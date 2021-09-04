@@ -55,6 +55,7 @@ export default function Component_Sidebar(param) {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
+                align-items: center;
                 height: 100vh;
                 overflow: overlay;
                 background: ${Setting_App.gradientColor ? `linear-gradient(${Setting_App.gradientColor})` : Setting_App.sidebarBackgroundColor};
@@ -71,11 +72,12 @@ export default function Component_Sidebar(param) {
 
             .sidebar .nav {
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 width: 100%;
                 cursor: pointer;
                 text-align: left;
-                font-size: 1.7em;
+                font-size: 1em;
                 font-weight: 400;
                 padding: 15px 14px;
                 color: ${Setting_App.secondaryColor};
@@ -86,11 +88,12 @@ export default function Component_Sidebar(param) {
             .sidebar .nav .icon {
                 fill: ${Setting_App.sidebarTextColor};
                 stroke: ${Setting_App.sidebarTextColor};
+                font-size: 1.5em;
             }
 
             .sidebar .nav .text {
                 color: ${Setting_App.sidebarTextColor};
-                font-size: .7em;
+                font-size: 1em;
                 padding-left: 10px;
             }
 
@@ -134,9 +137,6 @@ export default function Component_Sidebar(param) {
             #id .logo {
                 cursor: pointer;
                 margin-top: 15px;
-                height: 120px;
-                max-width: 200px;
-                object-fit: scale-down;
             }
 
             /* #id .logo {

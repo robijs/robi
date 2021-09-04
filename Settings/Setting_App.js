@@ -4,7 +4,7 @@ import Action_Store from '../Actions/Action_Store.js'
 export default {
     mode: 'dev',
     title: 'CSART',
-    logo: 'Images/Official_DHA_Logo.png',
+    logo: 'Images/dha-logo-no-label-100w.png',
     primaryColor: '#444',
     primaryColorRGB: '45, 61, 80',
     secondaryColor: 'ghostwhite',
@@ -48,7 +48,7 @@ export default {
         {
             rel: 'preload',
             as: 'image',
-            href: 'Images/Official_DHA_Logo.png'
+            href: 'Images/dha-logo-no-label-100w.png'
         },
     ],
     lists: [

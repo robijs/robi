@@ -58,18 +58,18 @@ if (Setting_App.mode === 'prod') {
             Error: JSON.stringify(error, replaceErrors)
         });
     }
-}
 
-/** Log errors from Promises to SharePoint list */
-window.addEventListener("unhandledrejection", event => {
-    Action_Error({
-        Message: event.reason.message,
-        Source: import.meta.url,
-        Line: null,
-        ColumnNumber: null,
-        Error: event.reason.stack
+    /** Log errors from Promises to SharePoint list */
+    window.addEventListener("unhandledrejection", event => {
+        Action_Error({
+            Message: event.reason.message,
+            Source: import.meta.url,
+            Line: null,
+            ColumnNumber: null,
+            Error: event.reason.stack
+        });
     });
-});
+}
 
 /** Start app on page load */
 window.onload = async () => {
