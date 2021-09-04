@@ -22,8 +22,8 @@ export default function ViewPart_LogForm(param) {
 
     const readOnlyFields = [
         {
-            internalFieldName: 'Id',
-            displayName: 'Id'
+            internalFieldName: 'id',
+            displayName: 'id'
         },
         {
             internalFieldName: 'SessionId',

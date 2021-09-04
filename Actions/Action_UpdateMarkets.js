@@ -167,7 +167,7 @@ export default function Action_UpdateMarkets(param) {
                 };
             }),
             data,
-            rowId: 'Id',
+            rowId: 'id',
             order: [[ 1, 'desc' ], [0, 'asc' ]],
             onRowClick(param) {
                 const {

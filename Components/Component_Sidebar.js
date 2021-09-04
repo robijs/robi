@@ -78,10 +78,14 @@ export default function Component_Sidebar(param) {
                 text-align: left;
                 font-size: 1em;
                 font-weight: 400;
-                padding: 7.5px 15px;
+                padding: 7.5px 10px;
                 color: ${Setting_App.secondaryColor};
                 border-left: solid 3px transparent;
                 border-right: solid 3px transparent;
+            }
+
+            .sidebar .nav:hover {
+                background: #2d3d5026;
             }
 
             .sidebar .nav-selected {
@@ -115,6 +119,7 @@ export default function Component_Sidebar(param) {
                 flex-direction: column;
                 align-items: start;
                 justify-content: flex-end;
+                width: 100%;
             }
 
             /* Logo */

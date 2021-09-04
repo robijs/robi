@@ -29,8 +29,8 @@ export default function ViewPart_ErrorForm(param) {
 
     const readOnlyFields = [
         {
-            internalFieldName: 'Id',
-            displayName: 'Id'
+            internalFieldName: 'id',
+            displayName: 'id'
         },
         {
             internalFieldName: 'SessionId',

@@ -91,8 +91,8 @@ export default async function View_Users(param = {}) {
         heading: '',
         fields: [
             {
-                internalFieldName: 'Id',
-                displayName: 'Id',
+                internalFieldName: 'id',
+                displayName: 'id',
             },
             {
                 internalFieldName: 'Title',
@@ -125,7 +125,7 @@ export default async function View_Users(param = {}) {
     // const usersTable = Component_DataTable({
     //     headers: [
     //         '',
-    //         'Id',
+    //         'id',
     //         'Name',
     //         'Account',
     //         'Email',
@@ -138,7 +138,7 @@ export default async function View_Users(param = {}) {
     //             data: null,
     //         },
     //         {
-    //             data: 'Id',
+    //             data: 'id',
     //             type: 'number',
     //             visible: false,
     //             render(data, type, row) {
@@ -177,7 +177,7 @@ export default async function View_Users(param = {}) {
     //     data: await Action_Get({
     //         list: 'Users'
     //     }),
-    //     rowId: 'Id',
+    //     rowId: 'id',
     //     order: [[2, 'asc']],
     //     buttons: [
     //         {

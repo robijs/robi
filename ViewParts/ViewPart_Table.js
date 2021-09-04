@@ -7,6 +7,7 @@ import Action_Store from '../Actions/Action_Store.js'
 import Component_DataTable from '../Components/Component_DataTable.js'
 import Component_Modal from '../Components/Component_Modal.js'
 import Component_Heading from '../Components/Component_Heading.js'
+import Setting_App from '../Settings/Setting_App.js';
 
 export default function ViewPart_Table(param) {
     const {
@@ -75,12 +76,12 @@ export default function ViewPart_Table(param) {
 
         const columnOptions = {
             data: internalFieldName === titleDisplayName ? 'Title' : internalFieldName,
-            type: internalFieldName === 'Id' ? 'number' : 'string',
-            visible: internalFieldName === 'Id' && !showId ? false : true
+            type: internalFieldName === 'id' ? 'number' : 'string',
+            visible: internalFieldName === 'id' && !showId ? false : true
         }
 
         /** Classes */
-        if (internalFieldName === 'Id') {
+        if (internalFieldName === 'id') {
             columnOptions.className = 'do-not-export bold';
             columnOptions.render = (data, type, row) => {
                 return data;
@@ -104,7 +105,7 @@ export default function ViewPart_Table(param) {
 
         else if (internalFieldName === 'Author') {
             columnOptions.render = (data, type, row) => {
-                return data.Title;
+                return Setting_App.mode === 'prod' ? data.Title : '(LOCAL)';
             }
         }
 
@@ -114,7 +115,7 @@ export default function ViewPart_Table(param) {
             }
         }
 
-        else if (internalFieldName !== 'Id') {
+        else if (internalFieldName !== 'id') {
             columnOptions.render = (data, type, row) => {
                 return typeof data === 'number' ? parseFloat(data).toLocaleString('en-US') : data;
             }
@@ -267,7 +268,7 @@ export default function ViewPart_Table(param) {
         width: '100%',
         columns,
         data: items,
-        rowId: 'Id',
+        rowId: 'id',
         /**
          * Sort by Status then Last Name 
          * {@link https://datatables.net/reference/api/order()}

@@ -78,7 +78,7 @@ export default function Component_Title(param) {
             }
 
             #id.title h1 {
-                font-size: 1.8em;
+                font-size: 1.7em;
                 font-weight: 400;
                 color: ${Setting_App.primaryColor};
                 margin-top: 0px;
@@ -181,7 +181,7 @@ export default function Component_Title(param) {
 
             @media (max-width: 1366px) {
                 #id.title h2 {
-                    font-size: 1.5em;
+                    font-size: 1.3em;
                 }
             }
 
@@ -191,7 +191,7 @@ export default function Component_Title(param) {
                 }
     
                 #id.title h2 {
-                    font-size: 1.3em;
+                    font-size: 1.1em;
                 }
     
                 #id.title .title-date {
