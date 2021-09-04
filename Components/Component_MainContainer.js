@@ -15,7 +15,7 @@ export default function Component_MainContainer(param) {
         style: /*css*/ `
             .maincontainer {
                 position: relative;
-                padding: 20px 50px;
+                padding: 15px 50px;
                 flex: 1;
                 height: 100vh;
                 overflow: overlay;
@@ -47,7 +47,7 @@ export default function Component_MainContainer(param) {
     }
 
     component.paddingOn = () => {
-        component.get().style.padding = '20px 50px';
+        component.get().style.padding = '15px 50px';
     }
 
     component.eventsOff = () => {

@@ -84,6 +84,11 @@ export default function Component_Sidebar(param) {
                 border-right: solid 3px transparent;
             }
 
+            .sidebar .nav-selected {
+                border-left: solid 3px #444;
+                background: #2d3d5026;
+            }
+
             .sidebar .nav .icon {
                 fill: ${Setting_App.sidebarTextColor};
                 stroke: ${Setting_App.sidebarTextColor};

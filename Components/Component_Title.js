@@ -35,34 +35,6 @@ export default function Component_Title(param) {
      * @todo show ticking time
      */
     const component = Action_Component({
-        //  html: /*html*/ `
-        //     <div class='title ${type || ''}'>
-        //         <div class='title-subtitle'>
-        //             <h1>${title}</h1>
-        //             ${subTitle !== undefined ? `<h2>${subTitle}</h2>` : ''}
-        //             ${
-        //                 breadcrumb !== undefined ? 
-        //                 /*html*/ `
-        //                     <h2 ${dropdown !== undefined ? `style='margin-right: 0px;'` : '' }>
-        //                         ${buildBreadcrumb(breadcrumb)}
-        //                         ${dropdown !== undefined ? `<span class='_breadcrumb-spacer'>/</span>` : '' }
-        //                     </h2>
-        //                 ` :
-        //                 ''
-        //             }
-        //             ${
-        //                 dropdown !== undefined ?
-        //                 /*html*/ `
-        //                     <h2 style='margin: 0px;'>
-        //                         ${buildDropdown(dropdown)}
-        //                     </h2>
-        //                 ` :
-        //                 ''
-        //             }
-        //         </div>
-        //         ${date !== undefined ? `<div class='title-date'>${date}</div>` : ''}
-        //     </div>
-        // `,
         html: /*html*/ `
             <div class='title ${type || ''}'>
                 <div class='title-subtitle'>
@@ -106,22 +78,22 @@ export default function Component_Title(param) {
             }
 
             #id.title h1 {
-                font-size: 2.5em;
-                font-weight: 300;
+                font-size: 1.8em;
+                font-weight: 400;
                 color: ${Setting_App.primaryColor};
                 margin-top: 0px;
                 margin-bottom: 10px;
             }
 
             #id.title h2 {
-                font-size: 1.7em;
+                font-size: 1.2em;
                 font-weight: 400;
                 color: ${Setting_App.primaryColor};
                 margin: 0px;
             }
 
             #id.title .title-date {
-                font-size: 1.3em;
+                font-size: .9em;
                 font-weight: 400;
                 color: ${Setting_App.primaryColor};
                 margin: 0px;
