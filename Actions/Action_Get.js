@@ -2,6 +2,7 @@
 import Action_Store from './Action_Store.js'
 import Action_GetItemCount from './Action_GetItemCount.js'
 import Action_CreateGetFilter from './Action_CreateGetFilter.js'
+import Setting_App from '../Settings/Setting_App.js';
 
 export default async function Action_Get(param) {
     const {
@@ -34,73 +35,79 @@ export default async function Action_Get(param) {
         signal: abortController.signal
     };
 
-    const itemCount = await Action_GetItemCount({
-        apiPath: path,
-        list
-    });
-
-    // let queryFilterString = '';
+    if (Setting_App.mode === 'prod') {
+        const itemCount = await Action_GetItemCount({
+            apiPath: path,
+            list
+        });
     
-    // if (filter) {
-    //     queryFilterString = typeof filter === 'string' ? `$filter=${filter}` : `$filter=${Action_CreateGetFilter(filter)}`;
-    // }
-
-    // if (select) {
-    //     queryFilterString += `${queryFilterString ? '&' : ''}$select=${select}`;
-    // }
-
-    // if (expand) {
-    //     queryFilterString += `${queryFilterString ? '&' : ''}$expand=${expand}`;
-    // }
-
-    // if (orderby) {
-    //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
-    // }
-
-    // if (paged) {
-    //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
-    // }
-
-    // if (startId) {
-    //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
-    // }
-
-    // if (count) {
-    //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
-    // }
-
-    const queryFilterString = [
-        insertIf(filter, 'filter'),
-        insertIf(select, 'select'),
-        insertIf(expand, 'expand'),
-        insertIf(orderby, 'orderby'),
-        insertIf(skip, 'skip'),
-        paged ? `$skiptoken=Paged=TRUE${startId ? `&P_ID=${startId}` : ''}`: undefined,
-        // paged ? `$skiptoken=Paged=TRUE&P_ID=${startId ? startId : itemCount}`: undefined,
-    ]
-    .filter(x => x)
-    .join('&');
-
-    function insertIf(value, parameter) {
-        return value ? `$${parameter}=${value}` : undefined;
-    }
-
-    try {
-        const response = await fetch(api || `${`${url}('${list}')/items?$top=${top || itemCount}`}&${queryFilterString || ''}`, options);
-        const data = await response.json();
+        // let queryFilterString = '';
+        
+        // if (filter) {
+        //     queryFilterString = typeof filter === 'string' ? `$filter=${filter}` : `$filter=${Action_CreateGetFilter(filter)}`;
+        // }
     
-        if (action) {
-            action(data);
+        // if (select) {
+        //     queryFilterString += `${queryFilterString ? '&' : ''}$select=${select}`;
+        // }
+    
+        // if (expand) {
+        //     queryFilterString += `${queryFilterString ? '&' : ''}$expand=${expand}`;
+        // }
+    
+        // if (orderby) {
+        //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
+        // }
+    
+        // if (paged) {
+        //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
+        // }
+    
+        // if (startId) {
+        //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
+        // }
+    
+        // if (count) {
+        //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
+        // }
+    
+        const queryFilterString = [
+            insertIf(filter, 'filter'),
+            insertIf(select, 'select'),
+            insertIf(expand, 'expand'),
+            insertIf(orderby, 'orderby'),
+            insertIf(skip, 'skip'),
+            paged ? `$skiptoken=Paged=TRUE${startId ? `&P_ID=${startId}` : ''}`: undefined,
+            // paged ? `$skiptoken=Paged=TRUE&P_ID=${startId ? startId : itemCount}`: undefined,
+        ]
+        .filter(x => x)
+        .join('&');
+    
+        function insertIf(value, parameter) {
+            return value ? `$${parameter}=${value}` : undefined;
         }
+    
+        try {
+            const response = await fetch(api || `${`${url}('${list}')/items?$top=${top || itemCount}`}&${queryFilterString || ''}`, options);
+            const data = await response.json();
+        
+            if (action) {
+                action(data);
+            }
+    
+            if (paged || skip) {
+                return data.d;
+            } else if (Array.isArray(data)) {
+                return data
+            } else {
+                return data.d.results;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    } else if (Setting_App.mode === 'dev') {
+        const response = await fetch(`http://localhost:3000/${list}`, options);
 
-        if (paged || skip) {
-            return data.d;
-        } else if (Array.isArray(data)) {
-            return data
-        } else {
-            return data.d.results;
-        }
-    } catch (error) {
-        console.log(error);
+        return await response.json();
     }
 }
