@@ -1,0 +1,20 @@
+{
+    "users": [
+        {
+            "Id": 1,
+            "Title": "Stephen Matheis",
+            "Email": "stephen.a.matheis.ctr@mail.mil",
+            "LoginName": "1098035555@mil"
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "body": "some comment",
+            "postId": 1
+        }
+    ],
+    "profile": {
+            "name": "typicode"
+    }
+}

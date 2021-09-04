@@ -1,0 +1,71 @@
+/** Settings */
+import Setting_App from '../Settings/Setting_App.js'
+
+/* Actions */
+import Component from '../Actions/Action_Component.js'
+
+export default function Component_DateField(param) {
+    const {
+        label,
+        date,
+        parent,
+        position
+    } = param;
+
+    const component = Component({
+        html: /*html*/ `
+            <div class='form-field'>
+                <div class='form-field-label'>${label}</div>
+                <input class='form-field-date' type='date' ${date ? `value=${date.toISOString().split('T')[0]}` : ''}>
+            </div>
+        `,
+        style: /*css*/ `
+            /* Rows */
+            #id.form-field {
+                margin-bottom: 20px;
+            }
+
+            /* Labels */
+            #id .form-field-label {
+                font-size: 1.1em;
+                font-weight: bold;
+                padding: 5px;
+            }
+
+            #id .form-field-date {
+                font-size: .9em;
+                font-weight: 500;
+                margin-top: 2px;
+                margin-bottom: 4px;
+                padding: 10px;
+                background: white;
+                border-radius: 4px;
+                border: ${Setting_App.defaultBorder};
+            }
+
+            #id .form-field-date:active,
+            #id .form-field-date:focus {
+                outline: none;
+                border: solid 1px transparent;
+                box-shadow: 0px 0px 0px 2px ${Setting_App.primaryColor};
+            }
+        `,
+        parent: parent,
+        position,
+        events: [
+
+        ]
+    });
+
+    component.value = (param) => {
+        const field = component.find('.form-field-date');
+
+        if (param) {
+            field.value = new Date(param).toISOString().split('T')[0];
+        } else {
+            return field.value;
+        }
+    }
+
+    return component
+}
