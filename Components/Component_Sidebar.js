@@ -88,7 +88,7 @@ export default function Component_Sidebar(param) {
             .sidebar .nav .icon {
                 fill: ${Setting_App.sidebarTextColor};
                 stroke: ${Setting_App.sidebarTextColor};
-                font-size: 1.5em;
+                font-size: 1.4em;
             }
 
             .sidebar .nav .text {
@@ -101,27 +101,6 @@ export default function Component_Sidebar(param) {
             .sidebar .nav-selected .icon {
                 fill: ${Setting_App.sidebarTextColor};
                 stroke: ${Setting_App.sidebarTextColor};
-            }
-
-            /* .sidebar .nav .icon {
-                fill: white;
-                stroke: white;
-            }
-
-            .sidebar .nav .text {
-                color: white;
-                font-size: .7em;
-                padding-left: 10px;
-            }
-
-            .sidebar .nav .icon:hover,
-            .sidebar .nav-selected .icon {
-                fill: white;
-                stroke: white;
-            } *
-
-            .sidebar .nav-selected {
-                border-left: solid 3px ${Setting_App.secondaryColor};
             }
 
             /* Settings */
@@ -138,17 +117,6 @@ export default function Component_Sidebar(param) {
                 cursor: pointer;
                 margin-top: 15px;
             }
-
-            /* #id .logo {
-                cursor: pointer;
-                margin-top: 15px;
-                background: url(${logo}) center;
-                background-repeat: no-repeat;
-                width: 100%;
-                height: 120px;
-                min-height: 120px;
-                background-size: 120px;
-            } */
 
             /* Drop down */
             #id .dropdown-container {
