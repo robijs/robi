@@ -47,15 +47,17 @@ window.replaceErrors = (key, value) => {
     return value;
 }
 
-/** Log errors to SharePoint list */
-window.onerror = async (message, source, lineno, colno, error) => {
-    Action_Error({
-        Message: message,
-        Source: source,
-        Line: lineno,
-        ColumnNumber: colno,
-        Error: JSON.stringify(error, replaceErrors)
-    });
+if (Setting_App.mode === 'prod') {
+    /** Log errors to SharePoint list */
+    window.onerror = async (message, source, lineno, colno, error) => {
+        Action_Error({
+            Message: message,
+            Source: source,
+            Line: lineno,
+            ColumnNumber: colno,
+            Error: JSON.stringify(error, replaceErrors)
+        });
+    }
 }
 
 /** Log errors from Promises to SharePoint list */
@@ -149,18 +151,16 @@ window.onload = async () => {
 
     // console.log(newPost);
 
-    const user = await fetch('http://localhost:3000/users?LoginName=1098035555@mil');
+    // const user = await fetch('http://localhost:3000/users?LoginName=1098035555@mil');
 
-    console.log(await user.json());
+    // console.log(await user.json());
 
-    return;
+    // return;
 
-    // const user = Setting_App.mode === 'prod' ?
-    //     await Action_GetCurrentUser({
-    //         list: usersList,
-    //         fields: usersFields
-    //     }) : 
-    //     await fetch('http://localhost:3000/users')  
+    await Action_GetCurrentUser({
+        list: usersList,
+        fields: usersFields
+    });
 
     /** Get AD user and Users list item properties */
     Action_Store.user();

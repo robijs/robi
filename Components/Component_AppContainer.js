@@ -16,7 +16,7 @@ export default function Component_AppContainer() {
             }
 
             *, html {
-                font-family: ${Setting_App.fontFamily || `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`};
+                font-family: ${Setting_App.fontFamily || ` -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`};
                 box-sizing: border-box;
                 color: rgba(0,0,0,0.8);
             }
