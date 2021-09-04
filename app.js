@@ -128,42 +128,11 @@ window.onload = async () => {
 
     svgDefs.add();
 
-    /** TESTING JSON SERVER */
-
-    // const response = await fetch('http://localhost:3000/posts', {
-    //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    //     mode: 'cors', // no-cors, *cors, same-origin
-    //     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    //     credentials: 'same-origin', // include, *same-origin, omit
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     redirect: 'follow', // manual, *follow, error
-    //     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    //     body: JSON.stringify({
-    //         "id": 3,
-    //         "title": "tokyo",
-    //         "author": "steve"
-    //     }) // body data type must match "Content-Type" header
-    // });
-
-    // const newPost = response.json(); // parses JSON response into native JavaScript objects
-
-    // console.log(newPost);
-
-    // const user = await fetch('http://localhost:3000/users?LoginName=1098035555@mil');
-
-    // console.log(await user.json());
-
-    // return;
-
-    await Action_GetCurrentUser({
+    /** Get AD user and Users list item properties */
+    Action_Store.user( await Action_GetCurrentUser({
         list: usersList,
         fields: usersFields
-    });
-
-    /** Get AD user and Users list item properties */
-    Action_Store.user();
+    }));
 
     /** Add App Container to #app */
     const appContainer = Component_AppContainer();

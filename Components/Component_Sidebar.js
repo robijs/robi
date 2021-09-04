@@ -72,14 +72,13 @@ export default function Component_Sidebar(param) {
 
             .sidebar .nav {
                 display: flex;
-                flex-direction: column;
                 align-items: center;
                 width: 100%;
                 cursor: pointer;
                 text-align: left;
                 font-size: 1em;
                 font-weight: 400;
-                padding: 15px 14px;
+                padding: 7.5px 15px;
                 color: ${Setting_App.secondaryColor};
                 border-left: solid 3px transparent;
                 border-right: solid 3px transparent;
@@ -94,7 +93,8 @@ export default function Component_Sidebar(param) {
             .sidebar .nav .text {
                 color: ${Setting_App.sidebarTextColor};
                 font-size: 1em;
-                padding-left: 10px;
+                font-weight: 500;
+                padding-left: 15px;
             }
 
             .sidebar .nav .icon:hover,
@@ -115,7 +115,7 @@ export default function Component_Sidebar(param) {
             /* Logo */
             #id .logo {
                 cursor: pointer;
-                margin-top: 15px;
+                margin: 15px 0px;
             }
 
             /* Drop down */

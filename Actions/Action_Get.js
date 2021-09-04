@@ -106,6 +106,23 @@ export default async function Action_Get(param) {
             console.log(error);
         }
     } else if (Setting_App.mode === 'dev') {
+        const queryFilterString = [
+            insertIf(filter, 'filter'),
+            insertIf(select, 'select'),
+            insertIf(expand, 'expand'),
+            insertIf(orderby, 'orderby'),
+            insertIf(skip, 'skip'),
+            paged ? `$skiptoken=Paged=TRUE${startId ? `&P_ID=${startId}` : ''}`: undefined,
+        ]
+        .filter(x => x)
+        .join('&');
+
+        console.log(filter);
+
+        function insertIf(value, parameter) {
+            return value ? `$${parameter}=${value}` : undefined;
+        }
+
         const response = await fetch(`http://localhost:3000/${list}`, options);
 
         return await response.json();

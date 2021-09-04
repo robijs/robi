@@ -35,6 +35,8 @@ export default async function View_AccountInfo(param) {
         Role,
     } = Action_Store.user();
 
+    console.log(Action_Store.user());
+
     /** Name */
     const nameField = Component_SingleLineTextField({
         label: 'Name',
