@@ -3,7 +3,7 @@ import Action_Store from '../Actions/Action_Store.js'
 
 export default {
     mode: 'dev',
-    title: 'CSART',
+    title: 'App',
     logo: 'Images/dha-logo-no-label-90w.png',
     primaryColor: '#444',
     primaryColorRGB: '45, 61, 80',
@@ -15,6 +15,7 @@ export default {
     defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
     defaultRoute: 'Home',
     domain: 'https://carepoint.health.mil',
+    site: '/sites/',
     usersList: 'Users',
     usersFields: [
         {

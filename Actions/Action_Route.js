@@ -68,7 +68,9 @@ export default function Action_Route(path = Setting_App.defaultRoute, options = 
     const queryParameters = pathAndQuery.length > 1 ? pathAndQuery[1] : '';
 
     /** Attach default query parameters */
-    if (!queryParameters) {
+    const defaultQueryParameters = Setting_App.getDefaultQueryParameters();
+
+    if (!queryParameters && defaultQueryParameters) {
         path += `?${Setting_App.getDefaultQueryParameters()}`;
     }
 

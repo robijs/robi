@@ -23,4 +23,19 @@ export default async function View_Home() {
     });
 
     viewTitle.add();
+
+    parent.get().insertAdjacentHTML('beforeend', /*html*/ `
+        <button class='collapse-sidebar' style='margin-top: 20px;'>Collapse</button>
+        <button class='open-sidebar' style='margin-top: 20px;'>Open</button>
+    `);
+
+    parent.find('.collapse-sidebar').addEventListener('click', event => {
+        Action_Store.get('sidebar').find('.logo').classList.add('closed');
+        Action_Store.get('sidebar').findAll('.text').forEach(item => item.classList.add('closed'));
+    });
+
+    parent.find('.open-sidebar').addEventListener('click', event => {
+        Action_Store.get('sidebar').find('.logo').classList.remove('closed');
+        Action_Store.get('sidebar').findAll('.text').forEach(item => item.classList.remove('closed'));
+    });
 }

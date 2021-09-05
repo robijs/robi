@@ -33,22 +33,22 @@ String.prototype.toTitleCase = function () {
         .join(' ');
 }
 
-/** Format error objects for JSON.stringify() to work properly */
-window.replaceErrors = (key, value) => {
-    if (value instanceof Error) {
-        var error = {};
+if (Setting_Dev.ErrorLogging === 'on') {
+    /** Format error objects for JSON.stringify() to work properly */
+    function replaceErrors(key, value) {
+        if (value instanceof Error) {
+            var error = {};
 
-        Object.getOwnPropertyNames(value).forEach(function (key) {
-            error[key] = value[key];
-        });
+            Object.getOwnPropertyNames(value).forEach(function (key) {
+                error[key] = value[key];
+            });
 
-        return error;
+            return error;
+        }
+
+        return value;
     }
 
-    return value;
-}
-
-if (Setting_Dev.ErrorLogging === 'on') {
     /** Log errors to SharePoint list */
     window.onerror = async (message, source, lineno, colno, error) => {
         Action_Error({

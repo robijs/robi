@@ -121,11 +121,17 @@ export default function Component_DataTable(param) {
 
             /** Toolbar */
             #id_wrapper .datatable-toolbar {
+                font-size: .9em;
                 padding: 0px 15px;
                 margin: 0px 0px 15px 0px;
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
+            }
+
+            #id_wrapper .datatable-toolbar .cell {
+                display: flex;
+                align-items: center;
             }
 
             #id_wrapper .datatable-toolbar .dataTables_length label,
@@ -136,6 +142,10 @@ export default function Component_DataTable(param) {
             /** Buttons */
             #id_wrapper .btn-group {
                 margin: 0px 10px 0px 0px;
+            }
+
+            #id_wrapper .btn {
+                font-size: .9em;
             }
 
             #id_wrapper .datatable-toolbar .btn-secondary {
@@ -253,12 +263,12 @@ export default function Component_DataTable(param) {
                 padding: 0px 15px;
                 margin: 15px 0px 0px 0px;
                 width: 100%;
+                font-size: .85em;
                 display: flex;
                 justify-content: space-between;
             }
 
-            /** Toolbar Cell */
-            #id_wrapper .datatable-toolbar .cell {
+            #id_wrapper .datatable-footer .cell.left {
                 display: flex;
                 align-items: center;
             }
@@ -298,8 +308,9 @@ export default function Component_DataTable(param) {
             /** Table */
             #id_wrapper .dataTable {
                 border-collapse: collapse !important;
+                font-size: .9em;
             }
-            
+
             /** Bordered */
             /* #id_wrapper .table-bordered {
                 border: 1px solid rgb(${Setting_App.primaryColorRGB}, .3);

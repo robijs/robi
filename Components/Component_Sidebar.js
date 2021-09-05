@@ -20,7 +20,7 @@ export default function Component_Sidebar(param) {
 
     const component = Action_Component({
         html: /*html*/ `
-            <div class='sidebar'>
+            <div class='sidebar' data-mode='open'>
                 <!-- <div class='logo' data-path='${Setting_App.defaultRoute}'></div> -->
                 <img src ='${logo}' class='logo' data-path='${Setting_App.defaultRoute}'>
                 ${
@@ -42,7 +42,11 @@ export default function Component_Sidebar(param) {
                     ${buildNav()}
                 </div>
                 <div class='settings-container'>
-                    <!-- Everyone can see Settings -->
+                    <!-- Open / Close -->
+                    <span class='open-close'>
+                        <svg class='icon'><use href='#icon-caret-left-fill'></use></svg>
+                    </span>
+                    <!-- Settings -->
                     <span class='nav ${(path === 'Settings') ? 'nav-selected' : ''} settings' data-path='Settings'>
                         <svg class='icon'><use href='#icon-cog'></use></svg>
                         <span class='text'>Settings</span>
@@ -74,6 +78,7 @@ export default function Component_Sidebar(param) {
                 display: flex;
                 align-items: center;
                 width: 100%;
+                min-height: 39px;
                 cursor: pointer;
                 text-align: left;
                 font-size: 1em;
@@ -117,15 +122,38 @@ export default function Component_Sidebar(param) {
                 flex: 1;
                 display: flex;
                 flex-direction: column;
-                align-items: start;
+                align-items: center;
                 justify-content: flex-end;
                 width: 100%;
+            }
+
+            /* Open/Close */ 
+            .sidebar .open-close {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                width: 100%;
+                text-align: left;
+                font-size: 1em;
+                font-weight: 400;
+                padding: 7.5px 10px;
+                color: ${Setting_App.secondaryColor};
+                border-left: solid 3px transparent;
+                border-right: solid 3px transparent;
+            }
+
+            .sidebar .open-close .icon {
+                cursor: pointer;
+                fill: ${Setting_App.sidebarTextColor};
+                stroke: ${Setting_App.sidebarTextColor};
+                font-size: 1em;
             }
 
             /* Logo */
             #id .logo {
                 cursor: pointer;
                 margin: 15px 0px;
+                transition: all 150ms;
             }
 
             /* Drop down */
@@ -169,18 +197,34 @@ export default function Component_Sidebar(param) {
                 box-sizing: border-box;
             }
             
-            /* @media (max-height: 780px) {
-                #id * {
-                    font-size: 11pt;
-                }
+            /* Collapse */
+            #id.sidebar .nav .text.closed {
+                display: none;
+            }
 
-                #id .logo {
-                    width: 100%;
-                    height: 100px;
-                    min-height: 100px;
-                    background-size: 100px;
+            #id.sidebar .logo.closed {
+                image-rendering: pixelated;
+                max-width: 40px;
+            }
+
+            #id.sidebar .open-close.closed {
+                justify-content: center;
+            }
+
+            @media (max-width: 1300px) {
+                #id.sidebar .nav .text.closed {
+                    display: none;
                 }
-            } */
+    
+                #id.sidebar .logo.closed {
+                    image-rendering: pixelated;
+                    max-width: 40px;
+                }
+    
+                #id.sidebar .open-close.closed {
+                    justify-content: center;
+                }
+            }
         `,
         parent: parent,
         position: 'afterbegin',
@@ -202,9 +246,73 @@ export default function Component_Sidebar(param) {
                 selector: '#id .dropdown-item',
                 event: 'click',
                 listener: onDropdown
+            },
+            {
+                selector: '#id .open-close',
+                event: 'click',
+                listener: toggleSidebarMode
             }
-        ]
+        ],
+        onAdd() {
+            /** Window resize event */
+            window.addEventListener('resize', event => {
+                const mode = component.get().dataset.mode;
+                const icon = component.find('.open-close');
+
+                if (window.innerWidth <= 1250) {
+                    closeSidebar(mode, icon);
+                } else {
+                    openSidebar(mode, icon);
+                }
+            });
+        }
     });
+
+    function toggleSidebarMode(event) {
+        const mode = component.get().dataset.mode;
+        
+        if (mode === 'open') {
+            closeSidebar(mode, this);
+        } else if (mode === 'closed') {
+            openSidebar(mode, this);
+        }
+    }
+
+    function closeSidebar(mode, icon) {
+        if (mode !== 'closed') {
+            /** Add classes */
+            component.find('.logo').classList.add('closed');
+            component.findAll('.text').forEach(item => item.classList.add('closed'));
+            icon.classList.add('closed');
+
+            /** Update icon */
+            icon.querySelector('.icon use').setAttribute('href', '#icon-caret-right-fill');
+
+            /** Set mode */
+            component.get().dataset.mode = 'closed';
+            
+            /** Log close action */
+            console.log(`Close sidebar.`);
+        }
+    }
+
+    function openSidebar(mode, icon) {
+        if (mode !== 'open') {
+            /** Remove Classes */
+            component.find('.logo').classList.remove('closed');
+            component.findAll('.text').forEach(item => item.classList.remove('closed'));
+            icon.classList.remove('closed');
+            
+            /** Update icon */
+            icon.querySelector('.icon use').setAttribute('href', '#icon-caret-left-fill');
+
+            /** Set mode */
+            component.get().dataset.mode = 'open';
+            
+            /** Log open action */
+            console.log(`Open sidebar.`);
+        }
+    }
 
     function onDropdown(event) {
         const key = event.target.dataset.key;

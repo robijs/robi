@@ -269,6 +269,14 @@ export default function Component_SvgDefs(param) {
                     <symbol id="icon-display" viewBox="0 0 100 100">
                         <path d="M0 6.25v62.5h100v-62.5h-100zM93.75 62.5h-87.5v-50h87.5v50zM65.625 75h-31.25l-3.125 12.5-6.25 6.25h50l-6.25-6.25z"></path>
                     </symbol>
+                    <!-- Bootstrap: Caret left fill -->
+                    <symbol id="icon-caret-left-fill" viewBox="0 0 16 16">
+                        <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                    </symbol>
+                    <!-- Bootstrap: Caret right fill -->
+                    <symbol id="icon-caret-right-fill" viewBox="0 0 16 16">
+                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </symbol>
                     ${addSymbols()}
                 </defs>
             </svg>
