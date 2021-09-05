@@ -8,6 +8,7 @@ export default function Component_DashboardLongCard(param) {
     const {
         border,
         margin,
+        padding,
         data,
         parent,
         position,
@@ -21,6 +22,13 @@ export default function Component_DashboardLongCard(param) {
     const component = Action_Component({
         html: /*html*/ `
             <div class='dashboard-long-card'>
+                <!-- Chart -->
+                <div class='dashboard-long-card-container'>
+                    <div class='dashboard-long-card-chart-title'></div>
+                    <div class='dashboard-long-card-chart-container'>
+                        <canvas class="myChart" width="700" height="275"></canvas>
+                    </div>
+                </div>
                 <!-- Text -->
                 <div class='dashboard-long-card-container'>
                     ${createInfoGroup('Today', 'today')}
@@ -28,19 +36,12 @@ export default function Component_DashboardLongCard(param) {
                     ${createInfoGroup('This Month', 'month')}
                     ${createInfoGroup('This Year', 'year')}
                 </div>
-                <!-- Chart -->
-                <div class='dashboard-long-card-container'>
-                    <div class='dashboard-long-card-chart-title'></div>
-                    <div class='dashboard-long-card-chart-container'>
-                        <canvas class="myChart" width="700" height="350"></canvas>
-                    </div>
-                </div>
             </div>
         `,
         style: /*css*/ `
             #id {
                 margin: ${margin || '20px'};
-                padding: 10px;
+                padding: ${padding || '10px'};
                 background: white;
                 border-radius: 4px;
                 border: ${border || Setting_App.defaultBorder};
@@ -52,7 +53,8 @@ export default function Component_DashboardLongCard(param) {
             #id .dashboard-long-card-container {
                 display: flex;
                 flex-direction: column;
-                justify-content: space-around;
+                justify-content: center;
+                width: 100%;
             }
 
             /** Text */
@@ -78,13 +80,12 @@ export default function Component_DashboardLongCard(param) {
 
             /** Chart */
             #id .dashboard-long-card-chart-container {
-                margin-left: 30px;
-                margin-right: 5px;
+                margin-right: 30px;
             }
 
             #id .dashboard-long-card-chart-title {
                 color: ${Setting_App.primaryColor};
-                font-size: 1.5em;
+                font-size: 1.3em;
                 font-weight: 500;
                 text-align: center;
             }
@@ -99,8 +100,7 @@ export default function Component_DashboardLongCard(param) {
                 position: relative;
                 -ms-flex: 1 1 auto;
                 flex: 1 1 auto;
-                /* width: 1%; */
-                width: 106px;
+                width: 1%;
                 min-width: 0;
                 margin-bottom: 0;
             }
@@ -108,9 +108,8 @@ export default function Component_DashboardLongCard(param) {
             .text-field {
                 display: block;
                 width: 100%;
-                height: calc(1.5em + .75rem + 2px);
                 padding: .375rem .75rem;
-                font-size: 1rem;
+                font-size: .9rem;
                 font-weight: 400;
                 line-height: 1.5;
                 color: #495057;
@@ -158,7 +157,7 @@ export default function Component_DashboardLongCard(param) {
     component.clearChart = () => {
         const chartContainer = component.find('.dashboard-long-card-chart-container');
         
-        chartContainer.innerHTML = /*html*/ `<canvas class="myChart" width="700" height="350"></canvas>`;
+        chartContainer.innerHTML = /*html*/ `<canvas class="myChart" width="700" height="275"></canvas>`;
     }
 
     component.getChart = () => {

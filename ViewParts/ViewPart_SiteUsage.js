@@ -60,7 +60,7 @@ export default async function View_SiteUsage(param) {
             data: data.stats_1,
             padding: '0px',
             border: 'none',
-            margin: '20px 0px',
+            margin: '0px',
             parent: dashboardCard
         });
 
@@ -71,7 +71,8 @@ export default async function View_SiteUsage(param) {
             data: data.model,
             parent: dashboardCard,
             border: 'none',
-            margin: '0px',
+            margin: '0px 0px 10px 0px',
+            padding: '0px',
             onClick(label) {
                 console.log('label:', label);
                 console.log('current selected chart:', selectedChart);
@@ -113,7 +114,7 @@ export default async function View_SiteUsage(param) {
             data: data.stats_2,
             padding: '0px',
             border: 'none',
-            margin: '20px 0px',
+            margin: '0px',
             parent: dashboardCard
         });
 
@@ -177,11 +178,13 @@ export default async function View_SiteUsage(param) {
                     '22:00',
                     '23:00'
                 ];
-                text = new Date().toLocaleDateString();
+                text = new Date().toLocaleDateString('default', {
+                    dateStyle: 'full'
+                });
                 break;
             case 'week':
                 const options = {
-                    month: 'short',
+                    month: 'long',
                     day: 'numeric'
                 };    
                 const startAndEndOfWeek = Model_StartAndEndOfWeek();
@@ -190,11 +193,11 @@ export default async function View_SiteUsage(param) {
                 
                 // labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
                 labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-                text = `${sunday} - ${saturday}`
+                text = `${sunday} - ${saturday}, ${startAndEndOfWeek.sunday.getFullYear()}`
                 break;
             case 'month':
                 labels = data[0].data.map((item, index) => index + 1);
-                text = new Date().toLocaleString('default', { month: 'long' });
+                text = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
                 break;
             case 'year':
                 labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

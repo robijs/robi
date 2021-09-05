@@ -55,7 +55,7 @@ export default function Component_DashboardBanner(param) {
             }
 
             #id .dashboard-banner-value {
-                font-size: 2.5em;
+                font-size: 1.85em;
                 font-weight: 500;
             }
 
@@ -65,7 +65,7 @@ export default function Component_DashboardBanner(param) {
                 }
 
                 #id .dashboard-banner-value {
-                    font-size: 1.5em;
+                    font-size: 1em;
                     font-weight: 500;
                 }
             }
