@@ -19,17 +19,29 @@ export default function Model_StartAndEndOfWeek(date) {
     // set time to some convenient value
     now.setHours(0,0,0,0);
 
-    // Get the previous Monday
-    const monday = new Date(now);
-    monday.setDate(monday.getDate() - monday.getDay() + 1);
+    // // Get Monday
+    // const monday = new Date(now);
+    // // monday.setDate(monday.getDate() - monday.getDay() + 1);
+    // monday.setDate(monday.getDate() - (6 - monday.getDay()));
 
-    // Get next Sunday
+    // // Get Sunday
+    // const sunday = new Date(now);
+    // // sunday.setDate(sunday.getDate() - sunday.getDay() + 7);
+    // sunday.setDate(sunday.getDate() + monday.getDay());
+
+    // Get Sunday
     const sunday = new Date(now);
-    sunday.setDate(sunday.getDate() - sunday.getDay() + 7);
+    // monday.setDate(monday.getDate() - monday.getDay() + 1);
+    sunday.setDate(sunday.getDate() - sunday.getDay());
+
+    // Get Sunday
+    const saturday = new Date(now);
+    // sunday.setDate(sunday.getDate() - sunday.getDay() + 7);
+    saturday.setDate(saturday.getDate() + (6 + saturday.getDay()));
 
     // Return object of date objects
     return {
-        monday,
-        sunday
+        sunday,
+        saturday
     };
 }

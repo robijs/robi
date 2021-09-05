@@ -88,6 +88,38 @@ export default function Component_DashboardLongCard(param) {
                 font-weight: 500;
                 text-align: center;
             }
+
+            /** Label - mimic bootstrap input */
+            .input-group > .text-field:not(:last-child) {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            .input-group > .text-field{
+                position: relative;
+                -ms-flex: 1 1 auto;
+                flex: 1 1 auto;
+                /* width: 1%; */
+                width: 106px;
+                min-width: 0;
+                margin-bottom: 0;
+            }
+
+            .text-field {
+                display: block;
+                width: 100%;
+                height: calc(1.5em + .75rem + 2px);
+                padding: .375rem .75rem;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #495057;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: .25rem;
+                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            }
         `,
         parent,
         position: position || 'beforeend',
@@ -108,14 +140,10 @@ export default function Component_DashboardLongCard(param) {
 
     function createInfoGroup(label, property) {
         return /*html*/ `
-            <div class='dashboard-long-card-info-group' data-label='${property === 'today' ? 'week' : property}'>
-                <div class='dashboard-long-card-info'>
-                    <div class='dashboard-long-card-info-label'>${label}</div>
-                    <div>${visits[property].length}</div>
-                </div>
-                <div class='dashboard-long-card-info smaller'>
-                    <div class='dashboard-long-card-info-label'>Visits</div>
-                    <div>${visits[property].length}</div>
+            <div class="input-group dashboard-long-card-info-group" data-label='${property}'>
+                <div class='text-field'>${label}</div>
+                <div class="input-group-append">
+                    <div class="input-group-text" id="btnGroupAddon2">${visits[property].length}</div>
                 </div>
             </div>
         `;

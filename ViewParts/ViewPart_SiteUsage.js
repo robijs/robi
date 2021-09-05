@@ -99,7 +99,7 @@ export default async function View_SiteUsage(param) {
         longCard.add();
 
         /** Start with type: 'week' on load */
-        let selectedChart = 'week';
+        let selectedChart = 'today';
         let selectedData = data.model.chart[selectedChart];
 
         addChart({
@@ -139,8 +139,6 @@ export default async function View_SiteUsage(param) {
         // const max = (Math.round((max0 + max1) / 10) || 1 ) * 10; /** Round sum of max numbers to the nearest multiple of 10*/
         // const max = (Math.ceil((Math.max(...data.map(item => Math.max(...item.data)))) / 10) || 1 ) * 10;
 
-        console.log(max, data)
-
         let stepSize;
         let labels;
         let text;
@@ -152,19 +150,47 @@ export default async function View_SiteUsage(param) {
         }
 
         switch(type) {
+            case 'today':
+                labels = [
+                    '00:00',
+                    '01:00',
+                    '02:00',
+                    '03:00',
+                    '04:00',
+                    '05:00',
+                    '06:00',
+                    '07:00',
+                    '08:00',
+                    '09:00',
+                    '10:00',
+                    '11:00',
+                    '12:00',
+                    '13:00',
+                    '14:00',
+                    '15:00',
+                    '16:00',
+                    '17:00',
+                    '18:00',
+                    '19:00',
+                    '20:00',
+                    '21:00',
+                    '22:00',
+                    '23:00'
+                ];
+                text = new Date().toLocaleDateString();
+                break;
             case 'week':
-                const options = { 
+                const options = {
                     month: 'short',
                     day: 'numeric'
                 };    
                 const startAndEndOfWeek = Model_StartAndEndOfWeek();
-                const monday = startAndEndOfWeek.monday.toLocaleString('default', options);
-
-                startAndEndOfWeek.sunday.setDate(startAndEndOfWeek.sunday.getDate() - 2);
-                const friday = startAndEndOfWeek.sunday.toLocaleString('default', options);
+                const sunday = startAndEndOfWeek.sunday.toLocaleString('default', options);
+                const saturday = startAndEndOfWeek.saturday.toLocaleString('default', options);
                 
-                labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-                text = `${monday} - ${friday}`
+                // labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+                labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                text = `${sunday} - ${saturday}`
                 break;
             case 'month':
                 labels = data[0].data.map((item, index) => index + 1);

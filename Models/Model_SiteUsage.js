@@ -22,14 +22,14 @@ export default function Model_New(param) {
     }
 
     /** Week */
-    const monday = Model_StartAndEndOfWeek().monday;
     const itemsCreatedThisWeek = visits.filter(createdThisWeek);
 
     function createdThisWeek(item) {
         const created = new Date(item.Created);
         created.setHours(0,0,0,0);
         
-        if (created >= monday) {
+        // if (created >= monday) {
+        if (created >= Model_StartAndEndOfWeek().sunday) {
             return item;
         }
     }
@@ -70,39 +70,73 @@ export default function Model_New(param) {
         return now;
     }
 
-    const itemsCreatedThisYear = visits.filter(breach => {
-        const created = new Date(breach.Created);
+    const itemsCreatedThisYear = visits.filter(item => {
+        const created = new Date(item.Created);
         created.setHours(0,0,0,0);
 
         if (created >= firstOfYear) {
-            return breach;
+            return item;
         }
     });
+
+    /** Chart - Today */
+    const today = [
+        {
+            label: 'Visits',
+            data: []
+        }
+    ];
+
+    for (let i = 0; i < 24 ; i++) {
+        today[0].data.push(itemsCreatedToday.filter(byHour, i));
+    }
+
+    function byHour(item) {
+        const created = new Date(item.Created);
+        
+        const hourBegin = new Date();
+        hourBegin.setHours(this,0,0,0);
+
+        const hourEnd = new Date();
+        hourEnd.setHours(this + 1,0,0,0);
+
+        // console.log(this);
+        // console.log(created);
+        // console.log(hourBegin);
+        // console.log(hourEnd);
+        // console.log('---');
+
+        if (created >= hourBegin && created < hourEnd) {
+            return item;
+        } 
+    }
 
     /** Chart - Week */
     const week = [
         {
             label: 'Visits',
             data: [
-                itemsCreatedThisWeek.filter(byDayOfWeek, 0),
+                itemsCreatedThisWeek.filter(byDayOfWeek, 0), /** Sunday */
                 itemsCreatedThisWeek.filter(byDayOfWeek, 1),
                 itemsCreatedThisWeek.filter(byDayOfWeek, 2),
                 itemsCreatedThisWeek.filter(byDayOfWeek, 3),
-                itemsCreatedThisWeek.filter(byDayOfWeek, 4)
+                itemsCreatedThisWeek.filter(byDayOfWeek, 4),
+                itemsCreatedThisWeek.filter(byDayOfWeek, 5),
+                itemsCreatedThisWeek.filter(byDayOfWeek, 6) /** Saturday */
             ]
         }
     ];
 
-    function byDayOfWeek(breach) {
-        const created = new Date(breach.Created);
+    function byDayOfWeek(item) {
+        const created = new Date(item.Created);
         created.setHours(0,0,0,0);
         
-        const day = Model_StartAndEndOfWeek().monday;
+        const day = Model_StartAndEndOfWeek().sunday;
         day.setDate(day.getDate() + this);
         day.setHours(0,0,0,0);
 
         if (created.toDateString() === day.toDateString()) {
-            return breach;
+            return item;
         } 
     }
     
@@ -182,6 +216,7 @@ export default function Model_New(param) {
             year: itemsCreatedThisYear,
         },
         chart: {
+            today,
             week,
             month,
             year
