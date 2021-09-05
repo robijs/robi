@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 /* Actions */
 import Action_Post from './Action_Post.js'

@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 /** Actions */
 import Action_Store from '../Actions/Action_Store.js'
@@ -64,6 +64,9 @@ export default function ViewPart_Table(param) {
             data: null,
         });
     }
+    
+    /** Item Id */
+    const idProperty = Setting_App.mode === 'prod' ? 'Id' : 'id';
 
     /** typeof fields === 'object' */
     (Array.isArray(fields) ? fields : fields.split(','))
@@ -76,12 +79,12 @@ export default function ViewPart_Table(param) {
 
         const columnOptions = {
             data: internalFieldName === titleDisplayName ? 'Title' : internalFieldName,
-            type: internalFieldName === 'id' ? 'number' : 'string',
-            visible: internalFieldName === 'id' && !showId ? false : true
+            type: internalFieldName === idProperty ? 'number' : 'string',
+            visible: internalFieldName === idProperty && !showId ? false : true
         }
 
         /** Classes */
-        if (internalFieldName === 'id') {
+        if (internalFieldName === idProperty) {
             columnOptions.className = 'do-not-export bold';
             columnOptions.render = (data, type, row) => {
                 return data;
@@ -105,7 +108,7 @@ export default function ViewPart_Table(param) {
 
         else if (internalFieldName === 'Author') {
             columnOptions.render = (data, type, row) => {
-                return Setting_App.mode === 'prod' ? data.Title : '(LOCAL)';
+                return data?.Title || '(Local Developer)';
             }
         }
 
@@ -115,7 +118,7 @@ export default function ViewPart_Table(param) {
             }
         }
 
-        else if (internalFieldName !== 'id') {
+        else if (internalFieldName !== idProperty) {
             columnOptions.render = (data, type, row) => {
                 return typeof data === 'number' ? parseFloat(data).toLocaleString('en-US') : data;
             }
@@ -268,7 +271,7 @@ export default function ViewPart_Table(param) {
         width: '100%',
         columns,
         data: items,
-        rowId: 'id',
+        rowId: idProperty,
         /**
          * Sort by Status then Last Name 
          * {@link https://datatables.net/reference/api/order()}

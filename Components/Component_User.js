@@ -8,7 +8,7 @@ import Action_CreateItem from '../Actions/Action_CreateItem.js'
 
 /* Components */
 import Component_DropDownField from './Component_DropDownField.js'
-import Component_FormButton from './Component_FormButton.js'
+import Component_Button from './Component_Button.js'
 import Component_Container from './Component_Container.js'
 import Action_UpdateItem from '../Actions/Action_UpdateItem.js'
 
@@ -278,7 +278,7 @@ export default function Component_User(param) {
                     
                         container.add();
     
-                        const submit = Component_FormButton({
+                        const submit = Component_Button({
                             value: 'Assign',
                             type: 'create',
                             margin: '0px 0px 0px 10px',
@@ -309,7 +309,7 @@ export default function Component_User(param) {
     
                         submit.add();
     
-                        const cancel = Component_FormButton({
+                        const cancel = Component_Button({
                             value: 'Cancel',
                             type: 'cancel',
                             margin: '0px 0px 0px 10px',

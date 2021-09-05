@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 /* Actions */
 import Action_Error from './Action_Error.js'

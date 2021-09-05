@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 /** Actions */
 import Action_Authorize from '../Actions/Action_Authorize.js'

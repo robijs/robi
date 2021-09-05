@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 export default [
     {

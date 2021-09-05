@@ -63,7 +63,7 @@ export default function Component_SingleLineTextField(param) {
             }
 
             #id .form-field-label {
-                font-size: 1.1em;
+                font-size: 1em;
                 font-weight: bold;
                 padding: 5px 0px;
             }
@@ -90,7 +90,7 @@ export default function Component_SingleLineTextField(param) {
                 border: solid 1px transparent;
                 margin: 0px;
                 /* padding: 0px; */
-                padding: 5px 10px;;
+                padding: 0px;
             }
 
             #id .form-field-single-line-text.editable:active,

@@ -5,6 +5,7 @@ import Action_Store from './Action_Store.js'
 
 /** Settings */
 import Setting_App from '../Settings/Setting_App.js'
+import Setting_Dev from '../Settings/Setting_Dev.js';
 
 /**
  * Create SharePoint list item.
@@ -75,6 +76,10 @@ export default async function Action_Log(param) {
                     role: Action_Store.user().Role
                 }),
                 StackTrace: JSON.stringify(StackTrace.replace('Error\n    at ', '')),
+                Author: {
+                    Title: Setting_Dev.Developer
+                },
+                Created: new Date().toISOString(),
                 Module
             }),
             headers: {
@@ -83,7 +88,7 @@ export default async function Action_Log(param) {
             }
         }
 
-        await fetch('http://localhost:3000/log', options);
+        await fetch('http://localhost:3000/Log', options);
 
         console.log(`%c'${Title}' logged to SharePoint list 'Log.'`, 'background: #1e1e1e; color: #fff');
     }

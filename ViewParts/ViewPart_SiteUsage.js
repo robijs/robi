@@ -42,7 +42,7 @@ export default async function View_SiteUsage(param) {
     loadingIndicator.add();
 
     /** Worker */
-    const worker = new Worker('../src/Workers/Worker_SiteUsage.js', {
+    const worker = new Worker('Workers/Worker_SiteUsage.js', {
         type: 'module'
     });
 

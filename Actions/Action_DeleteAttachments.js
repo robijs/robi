@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 /** Actions */
 import GetRequestDigest from './Action_GetRequestDigest.js'

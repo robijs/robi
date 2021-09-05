@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 /* Components */
 import Component_Notification from '../Components/Component_Notification.js'

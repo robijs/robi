@@ -1,12 +1,6 @@
-/** Actions */
-import Action_Get from '../Actions/Action_Get.js'
-import Action_UpdateItem from '../Actions/Action_UpdateItem.js'
-import Action_Store from '../Actions/Action_Store.js'
-
 /** Components */
 import Component_Card from '../Components/Component_Card.js'
-import Component_SingleLineTextField from '../Components/Component_SingleLineTextField.js'
-import Component_FormButton from '../Components/Component_FormButton.js'
+import Component_Button from '../Components/Component_Button.js'
 
 /** Settings */
 import Setting_App from '../Settings/Setting_App.js'
@@ -132,7 +126,7 @@ export default async function View_DeveloperLinks(param) {
                 url
             } = button;
 
-            const settingsButton = Component_FormButton({
+            const settingsButton = Component_Button({
                 type: 'normal',
                 value,
                 margin: '10px 0px',

@@ -37,14 +37,16 @@ export default function Component_Card(param) {
                 min-width: ${minWidth || 'initial'};
                 width: ${width || 'initial'};
                 border-radius: 4px;
-                /* border: ${Setting_App.defaultBorder}; */
-                border: ${border || 'solid 1px rgba(0, 0, 0, .125)'};
+                border: ${Setting_App.defaultBorder};
             }
 
             #id .round-card-title {
-                font-size: 1.5em;
+                font-size: 1.2em;
+                margin: -20px -20px 10px -20px; /** FIXME: will break with passed in padding  */
+                padding: 10px 20px; /** FIXME: will break with passed in padding  */
                 font-weight: ${titleWeight || '700'};
                 color: ${titleColor || Setting_App.defaultColor};
+                border-bottom: ${Setting_App.defaultBorder};
             }
 
             #id .round-card-description {

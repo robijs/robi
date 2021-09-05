@@ -5,7 +5,7 @@ import Setting_App from '../Settings/Setting_App.js'
 import Action_Component from '../Actions/Action_Component.js'
 import Action_AttachFiles from '../Actions/Action_AttachFiles.js'
 
-export default function Component_FormButton(param) {
+export default function Component_AttachFilesButton(param) {
     const {
         value,
         list,

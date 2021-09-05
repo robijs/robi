@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 /** Actions */
 import Action_Store from '../Actions/Action_Store.js'

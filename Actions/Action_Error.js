@@ -4,6 +4,7 @@ import Action_Post from './Action_Post.js'
 
 /** Settings */
 import Setting_App from '../Settings/Setting_App.js'
+import Setting_Dev from '../Settings/Setting_Dev.js'
 
 /**
  * Create SharePoint list item.
@@ -23,45 +24,78 @@ export default async function Action_Error(param) {
         ColumnNumber
     } = param;
 
-    /** Get new request digest */
-    /** @author Wil Pacheco & John Westhuis - Added temporary alert to prevent infinite error loop when reporting error, & reload page for user.*/
-    const requestDigest = await GetRequestDigest().catch(e => {
-        alert('Your session has expired, your page will now reload.')
-        location.reload()
-    });
+    if (Setting_App.mode === 'prod') { 
+        /** Get new request digest */
+    
+        /** 
+         * @author Wil Pacheco & John Westhuis
+         * Added temporary alert to prevent infinite error loop when reporting error, & reload page for user.
+         * 
+         * @author Stephen Matheis
+         * @to Wilfredo Pacheo, John Westhuis
+         * Catching the request digest promise was a great idea. Jealous I didn't think of it >_<;
+         */
+        const requestDigest = await GetRequestDigest().catch(e => {
+            alert('Your session has expired, your page will now reload.')
+            location.reload()
+        });
 
-    /** @todo check if Errors list exits, create if not */
-
-    /**
-     * Pass this object to fetch
-     * 
-     * @interface
-     * @property {string} url - SharePoint 2013 API
-     *
-     */
-    const postOptions = {
-        url: `../../_api/web/lists/GetByTitle('Errors')/items`,
-        data: {
-            SessionId: sessionStorage.getItem(`${Setting_App.title.split(' ').join('_')}-sessionId`),
-            Message,
-            Error,
-            Source,
-            Line,
-            ColumnNumber,
-            __metadata: {
-                'type': `SP.Data.ErrorsListItem`
+        /** @todo check if Errors list exits, create if not */
+        /**
+         * Pass this object to fetch
+         * 
+         * @interface
+         * @property {string} url - SharePoint 2013 API
+         *
+         */
+        const postOptions = {
+            url: `../../_api/web/lists/GetByTitle('Errors')/items`,
+            data: {
+                SessionId: sessionStorage.getItem(`${Setting_App.title.split(' ').join('_')}-sessionId`),
+                Message,
+                Error,
+                Source,
+                Line,
+                ColumnNumber,
+                __metadata: {
+                    'type': `SP.Data.ErrorsListItem`
+                }
+            },
+            headers: {
+                "Content-Type": "application/json;odata=verbose",
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": requestDigest,
             }
-        },
-        headers: {
-            "Content-Type": "application/json;odata=verbose",
-            "Accept": "application/json;odata=verbose",
-            "X-RequestDigest": requestDigest,
         }
+
+        const newItem = await Action_Post(postOptions);
+
+        console.log(`%cError '${Message}' logged to SharePoint list 'Errors.'`, 'background: crimson; color: #fff');
+
+        return newItem.d;
+    } else if (Setting_App.mode === 'dev') {
+        const options = {
+            method: `POST`,
+            body: JSON.stringify({
+                SessionId: sessionStorage.getItem(`${Setting_App.title.split(' ').join('_')}-sessionId`),
+                Message,
+                Error,
+                Source,
+                Line,
+                ColumnNumber,
+                Author: {
+                    Title: Setting_Dev.Developer
+                },
+                Created: new Date().toISOString()
+            }),
+            headers: {
+                "Content-Type": "application/json;odata=verbose",
+                "Accept": "application/json;odata=verbose",
+            }
+        }
+
+        await fetch('http://localhost:3000/Errors', options);
+
+        console.log(`%cError '${Message}' logged to SharePoint list 'Errors.'`, 'background: crimson; color: #fff');
     }
-
-    const newItem = await Action_Post(postOptions);
-
-    console.log(`%cError '${Message}' logged to SharePoint list 'Errors.'`, 'background: crimson; color: #fff');
-
-    return newItem.d;
 }

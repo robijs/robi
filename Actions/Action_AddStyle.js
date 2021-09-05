@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 export default function Action_Component(param) {
     const {

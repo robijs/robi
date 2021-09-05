@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 export default async function Action_Post(param) {
     const {

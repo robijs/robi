@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 /** Actions */
 import Action_History from './Action_History.js'

@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 /* Components */
 import Component_Container from '../Components/Component_Container.js'

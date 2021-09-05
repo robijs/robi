@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 /* Actions */
 import Action_GetItemCount from './Action_GetItemCount.js'

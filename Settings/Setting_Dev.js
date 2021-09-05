@@ -1,6 +1,5 @@
-import Action_GetQueryParameters from '../Actions/Action_GetQueryParameters.js'
-import Action_Store from '../Actions/Action_Store.js'
-
 export default {
-    LoginName: '1098035555@mil'
+    LoginName: '0987654321@mil',
+    Developer: 'First Last',
+    ErrorLogging: 'on'
 }

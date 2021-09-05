@@ -1,4 +1,4 @@
-/** RHC-C SharePoint Team */
+
 
 /* Actions */
 import Get from './Action_Get.js'

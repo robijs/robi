@@ -19,6 +19,7 @@ import Component_Modal from './Components/Component_Modal.js'
 
 /** Settings */
 import Setting_App from './Settings/Setting_App.js'
+import Setting_Dev from './Settings/Setting_Dev.js'
 
 /** View Parts */
 import ViewPart_ReleaseNotes from './ViewParts/ViewPart_ReleaseNotes.js'
@@ -47,7 +48,7 @@ window.replaceErrors = (key, value) => {
     return value;
 }
 
-if (Setting_App.mode === 'prod') {
+if (Setting_Dev.ErrorLogging === 'on') {
     /** Log errors to SharePoint list */
     window.onerror = async (message, source, lineno, colno, error) => {
         Action_Error({
@@ -259,7 +260,4 @@ window.onload = async () => {
     } else {
         console.log('Release notes message was already dismissed.');
     }
-
-    /** FOR DEVELOPMENT ONLY PLEASE DELETE THE FOLLOWING LINES WHEN DEVELOPMENT IS COMPLETE! @author Wilfredo Pacheco 20210818*/
-    window.Action_Store = Action_Store;
 }

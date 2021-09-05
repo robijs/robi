@@ -1,6 +1,4 @@
-﻿/** RHC-C SharePoint Team */
-
-/* Actions */
+﻿/* Actions */
 import Action_GetRequestDigest from './Action_GetRequestDigest.js'
 import Action_Post from './Action_Post.js'
 
