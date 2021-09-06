@@ -78,24 +78,30 @@ export default async function Action_Get(param) {
     } else if (Setting_App.mode === 'dev') {
         const queryFilterString = [
             formatFilter(filter),
-            // insertIf(orderby, 'orderby')
+            formatOrder(orderby)
         ]
         .filter(x => x)
         .join('&');
-
-        console.log(filter);
-        console.log(queryFilterString);
 
         function formatFilter(value) {
             if (value) {
                 return value
                 .split(' and ')
-                .map(pair => {
-                    const [ field, operator, value ] = pair.split(' ');
+                .map(group => {
+                    const [ field, operator, value ] = group.split(' ');
 
                     return `${field}${operator === 'eq' ? '=' : ''}${value.replace(/["']/g, "")}`;
                 })
                 .join('&');
+            }
+        }
+
+        /** GET /posts?_sort=views&_order=asc */
+        function formatOrder(value) {
+            if (value) {
+                const [ field, order ] = value.split(' ');
+
+                return `_sort=${field}&_order=${order}`;
             }
         }
 

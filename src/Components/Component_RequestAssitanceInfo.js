@@ -1,5 +1,8 @@
-/* Actions */
+/** Actions */
 import Action_Component from "../Actions/Action_Component.js"
+
+/** Settings */
+import Setting_App from "../Settings/Setting_App.js";
 
 export default function Component_RequestAssitanceInfo(param) {
     const {
@@ -12,14 +15,14 @@ export default function Component_RequestAssitanceInfo(param) {
         html: /*html*/ `
             <div class="request-assitance-info">
                 ${buildInfo()}
-                <div class="alert alert-warning" role="alert">
+                <div class="alert alert-light" role="alert">
                     <p class="mb-3">For general CarePoint issues, please contact:</p>
                     <div>
                         <h6 class="mb-2">DHA Global Service Center (GSC)</h6>
                         <p class="mb-1">
                             <a href="tel:18006009332" class="alert-link">1 (800) 600-9332</a>
                         </p>
-                        <p class="mb-2">Use the keyword "MHS Information Platform (MIP)"</p>
+                        <p class="mb-2">Use the keyword <strong><i>MHS Information Platform</i></strong> or <strong><i>MIP</strong></i></p>
                         <p class="mb-1">
                             <a href="mailto:dhagsc@mail.mil" class="alert-link">dhagsc@mail.mil</a>
                         </p>
@@ -33,6 +36,10 @@ export default function Component_RequestAssitanceInfo(param) {
         style: /*css*/ `
             #id p {
                 font-size: 14px;
+            }
+
+            #id .alert-light {
+                border: solid 1px rgba(0, 0, 0, 0.06);
             }
         `,
         parent: parent,
@@ -53,7 +60,7 @@ export default function Component_RequestAssitanceInfo(param) {
             } = item;
 
             return /*html*/ `
-                <div class="alert alert-primary" role="alert">
+                <div class="alert alert-info" role="alert">
                     <p class="mb-3">${label}</p>
                     <div>
                         <h5 class="mb-1">${name}</h5>

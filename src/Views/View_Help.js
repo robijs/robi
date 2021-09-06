@@ -36,14 +36,6 @@ export default async function View_Help() {
 
     viewContainer.add();
 
-    const infoAlert = Component_Alert({
-        type: 'info',
-        text: 'User guides coming soon!',
-        parent: viewContainer
-    });
-
-    infoAlert.add();
-
     const requestAssistanceInfo = Component_RequestAssitanceInfo({
         data: [
             {
