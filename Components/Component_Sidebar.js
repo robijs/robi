@@ -61,18 +61,14 @@ export default function Component_Sidebar(param) {
                 justify-content: flex-start;
                 align-items: center;
                 height: 100vh;
-                overflow: overlay;
                 background: ${Setting_App.gradientColor ? `linear-gradient(${Setting_App.gradientColor})` : Setting_App.sidebarBackgroundColor};
                 ${Setting_App.sidebarBorderColor ? `border-right: solid 1px ${Setting_App.sidebarBorderColor}` : ''}
             }
 
             /* Nav Container */
             .nav-container {
-                display: flex;
-                flex-direction: column;
-                align-items: start;
-                justify-content: center;
                 border-top: solid 1px ${Setting_App.sidebarBorderColor};
+                overflow: overlay;
             }
 
             .sidebar .nav {
@@ -90,8 +86,8 @@ export default function Component_Sidebar(param) {
                 border-right: solid 3px transparent;
             }
 
-            .sidebar .nav:hover {
-                background: #2d3d5026;
+            .sidebar .nav:not(.nav-selected):hover {
+                background: #2d3d5013;
             }
 
             .sidebar .nav-selected {

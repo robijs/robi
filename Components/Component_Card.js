@@ -36,7 +36,7 @@ export default function Component_Card(param) {
                 margin: ${margin || '0px'};
                 min-width: ${minWidth || 'initial'};
                 width: ${width || 'initial'};
-                border-radius: 4px;
+                border-radius: 10px;
                 border: ${Setting_App.defaultBorder};
             }
 
@@ -45,7 +45,8 @@ export default function Component_Card(param) {
                 margin: -20px -20px 10px -20px; /** FIXME: will break with passed in padding  */
                 padding: 10px 20px; /** FIXME: will break with passed in padding  */
                 font-weight: ${titleWeight || '700'};
-                background: #f8f9fa;
+                background: ${Setting_App.secondaryColor};
+                border-radius: 10px 10px 0px 0px;
                 color: ${titleColor || Setting_App.defaultColor};
                 border-bottom: ${Setting_App.defaultBorder};
             }

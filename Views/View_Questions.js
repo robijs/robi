@@ -7,7 +7,7 @@ import Action_Store from '../Actions/Action_Store.js';
 /** Components */
 import Component_Title from '../Components/Component_Title.js'
 import Component_Container from '../Components/Component_Container.js'
-import Component_QPPQuestions from '../Components/Component_QPPQuestions.js'
+import Component_QuestionTypes from '../Components/Component_QuestionTypes.js'
 
 /** Settings */
 import Setting_App from '../Settings/Setting_App.js'
@@ -38,7 +38,7 @@ export default async function View_Quesitons() {
 
     viewContainer.add();
 
-    const qppQuestions = Component_QPPQuestions({
+    const qppQuestions = Component_QuestionTypes({
         parent: viewContainer
     });
 

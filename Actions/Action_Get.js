@@ -41,36 +41,6 @@ export default async function Action_Get(param) {
             list
         });
     
-        // let queryFilterString = '';
-        
-        // if (filter) {
-        //     queryFilterString = typeof filter === 'string' ? `$filter=${filter}` : `$filter=${Action_CreateGetFilter(filter)}`;
-        // }
-    
-        // if (select) {
-        //     queryFilterString += `${queryFilterString ? '&' : ''}$select=${select}`;
-        // }
-    
-        // if (expand) {
-        //     queryFilterString += `${queryFilterString ? '&' : ''}$expand=${expand}`;
-        // }
-    
-        // if (orderby) {
-        //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
-        // }
-    
-        // if (paged) {
-        //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
-        // }
-    
-        // if (startId) {
-        //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
-        // }
-    
-        // if (count) {
-        //     queryFilterString += `${queryFilterString ? '&' : ''}$orderby=${orderby}`;
-        // }
-    
         const queryFilterString = [
             insertIf(filter, 'filter'),
             insertIf(select, 'select'),
@@ -107,23 +77,30 @@ export default async function Action_Get(param) {
         }
     } else if (Setting_App.mode === 'dev') {
         const queryFilterString = [
-            insertIf(filter, 'filter'),
-            insertIf(select, 'select'),
-            insertIf(expand, 'expand'),
-            insertIf(orderby, 'orderby'),
-            insertIf(skip, 'skip'),
-            paged ? `$skiptoken=Paged=TRUE${startId ? `&P_ID=${startId}` : ''}`: undefined,
+            formatFilter(filter),
+            // insertIf(orderby, 'orderby')
         ]
         .filter(x => x)
         .join('&');
 
         console.log(filter);
+        console.log(queryFilterString);
 
-        function insertIf(value, parameter) {
-            return value ? `$${parameter}=${value}` : undefined;
+        function formatFilter(value) {
+            if (value) {
+                return value
+                .split(' and ')
+                .map(pair => {
+                    const [ field, operator, value ] = pair.split(' ');
+
+                    return `${field}${operator === 'eq' ? '=' : ''}${value.replace(/["']/g, "")}`;
+                })
+                .join('&');
+            }
         }
 
-        const response = await fetch(`http://localhost:3000/${list}`, options);
+        const response = await fetch(`http://localhost:3000/${list}${queryFilterString ? `?${queryFilterString}` : ''}`, options);
+        // const response = await fetch(`http://localhost:3000/${list}`, options);
 
         return await response.json();
     }
