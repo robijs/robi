@@ -61,10 +61,10 @@ export default async function View_Developer(param) {
     const alertMessage = Component_Alert({
         type: 'warning',
         text: /*html*/ `
-            <h4 class="alert-heading">Developers, please read before making changes!</h4>
-            <p>Actions performed here may affect the QPP application for all users. Some or all changes may not be reversible.</p>
+            <h5 class="alert-heading">Developers, please read before making changes!</h5>
+            <p style='font-size: .9em;'>Actions performed here may affect the QPP application for all users. Some or all changes may not be reversible.</p>
             <hr>
-            <p class="mb-0">Please proceed with extreme caution.</p>
+            <p class="mb-0" style='font-size: .9em;'>Please proceed with extreme caution.</p>
         `,
         margin: '20px 0px',
         width: '100%',

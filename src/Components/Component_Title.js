@@ -93,7 +93,7 @@ export default function Component_Title(param) {
             }
 
             #id.title .title-date {
-                font-size: .9em;
+                font-size: 13px;
                 font-weight: 400;
                 color: ${Setting_App.primaryColor};
                 margin: 0px;

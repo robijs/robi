@@ -21,7 +21,7 @@ export default [
     },
     {
         path: 'Questions',
-        icon: 'question',
+        icon: 'chat-right-text',
         go(param) { 
             const {
                 pathParts
@@ -47,7 +47,7 @@ export default [
             'Developer',
             'Administrator'
         ],
-        icon: 'users',
+        icon: 'people',
         go(param) {
             const {
                 pathParts
@@ -67,14 +67,14 @@ export default [
         roles: [
             'Developer'
         ],
-        icon: 'embed2',
+        icon: 'code-slash',
         go(param) {
             View_Developer(param);
         }
     },
     {
         path: 'Help',
-        icon: 'info',
+        icon: 'info-circle',
         go() {
             View_Help();
         }
