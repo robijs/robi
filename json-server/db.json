@@ -700,6 +700,18 @@
       "Created": "2021-09-06T08:09:32.359Z",
       "Module": "http://127.0.0.1:8080/src/app.js",
       "Id": 55
+    },
+    {
+      "Title": "Route",
+      "SessionId": "a4fb8876-0c99-4b46-8f0a-0cc43191cf5b",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:18:53.981Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 56
     }
   ],
   "Errors": [],
