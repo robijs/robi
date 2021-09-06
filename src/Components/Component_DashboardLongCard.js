@@ -26,7 +26,7 @@ export default function Component_DashboardLongCard(param) {
                 <div class='dashboard-long-card-container'>
                     <div class='dashboard-long-card-chart-title'></div>
                     <div class='dashboard-long-card-chart-container'>
-                        <canvas class="myChart" width="700" height="275"></canvas>
+                        <canvas class="myChart" width="900" height="275"></canvas>
                     </div>
                 </div>
                 <!-- Text -->
@@ -85,7 +85,7 @@ export default function Component_DashboardLongCard(param) {
 
             #id .dashboard-long-card-chart-title {
                 color: ${Setting_App.primaryColor};
-                font-size: 1.3em;
+                font-size: 1.1em;
                 font-weight: 500;
                 text-align: center;
             }
@@ -157,7 +157,7 @@ export default function Component_DashboardLongCard(param) {
     component.clearChart = () => {
         const chartContainer = component.find('.dashboard-long-card-chart-container');
         
-        chartContainer.innerHTML = /*html*/ `<canvas class="myChart" width="700" height="275"></canvas>`;
+        chartContainer.innerHTML = /*html*/ `<canvas class="myChart" width="900" height="275"></canvas>`;
     }
 
     component.getChart = () => {

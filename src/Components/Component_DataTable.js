@@ -285,6 +285,7 @@ export default function Component_DataTable(param) {
             #id_wrapper .page-item .page-link {
                 color: unset;
                 border: solid 1px rgb(${Setting_App.primaryColorRGB}, .30);
+                padding: 6px 8px;
             }
 
             #id_wrapper .page-item .page-link:focus {

@@ -148,7 +148,7 @@ export default function Component_Sidebar(param) {
             /* Logo */
             #id .logo {
                 cursor: pointer;
-                margin: 15px 0px;
+                margin: 10px 0px;
                 transition: all 150ms;
                 min-height: 31px;
                 object-fit: scale-down;

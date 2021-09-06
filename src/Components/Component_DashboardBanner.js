@@ -55,7 +55,7 @@ export default function Component_DashboardBanner(param) {
             }
 
             #id .dashboard-banner-value {
-                font-size: 1.85em;
+                font-size: 1.7em;
                 font-weight: 500;
             }
 

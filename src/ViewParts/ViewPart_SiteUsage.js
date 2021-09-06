@@ -71,7 +71,7 @@ export default async function View_SiteUsage(param) {
             data: data.model,
             parent: dashboardCard,
             border: 'none',
-            margin: '0px 0px 10px 0px',
+            margin: '10px 0px',
             padding: '0px',
             onClick(label) {
                 console.log('label:', label);

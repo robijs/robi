@@ -78,7 +78,7 @@ export default function Component_Title(param) {
             }
 
             #id.title h1 {
-                font-size: 1.7em;
+                font-size: 1.6em;
                 font-weight: 500;
                 color: ${Setting_App.primaryColor};
                 margin-top: 0px;
@@ -86,7 +86,7 @@ export default function Component_Title(param) {
             }
 
             #id.title h2 {
-                font-size: 1.2em;
+                font-size: 1.1em;
                 font-weight: 400;
                 color: ${Setting_App.primaryColor};
                 margin: 0px;
@@ -113,7 +113,7 @@ export default function Component_Title(param) {
             }
 
             #id.across h2 {
-                margin: 0px 50px;
+                margin: 0px 40px;
             }
 
             /** Breadcrumb */
@@ -179,25 +179,7 @@ export default function Component_Title(param) {
                 display: none;
             }
 
-            @media (max-width: 1366px) {
-                #id.title h2 {
-                    font-size: 1.3em;
-                }
-            }
-
             @media (max-width: 1024px) {
-                #id.title h1 {
-                    font-size: 2em;
-                }
-    
-                #id.title h2 {
-                    font-size: 1.1em;
-                }
-    
-                #id.title .title-date {
-                    font-size: 1em;
-                }
-
                 #id.across h2 {
                     margin: 0px 45px;
                 }
