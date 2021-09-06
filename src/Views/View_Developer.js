@@ -118,8 +118,8 @@ export default async function View_Developer(param) {
     const logTable = ViewPart_Table({
         fields: [
             {
-                internalFieldName: 'id',
-                displayName: 'id'
+                internalFieldName: 'Id',
+                displayName: 'Id'
             },
             {
                 internalFieldName: 'SessionId',
@@ -144,7 +144,7 @@ export default async function View_Developer(param) {
         showId: true,
         addButton: false,
         checkboxes: false,
-        formTitleField: 'id',
+        formTitleField: 'Id',
         order: [[ 0, 'desc' ]],
         items: log,
         editForm: ViewPart_LogForm,
@@ -195,8 +195,8 @@ export default async function View_Developer(param) {
     const errorsTable = ViewPart_Table({
         fields: [
             {
-                internalFieldName: 'id',
-                displayName: 'id'
+                internalFieldName: 'Id',
+                displayName: 'Id'
             },
             {
                 internalFieldName: 'SessionId',
@@ -215,7 +215,7 @@ export default async function View_Developer(param) {
         addButton: false,
         checkboxes: false,
         formFooter: false,
-        formTitleField: 'id',
+        formTitleField: 'Id',
         order: [[ 0, 'desc' ]],
         items: errors,
         editForm: ViewPart_ErrorForm,

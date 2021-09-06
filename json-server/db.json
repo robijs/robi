@@ -52,6 +52,54 @@
       "Created": "2021-09-06T07:41:20.073Z",
       "Module": "http://127.0.0.1:8080/src/app.js",
       "Id": 1
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "95f4a0c0-033a-4312-9fbc-c37df66f87d2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T07:42:56.270Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 2
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "044ac934-4000-4f25-a668-4f7184f07d40",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T07:43:25.321Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 3
+    },
+    {
+      "Title": "Route",
+      "SessionId": "044ac934-4000-4f25-a668-4f7184f07d40",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T07:43:27.912Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 4
+    },
+    {
+      "Title": "Route",
+      "SessionId": "044ac934-4000-4f25-a668-4f7184f07d40",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T07:43:46.108Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 5
     }
   ],
   "Errors": [],

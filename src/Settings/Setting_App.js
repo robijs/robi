@@ -19,7 +19,7 @@ export default {
     usersList: 'Users',
     usersFields: [
         {
-            name: 'id',
+            name: 'Id',
             type: 0
         },
         {
