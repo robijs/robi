@@ -44,11 +44,11 @@ export default function Component_Sidebar(param) {
                 <div class='settings-container'>
                     <!-- Open / Close -->
                     <span class='open-close'>
-                        <svg class='icon'><use href='#icon-caret-left-fill'></use></svg>
+                        <svg class='icon'><use href='#icon-caret-left'></use></svg>
                     </span>
                     <!-- Settings -->
                     <span class='nav ${(path === 'Settings') ? 'nav-selected' : ''} settings' data-path='Settings'>
-                        <svg class='icon'><use href='#icon-cog'></use></svg>
+                        <svg class='icon'><use href='#icon-bs-gear'></use></svg>
                         <span class='text'>Settings</span>
                     </span>
                 </div>
@@ -284,7 +284,7 @@ export default function Component_Sidebar(param) {
             icon.classList.add('closed');
 
             /** Update icon */
-            icon.querySelector('.icon use').setAttribute('href', '#icon-caret-right-fill');
+            icon.querySelector('.icon use').setAttribute('href', '#icon-caret-right');
 
             /** Set mode */
             component.get().dataset.mode = 'closed';
@@ -302,7 +302,7 @@ export default function Component_Sidebar(param) {
             icon.classList.remove('closed');
             
             /** Update icon */
-            icon.querySelector('.icon use').setAttribute('href', '#icon-caret-left-fill');
+            icon.querySelector('.icon use').setAttribute('href', '#icon-caret-left');
 
             /** Set mode */
             component.get().dataset.mode = 'open';

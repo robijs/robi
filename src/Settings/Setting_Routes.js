@@ -81,7 +81,7 @@ export default [
     },
     {
         path: 'Settings',
-        icon: 'cog',
+        icon: 'bs-gear',
         go() {
             View_Settings();
         }

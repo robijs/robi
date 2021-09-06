@@ -712,6 +712,366 @@
       "Created": "2021-09-06T08:18:53.981Z",
       "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
       "Id": 56
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "7656e52b-7fb2-4661-9546-d2c9a13f1700",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:22:16.135Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 57
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "a8c316c3-eaa6-45e8-a8c5-edb9f26f6b41",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:24:09.781Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 58
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "e8b8703b-b15e-42b8-8c7d-37a710cb4037",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:24:21.408Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 59
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "78330d9f-714e-4f89-8490-1354a132544f",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:29:44.646Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 60
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "8ef024c1-6ae4-4d68-9389-eadcf613733c",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:29:52.473Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 61
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "8b05c594-3005-4c51-b27e-12d3971ef540",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:30:00.702Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 62
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "08cbce22-f354-4cd1-ab35-6f56ca4acd84",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:30:24.249Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 63
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "4ba5d60b-9bff-4ea9-a02e-14fb78319985",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:31:38.332Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 64
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "6cfbf349-6a6a-4dd8-a293-cc7d714ca18a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:31:57.233Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 65
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "8fe29994-bc2c-4609-abc6-6655e1c63032",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:32:07.114Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 66
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "1b7f951d-c9a5-4dc9-b877-f7593908ef88",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:32:28.359Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 67
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "17a60abc-173b-418f-b19d-63f75427b367",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:32:49.492Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 68
+    },
+    {
+      "Title": "Route",
+      "SessionId": "17a60abc-173b-418f-b19d-63f75427b367",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:33:10.709Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 69
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "774a6fa9-1055-46d3-ac0e-5c80389d26b0",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:34:09.873Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 70
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "a26ad4de-ae33-4dd8-97f7-6a19b0b42343",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:34:16.577Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 71
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "8de12b77-3366-4ad2-97a1-f59c176ebdc8",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:39:39.759Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 72
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "012eab16-9c75-400e-8ffe-ada1dfbba9d0",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:40:37.301Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 73
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "50338ce9-3f16-4998-8be5-f4996f2a4699",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:40:43.783Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 74
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "1c5d0336-5dd7-4556-a07c-e5bcb3deceaf",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:41:48.911Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 75
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "e58d5779-abee-483c-941e-fc5894ff7abc",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:42:40.844Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 76
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "6997d52c-86af-4639-91ce-bce8b570d3b4",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:43:28.992Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 77
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "9beea9ec-edc2-45dd-8d7f-0fa5a80513c8",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:44:45.173Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 78
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "b4894f26-f86d-4787-9e2b-94b9be177b2c",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:45:23.896Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 79
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "5660d566-5832-46b8-b454-1542100e777b",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:46:30.309Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 80
+    },
+    {
+      "Title": "Route",
+      "SessionId": "5660d566-5832-46b8-b454-1542100e777b",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:46:41.652Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 81
+    },
+    {
+      "Title": "Route",
+      "SessionId": "5660d566-5832-46b8-b454-1542100e777b",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:46:42.403Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 82
+    },
+    {
+      "Title": "Route",
+      "SessionId": "5660d566-5832-46b8-b454-1542100e777b",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:46:43.149Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 83
+    },
+    {
+      "Title": "Route",
+      "SessionId": "5660d566-5832-46b8-b454-1542100e777b",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:240:21)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:46:43.575Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 84
+    },
+    {
+      "Title": "Route",
+      "SessionId": "5660d566-5832-46b8-b454-1542100e777b",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:46:44.569Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 85
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "04c57931-fdc9-437e-94e9-f4135cc4cdf4",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T08:48:55.861Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 86
     }
   ],
   "Errors": [],

@@ -173,7 +173,7 @@ export default function ViewPart_Table(param) {
         buttons.unshift({
             text: /*html*/ `
                 <svg class='icon'>
-                    <use href='#icon-plus'></use>
+                    <use href='#icon-bs-plus'></use>
                 </svg>
                 <span>${addButtonValue || 'Add item'}</span>
             `,

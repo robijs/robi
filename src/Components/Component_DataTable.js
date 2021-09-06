@@ -170,8 +170,8 @@ export default function Component_DataTable(param) {
 
             /** Add Item Button */
             #id_wrapper .datatable-toolbar .add-item {
-                background: white;
-                border: solid 1px darkgreen;
+                background: seagreen;
+                border: solid 1px seagreen;
                 margin-right: 60px;
             }
 
@@ -179,13 +179,15 @@ export default function Component_DataTable(param) {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                color: darkgreen;
+                color: white;
             }
 
             #id_wrapper .datatable-toolbar .add-item .icon {
+                font-size: 14pt;
                 margin-right: 5px;
-                stroke: darkgreen;
-                fill: darkgreen;
+                margin-left: -5px;
+                stroke: white;
+                fill: white;
             }
 
             /** Disabled Button */

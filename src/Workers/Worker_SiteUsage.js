@@ -125,7 +125,8 @@ import Model_SiteUsage from '../Models/Model_SiteUsage.js'
             },
             {
                 label: 'Last Visit',
-                value: new Date(items[0].Created).toLocaleDateString() + ' ' + new Date(items[0].Created).toLocaleTimeString(),
+                // value: new Date(items[0].Created).toLocaleDateString() + ' ' + new Date(items[0].Created).toLocaleTimeString(),
+                value: new Date(items[0].Created).toLocaleDateString('default', { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false }),
                 description: items[0].Author.Title
             }
         ],
