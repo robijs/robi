@@ -1,15 +1,15 @@
 {
-  "name": "app-local",
+  "name": "app",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx live-server --watch=./src --open=./dev/app.html --quiet"
+    "start": "concurrently \"npx json-server --watch ./json-server/db.json\" \"npx live-server --watch=./src --open=./dev/app.html --quiet\""
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^6.2.1",
     "json-server": "^0.16.3",
     "live-server": "^1.2.1"
   }

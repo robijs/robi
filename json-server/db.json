@@ -7919,6 +7919,78 @@
       "Created": "2021-09-06T06:44:49.691Z",
       "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
       "id": 656
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "469f91ff-4e02-4f8c-95ab-1ef0cc837ee8",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T07:20:37.849Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 657
+    },
+    {
+      "Title": "Route",
+      "SessionId": "469f91ff-4e02-4f8c-95ab-1ef0cc837ee8",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T07:20:46.064Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 658
+    },
+    {
+      "Title": "Route",
+      "SessionId": "c1bc6de2-8c05-43bb-b15c-f40096862311",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:240:21)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T07:28:05.527Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 659
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "1ad27dd4-36ff-497c-b70f-27b532a4611c",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T07:30:49.630Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 660
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "b681fcfc-3765-4916-a63e-9034cd2304bd",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T07:31:04.374Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 661
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "c5722e66-43a5-4f5d-a07c-1a9d864f0aeb",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T07:31:50.277Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 662
     }
   ],
   "Errors": [
@@ -8285,6 +8357,19 @@
       },
       "Created": "2021-09-06T06:37:21.680Z",
       "id": 28
+    },
+    {
+      "SessionId": "1ad27dd4-36ff-497c-b70f-27b532a4611c",
+      "Message": "Message is not defined",
+      "Error": "ReferenceError: Message is not defined\n    at View_Home (http://127.0.0.1:8080/src/Views/View_Home.js:29:13)\n    at Object.go (http://127.0.0.1:8080/src/Settings/Setting_Routes.js:19:13)\n    at Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:111:11)\n    at window.onload (http://127.0.0.1:8080/src/app.js:219:5)",
+      "Source": "http://127.0.0.1:8080/src/app.js",
+      "Line": null,
+      "ColumnNumber": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T07:30:49.635Z",
+      "id": 29
     }
   ],
   "Comments": []
