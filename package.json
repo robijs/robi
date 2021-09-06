@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "concurrently \"npx json-server --watch ./json-server/db.json\" \"npx live-server --watch=./src --open=./dev/app.html --quiet\""
+    "start": "concurrently \"npx json-server --watch ./json-server/db.json --id Id\" \"npx live-server --watch=./src --open=./dev/app.html --quiet\""
   },
   "author": "",
   "license": "ISC",
