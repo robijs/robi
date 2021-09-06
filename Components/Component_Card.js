@@ -45,6 +45,7 @@ export default function Component_Card(param) {
                 margin: -20px -20px 10px -20px; /** FIXME: will break with passed in padding  */
                 padding: 10px 20px; /** FIXME: will break with passed in padding  */
                 font-weight: ${titleWeight || '700'};
+                background: #f8f9fa;
                 color: ${titleColor || Setting_App.defaultColor};
                 border-bottom: ${Setting_App.defaultBorder};
             }

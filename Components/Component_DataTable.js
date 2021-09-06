@@ -146,6 +146,7 @@ export default function Component_DataTable(param) {
 
             #id_wrapper .btn {
                 font-size: .9em;
+                padding: 4px 8px;
             }
 
             #id_wrapper .datatable-toolbar .btn-secondary {
