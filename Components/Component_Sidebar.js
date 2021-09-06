@@ -72,18 +72,19 @@ export default function Component_Sidebar(param) {
                 flex-direction: column;
                 align-items: start;
                 justify-content: center;
+                border-top: solid 1px ${Setting_App.sidebarBorderColor};
             }
 
             .sidebar .nav {
                 display: flex;
                 align-items: center;
                 width: 100%;
-                min-height: 39px;
+                min-height: 32px;
                 cursor: pointer;
                 text-align: left;
                 font-size: 1em;
                 font-weight: 400;
-                padding: 7.5px 10px;
+                padding: 4px 10px;
                 color: ${Setting_App.secondaryColor};
                 border-left: solid 3px transparent;
                 border-right: solid 3px transparent;
@@ -101,7 +102,7 @@ export default function Component_Sidebar(param) {
             .sidebar .nav .icon {
                 fill: ${Setting_App.sidebarTextColor};
                 stroke: ${Setting_App.sidebarTextColor};
-                font-size: 1.4em;
+                font-size: 1.3em;
             }
 
             .sidebar .nav .text {
@@ -138,8 +139,7 @@ export default function Component_Sidebar(param) {
                 font-weight: 400;
                 padding: 7.5px 10px;
                 color: ${Setting_App.secondaryColor};
-                border-left: solid 3px transparent;
-                border-right: solid 3px transparent;
+                border-bottom: solid 1px ${Setting_App.sidebarBorderColor};
             }
 
             .sidebar .open-close .icon {
@@ -154,6 +154,8 @@ export default function Component_Sidebar(param) {
                 cursor: pointer;
                 margin: 15px 0px;
                 transition: all 150ms;
+                min-height: 31px;
+                object-fit: scale-down;
             }
 
             /* Drop down */

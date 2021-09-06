@@ -24,20 +24,6 @@ export default async function ViewPart_NewUser(param) {
     /** Turn body scroll off */
     modal.scrollable(false);
 
-    /** Loading Indicator */
-    const loadingIndicator = Component_FoldingCube({
-        label: 'Loading form',
-        margin: '40px 0px',
-        parent
-    });
-    
-    loadingIndicator.add();
-
-    /** Roles */
-    const roles = await Action_Get({
-        list: 'Roles'
-    });
-
     /** Name */
     const nameField = Component_NameField({
         label: 'Search CarePoint Accounts',
@@ -181,15 +167,20 @@ export default async function ViewPart_NewUser(param) {
     const roleField = Component_DropDownField({
         list: 'Roles',
         label: 'Role',
-        dropDownOptions: roles.map(item => {
-            const {
-                Id, Title
-            } = item;
-
-            return {
-                id: Id,
-                value: Title
-            };
+        dropDownOptions: await Action_Get({
+            list: 'Roles'
+        })
+        .then(data => {
+            return data.map(item => {
+                const {
+                    Id, Title
+                } = item;
+    
+                return {
+                    id: Id,
+                    value: Title
+                };
+            });
         }),
         width: '200px',
         fieldMargin: '0px 40px 20px 40px',
@@ -197,9 +188,6 @@ export default async function ViewPart_NewUser(param) {
     });
 
     roleField.add();
-
-    /** Remove Loading Indication */
-    loadingIndicator.remove();
 
     /** Focus */
     nameField.focus();
