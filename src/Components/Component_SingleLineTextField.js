@@ -63,9 +63,9 @@ export default function Component_SingleLineTextField(param) {
             }
 
             #id .form-field-label {
-                font-size: 1em;
+                font-size: .95em;
                 font-weight: bold;
-                padding: 5px 0px;
+                padding: 3px 0px;
             }
 
             #id .form-field-description {
@@ -75,7 +75,7 @@ export default function Component_SingleLineTextField(param) {
             #id .form-field-single-line-text {
                 width: ${width || 'unset'};
                 min-height: 36px;
-                font-size: ${fontSize || '.9em'};
+                font-size: ${fontSize || '.85em'};
                 font-weight: 500;
                 margin: ${margin || '2px 0px 4px 0px'};
                 padding: 5px 10px;

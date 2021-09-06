@@ -11,6 +11,7 @@ import Component_QuestionTypes from '../Components/Component_QuestionTypes.js'
 
 /** Settings */
 import Setting_App from '../Settings/Setting_App.js'
+import Component_Card from '../Components/Component_Card.js';
 
 export default async function View_Quesitons() {
     /** View Parent */
@@ -31,16 +32,51 @@ export default async function View_Quesitons() {
 
     /** View Container */
     const viewContainer = Component_Container({
-        display: 'block',
-        margin: '30px 0px',
+        display: 'inline-flex',
+        direction: 'column',
+        margin: '20px 0px 0px 0px',
         parent
     });
 
     viewContainer.add();
 
-    const qppQuestions = Component_QuestionTypes({
-        parent: viewContainer
+    /** Check local storage for questionTypes */
+    let questionTypes = JSON.parse(localStorage.getItem(`${Setting_App.title.split(' ').join('-')}-questionTypes`));
+
+    if (!questionTypes) {
+        console.log('questionTypes not in local storage. Adding...');
+
+        const questionTypesResponse = await Action_Get({
+            list: 'View_Questions',
+            filter: `Title eq 'QuestionTypes'`
+        });
+
+        localStorage.setItem(`${Setting_App.title.split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
+        questionTypes = JSON.parse(localStorage.getItem(`${Setting_App.title.split(' ').join('-')}-questionTypes`));
+
+        console.log('questionTypes added to local storage.');
+    }
+
+    questionTypes.forEach(type => {
+        const {
+            title,
+            path
+        } = type;
+
+        const card = Component_Card({
+            title,
+            description: '',
+            parent: viewContainer,
+            margin: '0px 0px 20px 0px',
+            width: '100%'
+        });
+
+        card.add();
     });
 
-    qppQuestions.add();
+    // const qppQuestions = Component_QuestionTypes({
+    //     parent: viewContainer
+    // });
+
+    // qppQuestions.add();
 }

@@ -10,14 +10,13 @@ export default function Component_Card(param) {
         description,
         titleColor,
         titleWeight,
-        border,
         background,
         padding,
         margin,
         minWidth,
         parent,
         width,
-        position,
+        position
     } = param;
 
     const component = Action_Component({
@@ -41,7 +40,7 @@ export default function Component_Card(param) {
             }
 
             #id .round-card-title {
-                font-size: 1.2em;
+                font-size: 1em;
                 margin: -20px -20px 10px -20px; /** FIXME: will break with passed in padding  */
                 padding: 10px 20px; /** FIXME: will break with passed in padding  */
                 font-weight: ${titleWeight || '700'};

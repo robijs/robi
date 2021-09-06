@@ -37,9 +37,12 @@ export default function Component_Alert(param) {
             </div>
         `,
         style: /*css*/ `
+            #id {
+                font-size: 14px;
+            }
+            
             #id *:not(button) {
                 color: inherit;
-                
             }
 
             #id.alert-blank {

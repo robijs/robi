@@ -5,9 +5,8 @@ import Action_Store from '../Actions/Action_Store.js';
 
 /* Components */
 import Component_Title from '../Components/Component_Title.js'
-import Component_Heading from '../Components/Component_Heading.js'
 import Component_Alert from '../Components/Component_Alert.js'
-import Component_Text from '../Components/Component_Text.js';
+import Component_Container from '../Components/Component_Container.js'
 import Component_RequestAssitanceInfo from '../Components/Component_RequestAssitanceInfo.js';
 
 /** Settings */
@@ -28,32 +27,22 @@ export default async function View_Help() {
 
     viewTitle.add();
 
-    /** User Guide Heading */
-    const userGuideHeading = Component_Heading({
-        text: 'User guides',
-        margin: '20px 0px',
+    /** View Container */
+    const viewContainer = Component_Container({
+        display: 'block',
+        margin: '20px 0px 0px 0px',
         parent
     });
 
-    userGuideHeading.add();
+    viewContainer.add();
 
-    /** Alert */
     const infoAlert = Component_Alert({
         type: 'info',
         text: 'User guides coming soon!',
-        parent
+        parent: viewContainer
     });
 
     infoAlert.add();
-
-    /** Request assitance Heading */
-    const requestAssistanceHeading = Component_Heading({
-        text: 'Request Assistance',
-        margin: '50px 0px 20px 0px',
-        parent
-    });
-
-    requestAssistanceHeading.add();
 
     const requestAssistanceInfo = Component_RequestAssitanceInfo({
         data: [
@@ -65,7 +54,7 @@ export default async function View_Help() {
                 phone: '(555) 555-5555'
             }
         ],
-        parent
+        parent: viewContainer
     });
 
     requestAssistanceInfo.add();

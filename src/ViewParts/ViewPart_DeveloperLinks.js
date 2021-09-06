@@ -129,7 +129,7 @@ export default async function View_DeveloperLinks(param) {
             const settingsButton = Component_Button({
                 type: 'normal',
                 value,
-                margin: '10px 0px',
+                margin: '10px 0px 0px 0px',
                 parent: card,
                 async action(event) {
                     window.open(url);

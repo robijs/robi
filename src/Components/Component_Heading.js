@@ -35,8 +35,8 @@ export default function Component_Heading(param) {
             }    
 
             #id .text {
-                font-size: ${size || '2em'};
-                font-weight: ${weight || '400'};
+                font-size: ${size || '1.25em'};
+                font-weight: ${weight || '500'};
                 color: ${color || Setting_App.primaryColor};
                 margin: 0px;
                 text-align: ${align || 'left'};

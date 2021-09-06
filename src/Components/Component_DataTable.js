@@ -123,7 +123,7 @@ export default function Component_DataTable(param) {
             #id_wrapper .datatable-toolbar {
                 font-size: .9em;
                 padding: 0px 15px;
-                margin: 0px 0px 15px 0px;
+                margin: 0px 0px 10px 0px;
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
@@ -264,7 +264,7 @@ export default function Component_DataTable(param) {
             /** Footer */
             #id_wrapper .datatable-footer {
                 padding: 0px 15px;
-                margin: 15px 0px 0px 0px;
+                margin: 10px 0px 0px 0px;
                 width: 100%;
                 font-size: .85em;
                 display: flex;
@@ -312,7 +312,7 @@ export default function Component_DataTable(param) {
             /** Table */
             #id_wrapper .dataTable {
                 border-collapse: collapse !important;
-                font-size: .9em;
+                font-size: 14px;
             }
 
             /** Bordered */
