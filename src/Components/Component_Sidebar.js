@@ -98,12 +98,12 @@ export default function Component_Sidebar(param) {
             .sidebar .nav .icon {
                 fill: ${Setting_App.sidebarTextColor};
                 stroke: ${Setting_App.sidebarTextColor};
-                font-size: 1.3em;
+                font-size: 20px;
             }
 
             .sidebar .nav .text {
                 color: ${Setting_App.sidebarTextColor};
-                font-size: 1em;
+                font-size: 14px;
                 font-weight: 500;
                 padding-left: 15px;
             }

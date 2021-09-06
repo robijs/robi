@@ -79,7 +79,7 @@ export default function Component_Title(param) {
 
             #id.title h1 {
                 font-size: 1.7em;
-                font-weight: 400;
+                font-weight: 500;
                 color: ${Setting_App.primaryColor};
                 margin-top: 0px;
                 margin-bottom: 10px;
