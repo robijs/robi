@@ -6791,6 +6791,786 @@
       "Created": "2021-09-06T04:40:41.080Z",
       "Module": "http://127.0.0.1:5500/app.js",
       "id": 562
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "d900a8c3-c1d9-46b3-b1af-5930e39fd270",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:08:19.148Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 563
+    },
+    {
+      "Title": "Route",
+      "SessionId": "d900a8c3-c1d9-46b3-b1af-5930e39fd270",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:09:16.053Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 564
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "6db1acfe-0ba8-4460-bf21-dbbd2db2bda2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:09:42.887Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 565
+    },
+    {
+      "Title": "Route",
+      "SessionId": "6db1acfe-0ba8-4460-bf21-dbbd2db2bda2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:12:16.353Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 566
+    },
+    {
+      "Title": "Route",
+      "SessionId": "6db1acfe-0ba8-4460-bf21-dbbd2db2bda2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:12:17.081Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 567
+    },
+    {
+      "Title": "Route",
+      "SessionId": "6db1acfe-0ba8-4460-bf21-dbbd2db2bda2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:12:17.465Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 568
+    },
+    {
+      "Title": "Route",
+      "SessionId": "6db1acfe-0ba8-4460-bf21-dbbd2db2bda2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Help\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Help\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:12:17.778Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 569
+    },
+    {
+      "Title": "Route",
+      "SessionId": "6db1acfe-0ba8-4460-bf21-dbbd2db2bda2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:240:21)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:12:18.768Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 570
+    },
+    {
+      "Title": "Route",
+      "SessionId": "6db1acfe-0ba8-4460-bf21-dbbd2db2bda2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:12:21.943Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 571
+    },
+    {
+      "Title": "Route",
+      "SessionId": "6db1acfe-0ba8-4460-bf21-dbbd2db2bda2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:12:45.473Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 572
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "74495500-aabb-4035-b475-778a64163c71",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:13:23.016Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 573
+    },
+    {
+      "Title": "Route",
+      "SessionId": "74495500-aabb-4035-b475-778a64163c71",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:13:33.131Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 574
+    },
+    {
+      "Title": "Route",
+      "SessionId": "74495500-aabb-4035-b475-778a64163c71",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:13:39.633Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 575
+    },
+    {
+      "Title": "Route",
+      "SessionId": "74495500-aabb-4035-b475-778a64163c71",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:13:40.650Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 576
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "0e060c06-8223-4d4e-813b-db1c72d7b47d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:21:03.327Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 577
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "1caf908e-6c5f-4f9c-86cd-e7b134bcbe68",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:21:13.084Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 578
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:23:20.684Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 579
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:23:28.062Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 580
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:23:41.515Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 581
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:23:48.681Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 582
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:23:49.693Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 583
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:13.628Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 584
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:240:21)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:14.468Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 585
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:15.427Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 586
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:15.889Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 587
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:16.234Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 588
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Help\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Help\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:16.627Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 589
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:17.627Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 590
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:48.265Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 591
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:53.199Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 592
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Help\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Help\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:54.096Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 593
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:54.929Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 594
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:240:21)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:55.339Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 595
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:56.552Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 596
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:57.334Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 597
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:24:58.041Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 598
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:25:02.738Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 599
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions/General\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Components/Component_QuestionTypes.js:70:21)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:25:03.716Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 600
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions/RDS\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at route (http://127.0.0.1:8080/src/Views/View_QuestionsBoard.js:131:17)\\n    at HTMLSpanElement.goToRoute (http://127.0.0.1:8080/src/Components/Component_Title.js:296:13)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:25:06.835Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 601
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions/KSA\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at route (http://127.0.0.1:8080/src/Views/View_QuestionsBoard.js:131:17)\\n    at HTMLSpanElement.goToRoute (http://127.0.0.1:8080/src/Components/Component_Title.js:296:13)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:25:07.999Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 602
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions/General\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at route (http://127.0.0.1:8080/src/Views/View_QuestionsBoard.js:131:17)\\n    at HTMLSpanElement.goToRoute (http://127.0.0.1:8080/src/Components/Component_Title.js:296:13)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:25:09.063Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 603
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:240:21)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:25:23.488Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 604
+    },
+    {
+      "Title": "Route",
+      "SessionId": "4a275ed4-40f1-4107-8667-02692694ec6a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:25:24.466Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 605
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "6b307676-1d39-4614-93ab-61b02476a490",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:28:09.269Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 606
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "2755d918-b452-4f62-838c-4c81d2b8eb7e",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:28:13.754Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 607
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "71cd9688-e106-4b5d-97b1-f21b4e1ddaa3",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:28:21.670Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 608
+    },
+    {
+      "Title": "Route",
+      "SessionId": "71cd9688-e106-4b5d-97b1-f21b4e1ddaa3",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:28:26.455Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 609
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "939d17a2-5f91-4447-8a5a-01b36cbb55fc",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:29:03.184Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 610
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "d8265e4e-350a-4224-8083-b7c523c99a24",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:29:22.761Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 611
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "7de3b661-0cef-4e20-a6cb-3c5422089285",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:29:48.450Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 612
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "571bf873-702e-46c9-bf89-6e1b8e755333",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:29:57.532Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 613
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "c24ebf94-5d13-4d91-90a2-aa610ad337c3",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:30:20.049Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 614
+    },
+    {
+      "Title": "Route",
+      "SessionId": "c24ebf94-5d13-4d91-90a2-aa610ad337c3",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:30:24.588Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 615
+    },
+    {
+      "Title": "Route",
+      "SessionId": "c24ebf94-5d13-4d91-90a2-aa610ad337c3",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:30:31.436Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 616
+    },
+    {
+      "Title": "Route",
+      "SessionId": "c24ebf94-5d13-4d91-90a2-aa610ad337c3",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:30:32.329Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 617
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "bc7ad8c7-07c5-4998-b472-d564b660816d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:30:49.118Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 618
+    },
+    {
+      "Title": "Route",
+      "SessionId": "bc7ad8c7-07c5-4998-b472-d564b660816d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:30:59.711Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 619
+    },
+    {
+      "Title": "Route",
+      "SessionId": "bc7ad8c7-07c5-4998-b472-d564b660816d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:31:00.508Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 620
+    },
+    {
+      "Title": "Route",
+      "SessionId": "bc7ad8c7-07c5-4998-b472-d564b660816d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:240:21)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:31:15.667Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 621
+    },
+    {
+      "Title": "Route",
+      "SessionId": "bc7ad8c7-07c5-4998-b472-d564b660816d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:32:32.395Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 622
+    },
+    {
+      "Title": "Route",
+      "SessionId": "bc7ad8c7-07c5-4998-b472-d564b660816d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:32:33.126Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 623
+    },
+    {
+      "Title": "Route",
+      "SessionId": "bc7ad8c7-07c5-4998-b472-d564b660816d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:32:33.499Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 624
+    },
+    {
+      "Title": "Route",
+      "SessionId": "bc7ad8c7-07c5-4998-b472-d564b660816d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Help\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Help\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:32:33.841Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 625
+    },
+    {
+      "Title": "Route",
+      "SessionId": "bc7ad8c7-07c5-4998-b472-d564b660816d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:32:37.910Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "id": 626
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "8cebdb71-bf7a-4ff4-a7c4-7595ace2990d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:32:41.251Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "id": 627
     }
   ],
   "Errors": [
@@ -7118,6 +7898,19 @@
       },
       "Created": "2021-09-06T04:29:21.655Z",
       "id": 25
+    },
+    {
+      "SessionId": null,
+      "Message": "Failed to fetch",
+      "Error": "TypeError: Failed to fetch",
+      "Source": "http://127.0.0.1:8080/src/app.js",
+      "Line": null,
+      "ColumnNumber": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T06:07:37.113Z",
+      "id": 26
     }
   ],
   "Comments": []

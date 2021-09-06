@@ -21,8 +21,9 @@ export default function Component_Modal(param) {
     const component = Action_Component({
         html: /*html*/ `
             <!-- Modal -->
-            <div class='modal${fade ? ' fade' : ''}' tabindex='-1' role='dialog' aria-hidden='true'>
-                <div class='modal-dialog modal-dialog-scrollable modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
+            <!-- <div class='modal${fade ? ' fade' : ''}' tabindex='-1' role='dialog' aria-hidden='true'> -->
+            <div class='modal fade' tabindex='-1' role='dialog' aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-zoom modal-dialog-scrollable modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <h5 class='modal-title'>${title || ''}</h5>
@@ -123,6 +124,24 @@ export default function Component_Modal(param) {
             /** Footer */
             #id .modal-footer.hidden {
                 display: none;
+            }
+
+            /** Zoom in */
+            #id.fade {
+                transition: opacity 75ms linear;
+            }
+
+            #id.modal.fade .modal-dialog {
+                transition: transform 150ms ease-out, -webkit-transform 150ms ease-out;
+            }
+
+            #id.modal.fade .modal-dialog.modal-dialog-zoom {
+                -webkit-transform: translate(0,0)scale(.5);
+                transform: translate(0,0)scale(.5);
+            }
+            #id.modal.show .modal-dialog.modal-dialog-zoom {
+                -webkit-transform: translate(0,0)scale(1);
+                transform: translate(0,0)scale(1);
             }
 
             /** Override bootstrap defaults */

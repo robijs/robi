@@ -4,7 +4,7 @@ import Action_Store from '../Actions/Action_Store.js'
 export default {
     mode: 'dev',
     title: 'App',
-    logo: 'Images/dha-logo-no-label-90w.png',
+    logo: '../src/Images/dha-logo-no-label-90w.png',
     primaryColor: '#444',
     primaryColorRGB: '45, 61, 80',
     secondaryColor: 'ghostwhite',
@@ -49,7 +49,7 @@ export default {
         {
             rel: 'preload',
             as: 'image',
-            href: 'Images/dha-logo-no-label-90w.png'
+            href: '../src/Images/dha-logo-no-label-90w.png'
         },
     ],
     lists: [
