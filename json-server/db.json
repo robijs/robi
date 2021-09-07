@@ -4156,6 +4156,18 @@
       "Created": "2021-09-06T10:37:27.509Z",
       "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
       "Id": 343
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "35f4285d-93f7-4fca-96e9-eb5d2adc6470",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-06T18:52:22.186Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 344
     }
   ],
   "Errors": [
