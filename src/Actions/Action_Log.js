@@ -76,6 +76,7 @@ export default async function Action_Log(param) {
                     role: Action_Store.user().Role
                 }),
                 StackTrace: JSON.stringify(StackTrace.replace('Error\n    at ', '')),
+                UserAgent: navigator.userAgent,
                 Author: {
                     Title: Setting_Dev.Developer
                 },

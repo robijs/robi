@@ -55,6 +55,7 @@ export default async function Action_Error(param) {
                 Message,
                 Error,
                 Source,
+                UserAgent: navigator.userAgent,
                 Line,
                 ColumnNumber,
                 __metadata: {
