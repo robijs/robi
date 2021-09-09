@@ -46,7 +46,7 @@ export default function Component_MultiLineTextField(param) {
             }
 
             #id .form-field-description {
-                font-size: 1em;
+                font-size: .95em;
                 font-weight: 400;
                 padding-left: 5px;
                 padding-top: 5px;
@@ -56,6 +56,7 @@ export default function Component_MultiLineTextField(param) {
             #id .form-field-multi-line-text {
                 font-size: 1em;
                 font-weight: ${fontWeight || '500'};
+                font-size: ${fontSize || '.85em'};
                 margin-top: 2px;
                 margin-bottom: 4px;
                 padding: ${padding || '10px'};

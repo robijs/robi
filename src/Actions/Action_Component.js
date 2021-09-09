@@ -210,6 +210,13 @@ export default function Action_Component(param) {
                 this.get().insertAdjacentHTML('beforeend', param);
             }
         },
+        before(param) {
+            if (param instanceof Element) {
+                this.get().insertAdjacentElement('beforebegin', param);
+            } else if (typeof param === 'string') {
+                this.get().insertAdjacentHTML('beforebegin', param);
+            }
+        },
         add(localParent) {
             const storedComponent = Action_Store.get(name);
 
