@@ -15,34 +15,38 @@ export default async function Action_Data(lists) {
         displayLogo: Setting_App.logo,
         displayTitle: Setting_App.title,
         displayText: 'Loading',
-        totalCount: lists.length
+        totalCount: lists?.length || 0
     });
 
     loadingBar.add();
 
-    const responses = await Promise.all(lists.map(param => {
-        const {
-            list,
-            label,
-            select,
-            expand,
-            filter,
-            orderby
-        } = param;
-
-        return Action_Get({
-            list,
-            select,
-            expand,
-            filter,
-            orderby,
-            action() {
-                loadingBar.update({
-                    newDisplayText: label
-                });
-            }
-        });
-    }));
+    let responses;
+    
+    if (lists) {
+        responses = await Promise.all(lists.map(param => {
+            const {
+                list,
+                label,
+                select,
+                expand,
+                filter,
+                orderby
+            } = param;
+    
+            return Action_Get({
+                list,
+                select,
+                expand,
+                filter,
+                orderby,
+                action() {
+                    loadingBar.update({
+                        newDisplayText: label
+                    });
+                }
+            });
+        }));
+    }
 
     await loadingBar.end();
 

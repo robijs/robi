@@ -7,6 +7,10 @@ export default async function Action_SetSessionStorage(param) {
         sessionStorageData
     } = param;
 
+    if (!sessionStorageData) {
+        return;
+    }
+
     sessionStorageData.forEach(item => {
         const {
             key,

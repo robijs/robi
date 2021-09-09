@@ -1,7 +1,7 @@
 {
   "Users": [
     {
-      "id": 1,
+      "Id": 1,
       "Title": "First Last",
       "Email": "first.mi.last.ctr@mail.mil",
       "LoginName": "0987654321@mil",
@@ -11,17 +11,17 @@
   "ReleaseNotes": [],
   "Roles": [
     {
-      "id": 1,
+      "Id": 1,
       "Title": "Developer"
     },
     {
-      "id": 2,
+      "Id": 2,
       "Title": "User"
     }
   ],
   "View_Questions": [
     {
-      "id": 1,
+      "Id": 1,
       "Title": "QuestionTypes",
       "Value": [
         {
@@ -40,7 +40,100 @@
     }
   ],
   "Questions": [],
-  "Log": [],
-  "Errors": [],
+  "Log": [
+    {
+      "Title": "Log in",
+      "SessionId": "3e86d77c-4ddf-4e07-b254-c6075b9c4ea2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:213:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T10:21:12.227Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 1
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3e86d77c-4ddf-4e07-b254-c6075b9c4ea2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:416:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T10:21:14.089Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 2
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3e86d77c-4ddf-4e07-b254-c6075b9c4ea2",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:246:21)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T10:21:34.571Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 3
+    }
+  ],
+  "Errors": [
+    {
+      "SessionId": "1e37bc1d-233d-4080-99bc-090b67e2c8a4",
+      "Message": "Converting circular structure to JSON\n    --> starting at object with constructor 'Object'\n    |     property '_buttons' -> object with constructor 'Array'\n    |     index 0 -> object with constructor 'Object'\n    |     ...\n    |     property 'context' -> object with constructor 'Array'\n    --- index 0 closes the circle",
+      "Error": "TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Object'\n    |     property '_buttons' -> object with constructor 'Array'\n    |     index 0 -> object with constructor 'Object'\n    |     ...\n    |     property 'context' -> object with constructor 'Array'\n    --- index 0 closes the circle\n    at JSON.stringify (<anonymous>)\n    at Action_Error (http://127.0.0.1:8080/src/Actions/Action_Error.js:80:24)\n    at HTMLBodyElement.window.onerror (http://127.0.0.1:8080/src/app.js:54:9)\n    at Object.trigger (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8477:27)\n    at HTMLTableElement.<anonymous> (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8549:17)\n    at Function.each (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:367:19)\n    at jQuery.fn.init.each (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:202:17)\n    at jQuery.fn.init.trigger (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8548:15)\n    at H (http://127.0.0.1:8080/src/Libraries/DataTables/datatables.min.js:132:206)\n    at aa (http://127.0.0.1:8080/src/Libraries/DataTables/datatables.min.js:130:363)",
+      "Source": "http://127.0.0.1:8080/src/app.js",
+      "Line": null,
+      "ColumnNumber": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T10:21:09.320Z",
+      "Id": 1
+    },
+    {
+      "SessionId": "1e37bc1d-233d-4080-99bc-090b67e2c8a4",
+      "Message": "Converting circular structure to JSON\n    --> starting at object with constructor 'Object'\n    |     property '_buttons' -> object with constructor 'Array'\n    |     index 0 -> object with constructor 'Object'\n    |     ...\n    |     property 'context' -> object with constructor 'Array'\n    --- index 0 closes the circle",
+      "Error": "TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Object'\n    |     property '_buttons' -> object with constructor 'Array'\n    |     index 0 -> object with constructor 'Object'\n    |     ...\n    |     property 'context' -> object with constructor 'Array'\n    --- index 0 closes the circle\n    at JSON.stringify (<anonymous>)\n    at Action_Error (http://127.0.0.1:8080/src/Actions/Action_Error.js:80:24)\n    at window.onerror (http://127.0.0.1:8080/src/app.js:54:9)\n    at Object.trigger (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8477:27)\n    at HTMLTableElement.<anonymous> (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8549:17)\n    at Function.each (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:367:19)\n    at jQuery.fn.init.each (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:202:17)\n    at jQuery.fn.init.trigger (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8548:15)\n    at H (http://127.0.0.1:8080/src/Libraries/DataTables/datatables.min.js:132:206)\n    at aa (http://127.0.0.1:8080/src/Libraries/DataTables/datatables.min.js:130:363)",
+      "Source": "http://127.0.0.1:8080/src/app.js",
+      "Line": null,
+      "ColumnNumber": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T10:21:09.321Z",
+      "Id": 2
+    },
+    {
+      "SessionId": "1e37bc1d-233d-4080-99bc-090b67e2c8a4",
+      "Message": "Converting circular structure to JSON\n    --> starting at object with constructor 'Object'\n    |     property '_buttons' -> object with constructor 'Array'\n    |     index 0 -> object with constructor 'Object'\n    |     ...\n    |     property 'context' -> object with constructor 'Array'\n    --- index 0 closes the circle",
+      "Error": "TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Object'\n    |     property '_buttons' -> object with constructor 'Array'\n    |     index 0 -> object with constructor 'Object'\n    |     ...\n    |     property 'context' -> object with constructor 'Array'\n    --- index 0 closes the circle\n    at JSON.stringify (<anonymous>)\n    at Action_Error (http://127.0.0.1:8080/src/Actions/Action_Error.js:80:24)\n    at HTMLBodyElement.window.onerror (http://127.0.0.1:8080/src/app.js:54:9)\n    at Object.trigger (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8477:27)\n    at HTMLTableElement.<anonymous> (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8549:17)\n    at Function.each (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:367:19)\n    at jQuery.fn.init.each (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:202:17)\n    at jQuery.fn.init.trigger (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8548:15)\n    at H (http://127.0.0.1:8080/src/Libraries/DataTables/datatables.min.js:132:206)\n    at aa (http://127.0.0.1:8080/src/Libraries/DataTables/datatables.min.js:130:363)",
+      "Source": "http://127.0.0.1:8080/src/app.js",
+      "Line": null,
+      "ColumnNumber": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T10:21:09.321Z",
+      "Id": 3
+    },
+    {
+      "SessionId": "1e37bc1d-233d-4080-99bc-090b67e2c8a4",
+      "Message": "Converting circular structure to JSON\n    --> starting at object with constructor 'Object'\n    |     property '_buttons' -> object with constructor 'Array'\n    |     index 0 -> object with constructor 'Object'\n    |     ...\n    |     property 'context' -> object with constructor 'Array'\n    --- index 0 closes the circle",
+      "Error": "TypeError: Converting circular structure to JSON\n    --> starting at object with constructor 'Object'\n    |     property '_buttons' -> object with constructor 'Array'\n    |     index 0 -> object with constructor 'Object'\n    |     ...\n    |     property 'context' -> object with constructor 'Array'\n    --- index 0 closes the circle\n    at JSON.stringify (<anonymous>)\n    at Action_Error (http://127.0.0.1:8080/src/Actions/Action_Error.js:80:24)\n    at window.onerror (http://127.0.0.1:8080/src/app.js:54:9)\n    at Object.trigger (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8477:27)\n    at HTMLTableElement.<anonymous> (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8549:17)\n    at Function.each (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:367:19)\n    at jQuery.fn.init.each (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:202:17)\n    at jQuery.fn.init.trigger (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:8548:15)\n    at H (http://127.0.0.1:8080/src/Libraries/DataTables/datatables.min.js:132:206)\n    at aa (http://127.0.0.1:8080/src/Libraries/DataTables/datatables.min.js:130:363)",
+      "Source": "http://127.0.0.1:8080/src/app.js",
+      "Line": null,
+      "ColumnNumber": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T10:21:09.322Z",
+      "Id": 4
+    }
+  ],
   "Comments": []
 }

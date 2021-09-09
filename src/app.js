@@ -107,18 +107,20 @@ window.onload = async () => {
     /** Get list items */
     const data = await Action_Data(lists);
 
-    /** Add list items to store */
-    lists.forEach((param, index) => {
-        const {
-            list
-        } = param;
+    if (data) {
+        /** Add list items to store */
+        lists.forEach((param, index) => {
+                const {
+                    list
+                } = param;
 
-       Action_Store.add({
-           type: 'list',
-           list,
-           items: data[index]
-       });
-    });
+            Action_Store.add({
+                type: 'list',
+                list,
+                items: data[index]
+            });
+        });
+    }
 
     /** Load svg definitions */
     const svgDefs = Component_SvgDefs({
