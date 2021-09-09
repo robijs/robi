@@ -153,16 +153,25 @@ export default function Component_Sidebar(param) {
 
             /* Drop down */
             #id .dropdown-container {
-                padding: 15px 14px;
+                margin-bottom: 10px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
             }
+
+            #id .dropdown-container.closed {
+                display: none;
+            }
             
             #id .dropdown-label {
                 color: ${Setting_App.sidebarTextColor};
-                font-size: 1.5em;
+                font-size: 1.1em;
+                font-weight: 500;
+            }
+
+            #id .dropdown-toggle {
+                font-size: 14px;
             }
 
             #id .btn:focus,
@@ -176,6 +185,7 @@ export default function Component_Sidebar(param) {
 
             #id .dropdown-item {
                 /* padding: 6px 19px; */
+                font-size: 14px;
                 padding: 6px 12px;
                 cursor: pointer;
             }
@@ -198,7 +208,6 @@ export default function Component_Sidebar(param) {
             }
 
             #id.sidebar .logo.closed {
-                image-rendering: pixelated;
                 max-width: 40px;
             }
 
@@ -276,7 +285,9 @@ export default function Component_Sidebar(param) {
     function closeSidebar(mode, icon) {
         if (mode !== 'closed') {
             /** Add classes */
+            component.find('.logo').src = Setting_App.logoSmall;
             component.find('.logo').classList.add('closed');
+            component.find('.dropdown-container').classList.add('closed');
             component.findAll('.text').forEach(item => item.classList.add('closed'));
             icon.classList.add('closed');
 
@@ -294,7 +305,9 @@ export default function Component_Sidebar(param) {
     function openSidebar(mode, icon) {
         if (mode !== 'open') {
             /** Remove Classes */
+            component.find('.logo').src = Setting_App.logo;
             component.find('.logo').classList.remove('closed');
+            component.find('.dropdown-container').classList.remove('closed');
             component.findAll('.text').forEach(item => item.classList.remove('closed'));
             icon.classList.remove('closed');
             

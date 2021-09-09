@@ -1,4 +1,2261 @@
 {
+  "Facilities": [
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(1)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(1)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 1,
+      "Title": "WALTER REED NATL MIL MED CNTR",
+      "DMISID": 67,
+      "MarketID": 1,
+      "QPP_DropDown": "(0067) WALTER REED NATL MIL MED CNTR",
+      "MarketId": 10,
+      "ID": 1
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(2)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(2)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 2,
+      "Title": "NMC SAN DIEGO",
+      "DMISID": 29,
+      "MarketID": 8,
+      "QPP_DropDown": "(0029) NMC SAN DIEGO",
+      "MarketId": 6,
+      "ID": 2
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(3)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(3)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 3,
+      "Title": "NMC PORTSMOUTH",
+      "DMISID": 124,
+      "MarketID": 7,
+      "QPP_DropDown": "(0124) NMC PORTSMOUTH",
+      "MarketId": 2,
+      "ID": 3
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(4)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(4)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 4,
+      "Title": "NMC CAMP LEJEUNE",
+      "DMISID": 91,
+      "MarketID": 62,
+      "QPP_DropDown": "(0091) NMC CAMP LEJEUNE",
+      "MarketId": 9,
+      "ID": 4
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(5)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(5)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 5,
+      "Title": "NHC QUANTICO",
+      "DMISID": 385,
+      "MarketID": 1,
+      "QPP_DropDown": "(0385) NHC QUANTICO",
+      "MarketId": 10,
+      "ID": 5
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(6)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(6)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 6,
+      "Title": "NHC PATUXENT RIVER",
+      "DMISID": 68,
+      "MarketID": 1,
+      "QPP_DropDown": "(0068) NHC PATUXENT RIVER",
+      "MarketId": 10,
+      "ID": 6
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(7)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(7)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 7,
+      "Title": "NHC OAK HARBOR BIRTHING CTR",
+      "DMISID": 127,
+      "MarketID": 5,
+      "QPP_DropDown": "(0127) NHC OAK HARBOR BIRTHING CTR",
+      "MarketId": 8,
+      "ID": 7
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(8)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(8)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 8,
+      "Title": "NHC NEW ENGLAND",
+      "DMISID": 100,
+      "MarketID": 66,
+      "QPP_DropDown": "(0100) NHC NEW ENGLAND",
+      "MarketId": 5,
+      "ID": 8
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(9)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(9)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 9,
+      "Title": "NHC LEMOORE",
+      "DMISID": 28,
+      "MarketID": 66,
+      "QPP_DropDown": "(0028) NHC LEMOORE",
+      "MarketId": 5,
+      "ID": 9
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(10)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(10)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 10,
+      "Title": "NHC HAWAII",
+      "DMISID": 280,
+      "MarketID": 9,
+      "QPP_DropDown": "(0280) NHC HAWAII",
+      "MarketId": 15,
+      "ID": 10
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(11)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(11)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 11,
+      "Title": "NHC CORPUS CHRISTI",
+      "DMISID": 118,
+      "MarketID": 66,
+      "QPP_DropDown": "(0118) NHC CORPUS CHRISTI",
+      "MarketId": 5,
+      "ID": 11
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(12)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(12)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 12,
+      "Title": "NHC CHERRY POINT",
+      "DMISID": 92,
+      "MarketID": 62,
+      "QPP_DropDown": "(0092) NHC CHERRY POINT",
+      "MarketId": 9,
+      "ID": 12
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(13)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(13)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 13,
+      "Title": "NHC CHARLESTON",
+      "DMISID": 103,
+      "MarketID": 74,
+      "QPP_DropDown": "(0103) NHC CHARLESTON",
+      "MarketId": 11,
+      "ID": 13
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(14)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(14)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 14,
+      "Title": "NHC ANNAPOLIS",
+      "DMISID": 306,
+      "MarketID": 1,
+      "QPP_DropDown": "(0306) NHC ANNAPOLIS",
+      "MarketId": 10,
+      "ID": 14
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(15)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(15)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 15,
+      "Title": "NH YOKOSUKA",
+      "DMISID": 622,
+      "MarketID": 65,
+      "QPP_DropDown": "(0622) NH YOKOSUKA",
+      "MarketId": 14,
+      "ID": 15
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(16)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(16)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 16,
+      "Title": "NH TWENTYNINE PALMS",
+      "DMISID": 30,
+      "MarketID": 66,
+      "QPP_DropDown": "(0030) NH TWENTYNINE PALMS",
+      "MarketId": 5,
+      "ID": 16
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(17)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(17)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 17,
+      "Title": "NH SIGONELLA",
+      "DMISID": 624,
+      "MarketID": 64,
+      "QPP_DropDown": "(0624) NH SIGONELLA",
+      "MarketId": 17,
+      "ID": 17
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(18)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(18)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 18,
+      "Title": "NH ROTA",
+      "DMISID": 618,
+      "MarketID": 64,
+      "QPP_DropDown": "(0618) NH ROTA",
+      "MarketId": 17,
+      "ID": 18
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(19)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(19)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 19,
+      "Title": "NH PENSACOLA",
+      "DMISID": 38,
+      "MarketID": 69,
+      "QPP_DropDown": "(0038) NH PENSACOLA",
+      "MarketId": 16,
+      "ID": 19
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(20)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(20)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 20,
+      "Title": "NH OKINAWA",
+      "DMISID": 621,
+      "MarketID": 65,
+      "QPP_DropDown": "(0621) NH OKINAWA",
+      "MarketId": 14,
+      "ID": 20
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(21)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(21)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 21,
+      "Title": "NH NAPLES",
+      "DMISID": 617,
+      "MarketID": 64,
+      "QPP_DropDown": "(0617) NH NAPLES",
+      "MarketId": 17,
+      "ID": 21
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(22)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(22)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 22,
+      "Title": "NH JACKSONVILLE",
+      "DMISID": 39,
+      "MarketID": 15,
+      "QPP_DropDown": "(0039) NH JACKSONVILLE",
+      "MarketId": 13,
+      "ID": 22
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(23)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(23)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 23,
+      "Title": "NH GUANTANAMO BAY",
+      "DMISID": 615,
+      "MarketID": 66,
+      "QPP_DropDown": "(0615) NH GUANTANAMO BAY",
+      "MarketId": 5,
+      "ID": 23
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(24)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(24)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 24,
+      "Title": "NH GUAM-AGANA",
+      "DMISID": 620,
+      "MarketID": 65,
+      "QPP_DropDown": "(0620) NH GUAM-AGANA",
+      "MarketId": 14,
+      "ID": 24
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(25)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(25)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 25,
+      "Title": "NH CAMP PENDLETON",
+      "DMISID": 24,
+      "MarketID": 8,
+      "QPP_DropDown": "(0024) NH CAMP PENDLETON",
+      "MarketId": 6,
+      "ID": 25
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(26)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(26)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 26,
+      "Title": "NH BREMERTON",
+      "DMISID": 126,
+      "MarketID": 5,
+      "QPP_DropDown": "(0126) NH BREMERTON",
+      "MarketId": 8,
+      "ID": 26
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(27)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(27)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 27,
+      "Title": "NH BEAUFORT",
+      "DMISID": 104,
+      "MarketID": 74,
+      "QPP_DropDown": "(0104) NH BEAUFORT",
+      "MarketId": 11,
+      "ID": 27
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(28)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(28)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 28,
+      "Title": "LANDSTUHL REGIONAL MEDCEN",
+      "DMISID": 607,
+      "MarketID": 64,
+      "QPP_DropDown": "(0607) LANDSTUHL REGIONAL MEDCEN",
+      "MarketId": 17,
+      "ID": 28
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(29)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(29)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 29,
+      "Title": "KIMBROUGH AMB CAR CEN-MEADE",
+      "DMISID": 69,
+      "MarketID": 1,
+      "QPP_DropDown": "(0069) KIMBROUGH AMB CAR CEN-MEADE",
+      "MarketId": 10,
+      "ID": 29
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(30)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(30)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 30,
+      "Title": "JAMES A LOVELL FHCC",
+      "DMISID": 56,
+      "MarketID": 66,
+      "QPP_DropDown": "(0056) JAMES A LOVELL FHCC",
+      "MarketId": 5,
+      "ID": 30
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(31)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(31)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 31,
+      "Title": "FT BELVOIR COMMUNITY HOSP-FBCH",
+      "DMISID": 123,
+      "MarketID": 1,
+      "QPP_DropDown": "(0123) FT BELVOIR COMMUNITY HOSP-FBCH",
+      "MarketId": 10,
+      "ID": 31
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(32)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(32)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 32,
+      "Title": "BAVARIA MEDDAC-VILSECK",
+      "DMISID": 609,
+      "MarketID": 64,
+      "QPP_DropDown": "(0609) BAVARIA MEDDAC-VILSECK",
+      "MarketId": 17,
+      "ID": 32
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(33)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(33)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 33,
+      "Title": "AMC WOMACK-BRAGG",
+      "DMISID": 89,
+      "MarketID": 60,
+      "QPP_DropDown": "(0089) AMC WOMACK-BRAGG",
+      "MarketId": 22,
+      "ID": 33
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(34)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(34)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 34,
+      "Title": "AMC WILLIAM BEAUMONT-BLISS",
+      "DMISID": 108,
+      "MarketID": 72,
+      "QPP_DropDown": "(0108) AMC WILLIAM BEAUMONT-BLISS",
+      "MarketId": 18,
+      "ID": 34
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(35)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(35)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 35,
+      "Title": "AMC TRIPLER-SHAFTER",
+      "DMISID": 52,
+      "MarketID": 9,
+      "QPP_DropDown": "(0052) AMC TRIPLER-SHAFTER",
+      "MarketId": 15,
+      "ID": 35
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(36)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(36)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 36,
+      "Title": "AMC MADIGAN-LEWIS",
+      "DMISID": 125,
+      "MarketID": 5,
+      "QPP_DropDown": "(0125) AMC MADIGAN-LEWIS",
+      "MarketId": 8,
+      "ID": 36
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(37)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(37)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 37,
+      "Title": "AMC EISENHOWER-GORDON",
+      "DMISID": 47,
+      "MarketID": 67,
+      "QPP_DropDown": "(0047) AMC EISENHOWER-GORDON",
+      "MarketId": 23,
+      "ID": 37
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(38)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(38)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 38,
+      "Title": "AMC DARNALL-HOOD",
+      "DMISID": 110,
+      "MarketID": 68,
+      "QPP_DropDown": "(0110) AMC DARNALL-HOOD",
+      "MarketId": 21,
+      "ID": 38
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(39)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(39)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 39,
+      "Title": "AMC BAMC-FSH",
+      "DMISID": 109,
+      "MarketID": 6,
+      "QPP_DropDown": "(0109) AMC BAMC-FSH",
+      "MarketId": 7,
+      "ID": 39
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(40)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(40)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 40,
+      "Title": "AHC REYNOLDS-SILL",
+      "DMISID": 98,
+      "MarketID": 66,
+      "QPP_DropDown": "(0098) AHC REYNOLDS-SILL",
+      "MarketId": 5,
+      "ID": 40
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(41)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(41)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 41,
+      "Title": "AHC R W BLISS-HUACHUCA",
+      "DMISID": 8,
+      "MarketID": 66,
+      "QPP_DropDown": "(0008) AHC R W BLISS-HUACHUCA",
+      "MarketId": 5,
+      "ID": 41
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(42)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(42)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 42,
+      "Title": "AHC MUNSON-LEAVENWORTH",
+      "DMISID": 58,
+      "MarketID": 71,
+      "QPP_DropDown": "(0058) AHC MUNSON-LEAVENWORTH",
+      "MarketId": 12,
+      "ID": 42
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(43)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(43)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 43,
+      "Title": "AHC MONCRIEF-JACKSON",
+      "DMISID": 105,
+      "MarketID": 66,
+      "QPP_DropDown": "(0105) AHC MONCRIEF-JACKSON",
+      "MarketId": 5,
+      "ID": 43
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(44)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(44)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 44,
+      "Title": "AHC MCDONALD-EUSTIS",
+      "DMISID": 121,
+      "MarketID": 7,
+      "QPP_DropDown": "(0121) AHC MCDONALD-EUSTIS",
+      "MarketId": 2,
+      "ID": 44
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(45)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(45)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 45,
+      "Title": "AHC LYSTER-RUCKER",
+      "DMISID": 3,
+      "MarketID": 66,
+      "QPP_DropDown": "(0003) AHC LYSTER-RUCKER",
+      "MarketId": 5,
+      "ID": 45
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(46)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(46)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 46,
+      "Title": "AHC KENNER-LEE",
+      "DMISID": 122,
+      "MarketID": 66,
+      "QPP_DropDown": "(0122) AHC KENNER-LEE",
+      "MarketId": 5,
+      "ID": 46
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(47)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(47)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 47,
+      "Title": "AHC IRELAND-KNOX",
+      "DMISID": 61,
+      "MarketID": 66,
+      "QPP_DropDown": "(0061) AHC IRELAND-KNOX",
+      "MarketId": 5,
+      "ID": 47
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(48)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(48)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 48,
+      "Title": "AHC GUTHRIE-DRUM",
+      "DMISID": 330,
+      "MarketID": 66,
+      "QPP_DropDown": "(0330) AHC GUTHRIE-DRUM",
+      "MarketId": 5,
+      "ID": 48
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(49)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(49)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 49,
+      "Title": "AHC FOX-REDSTONE ARSENAL",
+      "DMISID": 1,
+      "MarketID": 66,
+      "QPP_DropDown": "(0001) AHC FOX-REDSTONE ARSENAL",
+      "MarketId": 5,
+      "ID": 49
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(50)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(50)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 50,
+      "Title": "AHC BG CRAWFORD SAMS-CAMP ZAMA",
+      "DMISID": 610,
+      "MarketID": 65,
+      "QPP_DropDown": "(0610) AHC BG CRAWFORD SAMS-CAMP ZAMA",
+      "MarketId": 14,
+      "ID": 50
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(51)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(51)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 51,
+      "Title": "AF-MC-99th MEDGRP-NELLIS",
+      "DMISID": 79,
+      "MarketID": 66,
+      "QPP_DropDown": "(0079) AF-MC-99th MEDGRP-NELLIS",
+      "MarketId": 5,
+      "ID": 51
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(52)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(52)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 52,
+      "Title": "AF-MC-88th MEDGRP-WRIGHT-PAT",
+      "DMISID": 95,
+      "MarketID": 66,
+      "QPP_DropDown": "(0095) AF-MC-88th MEDGRP-WRIGHT-PAT",
+      "MarketId": 5,
+      "ID": 52
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(53)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(53)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 53,
+      "Title": "AF-MC-81st MEDGRP-KEESLER",
+      "DMISID": 73,
+      "MarketID": 61,
+      "QPP_DropDown": "(0073) AF-MC-81st MEDGRP-KEESLER",
+      "MarketId": 20,
+      "ID": 53
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(54)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(54)",
+        "etag": "\"2\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 54,
+      "Title": "AF-MC-60th MEDGRP-TRAVIS",
+      "DMISID": 14,
+      "MarketID": 11,
+      "QPP_DropDown": "(0014) AF-MC-60th MEDGRP-TRAVIS",
+      "MarketId": 1,
+      "ID": 54
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(55)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(55)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 55,
+      "Title": "AF-LS-62nd MED FLT-JBLM-MCHORD",
+      "DMISID": 395,
+      "MarketID": 5,
+      "QPP_DropDown": "(0395) AF-LS-62nd MED FLT-JBLM-MCHORD",
+      "MarketId": 8,
+      "ID": 55
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(56)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(56)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 56,
+      "Title": "AF-H-96th MEDGRP-EGLIN",
+      "DMISID": 42,
+      "MarketID": 69,
+      "QPP_DropDown": "(0042) AF-H-96th MEDGRP-EGLIN",
+      "MarketId": 16,
+      "ID": 56
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(57)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(57)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 57,
+      "Title": "AF-H-673rd MEDGRP JBER-ELMNDRF",
+      "DMISID": 6,
+      "MarketID": 12,
+      "QPP_DropDown": "(0006) AF-H-673rd MEDGRP JBER-ELMNDRF",
+      "MarketId": 24,
+      "ID": 57
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(58)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(58)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 58,
+      "Title": "AF-H-633rd MEDGRP JBLE-LANGLEY",
+      "DMISID": 120,
+      "MarketID": 7,
+      "QPP_DropDown": "(0120) AF-H-633rd MEDGRP JBLE-LANGLEY",
+      "MarketId": 2,
+      "ID": 58
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(59)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(59)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 59,
+      "Title": "AF-H-51st MEDGRP-OSAN",
+      "DMISID": 638,
+      "MarketID": 65,
+      "QPP_DropDown": "(0638) AF-H-51st MEDGRP-OSAN",
+      "MarketId": 14,
+      "ID": 59
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(60)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(60)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 60,
+      "Title": "AF-H-48th MEDGRP-LAKENHEATH",
+      "DMISID": 633,
+      "MarketID": 64,
+      "QPP_DropDown": "(0633) AF-H-48th MEDGRP-LAKENHEATH",
+      "MarketId": 17,
+      "ID": 60
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(61)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(61)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 61,
+      "Title": "AF-H-374th MEDGRP-YOKOTA",
+      "DMISID": 640,
+      "MarketID": 65,
+      "QPP_DropDown": "(0640) AF-H-374th MEDGRP-YOKOTA",
+      "MarketId": 14,
+      "ID": 61
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(62)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(62)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 62,
+      "Title": "AF-H-35th MEDGRP-MISAWA",
+      "DMISID": 639,
+      "MarketID": 65,
+      "QPP_DropDown": "(0639) AF-H-35th MEDGRP-MISAWA",
+      "MarketId": 14,
+      "ID": 62
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(63)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(63)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 63,
+      "Title": "AF-C-9th MEDGRP-BEALE",
+      "DMISID": 15,
+      "MarketID": 66,
+      "QPP_DropDown": "(0015) AF-C-9th MEDGRP-BEALE",
+      "MarketId": 5,
+      "ID": 63
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(64)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(64)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 64,
+      "Title": "AF-C-97th MEDGRP-ALTUS",
+      "DMISID": 97,
+      "MarketID": 66,
+      "QPP_DropDown": "(0097) AF-C-97th MEDGRP-ALTUS",
+      "MarketId": 5,
+      "ID": 64
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(65)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(65)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 65,
+      "Title": "AF-C-92nd MEDGRP-FAIRCHILD",
+      "DMISID": 128,
+      "MarketID": 66,
+      "QPP_DropDown": "(0128) AF-C-92nd MEDGRP-FAIRCHILD",
+      "MarketId": 5,
+      "ID": 65
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(66)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(66)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 66,
+      "Title": "AF-C-90th MEDGRP-FE WARREN",
+      "DMISID": 129,
+      "MarketID": 66,
+      "QPP_DropDown": "(0129) AF-C-90th MEDGRP-FE WARREN",
+      "MarketId": 5,
+      "ID": 66
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(67)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(67)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 67,
+      "Title": "AF-C-8th MEDGRP-KUNSAN",
+      "DMISID": 637,
+      "MarketID": 65,
+      "QPP_DropDown": "(0637) AF-C-8th MEDGRP-KUNSAN",
+      "MarketId": 14,
+      "ID": 67
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(68)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(68)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 68,
+      "Title": "AF-C-87th MEDGRP JBMDL-MCGUIRE",
+      "DMISID": 326,
+      "MarketID": 66,
+      "QPP_DropDown": "(0326) AF-C-87th MEDGRP JBMDL-MCGUIRE",
+      "MarketId": 5,
+      "ID": 68
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(69)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(69)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 69,
+      "Title": "AF-C-86th MEDGRP-RAMSTEIN",
+      "DMISID": 806,
+      "MarketID": 64,
+      "QPP_DropDown": "(0806) AF-C-86th MEDGRP-RAMSTEIN",
+      "MarketId": 17,
+      "ID": 69
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(70)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(70)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 70,
+      "Title": "AF-C-82nd MEDGRP-SHEPPARD",
+      "DMISID": 113,
+      "MarketID": 66,
+      "QPP_DropDown": "(0113) AF-C-82nd MEDGRP-SHEPPARD",
+      "MarketId": 5,
+      "ID": 70
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(71)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(71)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 71,
+      "Title": "AF-C-7th MEDGRP-DYESS",
+      "DMISID": 112,
+      "MarketID": 66,
+      "QPP_DropDown": "(0112) AF-C-7th MEDGRP-DYESS",
+      "MarketId": 5,
+      "ID": 71
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(72)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(72)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 72,
+      "Title": "AF-C-78th MEDGRP-ROBINS",
+      "DMISID": 51,
+      "MarketID": 66,
+      "QPP_DropDown": "(0051) AF-C-78th MEDGRP-ROBINS",
+      "MarketId": 5,
+      "ID": 72
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(73)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(73)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 73,
+      "Title": "AF-C-75th MEDGRP-HILL",
+      "DMISID": 119,
+      "MarketID": 66,
+      "QPP_DropDown": "(0119) AF-C-75th MEDGRP-HILL",
+      "MarketId": 5,
+      "ID": 73
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(74)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(74)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 74,
+      "Title": "AF-C-72nd MEDGRP-TINKER",
+      "DMISID": 96,
+      "MarketID": 66,
+      "QPP_DropDown": "(0096) AF-C-72nd MEDGRP-TINKER",
+      "MarketId": 5,
+      "ID": 74
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(75)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(75)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 75,
+      "Title": "AF-C-71st MEDGRP-VANCE",
+      "DMISID": 338,
+      "MarketID": 66,
+      "QPP_DropDown": "(0338) AF-C-71st MEDGRP-VANCE",
+      "MarketId": 5,
+      "ID": 75
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(76)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(76)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 76,
+      "Title": "AF-C-6th MEDGRP-MACDILL",
+      "DMISID": 45,
+      "MarketID": 66,
+      "QPP_DropDown": "(0045) AF-C-6th MEDGRP-MACDILL",
+      "MarketId": 5,
+      "ID": 76
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(77)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(77)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 77,
+      "Title": "AF-C-66th MEDGRP-HANSCOM",
+      "DMISID": 310,
+      "MarketID": 66,
+      "QPP_DropDown": "(0310) AF-C-66th MEDGRP-HANSCOM",
+      "MarketId": 5,
+      "ID": 77
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(78)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(78)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 78,
+      "Title": "AF-C-628th MEDGRP-CHARLESTON",
+      "DMISID": 356,
+      "MarketID": 74,
+      "QPP_DropDown": "(0356) AF-C-628th MEDGRP-CHARLESTON",
+      "MarketId": 11,
+      "ID": 78
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(79)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(79)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 79,
+      "Title": "AF-C-61st MEDGRP-LOS ANGELES",
+      "DMISID": 248,
+      "MarketID": 66,
+      "QPP_DropDown": "(0248) AF-C-61st MEDGRP-LOS ANGELES",
+      "MarketId": 5,
+      "ID": 79
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(80)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(80)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 80,
+      "Title": "AF-C-5th MEDGRP-MINOT",
+      "DMISID": 94,
+      "MarketID": 66,
+      "QPP_DropDown": "(0094) AF-C-5th MEDGRP-MINOT",
+      "MarketId": 5,
+      "ID": 80
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(81)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(81)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 81,
+      "Title": "AF-C-56th MEDGRP-LUKE",
+      "DMISID": 9,
+      "MarketID": 66,
+      "QPP_DropDown": "(0009) AF-C-56th MEDGRP-LUKE",
+      "MarketId": 5,
+      "ID": 81
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(82)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(82)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 82,
+      "Title": "AF-C-55th MEDGRP-OFFUTT",
+      "DMISID": 78,
+      "MarketID": 66,
+      "QPP_DropDown": "(0078) AF-C-55th MEDGRP-OFFUTT",
+      "MarketId": 5,
+      "ID": 82
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(83)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(83)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 83,
+      "Title": "AF-C-52nd MEDGRP-SPANGDAHLEM",
+      "DMISID": 805,
+      "MarketID": 64,
+      "QPP_DropDown": "(0805) AF-C-52nd MEDGRP-SPANGDAHLEM",
+      "MarketId": 17,
+      "ID": 83
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(84)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(84)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 84,
+      "Title": "AF-C-509th MEDGRP-WHITEMAN",
+      "DMISID": 76,
+      "MarketID": 66,
+      "QPP_DropDown": "(0076) AF-C-509th MEDGRP-WHITEMAN",
+      "MarketId": 5,
+      "ID": 84
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(85)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(85)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 85,
+      "Title": "AF-C-4th MEDGRP-SJ",
+      "DMISID": 90,
+      "MarketID": 60,
+      "QPP_DropDown": "(0090) AF-C-4th MEDGRP-SJ",
+      "MarketId": 22,
+      "ID": 85
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(86)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(86)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 86,
+      "Title": "AF-C-49th MEDGRP-HOLLOMAN",
+      "DMISID": 84,
+      "MarketID": 72,
+      "QPP_DropDown": "(0084) AF-C-49th MEDGRP-HOLLOMAN",
+      "MarketId": 18,
+      "ID": 86
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(87)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(87)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 87,
+      "Title": "AF-C-47th MEDGRP-LAUGHLIN",
+      "DMISID": 114,
+      "MarketID": 66,
+      "QPP_DropDown": "(0114) AF-C-47th MEDGRP-LAUGHLIN",
+      "MarketId": 5,
+      "ID": 87
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(88)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(88)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 88,
+      "Title": "AF-C-460th MEDGRP-BUCKLEY",
+      "DMISID": 7200,
+      "MarketID": 4,
+      "QPP_DropDown": "(7200) AF-C-460th MEDGRP-BUCKLEY",
+      "MarketId": 19,
+      "ID": 88
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(89)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(89)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 89,
+      "Title": "AF-C-45th MEDGRP-PATRICK",
+      "DMISID": 46,
+      "MarketID": 66,
+      "QPP_DropDown": "(0046) AF-C-45th MEDGRP-PATRICK",
+      "MarketId": 5,
+      "ID": 89
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(90)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(90)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 90,
+      "Title": "AF-C-436th MEDGRP-DOVER",
+      "DMISID": 36,
+      "MarketID": 66,
+      "QPP_DropDown": "(0036) AF-C-436th MEDGRP-DOVER",
+      "MarketId": 5,
+      "ID": 90
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(91)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(91)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 91,
+      "Title": "AF-C-42nd MEDGRP-MAXWELL",
+      "DMISID": 4,
+      "MarketID": 66,
+      "QPP_DropDown": "(0004) AF-C-42nd MEDGRP-MAXWELL",
+      "MarketId": 5,
+      "ID": 91
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(92)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(92)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 92,
+      "Title": "AF-C-412th MEDGRP-EDWARDS",
+      "DMISID": 19,
+      "MarketID": 66,
+      "QPP_DropDown": "(0019) AF-C-412th MEDGRP-EDWARDS",
+      "MarketId": 5,
+      "ID": 92
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(93)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(93)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 93,
+      "Title": "AF-C-377th MEDGRP-KIRTLAND",
+      "DMISID": 83,
+      "MarketID": 66,
+      "QPP_DropDown": "(0083) AF-C-377th MEDGRP-KIRTLAND",
+      "MarketId": 5,
+      "ID": 93
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(94)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(94)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 94,
+      "Title": "AF-C-375th MEDGRP-SCOTT",
+      "DMISID": 55,
+      "MarketID": 66,
+      "QPP_DropDown": "(0055) AF-C-375th MEDGRP-SCOTT",
+      "MarketId": 5,
+      "ID": 94
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(95)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(95)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 95,
+      "Title": "AF-C-36th MEDGRP-ANDERSEN",
+      "DMISID": 802,
+      "MarketID": 65,
+      "QPP_DropDown": "(0802) AF-C-36th MEDGRP-ANDERSEN",
+      "MarketId": 14,
+      "ID": 95
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(96)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(96)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 96,
+      "Title": "AF-C-366th MEDGRP-MT HOME",
+      "DMISID": 53,
+      "MarketID": 66,
+      "QPP_DropDown": "(0053) AF-C-366th MEDGRP-MT HOME",
+      "MarketId": 5,
+      "ID": 96
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(97)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(97)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 97,
+      "Title": "AF-C-355th MEDGRP-DM",
+      "DMISID": 10,
+      "MarketID": 66,
+      "QPP_DropDown": "(0010) AF-C-355th MEDGRP-DM",
+      "MarketId": 5,
+      "ID": 97
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(98)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(98)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 98,
+      "Title": "AF-C-354th MEDGRP-EIELSON",
+      "DMISID": 203,
+      "MarketID": 12,
+      "QPP_DropDown": "(0203) AF-C-354th MEDGRP-EIELSON",
+      "MarketId": 24,
+      "ID": 98
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(99)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(99)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 99,
+      "Title": "AF-C-341st MEDGRP-MALMSTROM",
+      "DMISID": 77,
+      "MarketID": 66,
+      "QPP_DropDown": "(0077) AF-C-341st MEDGRP-MALMSTROM",
+      "MarketId": 5,
+      "ID": 99
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(100)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(100)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 100,
+      "Title": "AF-C-325th MEDGRP-TYNDALL",
+      "DMISID": 43,
+      "MarketID": 69,
+      "QPP_DropDown": "(0043) AF-C-325th MEDGRP-TYNDALL",
+      "MarketId": 16,
+      "ID": 100
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(101)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(101)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 101,
+      "Title": "AF-C-319th MEDGRP-GRAND FORKS",
+      "DMISID": 93,
+      "MarketID": 66,
+      "QPP_DropDown": "(0093) AF-C-319th MEDGRP-GRAND FORKS",
+      "MarketId": 5,
+      "ID": 101
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(102)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(102)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 102,
+      "Title": "AF-C-30th MEDGRP-VANDENBERG",
+      "DMISID": 18,
+      "MarketID": 66,
+      "QPP_DropDown": "(0018) AF-C-30th MEDGRP-VANDENBERG",
+      "MarketId": 5,
+      "ID": 102
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(103)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(103)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 103,
+      "Title": "AF-C-2nd MEDGRP-BARKSDALE",
+      "DMISID": 62,
+      "MarketID": 66,
+      "QPP_DropDown": "(0062) AF-C-2nd MEDGRP-BARKSDALE",
+      "MarketId": 5,
+      "ID": 103
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(104)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(104)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 104,
+      "Title": "AF-C-28th MEDGRP-ELLSWORTH",
+      "DMISID": 106,
+      "MarketID": 66,
+      "QPP_DropDown": "(0106) AF-C-28th MEDGRP-ELLSWORTH",
+      "MarketId": 5,
+      "ID": 104
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(105)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(105)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 105,
+      "Title": "AF-C-27th SPCLOPS MDGRP-CANNON",
+      "DMISID": 85,
+      "MarketID": 66,
+      "QPP_DropDown": "(0085) AF-C-27th SPCLOPS MDGRP-CANNON",
+      "MarketId": 5,
+      "ID": 105
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(106)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(106)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 106,
+      "Title": "AF-C-23rd MEDGRP-MOODY",
+      "DMISID": 50,
+      "MarketID": 66,
+      "QPP_DropDown": "(0050) AF-C-23rd MEDGRP-MOODY",
+      "MarketId": 5,
+      "ID": 106
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(107)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(107)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 107,
+      "Title": "AF-C-22nd MEDGRP-MCCONNELL",
+      "DMISID": 59,
+      "MarketID": 71,
+      "QPP_DropDown": "(0059) AF-C-22nd MEDGRP-MCCONNELL",
+      "MarketId": 12,
+      "ID": 107
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(108)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(108)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 108,
+      "Title": "AF-C-21st MEDGRP-PETERSON",
+      "DMISID": 252,
+      "MarketID": 4,
+      "QPP_DropDown": "(0252) AF-C-21st MEDGRP-PETERSON",
+      "MarketId": 19,
+      "ID": 108
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(109)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(109)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 109,
+      "Title": "AF-C-20th MEDGRP-SHAW",
+      "DMISID": 101,
+      "MarketID": 66,
+      "QPP_DropDown": "(0101) AF-C-20th MEDGRP-SHAW",
+      "MarketId": 5,
+      "ID": 109
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(110)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(110)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 110,
+      "Title": "AF-C-1st SPCL OPS MED-HURLBURT",
+      "DMISID": 7139,
+      "MarketID": 69,
+      "QPP_DropDown": "(7139) AF-C-1st SPCL OPS MED-HURLBURT",
+      "MarketId": 16,
+      "ID": 110
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(111)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(111)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 111,
+      "Title": "AF-C-19th MEDGRP-LITTLE ROCK",
+      "DMISID": 13,
+      "MarketID": 66,
+      "QPP_DropDown": "(0013) AF-C-19th MEDGRP-LITTLE ROCK",
+      "MarketId": 5,
+      "ID": 111
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(112)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(112)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 112,
+      "Title": "AF-C-18th MEDGRP-KADENA",
+      "DMISID": 804,
+      "MarketID": 65,
+      "QPP_DropDown": "(0804) AF-C-18th MEDGRP-KADENA",
+      "MarketId": 14,
+      "ID": 112
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(113)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(113)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 113,
+      "Title": "AF-C-17th MEDGRP-GOODFELLOW",
+      "DMISID": 364,
+      "MarketID": 66,
+      "QPP_DropDown": "(0364) AF-C-17th MEDGRP-GOODFELLOW",
+      "MarketId": 5,
+      "ID": 113
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(114)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(114)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 114,
+      "Title": "AF-C-15th MEDGRP JBPH-HICKAM",
+      "DMISID": 287,
+      "MarketID": 9,
+      "QPP_DropDown": "(0287) AF-C-15th MEDGRP JBPH-HICKAM",
+      "MarketId": 15,
+      "ID": 114
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(115)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(115)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 115,
+      "Title": "AF-C-14th MEDGRP-COLUMBUS",
+      "DMISID": 74,
+      "MarketID": 66,
+      "QPP_DropDown": "(0074) AF-C-14th MEDGRP-COLUMBUS",
+      "MarketId": 5,
+      "ID": 115
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(116)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(116)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 116,
+      "Title": "AF-ASU-59th MDW-WHASC-LACKLAND",
+      "DMISID": 117,
+      "MarketID": 6,
+      "QPP_DropDown": "(0117) AF-ASU-59th MDW-WHASC-LACKLAND",
+      "MarketId": 7,
+      "ID": 116
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(117)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(117)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 117,
+      "Title": "AF-ASU-39th MEDGRP-INCIRLIK",
+      "DMISID": 635,
+      "MarketID": 64,
+      "QPP_DropDown": "(0635) AF-ASU-39th MEDGRP-INCIRLIK",
+      "MarketId": 17,
+      "ID": 117
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(118)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(118)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 118,
+      "Title": "AF-ASU-31st MEDGRP-AVIANO",
+      "DMISID": 808,
+      "MarketID": 64,
+      "QPP_DropDown": "(0808) AF-ASU-31st MEDGRP-AVIANO",
+      "MarketId": 17,
+      "ID": 118
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(119)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(119)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 119,
+      "Title": "AF-ASU-11th MEDGRP-ANDREWS",
+      "DMISID": 66,
+      "MarketID": 1,
+      "QPP_DropDown": "(0066) AF-ASU-11th MEDGRP-ANDREWS",
+      "MarketId": 10,
+      "ID": 119
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(120)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(120)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 120,
+      "Title": "AF-ASU-10th MEDGRP-ACADEMY",
+      "DMISID": 33,
+      "MarketID": 4,
+      "QPP_DropDown": "(0033) AF-ASU-10th MEDGRP-ACADEMY",
+      "MarketId": 19,
+      "ID": 120
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(121)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(121)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 121,
+      "Title": "ACH WINN-STEWART",
+      "DMISID": 49,
+      "MarketID": 74,
+      "QPP_DropDown": "(0049) ACH WINN-STEWART",
+      "MarketId": 11,
+      "ID": 121
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(122)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(122)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 122,
+      "Title": "ACH WEED-IRWIN",
+      "DMISID": 131,
+      "MarketID": 66,
+      "QPP_DropDown": "(0131) ACH WEED-IRWIN",
+      "MarketId": 5,
+      "ID": 122
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(123)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(123)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 123,
+      "Title": "ACH MARTIN-BENNING",
+      "DMISID": 48,
+      "MarketID": 70,
+      "QPP_DropDown": "(0048) ACH MARTIN-BENNING",
+      "MarketId": 4,
+      "ID": 123
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(124)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(124)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 124,
+      "Title": "ACH LEONARD WOOD",
+      "DMISID": 75,
+      "MarketID": 66,
+      "QPP_DropDown": "(0075) ACH LEONARD WOOD",
+      "MarketId": 5,
+      "ID": 124
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(125)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(125)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 125,
+      "Title": "ACH KELLER-WEST POINT",
+      "DMISID": 86,
+      "MarketID": 66,
+      "QPP_DropDown": "(0086) ACH KELLER-WEST POINT",
+      "MarketId": 5,
+      "ID": 125
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(126)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(126)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 126,
+      "Title": "ACH IRWIN-RILEY",
+      "DMISID": 57,
+      "MarketID": 71,
+      "QPP_DropDown": "(0057) ACH IRWIN-RILEY",
+      "MarketId": 12,
+      "ID": 126
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(127)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(127)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 127,
+      "Title": "ACH EVANS-CARSON",
+      "DMISID": 32,
+      "MarketID": 4,
+      "QPP_DropDown": "(0032) ACH EVANS-CARSON",
+      "MarketId": 19,
+      "ID": 127
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(128)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(128)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 128,
+      "Title": "ACH BRIAN ALLGOOD-SEOUL",
+      "DMISID": 612,
+      "MarketID": 65,
+      "QPP_DropDown": "(0612) ACH BRIAN ALLGOOD-SEOUL",
+      "MarketId": 14,
+      "ID": 128
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(129)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(129)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 129,
+      "Title": "ACH BLANCHFIELD-CAMPBELL",
+      "DMISID": 60,
+      "MarketID": 63,
+      "QPP_DropDown": "(0060) ACH BLANCHFIELD-CAMPBELL",
+      "MarketId": 3,
+      "ID": 129
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(130)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(130)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 130,
+      "Title": "ACH BAYNE-JONES-POLK",
+      "DMISID": 64,
+      "MarketID": 66,
+      "QPP_DropDown": "(0064) ACH BAYNE-JONES-POLK",
+      "MarketId": 5,
+      "ID": 130
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(131)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'438c229b-43fa-4f75-a3f3-e5e8547fffc8')/Items(131)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFacilitiesListItem"
+      },
+      "Id": 131,
+      "Title": "ACH BASSETT-WAINWRIGHT",
+      "DMISID": 5,
+      "MarketID": 12,
+      "QPP_DropDown": "(0005) ACH BASSETT-WAINWRIGHT",
+      "MarketId": 24,
+      "ID": 131
+    }
+  ],
+  "Markets": [
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(24)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(24)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 24,
+      "Title": "ALASKA",
+      "MarketId": 12,
+      "ID": 24
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(23)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(23)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 23,
+      "Title": "AUGUSTA",
+      "MarketId": 67,
+      "ID": 23
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(22)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(22)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 22,
+      "Title": "CENTRAL NC",
+      "MarketId": 60,
+      "ID": 22
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(21)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(21)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 21,
+      "Title": "CENTRAL TEXAS",
+      "MarketId": 68,
+      "ID": 21
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(20)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(20)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 20,
+      "Title": "COASTAL MS",
+      "MarketId": 61,
+      "ID": 20
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(19)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(19)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 19,
+      "Title": "COLORADO SPRINGS",
+      "MarketId": 4,
+      "ID": 19
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(18)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(18)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 18,
+      "Title": "EL PASO",
+      "MarketId": 72,
+      "ID": 18
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(17)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(17)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 17,
+      "Title": "EUROPE",
+      "MarketId": 64,
+      "ID": 17
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(16)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(16)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 16,
+      "Title": "FLORIDA PANHANDLE",
+      "MarketId": 69,
+      "ID": 16
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(15)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(15)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 15,
+      "Title": "HAWAII",
+      "MarketId": 9,
+      "ID": 15
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(14)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(14)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 14,
+      "Title": "INDO-PACIFIC",
+      "MarketId": 65,
+      "ID": 14
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(13)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(13)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 13,
+      "Title": "JACKSONVILLE",
+      "MarketId": 15,
+      "ID": 13
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(12)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(12)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 12,
+      "Title": "KANSAS",
+      "MarketId": 71,
+      "ID": 12
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(11)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(11)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 11,
+      "Title": "LOWCOUNTRY",
+      "MarketId": 74,
+      "ID": 11
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(10)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(10)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 10,
+      "Title": "NATIONAL CAPITAL REGION",
+      "MarketId": 1,
+      "ID": 10
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(9)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(9)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 9,
+      "Title": "NC COAST",
+      "MarketId": 62,
+      "ID": 9
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(8)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(8)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 8,
+      "Title": "PUGET SOUND",
+      "MarketId": 5,
+      "ID": 8
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(7)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(7)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 7,
+      "Title": "SAN ANTONIO",
+      "MarketId": 6,
+      "ID": 7
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(6)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(6)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 6,
+      "Title": "SAN DIEGO",
+      "MarketId": 8,
+      "ID": 6
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(5)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(5)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 5,
+      "Title": "SM/C DEVELOPMENT OFFICE",
+      "MarketId": 66,
+      "ID": 5
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(4)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(4)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 4,
+      "Title": "SW GEORGIA",
+      "MarketId": 70,
+      "ID": 4
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(3)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(3)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 3,
+      "Title": "SW KENTUCKY",
+      "MarketId": 63,
+      "ID": 3
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(2)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(2)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 2,
+      "Title": "TIDEWATER",
+      "MarketId": 7,
+      "ID": 2
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(1)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'b71d7b99-3847-470e-8585-164428cf1ce9')/Items(1)",
+        "etag": "\"4\"",
+        "type": "SP.Data.LstmarketsListItem"
+      },
+      "Id": 1,
+      "Title": "TRAVIS",
+      "MarketId": 11,
+      "ID": 1
+    }
+  ],
   "Users": [
     {
       "Id": 1,
@@ -1886,6 +4143,422 @@
       "Created": "2021-09-09T01:54:22.112Z",
       "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
       "Id": 142
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3ef4bd51-a08e-4755-b158-6b1fcd28f0da",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:403:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T01:56:59.210Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 143
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "dcab5a44-e6dd-47b8-b686-aeb96d6d7951",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:14:00.007Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 144
+    },
+    {
+      "Title": "Route",
+      "SessionId": "dcab5a44-e6dd-47b8-b686-aeb96d6d7951",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.onDropdown (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:338:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:14:06.470Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 145
+    },
+    {
+      "Title": "Route",
+      "SessionId": "dcab5a44-e6dd-47b8-b686-aeb96d6d7951",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.onDropdown (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:338:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:14:07.716Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 146
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "4873f225-e1db-41c0-8b3f-f62639c465bf",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:14:55.955Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 147
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "93ba27a2-cc43-4a47-9f37-e02949d5906d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:15:18.491Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 148
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "5255a622-ce52-4e0f-a14a-587571ad80ff",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:18:09.515Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 149
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "afabacf9-4550-447c-9bd3-7fb7bcf08737",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:18:25.204Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 150
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "950a62fc-a9ba-4198-abc8-089ae2c1a04d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:18:56.981Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 151
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "c871d04f-fe0a-42b1-88c1-5324f3b68402",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:18:58.779Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 152
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "0c95690c-68f5-40fe-9356-e8b52427cc35",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:19:04.971Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 153
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "111aae0a-aac6-4448-93ff-ae724279669b",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:19:20.186Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 154
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "2343cc98-d730-42b8-ae11-069257041271",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:24:04.271Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 155
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "58f9fc77-4613-4312-8f38-802af6dc709d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:24:23.824Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 156
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "6a4d1642-4772-4abc-9cf9-b173b88cf0bc",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:26:09.908Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 157
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "a962fb1c-d94c-4989-bd69-16d7b3c1ed97",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:26:25.758Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 158
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "8181c37f-72db-4dfd-8535-02b1c962abb5",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:27:09.467Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 159
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "29f3f570-2ddd-4ed3-ab74-16c563f7edf7",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:27:30.066Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 160
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "86b037b3-d9f5-4a51-aa71-9a43c5182788",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:27:36.026Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 161
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "8c9b9dca-6b72-47dc-88aa-c3089bc8a032",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:27:37.098Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 162
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "b8456068-8cdd-4422-a960-beeace5bb254",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T02:27:38.568Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 163
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "2aabedbf-1391-4881-b41a-cb3e57928575",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:05:42.334Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 164
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "89275732-9f1f-42fe-9e06-a877ddedef16",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:06:28.302Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 165
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "47ae9730-6bde-4c43-b77b-d845f4f48cd1",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:06:33.010Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 166
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "4371110c-4d3d-4687-84d4-5650a6ed25ec",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:06:33.853Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 167
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "f41ce153-9265-4a77-a2a4-a53a184eac37",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:06:39.652Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 168
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "3d0e5674-2690-4057-ba9c-2a310367f030",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:06:51.851Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 169
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3d0e5674-2690-4057-ba9c-2a310367f030",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:416:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:07:22.495Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 170
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3d0e5674-2690-4057-ba9c-2a310367f030",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:416:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:07:23.136Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 171
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3d0e5674-2690-4057-ba9c-2a310367f030",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:416:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:07:23.736Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 172
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3d0e5674-2690-4057-ba9c-2a310367f030",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Help\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Help\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:416:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:07:24.321Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 173
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3d0e5674-2690-4057-ba9c-2a310367f030",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:246:21)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:07:49.557Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 174
     }
   ],
   "Errors": [],
