@@ -1,4 +1,110 @@
 {
+  "Fiscal Years": [
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(7)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(7)",
+        "etag": "\"6\"",
+        "type": "SP.Data.LstFiscalYearListItem"
+      },
+      "Id": 7,
+      "ID": 7,
+      "Title": "2019",
+      "EventDate": "2018-10-18T12:57:00Z",
+      "EndDate": "2040-09-30T04:00:00Z"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(6)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(6)",
+        "etag": "\"2\"",
+        "type": "SP.Data.LstFiscalYearListItem"
+      },
+      "Id": 6,
+      "ID": 6,
+      "Title": "2020",
+      "EventDate": "2019-10-01T04:00:00Z",
+      "EndDate": "2020-09-30T04:00:00Z"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(1)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(1)",
+        "etag": "\"2\"",
+        "type": "SP.Data.LstFiscalYearListItem"
+      },
+      "Id": 1,
+      "ID": 1,
+      "Title": "2022",
+      "EventDate": "2021-10-01T13:00:00Z",
+      "EndDate": "2022-09-30T14:00:00Z"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(2)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(2)",
+        "etag": "\"3\"",
+        "type": "SP.Data.LstFiscalYearListItem"
+      },
+      "Id": 2,
+      "ID": 2,
+      "Title": "2021",
+      "EventDate": "2021-10-01T13:00:00Z",
+      "EndDate": "2022-09-30T14:00:00Z"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(3)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(3)",
+        "etag": "\"2\"",
+        "type": "SP.Data.LstFiscalYearListItem"
+      },
+      "Id": 3,
+      "ID": 3,
+      "Title": "2023",
+      "EventDate": "2022-10-01T04:00:00Z",
+      "EndDate": "2023-09-30T04:00:00Z"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(4)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(4)",
+        "etag": "\"2\"",
+        "type": "SP.Data.LstFiscalYearListItem"
+      },
+      "Id": 4,
+      "ID": 4,
+      "Title": "2024",
+      "EventDate": "2023-10-01T04:00:00Z",
+      "EndDate": "2024-09-30T04:00:00Z"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(5)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(5)",
+        "etag": "\"2\"",
+        "type": "SP.Data.LstFiscalYearListItem"
+      },
+      "Id": 5,
+      "ID": 5,
+      "Title": "2025",
+      "EventDate": "2024-10-01T04:00:00Z",
+      "EndDate": "2025-09-30T04:00:00Z"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(9)",
+        "uri": "https://carepoint.health.mil/sites/J5/QPP/_api/Web/Lists(guid'5cf9d78a-b534-4bdd-83eb-899d767181ef')/Items(9)",
+        "etag": "\"1\"",
+        "type": "SP.Data.LstFiscalYearListItem"
+      },
+      "Id": 9,
+      "ID": 9,
+      "Title": "2026",
+      "EventDate": "2025-10-01T04:00:00Z",
+      "EndDate": "2026-09-30T04:00:00Z"
+    }
+  ],
   "Facilities": [
     {
       "__metadata": {
@@ -4559,8 +4665,35 @@
       "Created": "2021-09-09T03:07:49.557Z",
       "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
       "Id": 174
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "8bbb3e84-864c-45e5-ab0b-f7147d40c88e",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:15:06.017Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 175
     }
   ],
-  "Errors": [],
+  "Errors": [
+    {
+      "SessionId": "8bbb3e84-864c-45e5-ab0b-f7147d40c88e",
+      "Message": "marketId is not defined",
+      "Error": "ReferenceError: marketId is not defined\n    at http://127.0.0.1:8080/src/Views/View_Home.js:34:59\n    at Array.find (<anonymous>)\n    at View_Home (http://127.0.0.1:8080/src/Views/View_Home.js:34:28)\n    at Object.go (http://127.0.0.1:8080/src/Settings/Setting_Routes.js:19:13)\n    at Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:111:11)\n    at window.onload (http://127.0.0.1:8080/src/app.js:219:5)",
+      "Source": "http://127.0.0.1:8080/src/app.js",
+      "Line": null,
+      "ColumnNumber": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-09T03:15:06.024Z",
+      "Id": 1
+    }
+  ],
   "Comments": []
 }

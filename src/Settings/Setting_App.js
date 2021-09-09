@@ -59,10 +59,20 @@ export default {
         }
     ],
     lists: [
-        // {
-        //     list: 'View_Home',
-        //     select: 'Id,Title,Value,FiscalYear'
-        // },
+        {
+            list: 'Fiscal Years',
+            // select: 'Id,Title,EventDate,EndDate'
+        },
+        {
+            list: 'Markets',
+            // select: 'Id,Title,MarketId',
+            filter: `IsActive eq 1`,
+            orderby: 'Title asc'
+        },
+        {
+            list: 'Facilities',
+            // select: 'Id,Title,MarketID,DMISID,QPP_DropDown'
+        }
     ],
     sessionStorageData: [
         // {
@@ -70,26 +80,10 @@ export default {
         //     value: ''
         // }
     ],
-    // sidebarDropdown: {
-    //     label: 'Fiscal Year',
-    //     getSelected() {
-    //         return sessionStorage.getItem('fiscalYear')
-    //     },
-    //     action(event) {
-    //
-    //     },
-    //     items: [
-    //         {
-    //             label: '',
-    //             key: '', // sessionStorage key
-    //             value: ''
-    //         }
-    //     ]
-    // },
     sidebarDropdown: {
         label: 'Fiscal Year',
         getSelected() {
-            // return sessionStorage.getItem('fiscalYear')
+            return '2021-222';
         },
         action(event) {
             // const fiscalYear = event.target.dataset.value;

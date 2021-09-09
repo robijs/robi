@@ -11,21 +11,18 @@ export default async function View_Home() {
     /** View Parent */
     const parent = Action_Store.get('maincontainer');
 
-    /** View Title */
-    const viewTitle = Component_Title({
-        title: Setting_App.title,
-        subTitle: `Subtitle (Ex: Application/Abbreviation Full Name)`,
-        parent,
-        date: new Date().toLocaleString('en-US', {
-            dateStyle: 'full'
-        }),
-        type: 'across'
-    });
+    // /** View Title */
+    // const viewTitle = Component_Title({
+    //     title: Setting_App.title,
+    //     subTitle: `Subtitle (Ex: Application/Abbreviation Full Name)`,
+    //     parent,
+    //     date: new Date().toLocaleString('en-US', {
+    //         dateStyle: 'full'
+    //     }),
+    //     type: 'across'
+    // });
 
-    viewTitle.add();
-
-    /** View Parent */
-    const parent = Action_Store.get('maincontainer');
+    // viewTitle.add();
 
     /** Turn off Main Container Padding */
     parent.paddingOff();
