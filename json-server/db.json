@@ -1,7 +1,7 @@
 {
   "Users": [
     {
-      "id": 1,
+      "Id": 1,
       "Title": "First Last",
       "Email": "first.mi.last.ctr@mail.mil",
       "LoginName": "0987654321@mil",
@@ -11,17 +11,17 @@
   "ReleaseNotes": [],
   "Roles": [
     {
-      "id": 1,
+      "Id": 1,
       "Title": "Developer"
     },
     {
-      "id": 2,
+      "Id": 2,
       "Title": "User"
     }
   ],
   "View_Questions": [
     {
-      "id": 1,
+      "Id": 1,
       "Title": "QuestionTypes",
       "Value": [
         {
@@ -43,16 +43,94 @@
   "Log": [
     {
       "Title": "Log in",
-      "SessionId": "a3062334-c341-4d5a-b801-cd12d6f74dad",
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "SessionId": "0defa2f0-e4c0-4bd8-aa91-92a05ea5099d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
       "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
-      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
       "Author": {
         "Title": "First Last"
       },
-      "Created": "2021-09-08T02:31:00.662Z",
+      "Created": "2021-09-08T23:52:24.774Z",
       "Module": "http://127.0.0.1:8080/src/app.js",
       "Id": 1
+    },
+    {
+      "Title": "Route",
+      "SessionId": "0defa2f0-e4c0-4bd8-aa91-92a05ea5099d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_SIdebar.js:406:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-08T23:52:30.059Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 2
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "3506c4a9-3614-415a-ab55-548bf670208a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"window.onload (http://127.0.0.1:8080/src/app.js:211:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-08T23:53:10.180Z",
+      "Module": "http://127.0.0.1:8080/src/app.js",
+      "Id": 3
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3506c4a9-3614-415a-ab55-548bf670208a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-08T23:53:13.161Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 4
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3506c4a9-3614-415a-ab55-548bf670208a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-08T23:53:15.410Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 5
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3506c4a9-3614-415a-ab55-548bf670208a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Help\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Help\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-08T23:53:22.575Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 6
+    },
+    {
+      "Title": "Route",
+      "SessionId": "3506c4a9-3614-415a-ab55-548bf670208a",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Action_Route (http://127.0.0.1:8080/src/Actions/Action_Route.js:101:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:406:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-08T23:53:24.405Z",
+      "Module": "http://127.0.0.1:8080/src/Actions/Action_Route.js",
+      "Id": 7
     }
   ],
   "Errors": [],

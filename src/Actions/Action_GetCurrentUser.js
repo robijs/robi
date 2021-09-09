@@ -15,7 +15,7 @@ export default async function Action_GetCurrentUser(param) {
         fields
     } = param;
 
-    const url = Setting_App.mode === 'prod' ? `../../_api/web/CurrentUser` : `http://localhost:3000/users?LogiName=${Setting_Dev.LoginName}`;
+    const url = Setting_App.mode === 'prod' ? `../../_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${Setting_Dev.LoginName}`;
     const fetchOptions = {
         headers : { 
             'Content-Type': 'application/json; charset=UTF-8',
