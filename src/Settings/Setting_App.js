@@ -58,80 +58,34 @@ export default {
             href: '../src/Images/dha-logo-no-label-90w.png'
         }
     ],
-    lists: [
-        {
-            list: 'FiscalYears',
-            // select: 'Id,Title,EventDate,EndDate'
-        },
-        {
-            list: 'Markets',
-            // select: 'Id,Title,MarketId',
-            filter: `IsActive eq 1`,
-            orderby: 'Title asc'
-        },
-        {
-            list: 'Facilities',
-            // select: 'Id,Title,MarketID,DMISID,QPP_DropDown'
-        }
-    ],
-    sessionStorageData: [
+    // lists: [
+        // {
+        //     list: 'FiscalYears',
+        //     select: 'Id,Title,EventDate,EndDate'
+        // }
+    // ],
+    // sessionStorageData: [
         // {
         //     key: '',
         //     value: ''
         // }
-    ],
-    sidebarDropdown: {
-        label: 'Fiscal Year',
-        getSelected() {
-            return '2021-222';
-        },
-        action(event) {
-            // const fiscalYear = event.target.dataset.value;
-            // const queryParameters = Action_GetQueryParameters;
+    // ],
+    // sidebarDropdown: {
+    //     label: 'Fiscal Year',
+    //     getSelected() {
+    //         return '2021-222';
+    //     },
+    //     action(event) {
 
-            // queryParameters.fy = fiscalYear;
-
-            // let newParam = '';
-
-            // for (let prop in queryParameters) {
-            //     newParam += `${prop}=${queryParameters[prop]}`;
-            // }
-
-            // location.href = location.href.split('?')[0] + '?' + newParam;
-        },
-        items: [ // FIXME: This is hard coded!
-            {
-                label: '2019-2020',
-                key: 'fiscalYear',
-                value: '2019-2020'
-            },
-            {
-                label: '2020-2021',
-                key: 'fiscalYear',
-                value: '2020-2021'
-            },
-            {
-                label: '2021-2022',
-                key: 'fiscalYear',
-                value: '2021-2022'
-            },
-            {
-                label: '2022-2023',
-                key: 'fiscalYear',
-                value: '2022-2023'
-            },
-            {
-                label: '2023-2024',
-                key: 'fiscalYear',
-                value: '2023-2024'
-            },
-            {
-                label: '2024-2025',
-                key: 'fiscalYear',
-                value: '2024-2025'
-            }
-        ]
-    },
+    //     },
+    //     items: [
+    //         {
+    //             label: '',
+    //             key: '',
+    //             value: ''
+    //         }
+    //     ]
+    // },
     // beforeLoad() {
       
     // },
