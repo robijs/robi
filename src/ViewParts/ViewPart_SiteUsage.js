@@ -6,7 +6,7 @@ import Action_Store from '../Actions/Action_Store.js'
 import Component_Card from '../Components/Component_Card.js'
 import Component_FoldingCube from '../Components/Component_FoldingCube.js'
 import Component_DashboardBanner from '../Components/Component_DashboardBanner.js'
-import Component_DashboardLongCard from '../Components/Component_DashboardLongCard.js'
+import Component_SiteUsage from '../Components/Component_SiteUsage.js'
 
 /** Models*/
 import Model_SiteUsage from '../Models/Model_SiteUsage.js'
@@ -67,7 +67,7 @@ export default async function View_SiteUsage(param) {
         stats_1.add();
 
         /** Bar Chart */
-        const longCard = Component_DashboardLongCard({
+        const longCard = Component_SiteUsage({
             data: data.model,
             parent: dashboardCard,
             border: 'none',

@@ -6,7 +6,7 @@ import Component from '../Actions/Action_Component.js'
 import Action_CreateItem from '../Actions/Action_CreateItem.js'
 import Action_Store from '../Actions/Action_Store.js'
 
-export default function Component_Feedback(param) {
+export default function Component_Comments(param) {
     const {
         comments,
         parent,

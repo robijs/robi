@@ -4,7 +4,7 @@ import Action_Store from '../Actions/Action_Store.js'
 /** Components */
 import Component_Container from '../Components/Component_Container.js'
 import Component_Alert from '../Components/Component_Alert.js'
-import Component_QPPQuestionCard from '../Components/Component_QPPQuestionCard.js'
+import Component_QPPQuestionCard from '../Components/Component_QuestionCard.js'
 
 export default function ViewPart_QuestionCards(param) {
     const {

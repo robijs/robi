@@ -12,9 +12,9 @@ import Action_SendEmail from '../Actions/Action_SendEmail.js'
 import Component_Title from '../Components/Component_Title.js'
 import Component_FoldingCube from '../Components/Component_FoldingCube.js'
 import Component_Container from '../Components/Component_Container.js'
-import Component_QPPQuestionsToolbar from '../Components/Component_QPPQuestionsToolbar.js'
+import Component_QuestionsToolbar from '../Components/Component_QuestionsToolbar.js'
 import Component_Modal from '../Components/Component_Modal.js'
-import Component_QPPQuestionCard from '../Components/Component_QPPQuestionCard.js'
+import Component_QuestionCard from '../Components/Component_QuestionCard.js'
 
 /** Models */
 import Model_Questions from '../Models/Model_Questions.js'
@@ -154,7 +154,7 @@ export default async function View_QuestionsBoard(param) {
     let newQuestionForm;
 
     /** Toolbar */
-    const qppQuestionsToolbar = Component_QPPQuestionsToolbar({
+    const qppQuestionsToolbar = Component_QuestionsToolbar({
         selected: 'All',
         onFilter(filter) {
             console.log(filter);

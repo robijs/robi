@@ -1,11 +1,8 @@
 /* Actions */
 import Action_Component from '../Actions/Action_Component.js'
-// import Action_GetAdUsers from '../Actions/Action_GetAdUsers.js'
+import Action_GetAdUsers from '../Actions/Action_GetAdUsers.js'
 import Action_GetSiteUsers from '../Actions/Action_GetSiteUsers.js'
 import Action_Route from '../Actions/Action_Route.js'
-
-/* Components */
-import Component_DropDownMenu from './Component_DropDownMenu.js'
 
 /** Settings */
 import Setting_App from '../Settings/Setting_App.js'
@@ -17,8 +14,9 @@ export default function Component_NameField(param) {
         fieldMargin,
         parent,
         position,
-        onSetValue,
-        onInput
+        onSelect,
+        onClear,
+        onSearch
     } = param;
 
     const component = Action_Component({
@@ -26,8 +24,19 @@ export default function Component_NameField(param) {
             <div class='form-field'>
                 <div class='form-field-label'>${label}</div>
                 ${description ? /*html*/`<div class='form-field-description'>${description}</div>` : ''}
-                <div class='search-wrapper'>
-                    <div class='form-field-name' tabindex='0' contenteditable='true'></div>
+                <div class='input-group'>
+                    <div class='toggle-search-list' data-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                        <input class='form-field-name form-control mr-sm-2' type='search' placeholder='Search' aria-label='Search'>
+                    </div>
+                    <div class='dropdown-menu'>
+                    <!-- Show search spinner by default -->
+                        <a href='javascript:void(0)' class='dropdown-item' data-path=''>
+                            <span class='searching'>
+                                <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> 
+                                Searching for CarePoint accounts...
+                            <span>
+                        </a>
+                    </div>
                 </div>
             </div>
         `,
@@ -50,8 +59,8 @@ export default function Component_NameField(param) {
             }
 
             #id .form-field-name {
-                font-size: .9em;
-                font-weight: 500;
+                /* font-size: .9em; */
+                /* font-weight: 500; */
                 margin-top: 2px;
                 margin-bottom: 4px;
                 margin-right: 20px;
@@ -62,6 +71,12 @@ export default function Component_NameField(param) {
                 background: white;
                 border-radius: 4px;
                 border: ${Setting_App.defaultBorder};
+            }
+
+            #id .form-field-name::-webkit-search-cancel-button{
+                background: lightgray;
+                color: white;
+                border-radius: 50%;
             }
 
             #id .form-field-name:active,
@@ -77,80 +92,171 @@ export default function Component_NameField(param) {
                 text-decoration: underline;
             }
 
-            /** Search */
-            #id .search-wrapper {
-                display: flex;
-                align-items: baseline;
+            /** Dropdown */
+            #id .dropdown-menu {
+                padding: 0px;
+                overflow-y: overlay;
+            }
+
+            #id .dropdown-item-container {
+                overflow-y: overlay;
+            }
+
+            #id .dropdown-menu a {
+                outline: none;
+                border: none;
+            }
+            
+            #id .dropdown-item,
+            #id .dropdown-item:focus,
+            #id .dropdown-item:active, {
+                cursor: pointer;
+                outline: none;
+                border: none;
             }
         `,
         parent: parent,
         position,
         events: [
             {
-                selector: `#id .form-field-name`,
-                event: 'input',
+                selector: `#id .toggle-search-list`,
+                event: 'keydown',
                 listener(event) {
-                    /** Show empty drop down immediately */
-                    // addDropDownMenu(event);
-                    
-                    /**
-                     * @author Stephen Matheis
-                     * @date 2020.10.28
-                     * 
-                     * Trying to fix menu not going away.
-                     * 
-                     * This does the trick, and I think I know why.
-                     * But more research is necessary before I feel
-                     * this is the best way to do it.
-                     */
-                    if (event.isTrusted) {
-                        searchSiteUsers(event);
+                    if ((event.key === 'ArrowUp' || event.key === 'ArrowDown') &&  !component.find('.dropdown-menu').classList.contains('show')) {
+                        event.preventDefault();
+                        event.stopPropagation();
 
-                        if (onInput) {
-                            onInput(event);
-                        }
+                        return false;
                     }
+                }
+            },
+            {
+                selector: `#id input[type='search']`,
+                event: 'keyup',
+                listener(event) {
+                    if (!event.target.value) {
+                        if (component.find('.dropdown-menu').classList.contains('show')) {
+                            component.find('.toggle-search-list').click();
+                        }
+
+                        return;
+                    }
+
+                    /** Show dropdown menu  */
+                    if (!component.find('.dropdown-menu').classList.contains('show')) {
+                        component.find('.toggle-search-list').click();
+                    }
+
+                    /** Get menu node */
+                    const menu = component.find('.dropdown-menu');
+
+                    /** Reset list */
+                    menu.innerHTML = /*html*/ `
+                        <a href='javascript:void(0)' class='dropdown-item' data-path=''>
+                            <span class='searching'>
+                                <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> 
+                                Searching for CarePoint accounts...
+                            <span>
+                        </a>
+                    `;
+
+                    /** Search accounts */
+                    searchSiteUsers(event);
+                }
+            },
+            {
+                selector: `#id input[type='search']`,
+                event: 'click',
+                listener(event) {
+                    event.stopPropagation();
+                }
+            },
+            {
+                selector: `#id input[type='search']`,
+                event: 'search',
+                listener: onClear
+            },
+            {
+                selector: `#id .dropdown-menu`,
+                event: 'keydown',
+                listener(event) {
+                    if (event.key === 'Escape' || event.key === 'Backspace') {
+                        component.find('.toggle-search-list').click();
+                        component.find(`input[type='search']`).focus();
+
+                        event.preventDefault();
+
+                        return false;
+                    }
+                }
+            },
+            {
+                selector: `#id .dropdown-menu`,
+                event: 'click',
+                listener(event) {
+                    /** Set input value */
+                    component.find('.form-field-name').value = event.target.innerText;
+
+                    /** Get item */
+                    const item = data.find(user => user.info.Account === event.target.dataset.account);
+
+                    /** Call passed in onSelect function */
+                    onSelect({
+                        event,
+                        users: item.Info
+                    });
                 }
             }
         ]
     });
 
-    let menu;
+    /** Dropdown */
+    function dropdownItemTemplate(item) {
+        const {
+            value,
+            info
+        } = item;
 
-    function addDropDownMenu(event, data) {
-        const key = event.key;
+        const {
+            Account
+        } = info;
 
-        if (key && key.includes('Arrow') || key === 'Enter') {
-            event.preventDefault();
-
-            return;
-        }
-
-        // Reset menu
-        resetMenu();
-        
-        // Set menu
-        menu = Component_DropDownMenu({
-            dropDownField: component,
-            field: event.target,
-            data: data,
-            onSetValue
-        });
-
-        // Add to DOM
-        menu.add();
+        return /*html*/ `
+            <a href='javascript:void(0)' class='dropdown-item' data-account='${Account}'>${value}</a>
+        `;
     }
 
-    /** Reset menu */
-    function resetMenu() {
-        if (menu) {
-            menu.removeEvents();
-            menu.remove();
+    component.showSearchList = (param) => {
+        const {
+            items
+        } = param;
+
+        /** Get menu node */
+        const menu = component.find('.dropdown-menu');
+
+        /** Check if items exist*/
+        if (items.length > 0) {
+            /** Show if not open  */
+            if (!menu.classList.contains('show')) {
+                component.find('.toggle-search-list').click();
+            }
+
+            menu.innerHTML = /*html*/ `
+                <div class='dropdown-item-container'>
+                    ${items.map(item => dropdownItemTemplate(item)).join('\n')}
+                </div>
+            `
+            
+        } else {
+            if (menu.classList.contains('show')) {
+                component.find('.toggle-search-list').click();
+            }
         }
     }
 
     /** Search site users */
     let queries = [];
+    let data = [];
 
     async function searchSiteUsers(event) {
         event.preventDefault();
@@ -160,19 +266,21 @@ export default function Component_NameField(param) {
             query.abortController.abort();
         });
 
-        const query = event.target.innerText.toLowerCase();
+        const query = event.target.value.toLowerCase();
 
         if (query === '') {
             event.target.dataset.itemid = '';
             
-            resetMenu();
-            removeSpinner();
+            // resetMenu();
+            // removeSpinner();
+
+            console.log('reset');
 
             return;
         }
         
         removeNonefoundMessage();
-        addSpinner();
+        // addSpinner();
  
         const newSearch = Action_GetSiteUsers({
             query
@@ -185,15 +293,12 @@ export default function Component_NameField(param) {
         const response = await newSearch.response;
 
         if (response) {
-            const data = response.map(user => {
+            data = response.map(user => {
                 const {
-                    // Title
                     Name
                 } = user;
 
                 return {
-                    id: user.Id,
-                    // value: Title,
                     value: Name,
                     info: user
                 };
@@ -201,7 +306,10 @@ export default function Component_NameField(param) {
 
             if (data.length > 0) {
                 // removeSpinner();
-                addDropDownMenu(event, data);
+                // addDropDownMenu(event, data);
+                component.showSearchList({
+                    items: data
+                });
             } else {
                 // removeSpinner();
                 addNoneFoundMessage();
@@ -230,31 +338,6 @@ export default function Component_NameField(param) {
         
         if (message) {
             message.remove();
-        }
-    }
-
-    /** Add Spinner */
-    function addSpinner() {
-        const spinner = component.find('.searching');
-        
-        if (!spinner) {
-            const html = /*html*/ `
-                <span class='searching'>
-                    <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> 
-                    Searching for CarePoint accounts...
-                <span>
-            `;
-
-            component.find('.search-wrapper').insertAdjacentHTML('beforeend', html);
-        }
-    }
-
-    /** Add Spinner */
-    function removeSpinner() {
-        const spinner = component.find('.searching');
-        
-        if (spinner) {
-            spinner.remove();
         }
     }
 

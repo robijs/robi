@@ -1,6 +1,4 @@
-﻿
-
-/** Actions */
+﻿/** Actions */
 import Action_Get from '../Actions/Action_Get.js'
 import Action_Store from '../Actions/Action_Store.js';
 

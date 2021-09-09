@@ -4,7 +4,6 @@ import Action_Get from '../Actions/Action_Get.js'
 /* Components */
 import Component_FoldingCube from '../Components/Component_FoldingCube.js'
 import Component_NameField from '../Components/Component_NameField.js'
-import Component_NameField_2 from '../Components/Component_NameField_2.js'
 import Component_Alert from '../Components/Component_Alert.js'
 import Component_SingleLineTextField from '../Components/Component_SingleLineTextField.js'
 import Component_DropDownField from '../Components/Component_DropDownField.js'
@@ -25,77 +24,77 @@ export default async function ViewPart_NewUser(param) {
     modal.scrollable(false);
 
     /** Name */
-    const nameField = Component_NameField({
-        label: 'Search CarePoint Accounts',
-        description: 'If an account is found, Account and Email Fields will be set automatically.',
-        fieldMargin: '0px 40px 20px 40px',
-        parent,
-        onInput(event) {
-            const value = event.target.innerText;
+    // const nameField = Component_NameField({
+    //     label: 'Search CarePoint Accounts',
+    //     description: 'If an account is found, Account and Email Fields will be set automatically.',
+    //     fieldMargin: '0px 40px 20px 40px',
+    //     parent,
+    //     onInput(event) {
+    //         const value = event.target.innerText;
 
-            if (!value) {
-                accountField.value('');
-                emailField.value('');
-            }
-        },
-        async onSetValue(data) {
-            const {
-                info
-            } = data.newValue;
+    //         if (!value) {
+    //             accountField.value('');
+    //             emailField.value('');
+    //         }
+    //     },
+    //     async onSetValue(data) {
+    //         const {
+    //             info
+    //         } = data.newValue;
 
-            if (info) {
-                const {
-                    Account,
-                    WorkEmail
-                } = info;
+    //         if (info) {
+    //             const {
+    //                 Account,
+    //                 WorkEmail
+    //             } = info;
 
-                /** Check if account exists */
-                if (Account !== '')  {
-                    const userItem = await Action_Get({
-                        list: 'Users',
-                        select: 'Id,LoginName',
-                        filter: `LoginName eq '${Account.split('|')[2]}'`
-                    });
+    //             /** Check if account exists */
+    //             if (Account !== '')  {
+    //                 const userItem = await Action_Get({
+    //                     list: 'Users',
+    //                     select: 'Id,LoginName',
+    //                     filter: `LoginName eq '${Account.split('|')[2]}'`
+    //                 });
 
-                    if (userItem[0]) {
-                        readOnlyCard.update({
-                            type: 'secondary'
-                        });
+    //                 if (userItem[0]) {
+    //                     readOnlyCard.update({
+    //                         type: 'secondary'
+    //                     });
 
-                        accountField.value('None');
-                        emailField.value('None');
-                        nameField.value('');
+    //                     accountField.value('None');
+    //                     emailField.value('None');
+    //                     nameField.value('');
 
-                        const link = `Users/${userItem[0].Id}`;
+    //                     const link = `Users/${userItem[0].Id}`;
 
-                        nameField.addError({
-                            text: /*html*/ `
-                                An account for this user already exists. <span class='alert-link' data-route='${link}'>Click here to view it.</span> Or search for another name.
-                            `
-                        });
+    //                     nameField.addError({
+    //                         text: /*html*/ `
+    //                             An account for this user already exists. <span class='alert-link' data-route='${link}'>Click here to view it.</span> Or search for another name.
+    //                         `
+    //                     });
 
-                        return;
-                    } else {
-                        nameField.removeError();
-                    }
-                }
+    //                     return;
+    //                 } else {
+    //                     nameField.removeError();
+    //                 }
+    //             }
 
-                readOnlyCard.update({
-                    type: 'success'
-                });
+    //             readOnlyCard.update({
+    //                 type: 'success'
+    //             });
 
-                if (Account) {
-                    accountField.value(Account.split('|')[2]);
-                }
+    //             if (Account) {
+    //                 accountField.value(Account.split('|')[2]);
+    //             }
 
-                if (WorkEmail) {
-                    emailField.value(WorkEmail);
-                }
-            }
-        }
-    });
+    //             if (WorkEmail) {
+    //                 emailField.value(WorkEmail);
+    //             }
+    //         }
+    //     }
+    // });
 
-    nameField.add();
+    // nameField.add();
 
     /** Name Field (2) */
     const nameField_2 = Component_NameField_2({

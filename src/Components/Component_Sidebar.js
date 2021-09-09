@@ -3,9 +3,6 @@ import Action_Component from '../Actions/Action_Component.js'
 import Action_Store from '../Actions/Action_Store.js'
 import Action_Route from '../Actions/Action_Route.js'
 
-/** Components */
-import Component_Tree from './Component_Tree.js'
-
 /** Settings */
 import Setting_App from '../Settings/Setting_App.js'
 import Setting_Routes from '../Settings/Setting_Routes.js'
@@ -416,15 +413,6 @@ export default function Component_Sidebar(param) {
         if (nav) {
             nav.classList.add('nav-selected');
         }
-    }
-
-    component.addTree = (data) => {
-        const tree = Component_Tree({
-            data,
-            parent
-        });
-
-        tree.add();
     }
 
     return component;
