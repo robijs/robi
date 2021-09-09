@@ -203,6 +203,13 @@ export default function Action_Component(param) {
         empty() {
             this.get().innerHTML = '';
         },
+        append(param) {
+            if (param instanceof Element) {
+                this.get().insertAdjacentElement('beforeend', param);
+            } else if (typeof param === 'string') {
+                this.get().insertAdjacentHTML('beforeend', param);
+            }
+        },
         add(localParent) {
             const storedComponent = Action_Store.get(name);
 

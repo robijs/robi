@@ -36,7 +36,7 @@ export default function Component_DashboardBanner(param) {
 
             #id .dashboard-banner-group {
                 flex: 1;
-                padding: 10px 15px;
+                padding: 10px;
                 border-radius: 4px;
             }
 
@@ -55,7 +55,7 @@ export default function Component_DashboardBanner(param) {
             }
 
             #id .dashboard-banner-value {
-                font-size: 1.7em;
+                font-size: 1.5em;
                 font-weight: 500;
             }
 

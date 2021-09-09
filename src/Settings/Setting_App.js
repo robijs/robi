@@ -60,7 +60,7 @@ export default {
     ],
     lists: [
         {
-            list: 'Fiscal Years',
+            list: 'FiscalYears',
             // select: 'Id,Title,EventDate,EndDate'
         },
         {

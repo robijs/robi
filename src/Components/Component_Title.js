@@ -143,6 +143,7 @@ export default function Component_Title(param) {
 
             #id .dropdown-item {
                 cursor: pointer;
+                font-size: 14px;
             }
 
             #id .nav {

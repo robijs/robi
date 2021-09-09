@@ -60,7 +60,7 @@ export default function Component_SectionStepper(param) {
             /* Root */
             #id.section-stepper {
                 height: 100%;
-                padding: 20px;
+                padding: 15px 13px 5px 13px;
                 display: inline-flex;
                 flex-direction: column;
                 justify-content: space-between;
@@ -70,9 +70,10 @@ export default function Component_SectionStepper(param) {
 
             /* Title */
             #id .section-title {
-                font-size: 1.5em;
+                font-size: 1em;
                 color: ${Setting_App.primaryColor};
-                margin-bottom: 20px;
+                margin-bottom: 15px;
+                padding: .275rem .75rem;
                 cursor: pointer;
             }
 
@@ -94,21 +95,14 @@ export default function Component_SectionStepper(param) {
             #id .section-circle {
                 user-select: none;
                 border-radius: 50%;
-                width: 36px;
-                height: 36px;
+                width: 24px;
+                height: 24px;
                 padding: 6px;
                 background: ${Setting_App.primaryColor};
                 border: solid 1px ${Setting_App.primaryColor};
                 color: white;
                 text-align: center;
-                /* line-height: 1.2; */
-            }
-
-            #id .section-legend .section-circle {
-                width: 24px;
-                height: 24px;
-                padding: 3px;
-                font-size: .8em;
+                line-height: .6;
             }
 
             #id .section-circle.not-started {
@@ -156,13 +150,12 @@ export default function Component_SectionStepper(param) {
             /* Name */
             #id .section-name {
                 font-weight: 500;
-                padding-top: 8px;
                 white-space: nowrap;
             }
 
             #id .section-name-text {
-                padding-bottom: 4px;
                 margin: 0px 8px;
+                font-size: 14px;
             }
 
             #id .section-name-text.selected {
@@ -179,8 +172,8 @@ export default function Component_SectionStepper(param) {
             }
 
             #id .section-legend .section-circle {
-                width: 24px;
-                height: 24px;
+                width: 20px;
+                height: 20px;
                 padding: 3px;
             }
 
@@ -188,12 +181,6 @@ export default function Component_SectionStepper(param) {
             #id .section-group-container .section-circle:hover,
             .section-group-container .section-name-text:hover {
                 cursor: pointer;
-            }
-
-            @media (max-height: 780px) {
-                #id * {
-                    font-size: 10pt;
-                }
             }
         `,
         parent,
