@@ -287,7 +287,7 @@ export default function Component_Sidebar(param) {
             /** Add classes */
             component.find('.logo').src = Setting_App.logoSmall;
             component.find('.logo').classList.add('closed');
-            component.find('.dropdown-container').classList.add('closed');
+            component.find('.dropdown-container')?.classList.add('closed');
             component.findAll('.text').forEach(item => item.classList.add('closed'));
             icon.classList.add('closed');
 
@@ -307,7 +307,7 @@ export default function Component_Sidebar(param) {
             /** Remove Classes */
             component.find('.logo').src = Setting_App.logo;
             component.find('.logo').classList.remove('closed');
-            component.find('.dropdown-container').classList.remove('closed');
+            // component.find('.dropdown-container').classList.remove('closed');
             component.findAll('.text').forEach(item => item.classList.remove('closed'));
             icon.classList.remove('closed');
             
