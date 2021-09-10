@@ -20,7 +20,8 @@ const store = {
     components: {},
     models: {},
     lists: {},
-    user: {}
+    user: {},
+    routes: []
 };
 
 const controller = {
@@ -131,6 +132,12 @@ const controller = {
         } else {
             return store.viewScrollTop;
         }
+    },
+    setRoutes(routes) {
+        store.routes = routes;
+    },
+    routes() {
+        return store.routes;
     }
 }
 

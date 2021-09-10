@@ -2,5 +2,16 @@
 import Start from './Start.js'
 
 Start({
-    test: 'hello, world'
+    routes: [
+        {
+            path: 'Test',
+            icon: 'book',
+            go() {
+                console.log('it works!');
+            }  
+        },
+    ],
+    settings: {
+
+    }
 });

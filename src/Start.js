@@ -23,10 +23,12 @@ import Setting_Dev from './Settings/Setting_Dev.js'
 
 /** View Parts */
 import ViewPart_ReleaseNotes from './ViewParts/ViewPart_ReleaseNotes.js'
+import Setting_Routes from './Settings/Setting_Routes.js'
 
 export default function Start(param) {
     const {
-        test
+        routes,
+        settings
     } = param;
 
     console.log(param);
@@ -162,6 +164,9 @@ export default function Start(param) {
             }
         });
 
+        /** Store routes */
+        Action_Store.setRoutes(routes.concat(Setting_Routes));
+
         /** Sidebar Component */
         const sidebar = Component_Sidebar({
             logo,
@@ -217,6 +222,8 @@ export default function Start(param) {
         } catch (error) {
             console.error(error);
         }
+
+        console.log(Action_Store.routes());
 
         /** Run current route on page load */
         Action_Route(path, {

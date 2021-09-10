@@ -352,7 +352,7 @@ export default function Component_Sidebar(param) {
     }
 
     function buildNav() {
-        return Setting_Routes
+        return Action_Store.routes()
             .filter(route => route.path !== 'Settings' && !route.hide)
             .map(route => {
                 const {

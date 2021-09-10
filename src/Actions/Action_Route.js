@@ -1,5 +1,3 @@
-
-
 /** Actions */
 import Action_History from './Action_History.js'
 import Action_Store from './Action_Store.js'
@@ -82,7 +80,7 @@ export default function Action_Route(path = Setting_App.defaultRoute, options = 
     });
 
     /** Only select first path, remove any ? that might be passed in */
-    const route = Setting_Routes.find(item => item.path === pathParts[0]);
+    const route = Action_Store.routes().find(item => item.path === pathParts[0]);
 
     if (!route) {
         // Action_Route('404');
