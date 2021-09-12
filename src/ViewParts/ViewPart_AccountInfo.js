@@ -1,5 +1,5 @@
 /** Actions */
-import Action_Store from '../Actions/Action_Store.js'
+import Store from '../Core/Store.js'
 
 /** Settings */
 import { App } from '../Core/Settings.js'
@@ -28,7 +28,7 @@ export default async function View_AccountInfo(param) {
         LoginName,
         Email,
         Role,
-    } = Action_Store.user();
+    } = Store.user();
 
     /** Name */
     const nameField = Component_SingleLineTextField({

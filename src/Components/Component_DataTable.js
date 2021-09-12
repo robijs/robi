@@ -27,26 +27,26 @@ import { App } from '../Core/Settings.js'
  *
  *    table.row.add( new_row ).draw().show().draw(false);
  */
-$.fn.dataTable.Api.register('row().show()', function() {
-	var page_info = this.table().page.info();
-	// Get row index
-	var new_row_index = this.index();
-	// Row position
-	var row_position = this.table()
-		.rows({ search: 'applied' })[0]
-		.indexOf(new_row_index);
-	// Already on right page ?
-	if ((row_position >= page_info.start && row_position < page_info.end) || row_position < 0) {
-		// Return row object
-		return this;
-	}
-	// Find page number
-	var page_to_display = Math.floor(row_position / this.table().page.len());
-	// Go to that page
-	this.table().page(page_to_display);
-	// Return row object
-	return this;
-});
+// $.fn.dataTable.Api.register('row().show()', function() {
+// 	var page_info = this.table().page.info();
+// 	// Get row index
+// 	var new_row_index = this.index();
+// 	// Row position
+// 	var row_position = this.table()
+// 		.rows({ search: 'applied' })[0]
+// 		.indexOf(new_row_index);
+// 	// Already on right page ?
+// 	if ((row_position >= page_info.start && row_position < page_info.end) || row_position < 0) {
+// 		// Return row object
+// 		return this;
+// 	}
+// 	// Find page number
+// 	var page_to_display = Math.floor(row_position / this.table().page.len());
+// 	// Go to that page
+// 	this.table().page(page_to_display);
+// 	// Return row object
+// 	return this;
+// });
 
 export default function Component_DataTable(param) {
     const {
@@ -150,8 +150,8 @@ export default function Component_DataTable(param) {
             }
 
             #id_wrapper .datatable-toolbar .btn-secondary {
-                background: ${App.get('primaryColor')};
-                border-color: ${App.get('primaryColor')};
+                background: ${Setting_App.get('primaryColor')};
+                border-color: ${Setting_App.get('primaryColor')};
                 margin-right: 10px;
                 border-radius: .25rem;
             }
@@ -239,7 +239,7 @@ export default function Component_DataTable(param) {
             }
 
             #id_wrapper .buttons-html5 span{
-                color: ${App.get('primaryColor')} !important;
+                color: ${Setting_App.get('primaryColor')} !important;
             }
 
             @media (max-width: 1366px) {
@@ -254,11 +254,11 @@ export default function Component_DataTable(param) {
 
             /** Select and Search */
             #id_wrapper .custom-select {
-                border: 1px solid rgb(${App.get('primaryColorRGB')}, .30);
+                border: 1px solid rgb(${Setting_App.get('primaryColorRGB')}, .30);
             }
 
             #id_wrapper .form-control {
-                border: 1px solid rgb(${App.get('primaryColorRGB')}, .30);
+                border: 1px solid rgb(${Setting_App.get('primaryColorRGB')}, .30);
             }
 
             /** Footer */
@@ -284,7 +284,7 @@ export default function Component_DataTable(param) {
             /** Pagination */
             #id_wrapper .page-item .page-link {
                 color: unset;
-                border: solid 1px rgb(${App.get('primaryColorRGB')}, .30);
+                border: solid 1px rgb(${Setting_App.get('primaryColorRGB')}, .30);
                 padding: 6px 8px;
             }
 
@@ -294,19 +294,19 @@ export default function Component_DataTable(param) {
 
             #id_wrapper .page-item.active .page-link {
                 color: white;
-                background: ${App.get('primaryColor')};;
-                border: solid 1px ${App.get('primaryColor')};
+                background: ${Setting_App.get('primaryColor')};;
+                border: solid 1px ${Setting_App.get('primaryColor')};
             }
 
             #id_wrapper .page-link:hover {
-                background: rgb(${App.get('primaryColorRGB')}, .15);
+                background: rgb(${Setting_App.get('primaryColorRGB')}, .15);
             }
 
             /** Form control */
             #id_wrapper .form-control:focus {
                 box-shadow: none;
                 outline: none;
-                border-color: ${App.get('primaryColor')};
+                border-color: ${Setting_App.get('primaryColor')};
             }
 
             /** Table */
@@ -317,7 +317,7 @@ export default function Component_DataTable(param) {
 
             /** Bordered */
             /* #id_wrapper .table-bordered {
-                border: 1px solid rgb(${App.get('primaryColorRGB')}, .3);
+                border: 1px solid rgb(${Setting_App.get('primaryColorRGB')}, .3);
             }
             
             #id_wrapper .table-bordered.dataTable {
@@ -336,9 +336,9 @@ export default function Component_DataTable(param) {
             
             /** Headers */
             #id_wrapper .table-border thead th {
-                border-bottom: solid 1px rgb(${App.get('primaryColorRGB')}, .3);
-                background: rgb(${App.get('primaryColorRGB')}, .2);
-                color: ${App.get('primaryColor')};
+                border-bottom: solid 1px rgb(${Setting_App.get('primaryColorRGB')}, .3);
+                background: rgb(${Setting_App.get('primaryColorRGB')}, .2);
+                color: ${Setting_App.get('primaryColor')};
             }
 
             /** Cells */
@@ -360,7 +360,7 @@ export default function Component_DataTable(param) {
             #id_wrapper .sorting_asc::after,
             #id_wrapper .sorting_desc::before,
             #id_wrapper .sorting_desc::after {
-                color: ${App.get('primaryColor')}
+                color: ${Setting_App.get('primaryColor')}
             }
 
             /** Select Checkbox */
@@ -384,7 +384,7 @@ export default function Component_DataTable(param) {
             #id_wrapper tbody td.select-checkbox:after, 
             #id_wrapper tbody th.select-checkbox:after {
                 /* margin-top: -19px; */
-                /* color: ${App.get('primaryColor')}; */
+                /* color: ${Setting_App.get('primaryColor')}; */
                 margin-top: -10px;
                 text-shadow: none;
                 color: white;
@@ -394,7 +394,7 @@ export default function Component_DataTable(param) {
 
             /** Selected Row */
             #id_wrapper tbody > tr.selected {
-                background-color: rgb(${App.get('primaryColorRGB')});
+                background-color: rgb(${Setting_App.get('primaryColorRGB')});
             }
 
             #id_wrapper tbody > tr.selected td {

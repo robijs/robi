@@ -1,20 +1,7 @@
-/** Actions */
-import Action_Get from '../Actions/Action_Get.js'
-import Action_Store from '../Actions/Action_Store.js'
-
-/** Components */
-import Component_Card from '../Components/Component_Card.js'
-import Component_FoldingCube from '../Components/Component_FoldingCube.js'
-import Component_DashboardBanner from '../Components/Component_DashboardBanner.js'
-import Component_SiteUsage from '../Components/Component_SiteUsage.js'
-
-/** Models*/
-import Model_SiteUsage from '../Models/Model_SiteUsage.js'
+import Store from '../Core/Store.js'
 import Model_StartAndEndOfWeek from '../Models/Model_StartAndEndOfWeek.js'
-
-/** Settings */
+import { Card, FoldingCube, DashboardBanner, SiteUsage } from '../Core/Components.js'
 import { App } from '../Core/Settings.js'
-import Action_SendEmail from '../Actions/Action_SendEmail.js'
 
 export default async function View_SiteUsage(param) {
     const {
@@ -22,7 +9,7 @@ export default async function View_SiteUsage(param) {
     } = param;
 
     /** Dashboard */
-    const dashboardCard = Component_Card({
+    const dashboardCard = Card({
         title: 'Site Usage',
         titleColor: App.get('primaryColor'),
         width: '100%',
@@ -33,7 +20,7 @@ export default async function View_SiteUsage(param) {
     dashboardCard.add();
 
     /** Loading Indicator */
-    const loadingIndicator = Component_FoldingCube({
+    const loadingIndicator = FoldingCube({
         label: 'Loading Site Usage Information',
         margin: '40px 0px',
         parent: dashboardCard
@@ -48,7 +35,7 @@ export default async function View_SiteUsage(param) {
 
     worker.postMessage('dev');
 
-    Action_Store.addWorker(worker);
+    Store.addWorker(worker);
 
     worker.onmessage = event => {
         const {
@@ -58,7 +45,7 @@ export default async function View_SiteUsage(param) {
         // console.log(data);
 
         /** Stats 1 */
-        const stats_1 = Component_DashboardBanner({
+        const stats_1 = DashboardBanner({
             data: data.stats_1,
             padding: '0px',
             border: 'none',
@@ -69,7 +56,7 @@ export default async function View_SiteUsage(param) {
         stats_1.add();
 
         /** Bar Chart */
-        const longCard = Component_SiteUsage({
+        const longCard = SiteUsage({
             data: data.model,
             parent: dashboardCard,
             border: 'none',
@@ -112,7 +99,7 @@ export default async function View_SiteUsage(param) {
         });
         
         /** Stats 2 */
-        const stats_2 = Component_DashboardBanner({
+        const stats_2 = DashboardBanner({
             data: data.stats_2,
             padding: '0px',
             border: 'none',
