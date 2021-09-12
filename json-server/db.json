@@ -547,6 +547,19 @@
       "Created": "2021-09-12T17:01:53.280Z",
       "Module": "http://127.0.0.1:8080/src/Start.js",
       "Id": 39
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "28ba688f-7705-437a-8225-2a7673acb0ef",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Start.js:221:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T17:46:20.312Z",
+      "Module": "http://127.0.0.1:8080/src/Start.js",
+      "Id": 40
     }
   ],
   "Errors": [
