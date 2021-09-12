@@ -5,7 +5,6 @@ import Action_Store from './Action_Store.js'
 
 /** Settings */
 import Setting_App from '../Settings/Setting_App.js'
-import Setting_Dev from '../Settings/Setting_Dev.js';
 
 /**
  * Create SharePoint list item.

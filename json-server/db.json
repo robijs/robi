@@ -742,6 +742,45 @@
       "Created": "2021-09-12T18:02:05.936Z",
       "Module": "http://127.0.0.1:8080/src/Start.js",
       "Id": 54
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "c42171e7-e93e-4c44-bf49-4d689353f0af",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Start.js:220:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T18:02:38.225Z",
+      "Module": "http://127.0.0.1:8080/src/Start.js",
+      "Id": 55
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "29c1d017-61d8-45a1-8212-1cc8148d758c",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Start.js:220:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T18:02:48.267Z",
+      "Module": "http://127.0.0.1:8080/src/Start.js",
+      "Id": 56
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "89b7d07d-1b25-4d2a-91f8-2ba76b9fdc73",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Start.js:220:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T18:05:49.441Z",
+      "Module": "http://127.0.0.1:8080/src/Start.js",
+      "Id": 57
     }
   ],
   "Errors": [
