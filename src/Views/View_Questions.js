@@ -1,6 +1,6 @@
 ﻿/** Actions */
-import Action_Get from '../Actions/Action_Get.js'
-import Action_Store from '../Actions/Action_Store.js';
+import { Get } from '../Core/Actions.js'
+import Store from '../Core/Store.js';
 
 /** Components */
 import Component_Title from '../Components/Component_Title.js'
@@ -13,7 +13,7 @@ import Component_Card from '../Components/Component_Card.js';
 
 export default async function View_Quesitons() {
     /** View Parent */
-    const parent = Action_Store.get('maincontainer');
+    const parent = Store.get('maincontainer');
 
     /** View Title */
     const viewTitle = Component_Title({
@@ -44,7 +44,7 @@ export default async function View_Quesitons() {
     if (!questionTypes) {
         console.log('questionTypes not in local storage. Adding...');
 
-        const questionTypesResponse = await Action_Get({
+        const questionTypesResponse = await Get({
             list: 'View_Questions',
             filter: `Title eq 'QuestionTypes'`
         });

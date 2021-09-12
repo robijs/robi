@@ -1,32 +1,16 @@
-
-
-/** Actions */
-import Action_Authorize from '../Actions/Action_Authorize.js'
-import Action_Get from '../Actions/Action_Get.js'
-import Action_CreateItem from '../Actions/Action_CreateItem.js'
-import Action_UpdateItem from '../Actions/Action_UpdateItem.js'
-import Action_Store from '../Actions/Action_Store.js'
-import Action_Route from '../Actions/Action_Route.js'
-import Action_AttachFiles from '../Actions/Action_AttachFiles.js'
-import Action_UploadFiles from '../Actions/Action_UploadFiles.js'
-import Action_SendEmail from '../Actions/Action_SendEmail.js'
-// import Action_GetADUsers from '../Actions/Action_GetADUsers.js'
+import { Authorize, Get, CreateItem, UpdateItem, Route, AttachFiles, UploadFiles, SendEmail } from '../Core/Actions.js'
+import Store from '../Core/Store.js'
+import { App } from '../Core/Settings.js'
 
 /** Components */
 import Component_Title from '../Components/Component_Title.js'
-import Component_DashboardBanner from '../Components/Component_DashboardBanner.js'
 import Component_Alert from '../Components/Component_Alert.js'
 import Component_FoldingCube from '../Components/Component_FoldingCube.js'
-import Component_Heading from '../Components/Component_Heading.js'
 import Component_Timer from '../Components/Component_Timer.js'
-import Component_DataTable from '../Components/Component_DataTable.js'
 import Component_Card from '../Components/Component_Card.js'
 import Component_Container from '../Components/Component_Container.js'
 import Component_BootstrapButton from '../Components/Component_BootstrapButton.js'
 import Component_UploadButton from '../Components/Component_UploadButton.js'
-
-/** Settings */
-import { App } from '../Core/Settings.js'
 
 /** View Parts */
 import ViewPart_Table from '../ViewParts/ViewPart_Table.js'
@@ -35,14 +19,14 @@ import ViewPart_LogForm from '../ViewParts/ViewPart_LogForm.js'
 
 export default async function View_Developer(param) {
     /** Authorize */
-    const isAuthorized = Action_Authorize('Users');
+    const isAuthorized = Authorize('Users');
 
     if (!isAuthorized) {
         return;
     }
     
     /** View Parent */
-    const parent = Action_Store.get('maincontainer');
+    const parent = Store.get('maincontainer');
     
     /** View Title */
     const viewTitle = Component_Title({
@@ -103,7 +87,7 @@ export default async function View_Developer(param) {
         
     logLoadingIndicator.add();
 
-    const log = await Action_Get({
+    const log = await Get({
         list: 'Log',
         select: 'Id,Title,Message,Module,StackTrace,SessionId,Created,Author/Title',
         expand: 'Author/Id',
@@ -184,7 +168,7 @@ export default async function View_Developer(param) {
         
     errorsLoadingIndicator.add();
 
-    const errors = await Action_Get({
+    const errors = await Get({
         list: 'Errors',
         select: 'Id,Message,Error,Source,Line,ColumnNumber,SessionId,Status,Created,Author/Title',
         expand: 'Author/Id',
@@ -234,7 +218,7 @@ export default async function View_Developer(param) {
         
     dataLoadingIndicator.add();
 
-    // const items = await Action_Get({
+    // const items = await Get({
     //     list: '[LIST NAME]'
     // });
     
@@ -288,7 +272,7 @@ export default async function View_Developer(param) {
                     Title,
                 } = value;
 
-                const newItem = await Action_CreateItem({
+                const newItem = await CreateItem({
                     list: 'FacilityPlans',
                     data: {
                         Status: 'Completed',
@@ -315,7 +299,7 @@ export default async function View_Developer(param) {
         async action(files) {
             console.log(files);
 
-            const uploadedFiles = await Action_AttachFiles({
+            const uploadedFiles = await AttachFiles({
                 list: 'View_Home',
                 id: 1,
                 files
@@ -334,7 +318,7 @@ export default async function View_Developer(param) {
     /** Test Send Email */
     const sendEmailButton = Component_BootstrapButton({
         async action(event) {
-            await Action_SendEmail({
+            await SendEmail({
                 From: 'i:0e.t|dod_adfs_provider|1098035555@mil',
                 To: 'i:0e.t|dod_adfs_provider|1098035555@mil',
                 // CC: [

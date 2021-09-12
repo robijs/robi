@@ -1,7 +1,6 @@
-﻿/** Actions */
-import Action_Get from '../Actions/Action_Get.js'
-import Action_Store from '../Actions/Action_Store.js'
-import Action_Route from '../Actions/Action_Route.js'
+﻿import { Get, Route} from '../Core/Actions.js'
+import { App } from '../Core/Settings.js'
+import Store from '../Core/Store.js'
 
 /** Components */
 import Component_Title from '../Components/Component_Title.js'
@@ -11,9 +10,6 @@ import Component_Alert from '../Components/Component_Alert.js'
 
 /** Models */
 import Model_Questions from '../Models/Model_Questions.js'
-
-/** Settings */
-import { App } from '../Core/Settings.js'
 
 /** View Parts */
 import ViewPart_Question from '../ViewParts/ViewPart_Question.js'
@@ -25,7 +21,7 @@ export default async function View_Quesiton(param) {
     } = param;
 
     /** View Parent */
-    const parent = Action_Store.get('maincontainer');
+    const parent = Store.get('maincontainer');
 
     /** View Title */
     let viewTitle;
@@ -67,7 +63,7 @@ export default async function View_Quesiton(param) {
 
         viewTitle.add();
 
-        const questionTypesResponse = await Action_Get({
+        const questionTypesResponse = await Get({
             list: 'View_Questions',
             filter: `Title eq 'QuestionTypes'`
         });
@@ -126,7 +122,7 @@ export default async function View_Quesiton(param) {
                 }
             ],
             route(path) {
-                Action_Route(path);
+                Route(path);
             },
             parent,
             position: 'afterbegin',
@@ -158,7 +154,7 @@ export default async function View_Quesiton(param) {
     
     loadingIndicator.add();
 
-    let questions = Action_Store.get('Model_Questions');
+    let questions = Store.get('Model_Questions');
 
     if (questions) {
         console.log('Model_Questions found.');

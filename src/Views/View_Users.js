@@ -1,13 +1,6 @@
-﻿
-
-/** Actions */
-import Action_Authorize from '../Actions/Action_Authorize.js'
-import Action_Get from '../Actions/Action_Get.js'
-import Action_CreateItem from '../Actions/Action_CreateItem.js'
-import Action_UpdateItem from '../Actions/Action_UpdateItem.js'
-import Action_DeleteItem from '../Actions/Action_DeleteItem.js'
-import Action_Store from '../Actions/Action_Store.js'
-import Action_Route from '../Actions/Action_Route.js'
+﻿import Store from '../Core/Store.js'
+import { Authorize, Get, CreateItem, UpdateItem, DeleteItem, Route } from '../Core/Actions.js'
+import { App } from '../Core/Settings.js'
 
 /** Components */
 import Component_Title from '../Components/Component_Title.js'
@@ -16,9 +9,6 @@ import Component_Card from '../Components/Component_Card.js'
 import Component_Container from '../Components/Component_Container.js'
 import Component_DataTable from '../Components/Component_DataTable.js'
 import Component_Modal from '../Components/Component_Modal.js'
-
-/** Settings */
-import { App } from '../Core/Settings.js'
 
 /** View Parts */
 import ViewPart_Table from '../ViewParts/ViewPart_Table.js'
@@ -32,13 +22,13 @@ export default async function View_Users(param = {}) {
     } = param;
 
     /** Authorize */
-    const isAuthorized = Action_Authorize('Users');
+    const isAuthorized = Authorize('Users');
 
     if (!isAuthorized) {
         return;
     }
 
-    const parent = Action_Store.get('maincontainer');
+    const parent = Store.get('maincontainer');
 
     const viewTitle = Component_Title({
         title: App.get('title'),
@@ -111,7 +101,7 @@ export default async function View_Users(param = {}) {
                 displayName: 'Role'
             }
         ],
-        items: await Action_Get({
+        items: await Get({
             list: 'Users'
         }),
         checkboxes: true,
@@ -174,7 +164,7 @@ export default async function View_Users(param = {}) {
     //             }
     //         }
     //     ],
-    //     data: await Action_Get({
+    //     data: await Get({
     //         list: 'Users'
     //     }),
     //     rowId: 'Id',
@@ -248,7 +238,7 @@ export default async function View_Users(param = {}) {
 
     //                                     /** Check if account already exists */
     //                                     if (Account)  {
-    //                                         const userItem = await Action_Get({
+    //                                         const userItem = await Get({
     //                                             list: 'Users',
     //                                             select: 'Id,Account',
     //                                             filter: `Account eq '${Account}'`
@@ -284,7 +274,7 @@ export default async function View_Users(param = {}) {
     //                                     $(event.target).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Creating user');
 
     //                                     /** Create new user */
-    //                                     const newItem = await Action_CreateItem({
+    //                                     const newItem = await CreateItem({
     //                                         list: 'Users',
     //                                         data
     //                                     });
@@ -293,7 +283,7 @@ export default async function View_Users(param = {}) {
     //                                     const groups = userForm.getAllowedGroups();
 
     //                                     await Promise.all(groups.map(Group => {
-    //                                         return Action_CreateItem({
+    //                                         return CreateItem({
     //                                             list: 'AllowedSwitchGroups',
     //                                             data: {
     //                                                 Account,
@@ -418,7 +408,7 @@ export default async function View_Users(param = {}) {
     //                                 $(event.target).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Deleting user');
                                     
     //                                 /** Delete Users item */
-    //                                 await Action_DeleteItem({
+    //                                 await DeleteItem({
     //                                     list: 'Users',
     //                                     itemId: user.Id
     //                                 });
@@ -453,7 +443,7 @@ export default async function View_Users(param = {}) {
     //                             let updatedItem;
 
     //                             if (data) {
-    //                                 updatedItem = await Action_UpdateItem({
+    //                                 updatedItem = await UpdateItem({
     //                                     list: 'Users',
     //                                     itemId: user.Id,
     //                                     data
@@ -474,7 +464,7 @@ export default async function View_Users(param = {}) {
     //                                 /** Added */
     //                                 if (groups.added.length > 0) {
     //                                     await Promise.all(groups.added.map(Group => {
-    //                                         return Action_CreateItem({
+    //                                         return CreateItem({
     //                                             list: 'AllowedSwitchGroups',
     //                                             data: {
     //                                                 Account: updatedItem ? updatedItem.Account : user.Account,
@@ -487,7 +477,7 @@ export default async function View_Users(param = {}) {
     //                                 /** Removed */
     //                                 if (groups.removed.length > 0) {
     //                                     await Promise.all(groups.removed.map(item => {
-    //                                         return Action_DeleteItem({
+    //                                         return DeleteItem({
     //                                             list: 'AllowedSwitchGroups',
     //                                             itemId: item.Id
     //                                         });

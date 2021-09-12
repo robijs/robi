@@ -1,5 +1,4 @@
-/** Actions */
-import Action_Store from '../Actions/Action_Store.js'
+import Store from '../Core/Store.js'
 
 /* Components */
 import Component_Alert from '../Components/Component_Alert.js';
@@ -9,7 +8,7 @@ import Component_Title from '../Components/Component_Title.js'
 import { App } from '../Core/Settings.js'
 
 export default async function View_403() {
-    const parent = Action_Store.get('maincontainer');
+    const parent = Store.get('maincontainer');
 
     const viewTitle = Component_Title({
         title: App.get('title'),

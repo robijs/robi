@@ -1,9 +1,8 @@
-import Action_Component from '../Actions/Action_Component.js'
 import Store from '../Core/Store.js'
-import Action_Route from '../Actions/Action_Route.js'
+import { Component, Route } from '../Core/Actions.js'
 import { App } from '../Core/Settings.js'
 
-export default function Component_Sidebar(param) {
+export default function Sidebar(param) {
     const {
         parent,
         logo,
@@ -11,7 +10,7 @@ export default function Component_Sidebar(param) {
         sidebarDropdown
     } = param;
 
-    const component = Action_Component({
+    const component = Component({
         html: /*html*/ `
             <div class='sidebar' data-mode='open'>
                 <!-- <div class='logo' data-path='${App.get('defaultRoute')}'></div> -->
@@ -239,7 +238,7 @@ export default function Component_Sidebar(param) {
                 selector: '.logo',
                 event: 'click',
                 listener(event) {
-                    Action_Route(this.dataset.path);
+                    Route(this.dataset.path);
                 }
             },
             {
@@ -270,6 +269,8 @@ export default function Component_Sidebar(param) {
 
     function toggleSidebarMode(event) {
         const mode = component.get().dataset.mode;
+
+        console.log(mode);
         
         if (mode === 'open') {
             closeSidebar(mode, this);
@@ -344,7 +345,7 @@ export default function Component_Sidebar(param) {
         /** Route */
         const path = location.href.split('#')[1];
 
-        Action_Route(path);
+        Route(path);
     }
 
     function buildNav() {
@@ -409,7 +410,7 @@ export default function Component_Sidebar(param) {
 
         this.classList.add('nav-selected');
 
-        Action_Route(this.dataset.path);
+        Route(this.dataset.path);
     }
 
     component.selectNav = (path) => {

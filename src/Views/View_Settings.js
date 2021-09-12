@@ -1,13 +1,9 @@
-
-
 /** Actions */
-import Action_Store from '../Actions/Action_Store.js'
+import Store from '../Core/Store.js'
+import { App } from '../Core/Settings.js'
 
 /* Components */
 import Component_Title from '../Components/Component_Title.js'
-
-/** Settings */
-import { App } from '../Core/Settings.js'
 
 /** View Parts */
 import ViewPart_AccountInfo from '../ViewParts/ViewPart_AccountInfo.js'
@@ -16,7 +12,7 @@ import ViewPart_ReleaseNotes from '../ViewParts/ViewPart_ReleaseNotes.js'
 import ViewPart_SiteUsage from '../ViewParts/ViewPart_SiteUsage.js'
 
 export default async function View_Settings() {
-    const parent = Action_Store.get('maincontainer');
+    const parent = Store.get('maincontainer');
 
     const viewTitle = Component_Title({
         title: App.get('title'),
@@ -35,7 +31,7 @@ export default async function View_Settings() {
     });
 
     /** Authorize */
-    if (Action_Store.user().Role === 'Developer') {
+    if (Store.user().Role === 'Developer') {
         ViewPart_DeveloperLinks({
             parent
         });
@@ -46,7 +42,7 @@ export default async function View_Settings() {
     });
 
     /** Authorize */
-    if (Action_Store.user().Role === 'Developer') {
+    if (Store.user().Role === 'Developer') {
         ViewPart_SiteUsage({
             parent
         });

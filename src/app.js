@@ -1,4 +1,4 @@
-import Start from './Start.js'
+import { Start } from './Core/Core.js'
 
 Start({
     routes: [

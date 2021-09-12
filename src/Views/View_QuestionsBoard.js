@@ -1,12 +1,6 @@
-
-
-/** Actions */
-import Action_Get from '../Actions/Action_Get.js'
-import Action_CreateItem from '../Actions/Action_CreateItem.js'
-import Action_UpdateItem from '../Actions/Action_UpdateItem.js'
-import Action_Store from '../Actions/Action_Store.js'
-import Action_Route from '../Actions/Action_Route.js'
-import Action_SendEmail from '../Actions/Action_SendEmail.js'
+import Store from '../Core/Store.js'
+import { Get, CreateItem, UpdateItem, Route, SendEmail } from '../Core/Actions.js'
+import { App } from '../Core/Settings.js'
 
 /** Components */
 import Component_Title from '../Components/Component_Title.js'
@@ -20,9 +14,6 @@ import Component_QuestionCard from '../Components/Component_QuestionCard.js'
 import Model_Questions from '../Models/Model_Questions.js'
 import Model_Question from '../Models/Model_Question.js'
 
-/** Settings */
-import { App } from '../Core/Settings.js'
-
 /** View Parts */
 import ViewPart_QuestionCards from '../ViewParts/ViewPart_QuestionCards.js'
 import ViewPart_NewQuestion from '../ViewParts/ViewPart_NewQuestion.js'
@@ -33,7 +24,7 @@ export default async function View_QuestionsBoard(param) {
     } = param;
 
     /** View Parent */
-    const parent = Action_Store.get('maincontainer');
+    const parent = Store.get('maincontainer');
 
     /** View Title */
     let viewTitle;
@@ -76,7 +67,7 @@ export default async function View_QuestionsBoard(param) {
 
         viewTitle.add();
 
-        const questionTypesResponse = await Action_Get({
+        const questionTypesResponse = await Get({
             list: 'View_Questions',
             filter: `Title eq 'QuestionTypes'`
         });
@@ -128,7 +119,7 @@ export default async function View_QuestionsBoard(param) {
                 }
             ],
             route(path) {
-                Action_Route(path);
+                Route(path);
             },
             parent,
             position: 'afterbegin',
@@ -165,7 +156,7 @@ export default async function View_QuestionsBoard(param) {
                 parent: questionsContainer
             };
 
-            const questions = Action_Store.get('Model_Questions').filter(question => question.QuestionType === path);
+            const questions = Store.get('Model_Questions').filter(question => question.QuestionType === path);
 
             switch (filter) {
                 case 'All':
@@ -173,9 +164,9 @@ export default async function View_QuestionsBoard(param) {
                     break;
                 case 'Mine':
                     param.questions = questions.filter(question => {
-                        // console.log(question.Author.Title, Action_Store.user().Title);
+                        // console.log(question.Author.Title, Store.user().Title);
 
-                        return question.Author.Title === Action_Store.user().Title;
+                        return question.Author.Title === Store.user().Title;
                     });
                     break;
                 case 'Unanswered':
@@ -209,7 +200,7 @@ export default async function View_QuestionsBoard(param) {
         onSearch(query) {
             console.log('query: ', query);
 
-            const questions = Action_Store.get('Model_Questions').filter(question => question.QuestionType === path);
+            const questions = Store.get('Model_Questions').filter(question => question.QuestionType === path);
 
             const filteredQuestions = questions.filter(question => {
                 const {
@@ -300,13 +291,13 @@ export default async function View_QuestionsBoard(param) {
                                 fieldValues.QuestionType = path;
                                 
                                 /** Create Question */
-                                const newItem = await Action_CreateItem({
+                                const newItem = await CreateItem({
                                     list: 'Questions',
                                     data: fieldValues
                                 });
 
                                 /** Set QuestionId */
-                                const updatedItem = await Action_UpdateItem({
+                                const updatedItem = await UpdateItem({
                                     list: 'Questions',
                                     select: 'Id,Title,Body,Created,ParentId,QuestionId,QuestionType,Featured,Modified,Author/Name,Author/Title,Editor/Name,Editor/Title',
                                     expand: `Author/Id,Editor/Id`,
@@ -316,15 +307,15 @@ export default async function View_QuestionsBoard(param) {
                                     }
                                 });
 
-                                console.log(Action_Store.get('Model_Questions'));
+                                console.log(Store.get('Model_Questions'));
 
                                 const question = Model_Question({
                                     question: updatedItem
                                 });
 
-                                Action_Store.get('Model_Questions').push(question);
+                                Store.get('Model_Questions').push(question);
 
-                                console.log(Action_Store.get('Model_Questions'));
+                                console.log(Store.get('Model_Questions'));
 
                                 /** Add new quesiton card to DOM */
                                 questionCards.addCard(question);
@@ -369,7 +360,7 @@ export default async function View_QuestionsBoard(param) {
 
     questionsContainer.add();
 
-    let questions = Action_Store.get('Model_Questions');
+    let questions = Store.get('Model_Questions');
 
     if (questions) {
         console.log('Model_Questions found.');
