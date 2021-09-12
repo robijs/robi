@@ -30,8 +30,6 @@ export default function Start(param) {
         settings
     } = param;
 
-    console.log(param);
-
     Setting_App.set(settings);
 
     /** Add new string method */
@@ -224,8 +222,6 @@ export default function Start(param) {
             console.error(error);
         }
 
-        console.log(Action_Store.routes());
-
         /** Run current route on page load */
         Action_Route(path, {
             log: false
@@ -268,8 +264,6 @@ export default function Start(param) {
             });
 
             releaseNotes.add();
-        } else {
-            console.log('Release notes message was already dismissed.');
         }
     }
 }

@@ -361,8 +361,6 @@ export default function Component_Sidebar(param) {
                     roles
                 } = route;
 
-                console.log(roles, Action_Store.user());
-
                 if (roles) {
                     if (roles.includes(Action_Store.user().Role)) {
                         return navTemplate(path, icon);

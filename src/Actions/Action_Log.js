@@ -60,7 +60,7 @@ export default async function Action_Log(param) {
 
         const newItem = await Action_Post(postOptions);
 
-        console.log(`%c'${Title}' logged to SharePoint list 'Log.'`, 'background: #1e1e1e; color: #fff');
+        console.log(`%c'${Action_Store.user().Title}' logged in.`, 'background: #1e1e1e; color: #fff');
 
         return newItem.d;
     } else if (Setting_App.get('mode') === 'dev') {
@@ -90,6 +90,6 @@ export default async function Action_Log(param) {
 
         await fetch('http://localhost:3000/Log', options);
 
-        console.log(`%c'${Title}' logged to SharePoint list 'Log.'`, 'background: #1e1e1e; color: #fff');
+        console.log(`%c '${Action_Store.user().Title}' logged in. Session ID: ${sessionStorage.getItem(`${Setting_App.get('title').split(' ').join('_')}-sessionId`)}. `, 'background: #1e1e1e; color: #fff');
     }
 }

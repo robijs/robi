@@ -69,7 +69,7 @@ export default async function Action_Error(param) {
 
         const newItem = await Action_Post(postOptions);
 
-        console.log(`%cError '${Message}' logged to SharePoint list 'Errors.'`, 'background: crimson; color: #fff');
+        console.log(`%c Logged error '${Message}'. `, 'background: crimson; color: #fff');
 
         return newItem.d;
     } else if (Setting_App.get('mode') === 'dev') {
@@ -95,6 +95,6 @@ export default async function Action_Error(param) {
 
         await fetch('http://localhost:3000/Errors', options);
 
-        console.log(`%cError '${Message}' logged to SharePoint list 'Errors.'`, 'background: crimson; color: #fff');
+        console.log(`%c Logged error '${Message}'. `, 'background: crimson; color: #fff');
     }
 }

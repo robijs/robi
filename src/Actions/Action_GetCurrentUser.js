@@ -51,7 +51,7 @@ export default async function Action_GetCurrentUser(param) {
         });
 
         if (appUser[0]) {
-            console.log(`%cUser account for ${appUser[0].Title} found.`, 'color: mediumseagreen');
+            console.log(`%cFound user account for '${appUser[0].Title}'.`, 'background: seagreen; color: white');
             return appUser[0];
         } else {
             console.log(response.d);
@@ -89,7 +89,7 @@ export default async function Action_GetCurrentUser(param) {
         const currentUser = await fetch(url, fetchOptions);
         const response = await currentUser.json();
 
-        console.log(`%cUser account for ${response[0].Title} found.`, 'color: mediumseagreen');
+        console.log(`%c Found user account for '${response[0].Title}'. `, 'background: seagreen; color: white');
         return response[0];
     }
 }
