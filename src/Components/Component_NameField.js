@@ -70,7 +70,7 @@ export default function Component_NameField(param) {
                 padding: 5px 10px;
                 background: white;
                 border-radius: 4px;
-                border: ${Setting_App.defaultBorder};
+                border: ${Setting_App.get('defaultBorder')};
             }
 
             #id .form-field-name::-webkit-search-cancel-button{
@@ -83,7 +83,7 @@ export default function Component_NameField(param) {
             #id .form-field-name:focus {
                 outline: none;
                 border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 2px ${Setting_App.primaryColor};
+                box-shadow: 0px 0px 0px 2px ${Setting_App.get('primaryColor')};
             }
 
             /** Errors */

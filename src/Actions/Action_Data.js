@@ -1,5 +1,3 @@
-
-
 /* Actions */
 import Action_Get from './Action_Get.js'
 import Action_Store from './Action_Store.js'
@@ -12,8 +10,8 @@ import Component_LoadingBar from '../Components/Component_LoadingBar.js'
 
 export default async function Action_Data(lists) {
     const loadingBar = Component_LoadingBar({
-        displayLogo: Setting_App.logo,
-        displayTitle: Setting_App.title,
+        displayLogo: Setting_App.get('logo'),
+        displayTitle: Setting_App.get('title'),
         displayText: 'Loading',
         totalCount: lists?.length || 0
     });

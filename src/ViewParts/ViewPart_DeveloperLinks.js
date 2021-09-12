@@ -112,7 +112,7 @@ export default async function View_DeveloperLinks(param) {
         /** Pages */
         const card = Component_Card({
             title,
-            titleColor: Setting_App.primaryColor,
+            titleColor: Setting_App.get('primaryColor'),
             width: '100%',
             margin: '20px 0px 0px 0px',
             parent

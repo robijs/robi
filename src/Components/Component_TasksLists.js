@@ -95,7 +95,7 @@ export default function Component_TasksList(param) {
             }
 
             #id .select-all-title {
-                color: ${Setting_App.primaryColor};
+                color: ${Setting_App.get('primaryColor')};
                 font-weight: 500;
                 padding: 5px 0px;
             }
@@ -148,7 +148,7 @@ export default function Component_TasksList(param) {
 
             #id .add-an-item:focus,
             #id .add-an-item:active {
-                border-bottom: solid 2px ${Setting_App.primaryColor};
+                border-bottom: solid 2px ${Setting_App.get('primaryColor')};
             }
 
             /** Placeholder */

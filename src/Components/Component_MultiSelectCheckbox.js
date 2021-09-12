@@ -94,7 +94,7 @@ export default function Component_MultiSelectCheckbox(param) {
             }
 
             #id .select-all-title {
-                color: ${Setting_App.primaryColor};
+                color: ${Setting_App.get('primaryColor')};
                 font-weight: 500;
                 padding: 5px 0px;
             }

@@ -7,7 +7,7 @@ import Action_Log from './Action_Log.js'
 import Setting_App from '../Settings/Setting_App.js'
 import Setting_Routes from '../Settings/Setting_Routes.js'
 
-export default function Action_Route(path = Setting_App.defaultRoute, options = {}) {
+export default function Action_Route(path = Setting_App.get('defaultRoute'), options = {}) {
     const {
         scrollTop
     } = options;
@@ -66,10 +66,10 @@ export default function Action_Route(path = Setting_App.defaultRoute, options = 
     const queryParameters = pathAndQuery.length > 1 ? pathAndQuery[1] : '';
 
     /** Attach default query parameters */
-    const defaultQueryParameters = Setting_App.getDefaultQueryParameters();
+    const defaultQueryParameters = Setting_App.Setting_App.getDefaultQueryParameters;
 
     if (!queryParameters && defaultQueryParameters) {
-        path += `?${Setting_App.getDefaultQueryParameters()}`;
+        path += `?${Setting_App.Setting_App.getDefaultQueryParameters}`;
     }
 
     /** Set browswer history state */

@@ -31,7 +31,7 @@ export default function Component_DropDownMenu(param) {
                 background: white;
                 margin: 5px 10px;
                 border-radius: 4px;
-                border: ${Setting_App.defaultBorder};
+                border: ${Setting_App.get('defaultBorder')};
             }
 
             .form-list-text:focus,
@@ -48,7 +48,7 @@ export default function Component_DropDownMenu(param) {
                 background: white;
                 margin: 5px 0px;
                 border-radius: 4px;
-                border: ${Setting_App.defaultBorder};
+                border: ${Setting_App.get('defaultBorder')};
                 z-index: 10;
                 position: absolute;
                 top: 0px;
@@ -63,13 +63,13 @@ export default function Component_DropDownMenu(param) {
             }
 
             .list-option-selected {
-                background: ${Setting_App.primaryColor};
-                color: ${Setting_App.secondaryColor}
+                background: ${Setting_App.get('primaryColor')};
+                color: ${Setting_App.get('secondaryColor')}
             }
              
             .list-option:hover {
-                background: ${Setting_App.primaryColor};
-                color: ${Setting_App.secondaryColor}
+                background: ${Setting_App.get('primaryColor')};
+                color: ${Setting_App.get('secondaryColor')}
             }
 
             /** Loading Shimmer */

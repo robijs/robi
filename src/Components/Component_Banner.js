@@ -21,7 +21,7 @@ export default function Component_Banner(param) {
                 cursor: default;
                 font-size: 1.5em;
                 border-radius: 4px;
-                /* border: ${Setting_App.defaultBorder}; */
+                /* border: ${Setting_App.get('defaultBorder')}; */
             }
 
             #id.fixed {
@@ -36,7 +36,7 @@ export default function Component_Banner(param) {
             #id.normal {
                 display: inline-block;
                 background: white;
-                border-left: solid 10px ${Setting_App.primaryColor};
+                border-left: solid 10px ${Setting_App.get('primaryColor')};
                 margin: 20px 0px;
                 padding: 10px;
             }

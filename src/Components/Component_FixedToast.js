@@ -65,7 +65,7 @@ export default function Component_FixedToast(param) {
             }
 
             #id.inverse-colors {
-                background: ${Setting_App.primaryColor};
+                background: ${Setting_App.get('primaryColor')};
             }
 
             #id.inverse-colors * {

@@ -53,7 +53,7 @@ export default function Component_NewRequestForm(param) {
                 margin-bottom: 4px;
                 min-height: 200px;
                 border-radius: 4px;
-                border: solid 2px ${Setting_App.defaultColor};
+                border: solid 2px ${Setting_App.get('defaultColor')};
             }
 
             .drop-zone-button-container { 
@@ -64,7 +64,7 @@ export default function Component_NewRequestForm(param) {
                 cursor: pointer;
                 display: inline-block;
                 padding: 5px 10px;
-                background: ${Setting_App.primaryColor};
+                background: ${Setting_App.get('primaryColor')};
                 color: white;
                 font-weight: bold;
                 text-align: center;
@@ -79,13 +79,13 @@ export default function Component_NewRequestForm(param) {
 
             .drag-over {
                 background: white;
-                border: solid 2px ${Setting_App.primaryColor};
+                border: solid 2px ${Setting_App.get('primaryColor')};
             }
 
             .drop-zone-preview-container .icon {
                 font-size: 4.5em;
-                stroke: ${Setting_App.defaultColor};
-                fill: ${Setting_App.defaultColor};
+                stroke: ${Setting_App.get('defaultColor')};
+                fill: ${Setting_App.get('defaultColor')};
             }
 
             .file-preview {
@@ -110,7 +110,7 @@ export default function Component_NewRequestForm(param) {
                 background: crimson;
                 color: white;
                 border-radius: 4px;
-                border:  ${Setting_App.defaultBorder};
+                border:  ${Setting_App.get('defaultBorder')};
             }
 
             .file-icon {

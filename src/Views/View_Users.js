@@ -60,7 +60,7 @@ export default async function View_Users(param = {}) {
 
     const card = Component_Card({
         title: '',
-        titleColor: Setting_App.primaryColor,
+        titleColor: Setting_App.get('primaryColor'),
         padding: '20px',
         margin: '20px 0px',
         width: '100%',

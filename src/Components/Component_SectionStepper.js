@@ -65,13 +65,13 @@ export default function Component_SectionStepper(param) {
                 flex-direction: column;
                 justify-content: space-between;
                 overflow: overlay;
-                border-right: solid 1px ${Setting_App.sidebarBorderColor};
+                border-right: solid 1px ${Setting_App.get('sidebarBorderColor')};
             }
 
             /* Title */
             #id .section-title {
                 font-size: 1em;
-                color: ${Setting_App.primaryColor};
+                color: ${Setting_App.get('primaryColor')};
                 margin-bottom: 15px;
                 padding: .275rem .75rem;
                 cursor: pointer;
@@ -98,8 +98,8 @@ export default function Component_SectionStepper(param) {
                 width: 24px;
                 height: 24px;
                 padding: 6px;
-                background: ${Setting_App.primaryColor};
-                border: solid 1px ${Setting_App.primaryColor};
+                background: ${Setting_App.get('primaryColor')};
+                border: solid 1px ${Setting_App.get('primaryColor')};
                 color: white;
                 text-align: center;
                 line-height: .6;
@@ -107,7 +107,7 @@ export default function Component_SectionStepper(param) {
 
             #id .section-circle.not-started {
                 background: white;
-                color: ${Setting_App.primaryColor};
+                color: ${Setting_App.get('primaryColor')};
             }
 
             #id .section-circle.started {
@@ -141,7 +141,7 @@ export default function Component_SectionStepper(param) {
 
             /* Bar */
             #id .section-bar {
-                background: ${Setting_App.primaryColor};
+                background: ${Setting_App.get('primaryColor')};
                 height: 10px;
                 width: 1px;
                 margin: 5px 0px;
@@ -159,7 +159,7 @@ export default function Component_SectionStepper(param) {
             }
 
             #id .section-name-text.selected {
-                border-bottom: solid 2px ${Setting_App.primaryColor};
+                border-bottom: solid 2px ${Setting_App.get('primaryColor')};
             }
 
             /* Legend */

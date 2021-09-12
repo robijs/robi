@@ -81,7 +81,7 @@ export default function Component_SingleLineTextField(param) {
                 padding: 5px 10px;
                 border-radius: 4px;
                 background: white;
-                border: ${Setting_App.defaultBorder};
+                border: ${Setting_App.get('defaultBorder')};
                 transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
             }
 
@@ -97,7 +97,7 @@ export default function Component_SingleLineTextField(param) {
             #id .form-field-single-line-text.editable:focus {
                 outline: none;
                 border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 2px ${Setting_App.primaryColor};
+                box-shadow: 0px 0px 0px 2px ${Setting_App.get('primaryColor')};
             }
 
             /* Optional */

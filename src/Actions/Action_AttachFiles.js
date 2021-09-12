@@ -1,8 +1,7 @@
-
-
 /* Actions */
 import Action_Get from './Action_Get.js'
-import GetRequestDigest from './Action_GetRequestDigest.js'
+import Action_GetRequestDigest from './Action_GetRequestDigest.js'
+import Action_Store from './Action_Store.js'
 
 /**
  * 
@@ -22,7 +21,7 @@ export default async function AttachFiles(param) {
     } = param;
 
     // Get new request digest
-    const requestDigest = await GetRequestDigest();
+    const requestDigest = await Action_GetRequestDigest();
 
     // Upload responses
     const responses = [];

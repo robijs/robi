@@ -24,7 +24,7 @@ export default async function View_SiteUsage(param) {
     /** Dashboard */
     const dashboardCard = Component_Card({
         title: 'Site Usage',
-        titleColor: Setting_App.primaryColor,
+        titleColor: Setting_App.get('primaryColor'),
         width: '100%',
         margin: '20px 0px 0px 0px',
         parent
@@ -219,8 +219,8 @@ export default async function View_SiteUsage(param) {
                     return {
                         data: set.data.map(item => item.length),
                         label: set.label,
-                        backgroundColor: index === 0 ? `rgb(${Setting_App.primaryColorRGB}, 0.2)` : 'rgb(67, 203, 255, 0.2)',
-                        borderColor: index === 0 ? `rgb(${Setting_App.primaryColorRGB}, 1)` : 'rgb(67, 203, 255, 1)',
+                        backgroundColor: index === 0 ? `rgb(${Setting_App.get('primaryColorRGB')}, 0.2)` : 'rgb(67, 203, 255, 0.2)',
+                        borderColor: index === 0 ? `rgb(${Setting_App.get('primaryColorRGB')}, 1)` : 'rgb(67, 203, 255, 1)',
                         // backgroundColor: index === 0 ? 'rgb(147, 112, 219, 0.2)' : 'rgb(67, 203, 255, 0.2)',
                         // borderColor: index === 0 ? 'rgb(147, 112, 219, 1)' : 'rgb(67, 203, 255, 1)',
                         borderWidth: 1

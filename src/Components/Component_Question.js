@@ -86,7 +86,7 @@ export default function Component_QuestionCard(param) {
 
             /** Edit button */
             #id .btn-primaryColor {
-                background: ${Setting_App.primaryColor};
+                background: ${Setting_App.get('primaryColor')};
                 color: white;
             }
 

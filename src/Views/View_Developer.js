@@ -77,7 +77,7 @@ export default async function View_Developer(param) {
     const logCard = Component_Card({
         title: 'Logs',
         description: '',
-        titleColor: Setting_App.primaryColor,
+        titleColor: Setting_App.get('primaryColor'),
         padding: '20px',
         margin: '20px 0px',
         width: '100%',
@@ -158,7 +158,7 @@ export default async function View_Developer(param) {
     const errorsCard = Component_Card({
         title: 'Errors',
         description: '',
-        titleColor: Setting_App.primaryColor,
+        titleColor: Setting_App.get('primaryColor'),
         padding: '20px',
         margin: '20px 0px',
         width: '100%',

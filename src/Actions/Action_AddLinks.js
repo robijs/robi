@@ -1,5 +1,3 @@
-/** DHA J-5 KM Team */
-
 export default function Action_AddLinks(param) {
     const {
         links,

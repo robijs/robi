@@ -41,16 +41,16 @@ export default function Component_Button(param) {
 
             #id.normal-button {
                 color: white;
-                background: rgba(${Setting_App.primaryColorRGB}, .9);
+                background: rgba(${Setting_App.get('primaryColorRGB')}, .9);
                 border: solid 1px transparent;
             }
 
             #id.back-button,
             #id.hollow-button,
             #id.cancel-button {
-                color: rgba(${Setting_App.primaryColorRGB}, .9);
+                color: rgba(${Setting_App.get('primaryColorRGB')}, .9);
                 background: transparent;
-                border: solid 1px rgba(${Setting_App.primaryColorRGB}, .9);
+                border: solid 1px rgba(${Setting_App.get('primaryColorRGB')}, .9);
             }
 
             #id.create-button,

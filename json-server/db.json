@@ -508,6 +508,32 @@
       "Created": "2021-09-10T18:38:37.296Z",
       "Module": "http://127.0.0.1:8080/src/Start.js",
       "Id": 36
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "13dd88a6-e922-4d12-a9a1-77ac1705f74d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Start.js:219:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-10T18:41:20.459Z",
+      "Module": "http://127.0.0.1:8080/src/Start.js",
+      "Id": 37
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "5e9b37b4-9d8a-4718-88ac-0e34ea87d451",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Start.js:219:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.38",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-10T18:42:21.410Z",
+      "Module": "http://127.0.0.1:8080/src/Start.js",
+      "Id": 38
     }
   ],
   "Errors": [

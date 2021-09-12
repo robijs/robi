@@ -12,7 +12,7 @@ export default function Action_Download(param) {
 
     // File name
     const today = new Date();
-    downloadLink.download = `${`${fileName || Setting_App.title}_${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`}.csv`;
+    downloadLink.download = `${`${fileName || Setting_App.get('title')}_${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`}.csv`;
 
     // We have to create a link to the file
     downloadLink.href = window.URL.createObjectURL(csvFile);

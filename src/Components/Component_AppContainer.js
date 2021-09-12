@@ -18,14 +18,14 @@ export default function Component_AppContainer() {
             *, html {
                 font-family: ${Setting_App.fontFamily || ` -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`};
                 box-sizing: border-box;
-                color: ${Setting_App.primaryColor};
+                color: ${Setting_App.get('primaryColor')};
             }
             
             body {
                 padding: 0px;
                 margin: 0px;
                 box-sizing: border-box;
-                background: ${Setting_App.secondaryColor};
+                background: ${Setting_App.get('secondaryColor')};
                 overflow: hidden;
             }
             
@@ -43,7 +43,7 @@ export default function Component_AppContainer() {
             }
             
             ::-webkit-scrollbar-thumb {
-                background: ${Setting_App.primaryColor};
+                background: ${Setting_App.get('primaryColor')};
                 width: 8px;
                 height: 8px;
                 border: 3px solid transparent;
@@ -77,8 +77,8 @@ export default function Component_AppContainer() {
                 width: 1em;
                 height: 1em;
                 stroke-width: 0;
-                stroke: ${Setting_App.secondaryColor};
-                fill: ${Setting_App.secondaryColor};
+                stroke: ${Setting_App.get('secondaryColor')};
+                fill: ${Setting_App.get('secondaryColor')};
             }
 
             /** Wait */

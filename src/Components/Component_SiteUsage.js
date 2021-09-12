@@ -44,7 +44,7 @@ export default function Component_SiteUsage(param) {
                 padding: ${padding || '10px'};
                 background: white;
                 border-radius: 4px;
-                border: ${border || Setting_App.defaultBorder};
+                border: ${border || Setting_App.get('defaultBorder')};
                 display: flex;
                 flex: 1;
             }
@@ -84,7 +84,7 @@ export default function Component_SiteUsage(param) {
             }
 
             #id .dashboard-long-card-chart-title {
-                color: ${Setting_App.primaryColor};
+                color: ${Setting_App.get('primaryColor')};
                 font-size: 1.1em;
                 font-weight: 500;
                 text-align: center;

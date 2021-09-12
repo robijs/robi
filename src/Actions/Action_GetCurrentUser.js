@@ -75,8 +75,8 @@ export default async function Action_GetCurrentUser(param) {
                     Title,
                     Email,
                     LoginName: LoginName.split('|')[2],
-                    Role: Setting_App.userDefaultRole /** Default, can be changed later */,
-                    Settings: Setting_App.userSettings
+                    Role: Setting_App.get('userDefaultRole') /** Default, can be changed later */,
+                    Settings: Setting_App.get('userSettings')
                 }
             });
 

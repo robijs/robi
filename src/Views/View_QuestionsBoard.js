@@ -264,7 +264,7 @@ export default async function View_QuestionsBoard(param) {
             const modal = Component_Modal({
                 title: 'Ask a question',
                 showFooter: true,
-                background: Setting_App.secondaryColor,
+                background: Setting_App.get('secondaryColor'),
                 addContent(modalBody) {
                     newQuestionForm = ViewPart_NewQuestion({
                         parent: modalBody,

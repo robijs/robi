@@ -40,14 +40,14 @@ export default function Component_DateField(param) {
                 padding: 10px;
                 background: white;
                 border-radius: 4px;
-                border: ${Setting_App.defaultBorder};
+                border: ${Setting_App.get('defaultBorder')};
             }
 
             #id .form-field-date:active,
             #id .form-field-date:focus {
                 outline: none;
                 border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 2px ${Setting_App.primaryColor};
+                box-shadow: 0px 0px 0px 2px ${Setting_App.get('primaryColor')};
             }
         `,
         parent: parent,

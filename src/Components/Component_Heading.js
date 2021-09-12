@@ -37,13 +37,13 @@ export default function Component_Heading(param) {
             #id .text {
                 font-size: ${size || '1.25em'};
                 font-weight: ${weight || '500'};
-                color: ${color || Setting_App.primaryColor};
+                color: ${color || Setting_App.get('primaryColor')};
                 margin: 0px;
                 text-align: ${align || 'left'};
             }
 
             #id .text * {
-                color: ${color || Setting_App.primaryColor};
+                color: ${color || Setting_App.get('primaryColor')};
             }
         `,
         parent: parent,

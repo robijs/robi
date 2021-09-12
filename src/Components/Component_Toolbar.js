@@ -27,7 +27,7 @@ export default function Component_Toolbar(param) {
                 /* padding: 10px; */
                 margin: ${margin || '15px 0px'};
                 background: white;
-                border:  ${Setting_App.defaultBorder};
+                border:  ${Setting_App.get('defaultBorder')};
             }
         `,
         parent: parent,

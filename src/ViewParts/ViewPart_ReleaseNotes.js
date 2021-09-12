@@ -22,7 +22,7 @@ export default async function View_ReleaseNotes(param) {
 
     const releaseNotesCard = Component_Card({
         title: 'Release Notes',
-        titleColor: Setting_App.primaryColor,
+        titleColor: Setting_App.get('primaryColor'),
         width: '100%',
         margin: margin || '20px 0px 0px 0px',
         parent

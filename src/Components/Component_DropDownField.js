@@ -92,14 +92,14 @@ export default function Component_DropDownField(param) {
                 margin: 2px 0px 4px 0px;
                 background: white;
                 border-radius: 4px;
-                border: ${Setting_App.defaultBorder};
+                border: ${Setting_App.get('defaultBorder')};
             }
 
             #id .form-field-drop-down:active,
             #id .form-field-drop-down:focus {
                 outline: none;
                 border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 2px ${Setting_App.primaryColor};
+                box-shadow: 0px 0px 0px 2px ${Setting_App.get('primaryColor')};
             }
 
             /* Validation */

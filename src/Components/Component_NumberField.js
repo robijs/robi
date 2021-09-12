@@ -50,7 +50,7 @@ export default function Component_NumberField(param) {
             #id input:focus {
                 outline: none;
                 border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 1px ${Setting_App.primaryColor};
+                box-shadow: 0px 0px 0px 1px ${Setting_App.get('primaryColor')};
             }
         `,
         parent: parent,

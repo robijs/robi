@@ -86,8 +86,8 @@ export default function Component_Files(param) {
 
             .file-icon .page {
                 font-size: 2em;
-                stroke: ${Setting_App.defaultColor};
-                fill: ${Setting_App.defaultColor}
+                stroke: ${Setting_App.get('defaultColor')};
+                fill: ${Setting_App.get('defaultColor')}
             }
 
             .file-icon .type {
@@ -119,9 +119,9 @@ export default function Component_Files(param) {
                 font-weight: bold;
                 text-align: center;
                 border-radius: 4px;
-                color: ${Setting_App.secondaryColor};
-                background: ${Setting_App.primaryColor};
-                border: solid 2px ${Setting_App.primaryColor};
+                color: ${Setting_App.get('secondaryColor')};
+                background: ${Setting_App.get('primaryColor')};
+                border: solid 2px ${Setting_App.get('primaryColor')};
             }
         `,
         parent,

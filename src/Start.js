@@ -18,12 +18,12 @@ import Component_FixedToast from './Components/Component_FixedToast.js'
 import Component_Modal from './Components/Component_Modal.js'
 
 /** Settings */
-import Setting_App from './Settings/Setting_App.js'
 import Setting_Dev from './Settings/Setting_Dev.js'
+import Setting_Routes from './Settings/Setting_Routes.js'
+import Setting_App from './Settings/Setting_App.js'
 
 /** View Parts */
 import ViewPart_ReleaseNotes from './ViewParts/ViewPart_ReleaseNotes.js'
-import Setting_Routes from './Settings/Setting_Routes.js'
 
 export default function Start(param) {
     const {
@@ -32,6 +32,8 @@ export default function Start(param) {
     } = param;
 
     console.log(param);
+
+    Setting_App.set(settings);
 
     /** Add new string method */
     String.prototype.toTitleCase = function () {
@@ -95,7 +97,7 @@ export default function Start(param) {
             svgSymbols,
             sessionStorageData,
             sidebarDropdown
-        } = Setting_App;
+        } = settings;
 
         /** Add links to head */
         Action_AddLinks({
@@ -194,7 +196,7 @@ export default function Start(param) {
 
         mainContainer.add();
         
-        /** Run callback defined in Setting_App.js Before first view loads */
+        /** Run callback defined in settings Before first view loads */
         if (beforeLoad) {
             await beforeLoad();
         }
@@ -206,7 +208,7 @@ export default function Start(param) {
         const sessionId = Action_GenerateUUID();
 
         /** Format Title for Sessin/Local Storage keys */
-        const storageKeyPrefix = Setting_App.title.split(' ').join('_');
+        const storageKeyPrefix = settings.title.split(' ').join('_');
 
         /** Set Session Id */
         sessionStorage.setItem(`${storageKeyPrefix}-sessionId`, sessionId)
@@ -246,7 +248,7 @@ export default function Start(param) {
                     const modal = Component_Modal({
                         title: '',
                         fade: true,
-                        background: Setting_App.secondaryColor,
+                        background: settings.secondaryColor,
                         centered: true,
                         addContent(modalBody) {
                             ViewPart_ReleaseNotes({
