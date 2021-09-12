@@ -75,7 +75,7 @@ export default function Action_Route(path = Setting_App.get('defaultRoute'), opt
     /** Set browswer history state */
     Action_History({
         url: `${location.href.split('#')[0]}${(path) ? `#${path}` : ''}`,
-        title: `${Setting_App.title}${(path) ? ` - ${pathAndQuery[0]}` : ''}`
+        title: `${Setting_App.get('title')}${(path) ? ` - ${pathAndQuery[0]}` : ''}`
         // title: `${App.title}${(path) ? ` - ${path}` : ''}`
     });
 

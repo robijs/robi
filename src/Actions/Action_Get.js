@@ -35,7 +35,7 @@ export default async function Action_Get(param) {
         signal: abortController.signal
     };
 
-    if (Setting_App.mode === 'prod') {
+    if (Setting_App.get('mode') === 'prod') {
         const itemCount = await Action_GetItemCount({
             apiPath: path,
             list
@@ -75,7 +75,7 @@ export default async function Action_Get(param) {
         } catch (error) {
             console.log(error);
         }
-    } else if (Setting_App.mode === 'dev') {
+    } else if (Setting_App.get('mode') === 'dev') {
         const queryFilterString = [
             formatFilter(filter),
             formatOrder(orderby)

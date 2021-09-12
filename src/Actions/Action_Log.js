@@ -24,7 +24,7 @@ export default async function Action_Log(param) {
         Module
     } = param;
 
-    if (Setting_App.mode === 'prod') {
+    if (Setting_App.get('mode') === 'prod') {
         /** Get new request digest */
         const requestDigest = await Action_GetRequestDigest();
 
@@ -40,7 +40,7 @@ export default async function Action_Log(param) {
             url: `../../_api/web/lists/GetByTitle('Log')/items`,
             data: {
                 Title,
-                SessionId: sessionStorage.getItem(`${Setting_App.title.split(' ').join('_')}-sessionId`),
+                SessionId: sessionStorage.getItem(`${Setting_App.get('title').split(' ').join('_')}-sessionId`),
                 Message: JSON.stringify({
                     body: Message,
                     location: location.href,
@@ -64,12 +64,12 @@ export default async function Action_Log(param) {
         console.log(`%c'${Title}' logged to SharePoint list 'Log.'`, 'background: #1e1e1e; color: #fff');
 
         return newItem.d;
-    } else if (Setting_App.mode === 'dev') {
+    } else if (Setting_App.get('mode') === 'dev') {
         const options = {
             method: `POST`,
             body: JSON.stringify({
                 Title,
-                SessionId: sessionStorage.getItem(`${Setting_App.title.split(' ').join('_')}-sessionId`),
+                SessionId: sessionStorage.getItem(`${Setting_App.get('title').split(' ').join('_')}-sessionId`),
                 Message: JSON.stringify({
                     body: Message,
                     location: location.href,

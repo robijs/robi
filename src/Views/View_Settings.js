@@ -19,7 +19,7 @@ export default async function View_Settings() {
     const parent = Action_Store.get('maincontainer');
 
     const viewTitle = Component_Title({
-        title: Setting_App.title,
+        title: Setting_App.get('title'),
         subTitle: `Settings`,
         parent,
         date: new Date().toLocaleString('en-US', {

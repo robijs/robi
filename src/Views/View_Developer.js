@@ -46,7 +46,7 @@ export default async function View_Developer(param) {
     
     /** View Title */
     const viewTitle = Component_Title({
-        title: Setting_App.title,
+        title: Setting_App.get('title'),
         subTitle: 'Developer',
         parent,
         date: new Date().toLocaleString('default', {

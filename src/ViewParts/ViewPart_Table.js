@@ -66,7 +66,7 @@ export default function ViewPart_Table(param) {
     }
     
     /** Item Id */
-    const idProperty = Setting_App.mode === 'prod' ? 'Id' : 'Id';
+    const idProperty = Setting_App.get('mode') === 'prod' ? 'Id' : 'Id';
 
     /** typeof fields === 'object' */
     (Array.isArray(fields) ? fields : fields.split(','))

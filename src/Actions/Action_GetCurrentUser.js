@@ -15,7 +15,7 @@ export default async function Action_GetCurrentUser(param) {
         fields
     } = param;
 
-    const url = Setting_App.mode === 'prod' ? `../../_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${Setting_Dev.LoginName}`;
+    const url = Setting_App.get('mode') === 'prod' ? `../../_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${Setting_Dev.LoginName}`;
     const fetchOptions = {
         headers : { 
             'Content-Type': 'application/json; charset=UTF-8',
@@ -23,7 +23,7 @@ export default async function Action_GetCurrentUser(param) {
         }
     };
 
-    if (Setting_App.mode === 'prod') {
+    if (Setting_App.get('mode') === 'prod') {
         const url = `../../_api/web/CurrentUser`;
 
         /** Check if Users list exists */
@@ -88,7 +88,7 @@ export default async function Action_GetCurrentUser(param) {
             
             return newUser;
         }
-    } else if (Setting_App.mode === 'dev') {
+    } else if (Setting_App.get('mode') === 'dev') {
         const currentUser = await fetch(url, fetchOptions);
         const response = await currentUser.json();
 

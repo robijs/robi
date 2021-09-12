@@ -40,7 +40,7 @@ export default async function View_QuestionsBoard(param) {
     let currentType;
 
     /** Check local storage for questionTypes */
-    let questionTypes = localStorage.getItem(`${Setting_App.title.split(' ').join('-')}-questionTypes`);
+    let questionTypes = localStorage.getItem(`${Setting_App.get('title').split(' ').join('-')}-questionTypes`);
 
     if (questionTypes) {
         console.log('Found questionTypes in local storage.');
@@ -51,7 +51,7 @@ export default async function View_QuestionsBoard(param) {
 
         /** Set temporary title  */
         viewTitle = Component_Title({
-            title: Setting_App.title,
+            title: Setting_App.get('title'),
             breadcrumb: [
                 {
                     label: 'Questions',
@@ -81,11 +81,11 @@ export default async function View_QuestionsBoard(param) {
             filter: `Title eq 'QuestionTypes'`
         });
 
-        localStorage.setItem(`${Setting_App.title.split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
+        localStorage.setItem(`${Setting_App.get('title').split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
 
         console.log('questionTypes added to local storage.');
         
-        setTitle(localStorage.getItem(`${Setting_App.title.split(' ').join('-')}-questionTypes`))
+        setTitle(localStorage.getItem(`${Setting_App.get('title').split(' ').join('-')}-questionTypes`))
     }
     
     function setTitle(items) {
@@ -102,7 +102,7 @@ export default async function View_QuestionsBoard(param) {
         
         /** Set new title with drop down options */
         viewTitle = Component_Title({
-            title: Setting_App.title,
+            title: Setting_App.get('title'),
             breadcrumb: [
                 {
                     label: 'Questions',

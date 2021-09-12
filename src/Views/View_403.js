@@ -12,7 +12,7 @@ export default async function View_403() {
     const parent = Action_Store.get('maincontainer');
 
     const viewTitle = Component_Title({
-        title: Setting_App.title,
+        title: Setting_App.get('title'),
         subTitle: `403`,
         parent,
         date: new Date().toLocaleString('default', {

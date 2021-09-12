@@ -14,7 +14,7 @@ export default async function View_Home() {
 
     /** View Title */
     const viewTitle = Component_Title({
-        title: Setting_App.title,
+        title: Setting_App.get('title'),
         subTitle: `Subtitle (Ex: Application/Abbreviation Full Name)`,
         parent,
         date: new Date().toLocaleString('en-US', {

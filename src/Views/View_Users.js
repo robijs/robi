@@ -41,7 +41,7 @@ export default async function View_Users(param = {}) {
     const parent = Action_Store.get('maincontainer');
 
     const viewTitle = Component_Title({
-        title: Setting_App.title,
+        title: Setting_App.get('title'),
         subTitle: 'Users',
         date: `${new Date().toLocaleString('default', {
             dateStyle: 'full'
