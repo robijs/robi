@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /* Actions */
 import Component from '../Actions/Action_Component.js'
@@ -67,14 +67,14 @@ export default function Component_MultiLineTextField(param) {
                 width: ${width || 'unset'};
                 background: white;
                 border-radius: 4px;
-                border: ${Setting_App.get('defaultBorder')};
+                border: ${App.get('defaultBorder')};
             }
 
             #id .form-field-multi-line-text.editable:active,
             #id .form-field-multi-line-text.editable:focus {
                 outline: none;
                 border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 2px ${Setting_App.get('primaryColor')};
+                box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')};
             }
 
             /** Readonly */

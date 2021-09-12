@@ -4,7 +4,7 @@ import Action_Post from './Action_Post.js'
 import Action_Store from './Action_Store.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /**
  * Create SharePoint list item.
@@ -23,7 +23,7 @@ export default async function Action_Log(param) {
         Module
     } = param;
 
-    if (Setting_App.get('mode') === 'prod') {
+    if (App.get('mode') === 'prod') {
         /** Get new request digest */
         const requestDigest = await Action_GetRequestDigest();
 
@@ -39,7 +39,7 @@ export default async function Action_Log(param) {
             url: `../../_api/web/lists/GetByTitle('Log')/items`,
             data: {
                 Title,
-                SessionId: sessionStorage.getItem(`${Setting_App.get('title').split(' ').join('_')}-sessionId`),
+                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
                 Message: JSON.stringify({
                     body: Message,
                     location: location.href,
@@ -63,12 +63,12 @@ export default async function Action_Log(param) {
         console.log(`%c'${Action_Store.user().Title}' logged in.`, 'background: #1e1e1e; color: #fff');
 
         return newItem.d;
-    } else if (Setting_App.get('mode') === 'dev') {
+    } else if (App.get('mode') === 'dev') {
         const options = {
             method: `POST`,
             body: JSON.stringify({
                 Title,
-                SessionId: sessionStorage.getItem(`${Setting_App.get('title').split(' ').join('_')}-sessionId`),
+                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
                 Message: JSON.stringify({
                     body: Message,
                     location: location.href,
@@ -77,7 +77,7 @@ export default async function Action_Log(param) {
                 StackTrace: JSON.stringify(StackTrace.replace('Error\n    at ', '')),
                 UserAgent: navigator.userAgent,
                 Author: {
-                    Title: Setting_App.get('dev').Name
+                    Title: App.get('dev').Name
                 },
                 Created: new Date().toISOString(),
                 Module
@@ -90,6 +90,6 @@ export default async function Action_Log(param) {
 
         await fetch('http://localhost:3000/Log', options);
 
-        console.log(`%c '${Action_Store.user().Title}' logged in. Session ID: ${sessionStorage.getItem(`${Setting_App.get('title').split(' ').join('_')}-sessionId`)}. `, 'background: #1e1e1e; color: #fff');
+        console.log(`%c '${Action_Store.user().Title}' logged in. Session ID: ${sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`)}. `, 'background: #1e1e1e; color: #fff');
     }
 }

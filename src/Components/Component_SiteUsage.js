@@ -2,7 +2,7 @@
 import Action_Component from '../Actions/Action_Component.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default function Component_SiteUsage(param) {
     const {
@@ -44,7 +44,7 @@ export default function Component_SiteUsage(param) {
                 padding: ${padding || '10px'};
                 background: white;
                 border-radius: 4px;
-                border: ${border || Setting_App.get('defaultBorder')};
+                border: ${border || App.get('defaultBorder')};
                 display: flex;
                 flex: 1;
             }
@@ -84,7 +84,7 @@ export default function Component_SiteUsage(param) {
             }
 
             #id .dashboard-long-card-chart-title {
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
                 font-size: 1.1em;
                 font-weight: 500;
                 text-align: center;

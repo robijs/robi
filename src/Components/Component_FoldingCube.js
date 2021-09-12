@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /** Components */
 import Action_Component from '../Actions/Action_Component.js'
@@ -38,7 +38,7 @@ export default function Component_FoldingCube(param) {
             /** Label */
             .folding-cube-label {
                 font-weight: 400;
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
             }
 
             /** Folding cube1 */
@@ -68,7 +68,7 @@ export default function Component_FoldingCube(param) {
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: ${Setting_App.get('primaryColor')};
+                background-color: ${App.get('primaryColor')};
                 -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
                 animation: sk-foldCubeAngle 2.4s infinite linear both;
                 -webkit-transform-origin: 100% 100%;

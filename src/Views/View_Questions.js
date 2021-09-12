@@ -8,7 +8,7 @@ import Component_Container from '../Components/Component_Container.js'
 import Component_QuestionTypes from '../Components/Component_QuestionTypes.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 import Component_Card from '../Components/Component_Card.js';
 
 export default async function View_Quesitons() {
@@ -17,7 +17,7 @@ export default async function View_Quesitons() {
 
     /** View Title */
     const viewTitle = Component_Title({
-        title: Setting_App.get('title'),
+        title: App.get('title'),
         subTitle: `Questions`,
         parent,
         date: new Date().toLocaleString('en-US', {
@@ -39,7 +39,7 @@ export default async function View_Quesitons() {
     viewContainer.add();
 
     /** Check local storage for questionTypes */
-    let questionTypes = JSON.parse(localStorage.getItem(`${Setting_App.get('title').split(' ').join('-')}-questionTypes`));
+    let questionTypes = JSON.parse(localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`));
 
     if (!questionTypes) {
         console.log('questionTypes not in local storage. Adding...');
@@ -49,8 +49,8 @@ export default async function View_Quesitons() {
             filter: `Title eq 'QuestionTypes'`
         });
 
-        localStorage.setItem(`${Setting_App.get('title').split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
-        questionTypes = JSON.parse(localStorage.getItem(`${Setting_App.get('title').split(' ').join('-')}-questionTypes`));
+        localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
+        questionTypes = JSON.parse(localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`));
 
         console.log('questionTypes added to local storage.');
     }

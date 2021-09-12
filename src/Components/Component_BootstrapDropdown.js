@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /* Actions */
 import Action_Component from '../Actions/Action_Component.js'

@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /* Global Actions */
 import Component from '../Actions/Action_Component.js'
@@ -27,7 +27,7 @@ export default function Component_DashboardBanner(param) {
                 padding: ${padding || '10px'};
                 background: white;
                 border-radius: 4px;
-                border: ${border || Setting_App.get('defaultBorder')};
+                border: ${border || App.get('defaultBorder')};
                 /* display: flex; */
                 display: flex;
                 justify-content: space-between;
@@ -96,9 +96,9 @@ export default function Component_DashboardBanner(param) {
 
             html += /*html*/ `
                 <div class='dashboard-banner-group' style='background: ${background || 'transparent'}' data-label='${label}' data-action='${action ? 'true' : 'false'}'>
-                    <div class='dashboard-banner-label' style='color: ${color || Setting_App.get('defaultColor')}'>${label}</div>
-                    <div class='dashboard-banner-value' style='color: ${color || Setting_App.get('defaultColor')}'>${value}</div>
-                    <div class='dashboard-banner-description' style='color: ${color || Setting_App.get('defaultColor')}'>${description || ''}</div>
+                    <div class='dashboard-banner-label' style='color: ${color || App.get('defaultColor')}'>${label}</div>
+                    <div class='dashboard-banner-value' style='color: ${color || App.get('defaultColor')}'>${value}</div>
+                    <div class='dashboard-banner-description' style='color: ${color || App.get('defaultColor')}'>${description || ''}</div>
                 </div>
             `;
         });

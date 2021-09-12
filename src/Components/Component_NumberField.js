@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /* Actions */
 import Action_Component from '../Actions/Action_Component.js'
@@ -50,7 +50,7 @@ export default function Component_NumberField(param) {
             #id input:focus {
                 outline: none;
                 border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 1px ${Setting_App.get('primaryColor')};
+                box-shadow: 0px 0px 0px 1px ${App.get('primaryColor')};
             }
         `,
         parent: parent,

@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /* Global Actions */
 import Component from '../Actions/Action_Component.js'
@@ -27,7 +27,7 @@ export default function Component_Toolbar(param) {
                 /* padding: 10px; */
                 margin: ${margin || '15px 0px'};
                 background: white;
-                border:  ${Setting_App.get('defaultBorder')};
+                border:  ${App.get('defaultBorder')};
             }
         `,
         parent: parent,

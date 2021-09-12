@@ -7,7 +7,7 @@ import Action_Store from '../Actions/Action_Store.js'
 import Component_Title from '../Components/Component_Title.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /** View Parts */
 import ViewPart_AccountInfo from '../ViewParts/ViewPart_AccountInfo.js'
@@ -19,7 +19,7 @@ export default async function View_Settings() {
     const parent = Action_Store.get('maincontainer');
 
     const viewTitle = Component_Title({
-        title: Setting_App.get('title'),
+        title: App.get('title'),
         subTitle: `Settings`,
         parent,
         date: new Date().toLocaleString('en-US', {

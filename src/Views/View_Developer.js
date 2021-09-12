@@ -26,7 +26,7 @@ import Component_BootstrapButton from '../Components/Component_BootstrapButton.j
 import Component_UploadButton from '../Components/Component_UploadButton.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /** View Parts */
 import ViewPart_Table from '../ViewParts/ViewPart_Table.js'
@@ -46,7 +46,7 @@ export default async function View_Developer(param) {
     
     /** View Title */
     const viewTitle = Component_Title({
-        title: Setting_App.get('title'),
+        title: App.get('title'),
         subTitle: 'Developer',
         parent,
         date: new Date().toLocaleString('default', {
@@ -77,7 +77,7 @@ export default async function View_Developer(param) {
     const logCard = Component_Card({
         title: 'Logs',
         description: '',
-        titleColor: Setting_App.get('primaryColor'),
+        titleColor: App.get('primaryColor'),
         padding: '20px',
         margin: '20px 0px',
         width: '100%',
@@ -158,7 +158,7 @@ export default async function View_Developer(param) {
     const errorsCard = Component_Card({
         title: 'Errors',
         description: '',
-        titleColor: Setting_App.get('primaryColor'),
+        titleColor: App.get('primaryColor'),
         padding: '20px',
         margin: '20px 0px',
         width: '100%',

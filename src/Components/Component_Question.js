@@ -3,7 +3,7 @@ import Action_Component from '../Actions/Action_Component.js'
 import Action_Store from '../Actions/Action_Store.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default function Component_QuestionCard(param) {
     const {
@@ -86,7 +86,7 @@ export default function Component_QuestionCard(param) {
 
             /** Edit button */
             #id .btn-primaryColor {
-                background: ${Setting_App.get('primaryColor')};
+                background: ${App.get('primaryColor')};
                 color: white;
             }
 

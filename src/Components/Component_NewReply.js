@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /* Actions */
 import Component from '../Actions/Action_Component.js'
@@ -60,9 +60,9 @@ export default function Component_NewReply(param) {
             #id .new-comment:active,
             #id .new-comment:focus{
                 outline: none;
-                border-left: solid 1px ${Setting_App.get('primaryColor')};
-                border-top: solid 1px ${Setting_App.get('primaryColor')};
-                border-bottom: solid 1px ${Setting_App.get('primaryColor')};
+                border-left: solid 1px ${App.get('primaryColor')};
+                border-top: solid 1px ${App.get('primaryColor')};
+                border-bottom: solid 1px ${App.get('primaryColor')};
             }
 
             #id .new-comment-button-container,
@@ -76,9 +76,9 @@ export default function Component_NewReply(param) {
             #id .new-comment:active ~ .new-comment-button-container,
             #id .new-comment:focus ~ .new-comment-button-container {
                 border-radius: 0px 4px 4px 0px;
-                border-right: solid 1px ${Setting_App.get('primaryColor')};
-                border-top: solid 1px ${Setting_App.get('primaryColor')};
-                border-bottom: solid 1px ${Setting_App.get('primaryColor')};
+                border-right: solid 1px ${App.get('primaryColor')};
+                border-top: solid 1px ${App.get('primaryColor')};
+                border-bottom: solid 1px ${App.get('primaryColor')};
             }
 
             /* Button */
@@ -91,7 +91,7 @@ export default function Component_NewReply(param) {
                 text-align: center;
                 border-radius: 4px;
                 color: white;
-                background: ${Setting_App.get('primaryColor')};
+                background: ${App.get('primaryColor')};
             }
 
             #id .new-comment-button .icon {

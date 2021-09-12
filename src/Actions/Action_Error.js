@@ -2,7 +2,7 @@
 import Action_GetRequestDigest from './Action_GetRequestDigest.js'
 import Action_Post from './Action_Post.js'
 
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /**
  * Create SharePoint list item.
@@ -22,7 +22,7 @@ export default async function Action_Error(param) {
         ColumnNumber
     } = param;
 
-    if (Setting_App.get('mode') === 'prod') { 
+    if (App.get('mode') === 'prod') { 
         /** Get new request digest */
     
         /** 
@@ -49,7 +49,7 @@ export default async function Action_Error(param) {
         const postOptions = {
             url: `../../_api/web/lists/GetByTitle('Errors')/items`,
             data: {
-                SessionId: sessionStorage.getItem(`${Setting_App.get('title').split(' ').join('_')}-sessionId`),
+                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
                 Message,
                 Error,
                 Source,
@@ -72,18 +72,18 @@ export default async function Action_Error(param) {
         console.log(`%c Logged error '${Message}'. `, 'background: crimson; color: #fff');
 
         return newItem.d;
-    } else if (Setting_App.get('mode') === 'dev') {
+    } else if (App.get('mode') === 'dev') {
         const options = {
             method: `POST`,
             body: JSON.stringify({
-                SessionId: sessionStorage.getItem(`${Setting_App.get('title').split(' ').join('_')}-sessionId`),
+                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
                 Message,
                 Error,
                 Source,
                 Line,
                 ColumnNumber,
                 Author: {
-                    Title: Setting_App.get('dev').Name
+                    Title: App.get('dev').Name
                 },
                 Created: new Date().toISOString()
             }),

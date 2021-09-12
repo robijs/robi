@@ -3,7 +3,7 @@ import Action_Store from '../Actions/Action_Store.js'
 import Action_Component from '../Actions/Action_Component.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default function Component_FixedToast(param) {
     const {
@@ -65,7 +65,7 @@ export default function Component_FixedToast(param) {
             }
 
             #id.inverse-colors {
-                background: ${Setting_App.get('primaryColor')};
+                background: ${App.get('primaryColor')};
             }
 
             #id.inverse-colors * {

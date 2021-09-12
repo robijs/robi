@@ -5,7 +5,7 @@ import Action_GetSiteUsers from '../Actions/Action_GetSiteUsers.js'
 import Action_Route from '../Actions/Action_Route.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default function Component_NameField(param) {
     const {
@@ -70,7 +70,7 @@ export default function Component_NameField(param) {
                 padding: 5px 10px;
                 background: white;
                 border-radius: 4px;
-                border: ${Setting_App.get('defaultBorder')};
+                border: ${App.get('defaultBorder')};
             }
 
             #id .form-field-name::-webkit-search-cancel-button{
@@ -83,7 +83,7 @@ export default function Component_NameField(param) {
             #id .form-field-name:focus {
                 outline: none;
                 border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 2px ${Setting_App.get('primaryColor')};
+                box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')};
             }
 
             /** Errors */

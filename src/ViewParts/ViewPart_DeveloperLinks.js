@@ -3,7 +3,7 @@ import Component_Card from '../Components/Component_Card.js'
 import Component_Button from '../Components/Component_Button.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default async function View_DeveloperLinks(param) {
     const {
@@ -112,7 +112,7 @@ export default async function View_DeveloperLinks(param) {
         /** Pages */
         const card = Component_Card({
             title,
-            titleColor: Setting_App.get('primaryColor'),
+            titleColor: App.get('primaryColor'),
             width: '100%',
             margin: '20px 0px 0px 0px',
             parent

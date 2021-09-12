@@ -18,7 +18,7 @@ import Component_DataTable from '../Components/Component_DataTable.js'
 import Component_Modal from '../Components/Component_Modal.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /** View Parts */
 import ViewPart_Table from '../ViewParts/ViewPart_Table.js'
@@ -41,7 +41,7 @@ export default async function View_Users(param = {}) {
     const parent = Action_Store.get('maincontainer');
 
     const viewTitle = Component_Title({
-        title: Setting_App.get('title'),
+        title: App.get('title'),
         subTitle: 'Users',
         date: `${new Date().toLocaleString('default', {
             dateStyle: 'full'
@@ -60,7 +60,7 @@ export default async function View_Users(param = {}) {
 
     const card = Component_Card({
         title: '',
-        titleColor: Setting_App.get('primaryColor'),
+        titleColor: App.get('primaryColor'),
         padding: '20px',
         margin: '20px 0px',
         width: '100%',

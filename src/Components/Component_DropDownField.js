@@ -5,7 +5,7 @@ import Component from '../Actions/Action_Component.js'
 import Component_DropDownMenu from './Component_DropDownMenu.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default function Component_DropDownField(param) {
     const {
@@ -92,14 +92,14 @@ export default function Component_DropDownField(param) {
                 margin: 2px 0px 4px 0px;
                 background: white;
                 border-radius: 4px;
-                border: ${Setting_App.get('defaultBorder')};
+                border: ${App.get('defaultBorder')};
             }
 
             #id .form-field-drop-down:active,
             #id .form-field-drop-down:focus {
                 outline: none;
                 border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 2px ${Setting_App.get('primaryColor')};
+                box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')};
             }
 
             /* Validation */

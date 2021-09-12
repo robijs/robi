@@ -2,7 +2,7 @@
 import Action_GetRequestDigest from './Action_GetRequestDigest.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default function Action_GetADUsers(param) {
     const {

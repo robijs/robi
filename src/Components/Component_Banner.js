@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 import Component from '../Actions/Action_Component.js'
 
@@ -21,7 +21,7 @@ export default function Component_Banner(param) {
                 cursor: default;
                 font-size: 1.5em;
                 border-radius: 4px;
-                /* border: ${Setting_App.get('defaultBorder')}; */
+                /* border: ${App.get('defaultBorder')}; */
             }
 
             #id.fixed {
@@ -36,7 +36,7 @@ export default function Component_Banner(param) {
             #id.normal {
                 display: inline-block;
                 background: white;
-                border-left: solid 10px ${Setting_App.get('primaryColor')};
+                border-left: solid 10px ${App.get('primaryColor')};
                 margin: 20px 0px;
                 padding: 10px;
             }

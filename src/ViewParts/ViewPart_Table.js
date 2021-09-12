@@ -7,7 +7,7 @@ import Action_Store from '../Actions/Action_Store.js'
 import Component_DataTable from '../Components/Component_DataTable.js'
 import Component_Modal from '../Components/Component_Modal.js'
 import Component_Heading from '../Components/Component_Heading.js'
-import Setting_App from '../Settings/Setting_App.js';
+import { App } from '../Core/Settings.js'
 
 export default function ViewPart_Table(param) {
     const {
@@ -66,7 +66,7 @@ export default function ViewPart_Table(param) {
     }
     
     /** Item Id */
-    const idProperty = Setting_App.get('mode') === 'prod' ? 'Id' : 'Id';
+    const idProperty = App.get('mode') === 'prod' ? 'Id' : 'Id';
 
     /** typeof fields === 'object' */
     (Array.isArray(fields) ? fields : fields.split(','))

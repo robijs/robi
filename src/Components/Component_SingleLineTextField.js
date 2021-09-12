@@ -2,7 +2,7 @@
 import Action_Component from '../Actions/Action_Component.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default function Component_SingleLineTextField(param) {
     const {
@@ -81,7 +81,7 @@ export default function Component_SingleLineTextField(param) {
                 padding: 5px 10px;
                 border-radius: 4px;
                 background: white;
-                border: ${Setting_App.get('defaultBorder')};
+                border: ${App.get('defaultBorder')};
                 transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
             }
 
@@ -97,7 +97,7 @@ export default function Component_SingleLineTextField(param) {
             #id .form-field-single-line-text.editable:focus {
                 outline: none;
                 border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 2px ${Setting_App.get('primaryColor')};
+                box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')};
             }
 
             /* Optional */

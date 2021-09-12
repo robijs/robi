@@ -6,7 +6,7 @@ import Action_Route from '../Actions/Action_Route.js'
 import Component_Title from '../Components/Component_Title.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default async function View_Home() {
     /** View Parent */
@@ -14,7 +14,7 @@ export default async function View_Home() {
 
     /** View Title */
     const viewTitle = Component_Title({
-        title: Setting_App.get('title'),
+        title: App.get('title'),
         subTitle: `Subtitle (Ex: Application/Abbreviation Full Name)`,
         parent,
         date: new Date().toLocaleString('en-US', {

@@ -3,7 +3,7 @@ import Action_Component from '../Actions/Action_Component.js'
 import Action_Store from '../Actions/Action_Store.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js';
+import { App } from '../Core/Settings.js'
 
 export default function Component_SectionStepper(param) {
     const {
@@ -65,13 +65,13 @@ export default function Component_SectionStepper(param) {
                 flex-direction: column;
                 justify-content: space-between;
                 overflow: overlay;
-                border-right: solid 1px ${Setting_App.get('sidebarBorderColor')};
+                border-right: solid 1px ${App.get('sidebarBorderColor')};
             }
 
             /* Title */
             #id .section-title {
                 font-size: 1em;
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
                 margin-bottom: 15px;
                 padding: .275rem .75rem;
                 cursor: pointer;
@@ -98,8 +98,8 @@ export default function Component_SectionStepper(param) {
                 width: 24px;
                 height: 24px;
                 padding: 6px;
-                background: ${Setting_App.get('primaryColor')};
-                border: solid 1px ${Setting_App.get('primaryColor')};
+                background: ${App.get('primaryColor')};
+                border: solid 1px ${App.get('primaryColor')};
                 color: white;
                 text-align: center;
                 line-height: .6;
@@ -107,7 +107,7 @@ export default function Component_SectionStepper(param) {
 
             #id .section-circle.not-started {
                 background: white;
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
             }
 
             #id .section-circle.started {
@@ -141,7 +141,7 @@ export default function Component_SectionStepper(param) {
 
             /* Bar */
             #id .section-bar {
-                background: ${Setting_App.get('primaryColor')};
+                background: ${App.get('primaryColor')};
                 height: 10px;
                 width: 1px;
                 margin: 5px 0px;
@@ -159,7 +159,7 @@ export default function Component_SectionStepper(param) {
             }
 
             #id .section-name-text.selected {
-                border-bottom: solid 2px ${Setting_App.get('primaryColor')};
+                border-bottom: solid 2px ${App.get('primaryColor')};
             }
 
             /* Legend */

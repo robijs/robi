@@ -1,8 +1,9 @@
-/* Actions */
+/** Actions */
 import Action_Store from './Action_Store.js'
 import Action_GetItemCount from './Action_GetItemCount.js'
-import Action_CreateGetFilter from './Action_CreateGetFilter.js'
-import Setting_App from '../Settings/Setting_App.js';
+
+/** Settings */
+import { App } from '../Core/Settings.js'
 
 export default async function Action_Get(param) {
     const {
@@ -17,7 +18,8 @@ export default async function Action_Get(param) {
         startId,
         api,
         path,
-        action
+        action,
+        mode
     } = param;
 
     /** Add abort signal */
@@ -35,7 +37,7 @@ export default async function Action_Get(param) {
         signal: abortController.signal
     };
 
-    if (Setting_App.get('mode') === 'prod') {
+    if (App.get('mode') === 'prod' || mode === 'prod') {
         const itemCount = await Action_GetItemCount({
             apiPath: path,
             list
@@ -75,7 +77,7 @@ export default async function Action_Get(param) {
         } catch (error) {
             console.log(error);
         }
-    } else if (Setting_App.get('mode') === 'dev') {
+    } else if (App.get('mode') === 'dev' || mode === 'dev') {
         const queryFilterString = [
             formatFilter(filter),
             formatOrder(orderby)
@@ -104,6 +106,8 @@ export default async function Action_Get(param) {
                 return `_sort=${field}&_order=${order}`;
             }
         }
+
+        // console.log(`http://locaslhost:3000/${list}${queryFilterString ? `?${queryFilterString}` : ''}`);
 
         const response = await fetch(`http://localhost:3000/${list}${queryFilterString ? `?${queryFilterString}` : ''}`, options);
         // const response = await fetch(`http://localhost:3000/${list}`, options);

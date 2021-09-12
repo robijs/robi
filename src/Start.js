@@ -1,27 +1,12 @@
-/** Actions */
-import Action_Store from './Actions/Action_Store.js'
-import Action_Log from './Actions/Action_Log.js'
-import Action_Error from './Actions/Action_Error.js'
-import Action_GetCurrentUser from './Actions/Action_GetCurrentUser.js'
-import Action_Route from './Actions/Action_Route.js'
-import Action_AddLinks from './Actions/Action_AddLinks.js'
-import Action_SetSessionStorage from './Actions/Action_SetSessionStorage.js'
-import Action_Data from './Actions/Action_Data.js'
-import Action_GenerateUUID from './Actions/Action_GenerateUUID.js'
-
-/** Components */
+import { Log, LogError, GetCurrentUser, Route, AddLinks, SetSessionStorage, Data, GenerateUUID } from './Core/Actions.js'
+import Store from './Core/Store.js';
 import Component_SvgDefs from './Components/Component_SvgDefs.js'
 import Component_Sidebar from './Components/Component_Sidebar.js'
 import Component_AppContainer from './Components/Component_AppContainer.js'
 import Component_MainContainer from './Components/Component_MainContainer.js'
 import Component_FixedToast from './Components/Component_FixedToast.js'
 import Component_Modal from './Components/Component_Modal.js'
-
-/** Settings */
-import Setting_Routes from './Settings/Setting_Routes.js'
-import Setting_App from './Settings/Setting_App.js'
-
-/** View Parts */
+import { App, Routes } from './Core/Settings.js'
 import ViewPart_ReleaseNotes from './ViewParts/ViewPart_ReleaseNotes.js'
 
 export default function Start(param) {
@@ -30,7 +15,7 @@ export default function Start(param) {
         settings
     } = param;
 
-    Setting_App.set(settings);
+    App.set(settings);
 
     /** Add new string method */
     String.prototype.toTitleCase = function () {
@@ -41,7 +26,7 @@ export default function Start(param) {
             .join(' ');
     }
 
-    if (Setting_App.get('dev').ErrorLogging === 'on') {
+    if (App.get('dev').ErrorLogging === 'on') {
         /** Format error objects for JSON.stringify() to work properly */
         function replaceErrors(key, value) {
             if (value instanceof Error) {
@@ -59,7 +44,7 @@ export default function Start(param) {
 
         /** Log errors to SharePoint list */
         window.onerror = async (message, source, lineno, colno, error) => {
-            Action_Error({
+            LogError({
                 Message: message,
                 Source: source,
                 Line: lineno,
@@ -70,7 +55,7 @@ export default function Start(param) {
 
         /** Log errors from Promises to SharePoint list */
         window.addEventListener("unhandledrejection", event => {
-            Action_Error({
+            LogError({
                 Message: event.reason.message,
                 Source: import.meta.url,
                 Line: null,
@@ -97,17 +82,17 @@ export default function Start(param) {
         } = settings;
 
         /** Add links to head */
-        Action_AddLinks({
+        AddLinks({
             links
         });
 
         /** Set sessions storage */
-        Action_SetSessionStorage({
+        SetSessionStorage({
             sessionStorageData
         });
 
         /** Get list items */
-        const data = await Action_Data(lists);
+        const data = await Data(lists);
 
         if (data) {
             /** Add list items to store */
@@ -116,7 +101,7 @@ export default function Start(param) {
                         list
                     } = param;
 
-                Action_Store.add({
+                Store.add({
                     type: 'list',
                     list,
                     items: data[index]
@@ -134,7 +119,7 @@ export default function Start(param) {
         svgDefs.add();
 
         /** Get AD user and Users list item properties */
-        Action_Store.user( await Action_GetCurrentUser({
+        Store.user( await GetCurrentUser({
             list: usersList,
             fields: usersFields
         }));
@@ -142,7 +127,7 @@ export default function Start(param) {
         /** Add App Container to #app */
         const appContainer = Component_AppContainer();
 
-        Action_Store.add({
+        Store.add({
             name: 'appcontainer',
             component: appContainer
         });
@@ -157,14 +142,14 @@ export default function Start(param) {
         /** Attach Router to browser back/forward event */
         window.addEventListener('popstate', (event) => {
             if (event.state) {
-                Action_Route(event.state.url.split('#')[1], {
-                    scrollTop: Action_Store.viewScrollTop()
+                Route(event.state.url.split('#')[1], {
+                    scrollTop: Store.viewScrollTop()
                 }); 
             }
         });
 
         /** Store routes */
-        Action_Store.setRoutes(routes.concat(Setting_Routes));
+        Store.setRoutes(routes.concat(Routes));
 
         /** Sidebar Component */
         const sidebar = Component_Sidebar({
@@ -174,7 +159,7 @@ export default function Start(param) {
             sidebarDropdown
         });
 
-        Action_Store.add({
+        Store.add({
             name: 'sidebar',
             component: sidebar
         });
@@ -186,7 +171,7 @@ export default function Start(param) {
             parent: appContainer
         });
 
-        Action_Store.add({
+        Store.add({
             name: 'maincontainer',
             component: mainContainer
         });
@@ -202,7 +187,7 @@ export default function Start(param) {
         appContainer.show('flex');
 
         /** Generate Session Id */
-        const sessionId = Action_GenerateUUID();
+        const sessionId = GenerateUUID();
 
         /** Format Title for Sessin/Local Storage keys */
         const storageKeyPrefix = settings.title.split(' ').join('_');
@@ -212,9 +197,9 @@ export default function Start(param) {
 
         /** Log in*/
         try {
-            Action_Log({
+            Log({
                 Title: 'Log in',
-                Message: `${Action_Store.user().Email || 'User'} successfully loaded ${title}`,
+                Message: `${Store.user().Email || 'User'} successfully loaded ${title}`,
                 StackTrace: new Error().stack,
                 Module: import.meta.url
             });
@@ -223,7 +208,7 @@ export default function Start(param) {
         }
 
         /** Run current route on page load */
-        Action_Route(path, {
+        Route(path, {
             log: false
         });
 

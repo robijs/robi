@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /* Global Actions */
 import Component from '../Actions/Action_Component.js'
@@ -31,7 +31,7 @@ export default function Component_DropDownMenu(param) {
                 background: white;
                 margin: 5px 10px;
                 border-radius: 4px;
-                border: ${Setting_App.get('defaultBorder')};
+                border: ${App.get('defaultBorder')};
             }
 
             .form-list-text:focus,
@@ -48,7 +48,7 @@ export default function Component_DropDownMenu(param) {
                 background: white;
                 margin: 5px 0px;
                 border-radius: 4px;
-                border: ${Setting_App.get('defaultBorder')};
+                border: ${App.get('defaultBorder')};
                 z-index: 10;
                 position: absolute;
                 top: 0px;
@@ -63,13 +63,13 @@ export default function Component_DropDownMenu(param) {
             }
 
             .list-option-selected {
-                background: ${Setting_App.get('primaryColor')};
-                color: ${Setting_App.get('secondaryColor')}
+                background: ${App.get('primaryColor')};
+                color: ${App.get('secondaryColor')}
             }
              
             .list-option:hover {
-                background: ${Setting_App.get('primaryColor')};
-                color: ${Setting_App.get('secondaryColor')}
+                background: ${App.get('primaryColor')};
+                color: ${App.get('secondaryColor')}
             }
 
             /** Loading Shimmer */

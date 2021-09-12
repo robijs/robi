@@ -13,7 +13,7 @@ import Component_Alert from '../Components/Component_Alert.js'
 import Model_Questions from '../Models/Model_Questions.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /** View Parts */
 import ViewPart_Question from '../ViewParts/ViewPart_Question.js'
@@ -31,7 +31,7 @@ export default async function View_Quesiton(param) {
     let viewTitle;
 
     /** Check local storage for questionTypes */
-    let questionTypes = localStorage.getItem(`${Setting_App.get('title').split(' ').join('-')}questionTypes`);
+    let questionTypes = localStorage.getItem(`${App.get('title').split(' ').join('-')}questionTypes`);
 
     if (questionTypes) {
         console.log('Found questionTypes in local storage.');
@@ -42,7 +42,7 @@ export default async function View_Quesiton(param) {
 
         /** Set temporary title  */
         viewTitle = Component_Title({
-            title: Setting_App.get('title'),
+            title: App.get('title'),
             breadcrumb: [
                 {
                     label: 'Questions',
@@ -72,11 +72,11 @@ export default async function View_Quesiton(param) {
             filter: `Title eq 'QuestionTypes'`
         });
 
-        localStorage.setItem(`${Setting_App.get('title').split(' ').join('-')}questionTypes`, questionTypesResponse[0].Value);
+        localStorage.setItem(`${App.get('title').split(' ').join('-')}questionTypes`, questionTypesResponse[0].Value);
 
         console.log('questionTypes added to local storage.');
         
-        setTitle(localStorage.getItem(`${Setting_App.get('title').split(' ').join('-')}questionTypes`))
+        setTitle(localStorage.getItem(`${App.get('title').split(' ').join('-')}questionTypes`))
     }
     
     function setTitle(items) {
@@ -93,7 +93,7 @@ export default async function View_Quesiton(param) {
         
         /** Set new title with drop down options */
         viewTitle = Component_Title({
-            title: Setting_App.get('title'),
+            title: App.get('title'),
             breadcrumb: [
                 {
                     label: 'Questions',

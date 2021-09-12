@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default function Action_Download(param) {
     const {
@@ -12,7 +12,7 @@ export default function Action_Download(param) {
 
     // File name
     const today = new Date();
-    downloadLink.download = `${`${fileName || Setting_App.get('title')}_${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`}.csv`;
+    downloadLink.download = `${`${fileName || App.get('title')}_${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`}.csv`;
 
     // We have to create a link to the file
     downloadLink.href = window.URL.createObjectURL(csvFile);

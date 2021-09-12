@@ -13,7 +13,7 @@ import Model_SiteUsage from '../Models/Model_SiteUsage.js'
 import Model_StartAndEndOfWeek from '../Models/Model_StartAndEndOfWeek.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 import Action_SendEmail from '../Actions/Action_SendEmail.js'
 
 export default async function View_SiteUsage(param) {
@@ -24,7 +24,7 @@ export default async function View_SiteUsage(param) {
     /** Dashboard */
     const dashboardCard = Component_Card({
         title: 'Site Usage',
-        titleColor: Setting_App.get('primaryColor'),
+        titleColor: App.get('primaryColor'),
         width: '100%',
         margin: '20px 0px 0px 0px',
         parent
@@ -42,9 +42,11 @@ export default async function View_SiteUsage(param) {
     loadingIndicator.add();
 
     /** Worker */
-    const worker = new Worker('../src/Workers/Worker_SiteUsage.js', {
+    const worker = new Worker(`${App.get('domain')}${App.get('site')}/src/Core/Workers/SiteUsage.js`, {
         type: 'module'
     });
+
+    worker.postMessage('dev');
 
     Action_Store.addWorker(worker);
 
@@ -53,7 +55,7 @@ export default async function View_SiteUsage(param) {
             data
         } = event;
 
-        console.log(data);
+        // console.log(data);
 
         /** Stats 1 */
         const stats_1 = Component_DashboardBanner({
@@ -219,8 +221,8 @@ export default async function View_SiteUsage(param) {
                     return {
                         data: set.data.map(item => item.length),
                         label: set.label,
-                        backgroundColor: index === 0 ? `rgb(${Setting_App.get('primaryColorRGB')}, 0.2)` : 'rgb(67, 203, 255, 0.2)',
-                        borderColor: index === 0 ? `rgb(${Setting_App.get('primaryColorRGB')}, 1)` : 'rgb(67, 203, 255, 1)',
+                        backgroundColor: index === 0 ? `rgb(${App.get('primaryColorRGB')}, 0.2)` : 'rgb(67, 203, 255, 0.2)',
+                        borderColor: index === 0 ? `rgb(${App.get('primaryColorRGB')}, 1)` : 'rgb(67, 203, 255, 1)',
                         // backgroundColor: index === 0 ? 'rgb(147, 112, 219, 0.2)' : 'rgb(67, 203, 255, 0.2)',
                         // borderColor: index === 0 ? 'rgb(147, 112, 219, 1)' : 'rgb(67, 203, 255, 1)',
                         borderWidth: 1

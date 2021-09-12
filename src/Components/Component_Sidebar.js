@@ -1,11 +1,7 @@
-/** Actions */
 import Action_Component from '../Actions/Action_Component.js'
-import Action_Store from '../Actions/Action_Store.js'
+import Store from '../Core/Store.js'
 import Action_Route from '../Actions/Action_Route.js'
-
-/** Settings */
-import Setting_App from '../Settings/Setting_App.js'
-import Setting_Routes from '../Settings/Setting_Routes.js'
+import { App } from '../Core/Settings.js'
 
 export default function Component_Sidebar(param) {
     const {
@@ -18,8 +14,8 @@ export default function Component_Sidebar(param) {
     const component = Action_Component({
         html: /*html*/ `
             <div class='sidebar' data-mode='open'>
-                <!-- <div class='logo' data-path='${Setting_App.get('defaultRoute')}'></div> -->
-                <img src ='${logo}' class='logo' data-path='${Setting_App.get('defaultRoute')}'>
+                <!-- <div class='logo' data-path='${App.get('defaultRoute')}'></div> -->
+                <img src ='${logo}' class='logo' data-path='${App.get('defaultRoute')}'>
                 ${
                     sidebarDropdown ?
                     /*html*/ `
@@ -58,13 +54,13 @@ export default function Component_Sidebar(param) {
                 justify-content: flex-start;
                 align-items: center;
                 height: 100vh;
-                background: ${Setting_App.gradientColor ? `linear-gradient(${Setting_App.gradientColor})` : Setting_App.get('sidebarBackgroundColor')};
-                ${Setting_App.get('sidebarBorderColor') ? `border-right: solid 1px ${Setting_App.get('sidebarBorderColor')}` : ''}
+                background: ${App.gradientColor ? `linear-gradient(${App.gradientColor})` : App.get('sidebarBackgroundColor')};
+                ${App.get('sidebarBorderColor') ? `border-right: solid 1px ${App.get('sidebarBorderColor')}` : ''}
             }
 
             /* Nav Container */
             .nav-container {
-                border-top: solid 1px ${Setting_App.get('sidebarBorderColor')};
+                border-top: solid 1px ${App.get('sidebarBorderColor')};
                 overflow: overlay;
             }
 
@@ -78,7 +74,7 @@ export default function Component_Sidebar(param) {
                 font-size: 1em;
                 font-weight: 400;
                 padding: 4px 10px;
-                color: ${Setting_App.get('secondaryColor')};
+                color: ${App.get('secondaryColor')};
                 border-left: solid 3px transparent;
                 border-right: solid 3px transparent;
             }
@@ -93,13 +89,13 @@ export default function Component_Sidebar(param) {
             }
 
             .sidebar .nav .icon {
-                fill: ${Setting_App.get('sidebarTextColor')};
-                stroke: ${Setting_App.get('sidebarTextColor')};
+                fill: ${App.get('sidebarTextColor')};
+                stroke: ${App.get('sidebarTextColor')};
                 font-size: 20px;
             }
 
             .sidebar .nav .text {
-                color: ${Setting_App.get('sidebarTextColor')};
+                color: ${App.get('sidebarTextColor')};
                 font-size: 14px;
                 font-weight: 500;
                 padding-left: 15px;
@@ -107,8 +103,8 @@ export default function Component_Sidebar(param) {
 
             .sidebar .nav .icon:hover,
             .sidebar .nav-selected .icon {
-                fill: ${Setting_App.get('sidebarTextColor')};
-                stroke: ${Setting_App.get('sidebarTextColor')};
+                fill: ${App.get('sidebarTextColor')};
+                stroke: ${App.get('sidebarTextColor')};
             }
 
             /* Settings */
@@ -131,14 +127,14 @@ export default function Component_Sidebar(param) {
                 font-size: 1em;
                 font-weight: 400;
                 padding: 7.5px 10px;
-                color: ${Setting_App.get('secondaryColor')};
-                border-bottom: solid 1px ${Setting_App.get('sidebarBorderColor')};
+                color: ${App.get('secondaryColor')};
+                border-bottom: solid 1px ${App.get('sidebarBorderColor')};
             }
 
             .sidebar .open-close .icon {
                 cursor: pointer;
-                fill: ${Setting_App.get('sidebarTextColor')};
-                stroke: ${Setting_App.get('sidebarTextColor')};
+                fill: ${App.get('sidebarTextColor')};
+                stroke: ${App.get('sidebarTextColor')};
                 font-size: 1em;
             }
 
@@ -165,7 +161,7 @@ export default function Component_Sidebar(param) {
             }
             
             #id .dropdown-label {
-                color: ${Setting_App.get('sidebarTextColor')};
+                color: ${App.get('sidebarTextColor')};
                 font-size: 1.1em;
                 font-weight: 500;
             }
@@ -285,7 +281,7 @@ export default function Component_Sidebar(param) {
     function closeSidebar(mode, icon) {
         if (mode !== 'closed') {
             /** Add classes */
-            component.find('.logo').src = Setting_App.get('logoSmall');
+            component.find('.logo').src = App.get('logoSmall');
             component.find('.logo').classList.add('closed');
             component.find('.dropdown-container')?.classList.add('closed');
             component.findAll('.text').forEach(item => item.classList.add('closed'));
@@ -305,7 +301,7 @@ export default function Component_Sidebar(param) {
     function openSidebar(mode, icon) {
         if (mode !== 'open') {
             /** Remove Classes */
-            component.find('.logo').src = Setting_App.get('logo');
+            component.find('.logo').src = App.get('logo');
             component.find('.logo').classList.remove('closed');
             // component.find('.dropdown-container').classList.remove('closed');
             component.findAll('.text').forEach(item => item.classList.remove('closed'));
@@ -352,7 +348,7 @@ export default function Component_Sidebar(param) {
     }
 
     function buildNav() {
-        return Action_Store.routes()
+        return Store.routes()
             .filter(route => route.path !== 'Settings' && !route.hide)
             .map(route => {
                 const {
@@ -362,7 +358,7 @@ export default function Component_Sidebar(param) {
                 } = route;
 
                 if (roles) {
-                    if (roles.includes(Action_Store.user().Role)) {
+                    if (roles.includes(Store.user().Role)) {
                         return navTemplate(path, icon);
                     } else {
                         return '';
@@ -377,7 +373,7 @@ export default function Component_Sidebar(param) {
     function navTemplate(routeName, icon) {
         const firstPath = path ? path.split('/')[0] : undefined;
         return /*html*/ `
-            <span class='nav ${(firstPath === routeName || firstPath === undefined && routeName === Setting_App.get('defaultRoute')) ? 'nav-selected' : ''}' data-path='${routeName}'>
+            <span class='nav ${(firstPath === routeName || firstPath === undefined && routeName === App.get('defaultRoute')) ? 'nav-selected' : ''}' data-path='${routeName}'>
                 <svg class='icon'><use href='#icon-${icon}'></use></svg>
                 <span class='text'>${routeName.split(/(?=[A-Z])/).join(' ')}</span>
             </span>

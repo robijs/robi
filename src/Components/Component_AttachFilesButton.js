@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /** Actions */
 import Action_Component from '../Actions/Action_Component.js'
@@ -32,7 +32,7 @@ export default function Component_AttachFilesButton(param) {
                 font-weight: bold;
                 text-align: center;
                 border-radius: 4px;
-                color: ${Setting_App.get('secondaryColor')};
+                color: ${App.get('secondaryColor')};
                 background: mediumseagreen;
                 border: solid 2px seagreen;
             }

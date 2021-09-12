@@ -4,10 +4,9 @@ import Action_Store from './Action_Store.js'
 import Action_Log from './Action_Log.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
-import Setting_Routes from '../Settings/Setting_Routes.js'
+import { App } from '../Core/Settings.js'
 
-export default function Action_Route(path = Setting_App.get('defaultRoute'), options = {}) {
+export default function Action_Route(path = App.get('defaultRoute'), options = {}) {
     const {
         scrollTop
     } = options;
@@ -66,16 +65,16 @@ export default function Action_Route(path = Setting_App.get('defaultRoute'), opt
     const queryParameters = pathAndQuery.length > 1 ? pathAndQuery[1] : '';
 
     /** Attach default query parameters */
-    const defaultQueryParameters = Setting_App.get('defaultQueryParameters');
+    const defaultQueryParameters = App.get('defaultQueryParameters');
 
     if (!queryParameters && defaultQueryParameters) {
-        path += `?${Setting_App.get('defaultQueryParameters')}`;
+        path += `?${App.get('defaultQueryParameters')}`;
     }
 
     /** Set browswer history state */
     Action_History({
         url: `${location.href.split('#')[0]}${(path) ? `#${path}` : ''}`,
-        title: `${Setting_App.get('title')}${(path) ? ` - ${pathAndQuery[0]}` : ''}`
+        title: `${App.get('title')}${(path) ? ` - ${pathAndQuery[0]}` : ''}`
         // title: `${App.title}${(path) ? ` - ${path}` : ''}`
     });
 

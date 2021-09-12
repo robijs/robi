@@ -2,7 +2,7 @@
 import Action_Component from '../Actions/Action_Component.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js';
+import { App } from '../Core/Settings.js'
 
 export default function Component_Modal(param) {
     const {
@@ -45,7 +45,7 @@ export default function Component_Modal(param) {
         style: /*css*/ `
             /** Title */
             #id .modal-title {
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
             }
 
             /** Modal Dialog */
@@ -118,7 +118,7 @@ export default function Component_Modal(param) {
             }
 
             #id .close span {
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
             }
 
             /** Footer */
@@ -182,7 +182,7 @@ export default function Component_Modal(param) {
             /** Scroll listener */
             component.find('.modal-body').addEventListener('scroll', event => {
                 if (event.target.scrollTop > 0) {
-                    event.target.style.borderTop = `solid 1px ${Setting_App.get('sidebarBorderColor')}`;
+                    event.target.style.borderTop = `solid 1px ${App.get('sidebarBorderColor')}`;
                 } else {
                     event.target.style.borderTop = `none`;
                 }

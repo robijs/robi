@@ -6,13 +6,13 @@ import Component_Alert from '../Components/Component_Alert.js';
 import Component_Title from '../Components/Component_Title.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default async function View_403() {
     const parent = Action_Store.get('maincontainer');
 
     const viewTitle = Component_Title({
-        title: Setting_App.get('title'),
+        title: App.get('title'),
         subTitle: `403`,
         parent,
         date: new Date().toLocaleString('default', {

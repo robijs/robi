@@ -2,7 +2,7 @@
 import Action_Component from '../Actions/Action_Component.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default function Component_Card(param) {
     const {
@@ -36,7 +36,7 @@ export default function Component_Card(param) {
                 min-width: ${minWidth || 'initial'};
                 width: ${width || 'initial'};
                 border-radius: 10px;
-                border: ${Setting_App.get('defaultBorder')};
+                border: ${App.get('defaultBorder')};
             }
 
             #id .round-card-title {
@@ -44,10 +44,10 @@ export default function Component_Card(param) {
                 margin: -20px -20px 10px -20px; /** FIXME: will break with passed in padding  */
                 padding: 10px 20px; /** FIXME: will break with passed in padding  */
                 font-weight: ${titleWeight || '700'};
-                background: ${Setting_App.get('secondaryColor')};
+                background: ${App.get('secondaryColor')};
                 border-radius: 10px 10px 0px 0px;
-                color: ${titleColor || Setting_App.get('defaultColor')};
-                border-bottom: ${Setting_App.get('defaultBorder')};
+                color: ${titleColor || App.get('defaultColor')};
+                border-bottom: ${App.get('defaultBorder')};
             }
 
             #id .round-card-description {

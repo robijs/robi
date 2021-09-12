@@ -2,7 +2,7 @@
 import Action_Component from '../Actions/Action_Component.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default function Component_Heading(param) {
     const {
@@ -37,13 +37,13 @@ export default function Component_Heading(param) {
             #id .text {
                 font-size: ${size || '1.25em'};
                 font-weight: ${weight || '500'};
-                color: ${color || Setting_App.get('primaryColor')};
+                color: ${color || App.get('primaryColor')};
                 margin: 0px;
                 text-align: ${align || 'left'};
             }
 
             #id .text * {
-                color: ${color || Setting_App.get('primaryColor')};
+                color: ${color || App.get('primaryColor')};
             }
         `,
         parent: parent,

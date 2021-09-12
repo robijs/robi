@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /* Actions */
 import Component from '../Actions/Action_Component.js'
@@ -53,7 +53,7 @@ export default function Component_NewRequestForm(param) {
                 margin-bottom: 4px;
                 min-height: 200px;
                 border-radius: 4px;
-                border: solid 2px ${Setting_App.get('defaultColor')};
+                border: solid 2px ${App.get('defaultColor')};
             }
 
             .drop-zone-button-container { 
@@ -64,7 +64,7 @@ export default function Component_NewRequestForm(param) {
                 cursor: pointer;
                 display: inline-block;
                 padding: 5px 10px;
-                background: ${Setting_App.get('primaryColor')};
+                background: ${App.get('primaryColor')};
                 color: white;
                 font-weight: bold;
                 text-align: center;
@@ -79,13 +79,13 @@ export default function Component_NewRequestForm(param) {
 
             .drag-over {
                 background: white;
-                border: solid 2px ${Setting_App.get('primaryColor')};
+                border: solid 2px ${App.get('primaryColor')};
             }
 
             .drop-zone-preview-container .icon {
                 font-size: 4.5em;
-                stroke: ${Setting_App.get('defaultColor')};
-                fill: ${Setting_App.get('defaultColor')};
+                stroke: ${App.get('defaultColor')};
+                fill: ${App.get('defaultColor')};
             }
 
             .file-preview {
@@ -110,7 +110,7 @@ export default function Component_NewRequestForm(param) {
                 background: crimson;
                 color: white;
                 border-radius: 4px;
-                border:  ${Setting_App.get('defaultBorder')};
+                border:  ${App.get('defaultBorder')};
             }
 
             .file-icon {

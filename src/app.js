@@ -29,7 +29,7 @@ Start({
         defaultColor: '#24292f',
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
         defaultRoute: 'Home',
-        domain: 'https://carepoint.health.mil',
+        domain: 'http://127.0.0.1:8080',
         site: '',
         usersList: 'Users',
         usersFields: [

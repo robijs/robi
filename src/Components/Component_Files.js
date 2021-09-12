@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /** Actions */
 import Action_Component from '../Actions/Action_Component.js'
@@ -86,8 +86,8 @@ export default function Component_Files(param) {
 
             .file-icon .page {
                 font-size: 2em;
-                stroke: ${Setting_App.get('defaultColor')};
-                fill: ${Setting_App.get('defaultColor')}
+                stroke: ${App.get('defaultColor')};
+                fill: ${App.get('defaultColor')}
             }
 
             .file-icon .type {
@@ -119,9 +119,9 @@ export default function Component_Files(param) {
                 font-weight: bold;
                 text-align: center;
                 border-radius: 4px;
-                color: ${Setting_App.get('secondaryColor')};
-                background: ${Setting_App.get('primaryColor')};
-                border: solid 2px ${Setting_App.get('primaryColor')};
+                color: ${App.get('secondaryColor')};
+                background: ${App.get('primaryColor')};
+                border: solid 2px ${App.get('primaryColor')};
             }
         `,
         parent,
@@ -235,7 +235,7 @@ export default function Component_Files(param) {
                 </td>
                 <!-- <td>${editor}</td> -->
                 <td>
-                    ${remove || authorAccount === Setting_App.user.Account ? /*html*/ `<span class='remove'>&times;</span>` : ''}
+                    ${remove || authorAccount === App.user.Account ? /*html*/ `<span class='remove'>&times;</span>` : ''}
                 </td>
             </tr>
         `;

@@ -2,7 +2,7 @@
 import Action_Store from '../Actions/Action_Store.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /** Components */
 import Component_Card from '../Components/Component_Card.js'
@@ -15,7 +15,7 @@ export default async function View_AccountInfo(param) {
 
     const accountInfoCard = Component_Card({
         title: 'Account',
-        titleColor: Setting_App.get('primaryColor'),
+        titleColor: App.get('primaryColor'),
         width: '100%',
         margin: '20px 0px 0px 0px',
         parent
@@ -29,8 +29,6 @@ export default async function View_AccountInfo(param) {
         Email,
         Role,
     } = Action_Store.user();
-
-    console.log(Action_Store.user());
 
     /** Name */
     const nameField = Component_SingleLineTextField({

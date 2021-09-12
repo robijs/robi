@@ -4,7 +4,7 @@ import Action_CreateList from '../Actions/Action_CreateList.js'
 import Action_CreateItem from '../Actions/Action_CreateItem.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default async function Action_GetCurrentUser(param) {
     const {
@@ -12,7 +12,7 @@ export default async function Action_GetCurrentUser(param) {
         fields
     } = param;
 
-    const url = Setting_App.get('mode') === 'prod' ? `../../_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${Setting_App.get('dev').LoginName}`;
+    const url = App.get('mode') === 'prod' ? `../../_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${App.get('dev').LoginName}`;
     const fetchOptions = {
         headers : { 
             'Content-Type': 'application/json; charset=UTF-8',
@@ -20,7 +20,7 @@ export default async function Action_GetCurrentUser(param) {
         }
     };
 
-    if (Setting_App.get('mode') === 'prod') {
+    if (App.get('mode') === 'prod') {
         const url = `../../_api/web/CurrentUser`;
 
         /** Check if Users list exists */
@@ -72,8 +72,8 @@ export default async function Action_GetCurrentUser(param) {
                     Title,
                     Email,
                     LoginName: LoginName.split('|')[2],
-                    Role: Setting_App.get('userDefaultRole') /** Default, can be changed later */,
-                    Settings: Setting_App.get('userSettings')
+                    Role: App.get('userDefaultRole') /** Default, can be changed later */,
+                    Settings: App.get('userSettings')
                 }
             });
 
@@ -85,7 +85,7 @@ export default async function Action_GetCurrentUser(param) {
             
             return newUser;
         }
-    } else if (Setting_App.get('mode') === 'dev') {
+    } else if (App.get('mode') === 'dev') {
         const currentUser = await fetch(url, fetchOptions);
         const response = await currentUser.json();
 

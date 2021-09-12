@@ -3,7 +3,7 @@ import Action_Component from '../Actions/Action_Component.js'
 import Action_Route from '../Actions/Action_Route.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /**
  * 
@@ -80,7 +80,7 @@ export default function Component_Title(param) {
             #id.title h1 {
                 font-size: 1.6em;
                 font-weight: 500;
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
                 margin-top: 0px;
                 margin-bottom: 10px;
             }
@@ -88,19 +88,19 @@ export default function Component_Title(param) {
             #id.title h2 {
                 font-size: 1.1em;
                 font-weight: 400;
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
                 margin: 0px;
             }
 
             #id.title .title-date {
                 font-size: 13px;
                 font-weight: 400;
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
                 margin: 0px;
             }
 
             #id.title .title-date * {
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
             }
 
             #id.across {
@@ -169,7 +169,7 @@ export default function Component_Title(param) {
 
             #id .no-menu .dropdown-toggle,
             #id .no-menu .nav-pills .show > .nav-link {
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
             }
 
             #id .no-menu .dropdown-toggle::after {

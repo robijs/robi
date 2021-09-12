@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /** Actions */
 import Action_Component from '../Actions/Action_Component.js'
@@ -95,7 +95,7 @@ export default function Component_TasksList(param) {
             }
 
             #id .select-all-title {
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
                 font-weight: 500;
                 padding: 5px 0px;
             }
@@ -148,7 +148,7 @@ export default function Component_TasksList(param) {
 
             #id .add-an-item:focus,
             #id .add-an-item:active {
-                border-bottom: solid 2px ${Setting_App.get('primaryColor')};
+                border-bottom: solid 2px ${App.get('primaryColor')};
             }
 
             /** Placeholder */

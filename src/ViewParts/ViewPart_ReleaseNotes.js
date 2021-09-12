@@ -12,7 +12,7 @@ import Component_FoldingCube from '../Components/Component_FoldingCube.js'
 import Component_ReleaseNotes from '../Components/Component_ReleaseNotes.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default async function View_ReleaseNotes(param) {
     const {
@@ -22,7 +22,7 @@ export default async function View_ReleaseNotes(param) {
 
     const releaseNotesCard = Component_Card({
         title: 'Release Notes',
-        titleColor: Setting_App.get('primaryColor'),
+        titleColor: App.get('primaryColor'),
         width: '100%',
         margin: margin || '20px 0px 0px 0px',
         parent

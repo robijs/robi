@@ -10,13 +10,13 @@ import Component_Container from '../Components/Component_Container.js'
 import Component_RequestAssitanceInfo from '../Components/Component_RequestAssitanceInfo.js';
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default async function View_Help() {
     const parent = Action_Store.get('maincontainer');
 
     const viewTitle = Component_Title({
-        title: Setting_App.get('title'),
+        title: App.get('title'),
         subTitle: `Help`,
         parent,
         date: new Date().toLocaleString('default', {

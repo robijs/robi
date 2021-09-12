@@ -3,7 +3,7 @@
 import Component from '../Actions/Action_Component.js'
 
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 export default function Component_AppContainer() {
     const component = Component({
@@ -16,16 +16,16 @@ export default function Component_AppContainer() {
             }
 
             *, html {
-                font-family: ${Setting_App.fontFamily || ` -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`};
+                font-family: ${App.fontFamily || ` -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`};
                 box-sizing: border-box;
-                color: ${Setting_App.get('primaryColor')};
+                color: ${App.get('primaryColor')};
             }
             
             body {
                 padding: 0px;
                 margin: 0px;
                 box-sizing: border-box;
-                background: ${Setting_App.get('secondaryColor')};
+                background: ${App.get('secondaryColor')};
                 overflow: hidden;
             }
             
@@ -43,7 +43,7 @@ export default function Component_AppContainer() {
             }
             
             ::-webkit-scrollbar-thumb {
-                background: ${Setting_App.get('primaryColor')};
+                background: ${App.get('primaryColor')};
                 width: 8px;
                 height: 8px;
                 border: 3px solid transparent;
@@ -77,8 +77,8 @@ export default function Component_AppContainer() {
                 width: 1em;
                 height: 1em;
                 stroke-width: 0;
-                stroke: ${Setting_App.get('secondaryColor')};
-                fill: ${Setting_App.get('secondaryColor')};
+                stroke: ${App.get('secondaryColor')};
+                fill: ${App.get('secondaryColor')};
             }
 
             /** Wait */

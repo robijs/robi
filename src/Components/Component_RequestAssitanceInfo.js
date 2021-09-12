@@ -2,7 +2,7 @@
 import Action_Component from "../Actions/Action_Component.js"
 
 /** Settings */
-import Setting_App from "../Settings/Setting_App.js";
+import { App } from "../Core/Settings.js"
 
 export default function Component_RequestAssitanceInfo(param) {
     const {

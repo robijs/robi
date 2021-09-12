@@ -1,5 +1,5 @@
 /** Settings */
-import Setting_App from '../Settings/Setting_App.js'
+import { App } from '../Core/Settings.js'
 
 /* Actions */
 import Component from '../Actions/Action_Component.js'
@@ -57,7 +57,7 @@ export default function Component_Comments(param) {
                 width: ${width || '100%'};
                 max-height: 80vw;
                 padding-bottom: 20px;
-                /* border-bottom: solid 2px ${Setting_App.get('primaryColor')}; */
+                /* border-bottom: solid 2px ${App.get('primaryColor')}; */
             }
 
             .comments-border {
@@ -71,7 +71,7 @@ export default function Component_Comments(param) {
                 height: 40px;
                 border-radius: 50%;
                 margin: 5px 5px 5px 0px;
-                background: ${Setting_App.get('primaryColor')};
+                background: ${App.get('primaryColor')};
                 display: grid;
                 place-content: center;
             }
@@ -101,7 +101,7 @@ export default function Component_Comments(param) {
                 height: 2px;
                 flex: 1;
                 margin-top: 7px;
-                background: ${Setting_App.get('primaryColor')};
+                background: ${App.get('primaryColor')};
             }
 
             /* New Comment */
@@ -127,9 +127,9 @@ export default function Component_Comments(param) {
             #id .new-comment:active,
             #id .new-comment:focus{
                 outline: none;
-                border-left: solid 1px ${Setting_App.get('primaryColor')};
-                border-top: solid 1px ${Setting_App.get('primaryColor')};
-                border-bottom: solid 1px ${Setting_App.get('primaryColor')};
+                border-left: solid 1px ${App.get('primaryColor')};
+                border-top: solid 1px ${App.get('primaryColor')};
+                border-bottom: solid 1px ${App.get('primaryColor')};
             }
 
             #id .new-comment-button-container,
@@ -143,9 +143,9 @@ export default function Component_Comments(param) {
             #id .new-comment:active ~ .new-comment-button-container,
             #id .new-comment:focus ~ .new-comment-button-container {
                 border-radius: 0px 4px 4px 0px;
-                border-right: solid 1px ${Setting_App.get('primaryColor')};
-                border-top: solid 1px ${Setting_App.get('primaryColor')};
-                border-bottom: solid 1px ${Setting_App.get('primaryColor')};
+                border-right: solid 1px ${App.get('primaryColor')};
+                border-top: solid 1px ${App.get('primaryColor')};
+                border-bottom: solid 1px ${App.get('primaryColor')};
             }
 
             /* Button */
@@ -158,7 +158,7 @@ export default function Component_Comments(param) {
                 text-align: center;
                 border-radius: 4px;
                 color: white;
-                background: ${Setting_App.get('primaryColor')};
+                background: ${App.get('primaryColor')};
             }
 
             #id .new-comment-button .icon {
@@ -184,7 +184,7 @@ export default function Component_Comments(param) {
                 margin: 10px 0px;
                 padding: 7.5px 15px;
                 border-radius: 4px;
-                background: rgba(${Setting_App.get('primaryColorRGB')}, .1);
+                background: rgba(${App.get('primaryColorRGB')}, .1);
                 border: solid 1px rgba(0, 0, 0, .05);
                 max-width: 70%;
             }
@@ -212,7 +212,7 @@ export default function Component_Comments(param) {
             }
 
             #id .comment-container.mine .comment {
-                background: rgba(${Setting_App.get('primaryColorRGB')}, .8);
+                background: rgba(${App.get('primaryColorRGB')}, .8);
                 border: solid 1px transparent;
             }
 
