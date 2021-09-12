@@ -1,10 +1,8 @@
 ﻿/* Actions */
-import GetRequestDigest from './Action_GetRequestDigest.js'
+import Action_GetRequestDigest from './Action_GetRequestDigest.js'
 import Action_Post from './Action_Post.js'
-import Action_Store from './Action_Store.js'
 
 import Setting_App from '../Settings/Setting_App.js'
-import Setting_Dev from '../Settings/Setting_Dev.js'
 
 /**
  * Create SharePoint list item.
@@ -35,7 +33,7 @@ export default async function Action_Error(param) {
          * @to Wilfredo Pacheo, John Westhuis
          * Catching the request digest promise was a great idea. Jealous I didn't think of it >_<;
          */
-        const requestDigest = await GetRequestDigest().catch(e => {
+        const requestDigest = await Action_GetRequestDigest().catch(e => {
             alert('Your session has expired, your page will now reload.')
             location.reload()
         });
@@ -85,7 +83,7 @@ export default async function Action_Error(param) {
                 Line,
                 ColumnNumber,
                 Author: {
-                    Title: Setting_Dev.Developer
+                    Title: Setting_App.get('dev').Name
                 },
                 Created: new Date().toISOString()
             }),

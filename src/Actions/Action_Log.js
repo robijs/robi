@@ -78,7 +78,7 @@ export default async function Action_Log(param) {
                 StackTrace: JSON.stringify(StackTrace.replace('Error\n    at ', '')),
                 UserAgent: navigator.userAgent,
                 Author: {
-                    Title: Setting_Dev.Developer
+                    Title: Setting_App.get('dev').Name
                 },
                 Created: new Date().toISOString(),
                 Module

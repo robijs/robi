@@ -18,7 +18,6 @@ import Component_FixedToast from './Components/Component_FixedToast.js'
 import Component_Modal from './Components/Component_Modal.js'
 
 /** Settings */
-import Setting_Dev from './Settings/Setting_Dev.js'
 import Setting_Routes from './Settings/Setting_Routes.js'
 import Setting_App from './Settings/Setting_App.js'
 
@@ -44,7 +43,7 @@ export default function Start(param) {
             .join(' ');
     }
 
-    if (Setting_Dev.ErrorLogging === 'on') {
+    if (Setting_App.get('dev').ErrorLogging === 'on') {
         /** Format error objects for JSON.stringify() to work properly */
         function replaceErrors(key, value) {
             if (value instanceof Error) {

@@ -1,5 +1,3 @@
-
-
 /** Actions */
 import Action_Get from '../Actions/Action_Get.js'
 import Action_CreateList from '../Actions/Action_CreateList.js'
@@ -7,7 +5,6 @@ import Action_CreateItem from '../Actions/Action_CreateItem.js'
 
 /** Settings */
 import Setting_App from '../Settings/Setting_App.js'
-import Setting_Dev from '../Settings/Setting_Dev.js';
 
 export default async function Action_GetCurrentUser(param) {
     const {
@@ -15,7 +12,7 @@ export default async function Action_GetCurrentUser(param) {
         fields
     } = param;
 
-    const url = Setting_App.get('mode') === 'prod' ? `../../_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${Setting_Dev.LoginName}`;
+    const url = Setting_App.get('mode') === 'prod' ? `../../_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${Setting_App.get('dev').LoginName}`;
     const fetchOptions = {
         headers : { 
             'Content-Type': 'application/json; charset=UTF-8',

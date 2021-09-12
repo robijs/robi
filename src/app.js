@@ -12,6 +12,11 @@ Start({
     ],
     settings: {
         mode: 'dev',
+        dev: {
+            LoginName: '0987654321@mil',
+            Name: 'First Last',
+            ErrorLogging: 'on'
+        },
         title: 'App',
         logo: '../src/Images/dha-logo-no-label-90w.png',
         logoSmall: '../src/Images/dha-logo-no-label-40w.png',
