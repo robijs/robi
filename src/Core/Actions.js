@@ -1740,7 +1740,8 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
     const route = Store.routes().find(item => item.path === pathParts[0]);
 
     if (!route) {
-        // Route('404');
+        /** TODO: Reset history state? */
+        Route('404');
         
         return;
     }

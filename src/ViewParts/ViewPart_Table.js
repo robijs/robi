@@ -1,10 +1,8 @@
-
-
 /** Actions */
 import Action_Store from '../Actions/Action_Store.js'
 
 /** Components */
-import Component_DataTable from '../Components/Component_DataTable.js'
+import { DataTable } from '../Core/Components.js'
 import Component_Modal from '../Components/Component_Modal.js'
 import Component_Heading from '../Components/Component_Heading.js'
 import { App } from '../Core/Settings.js'
@@ -263,7 +261,7 @@ export default function ViewPart_Table(param) {
     let selectedForm;
 
     /** Table */
-    const table = Component_DataTable({
+    const table = DataTable({
         headers,
         checkboxes: checkboxes !== false ? true : false,
         striped: striped || false,

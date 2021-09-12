@@ -6337,7 +6337,7 @@ export function QuestionsToolbar(param) {
  * @param {*} param 
  * @returns 
  */
-export function QPPQuestions(param) {
+export function QuestionTypes(param) {
     const {
         parent,
         position

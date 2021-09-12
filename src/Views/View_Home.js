@@ -2,7 +2,7 @@
 import Store from '../Core/Store.js'
 
 /** Components */
-import Component_Title from '../Components/Component_Title.js'
+import { Title } from '../Core/Components.js'
 
 /** Settings */
 import { App } from '../Core/Settings.js'
@@ -12,7 +12,7 @@ export default async function View_Home() {
     const parent = Store.get('maincontainer');
 
     /** View Title */
-    const viewTitle = Component_Title({
+    const viewTitle = Title({
         title: App.get('title'),
         subTitle: `Subtitle (Ex: Application/Abbreviation Full Name)`,
         parent,

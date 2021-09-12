@@ -1,14 +1,15 @@
-/** Views */
-import View_403 from '../Views/View_403.js'
-import View_404 from '../Views/View_404.js'
-import View_Home from '../Views/View_Home.js'
-import View_Questions from '../Views/View_Questions.js'
-import View_QuestionsBoard from '../Views/View_QuestionsBoard.js'
-import View_Question from '../Views/View_Question.js'
-import View_Users from '../Views/View_Users.js'
-import View_Developer from '../Views/View_Developer.js'
-import View_Help from '../Views/View_Help.js'
-import View_Settings from '../Views/View_Settings.js'
+import { 
+    Home,
+    Help,
+    Missing,
+    Unauthorized,
+    Users,
+    Settings,
+    Developer,
+    Questions,
+    QuestionsBoard,
+    Question 
+} from './Views.js'
 
 let settings = {};
 
@@ -29,7 +30,7 @@ const Routes = [
         path: 'Home',
         hide: true,
         go() {
-            View_Home();
+            Home();
         }  
     },
     {
@@ -41,13 +42,13 @@ const Routes = [
             } = param;
 
             if (pathParts.length === 1) {
-                View_Questions();
+                Questions();
             } else if (pathParts.length === 2) {
-                View_QuestionsBoard({
+                QuestionsBoard({
                     path: pathParts[1]
                 });
             } else if (pathParts.length === 3) {
-                View_Question({
+                Question({
                     path: pathParts[1],
                     itemId: parseInt(pathParts[2])
                 });
@@ -67,9 +68,9 @@ const Routes = [
             } = param;
 
             if (pathParts.length === 1) {
-                View_Users();
+                Users();
             } else if (pathParts.length === 2) {
-                View_Users({
+                Users({
                     itemId: parseInt(pathParts[1])
                 });
             }
@@ -82,35 +83,35 @@ const Routes = [
         ],
         icon: 'code-slash',
         go(param) {
-            View_Developer(param);
+            Developer(param);
         }
     },
     {
         path: 'Help',
         icon: 'info-circle',
         go() {
-            View_Help();
+            Help();
         }
     },
     {
         path: 'Settings',
         icon: 'bs-gear',
         go() {
-            View_Settings();
+            Settings();
         }
     },
     {
         path: '403',
         hide: true,
         go() {
-            View_403();
+            Unauthorized();
         }
     },
     {
         path: '404',
         hide: true,
         go() {
-            View_404();
+            Missing();
         }
     },
     /** TEST */
