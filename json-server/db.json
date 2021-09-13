@@ -7359,6 +7359,19 @@
       "Created": "2021-09-13T00:19:12.581Z",
       "Module": "http://127.0.0.1:8080/src/Core/Core.js",
       "Id": 563
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "d3371430-e986-4284-9488-15e76d74367e",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:206:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:20:19.168Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 564
     }
   ],
   "Errors": [
