@@ -4349,6 +4349,7 @@ export function MultiLineTextField(param) {
         width,
         fieldMargin,
         fontWeight,
+        fontSize,
         padding,
         onKeydown,
         onFocusout
@@ -4393,7 +4394,7 @@ export function MultiLineTextField(param) {
             }
 
             #id .form-field-multi-line-text.editable {
-                min-height: ${minHeight || `300px`};
+                min-height: ${minHeight || `200px`};
                 width: ${width || 'unset'};
                 background: white;
                 border-radius: 4px;

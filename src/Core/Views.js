@@ -18,18 +18,20 @@ import { App } from '../Core/Settings.js'
 import Store from '../Core/Store.js'
 
 /** View Parts */
-import ViewPart_Table from '../ViewParts/ViewPart_Table.js'
-import ViewPart_EditUser from '../ViewParts/ViewPart_EditUser.js'
-import ViewPart_NewUser from '../ViewParts/ViewPart_NewUser.js'
-import ViewPart_AccountInfo from '../ViewParts/ViewPart_AccountInfo.js'
-import ViewPart_DeveloperLinks from '../ViewParts/ViewPart_DeveloperLinks.js'
-import ViewPart_ReleaseNotes from '../ViewParts/ViewPart_ReleaseNotes.js'
-import ViewPart_SiteUsage from '../ViewParts/ViewPart_SiteUsage.js'
-import ViewPart_ErrorForm from '../ViewParts/ViewPart_ErrorForm.js'
-import ViewPart_LogForm from '../ViewParts/ViewPart_LogForm.js'
-import ViewPart_Question from '../ViewParts/ViewPart_Question.js'
-import ViewPart_QuestionCards from '../ViewParts/ViewPart_QuestionCards.js'
-import ViewPart_NewQuestion from '../ViewParts/ViewPart_NewQuestion.js'
+import {
+    Table,
+    EditUser,
+    NewUser,
+    AccountInfo,
+    DeveloperLinks,
+    ReleaseNotes,
+    SiteUsage,
+    ErrorForm,
+    LogForm,
+    Question as VP_Question,
+    QuestionCards,
+    NewQuestion
+} from '../Core/ViewParts.js'
 
 /** Models */
 import Model_Questions from '../Models/Model_Questions.js'
@@ -221,7 +223,7 @@ export async function Users(param = {}) {
     
     loadingIndicator.add();
     
-    const usersTable = ViewPart_Table({
+    const usersTable = Table({
         heading: '',
         fields: [
             {
@@ -251,8 +253,8 @@ export async function Users(param = {}) {
         checkboxes: true,
         addButton: true,
         addButtonValue: 'Add user',
-        editForm: ViewPart_EditUser,
-        newForm: ViewPart_NewUser,
+        editForm: EditUser,
+        newForm: NewUser,
         parent: container
     });
 
@@ -327,7 +329,7 @@ export async function Users(param = {}) {
     //                 const userModal = Modal({
     //                     title: `New User`,
     //                     async addContent(modalBody) {
-    //                         userForm = await ViewPart_NewUser({
+    //                         userForm = await NewUser({
     //                             parent: modalBody
     //                         });
         
@@ -519,7 +521,7 @@ export async function Users(param = {}) {
     //         const eventModal = Modal({
     //             title,
     //             async addContent(modal) {
-    //                 userForm = await ViewPart_EditUser({
+    //                 userForm = await EditUser({
     //                     user: item,
     //                     parent: modal
     //                 });
@@ -714,24 +716,24 @@ export async function Settings() {
 
     viewTitle.add();
 
-    ViewPart_AccountInfo({
+    AccountInfo({
         parent
     });
 
     /** Authorize */
     if (Store.user().Role === 'Developer') {
-        ViewPart_DeveloperLinks({
+        DeveloperLinks({
             parent
         });
     }
 
-    ViewPart_ReleaseNotes({
+    ReleaseNotes({
         parent
     });
 
     /** Authorize */
     if (Store.user().Role === 'Developer') {
-        ViewPart_SiteUsage({
+        SiteUsage({
             parent
         });
     }
@@ -824,7 +826,7 @@ export async function Developer(param) {
 
     console.log(log);
 
-    const logTable = ViewPart_Table({
+    const logTable = Table({
         fields: [
             {
                 internalFieldName: 'Id',
@@ -856,7 +858,7 @@ export async function Developer(param) {
         formTitleField: 'Id',
         order: [[ 0, 'desc' ]],
         items: log,
-        editForm: ViewPart_LogForm,
+        editForm: LogForm,
         editFormTitle: 'Log',
         parent: logContainer
     });
@@ -901,7 +903,7 @@ export async function Developer(param) {
         top: '25'
     });
 
-    const errorsTable = ViewPart_Table({
+    const errorsTable = Table({
         fields: [
             {
                 internalFieldName: 'Id',
@@ -927,7 +929,7 @@ export async function Developer(param) {
         formTitleField: 'Id',
         order: [[ 0, 'desc' ]],
         items: errors,
-        editForm: ViewPart_ErrorForm,
+        editForm: ErrorForm,
         editFormTitle: 'Error',
         parent: errorsContainer
     });
@@ -1343,7 +1345,7 @@ export async function QuestionsBoard(param) {
             }
 
             /** Add new list of cards */
-            questionCards = ViewPart_QuestionCards(param);
+            questionCards = QuestionCards(param);
         },
         onSearch(query) {
             console.log('query: ', query);
@@ -1383,7 +1385,7 @@ export async function QuestionsBoard(param) {
             });
 
             /** Add new list of cards */
-            questionCards = ViewPart_QuestionCards({
+            questionCards = QuestionCards({
                 path,
                 questions: filteredQuestions,
                 parent: questionsContainer
@@ -1393,7 +1395,7 @@ export async function QuestionsBoard(param) {
             console.log(event);
 
             /** Add new list of cards */
-            questionCards = ViewPart_QuestionCards({
+            questionCards = QuestionCards({
                 path,
                 questions,
                 parent: questionsContainer
@@ -1405,7 +1407,7 @@ export async function QuestionsBoard(param) {
                 showFooter: true,
                 background: App.get('secondaryColor'),
                 addContent(modalBody) {
-                    newQuestionForm = ViewPart_NewQuestion({
+                    newQuestionForm = NewQuestion({
                         parent: modalBody,
                         modal
                     });
@@ -1527,7 +1529,7 @@ export async function QuestionsBoard(param) {
     }
 
     /** Add all question cards to DOM */
-    let questionCards = ViewPart_QuestionCards({
+    let questionCards = QuestionCards({
         path,
         questions,
         parent: questionsContainer
@@ -1723,7 +1725,7 @@ export async function Question(param) {
     });
 
     /** Question */
-    ViewPart_Question({
+    VP_Question({
         question,
         parent: viewContainer
     });

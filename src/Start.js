@@ -2,8 +2,7 @@ import { Log, LogError, GetCurrentUser, Route, AddLinks, SetSessionStorage, Data
 import { SvgDefs, Sidebar, AppContainer, MainContainer, FixedToast, Modal } from './Core/Components.js'
 import { App, Routes } from './Core/Settings.js'
 import Store from './Core/Store.js';
-
-import ViewPart_ReleaseNotes from './ViewParts/ViewPart_ReleaseNotes.js'
+import { ReleaseNotes } from './Core/ViewParts.js'
 
 export default function Start(param) {
     const {
@@ -274,7 +273,7 @@ export default function Start(param) {
                         background: settings.secondaryColor,
                         centered: true,
                         addContent(modalBody) {
-                            ViewPart_ReleaseNotes({
+                            ReleaseNotes({
                                 margin: '0px',
                                 parent: modalBody,
                             });

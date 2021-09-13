@@ -6657,6 +6657,708 @@
       "Created": "2021-09-12T23:49:11.892Z",
       "Module": "http://127.0.0.1:8080/src/Core/Core.js",
       "Id": 509
+    },
+    {
+      "Title": "Route",
+      "SessionId": "56ecf73d-c195-418b-a8c4-89d537deb686",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1757:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:413:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:50:51.243Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 510
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "fbeb419e-665e-44b8-8d58-201df756bd58",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:54:24.344Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 511
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "72c9f528-3056-49db-8e08-716860eb8744",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:54:25.987Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 512
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "0f260a84-259a-4609-b194-8e271e2b8e86",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:54:33.228Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 513
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "3557f8c7-7217-4678-8413-ac311acdc517",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:54:35.458Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 514
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "a6e916e9-9504-4af2-a40a-73ec04304682",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:54:53.600Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 515
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "fe8c9a29-62dc-4c69-9b9e-08f5d0dbf2d7",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:55:24.474Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 516
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "825a0a33-f926-4141-b705-6e97b682b1f8",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:55:26.583Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 517
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "cffce412-5ff0-4f14-a038-ca0022aa2595",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:55:34.859Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 518
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "3bddc3da-56e7-44bd-8073-769fecf49293",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:55:54.293Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 519
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "6fa4f491-cfa2-43d3-b81b-59e21b358fcf",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:56:12.749Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 520
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "4439f64b-8606-4da5-956a-844430ea4bb7",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:56:28.365Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 521
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "e3bf6d95-6c3d-4023-bbb3-db98e0dbfc32",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:56:29.298Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 522
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "0b3149d2-0670-4c30-a6b5-1c99dff50731",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:56:43.958Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 523
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "b2c8876e-37e9-413a-978f-c3ca35b7fc4b",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:57:22.039Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 524
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "57d645b7-91fc-4307-9c56-25c81f7fbd22",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:57:23.358Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 525
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "b43b9283-4930-4bdc-8ebe-876e4b3da604",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:57:27.468Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 526
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "0bd774a9-2eec-4e2e-9282-ad3afc2bf2fc",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:57:59.083Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 527
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "bd4f0474-f4c6-4139-94af-df467bd906ac",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-12T23:59:16.290Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 528
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "7ea6339b-4357-4b31-98f0-481aa4fe0536",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:00:05.901Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 529
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "017e685f-ea88-455f-aea3-ec7133145654",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:00:59.613Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 530
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "ea2577b6-5eae-4c40-b28b-2ae5fe146562",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:01:12.278Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 531
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "85699695-ac84-4f98-84b4-f65e9ea5d373",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:01:27.775Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 532
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "edae615d-bafb-4cde-8827-574cce753875",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:01:45.554Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 533
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "b8726bc9-642b-46bd-a802-c335a816ab3e",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:01:57.859Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 534
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "e6806858-8f57-4fea-beed-b62f56af4cee",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:02:10.615Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 535
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "3ee22464-6965-47cf-8857-2de7c3079d21",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:03:20.081Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 536
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "cb994d08-082b-412d-af7d-3b5d40352a61",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:04:14.283Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 537
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "aa73e1e9-bd44-4ee5-a8ab-0e86b43c2481",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:04:36.159Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 538
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "0cee642a-d236-4a68-8833-734d91d7f093",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:04:53.407Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 539
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "d6266eeb-7242-43fc-9904-9151131ba269",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:05:08.811Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 540
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "04e1dba1-df5f-4bb7-82ba-d2f3a1299a17",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:05:27.823Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 541
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "b0747f09-9098-4a39-9d6a-6012ae08f926",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:05:38.176Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 542
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "3ae174b6-44d5-4a09-a360-3894409f6390",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:06:19.670Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 543
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "0475d13c-e134-4fdf-8d68-f46301c59aa6",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:06:58.951Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 544
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "7ec28a49-a429-41b0-80a6-4771622a9377",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:08:16.930Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 545
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "fb7d54fa-f626-46d4-936a-cc26112a72c1",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:12:55.724Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 546
+    },
+    {
+      "Title": "Route",
+      "SessionId": "fb7d54fa-f626-46d4-936a-cc26112a72c1",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1757:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:413:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:12:59.281Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 547
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "cf842a9d-9bb1-4b5a-be87-b7574f8de1f8",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions/General\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:13:06.524Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 548
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "ee8cb932-41cc-4a0b-b3e9-c271739a7482",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions/General\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:13:34.949Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 549
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "d35842ed-bb3d-4fdc-b3a2-68ad938dfa43",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions/General\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:14:05.563Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 550
+    },
+    {
+      "Title": "Route",
+      "SessionId": "d35842ed-bb3d-4fdc-b3a2-68ad938dfa43",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1757:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:413:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:14:48.707Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 551
+    },
+    {
+      "Title": "Route",
+      "SessionId": "d35842ed-bb3d-4fdc-b3a2-68ad938dfa43",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1757:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:413:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:14:50.247Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 552
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "18aa3e25-8771-490d-abc2-c44862f1b559",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:14:52.339Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 553
+    },
+    {
+      "Title": "Route",
+      "SessionId": "18aa3e25-8771-490d-abc2-c44862f1b559",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1757:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:413:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:14:52.828Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 554
+    },
+    {
+      "Title": "Route",
+      "SessionId": "18aa3e25-8771-490d-abc2-c44862f1b559",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Help\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Help\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1757:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:413:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:14:57.233Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 555
+    },
+    {
+      "Title": "Route",
+      "SessionId": "18aa3e25-8771-490d-abc2-c44862f1b559",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1757:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:413:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:14:57.964Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 556
+    },
+    {
+      "Title": "Route",
+      "SessionId": "18aa3e25-8771-490d-abc2-c44862f1b559",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1757:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:413:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:14:58.550Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 557
+    },
+    {
+      "Title": "Route",
+      "SessionId": "18aa3e25-8771-490d-abc2-c44862f1b559",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1757:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:413:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:14:59.305Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 558
+    },
+    {
+      "Title": "Route",
+      "SessionId": "18aa3e25-8771-490d-abc2-c44862f1b559",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1757:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:413:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:15:00.512Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 559
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "533f4729-0e74-4b36-b9eb-eb72bd091739",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:15:51.999Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 560
+    },
+    {
+      "Title": "Route",
+      "SessionId": "533f4729-0e74-4b36-b9eb-eb72bd091739",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1757:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Components/Component_Sidebar.js:241:21)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:15:55.880Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 561
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "93696fb5-cad5-48d7-bc4e-2354d6c1465e",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:204:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:17:42.450Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 562
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "1da77d30-ba16-4d4f-b511-38fee7edf5cd",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Core.js:206:29)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:19:12.581Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Id": 563
     }
   ],
   "Errors": [
@@ -7244,6 +7946,45 @@
       },
       "Created": "2021-09-12T23:29:59.895Z",
       "Id": 45
+    },
+    {
+      "SessionId": "cf842a9d-9bb1-4b5a-be87-b7574f8de1f8",
+      "Message": "Uncaught ReferenceError: fontSize is not defined",
+      "Error": "{\"stack\":\"ReferenceError: fontSize is not defined\\n    at MultiLineTextField (http://127.0.0.1:8080/src/Core/Components.js:4389:30)\\n    at NewQuestion (http://127.0.0.1:8080/src/Core/ViewParts.js:1176:23)\\n    at addContent (http://127.0.0.1:8080/src/Core/Views.js:1410:39)\\n    at onAdd (http://127.0.0.1:8080/src/Core/Components.js:4248:17)\\n    at Object.add (http://127.0.0.1:8080/src/Core/Actions.js:441:17)\\n    at HTMLButtonElement.onAsk (http://127.0.0.1:8080/src/Core/Views.js:1486:19)\",\"message\":\"fontSize is not defined\"}",
+      "Source": "http://127.0.0.1:8080/src/Core/Components.js",
+      "Line": 4389,
+      "ColumnNumber": 30,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:13:09.873Z",
+      "Id": 46
+    },
+    {
+      "SessionId": "d35842ed-bb3d-4fdc-b3a2-68ad938dfa43",
+      "Message": "Cannot read properties of undefined (reading 'd')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'd')\n    at GetRequestDigest (http://127.0.0.1:8080/src/Core/Actions.js:1484:29)\n    at async CreateItem (http://127.0.0.1:8080/src/Core/Actions.js:562:27)\n    at async Object.onClick (http://127.0.0.1:8080/src/Core/Views.js:1444:49)",
+      "Source": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Line": null,
+      "ColumnNumber": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:14:14.207Z",
+      "Id": 47
+    },
+    {
+      "SessionId": "18aa3e25-8771-490d-abc2-c44862f1b559",
+      "Message": "NameField_2 is not defined",
+      "Error": "ReferenceError: NameField_2 is not defined\n    at NewUser (http://127.0.0.1:8080/src/Core/ViewParts.js:1311:25)\n    at addContent (http://127.0.0.1:8080/src/Core/ViewParts.js:2270:40)\n    at onAdd (http://127.0.0.1:8080/src/Core/Components.js:4248:17)\n    at Object.add (http://127.0.0.1:8080/src/Core/Actions.js:441:17)\n    at D.action (http://127.0.0.1:8080/src/Core/ViewParts.js:2337:27)\n    at g (http://127.0.0.1:8080/src/Libraries/DataTables/datatables.min.js:255:254)\n    at HTMLButtonElement.<anonymous> (http://127.0.0.1:8080/src/Libraries/DataTables/datatables.min.js:256:111)\n    at HTMLButtonElement.dispatch (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:5237:27)\n    at HTMLButtonElement.elemData.handle (http://127.0.0.1:8080/src/Libraries/jQuery/jquery-3.4.1.js:5044:28)",
+      "Source": "http://127.0.0.1:8080/src/Core/Core.js",
+      "Line": null,
+      "ColumnNumber": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:15:02.956Z",
+      "Id": 48
     }
   ],
   "Comments": []

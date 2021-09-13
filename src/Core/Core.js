@@ -1,13 +1,15 @@
 import { Log, LogError, GetCurrentUser, Route, AddLinks, SetSessionStorage, Data, GenerateUUID } from './Actions.js'
 import { App, Routes } from './Settings.js'
 import Store from './Store.js';
-import Component_SvgDefs from '../Components/Component_SvgDefs.js'
-import Component_Sidebar from '../Components/Component_Sidebar.js'
-import Component_AppContainer from '../Components/Component_AppContainer.js'
-import Component_MainContainer from '../Components/Component_MainContainer.js'
-import Component_FixedToast from '../Components/Component_FixedToast.js'
-import Component_Modal from '../Components/Component_Modal.js'
-import ViewPart_ReleaseNotes from '../ViewParts/ViewPart_ReleaseNotes.js'
+import {
+    SvgDefs,
+    Sidebar,
+    AppContainer,
+    MainContainer,
+    FixedToast,
+    Modal
+} from './Components.js'
+import { ReleaseNotes } from './ViewParts.js'
 
 export function Start(param) {
     const {
@@ -111,7 +113,7 @@ export function Start(param) {
         }
 
         /** Load svg definitions */
-        const svgDefs = Component_SvgDefs({
+        const svgDefs = SvgDefs({
             svgSymbols
         });
 
@@ -126,7 +128,7 @@ export function Start(param) {
         }));
 
         /** Add App Container to #app */
-        const appContainer = Component_AppContainer();
+        const appContainer = AppContainer();
 
         Store.add({
             name: 'appcontainer',
@@ -153,7 +155,7 @@ export function Start(param) {
         Store.setRoutes(routes.concat(Routes));
 
         /** Sidebar Component */
-        const sidebar = Component_Sidebar({
+        const sidebar = Sidebar({
             logo,
             parent: appContainer,
             path,
@@ -168,7 +170,7 @@ export function Start(param) {
         sidebar.add();
 
         /** Main Container */
-        const mainContainer = Component_MainContainer({
+        const mainContainer = MainContainer({
             parent: appContainer
         });
 
@@ -220,13 +222,13 @@ export function Start(param) {
             // console.log('Show release notes message.');
             
             /** Release Notes */
-            const releaseNotes = Component_FixedToast({
+            const releaseNotes = FixedToast({
                 title: 'New version is live!',
                 message: 'View release notes',
                 bottom: '20px',
                 right: '10px',
                 action(event) {
-                    const modal = Component_Modal({
+                    const modal = Modal({
                         title: '',
                         fade: true,
                         background: settings.secondaryColor,
