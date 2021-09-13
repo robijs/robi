@@ -11,10 +11,10 @@
         <link rel="shortcut icon" href="../Images/favicons/favicon.ico">
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
-        <link rel="stylesheet" href="../Libraries/DataTables/datatables.min.css">
-        <link rel="stylesheet" href="../Libraries/Bootstrap/bootstrap.min.css">
-        <link rel="stylesheet" href="../Libraries/fullcalendar/main.css">
-        <link rel="stylesheet" href="../Libraries/Chartjs/Chart.min.css">
+        <link rel="stylesheet" href="../Libraries/datatables.min.css">
+        <link rel="stylesheet" href="../Libraries/bootstrap.min.css">
+        <link rel="stylesheet" href="../Libraries/fullcalendar.css">
+        <link rel="stylesheet" href="../Libraries/Chart.min.css">
         <!-- Preloaded images dynamically imported here -->
     </head>
     <body>
@@ -27,12 +27,12 @@
                 location.href = "ie.aspx";
             }
         </script>
-        <script src="../Libraries/jQuery/jquery-3.4.1.js"></script>
-        <script src="../Libraries/Bootstrap/bootstrap.bundle.min.js"></script>
-        <script src="../Libraries/DataTables/datatables.min.js"></script>
-        <script src="../Libraries/DataTables/dataTables.buttons.min.js"></script>
-        <script src="../Libraries/Chartjs/Chart.min.js"></script>
-        <script src="../Libraries/fullcalendar/main.js"></script>
+        <script src="../Libraries/jquery-3.4.1.js"></script>
+        <script src="../Libraries/bootstrap.bundle.min.js"></script>
+        <script src="../Libraries/datatables.min.js"></script>
+        <script src="../Libraries/dataTables.buttons.min.js"></script>
+        <script src="../Libraries/Chart.min.js"></script>
+        <script src="../Libraries/fullcalendar.js"></script>
         <!-- DEV -->
         <script type="module" src="../app.js"></script>
         <!-- PROD -->
