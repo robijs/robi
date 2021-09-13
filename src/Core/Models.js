@@ -1,3 +1,11 @@
+import Store from './Store.js'
+import { Get } from './Actions.js'
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export function SiteUsage(param) {
     const {
         visits,
@@ -233,7 +241,7 @@ export function SiteUsage(param) {
  * - Changed return value to @Object from @Array
  */
 
- export default function StartAndEndOfWeek(date) {
+ export function StartAndEndOfWeek(date) {
     // set local variable
     const now = date ? new Date(date) : new Date();
 
@@ -265,4 +273,70 @@ export function SiteUsage(param) {
         sunday,
         saturday
     };
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export function Question(param) {
+    const {
+        question,
+        replies
+    } = param;
+
+    question.replies = replies || [];
+
+    question.addReply = (reply) => {
+        question.replies.push(reply);
+    }
+    
+    return question;
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export async function Questions(param) {
+    const {
+        filter
+    } = param;
+
+    /** Get Questions */
+    const messages = await Get({
+        list: 'Questions',
+        filter,
+        select: 'Id,Title,Body,Created,ParentId,QuestionId,QuestionType,Featured,Modified,Author/Name,Author/Title,Editor/Name,Editor/Title',
+        orderby: 'Id desc',
+        expand: `Author/Id,Editor/Id`
+    });
+
+    /** Questions */
+    const questions = messages.filter(question => question.ParentId === 0);
+
+    /** Replies */
+    const replies = messages.filter(question => question.ParentId !== 0);
+
+    /** Model */
+    const Model_Questions = questions.map(question => {
+        // question.replies = replies.filter(reply => reply.QuestionId === question.Id);
+
+        // return question;
+
+        return Question({
+            question,
+            replies: replies.filter(reply => reply.QuestionId === question.Id)
+        });
+    });
+
+    Store.add({
+        type: 'model',
+        name: 'Model_Questions',
+        model: Model_Questions
+    });
+    
+    return Model_Questions;
 }

@@ -27,13 +27,10 @@ import {
     SiteUsage as C_SiteUsage,
     DashboardBanner,
     DataTable
-} from '../Core/Components.js'
-import Store from '../Core/Store.js'
-import { App } from '../Core/Settings.js'
-
-/** Models */
-import Model_Question from '../Models/Model_Question.js'
-import Model_StartAndEndOfWeek from '../Models/Model_StartAndEndOfWeek.js'
+} from './Components.js'
+import Store from './Store.js'
+import { App } from './Settings.js'
+import { Question as M_Question, StartAndEndOfWeek } from './Models.js'
 
 /**
  * 
@@ -1490,7 +1487,7 @@ export function Question(param) {
                                     data: editQuestionForm.getFieldValues()
                                 });
 
-                                const updatedQuestion = Model_Question({
+                                const updatedQuestion = M_Question({
                                     question: updatedItem,
                                     replies: question.replies
                                 });
@@ -2023,7 +2020,7 @@ export async function SiteUsage(param) {
                     month: 'long',
                     day: 'numeric'
                 };    
-                const startAndEndOfWeek = Model_StartAndEndOfWeek();
+                const startAndEndOfWeek = StartAndEndOfWeek();
                 const sunday = startAndEndOfWeek.sunday.toLocaleString('default', options);
                 const saturday = startAndEndOfWeek.saturday.toLocaleString('default', options);
                 

@@ -34,8 +34,7 @@ import {
 } from '../Core/ViewParts.js'
 
 /** Models */
-import Model_Questions from '../Models/Model_Questions.js'
-import Model_Question from '../Models/Model_Question.js'
+import { Question as M_Question, Questions as M_Questions } from './Models.js'
 
 /**
  * 
@@ -1459,7 +1458,7 @@ export async function QuestionsBoard(param) {
 
                                 console.log(Store.get('Model_Questions'));
 
-                                const question = Model_Question({
+                                const question = M_Question({
                                     question: updatedItem
                                 });
 
@@ -1519,7 +1518,7 @@ export async function QuestionsBoard(param) {
     } else {
         console.log('Model_Questions missing. Fetching...');
 
-        const fetchedQuestions = await Model_Questions({
+        const fetchedQuestions = await M_Questions({
             // filter: `QuestionType eq '${path}'`
         });
 
@@ -1692,7 +1691,7 @@ export async function Question(param) {
     } else {
         console.log('Model_Questions missing. Fetching...');
 
-        const fetchedQuestions = await Model_Questions({
+        const fetchedQuestions = await M_Questions({
             // filter: `QuestionType eq '${path}'`
         });
 
