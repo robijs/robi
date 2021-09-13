@@ -8087,6 +8087,19 @@
       "Created": "2021-09-13T00:48:42.525Z",
       "Module": "https://carepoint.health.mil/sites/J5/kmdevtools/App/Core/Actions.js",
       "Id": 619
+    },
+    {
+      "Title": "Route",
+      "SessionId": "a52f4cc8-9434-401a-910f-431aa44ba9fc",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"https://carepoint.health.mil/sites/J5/kmdevtools/App/Pages/app.aspx#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (https://carepoint.health.mil/sites/J5/kmdevtools/App/Core/Actions.js:1758:29)\\n    at HTMLSpanElement.routeToView (https://carepoint.health.mil/sites/J5/kmdevtools/App/Core/Components.js:7502:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-09-13T00:49:40.800Z",
+      "Module": "https://carepoint.health.mil/sites/J5/kmdevtools/App/Core/Actions.js",
+      "Id": 620
     }
   ],
   "Errors": [
