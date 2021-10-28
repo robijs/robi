@@ -1,7 +1,15 @@
 import { Start } from './Core/Actions.js'
+import Home from './Routes/Home/Home.js'
 
 Start({
     routes: [
+        {
+            path: 'Home',
+            hide: true,
+            go() {
+                Home();
+            }  
+        },
         {
             path: 'Test',
             icon: 'book',
@@ -11,15 +19,16 @@ Start({
         },
     ],
     settings: {
-        mode: 'dev',
+        mode: 'prod',
         dev: {
             LoginName: '0987654321@mil',
             Name: 'First Last',
             ErrorLogging: 'on'
         },
-        title: 'App',
-        logo: '../src/Images/dha-logo-no-label-90w.png',
-        logoSmall: '../src/Images/dha-logo-no-label-40w.png',
+        title: 'Measures Library',
+        logo: 'dha-logo-no-label-90w.png',
+        logoSmall: 'https://carepoint.health.mil/sites/J5/AED/MRB/ML/dev/App/src/Images/dha-logo-no-label-40w.png',
+        logoLarge: 'https://carepoint.health.mil/sites/J5/AED/MRB/ML/dev/App/src/Images/dha-logo-no-label-386w.png',
         primaryColor: '#24292f',
         primaryColorRGB: '45, 61, 80',
         secondaryColor: 'ghostwhite',
@@ -30,7 +39,7 @@ Start({
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
         defaultRoute: 'Home',
         domain: 'http://127.0.0.1:8080',
-        site: '',
+        site: 'https://carepoint.health.mil/sites/J5/AED/MRB/ML/dev',
         usersList: 'Users',
         usersFields: [
             {
@@ -64,14 +73,26 @@ Start({
             {
                 rel: 'preload',
                 as: 'image',
-                href: '../src/Images/dha-logo-no-label-40w.png'
+                href: 'https://carepoint.health.mil/sites/J5/AED/MRB/ML/dev/App/src/Images/dha-logo-no-label-40w.png'
             },
             {
                 rel: 'preload',
                 as: 'image',
-                href: '../src/Images/dha-logo-no-label-90w.png'
+                href: 'https://carepoint.health.mil/sites/J5/AED/MRB/ML/dev/App/src/Images/dha-logo-no-label-90w.png'
+            },
+            {
+                rel: 'preload',
+                as: 'image',
+                href: 'https://carepoint.health.mil/sites/J5/AED/MRB/ML/dev/App/src/Images/dha-logo-no-label-386w.png'
             }
         ],
+        questionTypes: [
+            {
+                title: 'General',
+                path: 'General'
+            }
+        ],
+        defaultQueryParameters: ''
         // lists: [
             // {
             //     list: 'FiscalYears',
@@ -102,7 +123,6 @@ Start({
         // },
         // beforeLoad() {
           
-        // },
-        defaultQueryParameters: ''
+        // }
     }
 });

@@ -1,4 +1,5 @@
 import { Toast, LoadingBar, SvgDefs, Sidebar, AppContainer, MainContainer, FixedToast, Modal } from './Components.js'
+import { Lists } from './Models.js'
 import { App, Routes } from './Settings.js';
 import Store from './Store.js'
 import { ReleaseNotes } from './ViewParts.js'
@@ -19,7 +20,7 @@ export async function AddColumnToView(param) {
     const requestDigest = await GetRequestDigest();
 
     const postOptions = {
-        url: `../../_api/web/lists/GetByTitle('${list}')/Views/GetByTitle('${view || 'All Items'}')/ViewFields/addViewField('${name}')`,
+        url: `${App.get('site')}/_api/web/lists/GetByTitle('${list}')/Views/GetByTitle('${view || 'All Items'}')/ViewFields/addViewField('${name}')`,
         headers: {
             "Content-Type": "application/json;odata=verbose",
             "Accept": "application/json;odata=verbose",
@@ -28,6 +29,8 @@ export async function AddColumnToView(param) {
     }
 
     const newField = await Post(postOptions);
+
+    console.log(`Added to ${view || 'All Items'}: ${name}.`);
 
     return newField.d;
 }
@@ -117,7 +120,7 @@ export async function AttachFiles(param) {
         const name = file.name;
         const fileBuffer = await getFileBuffer(file);
 
-        const upload = await fetch(`../../_api/web/lists/getbytitle('${list}')/items(${id})/AttachmentFiles/add(FileName='${name}')`, {
+        const upload = await fetch(`${App.get('site')}/_api/web/lists/getbytitle('${list}')/items(${id})/AttachmentFiles/add(FileName='${name}')`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json; odata=verbose',
@@ -512,14 +515,15 @@ export async function CopyItem(param) {
     // Get new request digest
     const requestDigest = await GetRequestDigest();
 
+    
     const postOptions = {
-        url: `../../_api/web/lists/GetByTitle('${list}')/Fields`,
+        url: `${App.get('site')}/_api/web/lists/GetByTitle('${list}')/Fields`,
         data: {
             __metadata: {
                 'type': `SP.Field`,
             },
             'Title': name,
-            'FieldTypeKind': type
+            'FieldTypeKind': fieldType(type)
         },
         headers: {
             "Content-Type": "application/json;odata=verbose",
@@ -528,7 +532,42 @@ export async function CopyItem(param) {
         }
     }
 
+    /**
+     * @desc FieldTypeKind for SharePoint
+     *  
+     * @type {FieldTypeKind} - 2 (Single Line of Text)
+     * @type {FieldTypeKind} - 3 (Mulitiple Lines of Text)
+     * @type {FieldTypeKind} - 4 (Date)
+     * @type {FieldTypeKind} - 6 (Choice)
+     * @type {FieldTypeKind} - 7 (Lookup)
+     * @type {FieldTypeKind} - 9 (Number)
+     * @type {FieldTypeKind} - 20 (Person or Group)
+     * 
+     */
+    function fieldType(type) {
+        switch (type) {
+            case 'slot':
+                return 2;
+            case 'mlot':
+                return 3;
+            case 'date':
+                return 4;
+            case 'choice':
+                return 6;
+            case 'lookup':
+                return 7;
+            case 'number':
+                return 9;
+            case 'pp':
+                return 20;
+            default:
+                break;
+        }
+    }
+
     const newField = await Post(postOptions);
+
+    console.log(`Created Field: ${name}.`);
 
     /** Add column to All Items view */
     await AddColumnToView({
@@ -574,7 +613,7 @@ export async function CreateItem(param) {
      *
      */
     const postOptions = {
-        url: `../../_api/web/lists/GetByTitle('${list}')/items`,
+        url: `${App.get('site')}/_api/web/lists/GetByTitle('${list}')/items`,
         data,
         headers: {
             "Content-Type": "application/json;odata=verbose",
@@ -610,12 +649,9 @@ export async function CreateItem(param) {
 
 /**
  * Create SharePoint list item.
- * @param {Object}   param          Interface to UpdateItem() module.   
- * @param {string}   param.type     SharePoint list item type.
- * @param {string}   param.list     SharePoint list Name.
- * @param {string}   [param.list]   SharePoint list item type.
- * @param {function} param.action   Function to be run after updating item posts.
- * @param {boolean}  [param.notify] If false, don't display notification.
+ * @param {Object} param        Interface to UpdateItem() module.   
+ * @param {String} param.list   SharePoint list name.
+ * @param {Array}  param.fields SharePoint fields.
  */
 export async function CreateList(param) {
     const {
@@ -626,8 +662,25 @@ export async function CreateList(param) {
     // Get new request digest
     const requestDigest = await GetRequestDigest();
 
+    // Check if list exists
+    const listResponse = await fetch(`${App.get('site')}/_api/web/lists/GetByTitle('${list}')`, {
+        headers: {
+            "Content-Type": "application/json;odata=verbose",
+            "Accept": "application/json;odata=verbose",
+        }
+    })
+    const getList = await listResponse.json();
+
+    if (getList.d) {
+        console.log(`List ${list} already created.`);
+        
+        return;
+    } else {
+        console.log(getList);
+    }
+
     const postOptions = {
-        url: `../../_api/web/lists`,
+        url: `${App.get('site')}/_api/web/lists`,
         data: {
             __metadata: {
                 'type': `SP.List`,
@@ -641,6 +694,8 @@ export async function CreateList(param) {
             "X-RequestDigest": requestDigest,
         }
     }
+
+    console.log(`Created list: ${list}.`);
 
     /** Create list */
     const newList = await Post(postOptions);
@@ -663,15 +718,6 @@ export async function CreateList(param) {
 }
 
 export async function Data(lists) {
-    const loadingBar = LoadingBar({
-        displayLogo: App.get('logo'),
-        displayTitle: App.get('title'),
-        displayText: 'Loading',
-        totalCount: lists?.length || 0
-    });
-
-    loadingBar.add();
-
     let responses;
     
     if (lists) {
@@ -692,7 +738,7 @@ export async function Data(lists) {
                 filter,
                 orderby,
                 action() {
-                    loadingBar.update({
+                    Store.get('app-loading-bar').update({
                         newDisplayText: label
                     });
                 }
@@ -700,7 +746,7 @@ export async function Data(lists) {
         }));
     }
 
-    await loadingBar.end();
+    await Store.get('app-loading-bar').end();
 
     return responses
 }
@@ -720,7 +766,7 @@ export async function DeleteAttachments(param) {
     const responses = [];
 
     for (let i = 0; i < fileNames.length; i++) {
-        const upload = await fetch(`../../_api/web/lists/getbytitle('${list}')/items(${itemId})/AttachmentFiles/getByFileName('${fileNames[i]}')`, {
+        const upload = await fetch(`${App.get('site')}/_api/web/lists/getbytitle('${list}')/items(${itemId})/AttachmentFiles/getByFileName('${fileNames[i]}')`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json; odata=verbose',
@@ -876,7 +922,7 @@ export async function LogError(param) {
          *
          */
         const postOptions = {
-            url: `../../_api/web/lists/GetByTitle('Errors')/items`,
+            url: `${App.get('site')}/_api/web/lists/GetByTitle('Errors')/items`,
             data: {
                 SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
                 Message,
@@ -964,7 +1010,7 @@ export async function Get(param) {
 
     Store.addAbortController(abortController);
 
-    const url = `${path || '../..'}/_api/web/lists/GetByTitle`;
+    const url = `${path || App.get('site')}/_api/web/lists/GetByTitle`;
 
     const options = {
         headers : { 
@@ -1053,6 +1099,18 @@ export async function Get(param) {
 
 /**
  * 
+ */
+export async function GetAppSetting(prop) {
+    const getItem = await Get({
+        list: 'Settings',
+        filter: `Key eq '${prop}'`
+    });
+
+    return getItem[0] || undefined;
+}
+
+/**
+ * 
  * @param {*} param 
  * @returns 
  */
@@ -1063,7 +1121,7 @@ export function GetADUsers(param) {
 
     const abortController = new AbortController();
     // const url = window.location.href.split('/SiteAssets')[0] + '/_vti_bin/client.svc/ProcessQuery';
-    const url = '../../_vti_bin/client.svc/ProcessQuery';
+    const url = `${App.get('site')}/_vti_bin/client.svc/ProcessQuery`
 
     function getPostRequestHeaders(requestDigest) {
         if (!requestDigest) { 
@@ -1265,7 +1323,7 @@ export async function GetCurrentUser(param) {
         fields
     } = param;
 
-    const url = App.get('mode') === 'prod' ? `../../_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${App.get('dev').LoginName}`;
+    const url = App.get('mode') === 'prod' ? `${App.get('site')}/_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${App.get('dev').LoginName}`;
     const fetchOptions = {
         headers : { 
             'Content-Type': 'application/json; charset=UTF-8',
@@ -1274,11 +1332,11 @@ export async function GetCurrentUser(param) {
     };
 
     if (App.get('mode') === 'prod') {
-        const url = `../../_api/web/CurrentUser`;
+        const url = `${App.get('site')}/../_api/web/CurrentUser`;
 
         /** Check if Users list exists */
         // const usersList = await Get({
-        //     api: `../../_api/Web/Lists?$filter=title eq '${list || 'Users'}'`
+        //     api: `${App.get('site')}/_api/Web/Lists?$filter=title eq '${list || 'Users'}'`
         // });
 
         /** Create users list if it doesn't already exist */
@@ -1363,7 +1421,7 @@ export async function GetCurrentUser(param) {
         apiPath
     } = param;
 
-    apiPath = apiPath || '../..';
+    apiPath = apiPath || App.get('site');
     const url = type === 'lib' ? `${apiPath}/_api/web/GetFolderByServerRelativeUrl('${path}')/ItemCount` : `${apiPath}/_api/web/lists/GetByTitle('${list}')/ItemCount`;
     
     const headers = {
@@ -1404,7 +1462,7 @@ export async function GetLib(param) {
         orderby
     } = param;
 
-    const url = `../../_api/web/GetFolderByServerRelativeUrl('${path}')/${type || 'Files'}`;
+    const url = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/${type || 'Files'}`;
     const headers = {
         headers : { 
             'Content-Type': 'application/json; charset=UTF-8',
@@ -1451,7 +1509,7 @@ export async function GetList(param) {
         listName
     } = param;
 
-    const url = `../../_api/web/lists/GetByTitle('${listName}')`;
+    const url = `${App.get('site')}/_api/web/lists/GetByTitle('${listName}')`;
     const headers = {
         headers : { 
             'Content-Type': 'application/json; charset=UTF-8',
@@ -1476,7 +1534,7 @@ export async function GetList(param) {
  */
 export async function GetRequestDigest() {
     const getRequestDigest = await Post({
-        url: `../../_api/contextinfo`,
+        url: `${App.get('site')}/_api/contextinfo`,
         headers: {
             "Accept": "application/json; odata=verbose",
         }
@@ -1587,7 +1645,7 @@ export async function Log(param) {
          *
          */
         const postOptions = {
-            url: `../../_api/web/lists/GetByTitle('Log')/items`,
+            url: `${App.get('site')}/_api/web/lists/GetByTitle('Log')/items`,
             data: {
                 Title,
                 SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
@@ -1855,7 +1913,7 @@ export async function SendEmail(param) {
         }
     };
 
-    const response = await fetch('../../_api/SP.Utilities.Utility.SendEmail', {
+    const response = await fetch(`${App.get('site')}/_api/SP.Utilities.Utility.SendEmail`, {
         method: 'POST',
         headers,
         body: JSON.stringify(properties)
@@ -1908,7 +1966,8 @@ export function Start(param) {
         lists,
         svgSymbols,
         sessionStorageData,
-        sidebarDropdown
+        sidebarDropdown,
+        questionTypes
     } = settings;
 
     App.set(settings);
@@ -1963,6 +2022,87 @@ export function Start(param) {
 
     /** Start app on page load */
     window.onload = async () => {
+        const defaultLists = Lists();
+
+        const loadingBar = LoadingBar({
+            displayLogo: App.get('logoLarge'),
+            displayTitle: App.get('title'),
+            displayText: 'Loading',
+            totalCount: (lists?.length || 0) + defaultLists.length || 0
+        });
+    
+        loadingBar.add();
+
+        Store.add({
+            name: 'app-loading-bar',
+            component: loadingBar
+        });
+
+        // Check if app is already installed
+        const isInstalled = await GetAppSetting('Installed');
+
+        if (!isInstalled || isInstalled.Value === 'No') {
+            // Create lists
+            console.log('Installing app...');
+
+            for (let list in defaultLists) {
+                await CreateList(defaultLists[list]);
+                loadingBar.update();
+            }
+
+            // Add question types
+            await CreateItem({
+                list: 'Settings',
+                data: {
+                    Key: 'QuestionTypes',
+                    Value: JSON.stringify(questionTypes)
+                }
+            });
+
+            console.log(`Add Question Types: ${JSON.stringify(questionTypes)}`);
+
+            // Add Release Notes
+            await CreateItem({
+                list: 'ReleaseNotes',
+                data: {
+                    Summary: 'App installed.',
+                    Description: 'Initial lists and items created.',
+                    Status: 'Published',
+                    MajorVersion:'0',
+                    MinorVersion: '1',
+                    PatchVersion: '0',
+                    ReleaseType: 'Current'
+                }
+            });
+
+            console.log(`Add Release Notes: App installed. Initial lists and items created.`);
+
+            if (!isInstalled) {
+                // Create Installed
+                await CreateItem({
+                    list: 'Settings',
+                    data: {
+                        Key: 'Installed',
+                        Value: 'Yes'
+                    }
+                });
+            } else if (isInstalled.Value === 'No') {
+                // Create Installed
+                await UpdateItem({
+                    list: 'Settings',
+                    itemId: isInstalled.Id,
+                    data: {
+                        Value: 'Yes'
+                    }
+                });
+            }
+
+            console.log('App installed.');
+        } else if (isInstalled.Value === 'Yes') {
+            for (let list in defaultLists) {
+                loadingBar.update();
+            }
+        }
 
         /** Add links to head */
         AddLinks({
@@ -2073,7 +2213,7 @@ export function Start(param) {
         const sessionId = GenerateUUID();
 
         /** Format Title for Sessin/Local Storage keys */
-        const storageKeyPrefix = settings.title.split(' ').join('_');
+        const storageKeyPrefix = settings.title.split(' ').join('-');
 
         /** Set Session Id */
         sessionStorage.setItem(`${storageKeyPrefix}-sessionId`, sessionId)
@@ -2242,10 +2382,10 @@ export async function UploadFiles(param) {
         const name = file.name;
         const fileBuffer = await getFileBuffer(file);
         
-        // const upload = await fetch(`../../_api/web/folders/GetByUrl('/${site}/${list}')/Files/add(url='${name}',overwrite=true)`, {
-        // const upload = await fetch(`../../_api/web/GetFolderByServerRelativeUrl('${path}')/Files/add(url='${name}',overwrite=true)`, {
-        // const upload = await fetch(`../../_api/web/GetFolderByServerRelativeUrl('${path}')/Files/add`, {
-        const upload = await fetch(`../../_api/web/GetFolderByServerRelativeUrl('${path}')/Files/add(url='${name}')`, {
+        // const upload = await fetch(`${App.get('site')}/_api/web/folders/GetByUrl('/${site}/${list}')/Files/add(url='${name}',overwrite=true)`, {
+        // const upload = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/add(url='${name}',overwrite=true)`, {
+        // const upload = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/add`, {
+        const upload = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/add(url='${name}')`, {
             method: 'POST',
             headers: {
                 "Accept": "application/json;odata=verbose",

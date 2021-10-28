@@ -1072,7 +1072,8 @@ export function Card(param) {
         minWidth,
         parent,
         width,
-        position
+        position,
+        action
     } = param;
 
     const component = Component({
@@ -1093,6 +1094,7 @@ export function Card(param) {
                 width: ${width || 'initial'};
                 border-radius: 10px;
                 border: ${App.get('defaultBorder')};
+                cursor: ${action ? 'pointer' : 'initial'};
             }
 
             #id .round-card-title {
@@ -1113,7 +1115,15 @@ export function Card(param) {
         parent,
         position,
         events: [
-            
+            {
+                selector: '#id',
+                event: 'click',
+                listener: (event) => {
+                    if (action) {
+                        action(event);
+                    }
+                }
+            }
         ]
     });
 
@@ -3850,7 +3860,8 @@ export function LoadingBar(param) {
         html: /*html*/ `
             <div class='loading-bar'>
                 <div class='loading-message'>
-                    <div class='loading-message-logo'></div>
+                    <!-- <div class='loading-message-logo'></div> -->
+                    <img class='loading-message-logo' src=${displayLogo} />
                     <div class='loading-message-title'>${displayTitle}</div>
                     <div class='loading-message-text'>${displayText}</div>
                     <div class='loading-bar-container'>
@@ -3875,7 +3886,7 @@ export function LoadingBar(param) {
             }
 
             .loading-message {
-                width: 90%;
+                /* width: 90%; */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -3883,7 +3894,7 @@ export function LoadingBar(param) {
             }
 
             .loading-message-title{
-                font-size: 5em; /* original value 3em */
+                font-size: 4em; /* original value 3em */
                 font-weight: 500;
                 text-align: center;
             }
@@ -3897,28 +3908,28 @@ export function LoadingBar(param) {
             }
 
             .loading-bar-container {
-                width: 25%; /** original value 15% */
-                margin-top: 10px;
+                width: 90%; /** original value 15% */
+                margin-top: 15px;
                 background: lightgray;
-                border-radius: 2px;
+                border-radius: 10px;
             }
             
             .loading-bar-status {
                 width: 0%;
-                height: 8px;
+                height: 15px;
                 background: lightslategray;
-                border-radius: 2px;
+                border-radius: 10px;
                 transition: width 100ms ease-in-out;
             }
 
             /* Logo */
-            .loading-message-logo {
+            /* .loading-message-logo {
                 background: url(${displayLogo}) center;
                 background-repeat: no-repeat;
                 width: 100%;
-                height: 120px;
+                height: 100%;
                 background-size: 120px;
-            }
+            } */
 
             @keyframes fadein {
                 from {
@@ -3964,7 +3975,7 @@ export function LoadingBar(param) {
 
     let counter = 1;
 
-    component.update = (param) => {
+    component.update = (param = {}) => {
         const {
             newDisplayText
         } = param;
@@ -7103,7 +7114,7 @@ export function Sidebar(param) {
         html: /*html*/ `
             <div class='sidebar' data-mode='open'>
                 <!-- <div class='logo' data-path='${App.get('defaultRoute')}'></div> -->
-                <img src ='${logo}' class='logo' data-path='${App.get('defaultRoute')}'>
+                <img src ='../Images/${logo}' class='logo' data-path='${App.get('defaultRoute')}'>
                 ${
                     sidebarDropdown ?
                     /*html*/ `

@@ -1129,11 +1129,12 @@ export async function Questions() {
         console.log('questionTypes not in local storage. Adding...');
 
         const questionTypesResponse = await Get({
-            list: 'View_Questions',
-            filter: `Title eq 'QuestionTypes'`
+            list: 'Settings',
+            filter: `Key eq 'QuestionTypes'`
         });
 
-        localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
+        // localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
+        localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, questionTypesResponse[0].Value);
         questionTypes = JSON.parse(localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`));
 
         console.log('questionTypes added to local storage.');
@@ -1150,7 +1151,10 @@ export async function Questions() {
             description: '',
             parent: viewContainer,
             margin: '0px 0px 20px 0px',
-            width: '100%'
+            width: '100%',
+            action(event) {
+                Route(`Questions/${path}`);
+            }
         });
 
         card.add();
@@ -1217,8 +1221,8 @@ export async function QuestionsBoard(param) {
         viewTitle.add();
 
         const questionTypesResponse = await Get({
-            list: 'View_Questions',
-            filter: `Title eq 'QuestionTypes'`
+            list: 'Settings',
+            filter: `Key eq 'QuestionTypes'`
         });
 
         localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
@@ -1592,8 +1596,8 @@ export async function Question(param) {
         viewTitle.add();
 
         const questionTypesResponse = await Get({
-            list: 'View_Questions',
-            filter: `Title eq 'QuestionTypes'`
+            list: 'Settings',
+            filter: `Key eq 'QuestionTypes'`
         });
 
         localStorage.setItem(`${App.get('title').split(' ').join('-')}questionTypes`, questionTypesResponse[0].Value);
