@@ -20,24 +20,26 @@ export function Alert(param) {
     let {
         type
     } = param;
- 
+
     const component = Component({
         html: /*html*/ `
             <div class='alert alert-${type}' role='alert'${margin ? ` style='margin: ${margin};'` : ''}>
                 ${text}
-                ${close ? 
+                ${close ?
                     /*html*/ ` 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    ` 
-                    : ''
-                }
+                    `
+                : ''
+            }
             </div>
         `,
         style: /*css*/ `
             #id {
                 font-size: 14px;
+                border-radius: 10px;
+                border: none;
             }
             
             #id *:not(button) {
@@ -48,7 +50,7 @@ export function Alert(param) {
                 padding: 0px;    
             }
             
-            ${width ? 
+            ${width ?
                 /*css*/ `
                     #id {
                         width: ${width};
@@ -248,7 +250,7 @@ export function AttachFilesButton(param) {
                             id,
                             files
                         });
-            
+
                         if (onAdd) {
                             onAdd(attachedFiles);
                         }
@@ -439,19 +441,19 @@ export function AttachFilesField(param) {
 
     function updateFilePreview() {
         var input = component.find('#file_uploads');
-    
+
         var curFiles = input.files;
 
         if (curFiles.length === 0) {
             preview.innerHTML = 'No files currently selected for upload';
         } else {
             var html = '<table style="border-collapse: collapse; border-spacing: 0px;">';
-            
+
             for (var i = 0; i < curFiles.length; i++) {
                 html += '<tr>' +
-                            '<th style="text-align: left; border-bottom: solid 1px gray; padding: 4px">' + curFiles[i].name + '</th>' + 
-                            '<td style="text-align: right; border-bottom: solid 1px gray; padding: 4px">' + returnFileSize(curFiles[i].size) + '</td>' + 
-                        '</tr>';
+                    '<th style="text-align: left; border-bottom: solid 1px gray; padding: 4px">' + curFiles[i].name + '</th>' +
+                    '<td style="text-align: right; border-bottom: solid 1px gray; padding: 4px">' + returnFileSize(curFiles[i].size) + '</td>' +
+                    '</tr>';
             }
 
             html += '</table>';
@@ -464,9 +466,9 @@ export function AttachFilesField(param) {
         if (number < 1024) {
             return number + 'bytes';
         } else if (number >= 1024 && number < 1048576) {
-            return (number/1024).toFixed(1) + 'KB';
+            return (number / 1024).toFixed(1) + 'KB';
         } else if (number >= 1048576) {
-            return (number/1048576).toFixed(1) + 'MB';
+            return (number / 1048576).toFixed(1) + 'MB';
         }
     }
 
@@ -532,7 +534,7 @@ export function AttachFilesField(param) {
 
         files.forEach(file => {
             const ext = file.name.split('.').pop();
-            
+
             html += /*html*/ `
                 <div class='file-preview' draggable='true'>
                     <div class='file-icon'>
@@ -553,7 +555,7 @@ export function AttachFilesField(param) {
 
         icons.forEach(icon => {
             const removeButton = icon.querySelector('.file-preview-remove');
-            
+
             removeButton.addEventListener('click', removeFilePreview);
 
             // icon.addEventListener('dragstart', event => {
@@ -576,12 +578,12 @@ export function AttachFilesField(param) {
         const index = files.indexOf(file);
 
         files.splice(index, 1);
-        
+
         this.closest('.file-preview').remove();
     }
 
     function selectIcon(ext) {
-        switch(ext) {
+        switch (ext) {
             case 'doc':
             case 'docx':
                 return 'microsoftword';
@@ -603,7 +605,7 @@ export function AttachFilesField(param) {
     }
 
     component.getFieldData = () => {
-    
+
     }
 
     return component
@@ -630,7 +632,7 @@ export function Attachments(param) {
     const component = Component({
         html: /*html*/ `
             <div class='attachments'>
-                ${label ? /*html*/ `<div class='attachments-label'>${label}</div>`: ''}
+                ${label ? /*html*/ `<div class='attachments-label'>${label}</div>` : ''}
                 <div class='attachments-links-container'>
                     ${addLinks()}
                 </div>
@@ -723,7 +725,7 @@ export function Attachments(param) {
         const ext = file.FileName.split('.').pop();
 
         // console.log(file);
-            
+
         return /*html*/ `
             <div class='attachment-row' data-uri='${file.__metadata.uri}' data-name='${file.FileName}'>
                 <div class='file-icon'>
@@ -739,7 +741,7 @@ export function Attachments(param) {
     }
 
     function selectIcon(ext) {
-        switch(ext.toLowerCase()) {
+        switch (ext.toLowerCase()) {
             case 'doc':
             case 'docx':
                 return 'microsoftword';
@@ -1063,9 +1065,12 @@ export function Button(param) {
 export function Card(param) {
     const {
         title,
+        fontSize,
         description,
         titleColor,
         titleWeight,
+        titleBorder,
+        titleBackground,
         background,
         padding,
         margin,
@@ -1093,16 +1098,17 @@ export function Card(param) {
                 min-width: ${minWidth || 'initial'};
                 width: ${width || 'initial'};
                 border-radius: 10px;
-                border: ${App.get('defaultBorder')};
+                /* border: ${App.get('defaultBorder')}; */
+                border: none;
                 cursor: ${action ? 'pointer' : 'initial'};
             }
 
             #id .round-card-title {
                 font-size: 1em;
-                margin: -20px -20px 10px -20px; /** FIXME: will break with passed in padding  */
+                margin: ${padding === '0px' ? `0px` : '-20px -20px 0px -20px'}; /** FIXME: will break with passed in padding  */
                 padding: 10px 20px; /** FIXME: will break with passed in padding  */
                 font-weight: ${titleWeight || '700'};
-                background: ${App.get('secondaryColor')};
+                background: ${titleBackground || 'white'}; /** FIXME: Experimental */ /* alternate color: #d0d0d04d */
                 border-radius: 10px 10px 0px 0px;
                 color: ${titleColor || App.get('defaultColor')};
                 border-bottom: ${App.get('defaultBorder')};
@@ -1388,7 +1394,7 @@ export function Comments(param) {
                     const Comment = field.innerHTML;
                     const SubmittedBy = Store.user().Title
                     const LoginName = Store.user().LoginName;
-        
+
                     if (Comment) {
                         const newItem = await CreateItem({
                             list: 'Comments',
@@ -1399,9 +1405,9 @@ export function Comments(param) {
                                 LoginName
                             }
                         });
-            
+
                         component.addComment(newItem, true);
-            
+
                         field.innerHTML = '';
                     } else {
                         console.log('new comment field is empty');
@@ -1420,7 +1426,7 @@ export function Comments(param) {
 
         return html;
     }
-    
+
     function dateTemplate(date) {
         const d = new Date(date);
 
@@ -1431,7 +1437,7 @@ export function Comments(param) {
 
     function commentTemplate(comment, isNew) {
         return /*html*/ `
-            <div class='comment-container${comment.LoginName ===Store.user().LoginName ? ' mine' : ''}${isNew ? ' animate-new-comment' : ''}' data-itemid='${comment.Id}'>
+            <div class='comment-container${comment.LoginName === Store.user().LoginName ? ' mine' : ''}${isNew ? ' animate-new-comment' : ''}' data-itemid='${comment.Id}'>
                 <div class='comment'>
                     <div class='comment-date-container'>
                         ${comment.LoginName !== Store.user().LoginName ? /*html*/`<div class='comment-author'>${comment.SubmittedBy}</div>` : ''}
@@ -1454,7 +1460,7 @@ export function Comments(param) {
             itemIds.sort((a, b) => a - b);
 
             // console.log('sort\t', itemIds);
-            
+
             const index = itemIds.indexOf(comment.Id);
 
             // console.log('index\t', index);
@@ -1471,16 +1477,16 @@ export function Comments(param) {
                 behavior: 'smooth'
             });
         }
- 
+
         // container.insertAdjacentHTML('beforeend', commentTemplate(comment, true));
 
         const counter = component.find('.comments-border-count span');
         const newCount = parseInt(counter.innerText) + 1;
 
-        counter.innerText =  newCount;
+        counter.innerText = newCount;
 
         const text = component.find('.comments-border-name');
-      
+
         text.innerText = newCount > 1 ? 'Comments' : 'Comment'
     }
 
@@ -1559,57 +1565,48 @@ export function Container(param) {
                 flex: ${flex || 'unset'};
                 display: ${display || 'flex'};
                 /** @todo is this the best method? */
-                ${
-                    overflow ?
-                    `overflow: ${overflow}` :
-                    ''
-                }
-                ${
-                    overflowX ?
-                    `overflow-x: ${overflowX}` :
-                    ''
-                }
-                ${
-                    overflowY ?
-                    `overflow-y: ${overflowY}` :
-                    ''
-                }
-                ${
-                    zIndex ? 
-                    `z-index: ${zIndex};` :
-                    ''
-                }
-                ${
-                    layoutPosition ? 
-                    `position: ${layoutPosition};` :
-                    ''
-                }
-                ${
-                    top ? 
-                    `top: ${top};` :
-                    ''
-                }
-                ${
-                    bottom ? 
-                    `bottom: ${bottom};` :
-                    ''
-                }
-                ${
-                    left ? 
-                    `left: ${left};` :
-                    ''
-                }
-                ${
-                    right ? 
-                    `right: ${right};` :
-                    ''
-                }
+                ${overflow ?
+                `overflow: ${overflow}` :
+                ''
+            }
+                ${overflowX ?
+                `overflow-x: ${overflowX}` :
+                ''
+            }
+                ${overflowY ?
+                `overflow-y: ${overflowY}` :
+                ''
+            }
+                ${zIndex ?
+                `z-index: ${zIndex};` :
+                ''
+            }
+                ${layoutPosition ?
+                `position: ${layoutPosition};` :
+                ''
+            }
+                ${top ?
+                `top: ${top};` :
+                ''
+            }
+                ${bottom ?
+                `bottom: ${bottom};` :
+                ''
+            }
+                ${left ?
+                `left: ${left};` :
+                ''
+            }
+                ${right ?
+                `right: ${right};` :
+                ''
+            }
             }
         `,
         parent,
         position,
         events: [
-            
+
         ]
     });
 }
@@ -1626,8 +1623,10 @@ export function DashboardBanner(param) {
         border,
         parent,
         data,
-        action,
-        position
+        background,
+        position,
+        width,
+        weight
     } = param;
 
     const component = Component({
@@ -1638,25 +1637,35 @@ export function DashboardBanner(param) {
         `,
         style: /*css*/ `
             #id {
-                margin: ${margin || '20px'};
-                padding: ${padding || '10px'};
-                background: white;
-                border-radius: 4px;
+                margin: ${margin || '10px'};
+                padding: ${padding || '8px'};
+                background: ${background || 'white'};
+                border-radius: 8px;
                 border: ${border || App.get('defaultBorder')};
-                /* display: flex; */
                 display: flex;
                 justify-content: space-between;
                 overflow: overlay;
+                ${width ? `width: ${width};` : ''}
             }
 
             #id .dashboard-banner-group {
                 flex: 1;
-                padding: 10px;
-                border-radius: 4px;
+                padding: 8px;
+                border-radius: 8px;
+                font-weight: ${weight || 'normal'};
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                /* justify-content: center; */
+            }
+
+            #id .dashboard-banner-group.selected {
+                background: #e9ecef !important;
             }
 
             #id .dashboard-banner-group:not(:last-child) {
                 margin-right: 10px;
+                /* margin-right: 20px; */
             }
 
             #id .dashboard-banner-group[data-action='true'] {
@@ -1666,33 +1675,26 @@ export function DashboardBanner(param) {
             #id .dashboard-banner-label,
             #id .dashboard-banner-description {
                 white-space: nowrap;
-                font-size: .9em;
+                font-size: 13px;
             }
 
             #id .dashboard-banner-value {
-                font-size: 1.5em;
-                font-weight: 500;
-            }
-
-            @media screen and (max-width: 1120px) {
-                #id .dashboard-banner-group {
-                    padding: 8px;
-                }
-
-                #id .dashboard-banner-value {
-                    font-size: 1em;
-                    font-weight: 500;
-                }
+                font-size: 28px;
+                font-weight: 600;
             }
         `,
         parent,
         position: position || 'beforeend',
         events: [
-           {
+            {
                 selector: `#id .dashboard-banner-group[data-action='true']`,
                 event: 'click',
-                listener: action
-           }
+                listener(event) {
+                    const item = data.find(item => item.label === this.dataset.label);
+
+                    item?.action(item);
+                }
+            }
         ]
     });
 
@@ -1717,7 +1719,7 @@ export function DashboardBanner(param) {
                 </div>
             `;
         });
-        
+
         return html;
     }
 
@@ -1734,6 +1736,18 @@ export function DashboardBanner(param) {
                 }
             }
         }
+    }
+
+    component.select = (label) => {
+        component.find(`.dashboard-banner-group[data-label='${label}']`)?.classList.add('selected');
+    }
+
+    component.deselect = (label) => {
+        component.find(`.dashboard-banner-group[data-label='${label}']`)?.classList.remove('selected');
+    }
+
+    component.deselectAll = () => {
+        component.findAll(`.dashboard-banner-group`).forEach(group => group?.classList.remove('selected'));
     }
 
     component.update = (groups) => {
@@ -1786,6 +1800,9 @@ export function DataTable(param) {
         onRowClick,
         onSearch,
         onDraw,
+        toolbar,
+        fontSize,
+        nowrap,
         onSelect, // How do you turn select on?  i see the event but no option to enable it;
         onDeselect,
         rowCallback,
@@ -1805,7 +1822,7 @@ export function DataTable(param) {
                 ${border !== false ? 'table-bordered' : 'table-not-bordered'} 
                 animated 
                 fadeIn
-                nowrap'
+                ${nowrap !== false ? 'nowrap' : ''}'
             >
                 <thead>
                     ${buildHeader()}
@@ -1837,7 +1854,22 @@ export function DataTable(param) {
                 cursor: ${cursor || 'pointer'};
             }
 
-            /** Toolbar */
+            /* 
+            Toolbar 
+            paging: false,
+            search: false,
+            ordering: false,
+            */
+            ${
+                paging === false && search === false && ordering === false ?
+                /*css*/ `
+                    #id_wrapper .datatable-toolbar {
+                        margin: 0px !important;
+                    }
+                ` :
+                ''
+            }
+
             #id_wrapper .datatable-toolbar {
                 font-size: .9em;
                 padding: 0px 15px;
@@ -1952,8 +1984,10 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-html5 {
-                background: white !important;
-                border: 1px solid rgb(102, 51, 153, .30);
+                background: #e9ecef !important;
+                color: #444;
+                font-weight: 500;
+                border: 1px solid transparent !important;
             }
 
             #id_wrapper .buttons-html5 span{
@@ -1972,11 +2006,29 @@ export function DataTable(param) {
 
             /** Select and Search */
             #id_wrapper .custom-select {
-                border: 1px solid rgb(${App.get('primaryColorRGB')}, .30);
+                border: 1px solid transparent;
+                background: #e9ecef;
             }
 
-            #id_wrapper .form-control {
-                border: 1px solid rgb(${App.get('primaryColorRGB')}, .30);
+            #id_wrapper input[type='search'] {
+                border: 1px solid transparent;
+                background: #e9ecef;
+            }
+
+            #id_wrapper input[type='search']:active,
+            #id_wrapper input[type='search']:focus,
+            #id_wrapper select:focus,
+            #id_wrapper select:focus {
+                border: 1px solid transparent;
+                outline: none;
+            }
+
+            #id_wrapper input[type='search']::-webkit-search-cancel-button {
+                -webkit-appearance: none;
+                cursor: pointer;
+                height: 20px;
+                width: 20px;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill=''><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
             }
 
             /** Footer */
@@ -2002,8 +2054,9 @@ export function DataTable(param) {
             /** Pagination */
             #id_wrapper .page-item .page-link {
                 color: unset;
-                border: solid 1px rgb(${App.get('primaryColorRGB')}, .30);
-                padding: 6px 8px;
+                border: none; /* FIXME: Experimental */
+                padding: 3px 7px;
+                border-radius: 6px;
             }
 
             #id_wrapper .page-item .page-link:focus {
@@ -2024,23 +2077,13 @@ export function DataTable(param) {
             #id_wrapper .form-control:focus {
                 box-shadow: none;
                 outline: none;
-                border-color: ${App.get('primaryColor')};
             }
 
             /** Table */
             #id_wrapper .dataTable {
                 border-collapse: collapse !important;
-                font-size: 14px;
+                font-size: ${fontSize || '14px'};
             }
-
-            /** Bordered */
-            /* #id_wrapper .table-bordered {
-                border: 1px solid rgb(${App.get('primaryColorRGB')}, .3);
-            }
-            
-            #id_wrapper .table-bordered.dataTable {
-                border-right-width: 1px;
-            } */
 
             /** Not Bordered*/
             #id_wrapper .table-not-bordered {
@@ -2078,7 +2121,7 @@ export function DataTable(param) {
             #id_wrapper .sorting_asc::after,
             #id_wrapper .sorting_desc::before,
             #id_wrapper .sorting_desc::after {
-                color: ${App.get('primaryColor')}
+                color: ${App.get('primaryColor')};
             }
 
             /** Select Checkbox */
@@ -2102,7 +2145,6 @@ export function DataTable(param) {
             #id_wrapper tbody td.select-checkbox:after, 
             #id_wrapper tbody th.select-checkbox:after {
                 /* margin-top: -19px; */
-                /* color: ${App.get('primaryColor')}; */
                 margin-top: -10px;
                 text-shadow: none;
                 color: white;
@@ -2254,6 +2296,16 @@ export function DataTable(param) {
             options.createdRow = createdRow;
         }
 
+        /** 
+         * FIXME: Experimental
+         * 
+         * 
+        */
+        options.preDrawCallback = function (settings) {
+            var pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+            pagination.toggle(this.api().page.info().pages > 1);
+        }
+
         /** Create table. */
         const table = $(tableId).DataTable(options)
         .on('click', 'tr', function(rowData) {
@@ -2329,7 +2381,7 @@ export function DataTable(param) {
     }
 
     component.DataTable = () => {
-        return $(`#${component.get().id}`).DataTable();
+        return $(`#${component.get()?.id}`)?.DataTable();
     }
 
     component.search = (term, column) => {
@@ -2566,10 +2618,10 @@ export function DropDownField(param) {
                 listener(event) {
                     const data = dropDownOptions.filter(item => {
                         const query = event.target.innerText;
-            
+
                         return query ? item.value.toLowerCase().includes(query.toLowerCase()) : item;
                     });
-            
+
                     showDropDownMenu(event, data);
                 }
             },
@@ -2583,7 +2635,7 @@ export function DropDownField(param) {
 
                         return;
                     }
-                    
+
                     /** @todo remove menu on click outside */
                     showDropDownMenu(event, dropDownOptions);
                 }
@@ -2604,9 +2656,9 @@ export function DropDownField(param) {
                         }
                     } else if (!dropDownOptions.map(item => item.value).includes(value)) {
                         console.log('not a valid option');
-                        
+
                         component.addError('Not a valid option. Please enter or select an option from the menu.');
-                        
+
                         if (onError) {
                             onError(value);
                         }
@@ -2652,7 +2704,7 @@ export function DropDownField(param) {
 
         if (data.length === 0) {
             console.log('no options to show');
-            
+
             return;
         }
 
@@ -2685,7 +2737,7 @@ export function DropDownField(param) {
 
         component.get().classList.remove('disabled');
     }
-    
+
     component.disable = () => {
         disabled = true;
 
@@ -2704,20 +2756,20 @@ export function DropDownField(param) {
 
     component.addError = (param) => {
         component.removeError();
-        
+
         let text = typeof param === 'object' ? param.text : param;
 
         const html = /*html*/ `
             <div class='alert alert-danger' role='alert'>
                 ${text}
-                ${param.button ? 
+                ${param.button ?
                     /*html*/ ` 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    ` 
-                    : ''
-                }
+                    `
+                : ''
+            }
             </div>
         `;
 
@@ -2902,7 +2954,7 @@ export function DropDownMenu(param) {
                     id,
                     value
                 } = option;
-    
+
                 html += /*html*/ `
                     <div class='list-option' data-itemid='${id || 0}' data-index='${index}'>${value}</div>
                 `;
@@ -2912,7 +2964,7 @@ export function DropDownMenu(param) {
                 <div class='loading-item animate'>Searching...</div>
             `;
         }
-        
+
         html += /*html*/ `
                 </div>
             </div>
@@ -2942,12 +2994,12 @@ export function DropDownMenu(param) {
 
             onSetValue({
                 previousValue,
-                newValue: item[0] 
+                newValue: item[0]
             });
         } else {
             onSetValue({
                 previousValue,
-                newValue: data[parseInt(index)] 
+                newValue: data[parseInt(index)]
             });
         }
 
@@ -2987,7 +3039,7 @@ export function DropDownMenu(param) {
             listOptions[0].classList.add('list-option-selected');
         } else {
             currentSelected.classList.remove('list-option-selected');
-            
+
             if (listOptions[nextIndex]) {
                 listOptions[nextIndex].classList.add('list-option-selected');
             } else if (nextIndex >= listOptions.length) {
@@ -3050,7 +3102,7 @@ export function Files(param) {
     const component = Component({
         html: /*html*/ `
             <div class='files'>
-                ${label ? /*html*/ `<div class='files-label'>${label}</div>`: ''}
+                ${label ? /*html*/ `<div class='files-label'>${label}</div>` : ''}
                 <div class='files-table-container'>
                     ${createFilesTable(files)}
                 </div>
@@ -3174,7 +3226,7 @@ export function Files(param) {
                 event: 'change',
                 async listener(event) {
                     const files = event.target.files;
-                    
+
                     if (files.length > 0 && onAdd) {
                         onAdd(files);
                     }
@@ -3270,7 +3322,7 @@ export function Files(param) {
     }
 
     function selectIcon(ext) {
-        switch(ext.toLowerCase()) {
+        switch (ext.toLowerCase()) {
             case 'doc':
             case 'docx':
                 return 'microsoftword';
@@ -3315,7 +3367,7 @@ export function Files(param) {
         }
     }
 
-    
+
     component.addFile = (file) => {
         /** Check if file already exists in table */
         const row = component.find(`.file-row[data-itemid='${file.id}']`);
@@ -3333,7 +3385,7 @@ export function Files(param) {
         if (tbody) {
             tbody.insertAdjacentHTML('beforeend', fileTemplate(file));
         } else {
-            component.find('.files-table-container').innerHTML =  createFilesTable([file]);
+            component.find('.files-table-container').innerHTML = createFilesTable([file]);
         }
 
         /** Add remove event listener*/
@@ -3385,26 +3437,22 @@ export function FixedToast(param) {
                 padding: 20px;
                 box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 10%);
                 border-radius: 4px;
-                ${
-                    top ? 
-                    `top: ${top};` :
-                    ''
-                }
-                ${
-                    bottom ? 
-                    `bottom: ${bottom};` :
-                    ''
-                }
-                ${
-                    left ? 
-                    `left: ${left};` :
-                    ''
-                }
-                ${
-                    right ? 
-                    `right: ${right};` :
-                    ''
-                }
+                ${top ?
+                `top: ${top};` :
+                ''
+            }
+                ${bottom ?
+                `bottom: ${bottom};` :
+                ''
+            }
+                ${left ?
+                `left: ${left};` :
+                ''
+            }
+                ${right ?
+                `right: ${right};` :
+                ''
+            }
             }
 
             #id.inverse-colors {
@@ -3707,7 +3755,7 @@ export function Heading(param) {
         parent: parent,
         position: 'beforeend',
         events: [
-            
+
         ]
     });
 
@@ -4001,7 +4049,7 @@ export function LoadingBar(param) {
 
             if (loadingBar) {
                 loadingBar.classList.add('fadeout');
-        
+
                 loadingBar.addEventListener('animationend', (event) => {
                     loadingBar.remove();
                     resolve(true);
@@ -4049,7 +4097,7 @@ export function MainContainer(param) {
 
     component.dim = (toggle) => {
         const maincontainer = component.get();
-        
+
         if (toggle) {
             maincontainer.classList.add('dim');
         } else {
@@ -4225,7 +4273,7 @@ export function Modal(param) {
             }
 
             /** Override bootstrap defaults */
-            ${fullSize ? 
+            ${fullSize ?
                 /*css*/ `
                     #id .modal-lg, 
                     #id .modal-xl,
@@ -4882,7 +4930,7 @@ export function NameField(param) {
                 selector: `#id .toggle-search-list`,
                 event: 'keydown',
                 listener(event) {
-                    if ((event.key === 'ArrowUp' || event.key === 'ArrowDown') &&  !component.find('.dropdown-menu').classList.contains('show')) {
+                    if ((event.key === 'ArrowUp' || event.key === 'ArrowDown') && !component.find('.dropdown-menu').classList.contains('show')) {
                         event.preventDefault();
                         event.stopPropagation();
 
@@ -5006,7 +5054,7 @@ export function NameField(param) {
                     ${items.map(item => dropdownItemTemplate(item)).join('\n')}
                 </div>
             `
-            
+
         } else {
             if (menu.classList.contains('show')) {
                 component.find('.toggle-search-list').click();
@@ -5020,8 +5068,8 @@ export function NameField(param) {
 
     async function searchSiteUsers(event) {
         event.preventDefault();
-        
-        /** Abort previous queries */ 
+
+        /** Abort previous queries */
         queries.forEach(query => {
             query.abortController.abort();
         });
@@ -5030,7 +5078,7 @@ export function NameField(param) {
 
         if (query === '') {
             event.target.dataset.itemid = '';
-            
+
             // resetMenu();
             // removeSpinner();
 
@@ -5038,10 +5086,10 @@ export function NameField(param) {
 
             return;
         }
-        
+
         removeNonefoundMessage();
         // addSpinner();
- 
+
         const newSearch = GetSiteUsers({
             query
         });
@@ -5080,7 +5128,7 @@ export function NameField(param) {
     /** Add none found message */
     function addNoneFoundMessage() {
         const message = component.find('.none-found');
-        
+
         if (!message) {
             const html = /*html*/ `
                 <span class='none-found' style='color: firebrick;'>
@@ -5095,7 +5143,7 @@ export function NameField(param) {
     /** Remove none found message */
     function removeNonefoundMessage() {
         const message = component.find('.none-found');
-        
+
         if (message) {
             message.remove();
         }
@@ -5110,7 +5158,7 @@ export function NameField(param) {
     component.addError = (param) => {
         /** Remove previous errors */
         component.removeError();
-        
+
         /** Param can be a string or an object */
         let text = typeof param === 'object' ? param.text : param;
 
@@ -5118,20 +5166,20 @@ export function NameField(param) {
         const html = /*html*/ `
             <div class='alert alert-danger' role='alert'>
                 ${text}
-                ${param.button ? 
+                ${param.button ?
                     /*html*/ ` 
                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                         <span aria-hidden='true'>&times;</span>
                     </button>
-                    ` 
-                    : ''
-                }
+                    `
+                : ''
+            }
             </div>
         `;
 
         /** Add HTML to DOM */
         component.find('.form-field-name').insertAdjacentHTML('beforebegin', html);
-        
+
         /** Add Event Listeners to embedded links */
         component.findAll('.alert .alert-link').forEach(link => {
             link.addEventListener('click', event => {
@@ -5307,10 +5355,10 @@ export function NewReply(param) {
                 async listener(event) {
                     const field = component.find('.new-comment');
                     const value = field.innerHTML;
-                   
+
                     if (value) {
                         action(value);
-            
+
                         field.innerHTML = '';
                     } else {
                         console.log('new comment field is empty');
@@ -5415,20 +5463,20 @@ export function NumberField(param) {
 
     component.addError = (param) => {
         component.removeError();
-        
+
         let text = typeof param === 'object' ? param.text : param;
 
         const html = /*html*/ `
             <div class='alert alert-danger' role='alert'>
                 ${text}
-                ${param.button ? 
+                ${param.button ?
                     /*html*/ ` 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    ` 
-                    : ''
-                }
+                    `
+                : ''
+            }
             </div>
         `;
 
@@ -5585,20 +5633,20 @@ export function PercentField(param) {
 
     component.addError = (param) => {
         component.removeError();
-        
+
         let text = typeof param === 'object' ? param.text : param;
 
         const html = /*html*/ `
             <div class='alert alert-danger' role='alert'>
                 ${text}
-                ${param.button ? 
+                ${param.button ?
                     /*html*/ ` 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    ` 
-                    : ''
-                }
+                    `
+                : ''
+            }
             </div>
         `;
 
@@ -5620,7 +5668,7 @@ export function PercentField(param) {
             percentage = Math.round(parseFloat(param) * 100);
 
             field.value = percentage;
-            
+
             const inputGroup = component.find('.input-group');
             const color = setColor(percentage);
 
@@ -5810,7 +5858,7 @@ export function Question(param) {
 
     const replyCount = replies.length;
     const lastReply = replies[0];
-    
+
     const component = Component({
         html: /*html*/ `
             <div class='question'>
@@ -5818,13 +5866,12 @@ export function Question(param) {
                     <div class='card-body'>
                         <h5 class='card-title'>
                             <span class='title-text'>${Title}</span>
-                            ${
-                                Featured ? 
+                            ${Featured ?
                                 /*html*/ `
                                     <span class='badge badge-info' role='alert'>Featured</span>
-                                ` : 
-                                ''
-                            }
+                                ` :
+                ''
+            }
                         </h5>
                         <h6 class='card-subtitle mb-2 text-muted'>${Author.Title} ${formatDate(Created)}</h6>
                         <div class='card-text mb-2'>${Body || ''}</div>
@@ -5832,15 +5879,14 @@ export function Question(param) {
                     </div>
                     ${buildFooter(lastReply)}
                 </div>
-                ${
-                    Author.Name === Store.user().LoginName ?
+                ${Author.Name === Store.user().LoginName ?
                     /*html*/ `
                         <div class='edit-button-container'>
                             <button type='button' class='btn btn-primaryColor edit'>Edit question</button>
                         </div>
                     ` :
-                    ''
-                }
+                ''
+            }
                 <div class='reply-count'>
                     <span class='reply-count-label'>Replies</span>
                     <span class='badge badge-secondary reply-count-value'>${replyCount}</span>
@@ -5916,9 +5962,9 @@ export function Question(param) {
 
         return `
             ${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString('default', {
-                hour: 'numeric',
-                minute: 'numeric'
-            })}
+            hour: 'numeric',
+            minute: 'numeric'
+        })}
         `;
     }
 
@@ -5952,10 +5998,10 @@ export function Question(param) {
                 </div>
             `;
         } else {
-           return '';
+            return '';
         }
     }
-    
+
     function lastReplyTemplate(lastReply) {
         const {
             Author,
@@ -5991,7 +6037,7 @@ export function Question(param) {
             Editor
         } = param;
 
-        component.find('.title-text').innerHTML = Title; 
+        component.find('.title-text').innerHTML = Title;
         component.find('.card-text').innerHTML = Body || '';
         component.find('.edit-text').innerHTML = `Last edited by ${Editor.Title} ${formatDate(Modified)}`;
     }
@@ -6012,7 +6058,7 @@ export function Question(param) {
         }
 
     }
-    
+
     component.editButton = () => {
         return component.find('.edit');
     }
@@ -6051,16 +6097,16 @@ export function QuestionCard(param) {
     const lastReply = replies.sort((a, b) => {
         a = a.Id;
         b = b.Id;
-        
+
         /** Descending */
         if (a > b) {
             return -1;
         }
-        
+
         if (a < b) {
             return 1;
         }
-    
+
         // names must be equal
         return 0;
     })[0];
@@ -6071,30 +6117,27 @@ export function QuestionCard(param) {
                 <div class='card-body'>
                     <h5 class='card-title'>
                         <span>${Title}</span>
-                        ${
-                            Featured ? 
+                        ${Featured ?
                             /*html*/ `
                                 <span class='badge badge-info' role='alert'>Featured</span>
-                            ` : 
-                            ''
-                        }
-                        ${
-                            label === 'new' ? 
+                            ` :
+                ''
+            }
+                        ${label === 'new' ?
                             /*html*/ `
                                 <span class='badge badge-warning' role='alert'>New</span>
-                            ` : 
-                            ''
-                        }
-                        ${
-                            replyCount ? 
+                            ` :
+                ''
+            }
+                        ${replyCount ?
                             /*html*/ `
                                 <span class='reply-count'>
                                     <span class='reply-count-label'>Replies</span>
                                     <span class='badge badge-secondary'>${replyCount}</span>
                                 </span>
-                            ` : 
-                            '' 
-                        }
+                            ` :
+                ''
+            }
                     </h5>
                     <!-- <h6 class='card-subtitle mb-2 text-muted'>Asked by ${Author.Title} ${formatDate(Created)}</h6> -->
                     <h6 class='card-subtitle mb-2 text-muted'>${Author.Title} ${formatDate(Created)}</h6>
@@ -6170,9 +6213,9 @@ export function QuestionCard(param) {
 
         return `
             ${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString('default', {
-                hour: 'numeric',
-                minute: 'numeric'
-            })}
+            hour: 'numeric',
+            minute: 'numeric'
+        })}
         `;
     }
 
@@ -6217,7 +6260,7 @@ export function QuestionCard(param) {
                 </div>
             `;
         } else {
-           return '';
+            return '';
         }
     }
 
@@ -6293,7 +6336,7 @@ export function QuestionsToolbar(param) {
                         button.classList.remove('btn-primary');
                         button.classList.add('btn-outline-primary');
                     });
-                    
+
                     if (isSelected) {
                         event.target.classList.remove('btn-outline-primary');
                         event.target.classList.add('btn-primary');
@@ -6517,26 +6560,24 @@ export function Reply(param) {
     const component = Component({
         html: /*html*/ `
             <div class='card'>
-                ${
-                    Author.Name === Store.user().LoginName ?
+                ${Author.Name === Store.user().LoginName ?
                     /*html*/ `
                         <div class='button-group'>
                             <button type='button' class='btn btn-secondary cancel'>Cancel</button>
                             <button type='button' class='btn btn-primaryColor edit'>Edit reply</button>
                         </div>
                     ` :
-                    ''
-                }
+                ''
+            }
                 <div class='card-body'>
                     <h6 class='card-subtitle mb-2 text-muted'>
                         <span>${Author.Title} ${formatDate(Created)}</span>
-                        ${
-                            label === 'new' ? 
+                        ${label === 'new' ?
                             /*html*/ `
                                 <span class='badge badge-warning' role='alert'>New</span>
-                            ` : 
-                            ''
-                        }
+                            ` :
+                ''
+            }
                     </h6>
                     <div class='card-text mb-2'>${Body || ''}</div>
                     <h6 class='card-subtitle mt-2 text-muted edit-text'>${edited(Created, Modified) ? `Last edited by ${Editor.Title} ${formatDate(Modified)} ` : ''}</h6>
@@ -6675,9 +6716,9 @@ export function Reply(param) {
 
         return `
             ${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString('default', {
-                hour: 'numeric',
-                minute: 'numeric'
-            })}
+            hour: 'numeric',
+            minute: 'numeric'
+        })}
         `;
     }
 
@@ -7035,7 +7076,7 @@ export function SectionStepper(param) {
                     <div class='section-bar'></div>
                 `;
             }
-           
+
             html += /*html*/ `
                     </div>
                     <div class='section-name'>
@@ -7089,7 +7130,7 @@ export function SectionStepper(param) {
 
             const circle = component.find(`.section-circle[data-name='${name}']`);
 
-            circle.classList.remove('complete', 'started','not-started');
+            circle.classList.remove('complete', 'started', 'not-started');
             circle.classList.add(status);
         });
     }
@@ -7115,8 +7156,7 @@ export function Sidebar(param) {
             <div class='sidebar' data-mode='open'>
                 <!-- <div class='logo' data-path='${App.get('defaultRoute')}'></div> -->
                 <img src ='../Images/${logo}' class='logo' data-path='${App.get('defaultRoute')}'>
-                ${
-                    sidebarDropdown ?
+                ${sidebarDropdown ?
                     /*html*/ `
                         <div class='dropdown-container'>
                             <div class='dropdown-label mb-2'>${sidebarDropdown.label}</div>
@@ -7128,20 +7168,22 @@ export function Sidebar(param) {
                             </div>
                         </div>
                     ` :
-                    ''
-                }
+                ''
+            }
                 <div class='nav-container'>
                     ${buildNav()}
                 </div>
                 <div class='settings-container'>
+                    <!-- Settings -->
+                    <span class='nav ${(path === 'Settings') ? 'nav-selected' : ''} settings' data-path='Settings'>
+                        <span class='icon-container-wide'>
+                            <svg class='icon'><use href='#icon-bs-gear'></use></svg>
+                        </span>
+                        <span class='text'>Settings</span>
+                    </span>
                     <!-- Open / Close -->
                     <span class='open-close'>
                         <svg class='icon'><use href='#icon-caret-left'></use></svg>
-                    </span>
-                    <!-- Settings -->
-                    <span class='nav ${(path === 'Settings') ? 'nav-selected' : ''} settings' data-path='Settings'>
-                        <svg class='icon'><use href='#icon-bs-gear'></use></svg>
-                        <span class='text'>Settings</span>
                     </span>
                 </div>
             </div>
@@ -7159,51 +7201,11 @@ export function Sidebar(param) {
 
             /* Nav Container */
             .nav-container {
-                border-top: solid 1px ${App.get('sidebarBorderColor')};
+                background: white;
+                margin: 0px 15px;
+                border-radius: 10px;
+                /* border-top: solid 1px ${App.get('sidebarBorderColor')}; */
                 overflow: overlay;
-            }
-
-            .sidebar .nav {
-                display: flex;
-                align-items: center;
-                width: 100%;
-                min-height: 32px;
-                cursor: pointer;
-                text-align: left;
-                font-size: 1em;
-                font-weight: 400;
-                padding: 4px 10px;
-                color: ${App.get('secondaryColor')};
-                border-left: solid 3px transparent;
-                border-right: solid 3px transparent;
-            }
-
-            .sidebar .nav:not(.nav-selected):hover {
-                background: #2d3d5013;
-            }
-
-            .sidebar .nav-selected {
-                border-left: solid 3px #444;
-                background: #2d3d5026;
-            }
-
-            .sidebar .nav .icon {
-                fill: ${App.get('sidebarTextColor')};
-                stroke: ${App.get('sidebarTextColor')};
-                font-size: 20px;
-            }
-
-            .sidebar .nav .text {
-                color: ${App.get('sidebarTextColor')};
-                font-size: 14px;
-                font-weight: 500;
-                padding-left: 15px;
-            }
-
-            .sidebar .nav .icon:hover,
-            .sidebar .nav-selected .icon {
-                fill: ${App.get('sidebarTextColor')};
-                stroke: ${App.get('sidebarTextColor')};
             }
 
             /* Settings */
@@ -7213,7 +7215,73 @@ export function Sidebar(param) {
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-end;
+                width: calc(100% - 30px);
+            }
+
+            .settings {
+                border-radius: 10px;
+                background: white;
+                margin: 0px 15px;
+            }
+
+            .sidebar .nav {
+                display: flex;
+                align-items: center;
                 width: 100%;
+                min-height: 42px; /** TODO: Variable. Set manually */
+                cursor: pointer;
+                text-align: left;
+                font-size: 1em;
+                font-weight: 400;
+                /* padding: 10px; */
+                color: ${App.get('secondaryColor')};
+                /* border-left: solid 3px transparent;
+                border-right: solid 3px transparent; */
+            }
+
+            /* .sidebar .nav:not(.nav-selected):hover {
+                background: #2d3d5013;
+            } */
+
+            .sidebar .nav-selected {
+                /* border-left: solid 3px #444; */
+                box-shadow: 0px 0px 0px 1px #e4e4e6;
+                background: #e4e4e6;
+            }
+
+            .sidebar .nav .icon-container {
+                display: flex;
+                padding: 10px 15px;
+            }
+
+            
+            .sidebar .nav .icon-container-wide {
+                display: flex;
+                padding: 10px 15px;
+            }
+
+            .sidebar .nav .icon {
+                fill: ${App.get('sidebarTextColor')};
+                stroke: ${App.get('sidebarTextColor')};
+                font-size: 22px;
+            }
+
+            .sidebar .nav .text {
+                flex: 1;
+                color: ${App.get('sidebarTextColor')};
+                font-size: 15px;
+                font-weight: 500;
+                padding: 10px 15px;
+            }
+
+            .sidebar .nav:not(:last-child):not(.settings) .text {
+                border-bottom: solid 1px #e4e4e6;
+            }
+
+            .sidebar .nav .icon:hover,
+            .sidebar .nav-selected .icon {
+                fill: ${App.get('sidebarTextColor')};
+                stroke: ${App.get('sidebarTextColor')};
             }
 
             /* Open/Close */ 
@@ -7225,9 +7293,9 @@ export function Sidebar(param) {
                 text-align: left;
                 font-size: 1em;
                 font-weight: 400;
-                padding: 7.5px 10px;
+                padding: 15px 0px;
                 color: ${App.get('secondaryColor')};
-                border-bottom: solid 1px ${App.get('sidebarBorderColor')};
+                /* border-bottom: solid 1px ${App.get('sidebarBorderColor')}; */
             }
 
             .sidebar .open-close .icon {
@@ -7240,7 +7308,7 @@ export function Sidebar(param) {
             /* Logo */
             #id .logo {
                 cursor: pointer;
-                margin: 10px 0px;
+                margin: 15px 0px;
                 transition: all 150ms;
                 min-height: 31px;
                 object-fit: scale-down;
@@ -7371,7 +7439,7 @@ export function Sidebar(param) {
         const mode = component.get().dataset.mode;
 
         console.log(mode);
-        
+
         if (mode === 'open') {
             closeSidebar(mode, this);
         } else if (mode === 'closed') {
@@ -7382,7 +7450,7 @@ export function Sidebar(param) {
     function closeSidebar(mode, icon) {
         if (mode !== 'closed') {
             /** Add classes */
-            component.find('.logo').src = App.get('logoSmall');
+            component.find('.logo').src = `../Images/${App.get('logoSmall')}`;
             component.find('.logo').classList.add('closed');
             component.find('.dropdown-container')?.classList.add('closed');
             component.findAll('.text').forEach(item => item.classList.add('closed'));
@@ -7393,7 +7461,7 @@ export function Sidebar(param) {
 
             /** Set mode */
             component.get().dataset.mode = 'closed';
-            
+
             /** Log close action */
             console.log(`Close sidebar.`);
         }
@@ -7402,18 +7470,18 @@ export function Sidebar(param) {
     function openSidebar(mode, icon) {
         if (mode !== 'open') {
             /** Remove Classes */
-            component.find('.logo').src = App.get('logo');
+            component.find('.logo').src = `../Images/${App.get('logo')}`;
             component.find('.logo').classList.remove('closed');
             // component.find('.dropdown-container').classList.remove('closed');
             component.findAll('.text').forEach(item => item.classList.remove('closed'));
             icon.classList.remove('closed');
-            
+
             /** Update icon */
             icon.querySelector('.icon use').setAttribute('href', '#icon-caret-left');
 
             /** Set mode */
             component.get().dataset.mode = 'open';
-            
+
             /** Log open action */
             console.log(`Open sidebar.`);
         }
@@ -7441,7 +7509,7 @@ export function Sidebar(param) {
         if (sidebarDropdown.action) {
             sidebarDropdown.action(event);
         }
-        
+
         /** Route */
         const path = location.href.split('#')[1];
 
@@ -7473,9 +7541,12 @@ export function Sidebar(param) {
 
     function navTemplate(routeName, icon) {
         const firstPath = path ? path.split('/')[0] : undefined;
+
         return /*html*/ `
             <span class='nav ${(firstPath === routeName || firstPath === undefined && routeName === App.get('defaultRoute')) ? 'nav-selected' : ''}' data-path='${routeName}'>
-                <svg class='icon'><use href='#icon-${icon}'></use></svg>
+                <span class='icon-container'>
+                    <svg class='icon'><use href='#icon-${icon}'></use></svg>
+                </span>
                 <span class='text'>${routeName.split(/(?=[A-Z])/).join(' ')}</span>
             </span>
         `;
@@ -7484,23 +7555,23 @@ export function Sidebar(param) {
     function buildDropdown(items) {
         // console.info(items)
         return items
-        //.filter(item => item.label !== sidebarDropdown.getSelected()) /** filter out current selection */
-        .map(item => {
-            const {
-                label,
-                key,
-                value
-            } = item;
+            //.filter(item => item.label !== sidebarDropdown.getSelected()) /** filter out current selection */
+            .map(item => {
+                const {
+                    label,
+                    key,
+                    value
+                } = item;
 
-            /** Highlights selected Fiscal Year @author Wilfredo Pacheco 20210810 */
-            var active = '';
-            const isSelected = sessionStorage.getItem(key) === value
-            if ( isSelected ){ active = 'active' }
+                /** Highlights selected Fiscal Year @author Wilfredo Pacheco 20210810 */
+                var active = '';
+                const isSelected = sessionStorage.getItem(key) === value
+                if (isSelected) { active = 'active' }
 
-            return /*html*/ ` 
+                return /*html*/ ` 
                 <span class='dropdown-item ${active}' data-key='${key}' data-value='${value}'>${label}</span>
             `
-        }).join('\n');
+            }).join('\n');
     }
 
     function routeToView() {
@@ -7650,20 +7721,20 @@ export function SingleLineTextField(param) {
 
     component.addError = (param) => {
         component.removeError();
-        
+
         let text = typeof param === 'object' ? param.text : param;
 
         const html = /*html*/ `
             <div class='alert alert-danger' role='alert'>
                 ${text}
-                ${param.button ? 
+                ${param.button ?
                     /*html*/ ` 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    ` 
-                    : ''
-                }
+                    `
+                : ''
+            }
             </div>
         `;
 
@@ -7718,7 +7789,7 @@ export function SiteUsage(param) {
                 <div class='dashboard-long-card-container'>
                     <div class='dashboard-long-card-chart-title'></div>
                     <div class='dashboard-long-card-chart-container'>
-                        <canvas class="myChart" width="900" height="275"></canvas>
+                        <canvas class="myChart" width="800" height="275"></canvas>
                     </div>
                 </div>
                 <!-- Text -->
@@ -7750,7 +7821,7 @@ export function SiteUsage(param) {
             }
 
             /** Text */
-            #id .dashboard-long-card-info-group {
+            #id .info-group {
                 cursor: pointer;
                 margin: 5px 0px;
             }
@@ -7783,33 +7854,29 @@ export function SiteUsage(param) {
             }
 
             /** Label - mimic bootstrap input */
-            .input-group > .text-field:not(:last-child) {
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-            }
-
-            .input-group > .text-field{
-                position: relative;
-                -ms-flex: 1 1 auto;
-                flex: 1 1 auto;
-                width: 1%;
-                min-width: 0;
-                margin-bottom: 0;
-            }
-
-            .text-field {
-                display: block;
+            #id .info-group {
+                display: flex;
+                justify-content: space-between;
                 width: 100%;
-                padding: .375rem .75rem;
-                font-size: .9rem;
-                font-weight: 400;
-                line-height: 1.5;
-                color: #495057;
-                background-color: #fff;
-                background-clip: padding-box;
-                border: 1px solid #ced4da;
-                border-radius: .25rem;
-                transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                font-weight: 500;
+                background: #e9ecef;
+                border-radius: 8px;
+                padding: 5px;
+            }
+
+            #id .info-label {
+                padding: 5px;
+                font-size: 13px;
+                width: 80px;
+            }
+
+            #id .info-count {
+                border-radius: 8px;
+                padding: 5px;
+                background: #2d3d501a;
+                border: none;
+                width: 70px;
+                text-align: center;
             }
         `,
         parent,
@@ -7831,11 +7898,9 @@ export function SiteUsage(param) {
 
     function createInfoGroup(label, property) {
         return /*html*/ `
-            <div class="input-group dashboard-long-card-info-group" data-label='${property}'>
-                <div class='text-field'>${label}</div>
-                <div class="input-group-append">
-                    <div class="input-group-text" id="btnGroupAddon2">${visits[property].length}</div>
-                </div>
+            <div class="info-group" data-label='${property}'>
+                <div class='info-label'>${label}</div>
+                <div class="info-count">${visits[property].length}</div>
             </div>
         `;
     }
@@ -7848,8 +7913,8 @@ export function SiteUsage(param) {
 
     component.clearChart = () => {
         const chartContainer = component.find('.dashboard-long-card-chart-container');
-        
-        chartContainer.innerHTML = /*html*/ `<canvas class="myChart" width="900" height="275"></canvas>`;
+
+        chartContainer.innerHTML = /*html*/ `<canvas class="myChart" width="800" height="275"></canvas>`;
     }
 
     component.getChart = () => {
@@ -8028,11 +8093,6 @@ export function SvgDefs(param) {
                     <symbol id="icon-stats-bars" viewBox="0 0 32 32">
                         <title></title>
                         <path d="M0 26h32v4h-32zM4 18h4v6h-4zM10 10h4v14h-4zM16 16h4v8h-4zM22 4h4v20h-4z"></path>
-                    </symbol>
-                    <symbol id="icon-clipboard" viewBox="0 0 32 32">
-                        <title></title>
-                        <path d="M29 4h-9c0-2.209-1.791-4-4-4s-4 1.791-4 4h-9c-0.552 0-1 0.448-1 1v26c0 0.552 0.448 1 1 1h26c0.552 0 1-0.448 1-1v-26c0-0.552-0.448-1-1-1zM16 2c1.105 0 2 0.895 2 2s-0.895 2-2 2c-1.105 0-2-0.895-2-2s0.895-2 2-2zM28 30h-24v-24h4v3c0 0.552 0.448 1 1 1h14c0.552 0 1-0.448 1-1v-3h4v24z"></path>
-                        <path d="M14 26.828l-6.414-7.414 1.828-1.828 4.586 3.586 8.586-7.586 1.829 1.828z"></path>
                     </symbol>
                     <symbol id="icon-clipboard-add-solid" viewBox="0 0 32 32">
                         <title></title>
@@ -8285,6 +8345,43 @@ export function SvgDefs(param) {
                     <!-- Bootstrap: Plus -->
                     <symbol id="icon-bs-plus" viewBox="0 0 16 16">
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </symbol>
+                    <!-- Bootstrap: Cloud arrow up -->
+                    <symbol id="icon-bs-cloud-arrow-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z"/>
+                        <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
+                    </symbol>
+                    <!-- Bootstrap: Clipboard Check -->
+                    <symbol id="icon-bs-clipboard-check" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                    </symbol>
+                    <!-- Bootstrap: Activity -->
+                    <symbol id="icon-bs-activity" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
+                    </symbol>
+                     <!-- Bootstrap: Wrench -->
+                    <symbol id="icon-bs-wrench" viewBox="0 0 16 16">
+                        <path d="M.102 2.223A3.004 3.004 0 0 0 3.78 5.897l6.341 6.252A3.003 3.003 0 0 0 13 16a3 3 0 1 0-.851-5.878L5.897 3.781A3.004 3.004 0 0 0 2.223.1l2.141 2.142L4 4l-1.757.364L.102 2.223zm13.37 9.019.528.026.287.445.445.287.026.529L15 13l-.242.471-.026.529-.445.287-.287.445-.529.026L13 15l-.471-.242-.529-.026-.287-.445-.445-.287-.026-.529L11 13l.242-.471.026-.529.445-.287.287-.445.529-.026L13 11l.471.242z"/>
+                    </symbol>
+                    <!-- Bootstrap: pause-btn -->
+                    <symbol id="icon-bs-pause-btn" viewBox="0 0 16 16">
+                        <path d="M6.25 5C5.56 5 5 5.56 5 6.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C7.5 5.56 6.94 5 6.25 5zm3.5 0c-.69 0-1.25.56-1.25 1.25v3.5a1.25 1.25 0 1 0 2.5 0v-3.5C11 5.56 10.44 5 9.75 5z"/>
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                    </symbol>
+                    <!-- Bootstrap: File earmark ruled -->
+                    <symbol id="icon-bs-file-earmarked-ruled" viewBox="0 0 16 16">
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h7v1a1 1 0 0 1-1 1H6zm7-3H6v-2h7v2z"/>
+                    </symbol>
+                    <!-- Bootstrap: Person plus -->
+                    <symbol id="icon-bs-person-plus" viewBox="0 0 16 16">
+                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                    </symbol>
+                    <!-- Bootstrap: Book -->
+                    <symbol id="icon-bs-book" viewBox="0 0 16 16">
+                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
                     </symbol>
                     ${addSymbols()}
                 </defs>
@@ -8540,7 +8637,7 @@ export function TasksList(param) {
                 event: 'click',
                 listener(event) {
                     event.target.closest('.form-field-multi-select-row ').remove();
-                    
+
                     onDelete(event.target.dataset.itemid);
                 }
             }
@@ -8694,7 +8791,7 @@ export function TasksList(param) {
         if (newDelete) {
             newDelete.addEventListener('click', event => {
                 event.target.closest('.form-field-multi-select-row ').remove();
-                    
+
                 onDelete(event.target.dataset.itemid);
             });
         }
@@ -8788,22 +8885,22 @@ export function Timer(param) {
 
     function timer() {
         ms++;
-        
-        if (ms >= 100){
+
+        if (ms >= 100) {
             sec++
             ms = 0
         }
 
-        if (sec === 60){
+        if (sec === 60) {
             min++
             sec = 0
         }
 
-        if (min === 60){
+        if (min === 60) {
             ms, sec, min = 0;
         }
 
-        let newMs = ms < 10 ? `0${ms}`: ms;
+        let newMs = ms < 10 ? `0${ms}` : ms;
         let newSec = sec < 10 ? `0${sec}` : sec;
         let newMin = min < 10 ? `0${min}` : min;
 
@@ -8820,12 +8917,12 @@ export function Timer(param) {
 
     component.stop = () => {
         clearInterval(time)
-        
+
         if (stop) {
             stop();
         }
     }
-    
+
     component.reset = () => {
         ms = 0;
         sec = 0;
@@ -8837,7 +8934,7 @@ export function Timer(param) {
             reset();
         }
     }
-    
+
     return component;
 }
 
@@ -8876,29 +8973,28 @@ export function Title(param) {
                 <div class='title-subtitle'>
                     <h1 class='app-title'>${title}</h1>
                     ${subTitle !== undefined ? `<h2>${subTitle}</h2>` : ''}
-                    ${
-                        breadcrumb !== undefined ? 
+                    ${breadcrumb !== undefined ?
                         /*html*/ `
-                            <h2 ${dropdownGroups && dropdownGroups.length ? `style='margin-right: 0px;'` : '' }>
+                            <h2 ${dropdownGroups && dropdownGroups.length ? `style='margin-right: 0px;'` : ''}>
                                 ${buildBreadcrumb(breadcrumb)}
-                                ${dropdownGroups && dropdownGroups.length ? `<span class='_breadcrumb-spacer'>/</span>` : '' }
-                                ${
-                                    dropdownGroups && dropdownGroups.length ?
+                                ${dropdownGroups && dropdownGroups.length ? `<span class='_breadcrumb-spacer'>/</span>` : ''}
+                                ${dropdownGroups && dropdownGroups.length ?
                                     /*html*/ `
                                         ${buildDropdown(dropdownGroups)}
                                     ` :
-                                    ''
-                                }
+                    ''
+                }
                             </h2>
                         ` :
-                        ''
-                    }
+                ''
+            }
                 </div>
                 ${date !== undefined ? `<div class='title-date'>${date}</div>` : ''}
             </div>
         `,
         style: /*css*/ `
             #id {
+                
                 margin: ${margin || '0px'};
             }
 
@@ -8914,16 +9010,17 @@ export function Title(param) {
             }
 
             #id.title h1 {
+                font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
                 font-size: 1.6em;
-                font-weight: 500;
-                color: ${App.get('primaryColor')};
+                font-weight: 900;
+                color: ${App.get('titleColor')};
                 margin-top: 0px;
                 margin-bottom: 10px;
             }
 
             #id.title h2 {
                 font-size: 1.1em;
-                font-weight: 400;
+                font-weight: 500;
                 color: ${App.get('primaryColor')};
                 margin: 0px;
             }
@@ -9057,7 +9154,7 @@ export function Title(param) {
             } = part;
 
             return /*html*/ `
-                <span class='_breadcrumb ${currentPage ? 'current-page': 'route'}' data-path='${path}'>${label}</span>
+                <span class='_breadcrumb ${currentPage ? 'current-page' : 'route'}' data-path='${path}'>${label}</span>
             `;
         }).join(/*html*/ `
             <span class='_breadcrumb-spacer'>/</span>
@@ -9066,8 +9163,8 @@ export function Title(param) {
 
     function buildDropdown(dropdownGroups) {
         return dropdownGroups
-        .map(dropdown => dropdownTemplate(dropdown))
-        .join(/*html*/ `
+            .map(dropdown => dropdownTemplate(dropdown))
+            .join(/*html*/ `
             <span class='_breadcrumb-spacer'>/</span>
         `);
     }
@@ -9086,7 +9183,7 @@ export function Title(param) {
                         <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>${name}</a>
                         <div class='dropdown-menu'>
         `;
-        
+
         items.forEach(part => {
             const {
                 label,
@@ -9111,7 +9208,7 @@ export function Title(param) {
     function goToRoute(event) {
         if (route) {
             console.log(event.target.dataset.path);
-         
+
             route(event.target.dataset.path);
         }
     }
@@ -9245,7 +9342,7 @@ export function Toast(param) {
         position,
         parent,
         events: [
-            
+
         ],
         onAdd() {
             setTimeout(() => {
@@ -9299,7 +9396,7 @@ export function Toolbar(param) {
         parent: parent,
         position: position || 'beforeend',
         events: [
-            
+
         ]
     });
 }
@@ -9352,7 +9449,7 @@ export function UploadButton(param) {
                 event: 'change',
                 async listener(event) {
                     const files = event.target.files;
-                    
+
                     if (files.length > 0) {
                         action(files);
                     }

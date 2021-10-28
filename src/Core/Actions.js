@@ -1005,6 +1005,8 @@ export async function Get(param) {
         mode
     } = param;
 
+    console.log(param);
+
     /** Add abort signal */
     const abortController = new AbortController();
 
@@ -1669,7 +1671,7 @@ export async function Log(param) {
 
         const newItem = await Post(postOptions);
 
-        console.log(`%c'${Store.user().Title}' logged in.`, 'background: #1e1e1e; color: #fff');
+        console.log(`%c'${Store.user().Title}' ${Title}.`, 'background: #1e1e1e; color: #fff');
 
         return newItem.d;
     } else if (App.get('mode') === 'dev') {
