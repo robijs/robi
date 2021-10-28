@@ -90,6 +90,10 @@ export function Lists() {
                 {
                     name: "UserAgent",
                     type: 'mlot'
+                },
+                {
+                    name: "Status",
+                    type: 'slot'
                 }
             ]
         },
