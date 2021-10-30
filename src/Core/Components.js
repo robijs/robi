@@ -1885,6 +1885,7 @@ export function DataTable(param) {
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
+                flex-wrap: wrap;
             }
 
             #id_wrapper .datatable-toolbar .cell {
@@ -1987,6 +1988,10 @@ export function DataTable(param) {
             }
 
             /** HTML5 Buttons */
+            #id_wrapper .dt-buttons {
+                flex-wrap: nowrap !important;
+            }
+
             #id_wrapper .buttons-html5.ml-50 {
                 margin-left: 50px;
             }
@@ -2130,6 +2135,12 @@ export function DataTable(param) {
             #id_wrapper .sorting_desc::before,
             #id_wrapper .sorting_desc::after {
                 color: ${App.get('primaryColor')};
+            }
+
+            #id_wrapper .sorting::after,
+            #id_wrapper .sorting_asc::after,
+            #id_wrapper .sorting_desc::after {
+                right: .1em;
             }
 
             /** Select Checkbox */
