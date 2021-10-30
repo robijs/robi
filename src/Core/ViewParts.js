@@ -172,90 +172,90 @@ export async function DeveloperLinks(param) {
         buttons: [
             {
                 value: 'Settings',
-                url: '/sites/J5/QPP/_layouts/15/settings.aspx'
+                url: `${App.get(`site`)}/_layouts/15/settings.aspx`
             },
             {
-                value: 'Site Contents',
-                url: '/sites/J5/QPP/_layouts/15/viewlsts.aspx'
+                value: `Site Contents`,
+                url: `${App.get(`site`)}/_layouts/15/viewlsts.aspx`
             },
             {
-                value: 'Add an app',
-                url: '/sites/J5/QPP/_layouts/15/addanapp.aspx'
+                value: `Add an app`,
+                url: `${App.get(`site`)}/_layouts/15/addanapp.aspx`
             }
         ]
     });
 
     addSection({
-        title: 'Data',
+        title: `Data`,
         buttons: [
 
         ]
     });
 
     addSection({
-        title: 'Lists',
+        title: `Lists`,
         buttons: [
             {
-                value: 'Errors',
-                url: '/sites/J5/QPP/Lists/Errors'
+                value: `Errors`,
+                url: `${App.get(`site`)}/Lists/Errors`
             },
             {
-                value: 'Log',
-                url: '/sites/J5/QPP/Lists/Log'
+                value: `Log`,
+                url: `${App.get(`site`)}/Lists/Log`
             },
             {
-                value: 'Questions',
-                url: '/sites/J5/QPP/Lists/Questions'
+                value: `Questions`,
+                url: `${App.get(`site`)}/Lists/Questions`
             },
             {
-                value: 'Users',
-                url: '/sites/J5/QPP/Lists/Users'
+                value: `Users`,
+                url: `${App.get(`site`)}/Lists/Users`
             },
             {
-                value: 'Release Notes',
-                url: '/sites/J5/QPP/Lists/ReleaseNotes'
+                value: `Release Notes`,
+                url: `${App.get(`site`)}/Lists/ReleaseNotes`
             }
         ]
     });
 
     addSection({
-        title: 'Libraries',
+        title: `Libraries`,
         buttons: [
             {
-                value: 'App',
-                url: '/sites/J5/QPP/App'
+                value: `App`,
+                url: `${App.get(`site`)}/App`
             },
             {
-                value: 'Docs',
-                url: '/sites/J5/QPP/devdocs'
+                value: `Docs`,
+                url: `${App.get(`site`)}/devdocs`
             }
         ]
     });
 
     addSection({
-        title: 'Schemas',
+        title: `Schemas`,
         buttons: [
 
         ]
     });
 
     addSection({
-        title: 'Business Rules',
+        title: `Business Rules`,
         buttons: [
 
         ]
     });
 
     addSection({
-        title: 'Settings',
+        title: `Settings`,
         buttons: [
             {
-                value: 'Home',
-                url: '/sites/J5/QPP/Lists/Home'
+                value: `Home`,
+                url: `${App.get(`site`)}/Lists/Home`
             },
             {
-                value: 'Questions',
-                url: '/sites/J5/QPP/Lists/Questions'
+                value: `Questions`,
+                url: `${App.get(`site`)}/Lists/Questions`
             }
         ]
     });
@@ -1872,12 +1872,17 @@ export async function SiteUsage(param) {
     
     loadingIndicator.add();
 
+    const workerPath = App.get('mode') === 'prod' ? '../' : `${App.get('site')}/src/`
+
     /** Worker */
-    const worker = new Worker(`${App.get('domain')}${App.get('site')}/src/Core/Workers/SiteUsage.js`, {
+    const worker = new Worker(`${workerPath}Core/Workers/SiteUsage.js`, {
         type: 'module'
     });
 
-    worker.postMessage('dev');
+    worker.postMessage({
+        envMode: App.get('mode'),
+        site: App.get('site')
+    });
 
     Store.addWorker(worker);
 
@@ -1893,7 +1898,7 @@ export async function SiteUsage(param) {
             data: data.stats_1,
             padding: '0px',
             border: 'none',
-            margin: '0px',
+            margin: '10px 0px 0px 0px',
             parent: dashboardCard
         });
 
@@ -2098,6 +2103,7 @@ export function Table(param) {
         headingColor,
         headingSize,
         headingMargin,
+        headerFilter,
         titleDisplayName,
         showId,
         formTitleField,
@@ -2150,6 +2156,10 @@ export function Table(param) {
     /** typeof fields === 'object' */
     (Array.isArray(fields) ? fields : fields.split(','))
     .forEach(field => {
+        const {
+            render
+        } = field;
+        
         const internalFieldName = typeof field === 'object' ? field.internalFieldName : field;
         const displayName = typeof field === 'object' ? field.displayName : field;
         const type = typeof field === 'object' ? field.type || 'slot' : 'slot';
@@ -2158,12 +2168,12 @@ export function Table(param) {
 
         const columnOptions = {
             data: internalFieldName === titleDisplayName ? 'Title' : internalFieldName,
-            type: internalFieldName === idProperty ? 'number' : 'string',
-            visible: internalFieldName === idProperty && !showId ? false : true
+            type: internalFieldName === 'Id' ? 'number' : 'string',
+            visible: internalFieldName === 'Id' && !showId ? false : true
         }
 
         /** Classes */
-        if (internalFieldName === idProperty) {
+        if (internalFieldName === 'Id') {
             columnOptions.className = 'do-not-export bold';
             columnOptions.render = (data, type, row) => {
                 return data;
@@ -2171,9 +2181,13 @@ export function Table(param) {
         }
 
         /** Render */
-        if (internalFieldName.includes('Percent')) {
+        if (render) {
+            columnOptions.render = render
+        }
+
+        else if (internalFieldName.includes('Percent')) {
             columnOptions.render = (data, type, row) => {
-                return `${Math.round(parseFloat(data) * 100)}%`;
+                return `${Math.round(parseFloat(data || 0) * 100)}%`;
             }
         } 
 
@@ -2187,7 +2201,7 @@ export function Table(param) {
 
         else if (internalFieldName === 'Author') {
             columnOptions.render = (data, type, row) => {
-                return data?.Title || '(Local Developer)';
+                return data.Title;
             }
         }
 
@@ -2197,7 +2211,7 @@ export function Table(param) {
             }
         }
 
-        else if (internalFieldName !== idProperty) {
+        else if (internalFieldName !== 'Id') {
             columnOptions.render = (data, type, row) => {
                 return typeof data === 'number' ? parseFloat(data).toLocaleString('en-US') : data;
             }
@@ -2285,6 +2299,7 @@ export function Table(param) {
                                     }
                                 ]
                             },
+                            // TODO: send modal prop to form
                             {
                                 value: 'Create',
                                 classes: 'btn-primary',
@@ -2344,6 +2359,7 @@ export function Table(param) {
     /** Table */
     const table = DataTable({
         headers,
+        headerFilter,
         checkboxes: checkboxes !== false ? true : false,
         striped: striped || false,
         border: border || false,

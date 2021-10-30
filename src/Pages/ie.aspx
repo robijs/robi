@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<%@ Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<%@ Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <head>
     <title>Please Launch App in Edge</title>
     <link rel="shortcut icon" href="../src/Images/favicon.ico">
@@ -63,6 +65,14 @@
             align-items: center;
         }
     </style>
+
+<!--[if gte mso 9]><SharePoint:CTFieldRefs runat=server Prefix="mso:" FieldList="FileLeafRef,i3e7b0477ad24f0693a0b6cb17b27bf1,TaxCatchAllLabel,_dlc_DocId,_dlc_DocIdUrl,_dlc_DocIdPersistId,mb7b7c6cb3b94febb95b36ae1f78ffc5,ba60022a341749df97d7a0ab674012b7"><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">K75DWSHUVDYD-384991697-41</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">fbab23c5-2d85-436d-9156-3f0f350c87fb</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://info.health.mil/staff/analytics/cp/ModernDev/InstallDemo/_layouts/15/DocIdRedir.aspx?ID=K75DWSHUVDYD-384991697-41, K75DWSHUVDYD-384991697-41</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml></SharePoint:CTFieldRefs><![endif]-->
 </head>
 <body>
     <div class="center">

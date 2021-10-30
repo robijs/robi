@@ -2,6 +2,199 @@ import Store from './Store.js'
 import { Get } from './Actions.js'
 
 /**
+ * @param {*} param 
+ * @returns 
+ */
+export function Lists() {
+    return [
+        {
+            list: 'Settings',
+            fields: [
+                {
+                    name: "Key",
+                    type: 'slot'
+                },
+                {
+                    name: "Value",
+                    type: 'mlot'
+                }
+            ]
+        },
+        {
+            list: 'Comments',
+            fields: [
+                {
+                    name: "FK_ParentId",
+                    type: 'number'
+                },
+                {
+                    name: "Comment",
+                    type: 'mlot'
+                },
+                {
+                    name: "SubmitedBy",
+                    type: 'slot'
+                },
+                {
+                    name: "LoginName",
+                    type: 'slot'
+                }
+            ]
+        },
+        {
+            list: 'Errors',
+            fields: [
+                {
+                    name: "SessionId",
+                    type: 'slot'
+                },
+                {
+                    name: "Message",
+                    type: 'mlot'
+                },
+                {
+                    name: "Error",
+                    type: 'mlot'
+                },
+                {
+                    name: "Source",
+                    type: 'mlot'
+                },
+                {
+                    name: "Line",
+                    type: 'number'
+                },
+                {
+                    name: "ColumnNumber",
+                    type: 'number'
+                },
+                {
+                    name: "UserAgent",
+                    type: 'mlot'
+                },
+                {
+                    name: "Status",
+                    type: 'slot'
+                }
+            ]
+        },
+        {
+            list: 'Log',
+            fields: [
+                {
+                    name: "SessionId",
+                    type: 'slot'
+                },
+                {
+                    name: "Message",
+                    type: 'mlot'
+                },
+                {
+                    name: "StackTrace",
+                    type: 'mlot'
+                },
+                {
+                    name: "Module",
+                    type: 'mlot'
+                }
+            ]
+        },
+        {
+            list: 'ReleaseNotes',
+            fields: [
+                {
+                    name: "Summary",
+                    type: 'slot'
+                },
+                {
+                    name: "Description",
+                    type: 'mlot'
+                },
+                {
+                    name: "Status",
+                    type: 'slot'
+                },
+                {
+                    name: "MajorVersion",
+                    type: 'slot'
+                },
+                {
+                    name: "MinorVersion",
+                    type: 'slot'
+                },
+                {
+                    name: "PatchVersion",
+                    type: 'slot'
+                },
+                {
+                    name: "ReleaseType",
+                    type: 'slot'
+                }
+            ]
+        },
+        {
+            list: 'Roles',
+            fields: [
+                {
+                    name: "Role",
+                    type: 'slot'
+                }
+            ]
+        },
+        {
+            list: 'Questions',
+            fields: [
+                {
+                    name: 'Body',
+                    type: 'mlot'
+                },
+                {
+                    name: 'ParentId',
+                    type: 'number'
+                },
+                {
+                    name: 'QuestionId',
+                    type: 'number'
+                },
+                {
+                    name: 'QuestionType',
+                    type: 'slot'
+                },
+                {
+                    name: 'Featured',
+                    type: 'slot'
+                }
+            ]
+        },
+        {
+            list: 'Users',
+            fields: [
+                {
+                    name: "Title",
+                    type: 'slot'
+                },
+                {
+                    name: "Email",
+                    type: 'slot'
+                },
+                {
+                    name: "LoginName",
+                    type: 'slot'
+                },
+                {
+                    name: "Role",
+                    type: 'slot'
+                },
+                {
+                    name: "Settings",
+                    type: 'mlot'
+                }
+            ]
+        }
+    ]
+}
+
+/**
  * 
  * @param {*} param 
  * @returns 

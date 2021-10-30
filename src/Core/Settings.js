@@ -27,13 +27,6 @@ Object.freeze(App);
 /** Routes */
 const Routes = [
     {
-        path: 'Home',
-        hide: true,
-        go() {
-            Home();
-        }  
-    },
-    {
         path: 'Questions',
         icon: 'chat-right-text',
         go(param) { 

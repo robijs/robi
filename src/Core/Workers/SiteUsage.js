@@ -6,13 +6,15 @@ import { SiteUsage } from '../Models.js'
 
 (async () => {
     onmessage = async event => {
+        const {envMode, site} = event.data;
+
         const items = await Get({
             list: 'Log',
             select: 'Id,Title,SessionId,Created,Message,Module,StackTrace,Modified,Author/Name,Author/Title,Editor/Name,Editor/Title',
             expand: `Author/Id,Editor/Id`,
             orderby: 'Id desc',
-            path: '../../..',
-            mode: event.data
+            path: site,
+            mode: envMode
         });
 
         const visitors = [...new Set(items.map(item => item.Author.Title))];
@@ -80,28 +82,35 @@ import { SiteUsage } from '../Models.js'
         const model = SiteUsage({
             visits: items
         });
+
+        const background = '#2d3d501a';
     
         postMessage({
             stats_1: [
                 {
                     label: 'Total Page Views',
                     value: items.length,
+                    background
                 },
                 {
                     label: 'Unique Page Views',
                     value: pages.length,
+                    background
                 },
                 {
                     label: 'Unique Visitors',
                     value: visitors.length,
+                    background
                 },
                 {
                     label: 'Unique Roles',
                     value: roles.length,
+                    background
                 },
                 {
                     label: 'Monthly Active Users',
                     value: visitors.length,
+                    background
                 }
             ],
             stats_2: [
@@ -113,21 +122,24 @@ import { SiteUsage } from '../Models.js'
                 {
                     label: 'Most Popular Page',
                     value: mostPopularPage,
+                    background
                 },
                 {
                     label: 'Most Active Role',
                     value: mostPopularRole,
+                    background
                 },
                 {
                     label: 'Most Active Visitor',
                     value: visitors[0],
                     description: 'Developer',
+                    background
                 },
                 {
                     label: 'Last Visit',
-                    // value: new Date(items[0].Created).toLocaleDateString() + ' ' + new Date(items[0].Created).toLocaleTimeString(),
-                    value: new Date(items[0].Created).toLocaleDateString('default', { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false }),
-                    description: items[0].Author.Title
+                    value: new Date(items[0].Created).toLocaleDateString() + ' ' + new Date(items[0].Created).toLocaleTimeString('default', { timeStyle: 'short', hour12: false }),
+                    description: items[0].Author.Title,
+                    background
                 }
             ],
             model
