@@ -5,7 +5,6 @@
 2. Run
 ```console
 npm start
-foo
 ```
 
 ## Deploy to SharePont Site
