@@ -8,13 +8,13 @@ import { Table } from '../../Core/ViewParts.js'
  * 
  */
 export default async function Home() {
-    /** View Parent */
+    // View parent
     const parent = Store.get('maincontainer');
 
-    /** View Title */
+    // View title
     const viewTitle = Title({
         title: App.get('title'),
-        subTitle: ``,
+        subTitle: `Subtitle!`,
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'

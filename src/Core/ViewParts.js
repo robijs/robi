@@ -2101,6 +2101,7 @@ export function Table(param) {
         headingColor,
         headingSize,
         headingMargin,
+        headerFilter,
         titleDisplayName,
         showId,
         formTitleField,
@@ -2153,6 +2154,10 @@ export function Table(param) {
     /** typeof fields === 'object' */
     (Array.isArray(fields) ? fields : fields.split(','))
     .forEach(field => {
+        const {
+            render
+        } = field;
+        
         const internalFieldName = typeof field === 'object' ? field.internalFieldName : field;
         const displayName = typeof field === 'object' ? field.displayName : field;
         const type = typeof field === 'object' ? field.type || 'slot' : 'slot';
@@ -2161,12 +2166,12 @@ export function Table(param) {
 
         const columnOptions = {
             data: internalFieldName === titleDisplayName ? 'Title' : internalFieldName,
-            type: internalFieldName === idProperty ? 'number' : 'string',
-            visible: internalFieldName === idProperty && !showId ? false : true
+            type: internalFieldName === 'Id' ? 'number' : 'string',
+            visible: internalFieldName === 'Id' && !showId ? false : true
         }
 
         /** Classes */
-        if (internalFieldName === idProperty) {
+        if (internalFieldName === 'Id') {
             columnOptions.className = 'do-not-export bold';
             columnOptions.render = (data, type, row) => {
                 return data;
@@ -2174,9 +2179,13 @@ export function Table(param) {
         }
 
         /** Render */
-        if (internalFieldName.includes('Percent')) {
+        if (render) {
+            columnOptions.render = render
+        }
+
+        else if (internalFieldName.includes('Percent')) {
             columnOptions.render = (data, type, row) => {
-                return `${Math.round(parseFloat(data) * 100)}%`;
+                return `${Math.round(parseFloat(data || 0) * 100)}%`;
             }
         } 
 
@@ -2190,7 +2199,7 @@ export function Table(param) {
 
         else if (internalFieldName === 'Author') {
             columnOptions.render = (data, type, row) => {
-                return data?.Title || '(Local Developer)';
+                return data.Title;
             }
         }
 
@@ -2200,7 +2209,7 @@ export function Table(param) {
             }
         }
 
-        else if (internalFieldName !== idProperty) {
+        else if (internalFieldName !== 'Id') {
             columnOptions.render = (data, type, row) => {
                 return typeof data === 'number' ? parseFloat(data).toLocaleString('en-US') : data;
             }
@@ -2288,6 +2297,7 @@ export function Table(param) {
                                     }
                                 ]
                             },
+                            // TODO: send modal prop to form
                             {
                                 value: 'Create',
                                 classes: 'btn-primary',
@@ -2347,6 +2357,7 @@ export function Table(param) {
     /** Table */
     const table = DataTable({
         headers,
+        headerFilter,
         checkboxes: checkboxes !== false ? true : false,
         striped: striped || false,
         border: border || false,

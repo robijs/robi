@@ -40,6 +40,19 @@ export function Lists() {
     // ]
     return [
         {
+            list: 'Settings',
+            fields: [
+                {
+                    name: "Key",
+                    type: 'slot'
+                },
+                {
+                    name: "Value",
+                    type: 'mlot'
+                }
+            ]
+        },
+        {
             list: 'Comments',
             fields: [
                 {

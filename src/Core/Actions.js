@@ -64,7 +64,8 @@ export function AddLinks(param) {
             linkElement.setAttribute('as', as);
         }
 
-        linkElement.setAttribute('href', `${path || ''}${href}`);
+        // TODO: default relative path might not be right, test locally and on SP
+        linkElement.setAttribute('href', `${path || '../../'}${href}`);
 
         return linkElement;
     }
@@ -1005,8 +1006,6 @@ export async function Get(param) {
         mode
     } = param;
 
-    console.log(param);
-
     /** Add abort signal */
     const abortController = new AbortController();
 
@@ -1108,7 +1107,7 @@ export async function GetAppSetting(prop) {
         filter: `Key eq '${prop}'`
     });
 
-    return getItem[0] || undefined;
+    return getItem ? getItem[0] : undefined;
 }
 
 /**

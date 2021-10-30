@@ -1783,6 +1783,7 @@ export function DashboardBanner(param) {
 export function DataTable(param) {
     const {
         headers,
+        headerFilter,
         columns,
         buttons,
         cursor,
@@ -2296,11 +2297,38 @@ export function DataTable(param) {
             options.createdRow = createdRow;
         }
 
-        /** 
-         * FIXME: Experimental
-         * 
-         * 
-        */
+        if (headerFilter) {
+            options.initComplete = function () {
+                console.log('footer filter');
+
+                var footer = $(this).append('<tfoot><tr></tr></tfoot>');
+
+                // Apply the search
+                this.api().columns().every( function (index) {
+                    var that = this;
+
+                    var data = this.data();
+
+                    if (index === 6) {
+                        return;
+                    }
+
+                    // Append input
+                    // $(`${tableId} tfoot tr`).append('<th><input type="text" style="width:100%;" placeholder="Search column"></th>');
+                    $(footer).append('<th><input type="text" style="width:100%;" placeholder="Search column"></th>');
+     
+                    $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                        if ( that.search() !== this.value ) {
+                            that
+                                .search( this.value )
+                                .draw();
+                        }
+                    } );
+                } );
+            }
+        }
+
+        // FIXME: Experimental
         options.preDrawCallback = function (settings) {
             var pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
             pagination.toggle(this.api().page.info().pages > 1);
@@ -2378,6 +2406,14 @@ export function DataTable(param) {
 
         /** Adjust columns */
         table.columns.adjust().draw();
+
+        /** Header filter */
+        if (headerFilter) {
+            $(`${tableId} tfoot th`).each( function () {
+                var title = $(this).text();
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            } );
+        }
     }
 
     component.DataTable = () => {
@@ -3909,7 +3945,7 @@ export function LoadingBar(param) {
             <div class='loading-bar'>
                 <div class='loading-message'>
                     <!-- <div class='loading-message-logo'></div> -->
-                    <img class='loading-message-logo' src=${displayLogo} />
+                    <img class='loading-message-logo' src='../Images/${displayLogo}' />
                     <div class='loading-message-title'>${displayTitle}</div>
                     <div class='loading-message-text'>${displayText}</div>
                     <div class='loading-bar-container'>
@@ -4192,7 +4228,7 @@ export function Modal(param) {
 
             /** Modal Content */
             #id .modal-content {
-                border-radius: 4px;
+                border-radius: 10px;
                 border: none;
                 background: ${background || ''};
             }
@@ -4214,7 +4250,7 @@ export function Modal(param) {
 
             /** Button radius */
             #id .btn {
-                border-radius: 4px;
+                border-radius: 10px;
             }
 
             #id .btn * {
@@ -4225,6 +4261,14 @@ export function Modal(param) {
             #id .btn-primary {
                 background: mediumseagreen;
                 border: solid 1px mediumseagreen;
+            }
+
+            /** Button color */
+            #id .btn-secondary {
+                background: none;
+                border: solid 1px transparent;
+                color: ${App.get('defaultColor')};
+                font-weight: 500;
             }
 
             /** Button focus */
@@ -6848,11 +6892,6 @@ export function RequestAssitanceInfo(param) {
     return component
 }
 
-/**
- * 
- * @param {*} param 
- * @returns 
- */
 export function SectionStepper(param) {
     const {
         title,
@@ -6916,10 +6955,20 @@ export function SectionStepper(param) {
                 border-right: solid 1px ${App.get('sidebarBorderColor')};
             }
 
+            /* Buttons */
+            #id .btn-secondary {
+                background: #dee2e6;
+                color: #444;
+                border-color: transparent;
+            }
+
             /* Title */
             #id .section-title {
                 font-size: 1em;
-                color: ${App.get('primaryColor')};
+                text-align: center;
+                color: white;
+                background: mediumslateblue;
+                border-radius: 10px;
                 margin-bottom: 15px;
                 padding: .275rem .75rem;
                 cursor: pointer;
@@ -6942,20 +6991,21 @@ export function SectionStepper(param) {
             /* Circle */
             #id .section-circle {
                 user-select: none;
-                border-radius: 50%;
+                /* border-radius: 50%; */
+                border-radius: 25%;
                 width: 24px;
                 height: 24px;
                 padding: 6px;
                 background: ${App.get('primaryColor')};
-                border: solid 1px ${App.get('primaryColor')};
+                border: solid 1px transparent;
                 color: white;
                 text-align: center;
                 line-height: .6;
             }
 
             #id .section-circle.not-started {
-                background: white;
-                color: ${App.get('primaryColor')};
+                background: #e9ecef;
+                color: #444;
             }
 
             #id .section-circle.started {
@@ -6991,8 +7041,8 @@ export function SectionStepper(param) {
             #id .section-bar {
                 background: ${App.get('primaryColor')};
                 height: 10px;
-                width: 1px;
-                margin: 5px 0px;
+                /* width: 1px; */
+                /* margin: 5px 0px; */
             }
 
             /* Name */
@@ -7060,10 +7110,13 @@ export function SectionStepper(param) {
         let html = '';
 
         sections.forEach((section, index, sections) => {
+
             const {
                 name,
                 status
             } = section;
+
+            const ReadinessTitle = 'MTF Readiness Demand Signal'
 
             html += /*html*/ `
                 <div class='section-group'>
@@ -7076,11 +7129,15 @@ export function SectionStepper(param) {
                     <div class='section-bar'></div>
                 `;
             }
-
+           
             html += /*html*/ `
                     </div>
                     <div class='section-name'>
-                        <span class='section-name-text' data-name='${name}'>${name}</span>
+                        <span class='section-name-text' data-name='${name}'>${
+                            name === 'Readiness' ? 
+                            ReadinessTitle : 
+                            name
+                        }</span>
                     </div>
                 </div>
             `;
@@ -7130,7 +7187,7 @@ export function SectionStepper(param) {
 
             const circle = component.find(`.section-circle[data-name='${name}']`);
 
-            circle.classList.remove('complete', 'started', 'not-started');
+            circle.classList.remove('complete', 'started','not-started');
             circle.classList.add(status);
         });
     }
@@ -8961,7 +9018,8 @@ export function Title(param) {
         parent,
         position,
         date,
-        type
+        type,
+        action
     } = param;
 
     /**
@@ -9027,7 +9085,7 @@ export function Title(param) {
 
             #id.title .title-date {
                 font-size: 13px;
-                font-weight: 400;
+                font-weight: 500;
                 color: ${App.get('primaryColor')};
                 margin: 0px;
             }
@@ -9130,7 +9188,7 @@ export function Title(param) {
                 selector: '#id .app-title',
                 event: 'click',
                 listener(event) {
-                    Route('Home');
+                    action ? action(event) : Route('Home');
                 }
             },
             {

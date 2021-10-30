@@ -1,16 +1,5 @@
 import { Start } from './Core/Actions.js'
 import Home from './Routes/Home/Home.js'
-import MeasureRefreshStatus from './Routes/MeasureRefreshStatus/MeasureRefreshStatus.js'
-import MeasureDevelopmentChecklist from './Routes/MeasureDevelopmentChecklist/MeasureDevelopmentChecklist.js'
-import PlaceMeasureOnHold from './Routes/PlaceMeasureOnHold/PlaceMeasureOnHold.js'
-import MeasureIntakeForm from './Routes/MeasureIntakeForm/MeasureIntakeForm.js'
-import MeasureOperationsPortal from './Routes/MeasureOperationsPortal/MeasureOperationsPortal.js'
-import NewAccessRequest from './Routes/NewAccessRequest/NewAccessRequest.js'
-import ResourceLibrary from './Routes/ResourceLibrary/ResourceLibrary.js'
-import HelpRequest from './Routes/HelpRequest/HelpRequest.js'
-import Instructions from './Routes/Instructions/Instructions.js'
-import Administration from './Routes/Administration/Administration.js'
-import MissingFieldsReport from './Routes/MissingFieldsReport/MissingFieldsReport.js'
 
 Start({
     routes: [
@@ -21,83 +10,6 @@ Start({
                 Home();
             }  
         },
-        {
-            path: 'MeasureRefreshStatus',
-            icon: 'bs-activity',
-            go() {
-                MeasureRefreshStatus();
-            }  
-        },
-        {
-            path: 'MeasureDevelopmentChecklist',
-            icon: 'bs-clipboard-check',
-            go() {
-                MeasureDevelopmentChecklist();
-            }  
-        },
-        {
-            path: 'PlaceMeasureOnHold',
-            icon: 'bs-pause-btn',
-            go() {
-                PlaceMeasureOnHold();
-            }  
-        },
-        {
-            path: 'MeasureIntakeForm',
-            icon: 'drawer',
-            go() {
-                MeasureIntakeForm();
-            }  
-        },
-        {
-            path: 'MeasureOperationsPortal',
-            icon: 'bs-cloud-arrow-up',
-            go() {
-                MeasureOperationsPortal();
-            }  
-        },
-        {
-            path: 'NewAccessRequest',
-            icon: 'bs-person-plus',
-            go() {
-                NewAccessRequest();
-            }  
-        },
-        {
-            path: 'ResourceLibrary',
-            icon: 'bs-book',
-            go() {
-                ResourceLibrary();
-            }  
-        },
-        {
-            path: 'HelpRequest',
-            icon: 'question',
-            go() {
-                HelpRequest();
-            }  
-        },
-        {
-            path: 'Instructions',
-            icon: 'play3',
-            go() {
-                Instructions();
-            }  
-        },
-        {
-            path: 'Administration',
-            icon: 'bs-wrench',
-            go() {
-                Administration();
-            }  
-        },
-        {
-            path: 'MissingFieldsReport',
-            icon: 'bs-file-earmarked-ruled',
-            go() {
-                MissingFieldsReport();
-            }  
-        }
     ],
     settings: {
         mode: 'prod',
@@ -106,10 +18,10 @@ Start({
             Name: 'First Last',
             ErrorLogging: 'on'
         },
-        title: 'Measures Library',
+        title: 'App',
         logo: 'dha-logo-no-label-90w.png',
         logoSmall: 'dha-logo-no-label-40w.png',
-        logoLarge: 'https://carepoint.health.mil/sites/J5/AED/MRB/ML/dev/App/src/Images/dha-logo-no-label-386w.png',
+        logoLarge: 'dha-logo-no-label-386w.png',
         primaryColor: '#24292f',
         primaryColorRGB: '45, 61, 80',
         secondaryColor: 'white',
@@ -121,7 +33,7 @@ Start({
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
         defaultRoute: 'Home',
         domain: 'http://127.0.0.1:8080',
-        site: 'https://carepoint.health.mil/sites/J5/AED/MRB/ML/dev',
+        site: '', // enter site
         usersList: 'Users',
         usersFields: [
             {
@@ -155,17 +67,17 @@ Start({
             {
                 rel: 'preload',
                 as: 'image',
-                href: 'https://carepoint.health.mil/sites/J5/AED/MRB/ML/dev/App/src/Images/dha-logo-no-label-40w.png'
+                href: '/Images/dha-logo-no-label-40w.png'
             },
             {
                 rel: 'preload',
                 as: 'image',
-                href: 'https://carepoint.health.mil/sites/J5/AED/MRB/ML/dev/App/src/Images/dha-logo-no-label-90w.png'
+                href: '/Images/dha-logo-no-label-90w.png'
             },
             {
                 rel: 'preload',
                 as: 'image',
-                href: 'https://carepoint.health.mil/sites/J5/AED/MRB/ML/dev/App/src/Images/dha-logo-no-label-386w.png'
+                href: '/Images/dha-logo-no-label-386w.png'
             }
         ],
         questionTypes: [
