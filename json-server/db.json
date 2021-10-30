@@ -189,6 +189,19 @@
       "Created": "2021-10-30T17:43:02.810Z",
       "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
       "Id": 13
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "ee01ec44-4750-416b-a638-2d936b2b66fb",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Start.window.onload (http://127.0.0.1:8080/src/Core/Actions.js:2233:29)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-10-30T18:24:06.622Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 14
     }
   ],
   "Errors": [],
