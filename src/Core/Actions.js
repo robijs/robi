@@ -64,8 +64,10 @@ export function AddLinks(param) {
             linkElement.setAttribute('as', as);
         }
 
+        const relativePath = App.get('mode') === 'prod' ? '../../' : `/src/${App.get('site')}`;
+
         // TODO: default relative path might not be right, test locally and on SP
-        linkElement.setAttribute('href', `${path || '../../'}${href}`);
+        linkElement.setAttribute('href', `${path || relativePath}${href}`);
 
         return linkElement;
     }
@@ -747,7 +749,7 @@ export async function Data(lists) {
         }));
     }
 
-    await Store.get('app-loading-bar').end();
+    await Store.get('app-loading-bar')?.end();
 
     return responses
 }
@@ -2025,84 +2027,88 @@ export function Start(param) {
     window.onload = async () => {
         const defaultLists = Lists();
 
-        const loadingBar = LoadingBar({
-            displayLogo: App.get('logoLarge'),
-            displayTitle: App.get('title'),
-            displayText: 'Loading',
-            totalCount: (lists?.length || 0) + defaultLists.length || 0
-        });
+        // const loadingBar = LoadingBar({
+        //     displayLogo: App.get('logoLarge'),
+        //     displayTitle: App.get('title'),
+        //     displayText: 'Loading',
+        //     totalCount: (lists?.length || 0) + defaultLists.length || 0
+        // });
     
-        loadingBar.add();
+        // loadingBar.add();
 
-        Store.add({
-            name: 'app-loading-bar',
-            component: loadingBar
-        });
+        // Store.add({
+        //     name: 'app-loading-bar',
+        //     component: loadingBar
+        // });
 
-        // Check if app is already installed
-        const isInstalled = await GetAppSetting('Installed');
+        if (App.get('mode') === 'prod') {
+            // Check if app is already installed
+            const isInstalled = await GetAppSetting('Installed');
 
-        if (!isInstalled || isInstalled.Value === 'No') {
-            // Create lists
-            console.log('Installing app...');
+            if (!isInstalled || isInstalled.Value === 'No') {
+                // Create lists
+                console.log('Installing app...');
 
-            for (let list in defaultLists) {
-                await CreateList(defaultLists[list]);
-                loadingBar.update();
-            }
-
-            // Add question types
-            await CreateItem({
-                list: 'Settings',
-                data: {
-                    Key: 'QuestionTypes',
-                    Value: JSON.stringify(questionTypes)
+                for (let list in defaultLists) {
+                    await CreateList(defaultLists[list]);
+                    loadingBar.update();
                 }
-            });
 
-            console.log(`Add Question Types: ${JSON.stringify(questionTypes)}`);
-
-            // Add Release Notes
-            await CreateItem({
-                list: 'ReleaseNotes',
-                data: {
-                    Summary: 'App installed.',
-                    Description: 'Initial lists and items created.',
-                    Status: 'Published',
-                    MajorVersion:'0',
-                    MinorVersion: '1',
-                    PatchVersion: '0',
-                    ReleaseType: 'Current'
-                }
-            });
-
-            console.log(`Add Release Notes: App installed. Initial lists and items created.`);
-
-            if (!isInstalled) {
-                // Create Installed
+                // Add question types
                 await CreateItem({
                     list: 'Settings',
                     data: {
-                        Key: 'Installed',
-                        Value: 'Yes'
+                        Key: 'QuestionTypes',
+                        Value: JSON.stringify(questionTypes)
                     }
                 });
-            } else if (isInstalled.Value === 'No') {
-                // Create Installed
-                await UpdateItem({
-                    list: 'Settings',
-                    itemId: isInstalled.Id,
-                    data: {
-                        Value: 'Yes'
-                    }
-                });
-            }
 
-            console.log('App installed.');
-        } else if (isInstalled.Value === 'Yes') {
-            for (let list in defaultLists) {
-                loadingBar.update();
+                console.log(`Added Question Types: ${JSON.stringify(questionTypes)}`);
+
+                // Add Release Notes
+                await CreateItem({
+                    list: 'ReleaseNotes',
+                    data: {
+                        Summary: 'App installed.',
+                        Description: 'Initial lists and items created.',
+                        Status: 'Published',
+                        MajorVersion:'0',
+                        MinorVersion: '1',
+                        PatchVersion: '0',
+                        ReleaseType: 'Current'
+                    }
+                });
+
+                console.log(`Added Release Notes: App installed. Initial lists and items created.`);
+
+                if (!isInstalled) {
+                    // Create Installed
+                    await CreateItem({
+                        list: 'Settings',
+                        data: {
+                            Key: 'Installed',
+                            Value: 'Yes'
+                        }
+                    });
+                } else if (isInstalled.Value === 'No') {
+                    // Create Installed
+                    await UpdateItem({
+                        list: 'Settings',
+                        itemId: isInstalled.Id,
+                        data: {
+                            Value: 'Yes'
+                        }
+                    });
+                }
+
+                console.log('App installed.');
+            } else if (isInstalled.Value === 'Yes') {
+                for (let list in defaultLists) {
+                    loadingBar.update();
+                }
             }
+        } else {
+            console.log('Dev mode.');
         }
 
         /** Add links to head */

@@ -14,7 +14,7 @@ export default async function Home() {
     // View title
     const viewTitle = Title({
         title: App.get('title'),
-        subTitle: `Subtitle!`,
+        subTitle: `Subtitle`,
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'

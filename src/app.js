@@ -12,7 +12,7 @@ Start({
         },
     ],
     settings: {
-        mode: 'prod',
+        mode: 'dev', // 'dev' || 'prod'
         dev: {
             LoginName: '0987654321@mil',
             Name: 'First Last',

@@ -1872,8 +1872,10 @@ export async function SiteUsage(param) {
     
     loadingIndicator.add();
 
+    const workerPath = App.get('mode') === 'prod' ? '../' : `${App.get('site')}/src/`
+
     /** Worker */
-    const worker = new Worker(`../Core/Workers/SiteUsage.js`, {
+    const worker = new Worker(`${workerPath}Core/Workers/SiteUsage.js`, {
         type: 'module'
     });
 

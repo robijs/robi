@@ -19,28 +19,9 @@
         "Title": "User"
       }
     ],
-    "View_Questions": [
-      {
-        "Id": 1,
-        "Title": "QuestionTypes",
-        "Value": [
-          {
-            "title": "General",
-            "path": "General"
-          },
-          {
-            "title": "Access",
-            "path": "RDS"
-          },
-          {
-            "title": "Feedback",
-            "path": "KSA"
-          }
-        ]
-      }
-    ],
     "Questions": [],
     "Log": [],
     "Errors": [],
-    "Comments": []
+    "Comments": [],
+    "Settings": []
 }

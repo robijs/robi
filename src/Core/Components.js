@@ -3940,12 +3940,14 @@ export function LoadingBar(param) {
         totalCount
     } = param;
 
+    const logoPath = App.get('mode') === 'prod' ? '../Images' : `${App.get('site')}/src/Images`;
+
     const component = Component({
         html: /*html*/ `
             <div class='loading-bar'>
                 <div class='loading-message'>
                     <!-- <div class='loading-message-logo'></div> -->
-                    <img class='loading-message-logo' src='../Images/${displayLogo}' />
+                    <img class='loading-message-logo' src='${logoPath}/${displayLogo}' />
                     <div class='loading-message-title'>${displayTitle}</div>
                     <div class='loading-message-text'>${displayText}</div>
                     <div class='loading-bar-container'>
@@ -6555,13 +6557,13 @@ export function ReleaseNotes(param) {
 
         notes.forEach(note => {
             const {
-                Title,
+                Summary,
                 Description
             } = note;
 
             html += /*html*/ `
                 <li>
-                    <strong>${Title}</strong>
+                    <strong>${Summary}</strong>
                     &mdash;
                     ${Description}
                 </li>
@@ -7208,11 +7210,13 @@ export function Sidebar(param) {
         sidebarDropdown
     } = param;
 
+    const logoPath = App.get('mode') === 'prod' ? '../Images' : `${App.get('site')}/src/Images`;
+
     const component = Component({
         html: /*html*/ `
             <div class='sidebar' data-mode='open'>
                 <!-- <div class='logo' data-path='${App.get('defaultRoute')}'></div> -->
-                <img src ='../Images/${logo}' class='logo' data-path='${App.get('defaultRoute')}'>
+                <img src ='${logoPath}/${logo}' class='logo' data-path='${App.get('defaultRoute')}'>
                 ${sidebarDropdown ?
                     /*html*/ `
                         <div class='dropdown-container'>
@@ -7328,7 +7332,7 @@ export function Sidebar(param) {
                 color: ${App.get('sidebarTextColor')};
                 font-size: 15px;
                 font-weight: 500;
-                padding: 10px 15px;
+                padding: 10px 15px 9px 15px;
             }
 
             .sidebar .nav:not(:last-child):not(.settings) .text {
@@ -7507,7 +7511,7 @@ export function Sidebar(param) {
     function closeSidebar(mode, icon) {
         if (mode !== 'closed') {
             /** Add classes */
-            component.find('.logo').src = `../Images/${App.get('logoSmall')}`;
+            component.find('.logo').src = `${logoPath}/${App.get('logoSmall')}`;
             component.find('.logo').classList.add('closed');
             component.find('.dropdown-container')?.classList.add('closed');
             component.findAll('.text').forEach(item => item.classList.add('closed'));
@@ -7527,7 +7531,7 @@ export function Sidebar(param) {
     function openSidebar(mode, icon) {
         if (mode !== 'open') {
             /** Remove Classes */
-            component.find('.logo').src = `../Images/${App.get('logo')}`;
+            component.find('.logo').src = `${logoPath}/${App.get('logo')}`;
             component.find('.logo').classList.remove('closed');
             // component.find('.dropdown-container').classList.remove('closed');
             component.findAll('.text').forEach(item => item.classList.remove('closed'));

@@ -1132,7 +1132,7 @@ export async function Questions() {
             list: 'Settings',
             filter: `Key eq 'QuestionTypes'`
         });
-
+        
         // localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
         localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, questionTypesResponse[0].Value);
         questionTypes = JSON.parse(localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`));

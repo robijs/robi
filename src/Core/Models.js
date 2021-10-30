@@ -6,38 +6,6 @@ import { Get } from './Actions.js'
  * @returns 
  */
 export function Lists() {
-    // return [
-    //     {
-    //         list: 'Settings',
-    //         fields: [
-    //             {
-    //                 name: "Key",
-    //                 type: 'slot'
-    //             },
-    //             {
-    //                 name: "Value",
-    //                 type: 'mlot'
-    //             }
-    //         ]
-    //     },
-    //     {
-    //         list: 'Test',
-    //         fields: [
-    //             {
-    //                 name: "SLOT",
-    //                 type: 'slot'
-    //             },
-    //             {
-    //                 name: "MLOT",
-    //                 type: 'mlot'
-    //             },
-    //             {
-    //                 name: "Number",
-    //                 type: 'number'
-    //             }
-    //         ]
-    //     }
-    // ]
     return [
         {
             list: 'Settings',
