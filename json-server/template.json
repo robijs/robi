@@ -1,27 +1,33 @@
 {
-    "Users": [
-      {
-        "Id": 1,
-        "Title": "First Last",
-        "Email": "first.mi.last.ctr@mail.mil",
-        "LoginName": "0987654321@mil",
-        "Role": "Developer"
-      }
-    ],
-    "ReleaseNotes": [],
-    "Roles": [
-      {
-        "Id": 1,
-        "Title": "Developer"
-      },
-      {
-        "Id": 2,
-        "Title": "User"
-      }
-    ],
-    "Questions": [],
-    "Log": [],
-    "Errors": [],
-    "Comments": [],
-    "Settings": []
+  "Users": [
+    {
+      "Id": 1,
+      "Title": "First Last",
+      "Email": "first.mi.last.ctr@mail.mil",
+      "LoginName": "0987654321@mil",
+      "Role": "Developer"
+    }
+  ],
+  "ReleaseNotes": [],
+  "Roles": [
+    {
+      "Id": 1,
+      "Title": "Developer"
+    },
+    {
+      "Id": 2,
+      "Title": "User"
+    }
+  ],
+  "Questions": [],
+  "Log": [],
+  "Errors": [],
+  "Comments": [],
+  "Settings": [
+    {
+      "Id": 1,
+      "Key": "QuestionTypes",
+      "Value": "[{\"title\":\"General\",\"path\":\"General\"},{\"title\":\"Access\",\"path\":\"RDS\"},{\"title\":\"Feedback\",\"path\":\"KSA\"}]"
+    }
+  ]
 }
