@@ -172,6 +172,13 @@ export function AppContainer() {
                 pointer-events: none;
                 cursor: wait !important;
             }
+
+            /* Override default Bootstrap Alert */
+            #id .alert {
+                font-size: 14px;
+                border-radius: 10px;
+                border: none;
+            }
         `,
         position: 'afterbegin',
         events: []
@@ -6851,10 +6858,6 @@ export function RequestAssitanceInfo(param) {
             #id p {
                 font-size: 14px;
             }
-
-            #id .alert-light {
-                border: solid 1px rgba(0, 0, 0, 0.06);
-            }
         `,
         parent: parent,
         position,
@@ -7306,7 +7309,7 @@ export function Sidebar(param) {
 
             .sidebar .nav-selected {
                 /* border-left: solid 3px #444; */
-                box-shadow: 0px 0px 0px 1px #e4e4e6;
+                box-shadow: 0px -1px 0px 0px #e4e4e6;
                 background: #e4e4e6;
             }
 
