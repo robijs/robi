@@ -7857,6 +7857,9 @@ export function SiteUsage(param) {
         visits,
     } = data;
 
+    const screenWidth = window.screen.width;
+    const chartWidth = screenWidth > 1500 ? 800 : 500;
+
     const component = Component({
         html: /*html*/ `
             <div class='dashboard-long-card'>
@@ -7864,7 +7867,7 @@ export function SiteUsage(param) {
                 <div class='dashboard-long-card-container'>
                     <div class='dashboard-long-card-chart-title'></div>
                     <div class='dashboard-long-card-chart-container'>
-                        <canvas class="myChart" width="800" height="275"></canvas>
+                        <canvas class="myChart" width="${chartWidth}" height="275"></canvas>
                     </div>
                 </div>
                 <!-- Text -->
@@ -7885,6 +7888,7 @@ export function SiteUsage(param) {
                 border: ${border || App.get('defaultBorder')};
                 display: flex;
                 flex: 1;
+                overflow: auto;
             }
 
             /** Left/Right Containers */
@@ -7989,7 +7993,7 @@ export function SiteUsage(param) {
     component.clearChart = () => {
         const chartContainer = component.find('.dashboard-long-card-chart-container');
 
-        chartContainer.innerHTML = /*html*/ `<canvas class="myChart" width="800" height="275"></canvas>`;
+        chartContainer.innerHTML = /*html*/ `<canvas class="myChart" width="${chartWidth}" height="275"></canvas>`;
     }
 
     component.getChart = () => {
