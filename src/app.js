@@ -1,4 +1,5 @@
 import { Start } from './Core/Actions.js'
+import lists from './lists.js'
 import Home from './Routes/Home/Home.js'
 
 Start({
@@ -42,27 +43,27 @@ Start({
         usersFields: [
             {
                 name: 'Id',
-                type: 0
+                type: 'number'
             },
             {
                 name: 'Title',
-                type: 0
+                type: 'slot'
             },
             {
                 name: 'LoginName',
-                type: 2
+                type: 'slot'
             },
             {
                 name: 'Email',
-                type: 2
+                type: 'slot'
             },
             {
                 name: 'Role',
-                type: 2
+                type: 'slot'
             },
             {
                 name: 'Settings',
-                type: 3
+                type: 'mlot'
             }
         ],
         userSettings: '{}',
@@ -84,8 +85,9 @@ Start({
                 href: '/Images/dha-logo-no-label-386w.png'
             }
         ],
+        lists,
         defaultQueryParameters: ''
-        // lists: [
+        // preLoadLists: [
             // {
             //     list: 'FiscalYears',
             //     select: 'Id,Title,EventDate,EndDate'

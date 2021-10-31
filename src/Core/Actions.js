@@ -1987,6 +1987,7 @@ export function Start(param) {
         beforeLoad,
         links,
         lists,
+        preLoadLists,
         svgSymbols,
         sessionStorageData,
         sidebarDropdown,
@@ -2046,22 +2047,24 @@ export function Start(param) {
     /** Start app on page load */
     window.onload = async () => {
         const defaultLists = Lists();
-
-        // const loadingBar = LoadingBar({
-        //     displayLogo: App.get('logoLarge'),
-        //     displayTitle: App.get('title'),
-        //     displayText: 'Loading',
-        //     totalCount: (lists?.length || 0) + defaultLists.length || 0
-        // });
-    
-        // loadingBar.add();
-
-        // Store.add({
-        //     name: 'app-loading-bar',
-        //     component: loadingBar
-        // });
+        const listsToCreate = defaultLists.concat(lists);
 
         if (App.get('mode') === 'prod') {
+            // Start loading bar animation
+            const loadingBar = LoadingBar({
+                displayLogo: App.get('logoLarge'),
+                displayTitle: App.get('title'),
+                displayText: 'Loading',
+                totalCount: listsToCreate.length || 0
+            });
+
+            loadingBar.add();
+
+            Store.add({
+                name: 'app-loading-bar',
+                component: loadingBar
+            });
+
             // Check if app is already installed
             const isInstalled = await GetAppSetting('Installed');
 
@@ -2069,8 +2072,8 @@ export function Start(param) {
                 // Create lists
                 console.log('Installing app...');
 
-                for (let list in defaultLists) {
-                    await CreateList(defaultLists[list]);
+                for (let list in listsToCreate) {
+                    await CreateList(listsToCreate[list]);
                     loadingBar.update();
                 }
 
@@ -2142,11 +2145,11 @@ export function Start(param) {
         });
 
         /** Get list items */
-        const data = await Data(lists);
+        const data = await Data(preLoadLists);
 
         if (data) {
             /** Add list items to store */
-            lists.forEach((param, index) => {
+            preLoadLists.forEach((param, index) => {
                     const {
                         list
                     } = param;
