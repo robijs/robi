@@ -14,8 +14,12 @@ Start({
     settings: {
         mode: 'dev', // 'dev' || 'prod'
         dev: {
-            LoginName: '0987654321@mil',
-            Name: 'First Last',
+            user: {
+                Title: "First Last",
+                Email: "first.mi.last.ctr@mail.mil",
+                LoginName: "0987654321@mil",
+                Role: "Developer"
+            },
             ErrorLogging: 'on'
         },
         title: 'App',
@@ -78,12 +82,6 @@ Start({
                 rel: 'preload',
                 as: 'image',
                 href: '/Images/dha-logo-no-label-386w.png'
-            }
-        ],
-        questionTypes: [
-            {
-                title: 'General',
-                path: 'General'
             }
         ],
         defaultQueryParameters: ''

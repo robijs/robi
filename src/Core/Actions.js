@@ -601,53 +601,61 @@ export async function CreateItem(param) {
         message
     } = param;
 
-    // Get new request digest
-    const requestDigest = await GetRequestDigest();
+    if (App.get('mode') === 'prod') {
+        const requestDigest = await GetRequestDigest();
 
-    data.__metadata = {
-        'type': `SP.Data.${type || list}ListItem`
-    }
-
-    /**
-     * Pass this object to fetch
-     * 
-     * @interface
-     * @property {string} url - SharePoint 2013 API
-     *
-     */
-    const postOptions = {
-        url: `${App.get('site')}/_api/web/lists/GetByTitle('${list}')/items`,
-        data,
-        headers: {
-            "Content-Type": "application/json;odata=verbose",
-            "Accept": "application/json;odata=verbose",
-            "X-RequestDigest": requestDigest,
+        data.__metadata = {
+            'type': `SP.Data.${type || list}ListItem`
         }
-    }
 
-    let newItem = await Post(postOptions);
-
-    if (!newItem) {
-        return;
-    }
-
-    const refetechedNewItem = await Get({
-        list,
-        select,
-        expand,
-        filter: `Id eq ${newItem.d.Id}`
-    });
-
-    if (notify) {
-        const notification = Toast({
-            text: message || `Item created`
-        });
-
-        notification.add();
-        notification.remove(6000);
-    }
+        const postOptions = {
+            url: `${App.get('site')}/_api/web/lists/GetByTitle('${list}')/items`,
+            data,
+            headers: {
+                "Content-Type": "application/json;odata=verbose",
+                "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": requestDigest,
+            }
+        }
     
-    return refetechedNewItem[0];
+        let newItem = await Post(postOptions);
+    
+        if (!newItem) {
+            return;
+        }
+    
+        const refetechedNewItem = await Get({
+            list,
+            select,
+            expand,
+            filter: `Id eq ${newItem.d.Id}`
+        });
+    
+        if (notify) {
+            const notification = Toast({
+                text: message || `Item created`
+            });
+    
+            notification.add();
+            notification.remove(6000);
+        }
+        
+        return refetechedNewItem[0];
+    } else if (App.get('mode') === 'dev') {
+        const options = {
+            method: `POST`,
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json;odata=verbose",
+                "Accept": "application/json;odata=verbose",
+            }
+        }
+
+        const response = await fetch(`http://localhost:3000/${list}`, options);
+        const newItem = await response.json();
+
+        return newItem;
+    }
 }
 
 /**
@@ -1326,7 +1334,7 @@ export async function GetCurrentUser(param) {
         fields
     } = param;
 
-    const url = App.get('mode') === 'prod' ? `${App.get('site')}/_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${App.get('dev').LoginName}`;
+    const url = App.get('mode') === 'prod' ? `${App.get('site')}/_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${App.get('dev').user.LoginName}`;
     const fetchOptions = {
         headers : { 
             'Content-Type': 'application/json; charset=UTF-8',
@@ -1336,25 +1344,6 @@ export async function GetCurrentUser(param) {
 
     if (App.get('mode') === 'prod') {
         const url = `${App.get('site')}/../_api/web/CurrentUser`;
-
-        /** Check if Users list exists */
-        // const usersList = await Get({
-        //     api: `${App.get('site')}/_api/Web/Lists?$filter=title eq '${list || 'Users'}'`
-        // });
-
-        /** Create users list if it doesn't already exist */
-        // if (usersList.length === 0) {
-        //     console.log(`%cMissing ${list || 'Users'} list.`, 'color: red');
-        //     console.log(`Creating ${list || 'Users'} list....`);
-
-        //     await CreateList({
-        //         list: list || 'Users',
-        //         fields
-        //     });
-
-        //     console.log(`%c${list || 'Users'} list created!`, 'color: mediumseagreen');
-        // }
-
         const currentUser = await fetch(url, fetchOptions);
         const response = await currentUser.json();
         const email = response.d.Email;
@@ -1403,8 +1392,39 @@ export async function GetCurrentUser(param) {
         const currentUser = await fetch(url, fetchOptions);
         const response = await currentUser.json();
 
-        console.log(`%c Found user account for '${response[0].Title}'. `, 'background: seagreen; color: white');
-        return response[0];
+        const {
+            Title,
+            Email,
+            LoginName,
+            Role
+        } = App.get('dev').user;
+
+        if (response[0]) {
+            console.log(`%cFound user account for '${response[0].Title}'.`, 'color: mediumseagreen');
+            return response[0];
+        } else {
+            console.log(`%cMissing user account.`, 'color: red');
+            console.log(`Creating user account for ${Title}....`);
+
+            /** Create user */
+            const newUser = await CreateItem({
+                list: 'Users',
+                data: {
+                    Title,
+                    Email,
+                    LoginName,
+                    Role,
+                    Settings: App.get('userSettings')
+                }
+            });
+
+            if (newUser) {
+                console.log(`%cCreated user account for ${Title}!`, 'color: mediumseagreen');
+                return newUser;
+            } else {
+                console.log(`%cFailed to create a user account for ${Title}. Check POST data.`, 'color: firebrick');
+            }
+        }
     }
 }
 
@@ -1702,7 +1722,7 @@ export async function Log(param) {
 
         await fetch('http://localhost:3000/Log', options);
 
-        console.log(`%c '${Store.user().Title}' logged in. Session ID: ${sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`)}. `, 'background: #1e1e1e; color: #fff');
+        console.log(`%cLog: ${Title}`, 'background: #1e1e1e; color: #fff');
     }
 }
 

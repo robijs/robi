@@ -1,28 +1,24 @@
 {
-  "Users": [
-    {
-      "Id": 1,
-      "Title": "First Last",
-      "Email": "first.mi.last.ctr@mail.mil",
-      "LoginName": "0987654321@mil",
-      "Role": "Developer"
-    }
-  ],
+  "Comments": [],
+  "Errors": [],
+  "Log": [],
+  "Users": [],
+  "Questions": [],
   "ReleaseNotes": [],
   "Roles": [
     {
       "Id": 1,
-      "Title": "Developer"
+      "Title": "Administrator"
     },
     {
       "Id": 2,
+      "Title": "Developer"
+    },
+    {
+      "Id": 3,
       "Title": "User"
     }
   ],
-  "Questions": [],
-  "Log": [],
-  "Errors": [],
-  "Comments": [],
   "Settings": [
     {
       "Id": 1,
