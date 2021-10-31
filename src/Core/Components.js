@@ -3981,7 +3981,7 @@ export function LoadingBar(param) {
                 width: 50%;
                 height: 100%;
                 margin: auto;
-                position: fixed;
+                position: absolute;
                 top: 0; 
                 left: 0; 
                 bottom: 100px; /* @hack */ 

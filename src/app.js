@@ -21,7 +21,8 @@ Start({
                 LoginName: "0987654321@mil",
                 Role: "Developer"
             },
-            ErrorLogging: 'on'
+            ErrorLogging: 'on',
+            testLoading: true,
         },
         title: 'App',
         logo: 'dha-logo-no-label-90w.png',

@@ -1,4 +1,4 @@
-import { Toast, LoadingBar, SvgDefs, Sidebar, AppContainer, MainContainer, FixedToast, Modal } from './Components.js'
+import { Alert, Toast, LoadingBar, SvgDefs, Sidebar, AppContainer, MainContainer, FixedToast, Modal } from './Components.js'
 import { Lists } from './Models.js'
 import { App, Routes } from './Settings.js';
 import Store from './Store.js'
@@ -2048,6 +2048,66 @@ export function Start(param) {
     window.onload = async () => {
         const defaultLists = Lists();
         const listsToCreate = defaultLists.concat(lists);
+
+        if (App.get('dev').testLoading) {
+            // Start loading bar animation
+            const loadingBar = LoadingBar({
+                displayLogo: App.get('logoLarge'),
+                displayTitle: App.get('title'),
+                displayText: 'Loading',
+                totalCount: listsToCreate.length || 0
+            });
+
+            loadingBar.add();
+
+            Store.add({
+                name: 'app-loading-bar',
+                component: loadingBar
+            });
+
+            AddStyle({
+                name: 'console-box',
+                style: /*css*/ `
+                    .console {
+                        position: absolute;
+                        width: 100%;
+                        bottom: 0px;
+                    }
+
+                    .line-number {
+                        display: inline-block;
+                        font-weight: 600;
+                        width: 30px;
+                    }
+                `
+            });
+        
+            const alertInfo = Alert({
+                margin: '20px 0px',
+                type: 'info',
+                text: /*html*/ `
+        
+                `,
+                parent: loadingBar
+            });
+        
+            alertInfo.add();
+
+            alertInfo.get().classList.add('console');
+
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    alertInfo.append(/*html*/ `
+                        <div>
+                            <code class='line-number'>${i + 1}</code>
+                            <code>Test line ${i + 1}</code>
+                        </div>
+                    `);
+                }, (i + 1) * 1000);
+            }
+
+            return;
+        }
 
         if (App.get('mode') === 'prod') {
             // Start loading bar animation
