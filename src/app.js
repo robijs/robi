@@ -38,7 +38,6 @@ Start({
         titleColor: '#1c6cbb',
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
         defaultRoute: 'Home',
-        domain: 'http://127.0.0.1:8080',
         site: '', // enter site
         usersList: 'Users',
         usersFields: [
@@ -87,37 +86,12 @@ Start({
             }
         ],
         lists,
-        defaultQueryParameters: ''
-        // preLoadLists: [
-            // {
-            //     list: 'FiscalYears',
-            //     select: 'Id,Title,EventDate,EndDate'
-            // }
-        // ],
-        // sessionStorageData: [
-            // {
-            //     key: '',
-            //     value: ''
-            // }
-        // ],
-        // sidebarDropdown: {
-        //     label: 'Fiscal Year',
-        //     getSelected() {
-        //         return '2021-222';
-        //     },
-        //     action(event) {
-    
-        //     },
-        //     items: [
-        //         {
-        //             label: '',
-        //             key: '',
-        //             value: ''
-        //         }
-        //     ]
-        // },
-        // beforeLoad() {
-          
-        // }
+        defaultQueryParameters: '',
+        questionTypes: [
+            {
+                title: 'General',
+                path: 'General'
+            }
+        ]
     }
 });

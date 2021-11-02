@@ -1203,7 +1203,7 @@ export async function QuestionsBoard(param) {
                 },
                 {
                     label: /*html*/ `
-                        <div class='spinner-grow text-primary' role='status'>
+                        <div class='spinner-grow text-primary small' role='status'>
                             <span class='sr-only'>Loading...</span>
                         </div>
                     `,
@@ -1225,11 +1225,11 @@ export async function QuestionsBoard(param) {
             filter: `Key eq 'QuestionTypes'`
         });
 
-        localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
+        localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, questionTypesResponse[0].Value);
 
         console.log('questionTypes added to local storage.');
         
-        setTitle(localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`))
+        setTitle(localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`));
     }
     
     function setTitle(items) {
@@ -1559,7 +1559,7 @@ export async function Question(param) {
     let viewTitle;
 
     /** Check local storage for questionTypes */
-    let questionTypes = localStorage.getItem(`${App.get('title').split(' ').join('-')}questionTypes`);
+    let questionTypes = localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`);
 
     if (questionTypes) {
         console.log('Found questionTypes in local storage.');
@@ -1578,7 +1578,7 @@ export async function Question(param) {
                 },
                 {
                     label: /*html*/ `
-                        <div class='spinner-grow text-primary' role='status'>
+                        <div class='spinner-grow text-primary small' role='status'>
                             <span class='sr-only'>Loading...</span>
                         </div>
                     `,
@@ -1600,11 +1600,11 @@ export async function Question(param) {
             filter: `Key eq 'QuestionTypes'`
         });
 
-        localStorage.setItem(`${App.get('title').split(' ').join('-')}questionTypes`, questionTypesResponse[0].Value);
+        localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, questionTypesResponse[0].Value);
 
         console.log('questionTypes added to local storage.');
         
-        setTitle(localStorage.getItem(`${App.get('title').split(' ').join('-')}questionTypes`))
+        // setTitle(localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`))
     }
     
     function setTitle(items) {
@@ -1645,7 +1645,7 @@ export async function Question(param) {
                 },
                 {
                     name:  /*html*/ `
-                        <span class='spinner-grow text-primary' role='status'>
+                        <span class='spinner-grow text-primary small' role='status'>
                             <span class='sr-only'>Loading...</span>
                         </span>
                     `,

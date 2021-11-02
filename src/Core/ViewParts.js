@@ -1,6 +1,7 @@
 import {
     Get,
     UpdateItem,
+    CreateItem,
     Route
 } from '../Core/Actions.js'
 import {
@@ -1790,7 +1791,7 @@ export async function ReleaseNotes(param) {
     /** Get Items */
     const releaseNotes = await Get({
         list: 'ReleaseNotes',
-        select: 'Id,Title,Description,MajorVersion,MinorVersion,PatchVersion,ReleaseType',
+        select: 'Id,Summary,Description,MajorVersion,MinorVersion,PatchVersion,ReleaseType',
         filter: `Status eq 'Published'`
     });
 

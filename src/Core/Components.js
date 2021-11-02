@@ -6656,7 +6656,7 @@ export function ReleaseNotes(param) {
     const component = Component({
         html: /*html*/ `
             <div class='release-notes'>
-                <div class='release-notes-version'>v${version}</div>
+                <div class='release-notes-version'>${version}</div>
                 ${buildNotes(notes)}
             </div>
         `,
@@ -8072,7 +8072,7 @@ export function SiteUsage(param) {
         position: position || 'beforeend',
         events: [
             {
-                selector: '#id .dashboard-long-card-info-group',
+                selector: '#id .info-group',
                 event: 'click',
                 listener(event) {
                     const label = this.dataset.label;

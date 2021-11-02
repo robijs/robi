@@ -30,7 +30,26 @@ export async function AddColumnToView(param) {
 
     const newField = await Post(postOptions);
 
+    // Console success
     console.log(`Added to ${view || 'All Items'}: ${name}.`);
+
+    // Append to install-console
+    const installConsole = Store.get('install-console');
+
+    if (installConsole) {
+        installConsole.append(/*html*/ `
+            <div class='console-line'>
+                <!-- <code class='line-number'>0</code> -->
+                <code>Added '${name}' to view '${view || 'All Items'}'</code>
+            </div>
+        `);
+    }
+
+    const progressBar = Store.get('install-progress-bar');
+
+    if (progressBar) {
+        progressBar.update();
+    }
 
     return newField.d;
 }
@@ -64,7 +83,7 @@ export function AddLinks(param) {
             linkElement.setAttribute('as', as);
         }
 
-        const relativePath = App.get('mode') === 'prod' ? '../../' : `/src/${App.get('site')}`;
+        const relativePath = App.get('mode') === 'prod' ? '..' : `/src/${App.get('site')}`;
 
         // TODO: default relative path might not be right, test locally and on SP
         linkElement.setAttribute('href', `${path || relativePath}${href}`);
@@ -570,7 +589,26 @@ export async function CopyItem(param) {
 
     const newField = await Post(postOptions);
 
-    console.log(`Created Field: ${name}.`);
+    // Console success
+    console.log(`Created column '${name}'`);
+
+    // Append to install-console
+    const installConsole = Store.get('install-console');
+
+    if (installConsole) {
+        installConsole.append(/*html*/ `
+            <div class='console-line'>
+                <!-- <code class='line-number'>0</code> -->
+                <code>Created column '${name}'</code>
+            </div>
+        `);
+    }
+
+    const progressBar = Store.get('install-progress-bar');
+
+    if (progressBar) {
+        progressBar.update();
+    }
 
     /** Add column to All Items view */
     await AddColumnToView({
@@ -687,7 +725,7 @@ export async function CreateList(param) {
         
         return;
     } else {
-        console.log(getList);
+        // console.log(getList);
     }
 
     const postOptions = {
@@ -706,26 +744,47 @@ export async function CreateList(param) {
         }
     }
 
-    console.log(`Created list: ${list}.`);
-
     /** Create list */
     const newList = await Post(postOptions);
 
-    /** Create fields */
-    for (let field in fields) {
-        const {
-            name,
-            type
-        } = fields[field];
-        
-        await CreateColumn({
-            list,
-            name,
-            type
-        });
-    }
+    if (newList) {
+        // Console success
+        console.log(`Created list '${list}'`);
 
-    return newList.d;
+        // Append to install-console
+        const installConsole = Store.get('install-console');
+
+        if (installConsole) {
+            installConsole.append(/*html*/ `
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code>Created list '${list}'</code>
+                </div>
+            `);
+        }
+
+        const progressBar = Store.get('install-progress-bar');
+
+        if (progressBar) {
+            progressBar.update();
+        }
+
+        // Create fields
+        for (let field in fields) {
+            const {
+                name,
+                type
+            } = fields[field];
+            
+            await CreateColumn({
+                list,
+                name,
+                type
+            });
+        }
+
+        return newList.d;
+    }
 }
 
 export async function Data(lists) {
@@ -969,7 +1028,7 @@ export async function LogError(param) {
                 Line,
                 ColumnNumber,
                 Author: {
-                    Title: App.get('dev').Name
+                    Title: App.get('dev').user.Title
                 },
                 Created: new Date().toISOString()
             }),
@@ -1036,6 +1095,11 @@ export async function Get(param) {
             apiPath: path,
             list
         });
+
+        if (!itemCount) {
+            // Always return at least an empty array if query fails for any reason
+            return [];
+        }
     
         const queryFilterString = [
             insertIf(filter, 'filter'),
@@ -1054,7 +1118,7 @@ export async function Get(param) {
         }
     
         try {
-            const response = await fetch(api || `${`${url}('${list}')/items?$top=${top || itemCount}`}&${queryFilterString || ''}`, options);
+            const response = await fetch(api || `${`${url}('${list}')/items?$top=${top || itemCount || ''}`}&${queryFilterString || ''}`, options);
             const data = await response.json();
         
             if (action) {
@@ -1353,7 +1417,7 @@ export async function GetCurrentUser(param) {
             filter: `Email eq '${email}'`
         });
 
-        if (appUser[0]) {
+        if (appUser && appUser[0]) {
             console.log(`%cFound user account for '${appUser[0].Title}'.`, 'background: seagreen; color: white');
             return appUser[0];
         } else {
@@ -1471,7 +1535,7 @@ export async function GetCurrentUser(param) {
         
         return data.d.ItemCount;
     } catch(error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 
@@ -1594,7 +1658,7 @@ export function GetSiteUsers(param) {
     //     `&$filter=substringof('i:0e.t|dod_adfs_provider|', Name) and (substringof('${query}', Title) or substringof('${query}', EMail) or substringof('${query}', FirstName) or substringof('${query}', LastName))&$orderby=Name`
     // ].join('');
     const url = [
-        `${App.get('domain')}`,
+        `${App.get('site')}`,
         `/_vti_bin/listdata.svc/UserInformationList`,
         `?$top=200`,
         `&$select=Name,Account,WorkEmail`,
@@ -1692,7 +1756,7 @@ export async function Log(param) {
 
         const newItem = await Post(postOptions);
 
-        console.log(`%c'${Store.user().Title}' ${Title}.`, 'background: #1e1e1e; color: #fff');
+        console.log(`%cLog: ${Title}`, 'background: #1e1e1e; color: #fff');
 
         return newItem.d;
     } else if (App.get('mode') === 'dev') {
@@ -1709,7 +1773,7 @@ export async function Log(param) {
                 StackTrace: JSON.stringify(StackTrace.replace('Error\n    at ', '')),
                 UserAgent: navigator.userAgent,
                 Author: {
-                    Title: App.get('dev').Name
+                    Title: App.get('dev').user.Title
                 },
                 Created: new Date().toISOString(),
                 Module
@@ -2046,8 +2110,6 @@ export function Start(param) {
 
     /** Start app on page load */
     window.onload = async () => {
-        console.log('window.onload');
-
         const appContainer = AppContainer();
 
         Store.add({
@@ -2060,234 +2122,9 @@ export function Start(param) {
         const defaultLists = Lists();
         const listsToCreate = defaultLists.concat(lists);
 
-        if (App.get('dev').testLoading) {
-            AddStyle({
-                name: 'console-box',
-                style: /*css*/ `
-                    .console {
-                        height: 100%;
-                        overflow: overlay;
-                        background: #1E1E1E;
-                    }
-
-                    .console * {
-                        color: #CCCCCC !important;
-                    }
-
-                    .console-title {
-                        font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
-                    }
-
-                    .line-number {
-                        display: inline-block;
-                        font-weight: 600;
-                        width: 30px;
-                    }
-
-                    .install-modal {
-                        padding: 60px;
-                    }
-                `
-            });
-        
-            // Start loading bar animation
-            const loadingBar = LoadingBar({
-                displayLogo: App.get('logoLarge'),
-                displayTitle: App.get('title'),
-                totalCount: preLoadLists?.length || 0,
-                loadingBar: 'hidden',
-                onReady(event) {
-                    const modal = Modal({
-                        title: false,
-                        disableBackdropClose: true,
-                        async addContent(modalBody) {
-                            modalBody.classList.add('install-modal');
-
-                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                <div><strong>${App.get('title')}</strong> hasn't been run on this site before. Would you like to install it? </div>
-                                <div class='mt-2'>You can uninstall it later.</div>
-                            `);
-
-                            const installBtn = BootstrapButton({
-                                action(event) {
-                                    console.log('Install');
-
-                                    modal.find('.modal-content').style.width = 'unset';
-                                    
-                                    modalBody.style.height = `${modalBody.offsetHeight}px`;
-                                    modalBody.style.width = `${modalBody.offsetWidth}px`;
-                                    modalBody.style.overflowY = 'unset';
-                                    modalBody.style.display = 'flex';
-                                    modalBody.style.flexDirection = 'column',
-                                    modalBody.style.transition = 'all 300ms ease-in-out';
-                                    modalBody.innerHTML = '';
-                                    modalBody.style.height = '80vh';
-                                    modalBody.style.width = '80vw';
-
-                                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                        <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
-                                    `);
-
-                                    const logs = [];
-
-                                    logs.push('Core lists:');
-                                    defaultLists.forEach(item => {
-                                        const { list } = item;
-
-                                        logs.push(`- ${list}`);
-                                    });
-                                    logs.push(' ');
-
-                                    defaultLists.forEach(item => {
-                                        const { list, fields } = item;
-
-                                        logs.push(`Created core list '${list}'`);
-
-                                        fields.forEach(field => {
-                                            const { name } = field;
-
-                                            logs.push(`Created column '${name}'`);
-                                            logs.push(`Added column '${name}' to View 'All Items'`);
-                                        });
-
-                                        logs.push(' ');
-                                    });
-
-                                    logs.push(`${App.get('title')} lists:`);
-                                    lists.forEach(item => {
-                                        const { list } = item;
-
-                                        logs.push(`- ${list}`);
-                                    });
-                                    logs.push(' ');
-
-                                    lists.forEach(item => {
-                                        const { list, fields } = item;
-
-                                        logs.push(`Created ${App.get('title')} list '${list}'`);
-
-                                        fields.forEach(field => {
-                                            const { name } = field;
-
-                                            logs.push(`Created column '${name}'`);
-                                            logs.push(`Added column '${name}' to View 'All Items'`);
-                                        });
-
-                                        logs.push(' ');
-                                    });
-
-                                    const progressBar = ProgressBar({
-                                        parent: modalBody,
-                                        totalCount: logs.length
-                                    });
-
-                                    progressBar.add();
-    
-                                    const alertInfo = Alert({
-                                        type: 'secondary',
-                                        text: '',
-                                        margin: '0px',
-                                        parent: modalBody
-                                    });
-
-                                    alertInfo.add();
-                                    alertInfo.get().classList.add('console');
-
-                                    let line = 0;
-                                    let timeout = 50;
-
-                                    for (let i = 0; i < logs.length; i++) {
-                                        setTimeout(() => {
-                                            line++;
-
-                                            progressBar.update();
-
-                                            alertInfo.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <code class='line-number'>${line}</code>
-                                                    <code>${logs[i]}</code>
-                                                </div>
-                                            `);
-
-                                            alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
-                                        }, (i + 1) * timeout);
-                                    }
-
-                                    setTimeout(() => {
-                                        line++;
-
-                                        alertInfo.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <code class='line-number'>${line}</code>
-                                                <code>'${App.get('title')}' installed</code>
-                                            </div>
-                                        `);
-
-                                        // Show launch button
-                                        const launchBtn = BootstrapButton({
-                                            type: 'primary',
-                                            value: 'Launch app',
-                                            classes: [ 'mt-3', 'w-100' ],
-                                            action(event) {
-                                                console.log('Launch');
-
-                                                modal.close();
-                                                loadingBar.showLoadingBar();
-
-                                                setTimeout(() => {
-                                                    launch();
-                                                }, 150);
-                                            },
-                                            parent: modalBody
-                                        });
-
-                                        launchBtn.add();
-
-                                        alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
-                                    }, (logs.length + 1) * timeout);
-                                },
-                                classes: [ 'w-100 mt-5' ],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'primary',
-                                value: 'Install'
-                            });
-
-                            installBtn.add();
-
-                            const cancelBtn = BootstrapButton({
-                                action(event) {
-                                    console.log('Cancel');
-                                    modal.close();
-                                },
-                                classes: [ 'w-100 mt-2' ],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'light',
-                                value: 'Cancel'
-                            });
-
-                            cancelBtn.add();
-                        },
-                        centered: true,
-                        showFooter: false,
-                    });
-
-                    modal.add();
-
-                    // loadingBar.showLoadingBar();
-                }
-            });
-
-            loadingBar.add();
-
-            Store.add({
-                name: 'app-loading-bar',
-                component: loadingBar
-            });
-        }
-
         if (App.get('mode') === 'prod') {
+            console.log('Mode: prod');
+
             AddStyle({
                 name: 'console-box',
                 style: /*css*/ `
@@ -2323,133 +2160,164 @@ export function Start(param) {
                 displayTitle: App.get('title'),
                 totalCount: preLoadLists?.length || 0,
                 loadingBar: 'hidden',
-                onReady(event) {
-                    const modal = Modal({
-                        title: false,
-                        disableBackdropClose: true,
-                        async addContent(modalBody) {
-                            modalBody.classList.add('install-modal');
+                async onReady(event) {
+                    // Check if app is already installed
+                    const isInstalled = await GetAppSetting('Installed');
 
-                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                <div><strong>${App.get('title')}</strong> hasn't been run on this site before. Would you like to install it? </div>
-                                <div class='mt-2'>You can uninstall it later.</div>
-                            `);
+                    if (!isInstalled || isInstalled.Value === 'No') {
+                        console.log('Installing app...');
 
-                            const installBtn = BootstrapButton({
-                                action(event) {
-                                    console.log('Install');
-
-                                    modal.find('.modal-content').style.width = 'unset';
-                                    
-                                    modalBody.style.height = `${modalBody.offsetHeight}px`;
-                                    modalBody.style.width = `${modalBody.offsetWidth}px`;
-                                    modalBody.style.overflowY = 'unset';
-                                    modalBody.style.display = 'flex';
-                                    modalBody.style.flexDirection = 'column',
-                                    modalBody.style.transition = 'all 300ms ease-in-out';
-                                    modalBody.innerHTML = '';
-                                    modalBody.style.height = '80vh';
-                                    modalBody.style.width = '80vw';
-
-                                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                        <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
-                                    `);
-
-                                    const logs = [];
-
-                                    logs.push('Core lists:');
-                                    defaultLists.forEach(item => {
-                                        const { list } = item;
-
-                                        logs.push(`- ${list}`);
-                                    });
-                                    logs.push(' ');
-
-                                    defaultLists.forEach(item => {
-                                        const { list, fields } = item;
-
-                                        logs.push(`Created core list '${list}'`);
-
-                                        fields.forEach(field => {
-                                            const { name } = field;
-
-                                            logs.push(`Created column '${name}'`);
-                                            logs.push(`Added column '${name}' to View 'All Items'`);
-                                        });
-
-                                        logs.push(' ');
-                                    });
-
-                                    logs.push(`${App.get('title')} lists:`);
-                                    lists.forEach(item => {
-                                        const { list } = item;
-
-                                        logs.push(`- ${list}`);
-                                    });
-                                    logs.push(' ');
-
-                                    lists.forEach(item => {
-                                        const { list, fields } = item;
-
-                                        logs.push(`Created ${App.get('title')} list '${list}'`);
-
-                                        fields.forEach(field => {
-                                            const { name } = field;
-
-                                            logs.push(`Created column '${name}'`);
-                                            logs.push(`Added column '${name}' to View 'All Items'`);
-                                        });
-
-                                        logs.push(' ');
-                                    });
-
-                                    const progressBar = ProgressBar({
-                                        parent: modalBody,
-                                        totalCount: logs.length
-                                    });
-
-                                    progressBar.add();
+                        const modal = Modal({
+                            title: false,
+                            disableBackdropClose: true,
+                            async addContent(modalBody) {
+                                modalBody.classList.add('install-modal');
     
-                                    const alertInfo = Alert({
-                                        type: 'secondary',
-                                        text: '',
-                                        margin: '0px',
-                                        parent: modalBody
-                                    });
-
-                                    alertInfo.add();
-                                    alertInfo.get().classList.add('console');
-
-                                    let line = 0;
-                                    let timeout = 50;
-
-                                    for (let i = 0; i < logs.length; i++) {
-                                        setTimeout(() => {
-                                            line++;
-
-                                            progressBar.update();
-
-                                            alertInfo.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <code class='line-number'>${line}</code>
-                                                    <code>${logs[i]}</code>
-                                                </div>
-                                            `);
-
-                                            alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
-                                        }, (i + 1) * timeout);
-                                    }
-
-                                    setTimeout(() => {
-                                        line++;
-
-                                        alertInfo.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <code class='line-number'>${line}</code>
-                                                <code>'${App.get('title')}' installed</code>
-                                            </div>
+                                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                    <div><strong>${App.get('title')}</strong> hasn't been run on this site before. Would you like to install it? </div>
+                                    <div class='mt-2'>You can uninstall it later.</div>
+                                `);
+    
+                                const installBtn = BootstrapButton({
+                                    async action(event) {
+                                        console.log('Install');
+    
+                                        modal.find('.modal-content').style.width = 'unset';
+                                        
+                                        modalBody.style.height = `${modalBody.offsetHeight}px`;
+                                        modalBody.style.width = `${modalBody.offsetWidth}px`;
+                                        modalBody.style.overflowY = 'unset';
+                                        modalBody.style.display = 'flex';
+                                        modalBody.style.flexDirection = 'column',
+                                        modalBody.style.transition = 'all 300ms ease-in-out';
+                                        modalBody.innerHTML = '';
+                                        modalBody.style.height = '80vh';
+                                        modalBody.style.width = '80vw';
+    
+                                        modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                            <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
                                         `);
 
+                                        // Test
+
+                                        let progressCount = 0;
+
+                                        defaultLists.forEach(item => {
+                                            const { fields } = item;
+
+                                            // List + 1
+                                            progressCount = progressCount + 1;
+    
+                                            fields.forEach(field => {
+                                                // Field +2 (add column to list and view)
+                                                progressCount = progressCount + 2;
+                                            });
+                                        });
+
+                                        lists.forEach(item => {
+                                            const { fields } = item;
+
+                                            // List + 1
+                                            progressCount = progressCount + 1;
+    
+                                            fields.forEach(field => {
+                                                // Field +2 (add column to list and view)
+                                                progressCount = progressCount + 2;
+                                            });
+                                        });
+    
+                                        // END Test
+    
+                                        const progressBar = ProgressBar({
+                                            parent: modalBody,
+                                            totalCount: progressCount
+                                        });
+
+                                        Store.add({
+                                            name: 'install-progress-bar',
+                                            component: progressBar
+                                        });
+    
+                                        progressBar.add();
+        
+                                        const installConsole = Alert({
+                                            type: 'secondary',
+                                            text: '',
+                                            margin: '0px',
+                                            parent: modalBody
+                                        });
+
+                                        Store.add({
+                                            name: 'install-console',
+                                            component: installConsole
+                                        });
+    
+                                        installConsole.add();
+                                        installConsole.get().classList.add('console');
+
+                                        // Add default lists first
+                                        for (let list in defaultLists) {
+                                            // 1. Add list of default lists to install-console
+                                            
+                                            // 2. Create lists
+                                            await CreateList(defaultLists[list]);
+                                        }
+                
+                                        // TODO: add create item taskss to progress bar
+                                        // Add question types
+                                        await CreateItem({
+                                            list: 'Settings',
+                                            data: {
+                                                Key: 'QuestionTypes',
+                                                Value: JSON.stringify(questionTypes)
+                                            }
+                                        });
+                
+                                        console.log(`Added Question Types: ${JSON.stringify(questionTypes)}`);
+                
+                                        // Add Release Notes
+                                        await CreateItem({
+                                            list: 'ReleaseNotes',
+                                            data: {
+                                                Summary: 'App installed',
+                                                Description: 'Initial lists and items created.',
+                                                Status: 'Published',
+                                                MajorVersion:'0',
+                                                MinorVersion: '1',
+                                                PatchVersion: '0',
+                                                ReleaseType: 'Current'
+                                            }
+                                        });
+                
+                                        console.log(`Added Release Notes: App installed. Initial lists and items created.`);
+
+                                        // TODO: Add app lists defined by user in Start param.lists
+                
+                                        if (!isInstalled) {
+                                            // Create Installed
+                                            await CreateItem({
+                                                list: 'Settings',
+                                                data: {
+                                                    Key: 'Installed',
+                                                    Value: 'Yes'
+                                                }
+                                            });
+                                        } else if (isInstalled.Value === 'No') {
+                                            // Create Installed
+                                            await UpdateItem({
+                                                list: 'Settings',
+                                                itemId: isInstalled.Id,
+                                                data: {
+                                                    Value: 'Yes'
+                                                }
+                                            });
+                                        }
+                
+                                        console.log('App installed');
+    
+                                        let line = 0;
+                                        let timeout = 50;
+    
                                         // Show launch button
                                         const launchBtn = BootstrapButton({
                                             type: 'primary',
@@ -2463,46 +2331,44 @@ export function Start(param) {
 
                                                 setTimeout(() => {
                                                     launch();
-                                                }, 150);
+                                                }, 150); // hack, should wait for modal close animationend
                                             },
                                             parent: modalBody
                                         });
 
                                         launchBtn.add();
-
-                                        alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
-                                    }, (logs.length + 1) * timeout);
-                                },
-                                classes: [ 'w-100 mt-5' ],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'primary',
-                                value: 'Install'
-                            });
-
-                            installBtn.add();
-
-                            const cancelBtn = BootstrapButton({
-                                action(event) {
-                                    console.log('Cancel');
-                                    modal.close();
-                                },
-                                classes: [ 'w-100 mt-2' ],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'light',
-                                value: 'Cancel'
-                            });
-
-                            cancelBtn.add();
-                        },
-                        centered: true,
-                        showFooter: false,
-                    });
-
-                    modal.add();
-
-                    // loadingBar.showLoadingBar();
+                                    },
+                                    classes: [ 'w-100 mt-5' ],
+                                    width: '100%',
+                                    parent: modalBody,
+                                    type: 'primary',
+                                    value: 'Install'
+                                });
+    
+                                installBtn.add();
+    
+                                const cancelBtn = BootstrapButton({
+                                    action(event) {
+                                        console.log('Cancel');
+                                        modal.close();
+                                    },
+                                    classes: [ 'w-100 mt-2' ],
+                                    width: '100%',
+                                    parent: modalBody,
+                                    type: 'light',
+                                    value: 'Cancel'
+                                });
+    
+                                cancelBtn.add();
+                            },
+                            centered: true,
+                            showFooter: false,
+                        });
+    
+                        modal.add();
+                    } else {
+                        launch();
+                    }
                 }
             });
 
@@ -2512,76 +2378,233 @@ export function Start(param) {
                 name: 'app-loading-bar',
                 component: loadingBar
             });
-
-            // Check if app is already installed
-            const isInstalled = await GetAppSetting('Installed');
-
-            if (!isInstalled || isInstalled.Value === 'No') {
-                // Create lists
-                console.log('Installing app...');
-
-                for (let list in listsToCreate) {
-                    await CreateList(listsToCreate[list]);
-                    loadingBar.update();
-                }
-
-                // Add question types
-                await CreateItem({
-                    list: 'Settings',
-                    data: {
-                        Key: 'QuestionTypes',
-                        Value: JSON.stringify(questionTypes)
-                    }
-                });
-
-                console.log(`Added Question Types: ${JSON.stringify(questionTypes)}`);
-
-                // Add Release Notes
-                await CreateItem({
-                    list: 'ReleaseNotes',
-                    data: {
-                        Summary: 'App installed.',
-                        Description: 'Initial lists and items created.',
-                        Status: 'Published',
-                        MajorVersion:'0',
-                        MinorVersion: '1',
-                        PatchVersion: '0',
-                        ReleaseType: 'Current'
-                    }
-                });
-
-                console.log(`Added Release Notes: App installed. Initial lists and items created.`);
-
-                if (!isInstalled) {
-                    // Create Installed
-                    await CreateItem({
-                        list: 'Settings',
-                        data: {
-                            Key: 'Installed',
-                            Value: 'Yes'
-                        }
-                    });
-                } else if (isInstalled.Value === 'No') {
-                    // Create Installed
-                    await UpdateItem({
-                        list: 'Settings',
-                        itemId: isInstalled.Id,
-                        data: {
-                            Value: 'Yes'
-                        }
-                    });
-                }
-
-                console.log('App installed.');
-            } else if (isInstalled.Value === 'Yes') {
-                for (let list in defaultLists) {
-                    loadingBar.update();
-                }
-            }
-
-            launch();
         } else {
-            console.log('Dev mode');
+            console.log('Mode: dev');
+
+            if (App.get('dev').testLoading) {
+                AddStyle({
+                    name: 'console-box',
+                    style: /*css*/ `
+                        .console {
+                            height: 100%;
+                            overflow: overlay;
+                            background: #1E1E1E;
+                        }
+    
+                        .console * {
+                            color: #CCCCCC !important;
+                        }
+    
+                        .console-title {
+                            font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
+                        }
+    
+                        .line-number {
+                            display: inline-block;
+                            font-weight: 600;
+                            width: 30px;
+                        }
+    
+                        .install-modal {
+                            padding: 60px;
+                        }
+                    `
+                });
+            
+                // Start loading bar animation
+                const loadingBar = LoadingBar({
+                    displayLogo: App.get('logoLarge'),
+                    displayTitle: App.get('title'),
+                    totalCount: preLoadLists?.length || 0,
+                    loadingBar: 'hidden',
+                    onReady(event) {
+                        const modal = Modal({
+                            title: false,
+                            disableBackdropClose: true,
+                            async addContent(modalBody) {
+                                modalBody.classList.add('install-modal');
+    
+                                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                    <div><strong>${App.get('title')}</strong> hasn't been run on this site before. Would you like to install it? </div>
+                                    <div class='mt-2'>You can uninstall it later.</div>
+                                `);
+    
+                                const installBtn = BootstrapButton({
+                                    action(event) {
+                                        console.log('Install');
+    
+                                        modal.find('.modal-content').style.width = 'unset';
+                                        
+                                        modalBody.style.height = `${modalBody.offsetHeight}px`;
+                                        modalBody.style.width = `${modalBody.offsetWidth}px`;
+                                        modalBody.style.overflowY = 'unset';
+                                        modalBody.style.display = 'flex';
+                                        modalBody.style.flexDirection = 'column',
+                                        modalBody.style.transition = 'all 300ms ease-in-out';
+                                        modalBody.innerHTML = '';
+                                        modalBody.style.height = '80vh';
+                                        modalBody.style.width = '80vw';
+    
+                                        modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                            <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
+                                        `);
+    
+                                        const logs = [];
+    
+                                        logs.push('Core lists:');
+                                        defaultLists.forEach(item => {
+                                            const { list } = item;
+    
+                                            logs.push(`- ${list}`);
+                                        });
+                                        logs.push(' ');
+    
+                                        defaultLists.forEach(item => {
+                                            const { list, fields } = item;
+    
+                                            logs.push(`Created core list '${list}'`);
+    
+                                            fields.forEach(field => {
+                                                const { name } = field;
+    
+                                                logs.push(`Created column '${name}'`);
+                                                logs.push(`Added column '${name}' to View 'All Items'`);
+                                            });
+    
+                                            logs.push(' ');
+                                        });
+    
+                                        logs.push(`${App.get('title')} lists:`);
+                                        lists.forEach(item => {
+                                            const { list } = item;
+    
+                                            logs.push(`- ${list}`);
+                                        });
+                                        logs.push(' ');
+    
+                                        lists.forEach(item => {
+                                            const { list, fields } = item;
+    
+                                            logs.push(`Created ${App.get('title')} list '${list}'`);
+    
+                                            fields.forEach(field => {
+                                                const { name } = field;
+    
+                                                logs.push(`Created column '${name}'`);
+                                                logs.push(`Added column '${name}' to View 'All Items'`);
+                                            });
+    
+                                            logs.push(' ');
+                                        });
+    
+                                        const progressBar = ProgressBar({
+                                            parent: modalBody,
+                                            totalCount: logs.length
+                                        });
+    
+                                        progressBar.add();
+        
+                                        const alertInfo = Alert({
+                                            type: 'secondary',
+                                            text: '',
+                                            margin: '0px',
+                                            parent: modalBody
+                                        });
+    
+                                        alertInfo.add();
+                                        alertInfo.get().classList.add('console');
+    
+                                        let line = 0;
+                                        let timeout = 50;
+    
+                                        for (let i = 0; i < logs.length; i++) {
+                                            setTimeout(() => {
+                                                line++;
+    
+                                                progressBar.update();
+    
+                                                alertInfo.append(/*html*/ `
+                                                    <div class='console-line'>
+                                                        <code class='line-number'>${line}</code>
+                                                        <code>${logs[i]}</code>
+                                                    </div>
+                                                `);
+    
+                                                alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
+                                            }, (i + 1) * timeout);
+                                        }
+    
+                                        setTimeout(() => {
+                                            line++;
+    
+                                            alertInfo.append(/*html*/ `
+                                                <div class='console-line'>
+                                                    <code class='line-number'>${line}</code>
+                                                    <code>'${App.get('title')}' installed</code>
+                                                </div>
+                                            `);
+    
+                                            // Show launch button
+                                            const launchBtn = BootstrapButton({
+                                                type: 'primary',
+                                                value: 'Launch app',
+                                                classes: [ 'mt-3', 'w-100' ],
+                                                action(event) {
+                                                    console.log('Launch');
+    
+                                                    modal.close();
+                                                    loadingBar.showLoadingBar();
+    
+                                                    setTimeout(() => {
+                                                        launch();
+                                                    }, 150);
+                                                },
+                                                parent: modalBody
+                                            });
+    
+                                            launchBtn.add();
+    
+                                            alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
+                                        }, (logs.length + 1) * timeout);
+                                    },
+                                    classes: [ 'w-100 mt-5' ],
+                                    width: '100%',
+                                    parent: modalBody,
+                                    type: 'primary',
+                                    value: 'Install'
+                                });
+    
+                                installBtn.add();
+    
+                                const cancelBtn = BootstrapButton({
+                                    action(event) {
+                                        console.log('Cancel');
+                                        modal.close();
+                                    },
+                                    classes: [ 'w-100 mt-2' ],
+                                    width: '100%',
+                                    parent: modalBody,
+                                    type: 'light',
+                                    value: 'Cancel'
+                                });
+    
+                                cancelBtn.add();
+                            },
+                            centered: true,
+                            showFooter: false,
+                        });
+    
+                        modal.add();
+                    }
+                });
+    
+                loadingBar.add();
+    
+                Store.add({
+                    name: 'app-loading-bar',
+                    component: loadingBar
+                });
+            }
         }
 
         async function launch() {
