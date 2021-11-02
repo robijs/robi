@@ -2192,7 +2192,7 @@ export function Start(param) {
                                     border: none;
                                     background: #1E1E1E;
                                     color: white !important;
-                                    animation: fade-alert 200ms ease-in-out forwards;
+                                    animation: fade-in-bottom 200ms ease-in-out forwards;
                                 };
         
                                 .install-alert * {

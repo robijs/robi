@@ -1,6 +1,7 @@
 import { Start } from './Core/Actions.js'
 import lists from './lists.js'
 import Home from './Routes/Home/Home.js'
+import Resources from './Routes/Resources/Resources.js'
 
 Start({
     routes: [
@@ -9,6 +10,13 @@ Start({
             hide: true,
             go() {
                 Home();
+            }  
+        },
+        {
+            path: 'Resources',
+            icon: 'book',
+            go() {
+                Resources();
             }  
         },
     ],
@@ -22,7 +30,7 @@ Start({
                 Role: "Developer"
             },
             ErrorLogging: 'on',
-            testLoading: true,
+            // testLoading: true, // choose true || false
         },
         title: 'App', // enter app name
         site: '', // enter site
