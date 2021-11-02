@@ -1,4 +1,4 @@
-import { Alert, Toast, LoadingBar, SvgDefs, Sidebar, AppContainer, MainContainer, FixedToast, Modal } from './Components.js'
+import { Alert, Toast, LoadingBar, SvgDefs, Sidebar, AppContainer, MainContainer, FixedToast, Modal, BootstrapButton, ProgressBar } from './Components.js'
 import { Lists } from './Models.js'
 import { App, Routes } from './Settings.js';
 import Store from './Store.js'
@@ -2050,12 +2050,181 @@ export function Start(param) {
         const listsToCreate = defaultLists.concat(lists);
 
         if (App.get('dev').testLoading) {
+            AddStyle({
+                name: 'console-box',
+                style: /*css*/ `
+                    .console {
+                        height: 100%;
+                        overflow: overlay;
+                    }
+
+                    .console-title {
+                        font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
+                    }
+
+                    .line-number {
+                        display: inline-block;
+                        font-weight: 600;
+                        width: 30px;
+                    }
+
+                    .install-modal {
+                        padding: 60px;
+                    }
+                `
+            });
+        
             // Start loading bar animation
             const loadingBar = LoadingBar({
                 displayLogo: App.get('logoLarge'),
                 displayTitle: App.get('title'),
-                displayText: 'Loading',
-                totalCount: listsToCreate.length || 0
+                totalCount: listsToCreate.length || 0,
+                loadingBar: 'hidden',
+                onReady(event) {
+                    const modal = Modal({
+                        title: false,
+                        async addContent(modalBody) {
+                            modalBody.classList.add('install-modal');
+
+                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                <div><strong>${App.get('title')}</strong> hasn't been run on this site before. Would you like to install it? </div>
+                                <div class='mt-2'>You can uninstall it later.</div>
+                            `);
+
+                            const installBtn = BootstrapButton({
+                                action(event) {
+                                    console.log('Install');
+
+                                    modal.find('.modal-content').style.width = 'unset';
+                                    
+                                    modalBody.style.height = `${modalBody.offsetHeight}px`;
+                                    modalBody.style.width = `${modalBody.offsetWidth}px`;
+                                    modalBody.style.overflowY = 'unset';
+                                    modalBody.style.display = 'flex';
+                                    modalBody.style.flexDirection = 'column',
+                                    modalBody.style.transition = 'all 300ms ease-in-out';
+                                    modalBody.innerHTML = '';
+                                    modalBody.style.height = '80vw';
+                                    modalBody.style.width = '80vw';
+
+                                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                        <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
+                                    `);
+
+                                    const logs = [];
+
+                                    listsToCreate.forEach(item => {
+                                        const { list, fields } = item;
+
+                                        logs.push(`Created list '${list}'`);
+
+                                        fields.forEach(field => {
+                                            const { name } = field;
+
+                                            logs.push(`Created column '${name}'`);
+                                            logs.push(`Added column '${name}' to View 'All Items'`);
+                                        });
+
+                                        logs.push('----------------------------------------');
+                                    });
+
+                                    // console.log(logs);
+
+                                    const progressBar = ProgressBar({
+                                        parent: modalBody,
+                                        totalCount: logs.length
+                                    });
+
+                                    progressBar.add();
+    
+                                    const alertInfo = Alert({
+                                        type: 'secondary',
+                                        text: '',
+                                        margin: '0px',
+                                        parent: modalBody
+                                    });
+
+                                    alertInfo.add();
+                                    alertInfo.get().classList.add('console');
+
+                                    let line = 0;
+
+                                    for (let i = 0; i < logs.length; i++) {
+                                        setTimeout(() => {
+                                            line++;
+
+                                            progressBar.update();
+
+                                            alertInfo.append(/*html*/ `
+                                                <div class='console-line'>
+                                                    <code class='line-number'>${line}</code>
+                                                    <code>${logs[i]}</code>
+                                                </div>
+                                            `);
+
+                                            alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
+                                        }, (i + 1) * 100);
+                                    }
+
+                                    setTimeout(() => {
+                                        line++;
+
+                                        alertInfo.append(/*html*/ `
+                                            <div class='console-line'>
+                                                <code class='line-number'>${line}</code>
+                                                <code>'${App.get('title')}' installed</code>
+                                            </div>
+                                        `);
+
+                                        // Show launch button
+                                        const launchBtn = BootstrapButton({
+                                            type: 'primary',
+                                            value: 'Launch app',
+                                            classes: [ 'mt-3', 'w-100' ],
+                                            action(event) {
+                                                console.log('Launch');
+
+                                                // Close modal
+                                                modal.getModal().modal('hide');
+                                            },
+                                            parent: modalBody
+                                        });
+
+                                        launchBtn.add();
+
+                                        alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
+                                    }, (logs.length + 1) * 100);
+                                },
+                                classes: [ 'w-100 mt-5' ],
+                                width: '100%',
+                                parent: modalBody,
+                                type: 'primary',
+                                value: 'Install'
+                            });
+
+                            installBtn.add();
+
+                            const cancelBtn = BootstrapButton({
+                                action(event) {
+                                    console.log('Cancel');
+                                },
+                                classes: [ 'w-100 mt-2' ],
+                                width: '100%',
+                                parent: modalBody,
+                                type: 'light',
+                                value: 'Cancel'
+                            });
+
+                            cancelBtn.add();
+                        },
+                        centered: true,
+                        showFooter: false,
+                    });
+
+                    modal.add();
+
+                    // loadingBar.showLoadingBar();
+                }
             });
 
             loadingBar.add();
@@ -2064,47 +2233,6 @@ export function Start(param) {
                 name: 'app-loading-bar',
                 component: loadingBar
             });
-
-            AddStyle({
-                name: 'console-box',
-                style: /*css*/ `
-                    .console {
-                        position: absolute;
-                        width: 100%;
-                        bottom: 0px;
-                    }
-
-                    .line-number {
-                        display: inline-block;
-                        font-weight: 600;
-                        width: 30px;
-                    }
-                `
-            });
-        
-            const alertInfo = Alert({
-                margin: '20px 0px',
-                type: 'info',
-                text: /*html*/ `
-        
-                `,
-                parent: loadingBar
-            });
-        
-            alertInfo.add();
-
-            alertInfo.get().classList.add('console');
-
-            for (let i = 0; i < 20; i++) {
-                setTimeout(() => {
-                    alertInfo.append(/*html*/ `
-                        <div>
-                            <code class='line-number'>${i + 1}</code>
-                            <code>Test line ${i + 1}</code>
-                        </div>
-                    `);
-                }, (i + 1) * 1000);
-            }
 
             return;
         }

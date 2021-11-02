@@ -905,6 +905,7 @@ export function BootstrapButton(param) {
         action,
         parent,
         position,
+        classes,
         margin,
         type,
         value
@@ -912,7 +913,7 @@ export function BootstrapButton(param) {
 
     const component = Component({
         html: /*html*/ `
-            <button type="button" class="btn ${type}">${value}</button>
+            <button type="button" class="btn btn-${type} ${classes?.join(' ')}">${value}</button>
         `,
         style: /*css*/ `
             #id {
@@ -3954,6 +3955,8 @@ export function LoadingBar(param) {
         displayTitle,
         displayLogo,
         displayText,
+        loadingBar,
+        onReady,
         parent,
         totalCount
     } = param;
@@ -3967,26 +3970,28 @@ export function LoadingBar(param) {
                     <!-- <div class='loading-message-logo'></div> -->
                     <img class='loading-message-logo' src='${logoPath}/${displayLogo}' />
                     <div class='loading-message-title'>${displayTitle}</div>
-                    <div class='loading-message-text'>${displayText}</div>
-                    <div class='loading-bar-container'>
+                    <div class='loading-bar-container ${loadingBar || ''}'>
                         <div class='loading-bar-status'></div>
                     </div>
+                    <div class='loading-message-text'>${displayText || ''}</div>
                 </div>
             </div>
         `,
         style:  /*css*/ `
             .loading-bar {
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 width: 50%;
                 height: 100%;
                 margin: auto;
                 position: absolute;
-                top: 0; 
+                top: 36px; 
                 left: 0; 
-                bottom: 100px; /* @hack */ 
+                bottom: 0;
                 right: 0;
                 animation: fadein 350ms ease-in-out forwards;
+                transform: translateY(36px);
             }
 
             .loading-message {
@@ -4005,7 +4010,7 @@ export function LoadingBar(param) {
 
             /** TURNED OFF */
             .loading-message-text {
-                display: none;
+                min-height: 36px;
                 font-size: 1.5em;
                 font-weight: 400;
                 text-align: center;
@@ -4024,6 +4029,10 @@ export function LoadingBar(param) {
                 background: lightslategray;
                 border-radius: 10px;
                 transition: width 100ms ease-in-out;
+            }
+
+            .hidden {
+                opacity: 0;
             }
 
             /* Logo */
@@ -4073,6 +4082,15 @@ export function LoadingBar(param) {
                 listener() {
                     component.update(++counter);
                 }
+            },
+            {
+                selector: '.loading-bar',
+                event: 'animationend',
+                listener(event) {
+                    if (onReady) {
+                        onReady(event);
+                    }
+                }
             }
         ]
     });
@@ -4112,6 +4130,85 @@ export function LoadingBar(param) {
                 });
             }
         });
+    }
+
+    component.showLoadingBar = () => {
+        component.find('.loading-bar-container').classList.remove('hidden');
+    }
+
+    return component;
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+ export function ProgressBar(param) {
+    const {
+        parent,
+        totalCount
+    } = param;
+
+    const component = Component({
+        html: /*html*/ `
+            <div class='loading-bar-container'>
+                <div class='loading-bar-status'></div>
+            </div>
+        `,
+        style:  /*css*/ `
+            .loading-bar-container {
+                width: 100%;
+                margin: 1rem 0rem;
+                background: lightgray;
+                border-radius: 10px;
+            }
+            
+            .loading-bar-status {
+                width: 0%;
+                height: 15px;
+                background: lightslategray;
+                border-radius: 10px;
+                transition: width 100ms ease-in-out;
+            }
+        `,
+        parent: parent,
+        position: 'beforeend',
+        events: [
+            {
+                selector: '.loading-bar',
+                event: 'listItemsReturned',
+                listener() {
+                    component.update(++counter);
+                }
+            },
+            {
+                selector: '.loading-bar',
+                event: 'animationend',
+                listener(event) {
+                    if (onReady) {
+                        onReady(event);
+                    }
+                }
+            }
+        ]
+    });
+
+    let counter = 1;
+
+    component.update = () => {
+        const progressBar = component.get();
+        const statusBar = progressBar.querySelector('.loading-bar-status');
+        const percentComplete = (counter / totalCount) * 100;
+
+        if (statusBar) {
+            statusBar.style.width = `${percentComplete}%`;
+            counter++;
+        }
+    }
+
+    component.showLoadingBar = () => {
+        component.find('.loading-bar-container').classList.remove('hidden');
     }
 
     return component;
@@ -4209,13 +4306,17 @@ export function Modal(param) {
             <div class='modal fade' tabindex='-1' role='dialog' aria-hidden='true'>
                 <div class='modal-dialog modal-dialog-zoom modal-dialog-scrollable modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
                     <div class='modal-content'>
-                        <div class='modal-header'>
-                            <h5 class='modal-title'>${title || ''}</h5>
-                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                <!-- <span aria-hidden='true'>&times;</span> -->
-                                <span aria-hidden='true'>Close</span>
-                            </button>
-                        </div>
+                        ${
+                            title ?
+                                /*html*/ `<div class='modal-header'>
+                                    <h5 class='modal-title'>${title || ''}</h5>
+                                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                        <!-- <span aria-hidden='true'>&times;</span> -->
+                                        <span aria-hidden='true'>Close</span>
+                                    </button>
+                                </div>`
+                            : ''
+                        }
                         <div class='modal-body'>
                             <!-- Form elements go here -->
                         </div>
@@ -4278,10 +4379,10 @@ export function Modal(param) {
             }
 
             /** Button color */
-            #id .btn-primary {
+            /* #id .btn-primary {
                 background: mediumseagreen;
                 border: solid 1px mediumseagreen;
-            }
+            } */
 
             /** Button color */
             #id .btn-secondary {
@@ -4371,14 +4472,16 @@ export function Modal(param) {
                 addContent(component.getModalBody());
             }
 
-            /** Scroll listener */
-            component.find('.modal-body').addEventListener('scroll', event => {
-                if (event.target.scrollTop > 0) {
-                    event.target.style.borderTop = `solid 1px ${App.get('sidebarBorderColor')}`;
-                } else {
-                    event.target.style.borderTop = `none`;
-                }
-            });
+            if (title) {
+                /** Scroll listener */
+                component.find('.modal-body').addEventListener('scroll', event => {
+                    if (event.target.scrollTop > 0) {
+                        event.target.style.borderTop = `solid 1px ${App.get('sidebarBorderColor')}`;
+                    } else {
+                        event.target.style.borderTop = `none`;
+                    }
+                });
+            }
         }
     });
 

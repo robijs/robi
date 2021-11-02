@@ -1,6 +1,6 @@
 export default [
     {
-        name: 'Test',
+        list: 'Test',
         fields: [
             {
                 name: 'SLOT',
