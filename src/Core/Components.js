@@ -119,7 +119,7 @@ export function AppContainer() {
             }
             
             ::-webkit-scrollbar {
-                width: 10px;
+                width: 15px;
                 height: 10px;
             }
             
@@ -128,7 +128,7 @@ export function AppContainer() {
             }
             
             ::-webkit-scrollbar-thumb {
-                background: ${App.get('primaryColor')};
+                background: gray;
                 width: 8px;
                 height: 8px;
                 border: 3px solid transparent;
@@ -3986,7 +3986,7 @@ export function LoadingBar(param) {
                 height: 100%;
                 margin: auto;
                 position: absolute;
-                top: 36px; 
+                top: 0px; 
                 left: 0; 
                 bottom: 0;
                 right: 0;
@@ -4003,13 +4003,15 @@ export function LoadingBar(param) {
             }
 
             .loading-message-title{
+                font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
                 font-size: 4em; /* original value 3em */
-                font-weight: 500;
+                font-weight: 700;
                 text-align: center;
             }
 
             /** TURNED OFF */
             .loading-message-text {
+                display: none;
                 min-height: 36px;
                 font-size: 1.5em;
                 font-weight: 400;
@@ -4086,14 +4088,18 @@ export function LoadingBar(param) {
             {
                 selector: '.loading-bar',
                 event: 'animationend',
-                listener(event) {
-                    if (onReady) {
-                        onReady(event);
-                    }
-                }
+                listener: ready
             }
         ]
     });
+
+    function ready(event) {
+        if (onReady) {
+            onReady(event);
+        }
+
+        component.get().removeEventListener('animationend', ready);
+    }
 
     let counter = 1;
 
@@ -4180,15 +4186,6 @@ export function LoadingBar(param) {
                 event: 'listItemsReturned',
                 listener() {
                     component.update(++counter);
-                }
-            },
-            {
-                selector: '.loading-bar',
-                event: 'animationend',
-                listener(event) {
-                    if (onReady) {
-                        onReady(event);
-                    }
                 }
             }
         ]
@@ -4296,6 +4293,7 @@ export function Modal(param) {
         fullSize,
         showFooter,
         parent,
+        disableBackdropClose,
         position
     } = param;
 
@@ -4303,7 +4301,7 @@ export function Modal(param) {
         html: /*html*/ `
             <!-- Modal -->
             <!-- <div class='modal${fade ? ' fade' : ''}' tabindex='-1' role='dialog' aria-hidden='true'> -->
-            <div class='modal fade' tabindex='-1' role='dialog' aria-hidden='true'>
+            <div class='modal fade' tabindex='-1' role='dialog' aria-hidden='true' ${disableBackdropClose ? 'data-keyboard="false" data-backdrop="static"' : ''}>
                 <div class='modal-dialog modal-dialog-zoom modal-dialog-scrollable modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
                     <div class='modal-content'>
                         ${
@@ -4472,6 +4470,11 @@ export function Modal(param) {
                 addContent(component.getModalBody());
             }
 
+            /** Close listener */
+            $(component.get()).on('hidden.bs.modal', function (e) {
+                component.remove();
+            });
+
             if (title) {
                 /** Scroll listener */
                 component.find('.modal-body').addEventListener('scroll', event => {
@@ -4538,6 +4541,10 @@ export function Modal(param) {
 
     component.getModal = () => {
         return $(`#${component.get().id}`);
+    }
+
+    component.close = () => {
+        return $(`#${component.get().id}`).modal('hide');
     }
 
     component.getButton = value => {

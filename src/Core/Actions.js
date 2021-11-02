@@ -2046,6 +2046,17 @@ export function Start(param) {
 
     /** Start app on page load */
     window.onload = async () => {
+        console.log('window.onload');
+
+        const appContainer = AppContainer();
+
+        Store.add({
+            name: 'appcontainer',
+            component: appContainer
+        });
+
+        appContainer.add();
+
         const defaultLists = Lists();
         const listsToCreate = defaultLists.concat(lists);
 
@@ -2056,6 +2067,11 @@ export function Start(param) {
                     .console {
                         height: 100%;
                         overflow: overlay;
+                        background: #1E1E1E;
+                    }
+
+                    .console * {
+                        color: #CCCCCC !important;
                     }
 
                     .console-title {
@@ -2078,11 +2094,12 @@ export function Start(param) {
             const loadingBar = LoadingBar({
                 displayLogo: App.get('logoLarge'),
                 displayTitle: App.get('title'),
-                totalCount: listsToCreate.length || 0,
+                totalCount: preLoadLists?.length || 0,
                 loadingBar: 'hidden',
                 onReady(event) {
                     const modal = Modal({
                         title: false,
+                        disableBackdropClose: true,
                         async addContent(modalBody) {
                             modalBody.classList.add('install-modal');
 
@@ -2104,7 +2121,7 @@ export function Start(param) {
                                     modalBody.style.flexDirection = 'column',
                                     modalBody.style.transition = 'all 300ms ease-in-out';
                                     modalBody.innerHTML = '';
-                                    modalBody.style.height = '80vw';
+                                    modalBody.style.height = '80vh';
                                     modalBody.style.width = '80vw';
 
                                     modalBody.insertAdjacentHTML('beforeend', /*html*/ `
@@ -2113,10 +2130,18 @@ export function Start(param) {
 
                                     const logs = [];
 
-                                    listsToCreate.forEach(item => {
+                                    logs.push('Core lists:');
+                                    defaultLists.forEach(item => {
+                                        const { list } = item;
+
+                                        logs.push(`- ${list}`);
+                                    });
+                                    logs.push(' ');
+
+                                    defaultLists.forEach(item => {
                                         const { list, fields } = item;
 
-                                        logs.push(`Created list '${list}'`);
+                                        logs.push(`Created core list '${list}'`);
 
                                         fields.forEach(field => {
                                             const { name } = field;
@@ -2125,10 +2150,31 @@ export function Start(param) {
                                             logs.push(`Added column '${name}' to View 'All Items'`);
                                         });
 
-                                        logs.push('----------------------------------------');
+                                        logs.push(' ');
                                     });
 
-                                    // console.log(logs);
+                                    logs.push(`${App.get('title')} lists:`);
+                                    lists.forEach(item => {
+                                        const { list } = item;
+
+                                        logs.push(`- ${list}`);
+                                    });
+                                    logs.push(' ');
+
+                                    lists.forEach(item => {
+                                        const { list, fields } = item;
+
+                                        logs.push(`Created ${App.get('title')} list '${list}'`);
+
+                                        fields.forEach(field => {
+                                            const { name } = field;
+
+                                            logs.push(`Created column '${name}'`);
+                                            logs.push(`Added column '${name}' to View 'All Items'`);
+                                        });
+
+                                        logs.push(' ');
+                                    });
 
                                     const progressBar = ProgressBar({
                                         parent: modalBody,
@@ -2148,6 +2194,7 @@ export function Start(param) {
                                     alertInfo.get().classList.add('console');
 
                                     let line = 0;
+                                    let timeout = 50;
 
                                     for (let i = 0; i < logs.length; i++) {
                                         setTimeout(() => {
@@ -2163,7 +2210,7 @@ export function Start(param) {
                                             `);
 
                                             alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
-                                        }, (i + 1) * 100);
+                                        }, (i + 1) * timeout);
                                     }
 
                                     setTimeout(() => {
@@ -2184,8 +2231,12 @@ export function Start(param) {
                                             action(event) {
                                                 console.log('Launch');
 
-                                                // Close modal
-                                                modal.getModal().modal('hide');
+                                                modal.close();
+                                                loadingBar.showLoadingBar();
+
+                                                setTimeout(() => {
+                                                    launch();
+                                                }, 150);
                                             },
                                             parent: modalBody
                                         });
@@ -2193,7 +2244,7 @@ export function Start(param) {
                                         launchBtn.add();
 
                                         alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
-                                    }, (logs.length + 1) * 100);
+                                    }, (logs.length + 1) * timeout);
                                 },
                                 classes: [ 'w-100 mt-5' ],
                                 width: '100%',
@@ -2207,6 +2258,7 @@ export function Start(param) {
                             const cancelBtn = BootstrapButton({
                                 action(event) {
                                     console.log('Cancel');
+                                    modal.close();
                                 },
                                 classes: [ 'w-100 mt-2' ],
                                 width: '100%',
@@ -2233,17 +2285,225 @@ export function Start(param) {
                 name: 'app-loading-bar',
                 component: loadingBar
             });
-
-            return;
         }
 
         if (App.get('mode') === 'prod') {
+            AddStyle({
+                name: 'console-box',
+                style: /*css*/ `
+                    .console {
+                        height: 100%;
+                        overflow: overlay;
+                        background: #1E1E1E;
+                    }
+
+                    .console * {
+                        color: #CCCCCC !important;
+                    }
+
+                    .console-title {
+                        font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
+                    }
+
+                    .line-number {
+                        display: inline-block;
+                        font-weight: 600;
+                        width: 30px;
+                    }
+
+                    .install-modal {
+                        padding: 60px;
+                    }
+                `
+            });
+        
             // Start loading bar animation
             const loadingBar = LoadingBar({
                 displayLogo: App.get('logoLarge'),
                 displayTitle: App.get('title'),
-                displayText: 'Loading',
-                totalCount: listsToCreate.length || 0
+                totalCount: preLoadLists?.length || 0,
+                loadingBar: 'hidden',
+                onReady(event) {
+                    const modal = Modal({
+                        title: false,
+                        disableBackdropClose: true,
+                        async addContent(modalBody) {
+                            modalBody.classList.add('install-modal');
+
+                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                <div><strong>${App.get('title')}</strong> hasn't been run on this site before. Would you like to install it? </div>
+                                <div class='mt-2'>You can uninstall it later.</div>
+                            `);
+
+                            const installBtn = BootstrapButton({
+                                action(event) {
+                                    console.log('Install');
+
+                                    modal.find('.modal-content').style.width = 'unset';
+                                    
+                                    modalBody.style.height = `${modalBody.offsetHeight}px`;
+                                    modalBody.style.width = `${modalBody.offsetWidth}px`;
+                                    modalBody.style.overflowY = 'unset';
+                                    modalBody.style.display = 'flex';
+                                    modalBody.style.flexDirection = 'column',
+                                    modalBody.style.transition = 'all 300ms ease-in-out';
+                                    modalBody.innerHTML = '';
+                                    modalBody.style.height = '80vh';
+                                    modalBody.style.width = '80vw';
+
+                                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                        <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
+                                    `);
+
+                                    const logs = [];
+
+                                    logs.push('Core lists:');
+                                    defaultLists.forEach(item => {
+                                        const { list } = item;
+
+                                        logs.push(`- ${list}`);
+                                    });
+                                    logs.push(' ');
+
+                                    defaultLists.forEach(item => {
+                                        const { list, fields } = item;
+
+                                        logs.push(`Created core list '${list}'`);
+
+                                        fields.forEach(field => {
+                                            const { name } = field;
+
+                                            logs.push(`Created column '${name}'`);
+                                            logs.push(`Added column '${name}' to View 'All Items'`);
+                                        });
+
+                                        logs.push(' ');
+                                    });
+
+                                    logs.push(`${App.get('title')} lists:`);
+                                    lists.forEach(item => {
+                                        const { list } = item;
+
+                                        logs.push(`- ${list}`);
+                                    });
+                                    logs.push(' ');
+
+                                    lists.forEach(item => {
+                                        const { list, fields } = item;
+
+                                        logs.push(`Created ${App.get('title')} list '${list}'`);
+
+                                        fields.forEach(field => {
+                                            const { name } = field;
+
+                                            logs.push(`Created column '${name}'`);
+                                            logs.push(`Added column '${name}' to View 'All Items'`);
+                                        });
+
+                                        logs.push(' ');
+                                    });
+
+                                    const progressBar = ProgressBar({
+                                        parent: modalBody,
+                                        totalCount: logs.length
+                                    });
+
+                                    progressBar.add();
+    
+                                    const alertInfo = Alert({
+                                        type: 'secondary',
+                                        text: '',
+                                        margin: '0px',
+                                        parent: modalBody
+                                    });
+
+                                    alertInfo.add();
+                                    alertInfo.get().classList.add('console');
+
+                                    let line = 0;
+                                    let timeout = 50;
+
+                                    for (let i = 0; i < logs.length; i++) {
+                                        setTimeout(() => {
+                                            line++;
+
+                                            progressBar.update();
+
+                                            alertInfo.append(/*html*/ `
+                                                <div class='console-line'>
+                                                    <code class='line-number'>${line}</code>
+                                                    <code>${logs[i]}</code>
+                                                </div>
+                                            `);
+
+                                            alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
+                                        }, (i + 1) * timeout);
+                                    }
+
+                                    setTimeout(() => {
+                                        line++;
+
+                                        alertInfo.append(/*html*/ `
+                                            <div class='console-line'>
+                                                <code class='line-number'>${line}</code>
+                                                <code>'${App.get('title')}' installed</code>
+                                            </div>
+                                        `);
+
+                                        // Show launch button
+                                        const launchBtn = BootstrapButton({
+                                            type: 'primary',
+                                            value: 'Launch app',
+                                            classes: [ 'mt-3', 'w-100' ],
+                                            action(event) {
+                                                console.log('Launch');
+
+                                                modal.close();
+                                                loadingBar.showLoadingBar();
+
+                                                setTimeout(() => {
+                                                    launch();
+                                                }, 150);
+                                            },
+                                            parent: modalBody
+                                        });
+
+                                        launchBtn.add();
+
+                                        alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
+                                    }, (logs.length + 1) * timeout);
+                                },
+                                classes: [ 'w-100 mt-5' ],
+                                width: '100%',
+                                parent: modalBody,
+                                type: 'primary',
+                                value: 'Install'
+                            });
+
+                            installBtn.add();
+
+                            const cancelBtn = BootstrapButton({
+                                action(event) {
+                                    console.log('Cancel');
+                                    modal.close();
+                                },
+                                classes: [ 'w-100 mt-2' ],
+                                width: '100%',
+                                parent: modalBody,
+                                type: 'light',
+                                value: 'Cancel'
+                            });
+
+                            cancelBtn.add();
+                        },
+                        centered: true,
+                        showFooter: false,
+                    });
+
+                    modal.add();
+
+                    // loadingBar.showLoadingBar();
+                }
             });
 
             loadingBar.add();
@@ -2318,178 +2578,170 @@ export function Start(param) {
                     loadingBar.update();
                 }
             }
+
+            launch();
         } else {
-            console.log('Dev mode.');
+            console.log('Dev mode');
         }
 
-        /** Add links to head */
-        AddLinks({
-            links
-        });
-
-        /** Set sessions storage */
-        SetSessionStorage({
-            sessionStorageData
-        });
-
-        /** Get list items */
-        const data = await Data(preLoadLists);
-
-        if (data) {
-            /** Add list items to store */
-            preLoadLists.forEach((param, index) => {
-                    const {
-                        list
-                    } = param;
-
-                Store.add({
-                    type: 'list',
-                    list,
-                    items: data[index]
-                });
+        async function launch() {
+            /** Add links to head */
+            AddLinks({
+                links
             });
-        }
-
-        /** Load svg definitions */
-        const svgDefs = SvgDefs({
-            svgSymbols
-        });
-
-        // console.log('SVG Defs', svgDefs);
-
-        svgDefs.add();
-
-        /** Get AD user and Users list item properties */
-        Store.user( await GetCurrentUser({
-            list: usersList,
-            fields: usersFields
-        }));
-
-        /** Add App Container to #app */
-        const appContainer = AppContainer();
-
-        Store.add({
-            name: 'appcontainer',
-            component: appContainer
-        });
-
-        // console.log('App Container', appContainer);
-
-        appContainer.add();
-
-        /** Get current route */
-        const path = location.href.split('#')[1];
-
-        /** Attach Router to browser back/forward event */
-        window.addEventListener('popstate', (event) => {
-            if (event.state) {
-                Route(event.state.url.split('#')[1], {
-                    scrollTop: Store.viewScrollTop()
-                }); 
-            }
-        });
-
-        /** Store routes */
-        Store.setRoutes(routes.concat(Routes));
-
-        /** Sidebar Component */
-        const sidebar = Sidebar({
-            logo,
-            parent: appContainer,
-            path,
-            sidebarDropdown
-        });
-
-        Store.add({
-            name: 'sidebar',
-            component: sidebar
-        });
-
-        sidebar.add();
-
-        /** Main Container */
-        const mainContainer = MainContainer({
-            parent: appContainer
-        });
-
-        Store.add({
-            name: 'maincontainer',
-            component: mainContainer
-        });
-
-        mainContainer.add();
-        
-        /** Run callback defined in settings Before first view loads */
-        if (beforeLoad) {
-            await beforeLoad();
-        }
-
-        /** Show App Container */
-        appContainer.show('flex');
-
-        /** Generate Session Id */
-        const sessionId = GenerateUUID();
-
-        /** Format Title for Sessin/Local Storage keys */
-        const storageKeyPrefix = settings.title.split(' ').join('-');
-
-        /** Set Session Id */
-        sessionStorage.setItem(`${storageKeyPrefix}-sessionId`, sessionId)
-
-        /** Log in*/
-        try {
-            Log({
-                Title: 'Log in',
-                Message: `${Store.user().Email || 'User'} successfully loaded ${title}`,
-                StackTrace: new Error().stack,
-                Module: import.meta.url
+    
+            /** Set sessions storage */
+            SetSessionStorage({
+                sessionStorageData
             });
-        } catch (error) {
-            console.error(error);
-        }
+    
+            /** Get list items */
+            const data = await Data(preLoadLists);
 
-        /** Run current route on page load */
-        Route(path, {
-            log: false
-        });
-
-        /** Check Local Storage for release notes */
-        const isReleaseNotesDismissed = localStorage.getItem(`${storageKeyPrefix}-releaseNotesDismissed`);
-
-        if (!isReleaseNotesDismissed) {
-            // console.log('Show release notes message.');
-            
-            /** Release Notes */
-            const releaseNotes = FixedToast({
-                title: 'New version is live!',
-                message: 'View release notes',
-                bottom: '20px',
-                right: '10px',
-                action(event) {
-                    const modal = Modal({
-                        title: '',
-                        fade: true,
-                        background: settings.secondaryColor,
-                        centered: true,
-                        addContent(modalBody) {
-                            ReleaseNotes({
-                                margin: '0px',
-                                parent: modalBody,
-                            });
-                        },
-                        parent: appContainer
+            if (data) {
+                /** Add list items to store */
+                preLoadLists.forEach((param, index) => {
+                        const {
+                            list
+                        } = param;
+    
+                    Store.add({
+                        type: 'list',
+                        list,
+                        items: data[index]
                     });
-            
-                    modal.add();
-                },
-                onClose(event) {
-                    /** Set Local Storage */
-                    localStorage.setItem(`${storageKeyPrefix}-releaseNotesDismissed`, 'true');
-                },
+                });
+            }
+    
+            /** Load svg definitions */
+            const svgDefs = SvgDefs({
+                svgSymbols
+            });
+    
+            // console.log('SVG Defs', svgDefs);
+    
+            svgDefs.add();
+    
+            /** Get AD user and Users list item properties */
+            Store.user(await GetCurrentUser({
+                list: usersList,
+                fields: usersFields
+            }));
+    
+            /** Get current route */
+            const path = location.href.split('#')[1];
+    
+            /** Attach Router to browser back/forward event */
+            window.addEventListener('popstate', (event) => {
+                if (event.state) {
+                    Route(event.state.url.split('#')[1], {
+                        scrollTop: Store.viewScrollTop()
+                    }); 
+                }
+            });
+    
+            /** Store routes */
+            Store.setRoutes(routes.concat(Routes));
+    
+            /** Sidebar Component */
+            const sidebar = Sidebar({
+                logo,
+                parent: appContainer,
+                path,
+                sidebarDropdown
+            });
+    
+            Store.add({
+                name: 'sidebar',
+                component: sidebar
+            });
+    
+            sidebar.add();
+    
+            /** Main Container */
+            const mainContainer = MainContainer({
                 parent: appContainer
             });
-
-            releaseNotes.add();
+    
+            Store.add({
+                name: 'maincontainer',
+                component: mainContainer
+            });
+    
+            mainContainer.add();
+            
+            /** Run callback defined in settings Before first view loads */
+            if (beforeLoad) {
+                await beforeLoad();
+            }
+    
+            /** Show App Container */
+            appContainer.show('flex');
+    
+            /** Generate Session Id */
+            const sessionId = GenerateUUID();
+    
+            /** Format Title for Sessin/Local Storage keys */
+            const storageKeyPrefix = settings.title.split(' ').join('-');
+    
+            /** Set Session Id */
+            sessionStorage.setItem(`${storageKeyPrefix}-sessionId`, sessionId)
+    
+            /** Log in*/
+            try {
+                Log({
+                    Title: 'Log in',
+                    Message: `${Store.user().Email || 'User'} successfully loaded ${title}`,
+                    StackTrace: new Error().stack,
+                    Module: import.meta.url
+                });
+            } catch (error) {
+                console.error(error);
+            }
+    
+            /** Run current route on page load */
+            Route(path, {
+                log: false
+            });
+    
+            /** Check Local Storage for release notes */
+            const isReleaseNotesDismissed = localStorage.getItem(`${storageKeyPrefix}-releaseNotesDismissed`);
+    
+            if (!isReleaseNotesDismissed) {
+                // console.log('Show release notes message.');
+                
+                /** Release Notes */
+                const releaseNotes = FixedToast({
+                    title: 'New version is live!',
+                    message: 'View release notes',
+                    bottom: '20px',
+                    right: '10px',
+                    action(event) {
+                        const modal = Modal({
+                            title: '',
+                            fade: true,
+                            background: settings.secondaryColor,
+                            centered: true,
+                            addContent(modalBody) {
+                                ReleaseNotes({
+                                    margin: '0px',
+                                    parent: modalBody,
+                                });
+                            },
+                            parent: appContainer
+                        });
+                
+                        modal.add();
+                    },
+                    onClose(event) {
+                        /** Set Local Storage */
+                        localStorage.setItem(`${storageKeyPrefix}-releaseNotesDismissed`, 'true');
+                    },
+                    parent: appContainer
+                });
+    
+                releaseNotes.add();
+            }
         }
     }
 }

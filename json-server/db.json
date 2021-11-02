@@ -2024,6 +2024,83 @@
       "Author": {},
       "Created": "2021-11-02T00:22:46.010Z",
       "Id": 184
+    },
+    {
+      "SessionId": null,
+      "Message": "Uncaught ReferenceError: onReady is not defined",
+      "Error": "{\"stack\":\"ReferenceError: onReady is not defined\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Core/Components.js:4191:21)\",\"message\":\"onReady is not defined\"}",
+      "Source": "http://127.0.0.1:8080/src/Core/Components.js",
+      "Line": 4191,
+      "ColumnNumber": 21,
+      "Author": {},
+      "Created": "2021-11-02T02:06:06.143Z",
+      "Id": 185
+    },
+    {
+      "SessionId": null,
+      "Message": "appContainer is not defined",
+      "Error": "ReferenceError: appContainer is not defined\n    at launch (http://127.0.0.1:8080/src/Core/Actions.js:2439:21)",
+      "Source": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Line": null,
+      "ColumnNumber": null,
+      "Author": {},
+      "Created": "2021-11-02T02:06:06.492Z",
+      "Id": 186
+    },
+    {
+      "SessionId": null,
+      "Message": "Uncaught ReferenceError: onReady is not defined",
+      "Error": "{\"stack\":\"ReferenceError: onReady is not defined\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Core/Components.js:4191:21)\",\"message\":\"onReady is not defined\"}",
+      "Source": "http://127.0.0.1:8080/src/Core/Components.js",
+      "Line": 4191,
+      "ColumnNumber": 21,
+      "Author": {},
+      "Created": "2021-11-02T02:08:37.276Z",
+      "Id": 187
+    },
+    {
+      "SessionId": "f406afc2-1d7a-4efe-af59-c413eb63c659",
+      "Message": "Uncaught ReferenceError: onReady is not defined",
+      "Error": "{\"stack\":\"ReferenceError: onReady is not defined\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Core/Components.js:4191:21)\",\"message\":\"onReady is not defined\"}",
+      "Source": "http://127.0.0.1:8080/src/Core/Components.js",
+      "Line": 4191,
+      "ColumnNumber": 21,
+      "Author": {},
+      "Created": "2021-11-02T02:12:56.954Z",
+      "Id": 188
+    },
+    {
+      "SessionId": "e17916d9-b2f2-4d56-b9a1-a9f2dee0d619",
+      "Message": "Uncaught ReferenceError: onReady is not defined",
+      "Error": "{\"stack\":\"ReferenceError: onReady is not defined\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Core/Components.js:4191:21)\",\"message\":\"onReady is not defined\"}",
+      "Source": "http://127.0.0.1:8080/src/Core/Components.js",
+      "Line": 4191,
+      "ColumnNumber": 21,
+      "Author": {},
+      "Created": "2021-11-02T02:16:08.026Z",
+      "Id": 189
+    },
+    {
+      "SessionId": "e17916d9-b2f2-4d56-b9a1-a9f2dee0d619",
+      "Message": "Uncaught ReferenceError: onReady is not defined",
+      "Error": "{\"stack\":\"ReferenceError: onReady is not defined\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Core/Components.js:4195:21)\",\"message\":\"onReady is not defined\"}",
+      "Source": "http://127.0.0.1:8080/src/Core/Components.js",
+      "Line": 4195,
+      "ColumnNumber": 21,
+      "Author": {},
+      "Created": "2021-11-02T02:19:01.875Z",
+      "Id": 190
+    },
+    {
+      "SessionId": "9e2d5e00-8eff-401e-83f5-807b0d78895d",
+      "Message": "Cannot read properties of undefined (reading 'length')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'length')\n    at Start.window.onload (http://127.0.0.1:8080/src/Core/Actions.js:2097:42)",
+      "Source": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Line": null,
+      "ColumnNumber": null,
+      "Author": {},
+      "Created": "2021-11-02T02:38:14.230Z",
+      "Id": 191
     }
   ],
   "Log": [
@@ -2037,6 +2114,127 @@
       "Created": "2021-11-01T19:42:12.500Z",
       "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
       "Id": 1
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "f406afc2-1d7a-4efe-af59-c413eb63c659",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2484:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {},
+      "Created": "2021-11-02T02:08:37.611Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 2
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "e17916d9-b2f2-4d56-b9a1-a9f2dee0d619",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2482:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {},
+      "Created": "2021-11-02T02:12:57.309Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 3
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "c9b8d943-778c-4c8a-8a11-edf7ed79440d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2482:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {},
+      "Created": "2021-11-02T02:24:46.203Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 4
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "e697c592-430a-427d-904d-66ad1142e667",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2483:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {},
+      "Created": "2021-11-02T02:27:00.260Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 5
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "19776635-766b-4024-810d-6ec409d457f8",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2485:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {},
+      "Created": "2021-11-02T02:28:42.526Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 6
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "9f3ba571-9973-4553-b052-973351088bf6",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2485:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {},
+      "Created": "2021-11-02T02:29:11.019Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 7
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "140f8a5f-794f-4f16-aed1-638b5bb72d1f",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2485:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {},
+      "Created": "2021-11-02T02:31:05.683Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 8
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "d1963154-a508-44b0-aad2-dacd4bea113c",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2483:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {},
+      "Created": "2021-11-02T02:34:32.957Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 9
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "9e2d5e00-8eff-401e-83f5-807b0d78895d",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2482:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {},
+      "Created": "2021-11-02T02:35:17.020Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 10
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "e978441e-8738-4c02-8506-356100344431",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2485:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {},
+      "Created": "2021-11-02T02:41:56.359Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 11
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "1109fc89-49ae-4d1d-8a11-8d633be34381",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2485:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {},
+      "Created": "2021-11-02T02:43:21.664Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 12
     }
   ],
   "Users": [
