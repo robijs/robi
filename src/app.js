@@ -13,7 +13,7 @@ Start({
         },
     ],
     settings: {
-        mode: 'dev', // 'dev' || 'prod'
+        mode: 'dev', // choose 'dev' || 'prod'
         dev: {
             user: {
                 Title: "First Last",
@@ -22,9 +22,10 @@ Start({
                 Role: "Developer"
             },
             ErrorLogging: 'on',
-            // testLoading: true,
+            testLoading: true,
         },
-        title: 'App',
+        title: 'App', // enter app name
+        site: '', // enter site
         logo: 'dha-logo-no-label-90w.png',
         logoSmall: 'dha-logo-no-label-40w.png',
         logoLarge: 'dha-logo-no-label-386w.png',
@@ -38,7 +39,6 @@ Start({
         titleColor: '#1c6cbb',
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
         defaultRoute: 'Home',
-        site: '', // enter site
         usersList: 'Users',
         usersFields: [
             {

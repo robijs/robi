@@ -13,6 +13,19 @@
       },
       "Created": "2021-11-02T14:29:26.661Z",
       "Id": 1
+    },
+    {
+      "SessionId": null,
+      "Message": "Uncaught ReferenceError: $ is not defined",
+      "Error": "{\"stack\":\"ReferenceError: $ is not defined\\n    at onAdd (https://info.health.mil/staff/analytics/cp/ModernDev/Install-4/App/dist/bundle.js:1:128482)\\n    at Object.add (https://info.health.mil/staff/analytics/cp/ModernDev/Install-4/App/dist/bundle.js:1:155886)\\n    at onReady (https://info.health.mil/staff/analytics/cp/ModernDev/Install-4/App/dist/bundle.js:1:180078)\\n    at HTMLDivElement.e (https://info.health.mil/staff/analytics/cp/ModernDev/Install-4/App/dist/bundle.js:1:121561)\",\"message\":\"$ is not defined\"}",
+      "Source": "https://info.health.mil/staff/analytics/cp/ModernDev/Install-4/App/dist/bundle.js",
+      "Line": 1,
+      "ColumnNumber": 128482,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-11-02T16:14:17.796Z",
+      "Id": 2
     }
   ],
   "Log": [
@@ -132,6 +145,58 @@
       "Created": "2021-11-02T14:45:57.890Z",
       "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
       "Id": 9
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "cbca4dde-b7b8-4315-8c2a-1e2411b46198",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2734:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-11-02T14:47:07.875Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 10
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "27895dde-e5ae-4791-b7b2-f710c44145f7",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2769:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-11-02T15:53:50.164Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 11
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "643e7afe-eab5-4ae3-a429-79dd862308a6",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"https://info.health.mil/staff/analytics/cp/ModernDev/Install-4/App/dist/app.aspx\",\"role\":\"Developer\"}",
+      "StackTrace": "\"y (https://info.health.mil/staff/analytics/cp/ModernDev/Install-4/App/dist/bundle.js:1:240489)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-11-02T16:23:03.322Z",
+      "Module": "file:///C:/Users/steph/OneDrive/Documents/GitHub/robi/src/Core/Actions.js",
+      "Id": 12
+    },
+    {
+      "Title": "Route",
+      "SessionId": "643e7afe-eab5-4ae3-a429-79dd862308a6",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"https://info.health.mil/staff/analytics/cp/ModernDev/Install-4/App/dist/app.aspx#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Y (https://info.health.mil/staff/analytics/cp/ModernDev/Install-4/App/dist/bundle.js:1:164899)\\n    at HTMLSpanElement.listener (https://info.health.mil/staff/analytics/cp/ModernDev/Install-4/App/dist/bundle.js:1:236767)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-11-02T16:23:05.612Z",
+      "Module": "file:///C:/Users/steph/OneDrive/Documents/GitHub/robi/src/Core/Actions.js",
+      "Id": 13
     }
   ],
   "Users": [

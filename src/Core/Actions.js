@@ -1,4 +1,4 @@
-import { Alert, Toast, LoadingBar, SvgDefs, Sidebar, AppContainer, MainContainer, FixedToast, Modal, BootstrapButton, ProgressBar } from './Components.js'
+import { Alert, Toast, LoadingBar, SvgDefs, Sidebar, AppContainer, MainContainer, FixedToast, Modal, BootstrapButton, ProgressBar, InstallConsole, Container } from './Components.js'
 import { Lists } from './Models.js'
 import { App, Routes } from './Settings.js';
 import Store from './Store.js'
@@ -43,6 +43,8 @@ export async function AddColumnToView(param) {
                 <code>Added '${name}' to view '${view || 'All Items'}'</code>
             </div>
         `);
+
+        installConsole.get().scrollTop = installConsole.get().scrollHeight;
     }
 
     const progressBar = Store.get('install-progress-bar');
@@ -602,6 +604,8 @@ export async function CopyItem(param) {
                 <code>Created column '${name}'</code>
             </div>
         `);
+
+        installConsole.get().scrollTop = installConsole.get().scrollHeight;
     }
 
     const progressBar = Store.get('install-progress-bar');
@@ -775,6 +779,8 @@ export async function CreateList(param) {
                     <code>Created list '${list}'</code>
                 </div>
             `);
+
+            installConsole.get().scrollTop = installConsole.get().scrollHeight;
         }
 
         const progressBar = Store.get('install-progress-bar');
@@ -2138,35 +2144,6 @@ export function Start(param) {
 
         if (App.get('mode') === 'prod') {
             console.log('Mode: prod');
-
-            AddStyle({
-                name: 'console-box',
-                style: /*css*/ `
-                    .console {
-                        height: 100%;
-                        overflow: overlay;
-                        background: #1E1E1E;
-                    }
-
-                    .console * {
-                        color: #CCCCCC !important;
-                    }
-
-                    .console-title {
-                        font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
-                    }
-
-                    .line-number {
-                        display: inline-block;
-                        font-weight: 600;
-                        width: 30px;
-                    }
-
-                    .install-modal {
-                        padding: 60px;
-                    }
-                `
-            });
         
             // Start loading bar animation
             const loadingBar = LoadingBar({
@@ -2179,6 +2156,35 @@ export function Start(param) {
                     const isInstalled = await GetAppSetting('Installed');
 
                     if (!isInstalled || isInstalled.Value === 'No') {
+                        AddStyle({
+                            name: 'console-box',
+                            style: /*css*/ `
+                                .console {
+                                    height: 100%;
+                                    overflow: overlay;
+                                    background: #1E1E1E;
+                                }
+            
+                                .console * {
+                                    color: #CCCCCC !important;
+                                }
+            
+                                .console-title {
+                                    font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
+                                }
+            
+                                .line-number {
+                                    display: inline-block;
+                                    font-weight: 600;
+                                    width: 30px;
+                                }
+            
+                                .install-modal {
+                                    padding: 60px;
+                                }
+                            `
+                        });
+
                         console.log('Installing app...');
 
                         const modal = Modal({
@@ -2254,11 +2260,23 @@ export function Start(param) {
     
                                         progressBar.add();
         
-                                        const installConsole = Alert({
+                                        const installContainer = Container({
+                                            padding: '10px',
+                                            parent: modalBody,
+                                            overflow: 'hidden',
+                                            width: '100%',
+                                            height: '100%',
+                                            radius: '10px',
+                                            background: '#1E1E1E'
+                                        });
+
+                                        installContainer.add();
+
+                                        const installConsole = InstallConsole({
                                             type: 'secondary',
                                             text: '',
                                             margin: '0px',
-                                            parent: modalBody
+                                            parent: installContainer
                                         });
 
                                         Store.add({
@@ -2275,6 +2293,14 @@ export function Start(param) {
                                             
                                             // 2. Create lists
                                             await CreateList(defaultLists[list]);
+
+                                            // 3. Add spacer to console
+                                            installConsole.append(/*html*/ `
+                                                <div class='console-line'>
+                                                    <!-- <code class='line-number'>0</code> -->
+                                                    <code> </code>
+                                                </div>
+                                            `);
                                         }
                 
                                         // TODO: add create item taskss to progress bar
@@ -2329,8 +2355,9 @@ export function Start(param) {
                 
                                         console.log('App installed');
     
-                                        let line = 0;
-                                        let timeout = 50;
+                                        // TODO: increment install-console line number
+                                        // let line = 0;
+                                        // let timeout = 50;
     
                                         // Show launch button
                                         const launchBtn = BootstrapButton({
@@ -2338,14 +2365,16 @@ export function Start(param) {
                                             value: 'Launch app',
                                             classes: [ 'mt-3', 'w-100' ],
                                             action(event) {
-                                                console.log('Launch');
+                                                // Bootstrap uses jQuery .trigger, won't work with .addEventListener
+                                                $(modal.get()).on('hidden.bs.modal', event => {
+                                                    console.log('Modal close animiation end');
+                                                    console.log('Launch');
+
+                                                    launch();
+                                                });
 
                                                 modal.close();
                                                 loadingBar.showLoadingBar();
-
-                                                setTimeout(() => {
-                                                    launch();
-                                                }, 150); // hack, should wait for modal close animationend
                                             },
                                             parent: modalBody
                                         });
@@ -2364,6 +2393,11 @@ export function Start(param) {
                                 const cancelBtn = BootstrapButton({
                                     action(event) {
                                         console.log('Cancel');
+
+                                        // modal.get().addEventListener('hidden.bs.modal', event => {
+                                        //    console.log('modal close animiation end');
+                                        // });
+
                                         modal.close();
                                     },
                                     classes: [ 'w-100 mt-2' ],
@@ -2400,6 +2434,7 @@ export function Start(param) {
                     name: 'console-box',
                     style: /*css*/ `
                         .console {
+                            width: 100%;
                             height: 100%;
                             overflow: overlay;
                             background: #1E1E1E;
@@ -2517,16 +2552,28 @@ export function Start(param) {
                                         });
     
                                         progressBar.add();
-        
-                                        const alertInfo = Alert({
+
+                                        const installContainer = Container({
+                                            padding: '10px',
+                                            parent: modalBody,
+                                            overflow: 'hidden',
+                                            width: '100%',
+                                            height: '100%',
+                                            radius: '10px',
+                                            background: '#1E1E1E'
+                                        });
+
+                                        installContainer.add();
+
+                                        const installConsole = InstallConsole({
                                             type: 'secondary',
                                             text: '',
                                             margin: '0px',
-                                            parent: modalBody
+                                            parent: installContainer
                                         });
     
-                                        alertInfo.add();
-                                        alertInfo.get().classList.add('console');
+                                        installConsole.add();
+                                        installConsole.get().classList.add('console');
     
                                         let line = 0;
                                         let timeout = 50;
@@ -2537,21 +2584,21 @@ export function Start(param) {
     
                                                 progressBar.update();
     
-                                                alertInfo.append(/*html*/ `
+                                                installConsole.append(/*html*/ `
                                                     <div class='console-line'>
                                                         <code class='line-number'>${line}</code>
                                                         <code>${logs[i]}</code>
                                                     </div>
                                                 `);
     
-                                                alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
+                                                installConsole.get().scrollTop = installConsole.get().scrollHeight;
                                             }, (i + 1) * timeout);
                                         }
     
                                         setTimeout(() => {
                                             line++;
     
-                                            alertInfo.append(/*html*/ `
+                                            installConsole.append(/*html*/ `
                                                 <div class='console-line'>
                                                     <code class='line-number'>${line}</code>
                                                     <code>'${App.get('title')}' installed</code>
@@ -2578,7 +2625,7 @@ export function Start(param) {
     
                                             launchBtn.add();
     
-                                            alertInfo.get().scrollTop = alertInfo.get().scrollHeight;
+                                            installConsole.get().scrollTop = installConsole.get().scrollHeight;
                                         }, (logs.length + 1) * timeout);
                                     },
                                     classes: [ 'w-100 mt-5' ],
@@ -2593,6 +2640,12 @@ export function Start(param) {
                                 const cancelBtn = BootstrapButton({
                                     action(event) {
                                         console.log('Cancel');
+
+                                        // Bootstrap uses jQuery .trigger, won't work with .addEventListener
+                                        $(modal.get()).on('hidden.bs.modal', event => {
+                                            console.log('modal close animiation end');
+                                        });
+
                                         modal.close();
                                     },
                                     classes: [ 'w-100 mt-2' ],
@@ -2858,7 +2911,7 @@ export async function UpdateItem(param) {
         body.Editor = {
             Title: App.get('dev').user.Title
         };
-        
+
         const date = new Date().toUTCString();
         body.Modified = date;
 
