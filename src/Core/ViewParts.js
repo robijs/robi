@@ -1624,7 +1624,7 @@ export function Question(param) {
             // console.log(newItem);
 
             /** Add to DOM */
-            const replyComponent = QPPReply({
+            const replyComponent = Reply({
                 reply: newItem,
                 label: 'new',
                 margin: '0px 0px 10px 0px',
