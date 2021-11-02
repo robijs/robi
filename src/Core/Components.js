@@ -179,6 +179,20 @@ export function AppContainer() {
                 border-radius: 10px;
                 border: none;
             }
+            
+            @keyframes fade-in-bottom {
+                0% {
+                    bottom: -10px;
+                    transform: scale(.5);
+                    opacity: 0;
+                }
+            
+                100% {
+                    bottom: 10px;
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
         `,
         position: 'afterbegin',
         events: []

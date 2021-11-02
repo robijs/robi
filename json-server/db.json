@@ -26,6 +26,19 @@
       },
       "Created": "2021-11-02T16:14:17.796Z",
       "Id": 2
+    },
+    {
+      "SessionId": "e5d6ab4d-70ba-4557-8eea-311f6552acdf",
+      "Message": "Uncaught TypeError: appContainer.insertAdjacentHTML is not a function",
+      "Error": "{\"stack\":\"TypeError: appContainer.insertAdjacentHTML is not a function\\n    at HTMLButtonElement.action (http://127.0.0.1:8080/src/Core/Actions.js:2747:54)\",\"message\":\"appContainer.insertAdjacentHTML is not a function\"}",
+      "Source": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Line": 2747,
+      "ColumnNumber": 54,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-11-02T18:01:53.676Z",
+      "Id": 3
     }
   ],
   "Log": [

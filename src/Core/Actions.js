@@ -2182,6 +2182,36 @@ export function Start(param) {
                                 .install-modal {
                                     padding: 60px;
                                 }
+
+                                .install-alert {
+                                    left: 10px;
+                                    right: 10px;
+                                    bottom: 10px;
+                                    border-radius: 10px;
+                                    padding: 10px 15px;
+                                    border: none;
+                                    background: #1E1E1E;
+                                    color: white !important;
+                                    animation: fade-alert 200ms ease-in-out forwards;
+                                };
+        
+                                .install-alert * {
+                                    color: white !important;
+                                };
+
+                                @keyframes fade-alert {
+                                    0% {
+                                        bottom: -10px;
+                                        transform: scale(.5);
+                                        opacity: 0;
+                                    }
+                                
+                                    100% {
+                                        bottom: 10px;
+                                        transform: scale(1);
+                                        opacity: 1;
+                                    }
+                                }
                             `
                         });
 
@@ -2194,8 +2224,7 @@ export function Start(param) {
                                 modalBody.classList.add('install-modal');
     
                                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                    <div><strong>${App.get('title')}</strong> hasn't been run on this site before. Would you like to install it? </div>
-                                    <div class='mt-2'>You can uninstall it later.</div>
+                                    <div><strong>${App.get('title')}</strong> isn't installed on this site. Would you like to install it now? You can uninstall it later.</div>
                                 `);
     
                                 const installBtn = BootstrapButton({
@@ -2489,11 +2518,19 @@ export function Start(param) {
     
                                 const cancelBtn = BootstrapButton({
                                     action(event) {
-                                        console.log('Cancel');
+                                        console.log('Cancel install');
 
-                                        // modal.get().addEventListener('hidden.bs.modal', event => {
-                                        //    console.log('modal close animiation end');
-                                        // });
+                                        // Bootstrap uses jQuery .trigger, won't work with .addEventListener
+                                        $(modal.get()).on('hidden.bs.modal', event => {
+                                            console.log('modal close animiation end');
+
+                                            // Show alert
+                                            appContainer.get().insertAdjacentHTML('afterend', /*html*/ `
+                                                <div class='position-absolute install-alert mb-0'>
+                                                    Installation cancelled. You can close this page. Reload to resume install.
+                                                </div>
+                                            `);
+                                        });
 
                                         modal.close();
                                     },
@@ -2554,6 +2591,22 @@ export function Start(param) {
                         .install-modal {
                             padding: 60px;
                         }
+
+                        .install-alert {
+                            left: 10px;
+                            right: 10px;
+                            bottom: 10px;
+                            border-radius: 10px;
+                            padding: 10px 15px;
+                            border: none;
+                            background: #1E1E1E;
+                            color: white !important;
+                            animation: fade-in-bottom 200ms ease-in-out forwards;
+                        };
+
+                        .install-alert * {
+                            color: white !important;
+                        };
                     `
                 });
             
@@ -2571,8 +2624,7 @@ export function Start(param) {
                                 modalBody.classList.add('install-modal');
     
                                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                    <div><strong>${App.get('title')}</strong> hasn't been run on this site before. Would you like to install it? </div>
-                                    <div class='mt-2'>You can uninstall it later.</div>
+                                    <div><strong>${App.get('title')}</strong> isn't installed on this site. Would you like to install it now? You can uninstall it later.</div>
                                 `);
     
                                 const installBtn = BootstrapButton({
@@ -2736,11 +2788,18 @@ export function Start(param) {
     
                                 const cancelBtn = BootstrapButton({
                                     action(event) {
-                                        console.log('Cancel');
+                                        console.log('Cancel install');
 
                                         // Bootstrap uses jQuery .trigger, won't work with .addEventListener
                                         $(modal.get()).on('hidden.bs.modal', event => {
                                             console.log('modal close animiation end');
+
+                                            // Show alert
+                                            appContainer.get().insertAdjacentHTML('afterend', /*html*/ `
+                                                <div class='position-absolute install-alert mb-0'>
+                                                    Installation cancelled. You can close this page. Reload to resume install.
+                                                </div>
+                                            `);
                                         });
 
                                         modal.close();
