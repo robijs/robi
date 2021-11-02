@@ -1203,9 +1203,7 @@ export async function QuestionsBoard(param) {
                 },
                 {
                     label: /*html*/ `
-                        <div class='spinner-grow text-primary small' role='status'>
-                            <span class='sr-only'>Loading...</span>
-                        </div>
+                        <div style='height: 20px; width: 20px;' class='spinner-grow text-secondary' role='status'></div>
                     `,
                     path: '',
                     currentPage: true
@@ -1578,9 +1576,7 @@ export async function Question(param) {
                 },
                 {
                     label: /*html*/ `
-                        <div class='spinner-grow text-primary small' role='status'>
-                            <span class='sr-only'>Loading...</span>
-                        </div>
+                        <div style='height: 20px; width: 20px;' class='spinner-grow text-secondary' role='status'></div>
                     `,
                     path: '',
                     currentPage: true
@@ -1645,9 +1641,7 @@ export async function Question(param) {
                 },
                 {
                     name:  /*html*/ `
-                        <span class='spinner-grow text-primary small' role='status'>
-                            <span class='sr-only'>Loading...</span>
-                        </span>
+                        <div style='height: 20px; width: 20px;' class='spinner-grow text-secondary' role='status'></div>
                     `,
                     dataName: 'loading-questions',
                     items: []

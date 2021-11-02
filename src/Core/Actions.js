@@ -680,9 +680,23 @@ export async function CreateItem(param) {
         
         return refetechedNewItem[0];
     } else if (App.get('mode') === 'dev') {
+        const body = data;
+        
+        body.Author = {
+            Title: App.get('dev').user.Title
+        };
+
+        body.Editor = {
+            Title: App.get('dev').user.Title
+        };
+
+        const date = new Date().toUTCString();
+        body.Created = date;
+        body.Modified = date;
+
         const options = {
             method: `POST`,
-            body: JSON.stringify(data),
+            body: JSON.stringify(body),
             headers: {
                 "Content-Type": "application/json;odata=verbose",
                 "Accept": "application/json;odata=verbose",
@@ -2604,6 +2618,8 @@ export function Start(param) {
                     name: 'app-loading-bar',
                     component: loadingBar
                 });
+            } else {
+                launch();
             }
         }
 
@@ -2792,62 +2808,74 @@ export async function UpdateItem(param) {
         return;
     }
 
-    // Get item by id
-    const getItem = await Get({
-        list,
-        filter: `Id eq ${itemId}`
-    });
+    if (App.get('mode') === 'prod') {
+        // Get item by id
+        const getItem = await Get({
+            list,
+            filter: `Id eq ${itemId}`
+        });
 
-    const item = getItem[0];
+        const item = getItem[0];
 
-    // Get new request digest
-    const requestDigest = await GetRequestDigest();
+        // Get new request digest
+        const requestDigest = await GetRequestDigest();
 
-    // Add SharePoint List Item Type metadata property to passed in data object
-    data.__metadata = {
-        'type': item.__metadata.type
-    } 
-    
-    // Define Post interface
-    const postOptions = {
-        url: item.__metadata.uri,
-        data: data,
-        headers: {
-            "Content-Type": "application/json;odata=verbose",
-            "Accept": "application/json;odata=verbose",
-            "X-HTTP-Method": "MERGE",
-            "X-RequestDigest": requestDigest,
-            "If-Match": item.__metadata.etag
+        // Add SharePoint List Item Type metadata property to passed in data object
+        data.__metadata = {
+            'type': item.__metadata.type
+        } 
+        
+        // Define Post interface
+        const postOptions = {
+            url: item.__metadata.uri,
+            data: data,
+            headers: {
+                "Content-Type": "application/json;odata=verbose",
+                "Accept": "application/json;odata=verbose",
+                "X-HTTP-Method": "MERGE",
+                "X-RequestDigest": requestDigest,
+                "If-Match": item.__metadata.etag
+            }
         }
+
+        // Post update
+        await Post(postOptions);
+
+        // Get updated item
+        const getUpdatedItem = await Get({
+            list,
+            select,
+            expand,
+            filter: `Id eq ${itemId}`
+        });
+
+        const updatedItem = getUpdatedItem[0];
+
+        return updatedItem;
+    } else {
+        const body = data;
+        
+        body.Editor = {
+            Title: App.get('dev').user.Title
+        };
+        
+        const date = new Date().toUTCString();
+        body.Modified = date;
+
+        const options = {
+            method: 'PATCH',
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json;odata=verbose",
+                "Accept": "application/json;odata=verbose",
+            }
+        }
+
+        const response = await fetch(`http://localhost:3000/${list}/${itemId}`, options);
+        const newItem = await response.json();
+
+        return newItem;
     }
-
-    // Post update
-    await Post(postOptions);
-
-    // Get updated item
-    const getUpdatedItem = await Get({
-        list,
-        select,
-        expand,
-        filter: `Id eq ${itemId}`
-    });
-
-    const updatedItem = getUpdatedItem[0];
-
-    // Notify
-    if (notify !== false) {
-        // const notification = Toast({
-        //     text: notifyMessage || `Updated!`
-        // });
-
-        // notification.add();
-
-        // setTimeout(() => {
-        //     notification.remove();
-        // }, 6000);
-    }
-
-    return updatedItem;
 }
 
 /**

@@ -22,7 +22,7 @@ Start({
                 Role: "Developer"
             },
             ErrorLogging: 'on',
-            testLoading: true,
+            // testLoading: true,
         },
         title: 'App',
         logo: 'dha-logo-no-label-90w.png',

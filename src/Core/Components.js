@@ -9239,6 +9239,13 @@ export function Title(param) {
                 margin: 0px 40px;
             }
 
+            /* a, spacer */
+            #id a,
+            #id ._breadcrumb-spacer,
+            #id ._breadcrumb {
+                color: #1c6cbb
+            }
+
             /** Breadcrumb */
             #id ._breadcrumb {
                 color: darkslategray;
@@ -9246,11 +9253,7 @@ export function Title(param) {
 
             #id .route {
                 cursor: pointer;
-                color: #007bff;
-            }
-
-            #id .route:hover {
-                color: #0056b3;
+                color: #1c6cbb;
             }
 
             #id .current-page {
@@ -9282,7 +9285,7 @@ export function Title(param) {
             }
 
             #id .nav-pills .show > .nav-link {
-                color: #007bff;
+                color: #1c6cbb;
                 background-color: initial;
             }
 

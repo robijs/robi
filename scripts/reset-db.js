@@ -36,7 +36,7 @@ const db = {
         {
             "Id": 1,
             "Key": "QuestionTypes",
-            "Value": "[{\"title\":\"General\",\"path\":\"General\"},{\"title\":\"Access\",\"path\":\"RDS\"},{\"title\":\"Feedback\",\"path\":\"KSA\"}]"
+            "Value": "[{\"title\":\"General\"]"
         }
     ]
 }
