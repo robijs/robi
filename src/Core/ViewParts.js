@@ -172,7 +172,7 @@ export async function DeveloperLinks(param) {
         title: 'Pages',
         buttons: [
             {
-                value: 'Settings',
+                value: 'Site Settings',
                 url: `${App.get(`site`)}/_layouts/15/settings.aspx`
             },
             {
@@ -186,12 +186,12 @@ export async function DeveloperLinks(param) {
         ]
     });
 
-    addSection({
-        title: `Data`,
-        buttons: [
+    // addSection({
+    //     title: `Data`,
+    //     buttons: [
 
-        ]
-    });
+    //     ]
+    // });
 
     addSection({
         title: `Lists`,
@@ -207,6 +207,10 @@ export async function DeveloperLinks(param) {
             {
                 value: `Questions`,
                 url: `${App.get(`site`)}/Lists/Questions`
+            },
+            {
+                value: `Settings`,
+                url: `${App.get(`site`)}/Lists/Settings`
             },
             {
                 value: `Users`,
@@ -233,33 +237,19 @@ export async function DeveloperLinks(param) {
         ]
     });
 
-    addSection({
-        title: `Schemas`,
-        buttons: [
+    // addSection({
+    //     title: `Schemas`,
+    //     buttons: [
 
-        ]
-    });
+    //     ]
+    // });
 
-    addSection({
-        title: `Business Rules`,
-        buttons: [
+    // addSection({
+    //     title: `Business Rules`,
+    //     buttons: [
 
-        ]
-    });
-
-    addSection({
-        title: `Settings`,
-        buttons: [
-            {
-                value: `Home`,
-                url: `${App.get(`site`)}/Lists/Home`
-            },
-            {
-                value: `Questions`,
-                url: `${App.get(`site`)}/Lists/Questions`
-            }
-        ]
-    });
+    //     ]
+    // });
 
     function addSection(param) {
         const {

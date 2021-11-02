@@ -197,6 +197,45 @@
       "Created": "2021-11-02T16:23:05.612Z",
       "Module": "file:///C:/Users/steph/OneDrive/Documents/GitHub/robi/src/Core/Actions.js",
       "Id": 13
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "28c9c8c4-bfdd-46f5-8c2f-41939d59c7ea",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2787:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-11-02T17:03:11.557Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 14
+    },
+    {
+      "Title": "Route",
+      "SessionId": "28c9c8c4-bfdd-46f5-8c2f-41939d59c7ea",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:1923:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Core/Components.js:7853:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-11-02T17:03:12.063Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 15
+    },
+    {
+      "Title": "Log in",
+      "SessionId": "e5d6ab4d-70ba-4557-8eea-311f6552acdf",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:2787:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Created": "2021-11-02T17:03:54.870Z",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Id": 16
     }
   ],
   "Users": [

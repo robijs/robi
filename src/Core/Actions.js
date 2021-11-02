@@ -2139,8 +2139,7 @@ export function Start(param) {
 
         appContainer.add();
 
-        const defaultLists = Lists();
-        const listsToCreate = defaultLists.concat(lists);
+        const coreLists = Lists();
 
         if (App.get('mode') === 'prod') {
             console.log('Mode: prod');
@@ -2161,6 +2160,7 @@ export function Start(param) {
                             style: /*css*/ `
                                 .console {
                                     height: 100%;
+                                    width: 100%;
                                     overflow: overlay;
                                     background: #1E1E1E;
                                 }
@@ -2218,11 +2218,13 @@ export function Start(param) {
                                             <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
                                         `);
 
-                                        // Test
+                                        // Start at 3
+                                        // +1 - Create key 'QuestionTypes' in list 'Settings'
+                                        // +1 - Create init note in list 'ReleaseNotes'
+                                        // +1 - Create/update key 'Installed' in list 'Settings'
+                                        let progressCount = 3;
 
-                                        let progressCount = 0;
-
-                                        defaultLists.forEach(item => {
+                                        coreLists.forEach(item => {
                                             const { fields } = item;
 
                                             // List + 1
@@ -2245,8 +2247,6 @@ export function Start(param) {
                                                 progressCount = progressCount + 2;
                                             });
                                         });
-    
-                                        // END Test
     
                                         const progressBar = ProgressBar({
                                             parent: modalBody,
@@ -2287,20 +2287,88 @@ export function Start(param) {
                                         installConsole.add();
                                         installConsole.get().classList.add('console');
 
-                                        // Add default lists first
-                                        for (let list in defaultLists) {
-                                            // 1. Add list of default lists to install-console
-                                            
-                                            // 2. Create lists
-                                            await CreateList(defaultLists[list]);
+                                        // 1. CORE: Add core lists to install-console
+                                        installConsole.append(/*html*/ `
+                                                <div class='console-line'>
+                                                <!-- <code class='line-number'>0</code> -->
+                                                <code style='opacity: 0;'>Create core lists:</code>
+                                            </div>
+                                        `);
 
-                                            // 3. Add spacer to console
+                                        // Scroll console to bottom
+                                        installConsole.get().scrollTop = installConsole.get().scrollHeight;
+
+                                        coreLists.forEach(item => {
+                                            const { list } = item;
+
                                             installConsole.append(/*html*/ `
                                                 <div class='console-line'>
                                                     <!-- <code class='line-number'>0</code> -->
-                                                    <code> </code>
+                                                    <code style='opacity: 0;'>- ${list}</code>
                                                 </div>
                                             `);
+
+                                            // Scroll console to bottom
+                                            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+                                        });
+
+                                        // Add default lists first
+                                        for (let list in coreLists) {
+                                            // Create lists
+                                            await CreateList(coreLists[list]);
+
+                                            // Add spacer to console
+                                            installConsole.append(/*html*/ `
+                                                <div class='console-line'>
+                                                    <!-- <code class='line-number'>0</code> -->
+                                                    <code style='opacity: 0;'>Spacer</code>
+                                                </div>
+                                            `);
+
+                                            // Scroll console to bottom
+                                            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+                                        }
+
+                                        // 2. USER DEFINED: Add user defined lists to install-console
+                                        installConsole.append(/*html*/ `
+                                                <div class='console-line'>
+                                                <!-- <code class='line-number'>0</code> -->
+                                                <code style='opacity: 0;'>Create '${App.get('title')}' lists:</code>
+                                            </div>
+                                        `);
+
+                                        // Scroll console to bottom
+                                        installConsole.get().scrollTop = installConsole.get().scrollHeight;
+
+                                        lists.forEach(item => {
+                                            const { list } = item;
+
+                                            installConsole.append(/*html*/ `
+                                                <div class='console-line'>
+                                                    <!-- <code class='line-number'>0</code> -->
+                                                    <code style='opacity: 0;'>- ${list}</code>
+                                                </div>
+                                            `);
+
+                                            // Scroll console to bottom
+                                            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+                                        });
+
+                                        // Add default lists first
+                                        for (let list in lists) {
+                                            // Create lists
+                                            await CreateList(lists[list]);
+
+                                            // Add spacer to console
+                                            installConsole.append(/*html*/ `
+                                                <div class='console-line'>
+                                                    <!-- <code class='line-number'>0</code> -->
+                                                    <code style='opacity: 0;'>Spacer</code>
+                                                </div>
+                                            `);
+
+                                            // Scroll console to bottom
+                                            installConsole.get().scrollTop = installConsole.get().scrollHeight;
                                         }
                 
                                         // TODO: add create item taskss to progress bar
@@ -2314,6 +2382,17 @@ export function Start(param) {
                                         });
                 
                                         console.log(`Added Question Types: ${JSON.stringify(questionTypes)}`);
+
+                                        // 1. Add to console
+                                        installConsole.append(/*html*/ `
+                                            <div class='console-line'>
+                                                <!-- <code class='line-number'>0</code> -->
+                                                <code style='opacity: 0;'>Added Question Types ${JSON.stringify(questionTypes)} to list 'Settings'</code>
+                                            </div>
+                                        `);
+
+                                        // Scroll console to bottom
+                                        installConsole.get().scrollTop = installConsole.get().scrollHeight;
                 
                                         // Add Release Notes
                                         await CreateItem({
@@ -2331,10 +2410,21 @@ export function Start(param) {
                 
                                         console.log(`Added Release Notes: App installed. Initial lists and items created.`);
 
+                                        // 2. Add to console
+                                        installConsole.append(/*html*/ `
+                                            <div class='console-line'>
+                                                <!-- <code class='line-number'>0</code> -->
+                                                <code style='opacity: 0;'>Added Release Note 'App installed - Initial lists and items created' to list 'RelaseNotes'</code>
+                                            </div>
+                                        `);
+
+                                        // Scroll console to bottom
+                                        installConsole.get().scrollTop = installConsole.get().scrollHeight;
+
                                         // TODO: Add app lists defined by user in Start param.lists
                 
                                         if (!isInstalled) {
-                                            // Create Installed
+                                            // Create key 'Installed'
                                             await CreateItem({
                                                 list: 'Settings',
                                                 data: {
@@ -2343,7 +2433,7 @@ export function Start(param) {
                                                 }
                                             });
                                         } else if (isInstalled.Value === 'No') {
-                                            // Create Installed
+                                            // Update key 'Installed'
                                             await UpdateItem({
                                                 list: 'Settings',
                                                 itemId: isInstalled.Id,
@@ -2354,11 +2444,18 @@ export function Start(param) {
                                         }
                 
                                         console.log('App installed');
-    
-                                        // TODO: increment install-console line number
-                                        // let line = 0;
-                                        // let timeout = 50;
-    
+
+                                        // 3. Add to console
+                                        installConsole.append(/*html*/ `
+                                            <div class='console-line'>
+                                                <!-- <code class='line-number'>0</code> -->
+                                                <code style='opacity: 0;'>App '${App.get('title')}' installed</code>
+                                            </div>
+                                        `);
+
+                                        // Scroll console to bottom
+                                        installConsole.get().scrollTop = installConsole.get().scrollHeight;
+        
                                         // Show launch button
                                         const launchBtn = BootstrapButton({
                                             type: 'primary',
@@ -2501,14 +2598,14 @@ export function Start(param) {
                                         const logs = [];
     
                                         logs.push('Core lists:');
-                                        defaultLists.forEach(item => {
+                                        coreLists.forEach(item => {
                                             const { list } = item;
     
                                             logs.push(`- ${list}`);
                                         });
                                         logs.push(' ');
     
-                                        defaultLists.forEach(item => {
+                                        coreLists.forEach(item => {
                                             const { list, fields } = item;
     
                                             logs.push(`Created core list '${list}'`);
