@@ -68,7 +68,7 @@ export function AddLinks(param) {
     }
 
     links.forEach(link => head.append(createLinkElement(link)));
-    
+
     function createLinkElement(link) {
         const {
             rel,
@@ -76,7 +76,7 @@ export function AddLinks(param) {
             href,
             path
         } = link;
-        
+
         const linkElement = document.createElement('link');
 
         linkElement.setAttribute('rel', rel || 'stylesheet');
@@ -160,7 +160,7 @@ export async function AttachFiles(param) {
     function getFileBuffer(file) {
         return new Promise((resolve, reject) => {
             let fileReader = new FileReader();
-            
+
             fileReader.onload = event => resolve(event.target.result);
             fileReader.readAsArrayBuffer(file);
         });
@@ -221,7 +221,7 @@ export function Authorize(param) {
                 /** If param.route isn't set to false, route to View 403 */
                 Route('403');
             }
-            
+
             return false;
         }
     } else {
@@ -268,11 +268,11 @@ export function Component(param) {
 
     function insertElement(localParent) {
         localParent = localParent || parent;
-        
+
         const parser = new DOMParser();
         const parsedHTML = parser.parseFromString(html, 'text/html');
         const newElement = parsedHTML.body.firstElementChild;
-        
+
         if (inlineStyle) {
             newElement.style = inlineStyle
                 .split('\n')
@@ -280,12 +280,12 @@ export function Component(param) {
                 .join(' ')
                 .trim();
         }
-        
+
         newElement.id = id;
 
         try {
             let parentElement;
-            
+
             if (!localParent) {
                 parentElement = document.querySelector('#app');
             } else if (localParent instanceof Element) {
@@ -311,7 +311,7 @@ export function Component(param) {
             eventTypes.forEach(event => {
                 if (typeof item.selector === 'string') {
                     const replaceIdPlaceholder = item.selector.replace(/#id/g, `#${id}`);
-    
+
                     document.querySelectorAll(replaceIdPlaceholder).forEach((node) => {
                         node.addEventListener(event, item.listener);
                     });
@@ -326,7 +326,7 @@ export function Component(param) {
         addEvent(param) {
             /** Register event */
             events.push(param);
-            
+
             /** Add event listner */
             const {
                 event,
@@ -360,11 +360,11 @@ export function Component(param) {
         removeEvents() {
             events.forEach(item => {
                 const eventTypes = item.event.split(' ');
-    
+
                 eventTypes.forEach(event => {
                     if (typeof item.selector === 'string') {
                         const replaceIdPlaceholder = item.selector.replace(/#id/g, `#${id}`);
-        
+
                         document.querySelectorAll(replaceIdPlaceholder).forEach((node) => {
                             node.removeEventListener(event, item.listener);
                         });
@@ -387,12 +387,12 @@ export function Component(param) {
             return this.get().querySelectorAll(selector);
         },
         closest(selector) {
-            return this.get().closest(selector);  
+            return this.get().closest(selector);
         },
         // element() {
         //     const parser = new DOMParser();
         //     const parsedHTML = parser.parseFromString(html, 'text/html');
-            
+
         //     return parsedHTML.body.firstElementChild;
         // },
         hide() {
@@ -418,7 +418,7 @@ export function Component(param) {
 
             function findAndRemoveStyleAndNode() {
                 const styleNode = document.querySelector(`style[data-name='${id}']`);
-    
+
                 if (styleNode) {
                     styleNode.remove();
                 }
@@ -450,7 +450,7 @@ export function Component(param) {
 
             if (storedComponent && toggle) {
                 Store.remove(name);
-                
+
                 return;
             }
 
@@ -511,7 +511,7 @@ export async function CopyItem(param) {
     if (!copyItem) {
         return;
     }
-    
+
     if (notify !== false) {
         const notification = Toast({
             text: message || `Success!`
@@ -529,26 +529,59 @@ export async function CopyItem(param) {
  * @param {Object}   param          Interface to UpdateItem() module.   
  * @param {string}   param.list     SharePoint list Name.
  */
- export async function CreateColumn(param) {
+export async function CreateColumn(param) {
     const {
         list,
         name,
-        type
+        type,
+        choices,
+        title,
+        lookupList,
+        lookupField
     } = param;
 
     // Get new request digest
     const requestDigest = await GetRequestDigest();
-
     
-    const postOptions = {
-        url: `${App.get('site')}/_api/web/lists/GetByTitle('${list}')/Fields`,
-        data: {
+    let data = {};
+
+    if (type === 'choice') {
+        data = { 
+            __metadata: { 
+                "type": "SP.FieldChoice" 
+            }, 
+            Choices: { 
+                __metadata: { 
+                    "type": "Collection(Edm.String)" 
+                }, 
+                results: choices 
+            } 
+        };
+    } else if (type === 'lookup') {
+        const listGuid = await GetListGuid(lookupList);
+
+        data = { 
+            __metadata: { 
+                "type": "SP.FieldCreationInformation" 
+            }, 
+            FieldTypeKind: 7,
+            Title: title, 
+            LookupListId: listGuid,
+            LookupFieldName: lookupField
+        };
+    } else {
+        data = {
             __metadata: {
                 'type': `SP.Field`,
             },
-            'Title': name,
-            'FieldTypeKind': fieldType(type)
-        },
+            Title: name,
+            FieldTypeKind: fieldType(type)
+        }
+    }
+
+    const postOptions = {
+        url: `${App.get('site')}/_api/web/lists/GetByTitle('${list}')/Fields`,
+        data,
         headers: {
             "Content-Type": "application/json;odata=verbose",
             "Accept": "application/json;odata=verbose",
@@ -569,7 +602,7 @@ export async function CopyItem(param) {
      * 
      */
     function fieldType(type) {
-        switch (type) {
+        switch (type.toLowerCase()) {
             case 'slot':
                 return 2;
             case 'mlot':
@@ -659,33 +692,33 @@ export async function CreateItem(param) {
                 "X-RequestDigest": requestDigest,
             }
         }
-    
+
         let newItem = await Post(postOptions);
-    
+
         if (!newItem) {
             return;
         }
-    
+
         const refetechedNewItem = await Get({
             list,
             select,
             expand,
             filter: `Id eq ${newItem.d.Id}`
         });
-    
+
         if (notify) {
             const notification = Toast({
                 text: message || `Item created`
             });
-    
+
             notification.add();
             notification.remove(6000);
         }
-        
+
         return refetechedNewItem[0];
     } else if (App.get('mode') === 'dev') {
         const body = data;
-        
+
         body.Author = {
             Title: App.get('dev').user.Title
         };
@@ -740,7 +773,7 @@ export async function CreateList(param) {
 
     if (getList.d) {
         console.log(`List ${list} already created.`);
-        
+
         return;
     } else {
         // console.log(getList);
@@ -795,7 +828,7 @@ export async function CreateList(param) {
                 name,
                 type
             } = fields[field];
-            
+
             await CreateColumn({
                 list,
                 name,
@@ -809,7 +842,7 @@ export async function CreateList(param) {
 
 export async function Data(lists) {
     let responses;
-    
+
     if (lists) {
         responses = await Promise.all(lists.map(param => {
             const {
@@ -820,7 +853,7 @@ export async function Data(lists) {
                 filter,
                 orderby
             } = param;
-    
+
             return Get({
                 list,
                 select,
@@ -949,7 +982,7 @@ export function Download(param) {
         csv
     } = param;
 
-    const csvFile = new Blob([csv], {type: 'text/csv'});
+    const csvFile = new Blob([csv], { type: 'text/csv' });
     const downloadLink = document.createElement('a');
 
     // File name
@@ -987,9 +1020,9 @@ export async function LogError(param) {
         ColumnNumber
     } = param;
 
-    if (App.get('mode') === 'prod') { 
+    if (App.get('mode') === 'prod') {
         /** Get new request digest */
-    
+
         /** 
          * @author Wil Pacheco & John Westhuis
          * Added temporary alert to prevent infinite error loop when reporting error, & reload page for user.
@@ -1068,7 +1101,7 @@ export async function LogError(param) {
  * {@link https://stackoverflow.com/a/2117523}
  */
 export function GenerateUUID() {
-    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
 }
@@ -1103,7 +1136,7 @@ export async function Get(param) {
     const url = `${path || App.get('site')}/_api/web/lists/GetByTitle`;
 
     const options = {
-        headers : { 
+        headers: {
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': `application/json; odata=verbose`
         },
@@ -1120,31 +1153,31 @@ export async function Get(param) {
             // Always return at least an empty array if query fails for any reason
             return [];
         }
-    
+
         const queryFilterString = [
             insertIf(filter, 'filter'),
             insertIf(select, 'select'),
             insertIf(expand, 'expand'),
             insertIf(orderby, 'orderby'),
             insertIf(skip, 'skip'),
-            paged ? `$skiptoken=Paged=TRUE${startId ? `&P_ID=${startId}` : ''}`: undefined,
+            paged ? `$skiptoken=Paged=TRUE${startId ? `&P_ID=${startId}` : ''}` : undefined,
             // paged ? `$skiptoken=Paged=TRUE&P_ID=${startId ? startId : itemCount}`: undefined,
         ]
-        .filter(x => x)
-        .join('&');
-    
+            .filter(x => x)
+            .join('&');
+
         function insertIf(value, parameter) {
             return value ? `$${parameter}=${value}` : undefined;
         }
-    
+
         try {
             const response = await fetch(api || `${`${url}('${list}')/items?$top=${top || itemCount || ''}`}&${queryFilterString || ''}`, options);
             const data = await response.json();
-        
+
             if (action) {
                 action(data);
             }
-    
+
             if (paged || skip) {
                 return data.d;
             } else if (Array.isArray(data)) {
@@ -1160,26 +1193,26 @@ export async function Get(param) {
             formatFilter(filter),
             formatOrder(orderby)
         ]
-        .filter(x => x)
-        .join('&');
+            .filter(x => x)
+            .join('&');
 
         function formatFilter(value) {
             if (value) {
                 return value
-                .split(' and ')
-                .map(group => {
-                    const [ field, operator, value ] = group.split(' ');
+                    .split(' and ')
+                    .map(group => {
+                        const [field, operator, value] = group.split(' ');
 
-                    return `${field}${operator === 'eq' ? '=' : ''}${value.replace(/["']/g, "")}`;
-                })
-                .join('&');
+                        return `${field}${operator === 'eq' ? '=' : ''}${value.replace(/["']/g, "")}`;
+                    })
+                    .join('&');
             }
         }
 
         /** GET /posts?_sort=views&_order=asc */
         function formatOrder(value) {
             if (value) {
-                const [ field, order ] = value.split(' ');
+                const [field, order] = value.split(' ');
 
                 return `_sort=${field}&_order=${order}`;
             }
@@ -1219,10 +1252,10 @@ export function GetADUsers(param) {
     const url = `${App.get('site')}/_vti_bin/client.svc/ProcessQuery`
 
     function getPostRequestHeaders(requestDigest) {
-        if (!requestDigest) { 
+        if (!requestDigest) {
             throw new Error('Request Digest is required to send your request.');
         }
-        
+
         return {
             'Accept': 'application/json; odata=verbose',
             'Content-Type': 'application/json; odata=verbose',
@@ -1245,103 +1278,103 @@ export function GetADUsers(param) {
             UrlZoneSpecified: false,
             WebApplicationID: '{00000000-0000-0000-0000-000000000000}',
         }
-    
+
         return '<Request xmlns="http://schemas.microsoft.com/sharepoint/clientquery/2009" SchemaVersion="15.0.0.0" LibraryVersion="15.0.0.0" ApplicationName="Javascript Library">' +
-                    '<Actions>' +
-                        '<StaticMethod TypeId="{de2db963-8bab-4fb4-8a58-611aebc5254b}" Name="ClientPeoplePickerSearchUser" Id="0">' +
-                            '<Parameters>' +
-                                '<Parameter TypeId="{ac9358c6-e9b1-4514-bf6e-106acbfb19ce}">' +
-                                    '<Property Name="AllowEmailAddresses" Type="Boolean">' + options.AllowEmailAddresses + '</Property>' +
-                                    '<Property Name="AllowMultipleEntities" Type="Boolean">' + options.AllowMultipleEntities + '</Property>' +
-                                    '<Property Name="AllUrlZones" Type="Boolean">' + options.AllUrlZones + '</Property>' +
-                                    '<Property Name="EnabledClaimProviders" Type="Null" />' +
-                                    '<Property Name="ForceClaims" Type="Boolean">' + options.ForceClaims + '</Property>' +
-                                    '<Property Name="MaximumEntitySuggestions" Type="Number">' + options.MaximumEntitySuggestions + '</Property>' +
-                                    '<Property Name="PrincipalSource" Type="Number">' + options.PrincipalSource + '</Property>' +
-                                    '<Property Name="PrincipalType" Type="Number">' + options. PrincipalType + '</Property>' +
-                                    '<Property Name="QueryString" Type="String">' + queryString + '</Property>' +
-                                    '<Property Name="Required" Type="Boolean">' + options.Required + '</Property>' +
-                                    '<Property Name="SharePointGroupID" Type="Number">' + options.SharePointGroupID + '</Property>' +
-                                    '<Property Name="UrlZone" Type="Number">' + options.UrlZone + '</Property>' +
-                                    '<Property Name="UrlZoneSpecified" Type="Boolean">' + options.UrlZoneSpecified + '</Property>' +
-                                    '<Property Name="Web" Type="Null" />' +
-                                    '<Property Name="WebApplicationID" Type="String">' + options.WebApplicationID + '</Property>' +
-                                '</Parameter>' +
-                            '</Parameters>' +
-                        '</StaticMethod>' +
-                    '</Actions>' +
-                    '<ObjectPaths />' +
-                '</Request>';
+            '<Actions>' +
+            '<StaticMethod TypeId="{de2db963-8bab-4fb4-8a58-611aebc5254b}" Name="ClientPeoplePickerSearchUser" Id="0">' +
+            '<Parameters>' +
+            '<Parameter TypeId="{ac9358c6-e9b1-4514-bf6e-106acbfb19ce}">' +
+            '<Property Name="AllowEmailAddresses" Type="Boolean">' + options.AllowEmailAddresses + '</Property>' +
+            '<Property Name="AllowMultipleEntities" Type="Boolean">' + options.AllowMultipleEntities + '</Property>' +
+            '<Property Name="AllUrlZones" Type="Boolean">' + options.AllUrlZones + '</Property>' +
+            '<Property Name="EnabledClaimProviders" Type="Null" />' +
+            '<Property Name="ForceClaims" Type="Boolean">' + options.ForceClaims + '</Property>' +
+            '<Property Name="MaximumEntitySuggestions" Type="Number">' + options.MaximumEntitySuggestions + '</Property>' +
+            '<Property Name="PrincipalSource" Type="Number">' + options.PrincipalSource + '</Property>' +
+            '<Property Name="PrincipalType" Type="Number">' + options.PrincipalType + '</Property>' +
+            '<Property Name="QueryString" Type="String">' + queryString + '</Property>' +
+            '<Property Name="Required" Type="Boolean">' + options.Required + '</Property>' +
+            '<Property Name="SharePointGroupID" Type="Number">' + options.SharePointGroupID + '</Property>' +
+            '<Property Name="UrlZone" Type="Number">' + options.UrlZone + '</Property>' +
+            '<Property Name="UrlZoneSpecified" Type="Boolean">' + options.UrlZoneSpecified + '</Property>' +
+            '<Property Name="Web" Type="Null" />' +
+            '<Property Name="WebApplicationID" Type="String">' + options.WebApplicationID + '</Property>' +
+            '</Parameter>' +
+            '</Parameters>' +
+            '</StaticMethod>' +
+            '</Actions>' +
+            '<ObjectPaths />' +
+            '</Request>';
     }
 
     function createPostRequest(data, requestDigest) {
-        data = typeof(data) === 'string' ? data : JSON.stringify(data)       
-       
+        data = typeof (data) === 'string' ? data : JSON.stringify(data)
+
         return {
             method: 'POST',
             body: data,
             headers: getPostRequestHeaders(requestDigest),
         };
     }
- 
+
     return {
         abortController,
         response: GetRequestDigest()
-        .then(reqDigest => {
-            // Create Active Directory Search Payload
-            const reqData = createSearchPayload(query)
-            const reqOptions = Object.assign(createPostRequest(reqData, reqDigest), {
-                signal: abortController.signal
-            });
-
-            return fetch(url, reqOptions)
-            .then(async response => {
-                console.log(response);
-
-                const data = await response.json();
-
-                return data;
-
-                let result = JSON.parse(data[2]);
-
-                result.forEach(acct => {
-                    acct.Title = acct.DisplayText
-                    acct.LoginName = acct.Key
+            .then(reqDigest => {
+                // Create Active Directory Search Payload
+                const reqData = createSearchPayload(query)
+                const reqOptions = Object.assign(createPostRequest(reqData, reqDigest), {
+                    signal: abortController.signal
                 });
 
-                return result;
+                return fetch(url, reqOptions)
+                    .then(async response => {
+                        console.log(response);
+
+                        const data = await response.json();
+
+                        return data;
+
+                        let result = JSON.parse(data[2]);
+
+                        result.forEach(acct => {
+                            acct.Title = acct.DisplayText
+                            acct.LoginName = acct.Key
+                        });
+
+                        return result;
+                    })
             })
-        })
-        // response: GetRequestDigest().then(requestDigest => {
-        //     const init = {
-        //         method: 'POST',
-        //         body: JSON.stringify(createSearchPayload(query)),
-        //         headers : { 
-        //             'Content-Type': 'application/json; charset=UTF-8',
-        //             'Accept': 'application/json; odata=verbose',
-        //             'X-RequestDigest': requestDigest,
-        //         },
-        //         signal: abortController.signal 
-        //     };
+            // response: GetRequestDigest().then(requestDigest => {
+            //     const init = {
+            //         method: 'POST',
+            //         body: JSON.stringify(createSearchPayload(query)),
+            //         headers : { 
+            //             'Content-Type': 'application/json; charset=UTF-8',
+            //             'Accept': 'application/json; odata=verbose',
+            //             'X-RequestDigest': requestDigest,
+            //         },
+            //         signal: abortController.signal 
+            //     };
 
-        //     return fetch(url, init).then(async response => {
-        //         const data = await response.json();
+            //     return fetch(url, init).then(async response => {
+            //         const data = await response.json();
 
-        //         console.log(data);
-                
-        //         let result = JSON.parse(data[2]);
-                
-        //         result.forEach(acct => {
-        //             acct.Title = acct.DisplayText;
-        //             acct.LoginName = acct.Key;
-        //         });
-                
-        //         return result;
-        //     })
-        // })
-        .catch(error => {
-            // console.log(error);
-        })
+            //         console.log(data);
+
+            //         let result = JSON.parse(data[2]);
+
+            //         result.forEach(acct => {
+            //             acct.Title = acct.DisplayText;
+            //             acct.LoginName = acct.Key;
+            //         });
+
+            //         return result;
+            //     })
+            // })
+            .catch(error => {
+                // console.log(error);
+            })
     };
 }
 
@@ -1383,14 +1416,14 @@ export async function GetByUri(param) {
     } = param;
 
     const headers = {
-        headers : { 
+        headers: {
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': `application/json; odata=verbose`
         }
     };
 
     let queryFilterString = '';
-    
+
     if (select) {
         queryFilterString += `${queryFilterString ? '&' : ''}$select=${select}`;
     }
@@ -1399,7 +1432,7 @@ export async function GetByUri(param) {
         queryFilterString += `${queryFilterString ? '&' : ''}$expand=${expand}`;
     }
 
-    const response = await fetch( `${uri}?${queryFilterString}`, headers);
+    const response = await fetch(`${uri}?${queryFilterString}`, headers);
     const data = await response.json();
 
     if (data && data.d) {
@@ -1420,7 +1453,7 @@ export async function GetCurrentUser(param) {
 
     const url = App.get('mode') === 'prod' ? `${App.get('site')}/_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${App.get('dev').user.LoginName}`;
     const fetchOptions = {
-        headers : { 
+        headers: {
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json; odata=verbose'
         }
@@ -1469,7 +1502,7 @@ export async function GetCurrentUser(param) {
             } else {
                 console.log(`%cFailed to create a user account for ${Title}. Check POST data.`, 'background: firebrick; color: white');
             }
-            
+
             return newUser;
         }
     } else if (App.get('mode') === 'dev') {
@@ -1517,7 +1550,7 @@ export async function GetCurrentUser(param) {
  * @param {*} param 
  * @returns 
  */
- export async function GetItemCount(param) {
+export async function GetItemCount(param) {
     const {
         list,
         path,
@@ -1530,9 +1563,9 @@ export async function GetCurrentUser(param) {
 
     apiPath = apiPath || App.get('site');
     const url = type === 'lib' ? `${apiPath}/_api/web/GetFolderByServerRelativeUrl('${path}')/ItemCount` : `${apiPath}/_api/web/lists/GetByTitle('${list}')/ItemCount`;
-    
+
     const headers = {
-        headers : { 
+        headers: {
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json; odata=verbose'
         }
@@ -1550,11 +1583,11 @@ export async function GetCurrentUser(param) {
             //     Error: JSON.stringify(new Error().stack.replace('Error\n    at ', ''))
             // });
         }
-    
+
         const data = await response.json();
-        
+
         return data.d.ItemCount;
-    } catch(error) {
+    } catch (error) {
         // console.log(error);
     }
 }
@@ -1571,7 +1604,7 @@ export async function GetLib(param) {
 
     const url = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/${type || 'Files'}`;
     const headers = {
-        headers : { 
+        headers: {
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': `application/json; odata=verbose`
         }
@@ -1583,7 +1616,7 @@ export async function GetLib(param) {
     });
 
     let queryFilterString = `$filter=${filter}`;
-    
+
     if (select) {
         queryFilterString += `${queryFilterString ? '&' : ''}$select=${select}`;
     }
@@ -1600,13 +1633,13 @@ export async function GetLib(param) {
         const response = await fetch(`${`${url}?$top=${itemCount}`}&${queryFilterString || ''}`, headers);
 
         const data = await response.json();
-    
+
         if (Array.isArray(data)) {
             return data
         } else {
             return data.d.results;
         }
-    } catch(error) {
+    } catch (error) {
         console.log(error);
     }
 }
@@ -1618,7 +1651,31 @@ export async function GetList(param) {
 
     const url = `${App.get('site')}/_api/web/lists/GetByTitle('${listName}')`;
     const headers = {
-        headers : { 
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': `application/json; odata=verbose`
+        }
+    };
+
+    const response = await fetch(url, headers);
+
+    if (response) {
+        const data = await response.json();
+
+        if (data && data.d) {
+            return data.d;
+        }
+    }
+}
+
+export async function GetListGuid(param) {
+    const {
+        listName: list
+    } = param;
+
+    const url = `${App.get('site')}/_api/web/lists/GetByTitle('${list}')/Id`;
+    const headers = {
+        headers: {
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': `application/json; odata=verbose`
         }
@@ -1685,11 +1742,11 @@ export function GetSiteUsers(param) {
         `&$filter=substringof('i:0e.t|dod_adfs_provider|', Account) and (substringof('${query}', Name) or substringof('${query}', WorkEmail))&$orderby=Name`
     ].join('');
     const init = {
-        headers : { 
+        headers: {
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json; odata=verbose'
         },
-        signal: abortController.signal 
+        signal: abortController.signal
     };
 
     return {
@@ -1700,9 +1757,9 @@ export function GetSiteUsers(param) {
             // return data.d.results;
             return data.d;
         })
-        .catch(error => {
-            // console.log(error);
-        })
+            .catch(error => {
+                // console.log(error);
+            })
     };
 }
 
@@ -1818,13 +1875,13 @@ export async function Post(param) {
     } = param;
 
     const response = await fetch(url, {
-        method: 'POST', 
+        method: 'POST',
         headers,
-        body: JSON.stringify(data) 
+        body: JSON.stringify(data)
     });
 
     try {
-        return await response.json(); 
+        return await response.json();
     } catch (error) {
         // console.log(error);
     }
@@ -1908,7 +1965,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
     if (!route) {
         /** TODO: Reset history state? */
         Route('404');
-        
+
         return;
     }
 
@@ -1934,7 +1991,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         pathParts,
         props: queryStringToObject(path.split('?')[1])
     });
-    
+
     /** 
      * Modified from {@link https://stackoverflow.com/a/61948784} 
      */
@@ -1945,13 +2002,13 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
         const pairs = queryString.split('&');
         // → ["foo=bar", "baz=buzz"]
-        
+
         const array = pairs.map(el => {
             const parts = el.split('=');
             return parts;
         });
         // → [["foo", "bar"], ["baz", "buzz"]]
-        
+
         return Object.fromEntries(array);
         // → { "foo": "bar", "baz": "buzz" }
     }
@@ -2143,7 +2200,7 @@ export function Start(param) {
 
         if (App.get('mode') === 'prod') {
             console.log('Mode: prod');
-        
+
             // Start loading bar animation
             const loadingBar = LoadingBar({
                 displayLogo: App.get('logoLarge'),
@@ -2222,27 +2279,27 @@ export function Start(param) {
                             disableBackdropClose: true,
                             async addContent(modalBody) {
                                 modalBody.classList.add('install-modal');
-    
+
                                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                                     <div><strong>${App.get('title')}</strong> isn't installed on this site. Would you like to install it now? You can uninstall it later.</div>
                                 `);
-    
+
                                 const installBtn = BootstrapButton({
                                     async action(event) {
                                         console.log('Install');
-    
+
                                         modal.find('.modal-content').style.width = 'unset';
-                                        
+
                                         modalBody.style.height = `${modalBody.offsetHeight}px`;
                                         modalBody.style.width = `${modalBody.offsetWidth}px`;
                                         modalBody.style.overflowY = 'unset';
                                         modalBody.style.display = 'flex';
                                         modalBody.style.flexDirection = 'column',
-                                        modalBody.style.transition = 'all 300ms ease-in-out';
+                                            modalBody.style.transition = 'all 300ms ease-in-out';
                                         modalBody.innerHTML = '';
                                         modalBody.style.height = '80vh';
                                         modalBody.style.width = '80vw';
-    
+
                                         modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                                             <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
                                         `);
@@ -2258,7 +2315,7 @@ export function Start(param) {
 
                                             // List + 1
                                             progressCount = progressCount + 1;
-    
+
                                             fields.forEach(field => {
                                                 // Field +2 (add column to list and view)
                                                 progressCount = progressCount + 2;
@@ -2270,13 +2327,13 @@ export function Start(param) {
 
                                             // List + 1
                                             progressCount = progressCount + 1;
-    
+
                                             fields.forEach(field => {
                                                 // Field +2 (add column to list and view)
                                                 progressCount = progressCount + 2;
                                             });
                                         });
-    
+
                                         const progressBar = ProgressBar({
                                             parent: modalBody,
                                             totalCount: progressCount
@@ -2286,9 +2343,9 @@ export function Start(param) {
                                             name: 'install-progress-bar',
                                             component: progressBar
                                         });
-    
+
                                         progressBar.add();
-        
+
                                         const installContainer = Container({
                                             padding: '10px',
                                             parent: modalBody,
@@ -2312,7 +2369,7 @@ export function Start(param) {
                                             name: 'install-console',
                                             component: installConsole
                                         });
-    
+
                                         installConsole.add();
                                         installConsole.get().classList.add('console');
 
@@ -2399,7 +2456,7 @@ export function Start(param) {
                                             // Scroll console to bottom
                                             installConsole.get().scrollTop = installConsole.get().scrollHeight;
                                         }
-                
+
                                         // TODO: add create item taskss to progress bar
                                         // Add question types
                                         await CreateItem({
@@ -2409,7 +2466,7 @@ export function Start(param) {
                                                 Value: JSON.stringify(questionTypes)
                                             }
                                         });
-                
+
                                         console.log(`Added Question Types: ${JSON.stringify(questionTypes)}`);
 
                                         // 1. Add to console
@@ -2422,7 +2479,7 @@ export function Start(param) {
 
                                         // Scroll console to bottom
                                         installConsole.get().scrollTop = installConsole.get().scrollHeight;
-                
+
                                         // Add Release Notes
                                         await CreateItem({
                                             list: 'ReleaseNotes',
@@ -2430,13 +2487,13 @@ export function Start(param) {
                                                 Summary: 'App installed',
                                                 Description: 'Initial lists and items created.',
                                                 Status: 'Published',
-                                                MajorVersion:'0',
+                                                MajorVersion: '0',
                                                 MinorVersion: '1',
                                                 PatchVersion: '0',
                                                 ReleaseType: 'Current'
                                             }
                                         });
-                
+
                                         console.log(`Added Release Notes: App installed. Initial lists and items created.`);
 
                                         // 2. Add to console
@@ -2451,7 +2508,7 @@ export function Start(param) {
                                         installConsole.get().scrollTop = installConsole.get().scrollHeight;
 
                                         // TODO: Add app lists defined by user in Start param.lists
-                
+
                                         if (!isInstalled) {
                                             // Create key 'Installed'
                                             await CreateItem({
@@ -2471,7 +2528,7 @@ export function Start(param) {
                                                 }
                                             });
                                         }
-                
+
                                         console.log('App installed');
 
                                         // 3. Add to console
@@ -2484,12 +2541,12 @@ export function Start(param) {
 
                                         // Scroll console to bottom
                                         installConsole.get().scrollTop = installConsole.get().scrollHeight;
-        
+
                                         // Show launch button
                                         const launchBtn = BootstrapButton({
                                             type: 'primary',
                                             value: 'Launch app',
-                                            classes: [ 'mt-3', 'w-100' ],
+                                            classes: ['mt-3', 'w-100'],
                                             action(event) {
                                                 // Bootstrap uses jQuery .trigger, won't work with .addEventListener
                                                 $(modal.get()).on('hidden.bs.modal', event => {
@@ -2507,15 +2564,15 @@ export function Start(param) {
 
                                         launchBtn.add();
                                     },
-                                    classes: [ 'w-100 mt-5' ],
+                                    classes: ['w-100 mt-5'],
                                     width: '100%',
                                     parent: modalBody,
                                     type: 'primary',
                                     value: 'Install'
                                 });
-    
+
                                 installBtn.add();
-    
+
                                 const cancelBtn = BootstrapButton({
                                     action(event) {
                                         console.log('Cancel install');
@@ -2534,19 +2591,19 @@ export function Start(param) {
 
                                         modal.close();
                                     },
-                                    classes: [ 'w-100 mt-2' ],
+                                    classes: ['w-100 mt-2'],
                                     width: '100%',
                                     parent: modalBody,
                                     type: 'light',
                                     value: 'Cancel'
                                 });
-    
+
                                 cancelBtn.add();
                             },
                             centered: true,
                             showFooter: false,
                         });
-    
+
                         modal.add();
                     } else {
                         launch();
@@ -2609,7 +2666,7 @@ export function Start(param) {
                         };
                     `
                 });
-            
+
                 // Start loading bar animation
                 const loadingBar = LoadingBar({
                     displayLogo: App.get('logoLarge'),
@@ -2622,84 +2679,84 @@ export function Start(param) {
                             disableBackdropClose: true,
                             async addContent(modalBody) {
                                 modalBody.classList.add('install-modal');
-    
+
                                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                                     <div><strong>${App.get('title')}</strong> isn't installed on this site. Would you like to install it now? You can uninstall it later.</div>
                                 `);
-    
+
                                 const installBtn = BootstrapButton({
                                     action(event) {
                                         console.log('Install');
-    
+
                                         modal.find('.modal-content').style.width = 'unset';
-                                        
+
                                         modalBody.style.height = `${modalBody.offsetHeight}px`;
                                         modalBody.style.width = `${modalBody.offsetWidth}px`;
                                         modalBody.style.overflowY = 'unset';
                                         modalBody.style.display = 'flex';
                                         modalBody.style.flexDirection = 'column',
-                                        modalBody.style.transition = 'all 300ms ease-in-out';
+                                            modalBody.style.transition = 'all 300ms ease-in-out';
                                         modalBody.innerHTML = '';
                                         modalBody.style.height = '80vh';
                                         modalBody.style.width = '80vw';
-    
+
                                         modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                                             <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
                                         `);
-    
+
                                         const logs = [];
-    
+
                                         logs.push('Core lists:');
                                         coreLists.forEach(item => {
                                             const { list } = item;
-    
+
                                             logs.push(`- ${list}`);
                                         });
                                         logs.push(' ');
-    
+
                                         coreLists.forEach(item => {
                                             const { list, fields } = item;
-    
+
                                             logs.push(`Created core list '${list}'`);
-    
+
                                             fields.forEach(field => {
                                                 const { name } = field;
-    
+
                                                 logs.push(`Created column '${name}'`);
                                                 logs.push(`Added column '${name}' to View 'All Items'`);
                                             });
-    
+
                                             logs.push(' ');
                                         });
-    
+
                                         logs.push(`${App.get('title')} lists:`);
                                         lists.forEach(item => {
                                             const { list } = item;
-    
+
                                             logs.push(`- ${list}`);
                                         });
                                         logs.push(' ');
-    
+
                                         lists.forEach(item => {
                                             const { list, fields } = item;
-    
+
                                             logs.push(`Created ${App.get('title')} list '${list}'`);
-    
+
                                             fields.forEach(field => {
                                                 const { name } = field;
-    
+
                                                 logs.push(`Created column '${name}'`);
                                                 logs.push(`Added column '${name}' to View 'All Items'`);
                                             });
-    
+
                                             logs.push(' ');
                                         });
-    
+
                                         const progressBar = ProgressBar({
                                             parent: modalBody,
                                             totalCount: logs.length
                                         });
-    
+
                                         progressBar.add();
 
                                         const installContainer = Container({
@@ -2720,72 +2777,72 @@ export function Start(param) {
                                             margin: '0px',
                                             parent: installContainer
                                         });
-    
+
                                         installConsole.add();
                                         installConsole.get().classList.add('console');
-    
+
                                         let line = 0;
                                         let timeout = 50;
-    
+
                                         for (let i = 0; i < logs.length; i++) {
                                             setTimeout(() => {
                                                 line++;
-    
+
                                                 progressBar.update();
-    
+
                                                 installConsole.append(/*html*/ `
                                                     <div class='console-line'>
                                                         <code class='line-number'>${line}</code>
                                                         <code>${logs[i]}</code>
                                                     </div>
                                                 `);
-    
+
                                                 installConsole.get().scrollTop = installConsole.get().scrollHeight;
                                             }, (i + 1) * timeout);
                                         }
-    
+
                                         setTimeout(() => {
                                             line++;
-    
+
                                             installConsole.append(/*html*/ `
                                                 <div class='console-line'>
                                                     <code class='line-number'>${line}</code>
                                                     <code>'${App.get('title')}' installed</code>
                                                 </div>
                                             `);
-    
+
                                             // Show launch button
                                             const launchBtn = BootstrapButton({
                                                 type: 'primary',
                                                 value: 'Launch app',
-                                                classes: [ 'mt-3', 'w-100' ],
+                                                classes: ['mt-3', 'w-100'],
                                                 action(event) {
                                                     console.log('Launch');
-    
+
                                                     modal.close();
                                                     loadingBar.showLoadingBar();
-    
+
                                                     setTimeout(() => {
                                                         launch();
                                                     }, 150);
                                                 },
                                                 parent: modalBody
                                             });
-    
+
                                             launchBtn.add();
-    
+
                                             installConsole.get().scrollTop = installConsole.get().scrollHeight;
                                         }, (logs.length + 1) * timeout);
                                     },
-                                    classes: [ 'w-100 mt-5' ],
+                                    classes: ['w-100 mt-5'],
                                     width: '100%',
                                     parent: modalBody,
                                     type: 'primary',
                                     value: 'Install'
                                 });
-    
+
                                 installBtn.add();
-    
+
                                 const cancelBtn = BootstrapButton({
                                     action(event) {
                                         console.log('Cancel install');
@@ -2804,25 +2861,25 @@ export function Start(param) {
 
                                         modal.close();
                                     },
-                                    classes: [ 'w-100 mt-2' ],
+                                    classes: ['w-100 mt-2'],
                                     width: '100%',
                                     parent: modalBody,
                                     type: 'light',
                                     value: 'Cancel'
                                 });
-    
+
                                 cancelBtn.add();
                             },
                             centered: true,
                             showFooter: false,
                         });
-    
+
                         modal.add();
                     }
                 });
-    
+
                 loadingBar.add();
-    
+
                 Store.add({
                     name: 'app-loading-bar',
                     component: loadingBar
@@ -2837,22 +2894,22 @@ export function Start(param) {
             AddLinks({
                 links
             });
-    
+
             /** Set sessions storage */
             SetSessionStorage({
                 sessionStorageData
             });
-    
+
             /** Get list items */
             const data = await Data(preLoadLists);
 
             if (data) {
                 /** Add list items to store */
                 preLoadLists.forEach((param, index) => {
-                        const {
-                            list
-                        } = param;
-    
+                    const {
+                        list
+                    } = param;
+
                     Store.add({
                         type: 'list',
                         list,
@@ -2860,37 +2917,37 @@ export function Start(param) {
                     });
                 });
             }
-    
+
             /** Load svg definitions */
             const svgDefs = SvgDefs({
                 svgSymbols
             });
-    
+
             // console.log('SVG Defs', svgDefs);
-    
+
             svgDefs.add();
-    
+
             /** Get AD user and Users list item properties */
             Store.user(await GetCurrentUser({
                 list: usersList,
                 fields: usersFields
             }));
-    
+
             /** Get current route */
             const path = location.href.split('#')[1];
-    
+
             /** Attach Router to browser back/forward event */
             window.addEventListener('popstate', (event) => {
                 if (event.state) {
                     Route(event.state.url.split('#')[1], {
                         scrollTop: Store.viewScrollTop()
-                    }); 
+                    });
                 }
             });
-    
+
             /** Store routes */
             Store.setRoutes(routes.concat(Routes));
-    
+
             /** Sidebar Component */
             const sidebar = Sidebar({
                 logo,
@@ -2898,43 +2955,43 @@ export function Start(param) {
                 path,
                 sidebarDropdown
             });
-    
+
             Store.add({
                 name: 'sidebar',
                 component: sidebar
             });
-    
+
             sidebar.add();
-    
+
             /** Main Container */
             const mainContainer = MainContainer({
                 parent: appContainer
             });
-    
+
             Store.add({
                 name: 'maincontainer',
                 component: mainContainer
             });
-    
+
             mainContainer.add();
-            
+
             /** Run callback defined in settings Before first view loads */
             if (beforeLoad) {
                 await beforeLoad();
             }
-    
+
             /** Show App Container */
             appContainer.show('flex');
-    
+
             /** Generate Session Id */
             const sessionId = GenerateUUID();
-    
+
             /** Format Title for Sessin/Local Storage keys */
             const storageKeyPrefix = settings.title.split(' ').join('-');
-    
+
             /** Set Session Id */
             sessionStorage.setItem(`${storageKeyPrefix}-sessionId`, sessionId)
-    
+
             /** Log in*/
             try {
                 Log({
@@ -2946,18 +3003,18 @@ export function Start(param) {
             } catch (error) {
                 console.error(error);
             }
-    
+
             /** Run current route on page load */
             Route(path, {
                 log: false
             });
-    
+
             /** Check Local Storage for release notes */
             const isReleaseNotesDismissed = localStorage.getItem(`${storageKeyPrefix}-releaseNotesDismissed`);
-    
+
             if (!isReleaseNotesDismissed) {
                 // console.log('Show release notes message.');
-                
+
                 /** Release Notes */
                 const releaseNotes = FixedToast({
                     title: 'New version is live!',
@@ -2978,7 +3035,7 @@ export function Start(param) {
                             },
                             parent: appContainer
                         });
-                
+
                         modal.add();
                     },
                     onClose(event) {
@@ -2987,7 +3044,7 @@ export function Start(param) {
                     },
                     parent: appContainer
                 });
-    
+
                 releaseNotes.add();
             }
         }
@@ -3032,8 +3089,8 @@ export async function UpdateItem(param) {
         // Add SharePoint List Item Type metadata property to passed in data object
         data.__metadata = {
             'type': item.__metadata.type
-        } 
-        
+        }
+
         // Define Post interface
         const postOptions = {
             url: item.__metadata.uri,
@@ -3063,7 +3120,7 @@ export async function UpdateItem(param) {
         return updatedItem;
     } else {
         const body = data;
-        
+
         body.Editor = {
             Title: App.get('dev').user.Title
         };
@@ -3103,7 +3160,7 @@ export async function UploadFiles(param) {
 
     // Get new request digest
     const requestDigest = await GetRequestDigest();
-    
+
     // Upload responses
     const uploads = [];
 
@@ -3111,7 +3168,7 @@ export async function UploadFiles(param) {
         const file = files[i];
         const name = file.name;
         const fileBuffer = await getFileBuffer(file);
-        
+
         // const upload = await fetch(`${App.get('site')}/_api/web/folders/GetByUrl('/${site}/${list}')/Files/add(url='${name}',overwrite=true)`, {
         // const upload = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/add(url='${name}',overwrite=true)`, {
         // const upload = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/add`, {
@@ -3131,7 +3188,7 @@ export async function UploadFiles(param) {
     function getFileBuffer(file) {
         return new Promise((resolve, reject) => {
             let fileReader = new FileReader();
-            
+
             fileReader.onload = event => resolve(event.target.result);
             fileReader.readAsArrayBuffer(file);
         });
