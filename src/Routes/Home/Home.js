@@ -23,4 +23,6 @@ export default async function Home() {
     });
 
     viewTitle.add();
+
+    test.add();
 }

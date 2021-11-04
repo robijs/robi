@@ -1,5 +1,5 @@
 import { Start } from './Core/Actions.js'
-import lists from './lists.mjs'
+import lists from './lists.js'
 import Home from './Routes/Home/Home.js'
 
 Start({

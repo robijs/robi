@@ -917,63 +917,48 @@ export async function DeleteItem(param) {
         list,
         itemId,
         filter,
-        notify,
-        notifyMessage
     } = param;
 
-    /** Get item by id */
-    const getItems = await Get({
-        list,
-        filter: itemId ? `Id eq ${itemId}` : filter
-    });
+    if (App.get('mode') === 'prod') {
+        /** Get item by id */
+        const getItems = await Get({
+            list,
+            filter: itemId ? `Id eq ${itemId}` : filter
+        });
 
-    // const item = getItems[0];
+        // const item = getItems[0];
 
-    /** Get new request digest */
-    const requestDigest = await GetRequestDigest();
+        /** Get new request digest */
+        const requestDigest = await GetRequestDigest();
 
-    await Promise.all(getItems.map(item => {
-        const postOptions = {
-            url: item.__metadata.uri,
+        await Promise.all(getItems.map(item => {
+            const postOptions = {
+                url: item.__metadata.uri,
+                headers: {
+                    "Content-Type": "application/json;odata=verbose",
+                    "Accept": "application/json;odata=verbose",
+                    "X-HTTP-Method": "DELETE",
+                    "X-RequestDigest": requestDigest,
+                    "If-Match": item.__metadata.etag
+                }
+            }
+
+            return Post(postOptions);
+        }));
+    } else if (App.get('mode') === 'dev') {
+        const options = {
+            method: 'DELETE',
             headers: {
                 "Content-Type": "application/json;odata=verbose",
                 "Accept": "application/json;odata=verbose",
-                "X-HTTP-Method": "DELETE",
-                "X-RequestDigest": requestDigest,
-                "If-Match": item.__metadata.etag
             }
         }
 
-        return Post(postOptions);
-    }));
+        const response = await fetch(`http://localhost:3000/${list}/${itemId}`, options);
+        const deletedItem = await response.json();
 
-    // // Define Post interface
-    // const postOptions = {
-    //     url: item.__metadata.uri,
-    //     headers: {
-    //         "Content-Type": "application/json;odata=verbose",
-    //         "Accept": "application/json;odata=verbose",
-    //         "X-HTTP-Method": "DELETE",
-    //         "X-RequestDigest": requestDigest,
-    //         "If-Match": item.__metadata.etag
-    //     }
-    // }
-
-    // // Post update
-    // await Post(postOptions);
-
-    // Notify
-    // if (notify !== false) {
-    //     const notification = Toast({
-    //         text: notifyMessage || `Removed!`
-    //     });
-
-    //     notification.add();
-
-    //     setTimeout(() => {
-    //         notification.remove();
-    //     }, 6000);
-    // }
+        return deletedItem;
+    }
 }
 
 export function Download(param) {
@@ -1000,101 +985,6 @@ export function Download(param) {
 
     // Lanzamos
     downloadLink.click();
-}
-
-/**
- * Create SharePoint list item.
- * @param {Object}   param          Interface to UpdateItem() module.   
- * @param {string}   param.type     SharePoint list item type.
- * @param {string}   param.list     SharePoint list Name.
- * @param {string}   [param.list]   SharePoint list item type.
- * @param {function} param.action   Function to be run after updating item posts.
- * @param {boolean}  [param.notify] If false, don't display notification.
- */
-export async function LogError(param) {
-    const {
-        Message,
-        Error,
-        Source,
-        Line,
-        ColumnNumber
-    } = param;
-
-    if (App.get('mode') === 'prod') {
-        /** Get new request digest */
-
-        /** 
-         * @author Wil Pacheco & John Westhuis
-         * Added temporary alert to prevent infinite error loop when reporting error, & reload page for user.
-         * 
-         * @author Stephen Matheis
-         * @to Wilfredo Pacheo, John Westhuis
-         * Catching the request digest promise was a great idea. Jealous I didn't think of it >_<;
-         */
-        const requestDigest = await GetRequestDigest().catch(e => {
-            alert('Your session has expired, your page will now reload.')
-            location.reload()
-        });
-
-        /** @todo check if Errors list exits, create if not */
-        /**
-         * Pass this object to fetch
-         * 
-         * @interface
-         * @property {string} url - SharePoint 2013 API
-         *
-         */
-        const postOptions = {
-            url: `${App.get('site')}/_api/web/lists/GetByTitle('Errors')/items`,
-            data: {
-                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
-                Message,
-                Error,
-                Source,
-                UserAgent: navigator.userAgent,
-                Line,
-                ColumnNumber,
-                __metadata: {
-                    'type': `SP.Data.ErrorsListItem`
-                }
-            },
-            headers: {
-                "Content-Type": "application/json;odata=verbose",
-                "Accept": "application/json;odata=verbose",
-                "X-RequestDigest": requestDigest,
-            }
-        }
-
-        const newItem = await Post(postOptions);
-
-        console.log(`%c Logged error '${Message}'. `, 'background: crimson; color: #fff');
-
-        return newItem.d;
-    } else if (App.get('mode') === 'dev') {
-        const options = {
-            method: `POST`,
-            body: JSON.stringify({
-                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
-                Message,
-                Error,
-                Source,
-                Line,
-                ColumnNumber,
-                Author: {
-                    Title: App.get('dev').user.Title
-                },
-                Created: new Date().toISOString()
-            }),
-            headers: {
-                "Content-Type": "application/json;odata=verbose",
-                "Accept": "application/json;odata=verbose",
-            }
-        }
-
-        await fetch('http://localhost:3000/Errors', options);
-
-        console.log(`%c Logged error '${Message}'. `, 'background: crimson; color: #fff');
-    }
 }
 
 /**
@@ -1837,9 +1727,9 @@ export async function Log(param) {
 
         return newItem.d;
     } else if (App.get('mode') === 'dev') {
-        const options = {
-            method: `POST`,
-            body: JSON.stringify({
+        const newLog = await CreateItem({
+            list: 'Log',
+            data: {
                 Title,
                 SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
                 Message: JSON.stringify({
@@ -1849,21 +1739,100 @@ export async function Log(param) {
                 }),
                 StackTrace: JSON.stringify(StackTrace.replace('Error\n    at ', '')),
                 UserAgent: navigator.userAgent,
-                Author: {
-                    Title: App.get('dev').user.Title
-                },
-                Created: new Date().toISOString(),
                 Module
-            }),
+            }
+        });
+
+        console.log(`%cLog: ${Title}`, 'background: #1e1e1e; color: #fff');
+
+        return newLog;
+    }
+}
+
+/**
+ * Create SharePoint list item.
+ * @param {Object}   param          Interface to UpdateItem() module.   
+ * @param {string}   param.type     SharePoint list item type.
+ * @param {string}   param.list     SharePoint list Name.
+ * @param {string}   [param.list]   SharePoint list item type.
+ * @param {function} param.action   Function to be run after updating item posts.
+ * @param {boolean}  [param.notify] If false, don't display notification.
+ */
+ export async function LogError(param) {
+    const {
+        Message,
+        Error,
+        Source,
+        Line,
+        ColumnNumber
+    } = param;
+
+    if (App.get('mode') === 'prod') {
+        /** Get new request digest */
+
+        /** 
+         * @author Wil Pacheco & John Westhuis
+         * Added temporary alert to prevent infinite error loop when reporting error, & reload page for user.
+         * 
+         * @author Stephen Matheis
+         * @to Wilfredo Pacheo, John Westhuis
+         * Catching the request digest promise was a great idea. Jealous I didn't think of it >_<;
+         */
+        const requestDigest = await GetRequestDigest().catch(e => {
+            alert('Your session has expired, your page will now reload.')
+            location.reload()
+        });
+
+        /** @todo check if Errors list exits, create if not */
+        /**
+         * Pass this object to fetch
+         * 
+         * @interface
+         * @property {string} url - SharePoint 2013 API
+         *
+         */
+        const postOptions = {
+            url: `${App.get('site')}/_api/web/lists/GetByTitle('Errors')/items`,
+            data: {
+                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
+                Message,
+                Error,
+                Source,
+                UserAgent: navigator.userAgent,
+                Line,
+                ColumnNumber,
+                __metadata: {
+                    'type': `SP.Data.ErrorsListItem`
+                }
+            },
             headers: {
                 "Content-Type": "application/json;odata=verbose",
                 "Accept": "application/json;odata=verbose",
+                "X-RequestDigest": requestDigest,
             }
         }
 
-        await fetch('http://localhost:3000/Log', options);
+        const newItem = await Post(postOptions);
+
+        console.log(`%cError: ${Message}`, 'background: crimson; color: #fff');
+
+        return newItem.d;
+    } else if (App.get('mode') === 'dev') {
+        const newLog = await CreateItem({
+            list: 'Errors',
+            data: {
+                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
+                Message,
+                Error,
+                Source,
+                Line,
+                ColumnNumber
+            }
+        });
 
         console.log(`%cLog: ${Title}`, 'background: #1e1e1e; color: #fff');
+
+        return newLog;
     }
 }
 
@@ -2995,7 +2964,7 @@ export function Start(param) {
             /** Log in*/
             try {
                 Log({
-                    Title: 'Log in',
+                    Title:  `${Store.user().Title || 'User'} logged in`,
                     Message: `${Store.user().Email || 'User'} successfully loaded ${title}`,
                     StackTrace: new Error().stack,
                     Module: import.meta.url
@@ -3138,9 +3107,9 @@ export async function UpdateItem(param) {
         }
 
         const response = await fetch(`http://localhost:3000/${list}/${itemId}`, options);
-        const newItem = await response.json();
+        const item = await response.json();
 
-        return newItem;
+        return item;
     }
 }
 
