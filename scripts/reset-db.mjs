@@ -1,5 +1,5 @@
 import { writeFile } from 'fs';
-import lists from '../src/lists.mjs'
+import lists from '../src/lists.js'
 
 let db = {
     "Comments": [],
