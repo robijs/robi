@@ -1,5 +1,4 @@
 import { 
-    Home,
     Help,
     Missing,
     Unauthorized,
@@ -15,6 +14,12 @@ let settings = {};
 
 const App = {
     set(param) {
+        let { mode, site, library } = param;
+
+        if (mode === 'prod' && !site) {
+            param.site = location.href.split(library || '/App/')[0];
+        }
+
         settings = param;
     },
     get(prop) {

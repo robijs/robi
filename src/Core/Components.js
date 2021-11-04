@@ -7433,7 +7433,7 @@ export function Sidebar(param) {
         sidebarDropdown
     } = param;
 
-    const logoPath = App.get('mode') === 'prod' ? '../Images' : `${App.get('site')}/src/Images`;
+    const logoPath = App.get('mode') === 'prod' ? '../Images' : `/src/Images`;
 
     const component = Component({
         html: /*html*/ `

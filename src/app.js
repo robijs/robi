@@ -1,7 +1,6 @@
 import { Start } from './Core/Actions.js'
 import lists from './lists.js'
 import Home from './Routes/Home/Home.js'
-import Resources from './Routes/Resources/Resources.js'
 
 Start({
     routes: [
@@ -11,14 +10,7 @@ Start({
             go() {
                 Home();
             }  
-        },
-        {
-            path: 'Resources',
-            icon: 'book',
-            go() {
-                Resources();
-            }  
-        },
+        }
     ],
     settings: {
         mode: 'dev', // choose 'dev' || 'prod'
@@ -33,7 +25,8 @@ Start({
             // testLoading: true, // choose true || false
         },
         title: 'App', // enter app name
-        site: '', // enter site
+        site: '', // optional: enter site
+        library: '', // optional: enter src document library
         logo: 'dha-logo-no-label-90w.png',
         logoSmall: 'dha-logo-no-label-40w.png',
         logoLarge: 'dha-logo-no-label-386w.png',

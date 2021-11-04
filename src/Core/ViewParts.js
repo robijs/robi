@@ -32,6 +32,7 @@ import {
 import Store from './Store.js'
 import { App } from './Settings.js'
 import { Question as M_Question, StartAndEndOfWeek } from './Models.js'
+import lists from '../lists.js'
 
 /**
  * 
@@ -169,56 +170,61 @@ export async function DeveloperLinks(param) {
     } = param;
 
     addSection({
-        title: 'Pages',
+        title: 'SharePoint',
         buttons: [
             {
                 value: 'Site Settings',
-                url: `${App.get(`site`)}/_layouts/15/settings.aspx`
+                url: `${App.get('site')}/_layouts/15/settings.aspx`
             },
             {
                 value: `Site Contents`,
-                url: `${App.get(`site`)}/_layouts/15/viewlsts.aspx`
+                url: `${App.get('site')}/_layouts/15/viewlsts.aspx`
             },
             {
                 value: `Add an app`,
-                url: `${App.get(`site`)}/_layouts/15/addanapp.aspx`
+                url: `${App.get('site')}/_layouts/15/addanapp.aspx`
             }
         ]
     });
 
-    // addSection({
-    //     title: `Data`,
-    //     buttons: [
+    addSection({
+        title: `App Lists`,
+        buttons: lists.map(item => {
+            const { list } = item;
 
-    //     ]
-    // });
+            return {
+                value: list,
+                url: `${App.get('site')}/Lists/${list}`
+            }
+        })
+    });
 
     addSection({
-        title: `Lists`,
+        title: `Core Lists`,
         buttons: [
             {
                 value: `Errors`,
-                url: `${App.get(`site`)}/Lists/Errors`
+                url: `${App.get('site')}/Lists/Errors`
             },
             {
                 value: `Log`,
-                url: `${App.get(`site`)}/Lists/Log`
+                url: `${App.get('site')}/Lists/Log`
             },
             {
                 value: `Questions`,
-                url: `${App.get(`site`)}/Lists/Questions`
+                url: `${App.get('site')}/Lists/Questions`
             },
             {
                 value: `Settings`,
-                url: `${App.get(`site`)}/Lists/Settings`
+                url: `${App.get('site')}/Lists/Settings`
             },
             {
                 value: `Users`,
-                url: `${App.get(`site`)}/Lists/Users`
+                url: `${App.get('site')}/Lists/Users`
             },
             {
                 value: `Release Notes`,
-                url: `${App.get(`site`)}/Lists/ReleaseNotes`
+                url: `${App.get('site')}/Lists/ReleaseNotes`
             }
         ]
     });
@@ -228,11 +234,11 @@ export async function DeveloperLinks(param) {
         buttons: [
             {
                 value: `App`,
-                url: `${App.get(`site`)}/App`
+                url: `${App.get('site')}/App`
             },
             {
-                value: `Docs`,
-                url: `${App.get(`site`)}/devdocs`
+                value: `Documents`,
+                url: `${App.get('site')}/Shared%20Documents`
             }
         ]
     });
