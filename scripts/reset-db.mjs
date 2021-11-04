@@ -1,17 +1,7 @@
-const fs = require('fs')
+import { writeFile } from 'fs';
+import lists from '../src/lists.mjs'
 
-// fs.readFile('../src/lists.js', 'utf8' , (err, data) => {
-//     if (err) {
-//         console.error(err)
-//         return
-//     }
-
-//     console.log(data);
-// });
-
-// return;
-
-const db = {
+let db = {
     "Comments": [],
     "Errors": [],
     "Log": [],
@@ -41,9 +31,17 @@ const db = {
     ]
 }
 
-fs.writeFile('./json-server/db.json', JSON.stringify(db), err => {
+lists.forEach(item => {
+    const { list } = item;
+
+    db[list] = [];
+});
+
+writeFile('./json-server/db.json', JSON.stringify(db), err => {
     if (err) {
         console.error(err)
         return
     }
 })
+
+console.log('db.json reset');

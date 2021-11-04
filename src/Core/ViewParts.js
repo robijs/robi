@@ -32,7 +32,7 @@ import {
 import Store from './Store.js'
 import { App } from './Settings.js'
 import { Question as M_Question, StartAndEndOfWeek } from './Models.js'
-import lists from '../lists.js'
+import lists from '../lists.mjs'
 
 /**
  * 

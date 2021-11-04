@@ -1,4 +1,4 @@
-import { Alert, Toast, LoadingBar, SvgDefs, Sidebar, AppContainer, MainContainer, FixedToast, Modal, BootstrapButton, ProgressBar, InstallConsole, Container } from './Components.js'
+import { Toast, LoadingBar, SvgDefs, Sidebar, AppContainer, MainContainer, FixedToast, Modal, BootstrapButton, ProgressBar, InstallConsole, Container } from './Components.js'
 import { Lists } from './Models.js'
 import { App, Routes } from './Settings.js';
 import Store from './Store.js'
