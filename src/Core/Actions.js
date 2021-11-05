@@ -1799,8 +1799,6 @@ export async function Log(param) {
                 Error,
                 Source,
                 UserAgent: navigator.userAgent,
-                Line,
-                ColumnNumber,
                 __metadata: {
                     'type': `SP.Data.ErrorsListItem`
                 }
@@ -1825,12 +1823,10 @@ export async function Log(param) {
                 Message,
                 Error,
                 Source,
-                Line,
-                ColumnNumber
             }
         });
 
-        console.log(`%cLog: ${Title}`, 'background: #1e1e1e; color: #fff');
+        console.log(`%cError: ${Message}`, 'background: crimson; color: #fff');
 
         return newLog;
     }
@@ -2136,8 +2132,6 @@ export function Start(param) {
             LogError({
                 Message: message,
                 Source: source,
-                Line: lineno,
-                ColumnNumber: colno,
                 Error: JSON.stringify(error, replaceErrors)
             });
         }
@@ -2147,8 +2141,6 @@ export function Start(param) {
             LogError({
                 Message: event.reason.message,
                 Source: import.meta.url,
-                Line: null,
-                ColumnNumber: null,
                 Error: event.reason.stack
             });
         });
@@ -3033,9 +3025,7 @@ export async function UpdateItem(param) {
         itemId,
         select,
         expand,
-        data,
-        notify,
-        notifyMessage
+        data
     } = param;
 
     // Exit if no data passed in
@@ -3107,9 +3097,20 @@ export async function UpdateItem(param) {
         }
 
         const response = await fetch(`http://localhost:3000/${list}/${itemId}`, options);
-        const item = await response.json();
+        
+        if (response) {
+            // Get updated item
+            const getUpdatedItem = await Get({
+                list,
+                select,
+                expand,
+                filter: `Id eq ${itemId}`
+            });
 
-        return item;
+            const updatedItem = getUpdatedItem[0];
+
+            return updatedItem;
+        }
     }
 }
 

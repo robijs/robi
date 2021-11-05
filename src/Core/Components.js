@@ -961,6 +961,130 @@ export function BootstrapButton(param) {
  * @param {*} param 
  * @returns 
  */
+export function BootstrapDropdown(param) {
+    const {
+        action,
+        label,
+        parent,
+        position,
+        options,
+        value,
+        margin,
+        padding
+    } = param;
+
+    const component = Component({
+        html: /*html*/ `
+            <div>
+                <label>${label}</label>
+                <div class='dropdown'>
+                    <button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                        ${value}
+                    </button>
+                    <div class='dropdown-menu hidden' aria-labelledby='dropdownMenuButton'>
+                        ${buildDropdown(options)}
+                    </div>
+                </div>
+            </div>
+        `,
+        style: /*css*/ `
+            #id {
+                margin: ${margin || '0px'};
+                padding: ${padding || '0px'};
+            }
+
+            #id label {
+                font-size: .95em;
+                font-weight: bold;
+                padding: 3px 0px;
+            }
+
+            #id .dropdown-toggle {
+                font-size: .95em;
+                border-radius: 0.25rem;
+                border: 1px solid #ced4da;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            #id .dropdown-item {
+                font-size: .95em;
+                cursor: pointer;
+            }
+
+            #id .hidden {
+                display: block;
+                visibility: hidden;
+            }
+        `,
+        parent,
+        position,
+        events: [
+            {
+                selector: `#id .dropdown-item`,
+                event: 'click',
+                listener(event) {
+                    component.find('.dropdown-toggle').innerText = event.target.innerText;
+
+                    if (action) {
+                        action(event);
+                    }
+                }
+            }
+        ],
+        onAdd() {
+            // FIXME: Why does this work?
+            setTimeout(() => {
+                component.find('.dropdown-toggle').style.width = `${component.find('.dropdown-menu').offsetWidth}px`;
+                component.find('.dropdown-menu').classList.remove('hidden');
+            }, 200);
+        }
+    });
+
+    function buildDropdown(items) {
+        return items
+        .map(dropdown => dropdownTemplate(dropdown))
+        .join('\n');
+    }
+
+    function dropdownTemplate(dropdown) {
+        const {
+            label,
+            path
+        } = dropdown;
+
+        return /*html*/ `
+            <div class='dropdown-item' data-path='${path || ''}'>${label}</div>
+        `;
+    }
+
+    component.setDropdownMenu = (list) => {
+        component.find('.dropdown-menu').innerHTML = buildDropdown(list);
+
+        component.findAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', action);
+        });
+    }
+
+    component.value = (param) => {
+        const field = component.find('.dropdown-toggle');
+
+        if (param !== undefined) {
+            field.innerText = param;
+        } else {
+            return field.innerText;
+        }
+    }
+
+    return component;
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export function Button(param) {
     const {
         type,
@@ -975,7 +1099,7 @@ export function Button(param) {
 
     const component = Component({
         html: /*html*/ `
-            <div class="form-button ${type}-button ${disabled ? 'disabled' : ''}">${value}</div>
+            <div class='form-button ${type}-button ${disabled ? 'disabled' : ''}'>${value}</div>
         `,
         style: /*css*/ `
             #id.form-button {
@@ -1938,15 +2062,11 @@ export function DataTable(param) {
                 color: white;
             }
 
-            /* #id_wrapper .datatable-toolbar .btn:first-child {
-                margin-right: 60px;
-            } */
-
             /** Add Item Button */
             #id_wrapper .datatable-toolbar .add-item {
                 background: seagreen;
                 border: solid 1px seagreen;
-                margin-right: 60px;
+                padding: 0px 10px;
             }
 
             #id_wrapper .datatable-toolbar .add-item span {
@@ -1957,7 +2077,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .datatable-toolbar .add-item .icon {
-                font-size: 14pt;
+                font-size: 16pt;
                 margin-right: 5px;
                 margin-left: -5px;
                 stroke: white;
@@ -1965,28 +2085,20 @@ export function DataTable(param) {
             }
 
             /** Disabled Button */
-            #id_wrapper .datatable-toolbar .disabled {
-                background: white;
-                border: solid 1px gray !important;
-            }
-
-            #id_wrapper .datatable-toolbar .disabled span {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                color: gray !important;
-            }
-
             #id_wrapper .datatable-toolbar .disabled .icon {
-                margin-right: 5px;
                 stroke: gray !important;
                 fill: gray !important;
             }
 
             /** Delete Item Button */
             #id_wrapper .datatable-toolbar .delete-item {
-                background: white;
-                border: solid 1px firebrick
+                font-size: 20px;
+                background: transparent;
+                border: none;
+            }
+
+            #id_wrapper .datatable-toolbar .delete-item:hover {
+                background: #e9ecef;
             }
 
             #id_wrapper .datatable-toolbar .delete-item span {
@@ -1997,7 +2109,6 @@ export function DataTable(param) {
             }
 
             #id_wrapper .datatable-toolbar .delete-item .icon {
-                margin-right: 5px;
                 stroke: firebrick;
                 fill: firebrick;
             }
@@ -2130,6 +2241,11 @@ export function DataTable(param) {
                 color: ${App.get('primaryColor')};
             }
 
+            #id_wrapper :not(.table-border) thead th {
+                vertical-align: bottom;
+                border-bottom-width: 1px;
+            }
+
             /** Cells */
             #id_wrapper td,
             #id_wrapper th {
@@ -2178,21 +2294,16 @@ export function DataTable(param) {
 
             #id_wrapper tbody td.select-checkbox:after, 
             #id_wrapper tbody th.select-checkbox:after {
-                /* margin-top: -19px; */
-                margin-top: -10px;
+                margin-top: -11px;
                 text-shadow: none;
-                color: white;
+                color: ${App.get('defaultColor')};
                 font-weight: bolder;
                 font-size: 10pt;
             }
 
             /** Selected Row */
             #id_wrapper tbody > tr.selected {
-                background-color: rgb(${App.get('primaryColorRGB')});
-            }
-
-            #id_wrapper tbody > tr.selected td {
-                color: white;
+                background-color: ${App.get('sidebarBackgroundColor')};
             }
 
             /** Overflow MLOT field */
@@ -2317,9 +2428,11 @@ export function DataTable(param) {
             ];
 
             options.select = {
-                style: 'multi',
+                style: 'multi+shift',
                 selector: 'td:first-child'
             };
+        } else {
+            // options.select = 'single';
         }
 
         if (rowCallback) {
@@ -2360,6 +2473,8 @@ export function DataTable(param) {
                 } );
             }
         }
+
+        console.log('Table options:', options);
 
         // FIXME: Experimental
         options.preDrawCallback = function (settings) {
@@ -4391,6 +4506,7 @@ export function Modal(param) {
         background,
         fullSize,
         showFooter,
+        scrollable,
         parent,
         disableBackdropClose,
         position
@@ -4401,7 +4517,7 @@ export function Modal(param) {
             <!-- Modal -->
             <!-- <div class='modal${fade ? ' fade' : ''}' tabindex='-1' role='dialog' aria-hidden='true'> -->
             <div class='modal fade' tabindex='-1' role='dialog' aria-hidden='true' ${disableBackdropClose ? 'data-keyboard="false" data-backdrop="static"' : ''}>
-                <div class='modal-dialog modal-dialog-zoom modal-dialog-scrollable modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
+                <div class='modal-dialog modal-dialog-zoom ${scrollable !== false ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
                     <div class='modal-content'>
                         ${
                             title ?
@@ -4476,12 +4592,21 @@ export function Modal(param) {
             }
 
             /** Button color */
-            /* #id .btn-primary {
-                background: mediumseagreen;
-                border: solid 1px mediumseagreen;
-            } */
+            #id .btn-success {
+                background: seagreen;
+                border: solid 1px seagreen;
+            }
 
-            /** Button color */
+            #id .btn-primary {
+                background: royalblue;
+                border: solid 1px royalblue;
+            }
+
+            #id .btn-danger {
+                background: firebrick;
+                border: solid 1px firebrick;
+            }
+
             #id .btn-secondary {
                 background: none;
                 border: solid 1px transparent;
@@ -4591,7 +4716,26 @@ export function Modal(param) {
         let html = '';
 
         if (buttons && buttons.footer && Array.isArray(buttons.footer) && buttons.footer.length > 0) {
-            buttons.footer.forEach(button => {
+            // Delete button on left
+            const deleteButton = buttons.footer.find(button => button.value.toLowerCase() === 'delete');
+
+            if (deleteButton) {
+                const { value, disabled, data, classes, inlineStyle } = deleteButton;
+                html += /*html*/ `
+                    <div style='flex: 2'>
+                        <button ${inlineStyle ? `style='${inlineStyle}'` : ''} type='button' class='btn ${classes}' ${buildDataAttributes(data)} data-value='${value}' ${disabled ? 'disabled' : ''}>${value}</button>
+                    </div>
+                `
+            }
+
+            html += /*html*/ `
+                <div>
+            `
+            
+            // All other buttons on right
+            buttons.footer
+            .filter(button => button.value.toLowerCase() !== 'delete')
+            .forEach(button => {
                 const {
                     value,
                     disabled,
@@ -4604,6 +4748,10 @@ export function Modal(param) {
                     <button ${inlineStyle ? `style='${inlineStyle}'` : ''} type='button' class='btn ${classes}' ${buildDataAttributes(data)} data-value='${value}' ${disabled ? 'disabled' : ''}>${value}</button>
                 `;
             });
+
+            html += /*html*/ `
+                </div>
+            `
         }
 
         return html;
@@ -4690,8 +4838,7 @@ export function MultiLineTextField(param) {
     const component = Component({
         html: /*html*/ `
             <div class='form-field'>
-                <!-- ${label ? /*html*/`<div class='form-field-label'>${label}</div>` : ''} -->
-                ${label ? /*html*/`<div class='form-field-label'>${label}${optional ? /*html*/ `<span class='optional'><i>Optional</i></span>` : ''}</div>` : ''}
+                ${label ? /*html*/`<label>${label}${optional ? /*html*/ `<span class='optional'><i>Optional</i></span>` : ''}</label>` : ''}
                 ${description ? /*html*/`<div class='form-field-description'>${description}</div>` : ''}
                 ${readOnly ? /*html*/ `<div class='form-field-multi-line-text readonly'>${value || placeHolder}</div>` : /*html*/ `<div class='form-field-multi-line-text editable' contenteditable='true'>${value || ''}</div>`}
             </div>
@@ -4702,10 +4849,10 @@ export function MultiLineTextField(param) {
                 width: inherit;
             }
 
-            #id .form-field-label {
-                font-size: ${labelSize || '1.1em'};
+            #id label {
+                font-size: .95em;
                 font-weight: bold;
-                padding: 5px 0px;
+                padding: 3px 0px;
             }
 
             #id .form-field-description {
@@ -5685,14 +5832,13 @@ export function NumberField(param) {
         `,
         style: /*css*/ `
             #id {
-                ${margin ? `margin: ${margin};` : ''}
+                margin: ${margin || '0px 0px 20px 0px'};
             }
 
             #id label {
-                font-size: 1.1em;
+                font-size: .95em;
                 font-weight: bold;
-                padding: 5px 0px;
-                margin-bottom: 0px;
+                padding: 3px 0px;
             }
 
             #id input:active,
@@ -7931,7 +8077,7 @@ export function SingleLineTextField(param) {
     const component = Component({
         html: /*html*/ `
             <div class='form-field'>
-                ${label ? /*html*/`<div class='form-field-label'>${label}${optional ? /*html*/ `<span class='optional'><i>Optional</i></span>` : ''}</div>` : ''}
+                ${label ? /*html*/`<label>${label}${optional ? /*html*/ `<span class='optional'><i>Optional</i></span>` : ''}</label>` : ''}
                 ${description ? /*html*/`<div class='form-field-description'>${description}</div>` : ''}
                 ${readOnly ? /*html*/ `<div class='form-field-single-line-text readonly'>${value || ''}</div>` : /*html*/ `<div class='form-field-single-line-text editable' contenteditable='true'>${value || ''}</div>`}
             </div>
@@ -7946,7 +8092,7 @@ export function SingleLineTextField(param) {
                 ${background ? `background: ${background};` : ''}
             }
 
-            #id .form-field-label {
+            #id label {
                 font-size: .95em;
                 font-weight: bold;
                 padding: 3px 0px;
@@ -8670,6 +8816,11 @@ export function SvgDefs(param) {
                     <!-- Bootstrap: Book -->
                     <symbol id="icon-bs-book" viewBox="0 0 16 16">
                         <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+                    </symbol>
+                    <!-- Bootstrap: Trash -->
+                    <symbol id="icon-bs-trash" viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                     </symbol>
                     ${addSymbols()}
                 </defs>

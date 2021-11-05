@@ -1,33 +1,36 @@
 import {
-    Get,
-    UpdateItem,
     CreateItem,
-    Route
+    DeleteItem,
+    Get,
+    Route,
+    UpdateItem
 } from '../Core/Actions.js'
 import {
+    Alert,
+    BootstrapButton,
+    BootstrapDropdown,
     Button,
     Card,
-    SingleLineTextField,
     Comments as C_Comments,
     Container,
-    MultiLineTextField,
-    Alert,
-    FoldingCube,
+    DashboardBanner,
+    DataTable,
     DropDownField,
-    StatusField,
-    Toast,
+    FoldingCube,
     Heading,
-    BootstrapButton,
+    Modal,
+    MultiLineTextField,
     NameField,
+    NewReply,
+    NumberField,
     Question as C_Question,
     QuestionCard,
-    Reply,
-    NewReply,
-    Modal,
     ReleaseNotes as C_ReleaseNotes,
+    Reply,
+    SingleLineTextField,
     SiteUsage as C_SiteUsage,
-    DashboardBanner,
-    DataTable
+    StatusField,
+    Toast
 } from './Components.js'
 import Store from './Store.js'
 import { App } from './Settings.js'
@@ -292,6 +295,109 @@ export async function DeveloperLinks(param) {
         
             settingsButton.add();
         });
+    }
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export async function EditForm(param) {
+    const { event, fields, item, list, modal, parent, table } = param;
+    
+    console.log(param);
+
+    const components = fields
+    ?.filter(field => field.name !== 'Id')
+    ?.map(field => {
+        const { name, display, type, choices, action } = field;
+
+        let component = {};
+
+        switch (type) {
+            case 'slot':
+                component = SingleLineTextField({
+                    label: display,
+                    value: item[name],
+                    parent
+                });
+                break;
+            case 'mlot':
+                component = MultiLineTextField({
+                    label: display,
+                    value: item[name],
+                    parent
+                });
+                break;
+            case 'number':
+                component = NumberField({
+                    label: display,
+                    value: item[name],
+                    parent
+                });
+                break;
+            case 'choice':
+                component = BootstrapDropdown({
+                    label: display,
+                    value: item[name] || choices[0],
+                    options: choices.map(choice => {
+                        return {
+                            label: choice
+                        }
+                    }),
+                    parent
+                });
+                break;
+        }
+
+        component.add();
+
+        return {
+            component,
+            field
+        };
+    });
+
+    return {
+        async onUpdate(event) {
+            const data = {};
+            
+            components
+            .forEach(item => {
+                const { component, field } = item;
+                const { name, type} = field;
+
+                switch (type) {
+                    case 'slot':
+                    case 'mlot':
+                    case 'choice':
+                        data[name] = component.value();
+                        break;
+                    case 'number':
+                        data[name] = parseInt(component.value() || 0);
+                        break;
+                }
+            });
+
+            console.log(data);
+
+            const updatedItem = await UpdateItem({
+                list,
+                itemId: item.Id,
+                data
+            });
+
+            return updatedItem;
+        },
+        async onDelete(event) {
+            const deletedItem = await DeleteItem({
+                list,
+                itemId: item.Id
+            });
+
+            return deletedItem;
+        }
     }
 }
 
@@ -1133,6 +1239,97 @@ export async function Logs(param) {
 
     /** Remove Loading Indicator */
     loadingIndicator.remove();
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export async function NewForm(param) {
+    const { event, fields, list, modal, parent, table } = param;
+    
+    console.log(param);
+
+    const components = fields
+    ?.filter(field => field.name !== 'Id')
+    ?.map(field => {
+        const { name, display, type, choices, action } = field;
+
+        let component = {};
+
+        switch (type) {
+            case 'slot':
+                component = SingleLineTextField({
+                    label: display,
+                    parent
+                });
+                break;
+            case 'mlot':
+                component = MultiLineTextField({
+                    label: display,
+                    parent
+                });
+                break;
+            case 'number':
+                component = NumberField({
+                    label: display,
+                    parent
+                });
+                break;
+            case 'choice':
+                component = BootstrapDropdown({
+                    label: display,
+                    value: choices[0],
+                    options: choices.map(choice => {
+                        return {
+                            label: choice
+                        }
+                    }),
+                    parent
+                });
+                break;
+        }
+
+        component.add();
+
+        return {
+            component,
+            field
+        };
+    });
+
+    return {
+        async onCreate(event) {
+            const data = {};
+            
+            components
+            .forEach(item => {
+                const { component, field } = item;
+                const { name, type} = field;
+
+                switch (type) {
+                    case 'slot':
+                    case 'mlot':
+                    case 'choice':
+                        data[name] = component.value();
+                        break;
+                    case 'number':
+                        data[name] = parseInt(component.value() || 0);
+                        break;
+                }
+            });
+
+            console.log(data);
+
+            const newItem = await CreateItem({
+                list,
+                data
+            });
+
+            return newItem;
+        }
+    }
 }
 
 /**
@@ -2090,43 +2287,45 @@ export async function SiteUsage(param) {
  * @param {*} param 
  * @returns 
  */
-export function Table(param) {
+export async function Table(param) {
     const {
         addButton,
         addButtonValue,
+        border,
+        checkboxes,
         createdRow,
         defaultButtons,
-        heading,
-        headingColor,
-        headingSize,
-        headingMargin,
-        headerFilter,
-        titleDisplayName,
-        showId,
-        formTitleField,
-        formFooter,
-        fields,
-        checkboxes,
-        striped,
-        order,
-        border,
-        items,
-        newForm,
+        displayForm,
         editForm,
         editFormTitle,
-        displayForm,
+        filter,
+        formFooter,
+        formTitleField,
+        headerFilter,
+        heading,
+        headingColor,
+        headingMargin,
+        headingSize,
+        list,
+        newForm,
         onUpdate,
-        parent
+        order,
+        parent,
+        showId,
+        striped,
+        titleDisplayName
     } = param;
 
     let {
-        buttons
+        buttons,
+        fields,
+        items
     } = param;
 
     /** Heading */
-    if (heading) {
+    if (heading || list) {
         const legendHeading = Heading({
-            text: heading,
+            text: heading || list,
             size: headingSize,
             color: headingColor,
             margin: headingMargin || '20px 0px 15px 0px',
@@ -2148,76 +2347,170 @@ export function Table(param) {
     }
     
     /** Item Id */
-    const idProperty = App.get('mode') === 'prod' ? 'Id' : 'Id';
+    const idProperty = 'Id';
 
-    /** typeof fields === 'object' */
-    (Array.isArray(fields) ? fields : fields.split(','))
-    .forEach(field => {
-        const {
-            render
-        } = field;
+    if (list) {
+        // Show loading
+        parent.append(/*html*/ `
+            <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center'>
+                <div class="mb-2" style='font-weight: 600; color: darkgray'>Loading ${list}</div>
+                <div class="spinner-grow" style='color: darkgray' role="status"></div>
+            </div>
+        `);
+
+        items = await Get({
+            list,
+            filter
+        });
+
+        fields = lists.find(item => item.list === list)?.fields;
+
+        if (!fields) {
+            console.log('Missing fields');
+            return;
+        }
         
-        const internalFieldName = typeof field === 'object' ? field.internalFieldName : field;
-        const displayName = typeof field === 'object' ? field.displayName : field;
-        const type = typeof field === 'object' ? field.type || 'slot' : 'slot';
+        // Remove loading
+        parent.find('.loading-spinner').remove();
 
-        headers.push(displayName);
+        // Add Id field
+        fields.unshift({
+            name: 'Id',
+            display: 'Id',
+            type: 'number'
+        });
 
-        const columnOptions = {
-            data: internalFieldName === titleDisplayName ? 'Title' : internalFieldName,
-            type: internalFieldName === 'Id' ? 'number' : 'string',
-            visible: internalFieldName === 'Id' && !showId ? false : true
-        }
+        fields.forEach(field => {
+            const {
+                name,
+                display,
+                type,
+                render
+            } = field;
+            
+            headers.push(display);
 
-        /** Classes */
-        if (internalFieldName === 'Id') {
-            columnOptions.className = 'do-not-export bold';
-            columnOptions.render = (data, type, row) => {
-                return data;
+            const columnOptions = {
+                data: name === titleDisplayName ? 'Title' : name,
+                type: name === 'Id' ? 'number' : 'string',
+                visible: name === 'Id' && !showId ? false : true
             }
-        }
 
-        /** Render */
-        if (render) {
-            columnOptions.render = render
-        }
-
-        else if (internalFieldName.includes('Percent')) {
-            columnOptions.render = (data, type, row) => {
-                return `${Math.round(parseFloat(data || 0) * 100)}%`;
+            /** Classes */
+            if (name === 'Id') {
+                columnOptions.className = 'do-not-export bold';
+                columnOptions.render = (data, type, row) => {
+                    return data;
+                }
             }
-        } 
 
-        else if (type === 'mlot') {
-            columnOptions.render = (data, type, row) => {
-                return /*html*/ `
-                    <div class='dt-mlot'>${data || ''}</data>
-                `;
+            /** Render */
+            if (render) {
+                columnOptions.render = render
             }
-        }
 
-        else if (internalFieldName === 'Author') {
-            columnOptions.render = (data, type, row) => {
-                return data.Title;
+            else if (name.includes('Percent')) {
+                columnOptions.render = (data, type, row) => {
+                    return `${Math.round(parseFloat(data || 0) * 100)}%`;
+                }
+            } 
+
+            else if (type === 'mlot') {
+                columnOptions.render = (data, type, row) => {
+                    return /*html*/ `
+                        <div class='dt-mlot'>${data || ''}</data>
+                    `;
+                }
             }
-        }
 
-        else if (internalFieldName.includes('Created') || internalFieldName.includes('Date')) {
-            columnOptions.render = (data, type, row) => {
-                return new Date(data).toLocaleString();
+            else if (name === 'Author') {
+                columnOptions.render = (data, type, row) => {
+                    return data.Title;
+                }
             }
-        }
 
-        else if (internalFieldName !== 'Id') {
-            columnOptions.render = (data, type, row) => {
-                return typeof data === 'number' ? parseFloat(data).toLocaleString('en-US') : data;
+            else if (name.includes('Created') || name.includes('Date')) {
+                columnOptions.render = (data, type, row) => {
+                    return new Date(data).toLocaleString();
+                }
             }
-        }
 
-        columns.push(columnOptions);
-    });
+            else if (name !== 'Id') {
+                columnOptions.render = (data, type, row) => {
+                    return typeof data === 'number' ? parseFloat(data).toLocaleString('en-US') : data;
+                }
+            }
 
-    // console.log(headers, columns);
+            columns.push(columnOptions);
+        });
+    } else {
+        /** typeof fields === 'object' */
+        (Array.isArray(fields) ? fields : fields.split(','))
+        .forEach(field => {
+            const {
+                render
+            } = field;
+            
+            const internalFieldName = typeof field === 'object' ? field.internalFieldName : field;
+            const displayName = typeof field === 'object' ? field.displayName : field;
+            const type = typeof field === 'object' ? field.type || 'slot' : 'slot';
+
+            headers.push(displayName);
+
+            const columnOptions = {
+                data: internalFieldName === titleDisplayName ? 'Title' : internalFieldName,
+                type: internalFieldName === 'Id' ? 'number' : 'string',
+                visible: internalFieldName === 'Id' && !showId ? false : true
+            }
+
+            /** Classes */
+            if (internalFieldName === 'Id') {
+                columnOptions.className = 'do-not-export bold';
+                columnOptions.render = (data, type, row) => {
+                    return data;
+                }
+            }
+
+            /** Render */
+            if (render) {
+                columnOptions.render = render
+            }
+
+            else if (internalFieldName.includes('Percent')) {
+                columnOptions.render = (data, type, row) => {
+                    return `${Math.round(parseFloat(data || 0) * 100)}%`;
+                }
+            } 
+
+            else if (type === 'mlot') {
+                columnOptions.render = (data, type, row) => {
+                    return /*html*/ `
+                        <div class='dt-mlot'>${data || ''}</data>
+                    `;
+                }
+            }
+
+            else if (internalFieldName === 'Author') {
+                columnOptions.render = (data, type, row) => {
+                    return data.Title;
+                }
+            }
+
+            else if (internalFieldName.includes('Created') || internalFieldName.includes('Date')) {
+                columnOptions.render = (data, type, row) => {
+                    return new Date(data).toLocaleString();
+                }
+            }
+
+            else if (internalFieldName !== 'Id') {
+                columnOptions.render = (data, type, row) => {
+                    return typeof data === 'number' ? parseFloat(data).toLocaleString('en-US') : data;
+                }
+            }
+
+            columns.push(columnOptions);
+        });
+    }
 
     /** Table Buttons */
     if (defaultButtons !== false) {
@@ -2226,6 +2519,35 @@ export function Table(param) {
         }
 
         buttons = buttons.concat([
+            {
+                text: /*html*/ `
+                    <svg class='icon'>
+                        <use href='#icon-bs-trash'></use>
+                    </svg>
+                `,
+                className: 'delete-item mr-4',
+                name: 'delete',
+                enabled: false,
+                action: async function (e, dt, node, config) {
+                    const selected = table.selected();
+
+                    console.log('Delete selected:', selected);
+
+                    // Delete items
+                    for (let row in selected) {
+                        console.log(selected[row]);
+
+                        // Delete item
+                        await DeleteItem({
+                            list,
+                            itemId: selected[row].Id
+                        });
+
+                        // Delete Row
+                        table.removeRow(selected[row]);
+                    }
+                }
+            },
             {
                 extend: 'excelHtml5',
                 // className: 'ml-50',
@@ -2267,22 +2589,23 @@ export function Table(param) {
                 </svg>
                 <span>${addButtonValue || 'Add item'}</span>
             `,
-            className: 'add-item',
+            className: 'add-item mr-4',
+            name: 'add',
             action: function (e, dt, node, config) {
-                /** Add new item */
-                let itemForm;
-
-                const userModal = Modal({
+                const newModal = Modal({
                     title: `New Item`,
+                    scrollable: false,
                     async addContent(modalBody) {
-                        selectedForm = newForm({
-                            table,
-                            modal: userModal,
+                        selectedForm = await newForm({
+                            event: e,
+                            fields,
+                            list,
+                            modal: newModal,
                             parent: modalBody,
-                            event: e
+                            table
                         });
 
-                        userModal.showFooter();
+                        newModal.showFooter();
                     },
                     buttons: {
                         footer: [
@@ -2299,43 +2622,29 @@ export function Table(param) {
                             // TODO: send modal prop to form
                             {
                                 value: 'Create',
-                                classes: 'btn-primary',
+                                classes: 'btn-success',
                                 async onClick(event) {
-                                    // /** Disable button - Prevent user from clicking this item more than once */
-                                    // $(event.target).attr('disabled', '');
+                                    // Disable button - Prevent user from clicking this item more than once
+                                    $(event.target)
+                                        .attr('disabled', '')
+                                        .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Creating');
 
-                                    // /** Get field values from userForm View Part */
-                                    // const data = itemForm.getFieldValues();
+                                    // Call newForm.onCreate() and wait for it to complete
+                                    const newItem = await selectedForm?.onCreate(event);
 
-                                    // /** Check required values */
-                                    // if (!data) {
-                                    //     if (messageValid) {
-                                    //         messageValid.remove();
-                                    //     }
+                                    if (newItem) {
+                                        table.addRow({
+                                            data: newItem
+                                        });
+                                    }
 
-                                    //     messageValid = Alert({
-                                    //         type: 'danger',
-                                    //         text: `Missing requried information. Please check that all fields are valid.`,
-                                    //         close: true,
-                                    //         parent: userModal.getModalBody(),
-                                    //         position: 'beforeend'
-                                    //     });
-
-                                    //     messageValid.add();
-
-                                    //     /** Enable button */
-                                    //     $(event.target).removeAttr('disabled');
-
-                                    //     return;
-                                    // }
-
-                                    // // Enable button;
-                                    // $(event.target)
-                                    //     .removeAttr('disabled')
-                                    //     .text('Complete!')
+                                    // Enable button
+                                    $(event.target)
+                                        .removeAttr('disabled')
+                                        .text('Created');
     
-                                    // /** Hide modal */
-                                    // userModal.getModal().modal('hide');
+                                    // Close modal (DOM node will be removed on hidden.bs.modal event)
+                                    newModal.close();
                                 }
                             }
                         ]
@@ -2343,7 +2652,7 @@ export function Table(param) {
                     parent
                 });
     
-                userModal.add();
+                newModal.add();
             }
         });
     }
@@ -2352,6 +2661,9 @@ export function Table(param) {
     let selectedItem;
     let selectedRow;
     let selectedForm;
+
+    console.log('Table headers', headers);
+    console.log('Table columns', columns);
 
     /** Table */
     const table = DataTable({
@@ -2368,7 +2680,7 @@ export function Table(param) {
          * Sort by Status then Last Name 
          * {@link https://datatables.net/reference/api/order()}
          */
-        order: order || [[ 0, 'asc' ]],
+        order: order || [[ 1, 'asc' ]],
         buttons,
         createdRow,
         onRowClick(param) { // Note: This is where the click event is handled for datatables;
@@ -2388,17 +2700,20 @@ export function Table(param) {
                 // if editFormTitle else heading...
                 title: `${
                     editFormTitle || heading ? // Add heading and heading color (has to be passed in as a param property); 
-                                        `<span style='color: ${headingColor}'>${ 
-                                        // not sure about this part, wouldn't this editFormTitle always be false since it was false when we ended up here??
-                                            editFormTitle || heading}</span> — ` : 
-                                        ''}${selectedItem[formTitleField] || 'Edit Item'}`,
+                    `<span style='color: ${headingColor}'>${
+                    // not sure about this part, wouldn't this editFormTitle always be false since it was false when we ended up here??
+                    editFormTitle || heading}</span> — ` : 
+                    ''}${selectedItem[formTitleField] || 'Edit Item'
+                }`,
+                scrollable: false,
                 async addContent(modalBody) {
-                    selectedForm = displayForm ? // if displayForm is selected;
-                    displayForm({ item, parent: modalBody }) : 
-                    editForm ? // if editForm is selected;
-                        editForm({ item, table, row, modal: rowModal, parent: modalBody }) : undefined;
+                    selectedForm = displayForm ? // if displayForm is defined
+                    await displayForm({ item, parent: modalBody }) :
+                    editForm ? // if editForm is defined
+                    await editForm({ item, table, row, fields, list, modal: rowModal, parent: modalBody }) :
+                    undefined;
 
-                    if (formFooter !== false && Store.user().Role === 'Developer') {
+                    if (formFooter !== false) {
                         rowModal.showFooter();
                     }
                 },
@@ -2419,41 +2734,51 @@ export function Table(param) {
                             // disabled: true,
                             classes: 'btn-primary',
                             async onClick(event) {
-                               
-
-                                /** Get form data */
-                                const formValues = selectedForm.getFieldValues();
-
-                                if (!formValues) {
-                                    return;
-                                }
-                                
                                 /** Disable button - Prevent user from clicking this item more than once */
                                 $(event.target)
                                     .attr('disabled', '')
                                     .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating');
 
-                                const response = await onUpdate({
-                                    item: selectedItem,
-                                    row: selectedRow,
-                                    table,
-                                    formValues
-                                });
+                                // Call newForm.onUpdate() and wait for it to complete
+                                const updatedItem = await selectedForm?.onUpdate(event);
 
-                                if (response === 'unchanged') {
-                                    console.log('No changes were made.');
-                                    
-                                    $(event.target)
-                                        .removeAttr('disabled')
-                                        .text('Update');
-
-                                    return;   
+                                if (updatedItem) {
+                                    table.updateRow({
+                                        row: selectedRow,
+                                        data: updatedItem
+                                    });
                                 }
 
                                 /** Enable button */
                                 $(event.target)
                                     .removeAttr('disabled')
-                                    .text('Updated!');
+                                    .text('Updated');
+
+                                /** Hide modal */
+                                rowModal.getModal().modal('hide');
+                            }
+                        },
+                        {
+                            value: 'Delete',
+                            // disabled: true,
+                            classes: 'btn-danger',
+                            async onClick(event) {
+                                /** Disable button - Prevent user from clicking this item more than once */
+                                $(event.target)
+                                    .attr('disabled', '')
+                                    .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Deleteing');
+
+                                // Call newForm.onDelete() and wait for it to complete
+                                await selectedForm?.onDelete(event);
+
+                                 table.removeRow({
+                                    row: selectedRow
+                                });
+
+                                /** Enable button */
+                                $(event.target)
+                                    .removeAttr('disabled')
+                                    .text('Deleted');
 
                                 /** Hide modal */
                                 rowModal.getModal().modal('hide');
@@ -2470,11 +2795,19 @@ export function Table(param) {
             const selected = table.selected();
 
             console.log('select', selected);
+
+            if (selected.length > 0) {
+                table.DataTable().buttons('delete:name').enable();
+            }
         },
         onDeselect(param) {
             const selected = table.selected();
 
             console.log('deselect', selected);
+
+            if (selected.length === 0) {
+                table.DataTable().buttons('delete:name').disable();
+            }
         },
         onDraw(param) {
             const {

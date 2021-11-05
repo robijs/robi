@@ -1,8 +1,9 @@
 import { Authorize, Get, CreateItem, UpdateItem, DeleteItem, Route, AttachFiles, UploadFiles, SendEmail, AddStyle } from '../../Core/Actions.js'
-import { Title, Alert, Container, FoldingCube, Card, Modal, BootstrapButton } from '../../Core/Components.js'
+import { Title, Alert, Container, FoldingCube, Card, Modal, BootstrapButton, SingleLineTextField, NumberField } from '../../Core/Components.js'
 import { App } from '../../Core/Settings.js'
 import Store from '../../Core/Store.js'
 import { Table } from '../../Core/ViewParts.js'
+import {EditForm, NewForm } from '../../Core/ViewParts.js'
 
 /**
  * 
@@ -24,5 +25,12 @@ export default async function Home() {
 
     viewTitle.add();
 
-    test.add();
+    const testTable = await Table({
+        list: 'Test',
+        newForm: NewForm,
+        editForm: EditForm,
+        parent
+    });
+
+    console.log(testTable);
 }

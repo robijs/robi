@@ -61,14 +61,6 @@ export function Lists() {
                     type: 'mlot'
                 },
                 {
-                    name: "Line",
-                    type: 'number'
-                },
-                {
-                    name: "ColumnNumber",
-                    type: 'number'
-                },
-                {
                     name: "UserAgent",
                     type: 'mlot'
                 },
