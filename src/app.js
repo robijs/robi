@@ -15,7 +15,7 @@ Start({
     ],
     // sidebar: Sidebar, // replace default sidebar
     settings: {
-        mode: 'dev', // choose 'dev' || 'prod'
+        // mode: 'dev', // optional: choose 'dev' || 'prod'
         dev: {
             user: {
                 Title: "First Last",

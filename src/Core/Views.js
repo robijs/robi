@@ -271,6 +271,12 @@ export async function Developer(param) {
 
     viewTitle.add();
 
+    const devConsole = DevConsole({
+        parent
+    });
+
+    devConsole.add();
+
     const logLoadingIndicator = FoldingCube({
         label: 'Loading logs',
         margin: '40px 0px',
@@ -341,7 +347,7 @@ export async function Developer(param) {
 
     const errors = await Get({
         list: 'Errors',
-        select: 'Id,Message,Error,Source,Line,ColumnNumber,SessionId,Status,Created,Author/Title',
+        select: 'Id,Message,Error,Source,SessionId,Status,Created,Author/Title',
         expand: 'Author/Id',
         orderby: 'Id desc',
         top: '25'
@@ -380,12 +386,6 @@ export async function Developer(param) {
     });
 
     errorsLoadingIndicator.remove();
-
-    const devConsole = DevConsole({
-        parent
-    });
-
-    devConsole.add();
 
     // /** Data Loading Indicator */
     // const dataLoadingIndicator = FoldingCube({

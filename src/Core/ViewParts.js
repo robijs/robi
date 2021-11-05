@@ -15,7 +15,6 @@ import {
     Container,
     DashboardBanner,
     DataTable,
-    DropDownField,
     FoldingCube,
     Heading,
     Modal,
@@ -2354,36 +2353,41 @@ export async function Table(param) {
             buttons = [];
         }
 
-        buttons = buttons.concat([
-            {
-                text: /*html*/ `
-                    <svg class='icon'>
-                        <use href='#icon-bs-trash'></use>
-                    </svg>
-                `,
-                className: 'delete-item mr-4',
-                name: 'delete',
-                enabled: false,
-                action: async function (e, dt, node, config) {
-                    const selected = table.selected();
-
-                    console.log('Delete selected:', selected);
-
-                    // Delete items
-                    for (let row in selected) {
-                        console.log(selected[row]);
-
-                        // Delete item
-                        await DeleteItem({
-                            list,
-                            itemId: selected[row].Id
-                        });
-
-                        // Delete Row
-                        table.removeRow(selected[row]);
+        if (checkboxes !== false) {
+            buttons = buttons.concat([
+                {
+                    text: /*html*/ `
+                        <svg class='icon'>
+                            <use href='#icon-bs-trash'></use>
+                        </svg>
+                    `,
+                    className: 'delete-item mr-4',
+                    name: 'delete',
+                    enabled: false,
+                    action: async function (e, dt, node, config) {
+                        const selected = table.selected();
+    
+                        console.log('Delete selected:', selected);
+    
+                        // Delete items
+                        for (let row in selected) {
+                            console.log(selected[row]);
+    
+                            // Delete item
+                            await DeleteItem({
+                                list,
+                                itemId: selected[row].Id
+                            });
+    
+                            // Delete Row
+                            table.removeRow(selected[row].Id);
+                        }
                     }
                 }
-            },
+            ]);
+        }
+
+        buttons = buttons.concat([
             {
                 extend: 'excelHtml5',
                 // className: 'ml-50',
@@ -2601,9 +2605,7 @@ export async function Table(param) {
                                 // Call newForm.onDelete() and wait for it to complete
                                 await selectedForm?.onDelete(event);
 
-                                 table.removeRow({
-                                    row: selectedRow
-                                });
+                                table.removeRow(selectedItem.Id);
 
                                 /** Enable button */
                                 $(event.target)

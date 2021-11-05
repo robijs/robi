@@ -13,7 +13,7 @@
   "type": "module",
   "scripts": {
     "start": "concurrently \"npx json-server --watch ./json-server/db.json --id Id\" \"npx live-server --watch=./src --open=./dev/app.html --quiet\"",
-    "reset-db": "node ./scripts/reset-db.mjs",
+    "reset-db": "node ./scripts/reset-db.js",
     "depgraph": "depcruise --exclude \"^node_modules\" --output-type dot src | dot -T svg > dependencygraph.svg",
     "build": "webpack --config=./webpack.config.js"
   },

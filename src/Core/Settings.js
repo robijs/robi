@@ -16,7 +16,18 @@ const App = {
     set(param) {
         let { mode, site, library } = param;
 
-        if (mode === 'prod' && !site) {
+        // If mode isn't explicity set, assume dev if url contains local host 
+        if (!mode) {
+            if (location.href.includes('localhost') || location.href.includes('127.0.0.1')) {
+                param.mode = 'dev';
+            } else {
+                param.mode = 'prod';
+            }
+        }
+
+        if (param.mode === 'prod' && !site) {
+            console.log('Site:', location.href.split(library || '/App/')[0]);
+
             param.site = location.href.split(library || '/App/')[0];
         }
 
