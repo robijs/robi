@@ -1,6 +1,7 @@
-import { AttachFiles, Component, CreateItem, DeleteAttachments, DeleteItem, Get, GetADUsers, GetSiteUsers, Route } from './Actions.js'
+import { AddStyle, AttachFiles, Component, CreateItem, DeleteAttachments, DeleteItem, Get, GetADUsers, GetSiteUsers, GetWebLists, Route } from './Actions.js'
 import { App } from '../Core/Settings.js'
 import Store from './Store.js'
+import lists from '../lists.js';
 
 /**
  * 
@@ -989,7 +990,7 @@ export function BootstrapDropdown(param) {
         `,
         style: /*css*/ `
             #id {
-                margin: ${margin || '0px'};
+                margin: ${margin || '0px 0px 20px 0px'};
                 padding: ${padding || '0px'};
             }
 
@@ -1111,7 +1112,7 @@ export function Button(param) {
                 font-weight: 400;
                 text-align: center;
                 white-space: nowrap;
-                border-radius: 4px;
+                border-radius: .25rem;
                 width: ${width || 'fit-content'};
             }
 
@@ -2165,8 +2166,8 @@ export function DataTable(param) {
             #id_wrapper input[type='search']::-webkit-search-cancel-button {
                 -webkit-appearance: none;
                 cursor: pointer;
-                height: 20px;
-                width: 20px;
+                height: 16px;
+                width: 16px;
                 background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill=''><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
             }
 
@@ -2294,7 +2295,8 @@ export function DataTable(param) {
 
             #id_wrapper tbody td.select-checkbox:after, 
             #id_wrapper tbody th.select-checkbox:after {
-                margin-top: -11px;
+                margin-top: -18px;
+                top: auto;
                 text-shadow: none;
                 color: ${App.get('defaultColor')};
                 font-weight: bolder;
@@ -2474,7 +2476,7 @@ export function DataTable(param) {
             }
         }
 
-        console.log('Table options:', options);
+        // console.log('Table options:', options);
 
         // FIXME: Experimental
         options.preDrawCallback = function (settings) {
@@ -2677,6 +2679,398 @@ export function DateField(param) {
     }
 
     return component
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export function DevConsole(param) {
+    const { parent, position } = param;
+
+    AddStyle({
+        name: 'console-box',
+        style: /*css*/ `
+            .console {
+                width: 100%;
+                height: 100%;
+                overflow: overlay;
+                background: #1E1E1E;
+            }
+
+            .console * {
+                color: #CCCCCC !important;
+            }
+
+            .console-title {
+                font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
+            }
+
+            .line-number {
+                display: inline-block;
+                font-weight: 600;
+                width: 30px;
+            }
+
+            .install-modal {
+                padding: 60px;
+            }
+
+            .install-alert {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                border-radius: 10px;
+                padding: 10px 15px;
+                border: none;
+                background: #1E1E1E;
+                color: white !important;
+                animation: fade-in-bottom 200ms ease-in-out forwards;
+            };
+
+            .install-alert * {
+                color: white !important;
+            };
+        `
+    });
+
+    const component = Component({
+        html: /*html*/ `
+            <div>
+                <div class='dev-console-title'>Developer Tools</div>
+                <div class='alert alert-warning'>
+                    <p>These actions will affect <strong>${App.get('title')}</strong> for all users. Some or all changes can't be reversed.</p>
+                    <hr>
+                    <p class="mb-0">Please proceed with caution.</p>
+                </div>
+                <div class='dev-console'>
+                    <div class='dev-console-row'>
+                        <div class='dev-console-text'>
+                            <div class='dev-console-label'>Update ${App.get('title')}</div>
+                            <div class='dev-console-description'>Install new user defined lists in <code>App/src/lists.js</code>.</div>
+                        </div>
+                        <div class='d-flex align-items-center ml-5'>
+                            <button class='btn btn-outline-success dev-console-button update'>Update ${App.get('title')}</button>
+                        </div>
+                    </div>
+                    <div class='dev-console-row'>
+                        <div class='dev-console-text'>
+                            <div class='dev-console-label'>Reinstall ${App.get('title')}</div>
+                            <div class='dev-console-description'>Delete and recreate all core and user defined lists. All items will be deleted. This can't be undone.</div>
+                        </div>
+                        <div class='d-flex align-items-center ml-5'>
+                            <button class='btn btn-outline-secondary dev-console-button reinstall'>Remove data and reinstall ${App.get('title')}</button>
+                        </div>
+                    </div>
+                    <div class='dev-console-row'>
+                        <div class='dev-console-text'>
+                            <div class='dev-console-label'>Delete ${App.get('title')}</div>
+                            <div class='dev-console-description'>Delete all core and user defined lists. All items will be deleted. This can't be undone. You can install the app again later.</div>
+                        </div>
+                        <div class='d-flex align-items-center ml-5'>
+                            <button class='btn btn-outline-danger dev-console-button delete'>Delete all lists and data</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+        style: /*css*/ `
+            #id {
+                padding: 20px 0px;
+            }
+            
+            #id .alert {
+                border: none;
+                border-radius: 20px;
+            }
+
+            #id .dev-console-title {
+                font-size: 1.5em;
+                font-weight: 700;
+                color: #24292f;
+                margin-bottom: 10px;
+            }
+
+            #id .dev-console {
+                width: 100%;
+                /* padding: 40px; */
+                /* border: solid 2px ${App.get('primaryColor')}; */
+                border-radius: 20px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #id .dev-console-row {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                padding: 20px 30px;
+                border-radius: 20px;
+                background: ${App.get('sidebarBackgroundColor')};
+            }
+
+            #id .dev-console-text {
+                max-width: 700px;
+            }
+
+            #id .dev-console-label {
+                font-weight: 600;
+            }
+
+            #id .dev-console-row:not(:last-child) {
+                margin-bottom: 20px;
+            }
+
+            #id .dev-console-button {
+                font-weight: 600;
+                font-size: 14px;
+                height: fit-content;
+                border-radius: 10px;
+            }
+
+            #id .dev-console-button:focus,
+            #id .dev-console-button:active {
+                box-shadow: none;
+            }
+        `,
+        parent: parent,
+        position,
+        events: [
+            {
+                selector: '#id .update',
+                event: 'click',
+                async listener(event) {
+                    // Check lists
+                    const userDefinedLists = lists;
+
+                    console.log(userDefinedLists);
+
+                    const webLists = await GetWebLists();
+
+                    console.log(userDefinedLists);
+
+                    // const modal = Modal({
+                    //     title: false,
+                    //     disableBackdropClose: true,
+                    //     async addContent(modalBody) {
+                    //         modalBody.classList.add('install-modal');
+
+                    //         modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                    //             <div>The following <strong>${App.get('title')}</strong> lists aren't installed. Would you like to install them now?</div>
+                    //         `);
+
+                    //         const installBtn = BootstrapButton({
+                    //             action(event) {
+                    //                 console.log('Install');
+
+                    //                 modal.find('.modal-content').style.width = 'unset';
+
+                    //                 modalBody.style.height = `${modalBody.offsetHeight}px`;
+                    //                 modalBody.style.width = `${modalBody.offsetWidth}px`;
+                    //                 modalBody.style.overflowY = 'unset';
+                    //                 modalBody.style.display = 'flex';
+                    //                 modalBody.style.flexDirection = 'column',
+                    //                     modalBody.style.transition = 'all 300ms ease-in-out';
+                    //                 modalBody.innerHTML = '';
+                    //                 modalBody.style.height = '80vh';
+                    //                 modalBody.style.width = '80vw';
+
+                    //                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                    //                     <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
+                    //                 `);
+
+                    //                 const logs = [];
+
+                    //                 logs.push('Core lists:');
+                    //                 coreLists.forEach(item => {
+                    //                     const { list } = item;
+
+                    //                     logs.push(`- ${list}`);
+                    //                 });
+                    //                 logs.push(' ');
+
+                    //                 coreLists.forEach(item => {
+                    //                     const { list, fields } = item;
+
+                    //                     logs.push(`Created core list '${list}'`);
+
+                    //                     fields.forEach(field => {
+                    //                         const { name } = field;
+
+                    //                         logs.push(`Created column '${name}'`);
+                    //                         logs.push(`Added column '${name}' to View 'All Items'`);
+                    //                     });
+
+                    //                     logs.push(' ');
+                    //                 });
+
+                    //                 logs.push(`${App.get('title')} lists:`);
+                    //                 lists.forEach(item => {
+                    //                     const { list } = item;
+
+                    //                     logs.push(`- ${list}`);
+                    //                 });
+                    //                 logs.push(' ');
+
+                    //                 lists.forEach(item => {
+                    //                     const { list, fields } = item;
+
+                    //                     logs.push(`Created ${App.get('title')} list '${list}'`);
+
+                    //                     fields.forEach(field => {
+                    //                         const { name } = field;
+
+                    //                         logs.push(`Created column '${name}'`);
+                    //                         logs.push(`Added column '${name}' to View 'All Items'`);
+                    //                     });
+
+                    //                     logs.push(' ');
+                    //                 });
+
+                    //                 const progressBar = ProgressBar({
+                    //                     parent: modalBody,
+                    //                     totalCount: logs.length
+                    //                 });
+
+                    //                 progressBar.add();
+
+                    //                 const installContainer = Container({
+                    //                     padding: '10px',
+                    //                     parent: modalBody,
+                    //                     overflow: 'hidden',
+                    //                     width: '100%',
+                    //                     height: '100%',
+                    //                     radius: '10px',
+                    //                     background: '#1E1E1E'
+                    //                 });
+
+                    //                 installContainer.add();
+
+                    //                 const installConsole = InstallConsole({
+                    //                     type: 'secondary',
+                    //                     text: '',
+                    //                     margin: '0px',
+                    //                     parent: installContainer
+                    //                 });
+
+                    //                 installConsole.add();
+                    //                 installConsole.get().classList.add('console');
+
+                    //                 let line = 0;
+                    //                 let timeout = 50;
+
+                    //                 for (let i = 0; i < logs.length; i++) {
+                    //                     setTimeout(() => {
+                    //                         line++;
+
+                    //                         progressBar.update();
+
+                    //                         installConsole.append(/*html*/ `
+                    //                             <div class='console-line'>
+                    //                                 <code class='line-number'>${line}</code>
+                    //                                 <code>${logs[i]}</code>
+                    //                             </div>
+                    //                         `);
+
+                    //                         installConsole.get().scrollTop = installConsole.get().scrollHeight;
+                    //                     }, (i + 1) * timeout);
+                    //                 }
+
+                    //                 setTimeout(() => {
+                    //                     line++;
+
+                    //                     installConsole.append(/*html*/ `
+                    //                         <div class='console-line'>
+                    //                             <code class='line-number'>${line}</code>
+                    //                             <code>'${App.get('title')}' installed</code>
+                    //                         </div>
+                    //                     `);
+
+                    //                     // Show launch button
+                    //                     const launchBtn = BootstrapButton({
+                    //                         type: 'primary',
+                    //                         value: 'Launch app',
+                    //                         classes: ['mt-3', 'w-100'],
+                    //                         action(event) {
+                    //                             console.log('Launch');
+
+                    //                             modal.close();
+                    //                             loadingBar.showLoadingBar();
+
+                    //                             setTimeout(() => {
+                    //                                 launch();
+                    //                             }, 150);
+                    //                         },
+                    //                         parent: modalBody
+                    //                     });
+
+                    //                     launchBtn.add();
+
+                    //                     installConsole.get().scrollTop = installConsole.get().scrollHeight;
+                    //                 }, (logs.length + 1) * timeout);
+                    //             },
+                    //             classes: ['w-100 mt-5'],
+                    //             width: '100%',
+                    //             parent: modalBody,
+                    //             type: 'primary',
+                    //             value: 'Install'
+                    //         });
+
+                    //         installBtn.add();
+
+                    //         const cancelBtn = BootstrapButton({
+                    //             action(event) {
+                    //                 console.log('Cancel install');
+
+                    //                 // Bootstrap uses jQuery .trigger, won't work with .addEventListener
+                    //                 $(modal.get()).on('hidden.bs.modal', event => {
+                    //                     console.log('modal close animiation end');
+
+                    //                     // Show alert
+                    //                     appContainer.get().insertAdjacentHTML('afterend', /*html*/ `
+                    //                         <div class='position-absolute install-alert mb-0'>
+                    //                             Installation cancelled. You can close this page. Reload to resume install.
+                    //                         </div>
+                    //                     `);
+                    //                 });
+
+                    //                 modal.close();
+                    //             },
+                    //             classes: ['w-100 mt-2'],
+                    //             width: '100%',
+                    //             parent: modalBody,
+                    //             type: 'light',
+                    //             value: 'Cancel'
+                    //         });
+
+                    //         cancelBtn.add();
+                    //     },
+                    //     centered: true,
+                    //     showFooter: false,
+                    // });
+
+                    // modal.add();
+                }
+            },
+            {
+                selector: '#id .reinstall',
+                event: 'click',
+                listener(event) {
+                    console.log(event.target.innerText);
+                }
+            },
+            {
+                selector: '#id .delete',
+                event: 'click',
+                listener(event) {
+                    console.log(event.target.innerText);
+                }
+            }
+        ]
+    });
+
+    return component;
 }
 
 /**
@@ -4442,7 +4836,7 @@ export function MainContainer(param) {
         style: /*css*/ `
             .maincontainer {
                 position: relative;
-                padding: 15px 30px;
+                padding: 40px; /* 15px 30px; */
                 flex: 1;
                 height: 100vh;
                 overflow: overlay;
@@ -4474,7 +4868,7 @@ export function MainContainer(param) {
     }
 
     component.paddingOn = () => {
-        component.get().style.padding = '15px 30px';
+        component.get().style.padding = '40px'; // 15px 30px;
     }
 
     component.eventsOff = () => {
@@ -4559,6 +4953,14 @@ export function Modal(param) {
                     margin: 1.6rem auto; 
                 }
             } */
+
+            #id.modal {
+                overflow-y: overlay;
+            }
+
+            #id.modal.show {
+                padding-left: 0px !important;
+            }
 
             /** Modal Content */
             #id .modal-content {
@@ -5301,10 +5703,12 @@ export function NameField(param) {
                 border: ${App.get('defaultBorder')};
             }
 
-            #id .form-field-name::-webkit-search-cancel-button{
-                background: lightgray;
-                color: white;
-                border-radius: 50%;
+            #id .form-field-name::-webkit-search-cancel-button {
+                -webkit-appearance: none;
+                cursor: pointer;
+                height: 16px;
+                width: 16px;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill=''><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
             }
 
             #id .form-field-name:active,
@@ -7624,9 +8028,11 @@ export function Sidebar(param) {
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
-                height: 100vh;
                 background: ${App.gradientColor ? `linear-gradient(${App.gradientColor})` : App.get('sidebarBackgroundColor')};
                 ${App.get('sidebarBorderColor') ? `border-right: solid 1px ${App.get('sidebarBorderColor')}` : ''}
+                /* height: 100vh; */
+                border-radius: 20px;
+                margin: 20px 0px 20px 20px;
             }
 
             /* Nav Container */
@@ -8145,6 +8551,8 @@ export function SingleLineTextField(param) {
 
     component.focus = () => {
         const field = component.find('.form-field-single-line-text');
+
+        console.log(field);
 
         field.focus();
     }

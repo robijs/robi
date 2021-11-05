@@ -1482,6 +1482,11 @@ export async function GetItemCount(param) {
     }
 }
 
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export async function GetLib(param) {
     const {
         path,
@@ -1531,6 +1536,31 @@ export async function GetLib(param) {
         }
     } catch (error) {
         console.log(error);
+    }
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export async function GetWebLists(parm) {
+    const url = `${App.get('site')}/_api/web/lists/`;
+    const headers = {
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': `application/json; odata=verbose`
+        }
+    };
+
+    const response = await fetch(url, headers);
+
+    if (response) {
+        const data = await response.json();
+
+        if (data && data.d) {
+            return data.d;
+        }
     }
 }
 
@@ -2081,6 +2111,7 @@ export async function SetSessionStorage(param) {
 export function Start(param) {
     const {
         routes,
+        sidebar,
         settings
     } = param;
 
@@ -2910,19 +2941,21 @@ export function Start(param) {
             Store.setRoutes(routes.concat(Routes));
 
             /** Sidebar Component */
-            const sidebar = Sidebar({
+            const sidebarParam = {
                 logo,
                 parent: appContainer,
                 path,
                 sidebarDropdown
-            });
+            };
+            
+            const sidebarComponent = sidebar ? sidebar(sidebarParam) : Sidebar(sidebarParam);
 
             Store.add({
                 name: 'sidebar',
-                component: sidebar
+                component: sidebarComponent
             });
 
-            sidebar.add();
+            sidebarComponent.add();
 
             /** Main Container */
             const mainContainer = MainContainer({

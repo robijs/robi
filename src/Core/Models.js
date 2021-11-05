@@ -162,20 +162,27 @@ export function Lists() {
             list: 'Users',
             fields: [
                 {
-                    name: "Title",
+                    name: 'Title',
+                    display: 'Name',
                     type: 'slot'
                 },
                 {
-                    name: "Email",
+                    name: 'Email',
                     type: 'slot'
                 },
                 {
                     name: "LoginName",
+                    display: 'Login Name',
                     type: 'slot'
                 },
                 {
                     name: "Role",
-                    type: 'slot'
+                    type: 'choice',
+                    choices: [
+                        'Administrator',
+                        'Developer',
+                        'User'
+                    ]
                 },
                 {
                     name: "Settings",

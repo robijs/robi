@@ -34,7 +34,7 @@ import {
 } from './Components.js'
 import Store from './Store.js'
 import { App } from './Settings.js'
-import { Question as M_Question, StartAndEndOfWeek } from './Models.js'
+import { Lists, Question as M_Question, StartAndEndOfWeek } from './Models.js'
 import lists from '../lists.js'
 
 /**
@@ -318,28 +318,28 @@ export async function EditForm(param) {
         switch (type) {
             case 'slot':
                 component = SingleLineTextField({
-                    label: display,
+                    label: display || name,
                     value: item[name],
                     parent
                 });
                 break;
             case 'mlot':
                 component = MultiLineTextField({
-                    label: display,
+                    label: display || name,
                     value: item[name],
                     parent
                 });
                 break;
             case 'number':
                 component = NumberField({
-                    label: display,
+                    label: display || name,
                     value: item[name],
                     parent
                 });
                 break;
             case 'choice':
                 component = BootstrapDropdown({
-                    label: display,
+                    label: display || name,
                     value: item[name] || choices[0],
                     options: choices.map(choice => {
                         return {
@@ -480,128 +480,6 @@ export function EditQuestion(param) {
                 /** @todo field.addError() */
 
                 return false;
-            }
-
-            return data;
-        }
-    };
-}
-
-/**
- * EditUser
- * @description
- * @returns {Object} - @method {getFieldValues} call that return values for User
- */
-export async function EditUser(param) {
-    const {
-        item,
-        table,
-        row,
-        modal,
-        parent
-    } = param;
-
-    /** Turn body scroll off */
-    modal.scrollable(false);
-
-    const {
-        Title,
-        LoginName,
-        Email,
-        Role
-    } = item;
-    
-    /** Loading Indicator */
-    const loadingIndicator = FoldingCube({
-        label: 'Loading form',
-        margin: '40px 0px',
-        parent
-    });
-    
-    loadingIndicator.add();
-
-    /** Roles */
-    const roles = await Get({
-        list: 'Roles'
-    });
-
-    /** Name */
-    const nameField = SingleLineTextField({
-        label: 'Name',
-        value: Title,
-        fieldMargin: '0px',
-        parent
-    });
-
-    nameField.add();
-
-    /** Account */
-    const accountField = SingleLineTextField({
-        label: 'Account',
-        value: LoginName,
-        fieldMargin: '0px',
-        parent
-    });
-
-    accountField.add();
-
-    /** Email */
-    const emailField = SingleLineTextField({
-        label: 'Email',
-        value: Email,
-        fieldMargin: '0px',
-        parent
-    });
-
-    emailField.add();
-
-    /** Role */
-    const roleField = DropDownField({
-        list: 'Roles',
-        label: 'Role',
-        value: Role,
-        dropDownOptions: roles.map(item => {
-            const {
-                Id, Title
-            } = item;
-
-            return {
-                id: Id,
-                value: Title
-            };
-        }),
-        width: '200px',
-        fieldMargin: '0px',
-        parent
-    });
-
-    roleField.add();
-
-    /** Remove Loading Indication */
-    loadingIndicator.remove();
-
-    return {
-        getFieldValues() {
-            const data = {};
-
-            if (nameField.value() !== Title) {
-                /** @todo field.chagned() */
-                data.Title = nameField.value();
-            }
-
-            if (accountField.value() !== LoginName) {
-                /** @todo field.chagned() */
-                data.LoginName = middleNameField.value();
-            }
-
-            if (emailField.value() !== Email) {
-                /** @todo field.chagned() */
-                data.Email = emailField.value();
-            }
-
-            if (roleField.value() !== Role) {
-                /** @todo field.chagned() */
-                data.Role = roleField.value();
             }
 
             return data;
@@ -1261,25 +1139,25 @@ export async function NewForm(param) {
         switch (type) {
             case 'slot':
                 component = SingleLineTextField({
-                    label: display,
+                    label: display || name,
                     parent
                 });
                 break;
             case 'mlot':
                 component = MultiLineTextField({
-                    label: display,
+                    label: display || name,
                     parent
                 });
                 break;
             case 'number':
                 component = NumberField({
-                    label: display,
+                    label: display || name,
                     parent
                 });
                 break;
             case 'choice':
                 component = BootstrapDropdown({
-                    label: display,
+                    label: display || name,
                     value: choices[0],
                     options: choices.map(choice => {
                         return {
@@ -1337,93 +1215,14 @@ export async function NewForm(param) {
  * @param {*} param 
  * @returns 
  */
-export function NewQuestion(param) {
-    const {
-        parent,
-        modal
-    } = param;
-
-    /** First Name */
-    const titleField = SingleLineTextField({
-        label: 'Question',
-        description: '',
-        width: '100%',
-        fieldMargin: '0px 40px 20px 40px',
-        parent,
-        onKeydown(event) {
-            if (event.target.innerText) {
-                modal.getButton('Submit').disabled = false;
-            } else {
-                modal.getButton('Submit').disabled = true;
-            }
-            
-            submit(event);
-        }
-    });
-    
-    titleField.add();
-
-    /** Middle Name */
-    const bodyField = MultiLineTextField({
-        label: 'Description',
-        description: '',
-        width: '100%',
-        fieldMargin: '20px 40px',
-        optional: true,
-        parent,
-        onKeydown(event) {
-            submit(event);
-        }
-    });
-    
-    bodyField.add();
-
-    /** Control + Enter to submit */
-    function submit(event) {
-        if (event.ctrlKey && event.key === 'Enter') {
-            const submit = modal.getButton('Submit');
-            
-            if (!submit.disabled) {
-                submit.click();
-            }
-        }
-    }
-
-    /** Focus on name field */
-    titleField.focus();
-
-    return {
-        getFieldValues() {
-            const data = {
-                Title: titleField.value(),
-                Body: bodyField.value(),
-            }
-
-            if (!data.Title) {
-                /** @todo field.addError() */
-
-                return false;
-            }
-
-            return data;
-        }
-    };
-}
-
-/**
- * EditUser
- * @description
- * @returns {Object} - @method {getFieldValues} call that return values for User
- */
-export async function NewUser(param) {
+ export async function NewUser(param) {
     const {
         table,
         modal,
-        parent
+        parent,
+        list,
+        event
     } = param;
-
-    /** Turn body scroll off */
-    modal.scrollable(false);
 
     /** Name */
     // const nameField = NameField({
@@ -1498,24 +1297,13 @@ export async function NewUser(param) {
 
     // nameField.add();
 
-    /** Name Field (2) */
+    /** Name Field */
     const nameField = NameField({
         label: 'Search CarePoint Accounts',
         description: 'If an account is found, Account and Email Fields will be set automatically.',
-        fieldMargin: '0px 40px 20px 40px',
-        // parent: toolbarContainer,
         parent,
         onSearch(query) {
-            /** 
-             * - maybe call this in the component itself
-             * - doesn't need to be defined here
-             */
-            // marketsToolbar.showSearchList({
-            //     items: {
-            //         markets: filteredMarkets,
-            //         facilities: filteredFacilities
-            //     }
-            // });
+            console.log(query);
         },
         onSelect(data) {
             const {
@@ -1536,7 +1324,6 @@ export async function NewUser(param) {
     const readOnlyCard = Alert({
         text: '',
         type: 'secondary',
-        margin: '0px 40px 15px 40px',
         parent
     });
 
@@ -1547,7 +1334,6 @@ export async function NewUser(param) {
         label: 'Account',
         value: 'None',
         readOnly: true,
-        // fieldMargin: '0px 40px 20px 40px',
         parent: readOnlyCard
     });
 
@@ -1558,63 +1344,112 @@ export async function NewUser(param) {
         label: 'Email',
         value: 'None',
         readOnly: true,
-        // fieldMargin: '0px 40px 20px 40px',
         parent: readOnlyCard
     });
 
     emailField.add();
 
+    const roles = await Get({
+        list: 'Roles'
+    });
+
     /** Role */
-    const roleField = DropDownField({
-        list: 'Roles',
+    const roleField = BootstrapDropdown({
         label: 'Role',
-        dropDownOptions: await Get({
-            list: 'Roles'
-        })
-        .then(data => {
-            return data.map(item => {
-                const {
-                    Id, Title
-                } = item;
-    
-                return {
-                    id: Id,
-                    value: Title
-                };
-            });
+        value: 'User',
+        options: roles.map(item => {
+            const { Title } = item;
+
+            return { label: Title };
         }),
         width: '200px',
-        fieldMargin: '0px 40px 20px 40px',
         parent
     });
 
     roleField.add();
 
-    /** Focus */
+    // Focus in name field
     nameField.focus();
 
     return {
+        async onCreate(event) {
+            // Create user
+            console.log(event);
+        }
+    };
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export function NewQuestion(param) {
+    const {
+        parent,
+        modal
+    } = param;
+
+    /** First Name */
+    const titleField = SingleLineTextField({
+        label: 'Question',
+        description: '',
+        width: '100%',
+        fieldMargin: '0px 40px 20px 40px',
+        parent,
+        onKeydown(event) {
+            if (event.target.innerText) {
+                modal.getButton('Submit').disabled = false;
+            } else {
+                modal.getButton('Submit').disabled = true;
+            }
+            
+            submit(event);
+        }
+    });
+    
+    titleField.add();
+
+    /** Middle Name */
+    const bodyField = MultiLineTextField({
+        label: 'Description',
+        description: '',
+        width: '100%',
+        fieldMargin: '20px 40px',
+        optional: true,
+        parent,
+        onKeydown(event) {
+            submit(event);
+        }
+    });
+    
+    bodyField.add();
+
+    /** Control + Enter to submit */
+    function submit(event) {
+        if (event.ctrlKey && event.key === 'Enter') {
+            const submit = modal.getButton('Submit');
+            
+            if (!submit.disabled) {
+                submit.click();
+            }
+        }
+    }
+
+    /** Focus on name field */
+    titleField.focus();
+
+    return {
         getFieldValues() {
-            const data = {};
-
-            if (nameField.value()) {
-                /** @todo field.chagned() */
-                data.Title = nameField.value();
+            const data = {
+                Title: titleField.value(),
+                Body: bodyField.value(),
             }
 
-            if (accountField.value()) {
-                /** @todo field.chagned() */
-                data.LoginName = middleNameField.value();
-            }
+            if (!data.Title) {
+                /** @todo field.addError() */
 
-            if (emailField.value()) {
-                /** @todo field.chagned() */
-                data.Email = emailField.value();
-            }
-
-            if (roleField.value()) {
-                /** @todo field.chagned() */
-                data.Role = roleField.value();
+                return false;
             }
 
             return data;
@@ -2362,8 +2197,9 @@ export async function Table(param) {
             list,
             filter
         });
-
-        fields = lists.find(item => item.list === list)?.fields;
+        
+        // Find list in core or user defined lists
+        fields = lists.concat(Lists()).find(item => item.list === list)?.fields;
 
         if (!fields) {
             console.log('Missing fields');
@@ -2388,7 +2224,7 @@ export async function Table(param) {
                 render
             } = field;
             
-            headers.push(display);
+            headers.push(display || name);
 
             const columnOptions = {
                 data: name === titleDisplayName ? 'Title' : name,
@@ -2596,14 +2432,16 @@ export async function Table(param) {
                     title: `New Item`,
                     scrollable: false,
                     async addContent(modalBody) {
-                        selectedForm = await newForm({
+                        const formParam = {
                             event: e,
                             fields,
                             list,
                             modal: newModal,
                             parent: modalBody,
                             table
-                        });
+                        };
+
+                        selectedForm = newForm ? await newForm(formParam) : await NewForm(formParam);
 
                         newModal.showFooter();
                     },
@@ -2662,8 +2500,8 @@ export async function Table(param) {
     let selectedRow;
     let selectedForm;
 
-    console.log('Table headers', headers);
-    console.log('Table columns', columns);
+    // console.log('Table headers', headers);
+    // console.log('Table columns', columns);
 
     /** Table */
     const table = DataTable({
@@ -2698,20 +2536,12 @@ export async function Table(param) {
             /** Show User */
             const rowModal = Modal({
                 // if editFormTitle else heading...
-                title: `${
-                    editFormTitle || heading ? // Add heading and heading color (has to be passed in as a param property); 
-                    `<span style='color: ${headingColor}'>${
-                    // not sure about this part, wouldn't this editFormTitle always be false since it was false when we ended up here??
-                    editFormTitle || heading}</span> — ` : 
-                    ''}${selectedItem[formTitleField] || 'Edit Item'
-                }`,
+                title: 'Edit item',
                 scrollable: false,
                 async addContent(modalBody) {
-                    selectedForm = displayForm ? // if displayForm is defined
-                    await displayForm({ item, parent: modalBody }) :
-                    editForm ? // if editForm is defined
-                    await editForm({ item, table, row, fields, list, modal: rowModal, parent: modalBody }) :
-                    undefined;
+                    const formParam = { item, table, row, fields, list, modal: rowModal, parent: modalBody };
+
+                    selectedForm = editForm ? await editForm(formParam) : await EditForm(formParam);
 
                     if (formFooter !== false) {
                         rowModal.showFooter();

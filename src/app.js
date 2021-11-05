@@ -1,4 +1,5 @@
 import { Start } from './Core/Actions.js'
+import Sidebar from './Components/Sidebar.js';
 import lists from './lists.js'
 import Home from './Routes/Home/Home.js'
 
@@ -12,6 +13,7 @@ Start({
             }  
         }
     ],
+    // sidebar: Sidebar, // replace default sidebar
     settings: {
         mode: 'dev', // choose 'dev' || 'prod'
         dev: {
