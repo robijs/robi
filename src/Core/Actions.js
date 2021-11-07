@@ -2051,14 +2051,6 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
     /** Check route path */
     const pathAndQuery = path.split('?');
     const pathParts = pathAndQuery[0].split('/');
-    const queryParameters = pathAndQuery.length > 1 ? pathAndQuery[1] : '';
-
-    /** Attach query parameters */
-    const defaultQueryParameters = App.get('defaultQueryParameters');
-
-    if (!queryParameters && defaultQueryParameters) {
-        path += `?${App.get('defaultQueryParameters')}`;
-    }
 
     /** Set browswer history state */
     History({
