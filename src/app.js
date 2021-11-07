@@ -12,16 +12,15 @@ Start({
             }  
         }
     ],
-    // sidebar: mySidebar, // replace default sidebar
     settings: {
-        dev: {
+        dev: { // required: set local dev user props
             user: {
                 Title: "First Last",
                 Email: "first.mi.last.ctr@mail.mil",
                 LoginName: "0987654321@mil",
                 Role: "Developer"
             },
-            errorLoggin: 'on',
+            errorLogging: 'on',
             // testLoading: true, // optional: (true || false), default: false
         },
         title: 'App', // required: enter app name
@@ -37,10 +36,6 @@ Start({
         defaultColor: '#24292f', // required: set text color
         titleColor: '#1c6cbb', // required: set core Title component text color
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)', // required: set default border style for core comoponents
-        mode: '', // optional: choose 'dev' || 'prod'
-        site: '', // optional: enter site, will assume dev if location.href === localhost || 127.0.0.1
-        library: '', // optional: enter src document library, defaults to 'App'
-        usersList: 'Users', // optional: override default name for 'Users' lists
         usersFields: [ // required: set user account fields, used to create users lists on install
             {
                 name: 'Id',
@@ -69,6 +64,20 @@ Start({
         ],
         userSettings: {}, // requried: set user JSON
         userDefaultRole: 'User', // required: set default role for newly created use accounts
+        questionTypes: [ // required: define at least one questionType with title and path props
+            {
+                title: 'General',
+                path: 'General'
+            }
+        ],
+        appcontainer: '', // optional: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
+        sidebar: '', // optional: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
+        maincontainer: '', // optional: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
+        mode: '', // optional: choose 'dev' || 'prod'
+        site: '', // optional: enter site, will assume dev if location.href === localhost || 127.0.0.1
+        library: '', // optional: enter src document library, defaults to 'App'
+        usersList: 'Users', // optional: override default name for 'Users' lists,
+        lists, // optional: define app lists to be created on install
         links: [ // optional: recommend loading gloabl stylesheets and preloading logos
             {
                 href: 'app.css'
@@ -87,21 +96,6 @@ Start({
                 rel: 'preload',
                 as: 'image',
                 href: '/Images/dha-logo-no-label-386w.png'
-            }
-        ],
-        lists, // optional: define app lists to be created on install
-        questionTypes: [
-            {
-                title: 'General',
-                path: 'General'
-            },
-            {
-                title: 'Feature Requests',
-                path: 'FeatureRequests'
-            },
-            {
-                title: 'Report a bug',
-                path: 'BugReports'
             }
         ]
     }
