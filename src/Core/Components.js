@@ -8836,72 +8836,41 @@ export function QuestionsToolbar(param) {
  * @param {*} param 
  * @returns 
  */
-export function QuestionTypes(param) {
+export function QuestionType(param) {
     const {
+        title,
+        path,
+        questions,
         parent,
         position
     } = param;
 
     const component = Component({
         html: /*html*/ `
-            <div class='qpp-questions'>
-                <h4>For general questions related to each section of the CSART tool please submit your question below:</h4>
-                    <div class=button-container>
-                        <div class='btn btn-primary question' data-path='Questions/General'>General Questions</div>
-                    </div>
+            <div class='question-type'>
+                <div class='question-type-title'>${title}</div>
             </div>
         `,
         style: /*css*/ `
-            #id .heading {
-                font-weight: 500;
-                font-size: 1.1em;
-                padding-bottom: 10px;
-            }
-            
-            #id .heading:not(.first) {
-                padding-top: 30px;
+            #id {
+                border-radius: 20px;
+                padding: 20px;
+                background: ${App.get('sidebarBackgroundColor')};
+                cursor: pointer;
             }
 
-            #id td {
-                padding-right: 20px;
-                padding-bottom: 5px;
-            }
-
-            #id ul li {
-                font-size: 1.2em;
-                padding: 5px 0px;
-            }
-
-            #id h4 {
-                font-weight: 400;
-            }
-
-            #id .mt-50 {
-                margin-top: 50px;
-            }
-
-            #id .mt-30 {
-                margin-top: 30px;
-            }
-
-            #id .button-container {
-                display: flex;
-                flex-direction: column;
-                width: fit-content;
-            }
-            
-            #id .btn {
-                margin: 10px 0px;
+            #id .question-type-title {
+                font-weight: 600;
             }
         `,
         parent,
         position,
         events: [
             {
-                selector: '#id .question',
+                selector: '#id',
                 event: 'click',
                 listener(event) {
-                    Route(this.dataset.path);
+                    Route(`Questions/${path}`);
                 }
             }
         ]
@@ -9243,7 +9212,7 @@ export function RequestAssitanceInfo(param) {
                             <a href="mailto:dhagsc@mail.mil" class="alert-link">dhagsc@mail.mil</a>
                         </p>
                         <p class="mb-0">
-                            <a href="https://gsc.health.mil/" class="alert-link">https://gsc.health.mil/</a>
+                            <a href="https://gsc.health.mil/" class="alert-link">https://gsc.health.mil</a>
                         </p>
                     </div>
                 </div>
@@ -9292,6 +9261,11 @@ export function RequestAssitanceInfo(param) {
     return component
 }
 
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export function SectionStepper(param) {
     const {
         title,
@@ -9613,7 +9587,6 @@ export function Sidebar(param) {
     const component = Component({
         html: /*html*/ `
             <div class='sidebar' data-mode='open'>
-                <!-- <div class='logo' data-path='${App.get('defaultRoute')}'></div> -->
                 <img src ='${logoPath}/${logo}' class='logo' data-path='${App.get('defaultRoute')}'>
                 ${sidebarDropdown ?
                     /*html*/ `
@@ -9654,8 +9627,6 @@ export function Sidebar(param) {
                 justify-content: flex-start;
                 align-items: center;
                 background: ${App.gradientColor ? `linear-gradient(${App.gradientColor})` : App.get('sidebarBackgroundColor')};
-                ${App.get('sidebarBorderColor') ? `border-right: solid 1px ${App.get('sidebarBorderColor')}` : ''}
-                /* height: 100vh; */
                 border-radius: 20px;
                 margin: 20px 0px 20px 20px;
             }
@@ -9665,7 +9636,6 @@ export function Sidebar(param) {
                 background: white;
                 margin: 0px 15px;
                 border-radius: 10px;
-                /* border-top: solid 1px ${App.get('sidebarBorderColor')}; */
                 overflow: overlay;
             }
 
@@ -9694,18 +9664,10 @@ export function Sidebar(param) {
                 text-align: left;
                 font-size: 1em;
                 font-weight: 400;
-                /* padding: 10px; */
                 color: ${App.get('secondaryColor')};
-                /* border-left: solid 3px transparent;
-                border-right: solid 3px transparent; */
             }
 
-            /* .sidebar .nav:not(.nav-selected):hover {
-                background: #2d3d5013;
-            } */
-
             .sidebar .nav-selected {
-                /* border-left: solid 3px #444; */
                 box-shadow: 0px -1px 0px 0px #e4e4e6;
                 background: #e4e4e6;
             }
@@ -9756,7 +9718,6 @@ export function Sidebar(param) {
                 font-weight: 400;
                 padding: 15px 0px;
                 color: ${App.get('secondaryColor')};
-                /* border-bottom: solid 1px ${App.get('sidebarBorderColor')}; */
             }
 
             .sidebar .open-close .icon {
@@ -9808,7 +9769,6 @@ export function Sidebar(param) {
             }
 
             #id .dropdown-item {
-                /* padding: 6px 19px; */
                 font-size: 14px;
                 padding: 6px 12px;
                 cursor: pointer;
@@ -9951,7 +9911,6 @@ export function Sidebar(param) {
     function onDropdown(event) {
         const key = event.target.dataset.key;
         const value = event.target.dataset.value;
-        // console.info(event)
 
         /** Update session storage */
         sessionStorage.setItem(key, value);

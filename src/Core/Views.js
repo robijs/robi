@@ -11,7 +11,8 @@ import {
     Timer,
     UploadButton,
     QuestionsToolbar,
-    DevConsole
+    DevConsole,
+    QuestionType
 } from '../Core/Components.js'
 import { App } from '../Core/Settings.js'
 import Store from '../Core/Store.js'
@@ -85,7 +86,7 @@ export async function Help() {
     const requestAssistanceInfo = RequestAssitanceInfo({
         data: [
             {
-                label: 'For data related questions, please contact:',
+                label: 'For help with this app, please contact:',
                 name: 'First Last',
                 title: 'TItle, Branch',
                 email: 'first.last.civ@mail.mil',
@@ -598,18 +599,26 @@ export async function Questions() {
             path
         } = type;
 
-        const card = Card({
+        // const card = Card({
+        //     title,
+        //     description: '',
+        //     parent: viewContainer,
+        //     margin: '0px 0px 20px 0px',
+        //     width: '100%',
+        //     action(event) {
+        //         Route(`Questions/${path}`);
+        //     }
+        // });
+
+        // card.add();
+
+        const questionType = QuestionType({
             title,
-            description: '',
-            parent: viewContainer,
-            margin: '0px 0px 20px 0px',
-            width: '100%',
-            action(event) {
-                Route(`Questions/${path}`);
-            }
+            path,
+            parent
         });
 
-        card.add();
+        questionType.add();
     });
 
     // const qppQuestions = QuestionTypes({

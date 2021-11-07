@@ -42,7 +42,6 @@ Start({
         secondaryColor: 'white',
         sidebarBackgroundColor: '#F8F8FC',
         sidebarTextColor: '#24292f',
-        // sidebarBorderColor: '#d4d4d499', // optional
         defaultColor: '#24292f',
         titleColor: '#1c6cbb',
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
