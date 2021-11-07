@@ -26,7 +26,13 @@ let db = {
         {
             "Id": 1,
             "Key": "QuestionTypes",
-            "Value": "[{\"title\":\"General\"]"
+            // "Value": "[{\"title\":\"General\"]"
+            "Value": JSON.stringify([
+                {
+                    "title": "General",
+                    "path": "General"
+                }
+            ])
         }
     ]
 }

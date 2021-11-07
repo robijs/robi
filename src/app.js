@@ -1,5 +1,4 @@
 import { Start } from './Core/Actions.js'
-import Sidebar from './Components/Sidebar.js';
 import lists from './lists.js'
 import Home from './Routes/Home/Home.js'
 
@@ -13,16 +12,22 @@ Start({
             }  
         }
     ],
-    // sidebar: Sidebar, // replace default sidebar
+    // sidebar: mySidebar, // replace default sidebar
     settings: {
         // mode: 'dev', // optional: choose 'dev' || 'prod'
         dev: {
             user: {
-                Title: "First Last",
-                Email: "first.mi.last.ctr@mail.mil",
-                LoginName: "0987654321@mil",
+                Title: "Stephen Matheis",
+                Email: "stephen.a.matheis@.ctr@mail.mil",
+                LoginName: "1098035555@mil",
                 Role: "Developer"
             },
+            // user: {
+            //     Title: "First Last",
+            //     Email: "first.mi.last.ctr@mail.mil",
+            //     LoginName: "0987654321@mil",
+            //     Role: "Developer"
+            // },
             ErrorLogging: 'on',
             // testLoading: true, // choose true || false
         },

@@ -28,5 +28,40 @@ export default [
                 ]
             }
         ]
+    },
+    {
+        list: 'NewList',
+        fields: [
+            {
+                name: 'FullName',
+                display: 'Full Name',
+                type: 'slot'
+            },
+            {
+                name: 'FirstName',
+                display: 'First Name',
+                type: 'slot'
+            },
+            {
+                name: 'Phone',
+                display: 'Phone',
+                type: 'slot'
+            },
+            {
+                name: 'Email',
+                display: 'Email',
+                type: 'slot'
+            },
+            {
+                name: 'Role',
+                display: 'Role',
+                type: 'choice',
+                choices: [
+                    'Dev',
+                    'Admin',
+                    'QA'
+                ]
+            }
+        ]
     }
 ]
