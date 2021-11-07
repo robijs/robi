@@ -31,10 +31,6 @@ let db = {
                 {
                     "title": "General",
                     "path": "General"
-                },
-                {
-                    "title": "Feature Requests",
-                    "path": "FeatureRequests"
                 }
             ])
         }

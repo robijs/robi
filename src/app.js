@@ -17,25 +17,19 @@ Start({
         // mode: 'dev', // optional: choose 'dev' || 'prod'
         dev: {
             user: {
-                Title: "Stephen Matheis",
-                Email: "stephen.a.matheis@.ctr@mail.mil",
-                LoginName: "1098035555@mil",
+                Title: "First Last",
+                Email: "first.mi.last.ctr@mail.mil",
+                LoginName: "0987654321@mil",
                 Role: "Developer"
             },
-            // user: {
-            //     Title: "First Last",
-            //     Email: "first.mi.last.ctr@mail.mil",
-            //     LoginName: "0987654321@mil",
-            //     Role: "Developer"
-            // },
-            ErrorLogging: 'on',
-            // testLoading: true, // choose true || false
+            errorLoggin: 'on',
+            testLoading: true, // choose true || false
         },
         title: 'App', // enter app name
         site: '', // optional: enter site
         library: '', // optional: enter src document library
-        logo: 'dha-logo-no-label-90w.png',
-        logoSmall: 'dha-logo-no-label-40w.png',
+        logo: 'dha-logo-no-label-180w.png',
+        logoSmall: 'dha-logo-no-label-80w.png',
         logoLarge: 'dha-logo-no-label-386w.png',
         primaryColor: '#24292f',
         primaryColorRGB: '45, 61, 80',
@@ -73,7 +67,7 @@ Start({
                 type: 'mlot'
             }
         ],
-        userSettings: '{}',
+        userSettings: {},
         userDefaultRole: 'User',
         links: [
             {
@@ -105,6 +99,10 @@ Start({
             {
                 title: 'Feature Requests',
                 path: 'FeatureRequests'
+            },
+            {
+                title: 'Report a bug',
+                path: 'BugReports'
             }
         ]
     }

@@ -2255,7 +2255,7 @@ export function Start(param) {
             .join(' ');
     }
 
-    if (App.get('dev').ErrorLogging === 'on') {
+    if (App.get('dev').errorLogging === 'on') {
         /** Format error objects for JSON.stringify() to work properly */
         function replaceErrors(key, value) {
             if (value instanceof Error) {
@@ -2913,7 +2913,7 @@ export function Start(param) {
                                             // Show alert
                                             appContainer.get().insertAdjacentHTML('afterend', /*html*/ `
                                                 <div class='position-absolute install-alert mb-0'>
-                                                    Installation cancelled. You can close this page. Reload to resume install.
+                                                    Installation cancelled. You can safely close this page. Reload page to resume install.
                                                 </div>
                                             `);
                                         });
@@ -3186,7 +3186,7 @@ export function Start(param) {
                                             // Show alert
                                             appContainer.get().insertAdjacentHTML('afterend', /*html*/ `
                                                 <div class='position-absolute install-alert mb-0'>
-                                                    Installation cancelled. You can close this page. Reload to resume install.
+                                                    Installation cancelled. You can safely close this page. Reload page to resume install.
                                                 </div>
                                             `);
                                         });

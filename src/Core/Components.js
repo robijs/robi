@@ -6233,7 +6233,7 @@ export function LoadingBar(param) {
 
             .loading-message-title{
                 font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
-                font-size: 4em; /* original value 3em */
+                font-size: 3em; /* original value 3em */
                 font-weight: 700;
                 text-align: center;
             }
@@ -6267,13 +6267,9 @@ export function LoadingBar(param) {
             }
 
             /* Logo */
-            /* .loading-message-logo {
-                background: url(${displayLogo}) center;
-                background-repeat: no-repeat;
-                width: 100%;
-                height: 100%;
-                background-size: 120px;
-            } */
+            #id .loading-message-logo {
+                max-width: 193px;
+            }
 
             @keyframes fadein {
                 from {
@@ -6915,6 +6911,7 @@ export function MultiLineTextField(param) {
                 background: white;
                 border-radius: 4px;
                 border: ${App.get('defaultBorder')};
+                transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
             }
 
             #id .form-field-multi-line-text.editable:active,
@@ -9770,7 +9767,7 @@ export function Sidebar(param) {
                 cursor: pointer;
                 margin: 15px 0px;
                 transition: all 150ms;
-                min-height: 31px;
+                max-height: 31px;
                 object-fit: scale-down;
             }
 
@@ -9830,7 +9827,7 @@ export function Sidebar(param) {
             }
 
             #id.sidebar .logo.closed {
-                max-width: 40px;
+                width: 40px;
             }
 
             #id.sidebar .open-close.closed {
@@ -9844,7 +9841,7 @@ export function Sidebar(param) {
     
                 #id.sidebar .logo.closed {
                     image-rendering: pixelated;
-                    max-width: 40px;
+                    width: 40px;
                 }
     
                 #id.sidebar .open-close.closed {
@@ -10174,9 +10171,10 @@ export function SingleLineTextField(param) {
     component.focus = () => {
         const field = component.find('.form-field-single-line-text');
 
-        console.log(field);
-
-        field.focus();
+        setTimeout(() => {
+            console.log(field);
+            field.focus();
+        }, 0);
     }
 
     component.addError = (param) => {

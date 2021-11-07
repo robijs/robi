@@ -1126,11 +1126,8 @@ export async function Logs(param) {
 export async function NewForm(param) {
     const { event, fields, list, modal, parent, table } = param;
     
-    console.log(param);
-
-    const components = fields
-    ?.filter(field => field.name !== 'Id')
-    ?.map(field => {
+    const fieldsToCreate = fields?.filter(field => field.name !== 'Id');
+    const components = fieldsToCreate?.map((field, index) => {
         const { name, display, type, choices, action } = field;
 
         let component = {};
