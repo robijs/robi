@@ -2374,6 +2374,7 @@ export function Start(param) {
                         const modal = Modal({
                             title: false,
                             disableBackdropClose: true,
+                            scrollable: true,
                             async addContent(modalBody) {
                                 modalBody.classList.add('install-modal');
 
@@ -3001,6 +3002,7 @@ export function Start(param) {
                         const modal = Modal({
                             title: false,
                             disableBackdropClose: true,
+                            scrollable: true,
                             async addContent(modalBody) {
                                 modalBody.classList.add('install-modal');
 

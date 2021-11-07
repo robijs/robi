@@ -62,7 +62,7 @@ Start({
                 type: 'mlot'
             }
         ],
-        userSettings: {}, // requried: set user JSON
+        userSettings: JSON.stringify({}), // requried: set user JSON
         userDefaultRole: 'User', // required: set default role for newly created use accounts
         questionTypes: [ // required: define at least one questionType with title and path props
             {
