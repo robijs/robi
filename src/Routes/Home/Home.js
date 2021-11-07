@@ -22,20 +22,8 @@ export default async function Home() {
 
     viewTitle.add();
 
-    const exampleComponent = ExampleComponent({
-        title: 'This was passed in',
-        parent
-    });
-
-    exampleComponent.add();
-
     const testTable = await Table({
         list: 'Test',
-        parent
-    });
-
-    const newListTable = await Table({
-        list: 'NewList',
         parent
     });
 }

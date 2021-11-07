@@ -77,6 +77,9 @@ Start({
         userDefaultRole: 'User',
         links: [
             {
+                href: 'app.css'
+            },
+            {
                 rel: 'preload',
                 as: 'image',
                 href: '/Images/dha-logo-no-label-40w.png'
@@ -98,6 +101,10 @@ Start({
             {
                 title: 'General',
                 path: 'General'
+            },
+            {
+                title: 'Feature Requests',
+                path: 'FeatureRequests'
             }
         ]
     }

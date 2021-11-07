@@ -6,6 +6,14 @@ import { Component } from '../Core/Actions.js'
  * Use it as a launchpad to create custom components.
  * Recommend copying this file when createing new a new component.
  * 
+ * @example
+ * const exampleComponent = ExampleComponent({
+ *     title: 'This was passed in',
+ *     parent
+ * });
+ *
+ * exampleComponent.add();
+ * 
  * @param {Object} param - Object passed in as only argument to a Robi component
  * @param {(Object | HTMLElement | String)} param.parent - A Robi component, HTMLElement, or css selector as a string. 
  * @param {String} param.position - Options: beforebegin, afterbegin, beforeend, afterend.
@@ -28,7 +36,7 @@ import { Component } from '../Core/Actions.js'
             <!-- Every component must be wrapped in a parent tag. -->
             <div class='example-component'>
                 <!-- Combine classes from style property and libraries --> 
-                <div class='example-component-title pb-2'>Example Title: ${title}</div>
+                <div class='example-component-title pb-2'>Example Title: ${title || ''}</div>
                 <div class='alert alert-info mt-3 mb-0'>This is a bootstrap alert inside a Robi component</div>
             </div>
         `,

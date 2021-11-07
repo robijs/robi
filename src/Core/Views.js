@@ -593,6 +593,12 @@ export async function Questions() {
         console.log('questionTypes added to local storage.');
     }
 
+    const questions = await Get({
+        list: 'Questions'
+    });
+
+    console.log(questions);
+
     questionTypes.forEach(type => {
         const {
             title,
@@ -615,6 +621,7 @@ export async function Questions() {
         const questionType = QuestionType({
             title,
             path,
+            questions: questions.filter(item => item.QuestionType === title),
             parent
         });
 

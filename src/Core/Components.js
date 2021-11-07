@@ -6532,7 +6532,8 @@ export function Modal(param) {
             <!-- Modal -->
             <!-- <div class='modal${fade ? ' fade' : ''}' tabindex='-1' role='dialog' aria-hidden='true'> -->
             <div class='modal fade' tabindex='-1' role='dialog' aria-hidden='true' ${disableBackdropClose ? 'data-keyboard="false" data-backdrop="static"' : ''}>
-                <div class='modal-dialog modal-dialog-zoom ${scrollable !== false ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
+                <!-- <div class='modal-dialog modal-dialog-zoom ${scrollable !== false ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'> -->
+                <div class='modal-dialog modal-dialog-zoom ${scrollable ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
                     <div class='modal-content'>
                         ${
                             title ?
@@ -6560,6 +6561,19 @@ export function Modal(param) {
             #id .modal-title {
                 color: ${App.get('primaryColor')};
             }
+
+            /* Override default bootstrap padding */
+            /* #id .modal-header {
+                padding: 40px 40px 0px 40px;
+            }
+
+            #id .modal-body{
+                padding: 40px;
+            }
+
+            #id .modal-footer {
+                padding: 0px 40px 40px 40px;;
+            } */
 
             /** Modal Dialog */
             /* 
@@ -8845,10 +8859,16 @@ export function QuestionType(param) {
         position
     } = param;
 
+    const lastEntry = questions[questions.length - 1];
+
+    const { Editor, Modified } = lastEntry || { Editor: '', Modified: '' };
+
     const component = Component({
         html: /*html*/ `
-            <div class='question-type'>
-                <div class='question-type-title'>${title}</div>
+            <div class='question-type mb-3'>
+                <div class='question-type-title mb-1'>${title}</div>
+                <div class='question-count mb-1'>${questions.length} questions</div>
+                <div class='question-date'>${Modified ? `Last updated: ${Editor.Title} ${formatDate(Modified)}` : ''}</div>
             </div>
         `,
         style: /*css*/ `
@@ -8861,6 +8881,15 @@ export function QuestionType(param) {
 
             #id .question-type-title {
                 font-weight: 600;
+            }
+
+            #id .question-count {
+                font-size: 14px;
+            }
+
+            #id .question-date {
+                font-size: 14px;
+                color: gray;
             }
         `,
         parent,
@@ -8875,6 +8904,15 @@ export function QuestionType(param) {
             }
         ]
     });
+
+    function formatDate(date) {
+        return `
+            ${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString('default', {
+            hour: 'numeric',
+            minute: 'numeric'
+        })}
+        `;
+    }
 
     return component;
 }
