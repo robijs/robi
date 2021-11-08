@@ -2316,6 +2316,19 @@ export function DataTable(param) {
                 overflow: hidden;
             }
 
+            /* Bootstrap 5 overrides */
+            #id_wrapper .table>:not(caption) > * > * {
+                border-bottom-width: 0px;
+            } 
+
+            #id_wrapper .table > :not(:first-child) {
+                border-top: none;
+            }
+
+            #id_wrapper .table thead {
+                border-bottom-color: lightgray;
+            }
+
             ${addCSS || ''}
         `,
         parent,
@@ -10061,6 +10074,7 @@ export function Sidebar(param) {
  */
 export function SingleLineTextField(param) {
     const {
+        addon,
         label,
         description,
         value,
@@ -10085,7 +10099,7 @@ export function SingleLineTextField(param) {
 
     if (onKeydown) {
         events.push({
-            selector: '#id .form-field-single-line-text',
+            selector: '#id .form-control',
             event: 'keydown',
             listener: onKeydown
         });
@@ -10093,7 +10107,7 @@ export function SingleLineTextField(param) {
 
     if (onFocusout) {
         events.push({
-            selector: '#id .form-field-single-line-text',
+            selector: '#id .form-control',
             event: 'focusout',
             listener: onFocusout
         });
@@ -10101,10 +10115,16 @@ export function SingleLineTextField(param) {
 
     const component = Component({
         html: /*html*/ `
+            
             <div class='form-field'>
-                ${label ? /*html*/`<label>${label}${optional ? /*html*/ `<span class='optional'><i>Optional</i></span>` : ''}</label>` : ''}
+                <!-- ${label ? /*html*/`<label>${label}${optional ? /*html*/ `<span class='optional'><i>Optional</i></span>` : ''}</label>` : ''} -->
+                <!-- ${readOnly ? /*html*/ `<div class='form-field-single-line-text readonly'>${value || ''}</div>` : /*html*/ `<div class='form-field-single-line-text editable' contenteditable='true'>${value || ''}</div>`} -->
+                <label class='form-label'>${label}</label>
                 ${description ? /*html*/`<div class='form-field-description'>${description}</div>` : ''}
-                ${readOnly ? /*html*/ `<div class='form-field-single-line-text readonly'>${value || ''}</div>` : /*html*/ `<div class='form-field-single-line-text editable' contenteditable='true'>${value || ''}</div>`}
+                <div class="input-group">
+                    ${addon ? /*html*/ `<span class='input-group-text'>${addon}</span>` : ''}
+                    <input type='text' class='form-control' value='${value || ''}' autocomplete='off' ${readOnly ? 'readonly' : ''}>
+                </div>         
             </div>
         `,
         style: /*css*/ `
@@ -10117,7 +10137,8 @@ export function SingleLineTextField(param) {
                 ${background ? `background: ${background};` : ''}
             }
 
-            #id label {
+            #id label,
+            #id .form-label {
                 font-size: .95em;
                 font-weight: bold;
                 padding: 3px 0px;
@@ -10208,12 +10229,12 @@ export function SingleLineTextField(param) {
     }
 
     component.value = (param) => {
-        const field = component.find('.form-field-single-line-text');
+        const field = component.find('.form-control');
 
         if (param !== undefined) {
-            field.innerText = param;
+            field.value = param;
         } else {
-            return field.innerText;
+            return field.value;
         }
     }
 

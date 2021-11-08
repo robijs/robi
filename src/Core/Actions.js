@@ -56,6 +56,11 @@ export async function AddColumnToView(param) {
     return newField.d;
 }
 
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export function AddLinks(param) {
     const {
         links,
@@ -85,7 +90,7 @@ export function AddLinks(param) {
             linkElement.setAttribute('as', as);
         }
 
-        const relativePath = App.get('mode') === 'prod' ? '..' : `/src/`;
+        const relativePath = App.get('mode') === 'prod' ? `${App.get('site')}/${App.get('library')}/src` : `/src/`;
 
         // TODO: default relative path might not be right, test locally and on SP
         linkElement.setAttribute('href', `${path || relativePath}${href}`);
@@ -94,6 +99,10 @@ export function AddLinks(param) {
     }
 }
 
+/**
+ * 
+ * @param {*} param 
+ */
 export function AddStyle(param) {
     const {
         name,
@@ -229,6 +238,11 @@ export function Authorize(param) {
     }
 }
 
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export function Component(param) {
     const {
         name,
@@ -665,6 +679,78 @@ export async function CreateColumn(param) {
 }
 
 /**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export async function CreateFile(param) {
+    const {
+        contents,
+        file,
+        folder,
+        web,
+        site
+    } = param;
+
+    const requestDigest = await GetRequestDigest();
+
+    const postOptions = {
+        url: `${site || App.get('site')}/${web}/_api/web/GetFolderByServerRelativeUrl('${folder}')/Files/add(url='${file}',overwrite=true)`,
+        data: contents,
+        headers: {
+            "Accept": "application/json;odata=verbose",
+            "Content-Type": "application/json;odata=verbose",
+            "X-RequestDigest": requestDigest,
+        }
+    }
+
+    const newFile = await Post(postOptions);
+
+    if (newFile) {
+        return newFile.d;
+    }
+}
+
+/**
+ * Create SharePoint list item.
+ * @param {Object}   param          Interface to UpdateItem() module.   
+ * @param {string}   param.list     SharePoint list Name.
+ * @param {string}   [param.list]   SharePoint list item type.
+ * @param {function} param.action   Function to be run after updating item posts.
+ * @param {boolean}  [param.notify] If false, don't display notification.
+ */
+export async function CreateFolder(param) {
+    const {
+        site,
+        web,
+        library,
+        name
+    } = param;
+
+    // Get new request digest
+    const requestDigest = await GetRequestDigest();
+
+    const postOptions = {
+        url: `${site || App.get('site')}/${web}/_api/web/folders`,
+        data: {
+            "__metadata":{
+                "type":"SP.Folder"
+            },
+            "ServerRelativeUrl": `${library}/${name}`
+        },
+        headers: {
+            "Accept": "application/json;odata=verbose",
+            "Content-Type": "application/json;odata=verbose",
+            "X-RequestDigest": requestDigest,
+        }
+    }
+
+    const copyItem = await Post(postOptions);
+
+    return copyItem;
+}
+
+/**
  * Create SharePoint list item.
  * @param {Object}   param          Interface to UpdateItem() module.   
  * @param {string}   param.type     SharePoint list item type.
@@ -761,17 +847,46 @@ export async function CreateItem(param) {
  * @param {String} param.list   SharePoint list name.
  * @param {Array}  param.fields SharePoint fields.
  */
-export async function CreateList(param) {
+ export async function CreateLibrary(param) {
     const {
-        list,
+        name,
+        web,
         fields
     } = param;
 
+    const newLibrary = await CreateList({
+        list: name,
+        web,
+        fields,
+        template: 101
+    });
+
+    if (newLibrary) {
+        return newLibrary;
+    }
+}
+
+/**
+ * Create SharePoint list item.
+ * @param {Object} param        Interface to UpdateItem() module.   
+ * @param {String} param.list   SharePoint list name.
+ * @param {Array}  param.fields SharePoint fields.
+ */
+export async function CreateList(param) {
+    const {
+        list,
+        web,
+        fields,
+        template
+    } = param;
+
     // Get new request digest
-    const requestDigest = await GetRequestDigest();
+    const requestDigest = await GetRequestDigest({web});
+
+    console.log(web);
 
     // Check if list exists
-    const listResponse = await fetch(`${App.get('site')}/_api/web/lists/GetByTitle('${list}')`, {
+    const listResponse = await fetch(`${App.get('site')}${web ? `/${web}` : ''}/_api/web/lists/GetByTitle('${list}')`, {
         headers: {
             "Content-Type": "application/json;odata=verbose",
             "Accept": "application/json;odata=verbose",
@@ -784,8 +899,10 @@ export async function CreateList(param) {
     const installConsole = Store.get('install-console');
     const progressBar = Store.get('install-progress-bar');
 
+    const listType = template && template === 101 ? 'library' : 'list';
+
     if (getList.d) {
-        console.log(`List ${list} already created.`);
+        console.log(`${listType} ${list} already created.`);
 
         // Append to install-console
         const installConsole = Store.get('install-console');
@@ -794,7 +911,7 @@ export async function CreateList(param) {
             installConsole.append(/*html*/ `
                 <div class='console-line'>
                     <!-- <code class='line-number'>0</code> -->
-                    <code>List '${list}' already created</code>
+                    <code>${listType} '${list}' already created</code>
                 </div>
             `);
 
@@ -819,12 +936,12 @@ export async function CreateList(param) {
     }
 
     const postOptions = {
-        url: `${App.get('site')}/_api/web/lists`,
+        url: `${App.get('site')}${web ? `/${web}` : ''}/_api/web/lists`,
         data: {
             __metadata: {
                 'type': `SP.List`,
             },
-            'BaseTemplate': 100,
+            'BaseTemplate': template || 100,
             'Title': list
         },
         headers: {
@@ -839,13 +956,13 @@ export async function CreateList(param) {
 
     if (newList) {
         // Console success
-        console.log(`Created list '${list}'`);
+        console.log(`Created ${listType} '${list}'`);
 
         if (installConsole) {
             installConsole.append(/*html*/ `
                 <div class='console-line'>
                     <!-- <code class='line-number'>0</code> -->
-                    <code>Created list '${list}'</code>
+                    <code>Created ${listType} '${list}'</code>
                 </div>
                 <div class='console-line'>
                     <!-- <code class='line-number'>0</code> -->
@@ -872,6 +989,160 @@ export async function CreateList(param) {
     }
 }
 
+/**
+ * Create SharePoint site.
+ * @param {Object} param Interface to UpdateItem() module.   
+ * @param {String} param.name SharePoint site name.
+ * @param {String} param.url SharePoint site url.
+ */
+export async function CreateSite(param) {
+    const {
+        url,
+        title
+    } = param;
+
+    // Get new request digest
+    const requestDigest = await GetRequestDigest();
+
+    // // Check if site exists
+    // const listResponse = await fetch(`${App.get('site')}/_api/web/webinfos`, {
+    //     headers: {
+    //         "Content-Type": "application/json;odata=verbose",
+    //         "Accept": "application/json;odata=verbose",
+    //     }
+    // });
+    
+    // const getList = await listResponse.json();
+
+    // Get install console and progress bar robi components
+    const installConsole = Store.get('install-console');
+    const progressBar = Store.get('install-progress-bar');
+
+    // if (getList.d) {
+    //     console.log(`List ${list} already created.`);
+
+    //     // Append to install-console
+    //     const installConsole = Store.get('install-console');
+
+    //     if (installConsole) {
+    //         installConsole.append(/*html*/ `
+    //             <div class='console-line'>
+    //                 <!-- <code class='line-number'>0</code> -->
+    //                 <code>List '${list}' already created</code>
+    //             </div>
+    //         `);
+
+    //         installConsole.get().scrollTop = installConsole.get().scrollHeight;
+    //     }
+
+    //     const progressBar = Store.get('install-progress-bar');
+
+    //     if (progressBar) {
+    //         // +1 for the list
+    //         progressBar.update();
+
+    //         // +2 for each field
+    //         for (let i = 0; i < fields.length; i++) {
+    //             progressBar.update();
+    //             progressBar.update();
+    //         }
+    //     }
+    //     return;
+    // }
+
+    const postOptions = {
+        url: `${App.get('site')}/_api/web/webinfos/add`,
+        data: {
+            'parameters': {
+                '__metadata':  {
+                    'type': 'SP.WebInfoCreationInformation'
+                },
+                'Url': url,
+                'Title': title,
+                'Description': 'This site was created with Robi.',
+                'Language': 1033,
+                'WebTemplate': 'sts',
+                'UseUniquePermissions': false
+            }
+        },
+        headers: {
+            "Content-Type": "application/json;odata=verbose",
+            "Accept": "application/json;odata=verbose",
+            "X-RequestDigest": requestDigest,
+        }
+    }
+
+    /** Create site */
+    const newSite = await Post(postOptions);
+
+    console.log('New site:', newSite);
+
+    if (newSite) {
+        // Console success
+        console.log(`Created site '${title}'`);
+
+        if (installConsole) {
+            installConsole.append(/*html*/ `
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code>Created site '${title}'</code>
+                </div>
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code>----------------------------------------</code>
+                </div>
+            `);
+
+            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+        }
+
+        if (progressBar) {
+            progressBar.update();
+        }
+
+        // Deactivate MDS
+        const getNewRD = await Post({
+            url: `${App.get('site')}/${url}/_api/contextinfo`,
+            headers: {
+                "Accept": "application/json; odata=verbose",
+            }
+        });
+        const newRD = getNewRD.d.GetContextWebInformation.FormDigestValue;
+        const deactivateMDS = await fetch(`${App.get('site')}/${url}/_api/web`, {
+            method: 'POST',
+            body: JSON.stringify({ 
+                '__metadata': { 'type': 'SP.Web' },
+                Title: 'Changed',
+                'EnableMinimalDownload': false
+            }),
+            headers: {
+                "Content-Type": "application/json;odata=verbose",
+                "Accept": "application/json;odata=verbose",
+                'X-HTTP-Method': 'MERGE',
+                "X-RequestDigest": newRD
+            }
+        });
+        console.log(deactivateMDS);
+        console.log('Deactivate MDS:', deactivateMDS);
+
+        // Create App doc lib
+        console.log('Create app doc lib');
+
+        // Copy Robi
+        console.log('Copy robi into App doc lib');
+
+        // Install robi
+        console.log('Install robi');
+
+        return newSite;
+    }
+}
+
+/**
+ * 
+ * @param {*} lists 
+ * @returns 
+ */
 export async function Data(lists) {
     let responses;
 
@@ -906,6 +1177,10 @@ export async function Data(lists) {
     return responses
 }
 
+/**
+ * 
+ * @param {*} param 
+ */
 export async function DeleteAttachments(param) {
     const {
         list,
@@ -1062,6 +1337,10 @@ export async function DeleteList(param) {
     }
 }
 
+/**
+ * 
+ * @param {*} param 
+ */
 export function Download(param) {
     const {
         fileName,
@@ -1717,9 +1996,11 @@ export async function GetListGuid(param) {
  * 
  * @returns 
  */
-export async function GetRequestDigest() {
+export async function GetRequestDigest(param = {}) {
+    const { web } = param;
+
     const getRequestDigest = await Post({
-        url: `${App.get('site')}/_api/contextinfo`,
+        url: `${App.get('site')}${web ? `/${web}` : ''}/_api/contextinfo`,
         headers: {
             "Accept": "application/json; odata=verbose",
         }

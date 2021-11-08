@@ -25,8 +25,13 @@ const App = {
             }
         }
 
+        if (!library) {
+            param.library = 'App';
+        }
+
         if (param.mode === 'prod' && !site) {
             console.log('Site:', location.href.split(library || '/App/')[0]);
+            console.log('App library:', param.library);
 
             param.site = location.href.split(library || '/App/')[0];
         }

@@ -67,7 +67,7 @@ export async function AccountInfo(param) {
         label: 'Name',
         value: Title,
         readOnly: true,
-        fieldMargin: '0px',
+        fieldMargin: '0px 0px 20px 0px',
         parent: accountInfoCard
     });
 
@@ -78,7 +78,7 @@ export async function AccountInfo(param) {
         label: 'Account',
         value: LoginName,
         readOnly: true,
-        fieldMargin: '0px',
+        fieldMargin: '0px 0px 20px 0px',
         parent: accountInfoCard
     });
 
@@ -89,7 +89,7 @@ export async function AccountInfo(param) {
         label: 'Email',
         value: Email,
         readOnly: true,
-        fieldMargin: '0px',
+        fieldMargin: '0px 0px 20px 0px',
         parent: accountInfoCard
     });
 
@@ -100,7 +100,7 @@ export async function AccountInfo(param) {
         label: 'Role',
         value: Role || 'User',
         readOnly: true,
-        fieldMargin: '0px',
+        fieldMargin: '0px 0px 20px 0px',
         parent: accountInfoCard
     });
 

@@ -78,9 +78,9 @@ Start({
         library: '', // optional: enter src document library, defaults to 'App'
         usersList: 'Users', // optional: override default name for 'Users' lists,
         lists, // optional: define app lists to be created on install
-        links: [ // optional: recommend loading gloabl stylesheets and preloading logos
+        links: [ // optional: recommend loading shared stylesheets and preloading logos
             {
-                href: 'app.css'
+                href: '/app.css'
             },
             {
                 rel: 'preload',
