@@ -85,12 +85,12 @@ Start({
             {
                 rel: 'preload',
                 as: 'image',
-                href: '/Images/dha-logo-no-label-40w.png'
+                href: '/Images/dha-logo-no-label-80w.png'
             },
             {
                 rel: 'preload',
                 as: 'image',
-                href: '/Images/dha-logo-no-label-90w.png'
+                href: '/Images/dha-logo-no-label-180w.png'
             },
             {
                 rel: 'preload',
