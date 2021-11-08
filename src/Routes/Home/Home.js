@@ -56,10 +56,9 @@ export default async function Home() {
     createLib.add();
 
     async function copyDir(param) {
-        const { path, filter, library } = param;
+        const { path, filter } = param;
 
-        /** {@link https://sharepoint.stackexchange.com/a/138139} */
-        // 1. Look for files at top level
+        // 1. Look for files at top level of source site
         const url = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files`;
         
         console.log(url);

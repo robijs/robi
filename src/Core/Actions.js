@@ -539,6 +539,76 @@ export async function CopyItem(param) {
 }
 
 /**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+async function CopyRecurse(param) {
+    const { path, filter } = param;
+
+    // 1. Look for files at top level of source site
+    const url = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files`;
+    
+    console.log(url);
+
+    const requestDigest = await GetRequestDigest();
+    const options = {
+        method: 'GET',
+        headers: {
+            "Accept": "application/json;odata=verbose",
+            "Content-type": "application/json; odata=verbose",
+            "X-RequestDigest": requestDigest,
+        }
+    };
+    const query = await fetch(url, options);
+    const response = await query.json();
+
+    if (response.d.results.length) {
+        console.log(`Top level files in '${path}'`)
+        
+        for (let item in response.d.results) {
+            const file = response.d.results[item];
+            const { Name } = file;
+
+            await CreateFile({
+                source: App.get('site'),
+                target: `${App.get('site')}/mds-9`,
+                path,
+                file: Name
+            });
+
+            console.log(`File '${Name}' copied.`);
+        }
+    } else {
+        console.log(`No files in '${path}'`);
+    }
+
+    // 2. Look for directories
+    const dirs = await GetFolders({ path, filter });
+
+    for (let item in dirs) {
+        const file = dirs[item];
+        const { Name } = file;
+        
+        console.log(`- ${Name}`);
+        // 3 Create dirs
+        await CreateFolder({
+            web: 'mds-9', // target
+            path: `${path}/${Name}`
+        });
+
+        console.log(`Folder '${Name}' copied.`);
+
+        // Recurse into dir
+        await CopyRecurse({
+            path: `${path}/${Name}`
+        });
+    }
+
+    return true;
+}
+
+/**
  * Create SharePoint list item.
  * @param {Object}   param          Interface to UpdateItem() module.   
  * @param {string}   param.list     SharePoint list Name.
@@ -684,31 +754,33 @@ export async function CreateColumn(param) {
  * @returns 
  */
 export async function CreateFile(param) {
-    const {
-        contents,
-        file,
-        folder,
-        web,
-        site
-    } = param;
+    const { source, target, path, file } = param;
 
-    const requestDigest = await GetRequestDigest();
-
-    const postOptions = {
-        url: `${site || App.get('site')}/${web}/_api/web/GetFolderByServerRelativeUrl('${folder}')/Files/add(url='${file}',overwrite=true)`,
-        data: contents,
+    const sourceSiteUrl = source + "/_api/web/GetFolderByServerRelativeUrl('" + path + "')/Files('" + file + "')/$value";
+    const targetSiteUrl = target + "/_api/web/GetFolderByServerRelativeUrl('" + path + "')/Files/Add(url='" + file + "',overwrite=true)";
+    const srcRequestDigest = await GetRequestDigest({ site: source });
+    const getFileValue = await fetch(sourceSiteUrl, {
+        method: 'GET',
         headers: {
-            "Accept": "application/json;odata=verbose",
-            "Content-Type": "application/json;odata=verbose",
-            "X-RequestDigest": requestDigest,
+            'binaryStringRequestBody': 'true',
+            'Accept': 'application/json;odata=verbose;charset=utf-8',
+            'X-RequestDigest': srcRequestDigest
         }
-    }
+    });
 
-    const newFile = await Post(postOptions);
+    const arrayBuffer = await getFileValue.arrayBuffer();
 
-    if (newFile) {
-        return newFile.d;
-    }
+    const newFile = await fetch(targetSiteUrl, {
+        method: 'POST',
+        body: arrayBuffer, 
+        headers: {
+            'binaryStringRequestBody': 'true',
+            'Accept': 'application/json;odata=verbose;charset=utf-8',
+            'X-RequestDigest': srcRequestDigest
+        }
+    });
+
+    return newFile;
 }
 
 /**
@@ -846,7 +918,7 @@ export async function CreateItem(param) {
  * @param {String} param.list   SharePoint list name.
  * @param {Array}  param.fields SharePoint fields.
  */
- export async function CreateLibrary(param) {
+export async function CreateLibrary(param) {
     const {
         name,
         web,
@@ -1820,6 +1892,31 @@ export async function GetCurrentUser(param) {
  * @param {*} param 
  * @returns 
  */
+export async function GetFolders(param) {
+    const { path, filter } = param;
+    
+    // 2. Look for directories
+    const url = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/folders${filter ? `?$select=Name&$filter=${filter}` : ''}`;
+    const requestDigest = await GetRequestDigest();
+    const options = {
+        method: 'GET',
+        headers: {
+            "Accept": "application/json;odata=verbose",
+            "Content-type": "application/json; odata=verbose",
+            "X-RequestDigest": requestDigest,
+        }
+    };
+    const query = await fetch(url, options);
+    const response = await query.json();
+
+    return response?.d?.results;
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export async function GetItemCount(param) {
     const {
         list,
@@ -1944,6 +2041,11 @@ export async function GetWebLists() {
     }
 }
 
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export async function GetList(param) {
     const {
         listName
@@ -1968,6 +2070,11 @@ export async function GetList(param) {
     }
 }
 
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export async function GetListGuid(param) {
     const {
         listName: list
@@ -2182,7 +2289,7 @@ export async function Log(param) {
  * @param {function} param.action   Function to be run after updating item posts.
  * @param {boolean}  [param.notify] If false, don't display notification.
  */
- export async function LogError(param) {
+export async function LogError(param) {
     const {
         Message,
         Error,
@@ -2256,6 +2363,11 @@ export async function Log(param) {
     }
 }
 
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export async function Post(param) {
     const {
         url,
@@ -2276,6 +2388,12 @@ export async function Post(param) {
     }
 }
 
+/**
+ * 
+ * @param {*} path 
+ * @param {*} options 
+ * @returns 
+ */
 export function Route(path = App.get('defaultRoute'), options = {}) {
     const {
         scrollTop
