@@ -1,1 +1,168 @@
-{"Comments":[],"Errors":[],"Log":[],"Users":[],"Questions":[],"ReleaseNotes":[],"Roles":[{"Id":1,"Title":"Administrator"},{"Id":2,"Title":"Developer"},{"Id":3,"Title":"User"}],"Settings":[{"Id":1,"Key":"QuestionTypes","Value":"[{\"title\":\"General\",\"path\":\"General\"}]"}],"Test":[],"NewList":[]}
+{
+  "Comments": [],
+  "Errors": [],
+  "Log": [
+    {
+      "Title": "First Last logged in",
+      "SessionId": "88f17e01-4eab-437c-a04c-d21a8d5c016b",
+      "Message": "{\"body\":\"name@org.domain successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:3609:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 08 Nov 2021 21:44:53 GMT",
+      "Modified": "Mon, 08 Nov 2021 21:44:53 GMT",
+      "Id": 1
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": "a5e984db-0f0d-4376-a7bc-2b0c478fa588",
+      "Message": "{\"body\":\"name@org.domain successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:3609:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 08 Nov 2021 21:45:19 GMT",
+      "Modified": "Mon, 08 Nov 2021 21:45:19 GMT",
+      "Id": 2
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": "658e6321-e85d-4ee3-a70c-7ae56c2678f3",
+      "Message": "{\"body\":\"name@org.domain successfully loaded App\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"launch (http://127.0.0.1:8080/src/Core/Actions.js:3609:33)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 08 Nov 2021 21:52:57 GMT",
+      "Modified": "Mon, 08 Nov 2021 21:52:57 GMT",
+      "Id": 3
+    },
+    {
+      "Title": "Route",
+      "SessionId": "658e6321-e85d-4ee3-a70c-7ae56c2678f3",
+      "Message": "{\"body\":\"name@org.domain routed to Settings\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Settings\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:2361:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Core/Components.js:10052:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 08 Nov 2021 21:53:00 GMT",
+      "Modified": "Mon, 08 Nov 2021 21:53:00 GMT",
+      "Id": 4
+    },
+    {
+      "Title": "Route",
+      "SessionId": "658e6321-e85d-4ee3-a70c-7ae56c2678f3",
+      "Message": "{\"body\":\"name@org.domain routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:2361:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Core/Components.js:9878:21)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 08 Nov 2021 21:53:04 GMT",
+      "Modified": "Mon, 08 Nov 2021 21:53:04 GMT",
+      "Id": 5
+    },
+    {
+      "Title": "Route",
+      "SessionId": "658e6321-e85d-4ee3-a70c-7ae56c2678f3",
+      "Message": "{\"body\":\"name@org.domain routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:2361:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Core/Components.js:10052:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 08 Nov 2021 21:53:05 GMT",
+      "Modified": "Mon, 08 Nov 2021 21:53:05 GMT",
+      "Id": 6
+    },
+    {
+      "Title": "Route",
+      "SessionId": "658e6321-e85d-4ee3-a70c-7ae56c2678f3",
+      "Message": "{\"body\":\"name@org.domain routed to Home\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Home\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:2361:29)\\n    at HTMLImageElement.listener (http://127.0.0.1:8080/src/Core/Components.js:9878:21)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 08 Nov 2021 21:53:06 GMT",
+      "Modified": "Mon, 08 Nov 2021 21:53:06 GMT",
+      "Id": 7
+    }
+  ],
+  "Users": [
+    {
+      "Title": "First Last",
+      "Email": "name@org.domain",
+      "LoginName": "loginname",
+      "Role": "Developer",
+      "Settings": "{}",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 08 Nov 2021 21:44:53 GMT",
+      "Modified": "Mon, 08 Nov 2021 21:44:53 GMT",
+      "Id": 1
+    }
+  ],
+  "Questions": [],
+  "ReleaseNotes": [],
+  "Roles": [
+    {
+      "Id": 1,
+      "Title": "Administrator"
+    },
+    {
+      "Id": 2,
+      "Title": "Developer"
+    },
+    {
+      "Id": 3,
+      "Title": "User"
+    }
+  ],
+  "Settings": [
+    {
+      "Id": 1,
+      "Key": "QuestionTypes",
+      "Value": "[{\"title\":\"General\",\"path\":\"General\"}]"
+    }
+  ],
+  "Test": [],
+  "NewList": []
+}

@@ -723,8 +723,7 @@ export async function CreateFolder(param) {
     const {
         site,
         web,
-        library,
-        name
+        path
     } = param;
 
     // Get new request digest
@@ -736,7 +735,7 @@ export async function CreateFolder(param) {
             "__metadata":{
                 "type":"SP.Folder"
             },
-            "ServerRelativeUrl": `${library}/${name}`
+            "ServerRelativeUrl": `${path}`
         },
         headers: {
             "Accept": "application/json;odata=verbose",
@@ -998,7 +997,8 @@ export async function CreateList(param) {
 export async function CreateSite(param) {
     const {
         url,
-        title
+        title,
+        description
     } = param;
 
     // Get new request digest
@@ -1059,7 +1059,7 @@ export async function CreateSite(param) {
                 },
                 'Url': url,
                 'Title': title,
-                'Description': 'This site was created with Robi.',
+                'Description': description || 'This site was created with Robi.',
                 'Language': 1033,
                 'WebTemplate': 'sts',
                 'UseUniquePermissions': false
@@ -1997,10 +1997,10 @@ export async function GetListGuid(param) {
  * @returns 
  */
 export async function GetRequestDigest(param = {}) {
-    const { web } = param;
+    const { web, site } = param;
 
     const getRequestDigest = await Post({
-        url: `${App.get('site')}${web ? `/${web}` : ''}/_api/contextinfo`,
+        url: `${site || App.get('site')}${web ? `/${web}` : ''}/_api/contextinfo`,
         headers: {
             "Accept": "application/json; odata=verbose",
         }
@@ -2468,6 +2468,41 @@ export async function SendEmail(param) {
 }
 
 /**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export async function SetHomePage(param = {}) {
+    const { file, web, site } = param;
+
+    const requestDigest = await GetRequestDigest({web});
+    const headers = {
+        "Accept": "application/json;odata=verbose",
+        "Content-type": "application/json; odata=verbose",
+        "IF-MATCH": "*",
+        "X-HTTP-Method": "PATCH",
+        "X-RequestDigest": requestDigest,
+    }
+
+    const properties = {
+        'properties': {
+            '__metadata': {
+                'type': 'SP.Folder'
+            },
+            'WelcomePage': file || 'App/src/pages/app.aspx'
+        }
+    };
+
+    const response = await fetch(`${site || App.get('site')}${web ? `/${web}` : ''}/_api/web/rootfolder`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(properties)
+    });
+
+    return response;
+}
+
+/**
  * Set session storage key value pairs.
  * @param {Object}   param          Interface to module.   
  */
@@ -2524,7 +2559,7 @@ export function Start(param) {
         return this
             .toLowerCase()
             .split(' ')
-            .map(word => word.replace(word[0], word[0].toUpperCase()))
+            .map(word => word.replace(word[0], word[0]?.toUpperCase()))
             .join(' ');
     }
 

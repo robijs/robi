@@ -922,7 +922,6 @@ export function BootstrapButton(param) {
         parent,
         position,
         classes,
-        margin,
         type,
         value
     } = param;
@@ -932,9 +931,7 @@ export function BootstrapButton(param) {
             <button type="button" class="btn btn-${type} ${classes?.join(' ')}">${value}</button>
         `,
         style: /*css*/ `
-            #id {
-                margin: ${margin || ''};
-            }
+            
         `,
         parent,
         position,
@@ -1076,6 +1073,55 @@ export function BootstrapDropdown(param) {
             field.innerText = param;
         } else {
             return field.innerText;
+        }
+    }
+
+    return component;
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export function BootstrapTextarea(param) {
+    const {
+        label,
+        parent,
+        position,
+        classes,
+        value,
+    } = param;
+
+    const component = Component({
+        html: /*html*/ `
+            <div>
+                <div class='form-group'>
+                    <label>${label}</label>
+                    <textarea class='form-control' rows='3' ${value ? `value=${value}` : ''}></textarea>
+                </div>
+            </div>
+        `,
+        style: /*css*/ `
+           
+        `,
+        parent,
+        position,
+        events: [
+         
+        ],
+        onAdd() {
+       
+        }
+    });
+
+    component.value = (param) => {
+        const field = component.find('.form-control');
+
+        if (param !== undefined) {
+            field.value = param;
+        } else {
+            return field.value;
         }
     }
 
@@ -6863,7 +6909,6 @@ export function Modal(param) {
 export function MultiLineTextField(param) {
     const {
         label,
-        labelSize,
         description,
         optional,
         value,
@@ -6874,8 +6919,6 @@ export function MultiLineTextField(param) {
         minHeight,
         width,
         fieldMargin,
-        fontWeight,
-        fontSize,
         padding,
         onKeydown,
         onFocusout
@@ -6910,12 +6953,16 @@ export function MultiLineTextField(param) {
             }
 
             #id .form-field-multi-line-text {
+                color: #495057; /* Bootstrap@4.5.2 input color */
                 font-size: 1em;
-                font-weight: ${fontWeight || '500'};
-                font-size: ${fontSize || '.85em'};
                 margin-top: 2px;
                 margin-bottom: 4px;
-                padding: ${padding || '10px'};
+                /* padding: ${padding || '10px'}; */
+                padding: 0.375rem 0.75rem;
+            }
+
+            #id .form-field-multi-line-text > * {
+                color: #495057; /* Bootstrap@4.5.2 input color */
             }
 
             #id .form-field-multi-line-text.editable {
@@ -6923,15 +6970,16 @@ export function MultiLineTextField(param) {
                 width: ${width || 'unset'};
                 background: white;
                 border-radius: 4px;
-                border: ${App.get('defaultBorder')};
-                transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+                border: 1px solid #ced4da;
             }
 
             #id .form-field-multi-line-text.editable:active,
             #id .form-field-multi-line-text.editable:focus {
                 outline: none;
-                border: solid 1px transparent;
                 box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')};
+                border-color: #80bdff;
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
             }
 
             /** Readonly */
@@ -10121,9 +10169,23 @@ export function SingleLineTextField(param) {
                 <!-- ${readOnly ? /*html*/ `<div class='form-field-single-line-text readonly'>${value || ''}</div>` : /*html*/ `<div class='form-field-single-line-text editable' contenteditable='true'>${value || ''}</div>`} -->
                 <label class='form-label'>${label}</label>
                 ${description ? /*html*/`<div class='form-field-description'>${description}</div>` : ''}
-                <div class="input-group">
-                    ${addon ? /*html*/ `<span class='input-group-text'>${addon}</span>` : ''}
-                    <input type='text' class='form-control' value='${value || ''}' autocomplete='off' ${readOnly ? 'readonly' : ''}>
+                <div class='input-group'>
+                    ${addon ? 
+                        /*html*/ `
+                            <div class='input-group-prepend'>
+                                <div class='input-group-text'>${addon}</div>
+                            </div>
+                        ` : ''
+                    }
+                    ${
+                        readOnly ?
+                        /*html*/ `
+                            <div type='text' class='form-field-single-line-text readonly'>${value || ''}</div>
+                        ` :
+                        /*html*/ `
+                            <input type='text' class='form-control' value='${value || ''}' autocomplete='off'>
+                        `
+                    }
                 </div>         
             </div>
         `,
@@ -10137,12 +10199,12 @@ export function SingleLineTextField(param) {
                 ${background ? `background: ${background};` : ''}
             }
 
-            #id label,
+            /* #id label,
             #id .form-label {
                 font-size: .95em;
                 font-weight: bold;
                 padding: 3px 0px;
-            }
+            } */
 
             #id .form-field-description {
                 padding: 5px 0px;
@@ -10162,6 +10224,9 @@ export function SingleLineTextField(param) {
             }
 
             #id .form-field-single-line-text.readonly {
+                font-size: 1rem;
+                font-weight: 400;
+                color: #495057; /* Bootstrap@4.5.2 input color */
                 background: transparent;
                 border: solid 1px transparent;
                 margin: 0px;

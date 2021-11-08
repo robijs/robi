@@ -16,8 +16,8 @@ Start({
         dev: { // required: set local dev user props
             user: {
                 Title: "First Last",
-                Email: "name@org.domain",
-                LoginName: "loginname",
+                Email: "first.mi.last.ctr@mail.mil",
+                LoginName: "0987654321@mil",
                 Role: "Developer"
             },
             errorLogging: 'on',
