@@ -993,9 +993,7 @@ export function BootstrapDropdown(param) {
             }
 
             #id label {
-                font-size: .95em;
-                font-weight: bold;
-                padding: 3px 0px;
+                font-weight: 500;
             }
 
             #id .dropdown-toggle {
@@ -1103,7 +1101,9 @@ export function BootstrapTextarea(param) {
             </div>
         `,
         style: /*css*/ `
-           
+           #id label {
+               font-weight: 500;
+           }
         `,
         parent,
         position,
@@ -2751,52 +2751,6 @@ export function DateField(param) {
 export function DevConsole(param) {
     const { parent, position } = param;
 
-    AddStyle({
-        name: 'console-box',
-        style: /*css*/ `
-            .console {
-                width: 100%;
-                height: 100%;
-                overflow: overlay;
-                background: #1E1E1E;
-            }
-
-            .console * {
-                color: #CCCCCC !important;
-            }
-
-            .console-title {
-                font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
-            }
-
-            .line-number {
-                display: inline-block;
-                font-weight: 600;
-                width: 30px;
-            }
-
-            .install-modal {
-                padding: 60px;
-            }
-
-            .install-alert {
-                left: 10px;
-                right: 10px;
-                bottom: 10px;
-                border-radius: 10px;
-                padding: 10px 15px;
-                border: none;
-                background: #1E1E1E;
-                color: white !important;
-                animation: fade-in-bottom 200ms ease-in-out forwards;
-            };
-
-            .install-alert * {
-                color: white !important;
-            };
-        `
-    });
-
     const component = Component({
         html: /*html*/ `
             <div>
@@ -2932,6 +2886,7 @@ export function DevConsole(param) {
                     const modal = Modal({
                         title: false,
                         disableBackdropClose: true,
+                        scrollable: true,
                         async addContent(modalBody) {
                             modalBody.classList.add('install-modal');
 
@@ -3252,6 +3207,7 @@ export function DevConsole(param) {
                     const modal = Modal({
                         title: false,
                         disableBackdropClose: true,
+                        scrollable: true,
                         async addContent(modalBody) {
                             modalBody.classList.add('install-modal');
 
@@ -3761,6 +3717,7 @@ export function DevConsole(param) {
                     const modal = Modal({
                         title: false,
                         disableBackdropClose: true,
+                        scrollable: true,
                         async addContent(modalBody) {
                             modalBody.classList.add('install-modal');
 
@@ -4451,6 +4408,7 @@ export function DevConsole(param) {
                     const modal = Modal({
                         title: false,
                         disableBackdropClose: true,
+                        scrollable: true,
                         async addContent(modalBody) {
                             modalBody.classList.add('install-modal');
 
@@ -6032,7 +5990,7 @@ export function Heading(param) {
  * @param {*} param 
  * @returns 
  */
- export function InstallConsole(param) {
+export function InstallConsole(param) {
     const {
         text,
         close,
@@ -6941,9 +6899,7 @@ export function MultiLineTextField(param) {
             }
 
             #id label {
-                font-size: .95em;
-                font-weight: bold;
-                padding: 3px 0px;
+                font-weight: 500;
             }
 
             #id .form-field-description {
@@ -7935,9 +7891,7 @@ export function NumberField(param) {
             }
 
             #id label {
-                font-size: .95em;
-                font-weight: bold;
-                padding: 3px 0px;
+                font-weight: 500;
             }
 
             #id input:active,
@@ -10204,12 +10158,16 @@ export function SingleLineTextField(param) {
             ${
                 readOnly ?
                 /*css*/ `
-                    label {
+                    #id label {
                         margin-bottom: 0px;
                         font-weight: 500;
                     }
                 ` : 
-                ''
+                /*css*/ `
+                    #id label {
+                        font-weight: 500;
+                    }
+                ` 
             }
 
             /* #id label,
@@ -11981,52 +11939,6 @@ export function UpgradeApp(param) {
         position
     } = param;
 
-    AddStyle({
-        name: 'console-box',
-        style: /*css*/ `
-            .console {
-                width: 100%;
-                height: 100%;
-                overflow: overlay;
-                background: #1E1E1E;
-            }
-
-            .console * {
-                color: #CCCCCC !important;
-            }
-
-            .console-title {
-                font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
-            }
-
-            .line-number {
-                display: inline-block;
-                font-weight: 600;
-                width: 30px;
-            }
-
-            .install-modal {
-                padding: 60px;
-            }
-
-            .install-alert {
-                left: 10px;
-                right: 10px;
-                bottom: 10px;
-                border-radius: 10px;
-                padding: 10px 15px;
-                border: none;
-                background: #1E1E1E;
-                color: white !important;
-                animation: fade-in-bottom 200ms ease-in-out forwards;
-            };
-
-            .install-alert * {
-                color: white !important;
-            };
-        `
-    });
-
     const component = Component({
         html: /*html*/ `
             <div>
@@ -12412,7 +12324,7 @@ export function UpgradeApp(param) {
                                     width: '100%',
                                     parent: modalBody,
                                     type: 'success',
-                                    value: `Install lists`
+                                    value: `Upgrade build`
                                 });
 
                                 installBtn.add();
@@ -12420,7 +12332,7 @@ export function UpgradeApp(param) {
 
                             const cancelBtn = BootstrapButton({
                                 action(event) {
-                                    console.log('Cancel install');
+                                    console.log('Cancel upgrade');
 
                                     modal.close();
                                 },

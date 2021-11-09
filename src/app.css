@@ -8,3 +8,64 @@
     background-color: royalblue;
     border-color: royalblue;
 }
+
+/* Add padding to all modals */
+.modal-content {
+    padding: 30px;
+}
+
+/* Install Console */
+.console {
+    width: 100%;
+    height: 100%;
+    overflow: overlay;
+    background: #1E1E1E;
+}
+
+.console * {
+    color: #CCCCCC !important;
+}
+
+.console-title {
+    font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
+}
+
+.line-number {
+    display: inline-block;
+    font-weight: 600;
+    width: 30px;
+}
+
+.install-modal {
+    padding: 30px;
+}
+
+.install-alert {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border-radius: 10px;
+    padding: 10px 15px;
+    border: none;
+    background: #1E1E1E;
+    color: white !important;
+    animation: fade-in-bottom 200ms ease-in-out forwards;
+};
+
+.install-alert * {
+    color: white !important;
+};
+
+@keyframes fade-alert {
+    0% {
+        bottom: -10px;
+        transform: scale(.5);
+        opacity: 0;
+    }
+
+    100% {
+        bottom: 10px;
+        transform: scale(1);
+        opacity: 1;
+    }
+}

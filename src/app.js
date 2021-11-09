@@ -14,14 +14,14 @@ Start({
     ],
     settings: {
         dev: { // required: set local dev user props
-            user: {
+            user: { // required: placeholder account props for local dev
                 Title: "First Last",
                 Email: "first.mi.last.ctr@mail.mil",
                 LoginName: "0987654321@mil",
                 Role: "Developer"
             },
             errorLogging: 'on',
-            // testLoading: true, // optional: (true || false), default: false
+            testInstall: false, // optional: (true || false)
         },
         title: 'App', // required: enter app name
         defaultRoute: 'Home', // required: set default #route rendered if none present
@@ -62,7 +62,7 @@ Start({
                 type: 'mlot'
             }
         ],
-        userSettings: JSON.stringify({}), // requried: set user JSON
+        userSettings: JSON.stringify({}), // requried: set user account 'Settings' field JSON value
         userDefaultRole: 'User', // required: set default role for newly created use accounts
         questionTypes: [ // required: define at least one questionType with title and path props
             {

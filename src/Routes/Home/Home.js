@@ -28,242 +28,12 @@ export default async function Home() {
         parent
     });
 
-    const createLib = BootstrapButton({
-        value: 'Copy',
+    const createSiteBtn = BootstrapButton({
+        value: 'Create site',
         classes: ['mt-3'],
         type: 'primary',
         parent,
         async action(event) {
-            const fileCount = await GetItemCount({
-                list: 'App'
-            });
-
-            console.log(fileCount);
-
-            return;
-
-            // Get new request digest
-            const requestDigest = await GetRequestDigest();
-
-            // Check if site exists
-            const siteResponse = await fetch(`${App.get('site')}/_api/web/lists/getbytitle('App')/items`, {
-                headers: {
-                    "Content-Type": "application/json;odata=verbose",
-                    "Accept": "application/json;odata=verbose",
-                    "X-RequestDigest": requestDigest,
-                }
-            });
-            const data = await siteResponse.json();
-            
-            console.log(data);
-
-            copyDir({
-                path: 'App',
-                library: 'App',
-                filter: `Name ne 'Forms'`
-            });
-
-            // const response = await CreateLibrary({
-            //     name: 'App',
-            //     web: 'mds-9'
-            // });
-
-            // const folder = await CreateFolder({
-            //     web: 'mds-9',
-            //     library: 'App',
-            //     name: 'src'
-            // })
-
-            // console.log(folder);
-        }
-    });
-
-    createLib.add();
-
-    // async function copyDir(param) {
-    //     const { path, filter } = param;
-
-    //     // 1. Look for files at top level of source site
-    //     const url = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files`;
-        
-    //     console.log(url);
-
-    //     const requestDigest = await GetRequestDigest();
-    //     const options = {
-    //         method: 'GET',
-    //         headers: {
-    //             "Accept": "application/json;odata=verbose",
-    //             "Content-type": "application/json; odata=verbose",
-    //             "X-RequestDigest": requestDigest,
-    //         }
-    //     };
-    //     const query = await fetch(url, options);
-    //     const response = await query.json();
-
-    //     if (response.d.results.length) {
-    //         console.log(`Top level files in '${path}'`)
-            
-    //         for (let item in response.d.results) {
-    //             const file = response.d.results[item];
-    //             const { Name } = file;
-
-    //             await createFile({
-    //                 source: App.get('site'),
-    //                 target: `${App.get('site')}/mds-9`,
-    //                 path,
-    //                 file: Name
-    //             });
-
-    //             console.log(`File '${Name}' copied.`);
-    //         }
-    //     } else {
-    //         console.log(`No files in '${path}'`);
-    //     }
-
-    //     // 2. Look for directories
-    //     const dirs = await findDirs({ path, filter });
-
-    //     for (let item in dirs) {
-    //         const file = dirs[item];
-    //         const { Name } = file;
-            
-    //         console.log(`- ${Name}`);
-    //         // 3 Create dirs
-    //         await CreateFolder({
-    //             web: 'mds-9', // target
-    //             path: `${path}/${Name}`
-    //         });
-
-    //         console.log(`Folder '${Name}' copied.`);
-
-    //         // Recurse into dir
-    //         await copyDir({
-    //             path: `${path}/${Name}`
-    //         });
-    //     }
-
-    //     return true;
-    // }
-
-    // async function findDirs(param) {
-    //     const { path, filter } = param;
-        
-    //     // 2. Look for directories
-    //     const url = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/folders${filter ? `?$select=Name&$filter=${filter}` : ''}`;
-    //     const requestDigest = await GetRequestDigest();
-    //     const options = {
-    //         method: 'GET',
-    //         headers: {
-    //             "Accept": "application/json;odata=verbose",
-    //             "Content-type": "application/json; odata=verbose",
-    //             "X-RequestDigest": requestDigest,
-    //         }
-    //     };
-    //     const query = await fetch(url, options);
-    //     const response = await query.json();
-
-    //     return response?.d?.results;
-    // }
-
-    // async function createFile(param) {
-    //     const { source, target, path, file } = param;
-
-    //     console.log(param);
-
-    //     const sourceSiteUrl = source + "/_api/web/GetFolderByServerRelativeUrl('" + path + "')/Files('" + file + "')/$value";
-    //     const targetSiteUrl = target + "/_api/web/GetFolderByServerRelativeUrl('" + path + "')/Files/Add(url='" + file + "',overwrite=true)";
-    //     const srcRequestDigest = await GetRequestDigest({ site: source });
-    //     const getFileValue = await fetch(sourceSiteUrl, {
-    //         method: 'GET',
-    //         headers: {
-    //             'binaryStringRequestBody': 'true',
-    //             'Accept': 'application/json;odata=verbose;charset=utf-8',
-    //             'X-RequestDigest': srcRequestDigest
-    //         }
-    //     });
-
-    //     const arrayBuffer = await getFileValue.arrayBuffer();
-
-    //     const newFile = await fetch(targetSiteUrl, {
-    //         method: 'POST',
-    //         body: arrayBuffer, 
-    //         headers: {
-    //             'binaryStringRequestBody': 'true',
-    //             'Accept': 'application/json;odata=verbose;charset=utf-8',
-    //             'X-RequestDigest': srcRequestDigest
-    //         }
-    //     });
-
-    //     return newFile;
-    // }
-
-    const createSiteBtn = BootstrapButton({
-        value: 'Create site',
-        classes: ['ml-3', 'mt-3'],
-        type: 'primary',
-        parent,
-        async action(event) {
-             // Test Create Site modal
-            AddStyle({
-                name: 'console-box',
-                style: /*css*/ `
-                    .console {
-                        height: 100%;
-                        width: 100%;
-                        overflow: overlay;
-                        background: #1E1E1E;
-                    }
-
-                    .console * {
-                        color: #CCCCCC !important;
-                    }
-
-                    .console-title {
-                        font-family: 'M PLUS Rounded 1c', sans-serif;
-                    }
-
-                    .line-number {
-                        display: inline-block;
-                        font-weight: 600;
-                        width: 30px;
-                    }
-
-                    .install-modal {
-                        padding: 60px;
-                    }
-
-                    .install-alert {
-                        left: 10px;
-                        right: 10px;
-                        bottom: 10px;
-                        border-radius: 10px;
-                        padding: 10px 15px;
-                        border: none;
-                        background: #1E1E1E;
-                        color: white !important;
-                        animation: fade-in-bottom 200ms ease-in-out forwards;
-                    };
-
-                    .install-alert * {
-                        color: white !important;
-                    };
-
-                    @keyframes fade-alert {
-                        0% {
-                            bottom: -10px;
-                            transform: scale(.5);
-                            opacity: 0;
-                        }
-                    
-                        100% {
-                            bottom: 10px;
-                            transform: scale(1);
-                            opacity: 1;
-                        }
-                    }
-                `
-            });
-
             const modal = Modal({
                 title: false,
                 disableBackdropClose: true,
@@ -352,8 +122,6 @@ export default async function Home() {
                             <h3 class='console-title mb-0'>Creating app <strong>${name}</strong></h3>
                         `);
 
-                        // TODO: Show loading indicator
-
                         // Get robi source code file count
                         const fileCount = await GetItemCount({
                             list: 'App'
@@ -362,33 +130,9 @@ export default async function Home() {
                         // const coreLists = Lists();
 
                         // TODO: Start at 2
-                        // 0 - Create site
-                        // 1 - Create App doc lib
+                        // 1 - Create site
+                        // 2 - Create App doc lib
                         let progressCount = 2 + parseInt(fileCount);
-
-                        // coreLists.forEach(item => {
-                        //     const { fields } = item;
-
-                        //     // List +1
-                        //     progressCount = progressCount + 1;
-
-                        //     fields.forEach(field => {
-                        //         // Field +2 (add column to list and view)
-                        //         progressCount = progressCount + 2;
-                        //     });
-                        // });
-
-                        // lists.forEach(item => {
-                        //     const { fields } = item;
-
-                        //     // List +1
-                        //     progressCount = progressCount + 1;
-
-                        //     fields.forEach(field => {
-                        //         // Field +2 (add column to list and view)
-                        //         progressCount = progressCount + 2;
-                        //     });
-                        // });
 
                         const progressBar = ProgressBar({
                             parent: modalBody,
@@ -528,20 +272,21 @@ export default async function Home() {
                         // TODO: init app automatically
                         // TODO: set home page after app copied
                         modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                            <div class='mt-4 mb-4'>New site <strong>${title}</strong> created at <a href='${App.get('site')}/${url}'>${App.get('site')}/${url}</a>. Select <span style='color: royalblue; font-weight: 500;'>Launch site</span> to install app.</div>
+                            <div class='mt-4'>New site <strong>${title}</strong> created at <a href='${App.get('site')}/${url}'>${App.get('site')}/${url}</a>.</div>
+                            <div class='mb-4'>
+                                <!-- Select <span style='padding: 2px 4px; border-raidus: 6px; background: royalblue; color: white;'>Install App</span> to create a new starter Robi app at the site above. You can <span style='padding: 2px 4px; border-raidus: 6px; border: solid 1px royalblue; color: royalblue;'>modify the source</span> before installing, or close and install later. -->
+                                Select <span style='color: royalblue: font-weight: 500'>Install App</span> to create a new starter Robi app at the site above. You can <span style='color: royalblue: font-weight: 500'>Modify Source</span> before installing, or <span  style='font-weight: 500'>Close</span> and install later.
+                            </div>
                         `);
 
                         // Show launch button
-                        const launchBtn = BootstrapButton({
+                        const installAppBtn = BootstrapButton({
                             type: 'primary',
-                            value: 'Launch site',
+                            value: 'Install app',
                             classes: ['mt-3', 'w-100'],
                             action(event) {
                                 // Bootstrap uses jQuery .trigger, won't work with .addEventListener
                                 $(modal.get()).on('hidden.bs.modal', event => {
-                                    console.log('Modal close animiation end');
-                                    console.log('Launch');
-
                                     window.open(`${App.get('site')}/${url}`);
                                 });
 
@@ -550,7 +295,39 @@ export default async function Home() {
                             parent: modalBody
                         });
 
-                        launchBtn.add();
+                        installAppBtn.add();
+
+                        const modifyBtn = BootstrapButton({
+                            action(event) {
+                                window.open(`${App.get('site')}/${url}/${App.get('library') || 'App'}/src`);
+                            },
+                            classes: ['w-100 mt-2'],
+                            width: '100%',
+                            parent: modalBody,
+                            type: 'outline-primary',
+                            value: 'Modify source'
+                        });
+
+                        modifyBtn.add();
+
+                        const cancelBtn = BootstrapButton({
+                            action(event) {
+                                console.log('Cancel install');
+
+                                $(modal.get()).on('hidden.bs.modal', event => {
+                                    console.log('modal close animiation end');
+                                });
+
+                                modal.close();
+                            },
+                            classes: ['w-100 mt-2'],
+                            width: '100%',
+                            parent: modalBody,
+                            type: 'light',
+                            value: 'Close'
+                        });
+
+                        cancelBtn.add();
 
                         // Scroll console to bottom (after launch button pushes it up);
                         installConsole.get().scrollTop = installConsole.get().scrollHeight;
@@ -559,18 +336,6 @@ export default async function Home() {
                     const cancelBtn = BootstrapButton({
                         action(event) {
                             console.log('Cancel create site');
-
-                            // Bootstrap uses jQuery .trigger, won't work with .addEventListener
-                            $(modal.get()).on('hidden.bs.modal', event => {
-                                console.log('modal close animiation end');
-
-                                // Show alert
-                                // appContainer.get().insertAdjacentHTML('afterend', /*html*/ `
-                                //     <div class='position-absolute install-alert mb-0'>
-                                //         Installation cancelled. You can safely close this page. Reload page to resume install.
-                                //     </div>
-                                // `);
-                            });
 
                             modal.close();
                         },
