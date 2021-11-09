@@ -543,8 +543,8 @@ export async function CopyItem(param) {
  * @param {*} param 
  * @returns 
  */
-async function CopyRecurse(param) {
-    const { path, filter } = param;
+export async function CopyRecurse(param) {
+    const { path, filter, targetWeb } = param;
 
     // 1. Look for files at top level of source site
     const url = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files`;
@@ -572,7 +572,7 @@ async function CopyRecurse(param) {
 
             await CreateFile({
                 source: App.get('site'),
-                target: `${App.get('site')}/mds-9`,
+                target: `${App.get('site')}/${targetWeb}`,
                 path,
                 file: Name
             });
@@ -593,7 +593,7 @@ async function CopyRecurse(param) {
         console.log(`- ${Name}`);
         // 3 Create dirs
         await CreateFolder({
-            web: 'mds-9', // target
+            web: targetWeb,
             path: `${path}/${Name}`
         });
 
@@ -601,7 +601,8 @@ async function CopyRecurse(param) {
 
         // Recurse into dir
         await CopyRecurse({
-            path: `${path}/${Name}`
+            path: `${path}/${Name}`,
+            targetWeb
         });
     }
 
@@ -780,6 +781,27 @@ export async function CreateFile(param) {
         }
     });
 
+    // Get install console and progress bar robi components
+    const installConsole = Store.get('install-console');
+    const progressBar = Store.get('install-progress-bar');
+
+    if (newFile) {
+        if (installConsole) {
+            installConsole.append(/*html*/ `
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code>Created file '${file}'</code>
+                </div>
+            `);
+
+            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+        }
+
+        if (progressBar) {
+            progressBar.update();
+        }
+    }
+
     return newFile;
 }
 
@@ -797,6 +819,8 @@ export async function CreateFolder(param) {
         web,
         path
     } = param;
+
+    // TODO: check if folder already exists
 
     // Get new request digest
     const requestDigest = await GetRequestDigest();
@@ -817,6 +841,35 @@ export async function CreateFolder(param) {
     }
 
     const copyItem = await Post(postOptions);
+
+    // Get install console and progress bar robi components
+    const installConsole = Store.get('install-console');
+    const progressBar = Store.get('install-progress-bar');
+
+    if (copyItem) {
+        if (installConsole) {
+            installConsole.append(/*html*/ `
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code style='opacity: 0;'>Spacer</code>
+                </div>
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code>Created folder '${path}'</code>
+                </div>
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code>----------------------------------------</code>
+                </div>
+            `);
+
+            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+        }
+
+        if (progressBar) {
+            progressBar.update();
+        }
+    }
 
     return copyItem;
 }
@@ -932,7 +985,7 @@ export async function CreateLibrary(param) {
         template: 101
     });
 
-    if (newLibrary) {
+    if (newLibrary) {        
         return newLibrary;
     }
 }
@@ -953,8 +1006,6 @@ export async function CreateList(param) {
 
     // Get new request digest
     const requestDigest = await GetRequestDigest({web});
-
-    console.log(web);
 
     // Check if list exists
     const listResponse = await fetch(`${App.get('site')}${web ? `/${web}` : ''}/_api/web/lists/GetByTitle('${list}')`, {
@@ -996,9 +1047,11 @@ export async function CreateList(param) {
             progressBar.update();
 
             // +2 for each field
-            for (let i = 0; i < fields.length; i++) {
-                progressBar.update();
-                progressBar.update();
+            if (fields.length) {
+                for (let i = 0; i < fields.length; i++) {
+                    progressBar.update();
+                    progressBar.update();
+                }
             }
         }
         return;
@@ -1035,10 +1088,10 @@ export async function CreateList(param) {
                     <!-- <code class='line-number'>0</code> -->
                     <code>Created ${listType} '${list}'</code>
                 </div>
-                <div class='console-line'>
-                    <!-- <code class='line-number'>0</code> -->
+                <!-- <div class='console-line'>
+                    <code class='line-number'>0</code>
                     <code>----------------------------------------</code>
-                </div>
+                </div> -->
             `);
 
             installConsole.get().scrollTop = installConsole.get().scrollHeight;
@@ -1076,51 +1129,54 @@ export async function CreateSite(param) {
     // Get new request digest
     const requestDigest = await GetRequestDigest();
 
-    // // Check if site exists
-    // const listResponse = await fetch(`${App.get('site')}/_api/web/webinfos`, {
-    //     headers: {
-    //         "Content-Type": "application/json;odata=verbose",
-    //         "Accept": "application/json;odata=verbose",
-    //     }
-    // });
-    
-    // const getList = await listResponse.json();
+    // Check if site exists
+    const siteResponse = await fetch(`${App.get('site')}/${url}`, {
+        headers: {
+            "Content-Type": "application/json;odata=verbose",
+            "Accept": "application/json;odata=verbose",
+        }
+    });
 
     // Get install console and progress bar robi components
     const installConsole = Store.get('install-console');
     const progressBar = Store.get('install-progress-bar');
 
-    // if (getList.d) {
-    //     console.log(`List ${list} already created.`);
+    if (installConsole) {
+        installConsole.append(/*html*/ `
+            <div class='console-line'>
+                <!-- <code class='line-number'>0</code> -->
+                <code>Creating site '${title}', please don't leave the page...</code>
+            </div>
+        `);
 
-    //     // Append to install-console
-    //     const installConsole = Store.get('install-console');
+        installConsole.get().scrollTop = installConsole.get().scrollHeight;
+    }
 
-    //     if (installConsole) {
-    //         installConsole.append(/*html*/ `
-    //             <div class='console-line'>
-    //                 <!-- <code class='line-number'>0</code> -->
-    //                 <code>List '${list}' already created</code>
-    //             </div>
-    //         `);
+    if (siteResponse.status !== 404) {
+        console.log(`Site '${title}' already created.`);
 
-    //         installConsole.get().scrollTop = installConsole.get().scrollHeight;
-    //     }
+        if (installConsole) {
+            installConsole.append(/*html*/ `
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code>Site '${title}' already created</code>
+                </div>
+            `);
 
-    //     const progressBar = Store.get('install-progress-bar');
+            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+        }
 
-    //     if (progressBar) {
-    //         // +1 for the list
-    //         progressBar.update();
+        const progressBar = Store.get('install-progress-bar');
 
-    //         // +2 for each field
-    //         for (let i = 0; i < fields.length; i++) {
-    //             progressBar.update();
-    //             progressBar.update();
-    //         }
-    //     }
-    //     return;
-    // }
+        if (progressBar) {
+            // +1 for the list
+            progressBar.update();
+
+            // +? litsts, plus all their fields?
+        }
+
+        return;
+    }
 
     const postOptions = {
         url: `${App.get('site')}/_api/web/webinfos/add`,
@@ -1159,17 +1215,9 @@ export async function CreateSite(param) {
                     <!-- <code class='line-number'>0</code> -->
                     <code>Created site '${title}'</code>
                 </div>
-                <div class='console-line'>
-                    <!-- <code class='line-number'>0</code> -->
-                    <code>----------------------------------------</code>
-                </div>
             `);
 
             installConsole.get().scrollTop = installConsole.get().scrollHeight;
-        }
-
-        if (progressBar) {
-            progressBar.update();
         }
 
         // Deactivate MDS
@@ -1180,11 +1228,10 @@ export async function CreateSite(param) {
             }
         });
         const newRD = getNewRD.d.GetContextWebInformation.FormDigestValue;
-        const deactivateMDS = await fetch(`${App.get('site')}/${url}/_api/web`, {
+        await fetch(`${App.get('site')}/${url}/_api/web`, {
             method: 'POST',
             body: JSON.stringify({ 
                 '__metadata': { 'type': 'SP.Web' },
-                Title: 'Changed',
                 'EnableMinimalDownload': false
             }),
             headers: {
@@ -1194,17 +1241,20 @@ export async function CreateSite(param) {
                 "X-RequestDigest": newRD
             }
         });
-        console.log(deactivateMDS);
-        console.log('Deactivate MDS:', deactivateMDS);
+        console.log('MDS deactivated');
 
-        // Create App doc lib
-        console.log('Create app doc lib');
+        installConsole.append(/*html*/ `
+            <div class='console-line'>
+                <!-- <code class='line-number'>0</code> -->
+                <code>Minimal Download Strategy (MDS) deactivated</code>
+            </div>
+        `);
 
-        // Copy Robi
-        console.log('Copy robi into App doc lib');
-
-        // Install robi
-        console.log('Install robi');
+        installConsole.get().scrollTop = installConsole.get().scrollHeight;
+        
+        if (progressBar) {
+            progressBar.update();
+        }
 
         return newSite;
     }
@@ -2603,12 +2653,10 @@ export async function SetHomePage(param = {}) {
     }
 
     const properties = {
-        'properties': {
-            '__metadata': {
-                'type': 'SP.Folder'
-            },
-            'WelcomePage': file || 'App/src/pages/app.aspx'
-        }
+        '__metadata': {
+            'type': 'SP.Folder'
+        },
+        'WelcomePage': file || 'App/src/pages/app.aspx'
     };
 
     const response = await fetch(`${site || App.get('site')}${web ? `/${web}` : ''}/_api/web/rootfolder`, {
@@ -2846,7 +2894,7 @@ export function Start(param) {
                                     modalBody.style.overflowY = 'unset';
                                     modalBody.style.display = 'flex';
                                     modalBody.style.flexDirection = 'column',
-                                        modalBody.style.transition = 'all 300ms ease-in-out';
+                                    modalBody.style.transition = 'all 300ms ease-in-out';
                                     modalBody.innerHTML = '';
                                     modalBody.style.height = '80vh';
                                     modalBody.style.width = '80vw';
@@ -3329,6 +3377,19 @@ export function Start(param) {
                                     installConsole.get().scrollTop = installConsole.get().scrollHeight;
                                 }
 
+                                const modifyBtn = BootstrapButton({
+                                    action(event) {
+                                        window.open(`${App.get('site')}/${library || 'App'}/src`);
+                                    },
+                                    classes: ['w-100 mt-2'],
+                                    width: '100%',
+                                    parent: modalBody,
+                                    type: 'primary-outline',
+                                    value: 'Modify source'
+                                });
+
+                                modifyBtn.add();
+
                                 const cancelBtn = BootstrapButton({
                                     action(event) {
                                         console.log('Cancel install');
@@ -3602,6 +3663,19 @@ export function Start(param) {
                                 });
 
                                 installBtn.add();
+
+                                const modifyBtn = BootstrapButton({
+                                    action(event) {
+                                        window.open(`${App.get('site')}/${library || 'App'}/src`);
+                                    },
+                                    classes: ['w-100 mt-2'],
+                                    width: '100%',
+                                    parent: modalBody,
+                                    type: 'primary-outline',
+                                    value: 'Modify source'
+                                });
+
+                                modifyBtn.add();
 
                                 const cancelBtn = BootstrapButton({
                                     action(event) {

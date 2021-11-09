@@ -1269,6 +1269,7 @@ export function Card(param) {
         padding,
         margin,
         minWidth,
+        minHeight,
         parent,
         width,
         position,
@@ -1290,6 +1291,7 @@ export function Card(param) {
                 padding: ${padding || '20px'};
                 margin: ${margin || '0px'};
                 min-width: ${minWidth || 'initial'};
+                min-height: ${minHeight || 'initial'};
                 width: ${width || 'initial'};
                 border-radius: 10px;
                 /* border: ${App.get('defaultBorder')}; */
@@ -1298,10 +1300,10 @@ export function Card(param) {
             }
 
             #id .round-card-title {
-                font-size: 1em;
+                font-size: 20px;
                 margin: ${padding === '0px' ? `0px` : '-20px -20px 0px -20px'}; /** FIXME: will break with passed in padding  */
                 padding: 10px 20px; /** FIXME: will break with passed in padding  */
-                font-weight: ${titleWeight || '700'};
+                font-weight: ${titleWeight || '400'};
                 background: ${titleBackground || 'white'}; /** FIXME: Experimental */ /* alternate color: #d0d0d04d */
                 border-radius: 10px 10px 0px 0px;
                 color: ${titleColor || App.get('defaultColor')};
@@ -9790,7 +9792,7 @@ export function Sidebar(param) {
                 color: ${App.get('sidebarTextColor')};
                 font-size: 15px;
                 font-weight: 500;
-                padding: 10px 15px 9px 15px;
+                padding: 9px 15px 9px 15px;
             }
 
             .sidebar .nav:not(:last-child):not(.settings) .text {
@@ -9828,7 +9830,7 @@ export function Sidebar(param) {
                 cursor: pointer;
                 margin: 15px 0px;
                 transition: all 150ms;
-                max-height: 31px;
+                height: 31px;
                 object-fit: scale-down;
             }
 
@@ -10197,6 +10199,17 @@ export function SingleLineTextField(param) {
                 ${padding ? `padding: ${padding};` : ''}
                 ${borderRadius ? `border-radius: ${borderRadius};` : ''}
                 ${background ? `background: ${background};` : ''}
+            }
+
+            ${
+                readOnly ?
+                /*css*/ `
+                    label {
+                        margin-bottom: 0px;
+                        font-weight: 500;
+                    }
+                ` : 
+                ''
             }
 
             /* #id label,
@@ -11956,6 +11969,481 @@ export function Toolbar(param) {
 
         ]
     });
+}
+
+/**
+ * 
+ * @param {*} param 
+ */
+export function UpgradeApp(param) {
+    const {
+        parent,
+        position
+    } = param;
+
+    AddStyle({
+        name: 'console-box',
+        style: /*css*/ `
+            .console {
+                width: 100%;
+                height: 100%;
+                overflow: overlay;
+                background: #1E1E1E;
+            }
+
+            .console * {
+                color: #CCCCCC !important;
+            }
+
+            .console-title {
+                font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
+            }
+
+            .line-number {
+                display: inline-block;
+                font-weight: 600;
+                width: 30px;
+            }
+
+            .install-modal {
+                padding: 60px;
+            }
+
+            .install-alert {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                border-radius: 10px;
+                padding: 10px 15px;
+                border: none;
+                background: #1E1E1E;
+                color: white !important;
+                animation: fade-in-bottom 200ms ease-in-out forwards;
+            };
+
+            .install-alert * {
+                color: white !important;
+            };
+        `
+    });
+
+    const component = Component({
+        html: /*html*/ `
+            <div>
+                <div class='dev-console'>
+                    <div class='dev-console-row'>
+                        <div class='dev-console-text'>
+                            <div class='dev-console-label'>Upgrade Robi Build</div>
+                            <div class='dev-console-description'>Install latest Robi build from <code>path/to/source</code>.</div>
+                        </div>
+                        <div class='d-flex align-items-center ml-5'>
+                            <button class='btn btn-success dev-console-button upgrade'>Upgrade ${App.get('title')}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+        style: /*css*/ `
+            #id {
+                padding: 0px;
+            }
+            
+            #id .alert {
+                border: none;
+                border-radius: 20px;
+            }
+
+            #id .dev-console-title {
+                font-size: 1.5em;
+                font-weight: 700;
+                color: #24292f;
+                margin-bottom: 10px;
+            }
+
+            #id .dev-console {
+                width: 100%;
+                /* padding: 40px; */
+                /* border: solid 2px ${App.get('primaryColor')}; */
+                border-radius: 20px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #id .dev-console-row {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                padding: 20px 30px;
+                border-radius: 20px;
+                background: ${App.get('sidebarBackgroundColor')};
+            }
+
+            #id .dev-console-text {
+                max-width: 700px;
+            }
+
+            #id .dev-console-label {
+                font-weight: 600;
+            }
+
+            #id .dev-console-row:not(:last-child) {
+                margin-bottom: 20px;
+            }
+
+            #id .dev-console-button {
+                font-weight: 600;
+                font-size: 14px;
+                height: fit-content;
+                border-radius: 10px;
+                width: 230px;
+                border: none;
+            }
+
+            #id .btn-danger {
+                background: firebrick;
+            }
+
+            #id .btn-success {
+                background: seagreen;
+            }
+
+            #id .btn-secondary {
+                background: white;
+                color: firebrick;
+            }
+
+            #id .dev-console-button:focus,
+            #id .dev-console-button:active {
+                box-shadow: none;
+            }
+        `,
+        parent: parent,
+        position,
+        events: [
+            {
+                selector: '#id .upgrade',
+                event: 'click',
+                async listener(event) {
+                    console.log('Upgrade app');
+
+                    const modal = Modal({
+                        title: false,
+                        disableBackdropClose: true,
+                        async addContent(modalBody) {
+                            modalBody.classList.add('install-modal');
+
+                            // Show loading
+                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center'>
+                                    <div class="mb-2" style='font-weight: 600; color: darkgray'>Loading lists</div>
+                                    <div class="spinner-grow" style='color: darkgray' role="status"></div>
+                                </div>
+                            `);
+
+                            // Check lists
+                            const coreLists = Lists();
+                            const appLists = lists;
+                            const allLists = coreLists.concat(appLists);
+                            const webLists = await GetWebLists();
+                            const diff = allLists.map(item => item.list).filter(x => !webLists.map(item => item.Title).includes(x));
+                            console.log(webLists, allLists, diff);
+        
+                            console.log(event.target.innerText);
+
+                            const toCreate = diff.map(list => allLists.find(item => item.list === list));
+                            
+                            // Remove loading
+                            modal.find('.loading-spinner').remove();
+
+                            if (!toCreate.length) {
+                                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                    <h4 class='mb-3'>No new lists to install</h4>
+                                `);
+                            } else {
+                                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                    <h4 class='mb-1'>New lists to install</h4>
+                                    ${
+                                        toCreate
+                                        .sort((a, b) => a.list - b.list)
+                                        .map(item => {
+                                            return /*html*/ `
+                                                <div class="form-check ml-2">
+                                                    <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.list.split(' ').join('-')}" data-list='${item.list}' checked>
+                                                    <label class="form-check-label" for="checkbox-${item.list.split(' ').join('-')}">
+                                                        ${item.list}
+                                                    </label>
+                                                </div>
+                                            `
+                                        }).join('\n')
+                                    }
+                                `);
+
+                                const installBtn = BootstrapButton({
+                                    async action(event) {
+                                        console.log('Install');
+
+                                        // Get checked lists
+                                        const checkedLists = [...modal.findAll('.form-check-input:checked')].map(node => allLists.find(item => item.list === node.dataset.list));
+
+                                        console.log(checkedLists);
+
+                                        if (!checkedLists.length) {
+                                            alert('Select at least one list to reset.');
+                                            return;
+                                        }
+
+                                        modal.find('.modal-content').style.width = 'unset';
+
+                                        modalBody.style.height = `${modalBody.offsetHeight}px`;
+                                        modalBody.style.width = `${modalBody.offsetWidth}px`;
+                                        modalBody.style.overflowY = 'unset';
+                                        modalBody.style.display = 'flex';
+                                        modalBody.style.flexDirection = 'column',
+                                        modalBody.style.transition = 'all 300ms ease-in-out';
+                                        modalBody.innerHTML = '';
+                                        modalBody.style.height = '80vh';
+                                        modalBody.style.width = '80vw';
+
+                                        modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                            <h3 class='console-title mb-0'>Reseting <strong>lists</strong></h3>
+                                        `);
+
+                                        let progressCount = 0;
+
+                                        checkedLists.forEach(item => {
+                                            const { fields } = item;
+
+                                            // List + 1 for install
+                                            progressCount = progressCount + 1;
+
+                                            fields.forEach(field => {
+                                                // Field +2 (add column to list and view)
+                                                progressCount = progressCount + 2;
+                                            });
+                                        });
+
+                                        const progressBar = ProgressBar({
+                                            parent: modalBody,
+                                            totalCount: progressCount
+                                        });
+
+                                        Store.add({
+                                            name: 'install-progress-bar',
+                                            component: progressBar
+                                        });
+
+                                        progressBar.add();
+
+                                        const deleteContainer = Container({
+                                            padding: '10px',
+                                            parent: modalBody,
+                                            overflow: 'hidden',
+                                            width: '100%',
+                                            height: '100%',
+                                            radius: '10px',
+                                            background: '#1E1E1E'
+                                        });
+
+                                        deleteContainer.add();
+
+                                        const reinstallConsole = InstallConsole({
+                                            type: 'secondary',
+                                            text: '',
+                                            margin: '0px',
+                                            parent: deleteContainer
+                                        });
+
+                                        Store.add({
+                                            name: 'install-console',
+                                            component: reinstallConsole
+                                        });
+
+                                        reinstallConsole.add();
+                                        reinstallConsole.get().classList.add('console');
+
+                                        // Install ----------------------------------------------------------------------------------------
+
+                                        // 1. CORE: Add core lists to install-console
+                                        reinstallConsole.append(/*html*/ `
+                                                <div class='console-line'>
+                                                <!-- <code class='line-number'>0</code> -->
+                                                <code>Create lists:</code>
+                                            </div>
+                                        `);
+
+                                        // Scroll console to bottom
+                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                                        checkedLists.forEach(item => {
+                                            const { list } = item;
+
+                                            reinstallConsole.append(/*html*/ `
+                                                <div class='console-line'>
+                                                    <!-- <code class='line-number'>0</code> -->
+                                                    <code>- ${list}</code>
+                                                </div>
+                                            `);
+
+                                            // Scroll console to bottom
+                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                                        });
+
+                                        // Add spacer to console
+                                        reinstallConsole.append(/*html*/ `
+                                            <div class='console-line'>
+                                                <!-- <code class='line-number'>0</code> -->
+                                                <code style='opacity: 0;'>Spacer</code>
+                                            </div>
+                                        `);
+
+                                        // Scroll console to bottom
+                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                                        // Add default lists first
+                                        for (let list in checkedLists) {
+                                            // Create lists
+                                            await CreateList(checkedLists[list]);
+
+                                            // Add spacer to console
+                                            reinstallConsole.append(/*html*/ `
+                                                <div class='console-line'>
+                                                    <!-- <code class='line-number'>0</code> -->
+                                                    <code style='opacity: 0;'>Spacer</code>
+                                                </div>
+                                            `);
+
+                                            // Scroll console to bottom
+                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                                        }
+
+                                    if (lists.length) {
+                                            // Add Release Notes
+                                            await CreateItem({
+                                                list: 'ReleaseNotes',
+                                                data: {
+                                                    Summary: `New ${App.get('title')} lists created`,
+                                                    Description: checkedLists.map(item => item.list).join(', ') + '.',
+                                                    Status: 'Published',
+                                                    MajorVersion: '0',
+                                                    MinorVersion: '1',
+                                                    PatchVersion: '0',
+                                                    ReleaseType: 'Current'
+                                                }
+                                            });
+
+                                            console.log(`Added Release Note: ${App.get('title')} lists created - ${checkedLists.map(item => item.list).join(', ')}.`);
+
+                                            // Add to console
+                                            reinstallConsole.append(/*html*/ `
+                                                <div class='console-line'>
+                                                    <!-- <code class='line-number'>0</code> -->
+                                                    <code>'New ${App.get('title')} lists created - ${checkedLists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
+                                                </div>
+                                            `);
+
+                                            // Scroll console to bottom
+                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                                        }
+
+                                        // Add spacer to console
+                                        reinstallConsole.append(/*html*/ `
+                                            <div class='console-line'>
+                                                <!-- <code class='line-number'>0</code> -->
+                                                <code style='opacity: 0;'>Spacer</code>
+                                            </div>
+                                        `);
+
+                                        // Scroll console to bottom
+                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                                        let spacers = '===================';
+
+                                        // for (let i = 0; i < App.get('title').length; i++) {
+                                        //     spacers = spacers + '=';
+                                        // }
+                                        
+                                        // 3. Add to console
+                                        reinstallConsole.append(/*html*/ `
+                                            <div class='console-line'>
+                                                <!-- <code class='line-number'>0</code> -->
+                                                <code style='color: mediumseagreen !important;'>${spacers}</code>
+                                            </div>
+                                            <div class='console-line'>
+                                                <!-- <code class='line-number'>0</code> -->
+                                                <code style='color: mediumseagreen !important;'>| Lists installed |</code>
+                                            </div>
+                                            <div class='console-line'>
+                                                <!-- <code class='line-number'>0</code> -->
+                                                <code style='color: mediumseagreen !important;'>${spacers}</code>
+                                            </div>
+                                        `);
+
+                                        // END RESET ------------------------------------------------------------------------------------
+
+                                        modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                            <div class='mt-4 mb-4'>All new lists have been successfully installed. You can safely close this modal.</div>
+                                        `);
+
+                                        // Show return button
+                                        const returnBtn = BootstrapButton({
+                                            type: 'primary',
+                                            value: 'Close',
+                                            classes: ['w-100'],
+                                            action(event) {
+                                                // Bootstrap uses jQuery .trigger, won't work with .addEventListener
+                                                $(modal.get()).on('hidden.bs.modal', event => {
+                                                    console.log('Modal close animiation end');
+                                                    console.log('Reload');
+
+                                                    Route(location.href.split('#')[1] || '');
+                                                });
+
+                                                modal.close();
+                                            },
+                                            parent: modalBody
+                                        });
+
+                                        returnBtn.add();
+
+                                        // Scroll console to bottom (after launch button pushes it up);
+                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                                    },
+                                    classes: ['w-100', 'mt-4'],
+                                    width: '100%',
+                                    parent: modalBody,
+                                    type: 'success',
+                                    value: `Install lists`
+                                });
+
+                                installBtn.add();
+                            }
+
+                            const cancelBtn = BootstrapButton({
+                                action(event) {
+                                    console.log('Cancel install');
+
+                                    modal.close();
+                                },
+                                classes: ['w-100 mt-2'],
+                                width: '100%',
+                                parent: modalBody,
+                                type: 'light',
+                                value: 'Cancel'
+                            });
+
+                            cancelBtn.add();
+                        },
+                        centered: true,
+                        showFooter: false,
+                    });
+
+                    modal.add();
+                }
+            }
+        ]
+    });
+
+    return component;
 }
 
 /**

@@ -1,4 +1,10 @@
-/* Override bootstrap primary button color */
+/* Override bootstrap primary button style */
 .btn-primary {
     background-color: royalblue;
+    border-color: royalblue;
+}
+
+.btn-primary:hover {
+    background-color: royalblue;
+    border-color: royalblue;
 }

@@ -12,7 +12,8 @@ import {
     UploadButton,
     QuestionsToolbar,
     DevConsole,
-    QuestionType
+    QuestionType,
+    UpgradeApp
 } from '../Core/Components.js'
 import { App } from '../Core/Settings.js'
 import Store from '../Core/Store.js'
@@ -22,6 +23,7 @@ import {
     Table,
     NewUser,
     AccountInfo,
+    BuildInfo,
     DeveloperLinks,
     ReleaseNotes,
     SiteUsage,
@@ -240,6 +242,16 @@ export async function Settings() {
         SiteUsage({
             parent
         });
+
+        BuildInfo({
+            parent
+        });
+
+        const upgrade = UpgradeApp({
+            parent
+        });
+
+        upgrade.add();
     }
 }
 
