@@ -1,4 +1,4 @@
-import { AddStyle, AttachFiles, Component, CreateItem, CreateList, DeleteAttachments, DeleteItem, DeleteList, Get, GetAppSetting, GetADUsers, GetSiteUsers, GetWebLists, Route } from './Actions.js'
+import { AddStyle, AttachFiles, Component, CreateItem, CreateList, DeleteAttachments, DeleteItem, DeleteList, Get, GetAppSetting, GetADUsers, GetSiteUsers, GetWebLists, Route, UpdateApp, ResetApp, ReinstallApp, DeleteApp } from './Actions.js'
 import { App } from '../Core/Settings.js'
 import { Lists } from './Models.js';
 import Store from './Store.js'
@@ -2754,26 +2754,20 @@ export function DevConsole(param) {
     const component = Component({
         html: /*html*/ `
             <div>
-                <!-- <div class='dev-console-title'>Developer Tools</div> -->
-                <!-- <div class='alert alert-warning'>
-                    <p><strong>These actions affect all users. Some changes can't be reversed.</strong></p>
-                    <hr>
-                    <p class="mb-0"><strong>Please proceed with caution.</strong></p>
-                </div> -->
                 <div class='dev-console'>
                     <div class='dev-console-row'>
                         <div class='dev-console-text'>
-                            <div class='dev-console-label'>Update ${App.get('title')}</div>
-                            <div class='dev-console-description'>Install new lists from <code>App/src/lists.js</code>.</div>
+                            <div class='dev-console-label'>Update ${App.get('name')}</div>
+                            <div class='dev-console-description'>Sync ${App.get('name')} with list schema defined in <code>App/src/lists.js</code>. You can choose which new lists and columns will be created and which existing lists and columns will be deleted. </div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
-                            <button class='btn btn-success dev-console-button update'>Update ${App.get('title')}</button>
+                            <button class='btn btn-primary dev-console-button update'>Update ${App.get('name')}</button>
                         </div>
                     </div>
                     <div class='dev-console-row'>
                         <div class='dev-console-text'>
                             <div class='dev-console-label'>Reset lists</div>
-                            <div class='dev-console-description'>Remove all items from selected core lists from <code>App/src/Core/Models.js > Lists()</code> and <strong>${App.get('title')}</strong> lists in <code>App/src/lists.js</code>. All items from selected lists will be deleted. This can't be undone.</div>
+                            <div class='dev-console-description'>Delete and recreate selected lists. All items from selected lists will be deleted. This can't be undone.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
                             <button class='btn btn-secondary dev-console-button reset'>Choose lists to reset</button>
@@ -2781,17 +2775,17 @@ export function DevConsole(param) {
                     </div>
                     <div class='dev-console-row'>
                         <div class='dev-console-text'>
-                            <div class='dev-console-label'>Reinstall ${App.get('title')}</div>
-                            <div class='dev-console-description'>Delete and recreate all core lists from <code>App/src/Core/Models.js > Lists()</code> and <strong>${App.get('title')}</strong> lists in <code>App/src/lists.js</code>. All items will be deleted. This can't be undone.</div>
+                            <div class='dev-console-label'>Reinstall ${App.get('name')}</div>
+                            <div class='dev-console-description'>Delete and recreate all lists. Resets all settings. All items will be deleted. This can't be undone.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
-                            <button class='btn btn-secondary dev-console-button reinstall'>Remove data and reinstall ${App.get('title')}</button>
+                            <button class='btn btn-secondary dev-console-button reinstall'>Remove data and reinstall ${App.get('name')}</button>
                         </div>
                     </div>
                     <div class='dev-console-row'>
                         <div class='dev-console-text'>
-                            <div class='dev-console-label'>Delete ${App.get('title')}</div>
-                            <div class='dev-console-description'>Delete all core and <strong>${App.get('title')}</strong> lists. All items will be deleted. This can't be undone. You will need to install the app again later.</div>
+                            <div class='dev-console-label'>Delete ${App.get('name')}</div>
+                            <div class='dev-console-description'>Delete all lists and remove all settings. All items will be deleted. This can't be undone. You will need to install the app again later.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
                             <button class='btn btn-danger dev-console-button delete'>Delete all lists and data</button>
@@ -2819,8 +2813,6 @@ export function DevConsole(param) {
 
             #id .dev-console {
                 width: 100%;
-                /* padding: 40px; */
-                /* border: solid 2px ${App.get('primaryColor')}; */
                 border-radius: 20px;
                 display: flex;
                 flex-direction: column;
@@ -2850,10 +2842,11 @@ export function DevConsole(param) {
             #id .dev-console-button {
                 font-weight: 600;
                 font-size: 14px;
+                padding: 10px;
                 height: fit-content;
                 border-radius: 10px;
-                width: 230px;
-                border: none;
+                width: 300px;
+                border-color: transparent;
             }
 
             #id .btn-danger {
@@ -2867,6 +2860,7 @@ export function DevConsole(param) {
             #id .btn-secondary {
                 background: white;
                 color: firebrick;
+                border-color: firebrick;
             }
 
             #id .dev-console-button:focus,
@@ -2881,1830 +2875,36 @@ export function DevConsole(param) {
                 selector: '#id .update',
                 event: 'click',
                 async listener(event) {
-                    console.log('Update app');
+                    console.log('Button:', event.target.innerText);
 
-                    const modal = Modal({
-                        title: false,
-                        disableBackdropClose: true,
-                        scrollable: true,
-                        async addContent(modalBody) {
-                            modalBody.classList.add('install-modal');
-
-                            // Show loading
-                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center'>
-                                    <div class="mb-2" style='font-weight: 600; color: darkgray'>Loading lists</div>
-                                    <div class="spinner-grow" style='color: darkgray' role="status"></div>
-                                </div>
-                            `);
-
-                            // Check lists
-                            const coreLists = Lists();
-                            const appLists = lists;
-                            const allLists = coreLists.concat(appLists);
-                            const webLists = await GetWebLists();
-                            const diff = allLists.map(item => item.list).filter(x => !webLists.map(item => item.Title).includes(x));
-                            console.log(webLists, allLists, diff);
-        
-                            console.log(event.target.innerText);
-
-                            const toCreate = diff.map(list => allLists.find(item => item.list === list));
-                            
-                            // Remove loading
-                            modal.find('.loading-spinner').remove();
-
-                            if (!toCreate.length) {
-                                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                    <h4 class='mb-3'>No new lists to install</h4>
-                                `);
-                            } else {
-                                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                    <h4 class='mb-1'>New lists to install</h4>
-                                    ${
-                                        toCreate
-                                        .sort((a, b) => a.list - b.list)
-                                        .map(item => {
-                                            return /*html*/ `
-                                                <div class="form-check ml-2">
-                                                    <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.list.split(' ').join('-')}" data-list='${item.list}' checked>
-                                                    <label class="form-check-label" for="checkbox-${item.list.split(' ').join('-')}">
-                                                        ${item.list}
-                                                    </label>
-                                                </div>
-                                            `
-                                        }).join('\n')
-                                    }
-                                `);
-
-                                const installBtn = BootstrapButton({
-                                    async action(event) {
-                                        console.log('Install');
-
-                                        // Get checked lists
-                                        const checkedLists = [...modal.findAll('.form-check-input:checked')].map(node => allLists.find(item => item.list === node.dataset.list));
-
-                                        console.log(checkedLists);
-
-                                        if (!checkedLists.length) {
-                                            alert('Select at least one list to reset.');
-                                            return;
-                                        }
-
-                                        modal.find('.modal-content').style.width = 'unset';
-
-                                        modalBody.style.height = `${modalBody.offsetHeight}px`;
-                                        modalBody.style.width = `${modalBody.offsetWidth}px`;
-                                        modalBody.style.overflowY = 'unset';
-                                        modalBody.style.display = 'flex';
-                                        modalBody.style.flexDirection = 'column',
-                                        modalBody.style.transition = 'all 300ms ease-in-out';
-                                        modalBody.innerHTML = '';
-                                        modalBody.style.height = '80vh';
-                                        modalBody.style.width = '80vw';
-
-                                        modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                            <h3 class='console-title mb-0'>Reseting <strong>lists</strong></h3>
-                                        `);
-
-                                        let progressCount = 0;
-
-                                        checkedLists.forEach(item => {
-                                            const { fields } = item;
-
-                                            // List + 1 for install
-                                            progressCount = progressCount + 1;
-
-                                            fields.forEach(field => {
-                                                // Field +2 (add column to list and view)
-                                                progressCount = progressCount + 2;
-                                            });
-                                        });
-
-                                        const progressBar = ProgressBar({
-                                            parent: modalBody,
-                                            totalCount: progressCount
-                                        });
-
-                                        Store.add({
-                                            name: 'install-progress-bar',
-                                            component: progressBar
-                                        });
-
-                                        progressBar.add();
-
-                                        const deleteContainer = Container({
-                                            padding: '10px',
-                                            parent: modalBody,
-                                            overflow: 'hidden',
-                                            width: '100%',
-                                            height: '100%',
-                                            radius: '10px',
-                                            background: '#1E1E1E'
-                                        });
-
-                                        deleteContainer.add();
-
-                                        const reinstallConsole = InstallConsole({
-                                            type: 'secondary',
-                                            text: '',
-                                            margin: '0px',
-                                            parent: deleteContainer
-                                        });
-
-                                        Store.add({
-                                            name: 'install-console',
-                                            component: reinstallConsole
-                                        });
-
-                                        reinstallConsole.add();
-                                        reinstallConsole.get().classList.add('console');
-
-                                        // Install ----------------------------------------------------------------------------------------
-
-                                        // 1. CORE: Add core lists to install-console
-                                        reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>Create lists:</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                        checkedLists.forEach(item => {
-                                            const { list } = item;
-
-                                            reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <!-- <code class='line-number'>0</code> -->
-                                                    <code>- ${list}</code>
-                                                </div>
-                                            `);
-
-                                            // Scroll console to bottom
-                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                        });
-
-                                        // Add spacer to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='opacity: 0;'>Spacer</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                        // Add default lists first
-                                        for (let list in checkedLists) {
-                                            // Create lists
-                                            await CreateList(checkedLists[list]);
-
-                                            // Add spacer to console
-                                            reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <!-- <code class='line-number'>0</code> -->
-                                                    <code style='opacity: 0;'>Spacer</code>
-                                                </div>
-                                            `);
-
-                                            // Scroll console to bottom
-                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                        }
-
-                                    if (lists.length) {
-                                            // Add Release Notes
-                                            await CreateItem({
-                                                list: 'ReleaseNotes',
-                                                data: {
-                                                    Summary: `New ${App.get('title')} lists created`,
-                                                    Description: checkedLists.map(item => item.list).join(', ') + '.',
-                                                    Status: 'Published',
-                                                    MajorVersion: '0',
-                                                    MinorVersion: '1',
-                                                    PatchVersion: '0',
-                                                    ReleaseType: 'Current'
-                                                }
-                                            });
-
-                                            console.log(`Added Release Note: ${App.get('title')} lists created - ${checkedLists.map(item => item.list).join(', ')}.`);
-
-                                            // Add to console
-                                            reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <!-- <code class='line-number'>0</code> -->
-                                                    <code>'New ${App.get('title')} lists created - ${checkedLists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
-                                                </div>
-                                            `);
-
-                                            // Scroll console to bottom
-                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                        }
-
-                                        // Add spacer to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='opacity: 0;'>Spacer</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                        let spacers = '===================';
-
-                                        // for (let i = 0; i < App.get('title').length; i++) {
-                                        //     spacers = spacers + '=';
-                                        // }
-                                        
-                                        // 3. Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='color: mediumseagreen !important;'>${spacers}</code>
-                                            </div>
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='color: mediumseagreen !important;'>| Lists installed |</code>
-                                            </div>
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='color: mediumseagreen !important;'>${spacers}</code>
-                                            </div>
-                                        `);
-
-                                        // END RESET ------------------------------------------------------------------------------------
-
-                                        modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                            <div class='mt-4 mb-4'>All new lists have been successfully installed. You can safely close this modal.</div>
-                                        `);
-
-                                        // Show return button
-                                        const returnBtn = BootstrapButton({
-                                            type: 'primary',
-                                            value: 'Close',
-                                            classes: ['w-100'],
-                                            action(event) {
-                                                // Bootstrap uses jQuery .trigger, won't work with .addEventListener
-                                                $(modal.get()).on('hidden.bs.modal', event => {
-                                                    console.log('Modal close animiation end');
-                                                    console.log('Reload');
-
-                                                    Route(location.href.split('#')[1] || '');
-                                                });
-
-                                                modal.close();
-                                            },
-                                            parent: modalBody
-                                        });
-
-                                        returnBtn.add();
-
-                                        // Scroll console to bottom (after launch button pushes it up);
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    },
-                                    classes: ['w-100', 'mt-4'],
-                                    width: '100%',
-                                    parent: modalBody,
-                                    type: 'success',
-                                    value: `Install lists`
-                                });
-
-                                installBtn.add();
-                            }
-
-                            const cancelBtn = BootstrapButton({
-                                action(event) {
-                                    console.log('Cancel install');
-
-                                    modal.close();
-                                },
-                                classes: ['w-100 mt-2'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'light',
-                                value: 'Cancel'
-                            });
-
-                            cancelBtn.add();
-                        },
-                        centered: true,
-                        showFooter: false,
-                    });
-
-                    modal.add();
+                    UpdateApp();
                 }
             },
             {
                 selector: '#id .reset',
                 event: 'click',
                 listener(event) {
-                    console.log(event.target.innerText);
+                    console.log('Button:', event.target.innerText);
 
-                    const modal = Modal({
-                        title: false,
-                        disableBackdropClose: true,
-                        scrollable: true,
-                        async addContent(modalBody) {
-                            modalBody.classList.add('install-modal');
-
-                            // Core lists
-                            const coreLists = Lists();
-                            console.log(coreLists);
-
-                            // App lists
-                            const appLists = lists;
-                            console.log(coreLists);
-
-                            // All Lists
-                            const allLists = Lists().concat(appLists);
-                            console.log(allLists);
-
-                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                <div class='mt-3 mb-1'>Select <strong>${App.get('title')}</strong> lists to reset <span style='border-radius: 10px; background: ghostwhite; color: firebrick; font-weight: 500; padding: 5px 10px;'>all items will be deleted</span></div>
-                                ${
-                                    appLists
-                                    .sort((a, b) => a.list - b.list)
-                                    .map(item => {
-                                        return /*html*/ `
-                                            <div class="form-check ml-2">
-                                                <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.list.split(' ').join('-')}" data-list='${item.list}'>
-                                                <label class="form-check-label" for="checkbox-${item.list.split(' ').join('-')}">
-                                                    ${item.list}
-                                                </label>
-                                            </div>
-                                        `
-                                    }).join('\n')
-                                }
-                                <div class='mt-4 mb-1'>Select <strong>Core</strong> lists to reset</div>
-                                ${
-                                    coreLists
-                                    .filter(item => item.list !== 'Settings')
-                                    .sort((a, b) => a.list - b.list)
-                                    .map(item => {
-                                        return /*html*/ `
-                                            <div class="form-check ml-2">
-                                            <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.list.split(' ').join('-')}" data-list='${item.list}'>
-                                                <label class="form-check-label" for="checkbox-${item.list.split(' ').join('-')}">
-                                                    ${item.list}
-                                                </label>
-                                            </div>
-                                        `
-                                    }).join('\n')
-                                }
-                                <div class='alert alert-danger mt-5' style='border: none; border-radius: 10px;'>
-                                    This can't be undone. Proceed with caution.
-                                </div>
-                            `);
-
-                            const deleteBtn = BootstrapButton({
-                                async action(event) {
-                                    console.log('Reinstall');
-
-                                    // Get checked lists
-                                    const checkedLists = [...modal.findAll('.form-check-input:checked')].map(node => allLists.find(item => item.list === node.dataset.list));
-
-                                    console.log(checkedLists);
-
-                                    if (!checkedLists.length) {
-                                        alert('Select at least one list to reset.');
-                                        return;
-                                    }
-
-                                    modal.find('.modal-content').style.width = 'unset';
-
-                                    modalBody.style.height = `${modalBody.offsetHeight}px`;
-                                    modalBody.style.width = `${modalBody.offsetWidth}px`;
-                                    modalBody.style.overflowY = 'unset';
-                                    modalBody.style.display = 'flex';
-                                    modalBody.style.flexDirection = 'column',
-                                    modalBody.style.transition = 'all 300ms ease-in-out';
-                                    modalBody.innerHTML = '';
-                                    modalBody.style.height = '80vh';
-                                    modalBody.style.width = '80vw';
-
-                                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                        <h3 class='console-title mb-0'>Reseting <strong>lists</strong></h3>
-                                    `);
-
-                                    let progressCount = 0;
-
-                                    checkedLists.forEach(item => {
-                                        const { fields } = item;
-
-                                        // List + 1 for delete
-                                        // List + 1 for reinstall
-                                        progressCount = progressCount + 2;
-
-                                        fields.forEach(field => {
-                                            // Field +2 (add column to list and view)
-                                            progressCount = progressCount + 2;
-                                        });
-                                    });
-
-                                    const progressBar = ProgressBar({
-                                        parent: modalBody,
-                                        totalCount: progressCount
-                                    });
-
-                                    Store.add({
-                                        name: 'install-progress-bar',
-                                        component: progressBar
-                                    });
-
-                                    progressBar.add();
-
-                                    const deleteContainer = Container({
-                                        padding: '10px',
-                                        parent: modalBody,
-                                        overflow: 'hidden',
-                                        width: '100%',
-                                        height: '100%',
-                                        radius: '10px',
-                                        background: '#1E1E1E'
-                                    });
-
-                                    deleteContainer.add();
-
-                                    const reinstallConsole = InstallConsole({
-                                        type: 'secondary',
-                                        text: '',
-                                        margin: '0px',
-                                        parent: deleteContainer
-                                    });
-
-                                    Store.add({
-                                        name: 'install-console',
-                                        component: reinstallConsole
-                                    });
-
-                                    reinstallConsole.add();
-                                    reinstallConsole.get().classList.add('console');
-
-                                    // 1. CORE: Add core lists to install-console
-                                    reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code>Delete lists:</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    checkedLists.forEach(item => {
-                                        const { list } = item;
-
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>- ${list}</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    });
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    // Add default lists first
-                                    for (let list in checkedLists) {
-                                        // Create lists
-                                        await DeleteList(checkedLists[list]);
-                                    }
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    // RESET ----------------------------------------------------------------------------------------
-
-                                    // 1. CORE: Add core lists to install-console
-                                    reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code>Create lists:</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    checkedLists.forEach(item => {
-                                        const { list } = item;
-
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>- ${list}</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    });
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    // Add default lists first
-                                    for (let list in checkedLists) {
-                                        // Create lists
-                                        await CreateList(checkedLists[list]);
-
-                                        // Add spacer to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='opacity: 0;'>Spacer</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    }
-
-                                    // Add Release Notes
-                                    const releaseNoteExists = await Get({
-                                        list: 'ReleaseNotes',
-                                        filter: `Summary eq 'App installed'`
-                                    });
-
-                                    if (releaseNoteExists[0]) {
-                                        // Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>'App installed' release note already exists.'</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    } else {
-                                        await CreateItem({
-                                            list: 'ReleaseNotes',
-                                            data: {
-                                                Summary: 'App installed',
-                                                Description: 'Initial lists and items created.',
-                                                Status: 'Published',
-                                                MajorVersion: '0',
-                                                MinorVersion: '1',
-                                                PatchVersion: '0',
-                                                ReleaseType: 'Current'
-                                            }
-                                        });
-    
-                                        console.log(`Added Release Note: App installed. Initial lists and items created.`);
-    
-                                        // Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>'App installed - Core lists and items created.' added to 'releaseNotes'</code>
-                                            </div>
-                                        `);
-    
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    }
-
-                                   if (lists.length) {
-                                        // Add Release Notes
-                                        const releaseNoteExists = await Get({
-                                            list: 'ReleaseNotes',
-                                            filter: `Summary eq '${App.get('title')} lists created'`
-                                        });
-
-                                        if (releaseNoteExists[0]) {
-                                            // Add to console
-                                            reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <!-- <code class='line-number'>0</code> -->
-                                                    <code>'${App.get('title')} lists created' release note already exists.'</code>
-                                                </div>
-                                            `);
-
-                                            // Scroll console to bottom
-                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                        } else {
-                                            // Add Release Notes
-                                            await CreateItem({
-                                                list: 'ReleaseNotes',
-                                                data: {
-                                                    Summary: `${App.get('title')} lists created`,
-                                                    Description: lists.map(item => item.list).join(', ') + '.',
-                                                    Status: 'Published',
-                                                    MajorVersion: '0',
-                                                    MinorVersion: '1',
-                                                    PatchVersion: '0',
-                                                    ReleaseType: 'Current'
-                                                }
-                                            });
-
-                                            console.log(`Added Release Note: ${App.get('title')} lists created - ${lists.map(item => item.list).join(', ')}.`);
-
-                                            // Add to console
-                                            reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <!-- <code class='line-number'>0</code> -->
-                                                    <code>'${App.get('title')} lists created - ${lists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
-                                                </div>
-                                            `);
-
-                                            // Scroll console to bottom
-                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                        }
-                                    }
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    // Create developer account
-                                    const url = `${App.get('site')}/../_api/web/CurrentUser`;
-                                    const fetchOptions = {
-                                        headers: {
-                                            'Content-Type': 'application/json; charset=UTF-8',
-                                            'Accept': 'application/json; odata=verbose'
-                                        }
-                                    };
-                                    const currentUser = await fetch(url, fetchOptions);
-                                    const response = await currentUser.json();
-                                    
-                                    const appUser = await Get({
-                                        list: App.get('usersList') || 'Users',
-                                        select: coreLists.find(item => item.list === App.get('usersList') || item.list === 'Users').fields.map(field => field.name),
-                                        filter: `Email eq '${response.d.Email}'`
-                                    });
-                            
-                                    // User already exists
-                                    if (appUser && appUser[0]) {
-                                        console.log(`User account for '${response.d.Title}' already exists.`);
-
-                                        // Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>User account for '${response.d.Title}' already exists.</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    } else {
-                                        /** Create user */
-                                        await CreateItem({
-                                            list: 'Users',
-                                            data: {
-                                                Title: response.d.Title,
-                                                Email: response.d.Email,
-                                                LoginName: response.d.LoginName.split('|')[2],
-                                                Role: 'Developer',
-                                                Settings: App.get('userSettings')
-                                            }
-                                        });
-
-                                        console.log(`Created user account for '${response.d.Title}' with role 'Developer'`);
-
-                                        // Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>User account for '${response.d.Title}' created with role 'Developer'</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    }
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    let spacers = '===============';
-
-                                    // for (let i = 0; i < App.get('title').length; i++) {
-                                    //     spacers = spacers + '=';
-                                    // }
-                                    
-                                    // 3. Add to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='color: mediumseagreen !important;'>${spacers}</code>
-                                        </div>
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='color: mediumseagreen !important;'>| Lists reset |</code>
-                                        </div>
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='color: mediumseagreen !important;'>${spacers}</code>
-                                        </div>
-                                    `);
-
-                                    // END RESET ------------------------------------------------------------------------------------
-
-                                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                        <div class='mt-4 mb-4'>All selected lists have been successfully reset. You can safely close this modal.</div>
-                                    `);
-
-                                    // Show return button
-                                    const returnBtn = BootstrapButton({
-                                        type: 'primary',
-                                        value: 'Close',
-                                        classes: ['w-100'],
-                                        action(event) {
-                                            // Bootstrap uses jQuery .trigger, won't work with .addEventListener
-                                            $(modal.get()).on('hidden.bs.modal', event => {
-                                                console.log('Modal close animiation end');
-                                                console.log('Reload');
-
-                                                Route(location.href.split('#')[1] || '');
-                                            });
-
-                                            modal.close();
-                                        },
-                                        parent: modalBody
-                                    });
-
-                                    returnBtn.add();
-
-                                    // Scroll console to bottom (after launch button pushes it up);
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                },
-                                classes: ['w-100'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'danger',
-                                value: `Reset lists`
-                            });
-
-                            deleteBtn.add();
-
-                            const cancelBtn = BootstrapButton({
-                                action(event) {
-                                    console.log('Cancel delete');
-
-                                    modal.close();
-                                },
-                                classes: ['w-100 mt-2'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'light',
-                                value: 'Cancel'
-                            });
-
-                            cancelBtn.add();
-                        },
-                        centered: true,
-                        showFooter: false,
-                    });
-
-                    modal.add();
+                    ResetApp();
                 }
             },
             {
                 selector: '#id .reinstall',
                 event: 'click',
                 listener(event) {
-                    console.log(event.target.innerText);
+                    console.log('Button:', event.target.innerText);
 
-                    const modal = Modal({
-                        title: false,
-                        disableBackdropClose: true,
-                        scrollable: true,
-                        async addContent(modalBody) {
-                            modalBody.classList.add('install-modal');
-
-                            // Core lists
-                            const coreLists = Lists();
-                            console.log(coreLists);
-
-                            // App lists
-                            const appLists = lists;
-                            console.log(coreLists);
-
-                            // All Lists
-                            const allLists = Lists().concat(lists);
-                            console.log(allLists);
-
-                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                <div class='mt-3'>All <strong>${App.get('title')}</strong> lists will be reinstalled <span style='border-radius: 10px; background: ghostwhite; color: firebrick; font-weight: 500; padding: 5px 10px;'>all items will be deleted</span></div>
-                                <ul>
-                                    ${
-                                        appLists
-                                        .sort((a, b) => a.list - b.list)
-                                        .map(item => {
-                                            return /*html*/ `
-                                                <li>${item.list}</li>
-                                            `
-                                        }).join('\n')
-                                    }
-                                </ul>
-                                <div>All <strong>Core</strong> lists will be reinstalled <span style='border-radius: 10px; background: ghostwhite; color: firebrick; font-weight: 500; padding: 5px 10px;'>all user generated items will be deleted</span></div>
-                                <ul>
-                                    ${
-                                        coreLists
-                                        .sort((a, b) => a.list - b.list)
-                                        .map(item => {
-                                            return /*html*/ `
-                                                <li>${item.list}</li>
-                                            `
-                                        }).join('\n')
-                                    }
-                                </ul>
-                                <div class='alert alert-danger mt-5' style='border: none; border-radius: 10px;'>
-                                    This can't be undone. Proceed with caution.
-                                </div>
-                            `);
-
-                            const deleteBtn = BootstrapButton({
-                                async action(event) {
-                                    console.log('Reinstall');
-
-                                    modal.find('.modal-content').style.width = 'unset';
-
-                                    modalBody.style.height = `${modalBody.offsetHeight}px`;
-                                    modalBody.style.width = `${modalBody.offsetWidth}px`;
-                                    modalBody.style.overflowY = 'unset';
-                                    modalBody.style.display = 'flex';
-                                    modalBody.style.flexDirection = 'column',
-                                    modalBody.style.transition = 'all 300ms ease-in-out';
-                                    modalBody.innerHTML = '';
-                                    modalBody.style.height = '80vh';
-                                    modalBody.style.width = '80vw';
-
-                                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                        <h3 class='console-title mb-0'>Reinstalling <strong>${App.get('title')}</strong></h3>
-                                    `);
-
-                                    let progressCount = 0;
-
-                                    coreLists.forEach(item => {
-                                        const { fields } = item;
-
-                                        // List + 1 for delete
-                                        // List + 1 for reinstall
-                                        progressCount = progressCount + 2;
-
-                                        fields.forEach(field => {
-                                            // Field +2 (add column to list and view)
-                                            progressCount = progressCount + 2;
-                                        });
-                                    });
-
-                                    lists.forEach(item => {
-                                        const { fields } = item;
-
-                                        // List + 1 for delete
-                                        // List + 1 for reinstall
-                                        progressCount = progressCount + 2;
-
-                                        fields.forEach(field => {
-                                            // Field +2 (add column to list and view)
-                                            progressCount = progressCount + 2;
-                                        });
-                                    });
-
-                                    const progressBar = ProgressBar({
-                                        parent: modalBody,
-                                        totalCount: progressCount
-                                    });
-
-                                    Store.add({
-                                        name: 'install-progress-bar',
-                                        component: progressBar
-                                    });
-
-                                    progressBar.add();
-
-                                    const deleteContainer = Container({
-                                        padding: '10px',
-                                        parent: modalBody,
-                                        overflow: 'hidden',
-                                        width: '100%',
-                                        height: '100%',
-                                        radius: '10px',
-                                        background: '#1E1E1E'
-                                    });
-
-                                    deleteContainer.add();
-
-                                    const reinstallConsole = InstallConsole({
-                                        type: 'secondary',
-                                        text: '',
-                                        margin: '0px',
-                                        parent: deleteContainer
-                                    });
-
-                                    Store.add({
-                                        name: 'install-console',
-                                        component: reinstallConsole
-                                    });
-
-                                    reinstallConsole.add();
-                                    reinstallConsole.get().classList.add('console');
-
-                                    // 1. CORE: Add core lists to install-console
-                                    reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code>Delete core lists:</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    coreLists.forEach(item => {
-                                        const { list } = item;
-
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>- ${list}</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    });
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    // Add default lists first
-                                    for (let list in coreLists) {
-                                        // Create lists
-                                        await DeleteList(coreLists[list]);
-                                    }
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    // 2. USER DEFINED: Add user defined lists to install-console
-                                    reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code>Delete '${App.get('title')}' lists:</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    lists.forEach(item => {
-                                        const { list } = item;
-
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>- ${list}</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    });
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    // Add default lists first
-                                    for (let list in lists) {
-                                        // Create lists
-                                        await DeleteList(lists[list]);
-
-                                        // Add spacer to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='opacity: 0;'>Spacer</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    }
-
-                                    // REINSTALL ----------------------------------------------------------------------------------------
-
-                                    // 1. CORE: Add core lists to install-console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code>Create core lists:</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    coreLists.forEach(item => {
-                                        const { list } = item;
-
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>- ${list}</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    });
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    // Add default lists first
-                                    for (let list in coreLists) {
-                                        // Create lists
-                                        await CreateList(coreLists[list]);
-
-                                        // Add spacer to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='opacity: 0;'>Spacer</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    }
-
-                                    // 2. USER DEFINED: Add user defined lists to install-console
-                                    reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code>Create '${App.get('title')}' lists:</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    lists.forEach(item => {
-                                        const { list } = item;
-
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>- ${list}</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    });
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    // Add default lists first
-                                    for (let list in lists) {
-                                        // Create lists
-                                        await CreateList(lists[list]);
-
-                                        // Add spacer to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='opacity: 0;'>Spacer</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    }
-
-                                    const questionTypesKeyExists = await Get({
-                                        list: 'Settings',
-                                        filter: `Key eq 'QuestionTypes'`
-                                    });
-
-                                    if (questionTypesKeyExists[0]) {
-                                        console.log(`Key 'Question Types' in Settings already exists.`);
-
-                                        // 1. Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>Key 'Question Types' in Settings already exists.</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    } else {
-                                        const questionTypes = App.get('questionTypes');
-                                        // Add question types
-                                        await CreateItem({
-                                            list: 'Settings',
-                                            data: {
-                                                Key: 'QuestionTypes',
-                                                Value: JSON.stringify(questionTypes)
-                                            }
-                                        });
-
-                                        console.log(`Added Question Types: ${JSON.stringify(questionTypes)}`);
-
-                                        // 1. Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>Question Types ${JSON.stringify(questionTypes)} added to 'Settings'</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    }
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    // Add Release Notes
-                                    const releaseNoteExists = await Get({
-                                        list: 'ReleaseNotes',
-                                        filter: `Summary eq 'App installed'`
-                                    });
-
-                                    if (releaseNoteExists[0]) {
-                                        // Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>'App installed' release note already exists.'</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    } else {
-                                        await CreateItem({
-                                            list: 'ReleaseNotes',
-                                            data: {
-                                                Summary: 'App installed',
-                                                Description: 'Initial lists and items created.',
-                                                Status: 'Published',
-                                                MajorVersion: '0',
-                                                MinorVersion: '1',
-                                                PatchVersion: '0',
-                                                ReleaseType: 'Current'
-                                            }
-                                        });
-    
-                                        console.log(`Added Release Note: App installed. Initial lists and items created.`);
-    
-                                        // Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>'App installed - Core lists and items created.' added to 'releaseNotes'</code>
-                                            </div>
-                                        `);
-    
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    }
-
-                                   if (lists.length) {
-                                        // Add Release Notes
-                                        const releaseNoteExists = await Get({
-                                            list: 'ReleaseNotes',
-                                            filter: `Summary eq '${App.get('title')} lists created'`
-                                        });
-
-                                        if (releaseNoteExists[0]) {
-                                            // Add to console
-                                            reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <!-- <code class='line-number'>0</code> -->
-                                                    <code>'${App.get('title')} lists created' release note already exists.'</code>
-                                                </div>
-                                            `);
-
-                                            // Scroll console to bottom
-                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                        } else {
-                                            // Add Release Notes
-                                            await CreateItem({
-                                                list: 'ReleaseNotes',
-                                                data: {
-                                                    Summary: `${App.get('title')} lists created`,
-                                                    Description: lists.map(item => item.list).join(', ') + '.',
-                                                    Status: 'Published',
-                                                    MajorVersion: '0',
-                                                    MinorVersion: '1',
-                                                    PatchVersion: '0',
-                                                    ReleaseType: 'Current'
-                                                }
-                                            });
-
-                                            console.log(`Added Release Note: ${App.get('title')} lists created - ${lists.map(item => item.list).join(', ')}.`);
-
-                                            // Add to console
-                                            reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <!-- <code class='line-number'>0</code> -->
-                                                    <code>'${App.get('title')} lists created - ${lists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
-                                                </div>
-                                            `);
-
-                                            // Scroll console to bottom
-                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                        }
-                                    }
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    // Create developer account
-                                    const url = `${App.get('site')}/../_api/web/CurrentUser`;
-                                    const fetchOptions = {
-                                        headers: {
-                                            'Content-Type': 'application/json; charset=UTF-8',
-                                            'Accept': 'application/json; odata=verbose'
-                                        }
-                                    };
-                                    const currentUser = await fetch(url, fetchOptions);
-                                    const response = await currentUser.json();
-                                    
-                                    const appUser = await Get({
-                                        list: App.get('usersList') || 'Users',
-                                        select: coreLists.find(item => item.list === App.get('usersList') || item.list === 'Users').fields.map(field => field.name),
-                                        filter: `Email eq '${response.d.Email}'`
-                                    });
-                            
-                                    // User already exists
-                                    if (appUser && appUser[0]) {
-                                        console.log(`User account for '${response.d.Title}' already exists.`);
-
-                                        // Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>User account for '${response.d.Title}' already exists.</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    } else {
-                                        /** Create user */
-                                        await CreateItem({
-                                            list: 'Users',
-                                            data: {
-                                                Title: response.d.Title,
-                                                Email: response.d.Email,
-                                                LoginName: response.d.LoginName.split('|')[2],
-                                                Role: 'Developer',
-                                                Settings: App.get('userSettings')
-                                            }
-                                        });
-
-                                        console.log(`Created user account for '${response.d.Title}' with role 'Developer'`);
-
-                                        // Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>User account for '${response.d.Title}' created with role 'Developer'</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    }
-
-                                    // Check if app is already installed
-                                    const isInstalled = await GetAppSetting('Installed');
-                        
-                                    if (!isInstalled) {
-                                        // Create key 'Installed'
-                                        await CreateItem({
-                                            list: 'Settings',
-                                            data: {
-                                                Key: 'Installed',
-                                                Value: 'Yes'
-                                            }
-                                        });
-                                    } else if (isInstalled.Value === 'No') {
-                                        // Update key 'Installed'
-                                        await UpdateItem({
-                                            list: 'Settings',
-                                            itemId: isInstalled.Id,
-                                            data: {
-                                                Value: 'Yes'
-                                            }
-                                        });
-                                    }
-
-                                    console.log('App installed');
-
-                                    // Add spacer to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                    let spacers = '==================';
-
-                                    for (let i = 0; i < App.get('title').length; i++) {
-                                        spacers = spacers + '=';
-                                    }
-                                    
-                                    // 3. Add to console
-                                    reinstallConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='color: mediumseagreen !important;'>${spacers}</code>
-                                        </div>
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='color: mediumseagreen !important;'>| '${App.get('title')}' reinstalled |</code>
-                                        </div>
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='color: mediumseagreen !important;'>${spacers}</code>
-                                        </div>
-                                    `);
-
-                                    // END REINSTALL ------------------------------------------------------------------------------------
-
-                                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                        <div class='mt-4 mb-2'>All lists have been successfully reinstall.</div>
-                                    `);
-
-                                    // Show return button
-                                    const returnBtn = BootstrapButton({
-                                        type: 'primary',
-                                        value: 'Reload',
-                                        classes: ['w-100'],
-                                        action(event) {
-                                            // Bootstrap uses jQuery .trigger, won't work with .addEventListener
-                                            $(modal.get()).on('hidden.bs.modal', event => {
-                                                console.log('Modal close animiation end');
-                                                console.log('Reload');
-
-                                                location.reload();
-                                            });
-
-                                            modal.close();
-                                        },
-                                        parent: modalBody
-                                    });
-
-                                    returnBtn.add();
-
-                                    // Scroll console to bottom (after launch button pushes it up);
-                                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                },
-                                classes: ['w-100'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'danger',
-                                value: `Reinstall ${App.get('title')}`
-                            });
-
-                            deleteBtn.add();
-
-                            const cancelBtn = BootstrapButton({
-                                action(event) {
-                                    console.log('Cancel delete');
-
-                                    modal.close();
-                                },
-                                classes: ['w-100 mt-2'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'light',
-                                value: 'Cancel'
-                            });
-
-                            cancelBtn.add();
-                        },
-                        centered: true,
-                        showFooter: false,
-                    });
-
-                    modal.add();
+                    ReinstallApp();
                 }
             },
             {
                 selector: '#id .delete',
                 event: 'click',
                 async listener(event) {
-                    console.log(event.target.innerText);
+                    console.log('Button:', event.target.innerText);
 
-                    const modal = Modal({
-                        title: false,
-                        disableBackdropClose: true,
-                        scrollable: true,
-                        async addContent(modalBody) {
-                            modalBody.classList.add('install-modal');
-
-                            // Core lists
-                            const coreLists = Lists();
-                            console.log(coreLists);
-
-                            // App lists
-                            const appLists = lists;
-                            console.log(coreLists);
-
-                            // All Lists
-                            const allLists = Lists().concat(lists);
-                            console.log(allLists);
-
-                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                <div class='mt-3'><strong>${App.get('title')}</strong> lists that will be deleted</div>
-                                <ul>
-                                    ${
-                                        appLists
-                                        .sort((a, b) => a.list - b.list)
-                                        .map(item => {
-                                            return /*html*/ `
-                                                <li>${item.list}</li>
-                                            `
-                                        }).join('\n')
-                                    }
-                                </ul>
-                                <div><strong>Core</strong> lists that will be deleted</div>
-                                <ul>
-                                    ${
-                                        coreLists
-                                        .sort((a, b) => a.list - b.list)
-                                        .map(item => {
-                                            return /*html*/ `
-                                                <li>${item.list}</li>
-                                            `
-                                        }).join('\n')
-                                    }
-                                </ul>
-                            `);
-
-                            const deleteBtn = BootstrapButton({
-                                async action(event) {
-                                    console.log('Delete');
-
-                                    modal.find('.modal-content').style.width = 'unset';
-
-                                    modalBody.style.height = `${modalBody.offsetHeight}px`;
-                                    modalBody.style.width = `${modalBody.offsetWidth}px`;
-                                    modalBody.style.overflowY = 'unset';
-                                    modalBody.style.display = 'flex';
-                                    modalBody.style.flexDirection = 'column',
-                                        modalBody.style.transition = 'all 300ms ease-in-out';
-                                    modalBody.innerHTML = '';
-                                    modalBody.style.height = '80vh';
-                                    modalBody.style.width = '80vw';
-
-                                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                        <h3 class='console-title mb-0'>Deleting <strong>${App.get('title')}</strong></h3>
-                                    `);
-
-                                    let progressCount = allLists.length;
-
-                                    const progressBar = ProgressBar({
-                                        parent: modalBody,
-                                        totalCount: progressCount
-                                    });
-
-                                    Store.add({
-                                        name: 'install-progress-bar',
-                                        component: progressBar
-                                    });
-
-                                    progressBar.add();
-
-                                    const deleteContainer = Container({
-                                        padding: '10px',
-                                        parent: modalBody,
-                                        overflow: 'hidden',
-                                        width: '100%',
-                                        height: '100%',
-                                        radius: '10px',
-                                        background: '#1E1E1E'
-                                    });
-
-                                    deleteContainer.add();
-
-                                    const deleteConsole = InstallConsole({
-                                        type: 'secondary',
-                                        text: '',
-                                        margin: '0px',
-                                        parent: deleteContainer
-                                    });
-
-                                    Store.add({
-                                        name: 'install-console',
-                                        component: deleteConsole
-                                    });
-
-                                    deleteConsole.add();
-                                    deleteConsole.get().classList.add('console');
-
-                                    // 1. CORE: Add core lists to install-console
-                                    deleteConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code>Delete core lists:</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
-
-                                    coreLists.forEach(item => {
-                                        const { list } = item;
-
-                                        deleteConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>- ${list}</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
-                                    });
-
-                                    // Add spacer to console
-                                    deleteConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
-
-                                    // Add default lists first
-                                    for (let list in coreLists) {
-                                        // Create lists
-                                        await DeleteList(coreLists[list]);
-                                    }
-
-                                    // Add spacer to console
-                                    deleteConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
-
-                                    // 2. USER DEFINED: Add user defined lists to install-console
-                                    deleteConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code>Delete '${App.get('title')}' lists:</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
-
-                                    lists.forEach(item => {
-                                        const { list } = item;
-
-                                        deleteConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>- ${list}</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
-                                    });
-
-                                    // Add spacer to console
-                                    deleteConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='opacity: 0;'>Spacer</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
-
-                                    // Add default lists first
-                                    for (let list in lists) {
-                                        // Create lists
-                                        await DeleteList(lists[list]);
-
-                                        // Add spacer to console
-                                        deleteConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='opacity: 0;'>Spacer</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
-                                    }
-
-                                    console.log('App deleted');
-
-
-                                    let spacers = '==============';
-
-                                    for (let i = 0; i < App.get('title').length; i++) {
-                                        spacers = spacers + '=';
-                                    }
-                                    
-                                    // 3. Add to console
-                                    deleteConsole.append(/*html*/ `
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='color: crimson !important;'>${spacers}</code>
-                                        </div>
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='color: crimson !important;'>| '${App.get('title')}' deleted |</code>
-                                        </div>
-                                        <div class='console-line'>
-                                            <!-- <code class='line-number'>0</code> -->
-                                            <code style='color: crimson !important;'>${spacers}</code>
-                                        </div>
-                                    `);
-
-                                    // Scroll console to bottom
-                                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
-
-                                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                        <div class='mt-4 mb-2'>All lists and data for <strong>${App.get('title')}</strong> have been successfully deleted.</div>
-                                        <div class='mb-4'>You can install it again at <strong>Site Contents > App > src > pages > app.aspx</strong></div>
-                                    `);
-
-                                    // Show return button
-                                    const returnBtn = BootstrapButton({
-                                        type: 'primary',
-                                        value: 'Site Contents',
-                                        classes: ['w-100'],
-                                        action(event) {
-                                            // Bootstrap uses jQuery .trigger, won't work with .addEventListener
-                                            $(modal.get()).on('hidden.bs.modal', event => {
-                                                console.log('Modal close animiation end');
-                                                console.log('Launch');
-
-                                                // Go to SharePoint site home page
-                                                location = `${App.get('site')}/_layouts/15/viewlsts.aspx`;
-                                            });
-
-                                            modal.close();
-                                        },
-                                        parent: modalBody
-                                    });
-
-                                    returnBtn.add();
-
-                                    // Scroll console to bottom (after launch button pushes it up);
-                                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
-                                },
-                                classes: ['w-100 mt-5'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'danger',
-                                value: 'Delete all lists and data'
-                            });
-
-                            deleteBtn.add();
-
-                            const cancelBtn = BootstrapButton({
-                                action(event) {
-                                    console.log('Cancel delete');
-
-                                    modal.close();
-                                },
-                                classes: ['w-100 mt-2'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'light',
-                                value: 'Cancel'
-                            });
-
-                            cancelBtn.add();
-                        },
-                        centered: true,
-                        showFooter: false,
-                    });
-
-                    modal.add();
+                    DeleteApp();
                 }
             }
         ]
@@ -6394,6 +4594,48 @@ export function LoadingBar(param) {
  * @param {*} param 
  * @returns 
  */
+export function LoadingSpinner(param) {
+    const {
+        font,
+        message,
+        classes,
+        parent,
+        position
+    } = param;
+
+    const component = Component({
+        html: /*html*/ `
+            <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center ${classes.join(' ')}'>
+                <div class="mb-2" style='font-weight: 600; color: darkgray'>${message || 'Loading'}</div>
+                <div class="spinner-grow" style='color: darkgray' role="status"></div>
+            </div>
+        `,
+        style:  /*css*/ `
+           ${
+               font ?
+               /*css */ `
+                    #id * {
+                        font-family: ${font}
+                    }
+               ` :
+               ''
+           }
+        `,
+        parent,
+        position,
+        events: [
+
+        ]
+    });
+
+    return component;
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
  export function ProgressBar(param) {
     const {
         parent,
@@ -6537,6 +4779,7 @@ export function Modal(param) {
         fullSize,
         showFooter,
         scrollable,
+        contentPadding,
         parent,
         disableBackdropClose,
         position
@@ -6617,6 +4860,7 @@ export function Modal(param) {
                 border-radius: 10px;
                 border: none;
                 background: ${background || ''};
+                padding: ${contentPadding || '0px'};
             }
 
             /** Modal Body */
@@ -11933,7 +10177,7 @@ export function Toolbar(param) {
  * 
  * @param {*} param 
  */
-export function UpgradeApp(param) {
+export function UpgradeAppButton(param) {
     const {
         parent,
         position
@@ -11949,7 +10193,7 @@ export function UpgradeApp(param) {
                             <div class='dev-console-description'>Install latest Robi build from <code>path/to/source</code>.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
-                            <button class='btn btn-success dev-console-button upgrade'>Upgrade ${App.get('title')}</button>
+                            <button class='btn btn-success dev-console-button upgrade'>Upgrade ${App.get('name')}</button>
                         </div>
                     </div>
                 </div>
@@ -12228,12 +10472,12 @@ export function UpgradeApp(param) {
                                             reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
                                         }
 
-                                    if (lists.length) {
+                                        if (lists.length) {
                                             // Add Release Notes
                                             await CreateItem({
                                                 list: 'ReleaseNotes',
                                                 data: {
-                                                    Summary: `New ${App.get('title')} lists created`,
+                                                    Summary: `New ${App.get('name')} lists created`,
                                                     Description: checkedLists.map(item => item.list).join(', ') + '.',
                                                     Status: 'Published',
                                                     MajorVersion: '0',
@@ -12243,13 +10487,13 @@ export function UpgradeApp(param) {
                                                 }
                                             });
 
-                                            console.log(`Added Release Note: ${App.get('title')} lists created - ${checkedLists.map(item => item.list).join(', ')}.`);
+                                            console.log(`Added Release Note: App lists created - ${checkedLists.map(item => item.list).join(', ')}.`);
 
                                             // Add to console
                                             reinstallConsole.append(/*html*/ `
                                                 <div class='console-line'>
                                                     <!-- <code class='line-number'>0</code> -->
-                                                    <code>'New ${App.get('title')} lists created - ${checkedLists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
+                                                    <code>'New ${App.get('name')} lists created - ${checkedLists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
                                                 </div>
                                             `);
 
@@ -12270,7 +10514,7 @@ export function UpgradeApp(param) {
 
                                         let spacers = '===================';
 
-                                        // for (let i = 0; i < App.get('title').length; i++) {
+                                        // for (let i = 0; i < App.get('name').length; i++) {
                                         //     spacers = spacers + '=';
                                         // }
                                         

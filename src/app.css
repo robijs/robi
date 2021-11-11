@@ -9,9 +9,44 @@
     border-color: royalblue;
 }
 
+.btn-outline-primary {
+    color: royalblue;
+    border-color: royalblue;
+}
+
+.btn-outline-primary:hover {
+    background-color: initial;
+    color: royalblue;
+    border-color: royalblue;
+}
+
+/* Override bootstrap alert style */
+.alert {
+    border: none;
+    border-radius: 10px;
+}
+
+/** Code mirror */
+.CodeMirror * {
+    color: unset;
+    font-family: 'Inconsolata', monospace;
+    font-size: 14px;
+}
+
+.robi-code-background {
+    background: #292D3E;
+}
+
 /* Add padding to all modals */
-.modal-content {
+/* .modal-content {
     padding: 30px;
+} */
+
+/* Intl Tel Input */
+.iti__flag {background-image: url('./Images/flags.png');}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .iti__flag {background-image: url('./Images/flags@2x.png');}
 }
 
 /* Install Console */
@@ -37,7 +72,7 @@
 }
 
 .install-modal {
-    padding: 30px;
+    padding: 60px;
 }
 
 .install-alert {

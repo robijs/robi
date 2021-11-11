@@ -23,7 +23,8 @@ Start({
             errorLogging: 'on',
             testInstall: false, // optional: (true || false)
         },
-        title: 'App', // required: enter app name
+        name: '@App', // required: enter app name (AUTOPOPULATED if created with CREATE APP
+        title: '@Title', // required: enter app name (AUTOPOPULATED if created with CREATE APP)
         defaultRoute: 'Home', // required: set default #route rendered if none present
         logo: 'dha-logo-no-label-180w.png', // required: set open sidebar logo
         logoSmall: 'dha-logo-no-label-80w.png', // required: set logo when sidebar is collapsed

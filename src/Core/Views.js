@@ -13,7 +13,7 @@ import {
     QuestionsToolbar,
     DevConsole,
     QuestionType,
-    UpgradeApp
+    UpgradeAppButton
 } from '../Core/Components.js'
 import { App } from '../Core/Settings.js'
 import Store from '../Core/Store.js'
@@ -247,7 +247,7 @@ export async function Settings() {
             parent
         });
 
-        const upgrade = UpgradeApp({
+        const upgrade = UpgradeAppButton({
             parent
         });
 
@@ -588,7 +588,7 @@ export async function Questions() {
     viewContainer.add();
 
     /** Check local storage for questionTypes */
-    let questionTypes = JSON.parse(localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`));
+    let questionTypes = JSON.parse(localStorage.getItem(`${App.get('name').split(' ').join('-')}-questionTypes`));
 
     if (!questionTypes) {
         console.log('questionTypes not in local storage. Adding...');
@@ -598,9 +598,9 @@ export async function Questions() {
             filter: `Key eq 'QuestionTypes'`
         });
         
-        // localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
-        localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, questionTypesResponse[0].Value);
-        questionTypes = JSON.parse(localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`));
+        // localStorage.setItem(`${App.get('name').split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
+        localStorage.setItem(`${App.get('name').split(' ').join('-')}-questionTypes`, questionTypesResponse[0].Value);
+        questionTypes = JSON.parse(localStorage.getItem(`${App.get('name').split(' ').join('-')}-questionTypes`));
 
         console.log('questionTypes added to local storage.');
     }
@@ -664,7 +664,7 @@ export async function QuestionsBoard(param) {
     let currentType;
 
     /** Check local storage for questionTypes */
-    let questionTypes = localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`);
+    let questionTypes = localStorage.getItem(`${App.get('name').split(' ').join('-')}-questionTypes`);
 
     if (questionTypes) {
         console.log('Found questionTypes in local storage.');
@@ -675,7 +675,7 @@ export async function QuestionsBoard(param) {
 
         /** Set temporary title  */
         viewTitle = Title({
-            title: App.get('title'),
+            title: App.get('name'),
             breadcrumb: [
                 {
                     label: 'Questions',
@@ -703,11 +703,11 @@ export async function QuestionsBoard(param) {
             filter: `Key eq 'QuestionTypes'`
         });
 
-        localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, questionTypesResponse[0].Value);
+        localStorage.setItem(`${App.get('name').split(' ').join('-')}-questionTypes`, questionTypesResponse[0].Value);
 
         console.log('questionTypes added to local storage.');
         
-        setTitle(localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`));
+        setTitle(localStorage.getItem(`${App.get('name').split(' ').join('-')}-questionTypes`));
     }
     
     function setTitle(items) {
@@ -724,7 +724,7 @@ export async function QuestionsBoard(param) {
         
         /** Set new title with drop down options */
         viewTitle = Title({
-            title: App.get('title'),
+            title: App.get('name'),
             breadcrumb: [
                 {
                     label: 'Questions',
@@ -1037,7 +1037,7 @@ export async function Question(param) {
     let viewTitle;
 
     /** Check local storage for questionTypes */
-    let questionTypes = localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`);
+    let questionTypes = localStorage.getItem(`${App.get('name').split(' ').join('-')}-questionTypes`);
 
     if (questionTypes) {
         console.log('Found questionTypes in local storage.');
@@ -1048,7 +1048,7 @@ export async function Question(param) {
 
         /** Set temporary title  */
         viewTitle = Title({
-            title: App.get('title'),
+            title: App.get('name'),
             breadcrumb: [
                 {
                     label: 'Questions',
@@ -1076,11 +1076,11 @@ export async function Question(param) {
             filter: `Key eq 'QuestionTypes'`
         });
 
-        localStorage.setItem(`${App.get('title').split(' ').join('-')}-questionTypes`, questionTypesResponse[0].Value);
+        localStorage.setItem(`${App.get('name').split(' ').join('-')}-questionTypes`, questionTypesResponse[0].Value);
 
         console.log('questionTypes added to local storage.');
         
-        // setTitle(localStorage.getItem(`${App.get('title').split(' ').join('-')}-questionTypes`))
+        // setTitle(localStorage.getItem(`${App.get('name').split(' ').join('-')}-questionTypes`))
     }
     
     function setTitle(items) {
@@ -1097,7 +1097,7 @@ export async function Question(param) {
         
         /** Set new title with drop down options */
         viewTitle = Title({
-            title: App.get('title'),
+            title: App.get('name'),
             breadcrumb: [
                 {
                     label: 'Questions',

@@ -1,5 +1,5 @@
-import { AddStyle, CreateSite, CreateFile, CreateLibrary, CreateFolder, GetRequestDigest, GetItemCount, CopyRecurse, SetHomePage } from '../../Core/Actions.js'
-import { Title, Modal, BootstrapButton, SingleLineTextField, BootstrapTextarea, ProgressBar, InstallConsole, Container } from '../../Core/Components.js'
+import { AddStyle, CreateSite, CopyFile, CreateLibrary, CreateFolder, GetRequestDigest, GetItemCount, CopyRecurse, SetHomePage, DeleteColumn } from '../../Core/Actions.js'
+import { Title, Modal, BootstrapButton, SingleLineTextField, BootstrapTextarea, ProgressBar, InstallConsole, Container, LoadingSpinner } from '../../Core/Components.js'
 import { Lists } from '../../Core/Models.js'
 import { App } from '../../Core/Settings.js'
 import Store from '../../Core/Store.js'
@@ -28,8 +28,199 @@ export default async function Home() {
         parent
     });
 
+    const codeMirrorBtn = BootstrapButton({
+        value: 'Code Mirror',
+        classes: ['mt-3', 'mr-3'],
+        type: 'primary',
+        parent,
+        async action(event) {
+            const modal = Modal({
+                title: false,
+                disableBackdropClose: true,
+                background: '#292D3E',
+                async addContent(modalBody) {
+                    const loading = LoadingSpinner({
+                        message: 'Loading /App/src/Lists.js',
+                        classes: ['mt-3', 'mb-3'],
+                        font: 'Inconsolata',
+                        parent: modalBody
+                    });
+
+                    loading.add();
+
+                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                        <textarea class='code-mirror-container robi-code-background'></textarea>
+                    `);
+
+                    const editor = CodeMirror.fromTextArea(modal.find('.code-mirror-container'), {
+                        mode: 'javascript',
+                        lineNumbers: true,
+                        extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+                        foldGutter: true,
+                        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+                    });
+                    editor.foldCode(CodeMirror.Pos(0, 0));
+                    editor.setSize(0, 0);
+                    editor.setOption('extraKeys', {
+                        'Ctrl-/'(cm) {
+                            editor.toggleComment({
+                                // this prop makes sure comments retain indented code
+                                // https://github.com/codemirror/CodeMirror/issues/3765#issuecomment-171819763
+                                indent: true
+                            });
+                        },
+                    });
+
+                    const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('lists.js')/$value`;
+                    const srcRequestDigest = await GetRequestDigest();
+                    const getFileValue = await fetch(sourceSiteUrl, {
+                        method: 'GET',
+                        headers: {
+                            'binaryStringRequestBody': 'true',
+                            'Accept': 'application/json;odata=verbose;charset=utf-8',
+                            'X-RequestDigest': srcRequestDigest
+                        }
+                    });
+                
+                    let value = await getFileValue.text();
+
+                    editor.setSize('auto', 'auto');
+                    editor.setOption('viewportMargin', Infinity);
+                    editor.setOption('theme', 'material-palenight');
+                    editor.getDoc().setValue(value);
+
+                    // Watch for changes
+                    editor.on('change', event => {
+                        if (value === editor.doc.getValue()) {
+                            const dot = modal.find('.changed-dot');
+
+                            if (dot) {
+                                dot.remove();
+                            }
+                            console.log('unchanged');
+                        } else {
+                            const dot = modal.find('.changed-dot');
+
+                            if (!dot) {
+                                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                    <div class='changed-dot' style='width: 10px; height: 10px; background: #dee2e6; border-radius: 50%; position: absolute; top: 1rem; right: 1rem;'></div>
+                                `);
+                            }
+                            console.log('changed');
+                        }
+                    });
+
+                    loading.remove();
+
+                    const modifyBtn = BootstrapButton({
+                        async action(event) {
+                            // Disable button - Prevent user from clicking this item more than once
+                            $(event.target)
+                                .attr('disabled', '')
+                                .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving');
+
+                            const value = editor.getDoc().getValue();
+
+                            console.log(value);
+
+                            // TODO: Move to SetFile action
+                            const setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='lists.js',overwrite=true)`, {
+                                method: 'POST',
+                                body: value, 
+                                headers: {
+                                    'binaryStringRequestBody': 'true',
+                                    'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                    'X-RequestDigest': srcRequestDigest
+                                }
+                            });
+
+                            console.log(setFile);
+
+                            $(modal.get()).on('hidden.bs.modal', event => {
+                                location.reload(true);
+                            });
+                            
+                            setTimeout(() => {
+                                // Enable button
+                                $(event.target)
+                                    .removeAttr('disabled')
+                                    .text('Saved');
+
+                                // Close modal (DOM node will be removed on hidden.bs.modal event)
+                                modal.close();
+                            }, 1000);
+                        },
+                        classes: ['w-100 mt-4'],
+                        width: '100%',
+                        parent: modalBody,
+                        type: 'success',
+                        value: 'Save'
+                    });
+
+                    modifyBtn.add();
+
+                    const cancelBtn = BootstrapButton({
+                        action(event) {
+                            $(modal.get()).on('hidden.bs.modal', event => {
+                                console.log('modal close animiation end');
+                            });
+
+                            modal.close();
+                        },
+                        classes: ['w-100 mt-2'],
+                        width: '100%',
+                        parent: modalBody,
+                        type: 'light',
+                        value: 'Close'
+                    });
+
+                    cancelBtn.add();
+                },
+                centered: true,
+                showFooter: false,
+            });
+
+            modal.add();
+        }
+    });
+
+    codeMirrorBtn.add();
+
+    const copyFileBtn = BootstrapButton({
+        value: 'Copy file',
+        classes: ['mt-3', 'mr-3'],
+        type: 'success',
+        parent,
+        async action(event) {
+            CopyFile({
+               source: `${App.get('site')}`, 
+               target: `${App.get('site')}/test-with-alec`,
+               path: 'App/src',
+               file: 'app.js',
+               appName: 'TestWithAlec'
+            })
+        }
+    });
+
+    copyFileBtn.add();
+
+    const deleteColumnBtn = BootstrapButton({
+        value: 'Delete Column',
+        classes: ['mt-3', 'mr-3'],
+        type: 'danger',
+        parent,
+        async action(event) {
+            DeleteColumn({
+                list: 'Test',
+                name: 'Number'
+            })
+        }
+    });
+
+    deleteColumnBtn.add();
+
     const createSiteBtn = BootstrapButton({
-        value: 'Create site',
+        value: 'Create app',
         classes: ['mt-3'],
         type: 'primary',
         parent,
@@ -177,7 +368,8 @@ export default async function Home() {
                         await CreateSite({
                             title,
                             description,
-                            url
+                            url,
+                            name
                         });
 
                         // Add spacer to console
@@ -202,7 +394,9 @@ export default async function Home() {
                             path: 'App',
                             library: 'App',
                             targetWeb: url,
-                            filter: `Name ne 'Forms'`
+                            filter: `Name ne 'Forms'`,
+                            appName: name,
+                            appTitle: title
                         });
 
                         // Add spacer to console
@@ -257,7 +451,7 @@ export default async function Home() {
                             </div>
                             <div class='console-line'>
                                 <!-- <code class='line-number'>0</code> -->
-                                <code style='color: mediumseagreen !important;'>| '${title}' created |</code>
+                                <code style='color: mediumseagreen !important;'>| '${name}' created |</code>
                             </div>
                             <div class='console-line'>
                                 <!-- <code class='line-number'>0</code> -->
@@ -272,10 +466,10 @@ export default async function Home() {
                         // TODO: init app automatically
                         // TODO: set home page after app copied
                         modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                            <div class='mt-4'>New site <strong>${title}</strong> created at <a href='${App.get('site')}/${url}'>${App.get('site')}/${url}</a>.</div>
+                            <div class='mt-4'>New site <strong>${title}</strong> created at <a href='${App.get('site')}/${url}' target='_blank'>${App.get('site')}/${url}</a>.</div>
                             <div class='mb-4'>
                                 <!-- Select <span style='padding: 2px 4px; border-raidus: 6px; background: royalblue; color: white;'>Install App</span> to create a new starter Robi app at the site above. You can <span style='padding: 2px 4px; border-raidus: 6px; border: solid 1px royalblue; color: royalblue;'>modify the source</span> before installing, or close and install later. -->
-                                Select <span style='color: royalblue: font-weight: 500'>Install App</span> to create a new starter Robi app at the site above. You can <span style='color: royalblue: font-weight: 500'>Modify Source</span> before installing, or <span  style='font-weight: 500'>Close</span> and install later.
+                                Select <span style='color: royalblue: font-weight: 500'>Install App</span> to create a new Robi project at the site above. You can <span style='color: royalblue: font-weight: 500'>Modify Source</span> before installing, or <span  style='font-weight: 500'>Close</span> and install later.
                             </div>
                         `);
 

@@ -581,14 +581,6 @@ export function ErrorForm(param) {
             type: 'mlot'
         },
         {
-            internalFieldName: 'Line',
-            displayName: 'Line Number'
-        },
-        {
-            internalFieldName: 'ColumnNumber',
-            displayName: 'Column Number'
-        },
-        {
             internalFieldName: 'Created',
             displayName: 'Created',
             type: 'date'
@@ -651,7 +643,7 @@ export function ErrorForm(param) {
            const updatedItem = await UpdateItem({
                 list: 'Errors',
                 itemId: item.Id,
-                select: 'Id,Message,Error,Source,Line,ColumnNumber,SessionId,Status,Created,Author/Title',
+                select: 'Id,Message,Error,Source,SessionId,Status,Created,Author/Title',
                 expand: 'Author/Id',
                 data: {
                     Status: event.target.innerText
@@ -738,7 +730,7 @@ export async function Errors(param) {
     /** Get Errors */
     const errors = await Get({
         list: 'Errors',
-        select: 'Id,Message,Error,Source,Line,ColumnNumber,SessionId,Created,Author/Title',
+        select: 'Id,Message,Error,Source,SessionId,Created,Author/Title',
         expand: 'Author/Id',
         filter: `SessionId eq '${sessionId}'`
     });
@@ -799,14 +791,6 @@ export async function Errors(param) {
                 internalFieldName: 'Error',
                 displayName: 'Error',
                 type: 'mlot'
-            },
-            {
-                internalFieldName: 'Line',
-                displayName: 'Line Number'
-            },
-            {
-                internalFieldName: 'ColumnNumber',
-                displayName: 'Column Number'
             },
             {
                 internalFieldName: 'Created',
@@ -2268,14 +2252,17 @@ export async function Table(param) {
         // Remove loading
         parent.find('.loading-spinner').remove();
 
+        // FIXME: Side effect, added element to fields array.
         // Add Id field
-        fields.unshift({
-            name: 'Id',
-            display: 'Id',
-            type: 'number'
-        });
+        // fields.unshift({
+        //     name: 'Id',
+        //     display: 'Id',
+        //     type: 'number'
+        // });
 
-        fields.forEach(field => {
+        [ { name: 'Id', display: 'Id', type: 'number' } ]
+        .concat(fields)
+        .forEach(field => {
             const {
                 name,
                 display,
@@ -2493,8 +2480,8 @@ export async function Table(param) {
             name: 'add',
             action: function (e, dt, node, config) {
                 const newModal = Modal({
+                    contentPadding: '30px',
                     title: `New Item`,
-                    scrollable: false,
                     async addContent(modalBody) {
                         const formParam = {
                             event: e,
@@ -2599,9 +2586,8 @@ export async function Table(param) {
 
             /** Show User */
             const rowModal = Modal({
-                // if editFormTitle else heading...
                 title: 'Edit item',
-                scrollable: false,
+                contentPadding: '30px',
                 async addContent(modalBody) {
                     const formParam = { item, table, row, fields, list, modal: rowModal, parent: modalBody };
 

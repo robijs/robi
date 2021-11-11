@@ -3,6 +3,7 @@ import { Lists } from './Models.js'
 import { App, Routes } from './Settings.js';
 import Store from './Store.js'
 import { ReleaseNotes } from './ViewParts.js'
+import lists from '../lists.js';
 
 /**
  * Create SharePoint list item.
@@ -544,7 +545,7 @@ export async function CopyItem(param) {
  * @returns 
  */
 export async function CopyRecurse(param) {
-    const { path, filter, targetWeb } = param;
+    const { path, filter, targetWeb, appName, appTitle } = param;
 
     // 1. Look for files at top level of source site
     const url = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files`;
@@ -570,11 +571,13 @@ export async function CopyRecurse(param) {
             const file = response.d.results[item];
             const { Name } = file;
 
-            await CreateFile({
+            await CopyFile({
                 source: App.get('site'),
                 target: `${App.get('site')}/${targetWeb}`,
                 path,
-                file: Name
+                file: Name,
+                appName,
+                appTitle
             });
 
             console.log(`File '${Name}' copied.`);
@@ -602,7 +605,9 @@ export async function CopyRecurse(param) {
         // Recurse into dir
         await CopyRecurse({
             path: `${path}/${Name}`,
-            targetWeb
+            targetWeb,
+            appName,
+            appTitle
         });
     }
 
@@ -628,6 +633,36 @@ export async function CreateColumn(param) {
         lookupList,
         lookupField
     } = field;
+
+    // Don't create columns with reserved SharePoint names
+    if (name === 'Title' || name === 'Id') {
+        // Console 
+        console.log(`Column '${name}' already exists`);
+
+        // Add to Install Console
+        const installConsole = Store.get('install-console');
+
+        if (installConsole) {
+            installConsole.append(/*html*/ `
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code>Column '${name}' already exists</code>
+                </div>
+            `);
+
+            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+        }
+
+        const progressBar = Store.get('install-progress-bar');
+
+        if (progressBar) {
+            // +2 since not adding to column to view
+            progressBar.update();
+            progressBar.update();
+        }
+
+        return;
+    }
     
     // TODO: Check if field exists first
 
@@ -754,8 +789,8 @@ export async function CreateColumn(param) {
  * @param {*} param 
  * @returns 
  */
-export async function CreateFile(param) {
-    const { source, target, path, file } = param;
+export async function CopyFile(param) {
+    const { source, target, path, file, appName, appTitle } = param;
 
     const sourceSiteUrl = source + "/_api/web/GetFolderByServerRelativeUrl('" + path + "')/Files('" + file + "')/$value";
     const targetSiteUrl = target + "/_api/web/GetFolderByServerRelativeUrl('" + path + "')/Files/Add(url='" + file + "',overwrite=true)";
@@ -769,11 +804,18 @@ export async function CreateFile(param) {
         }
     });
 
-    const arrayBuffer = await getFileValue.arrayBuffer();
+    let contents = file === 'app.js' ? await getFileValue.text() : await getFileValue.arrayBuffer() ;
+
+    // TODO: Add check for App/src path so other paths that you might want to copy from aren't affected
+    if (file === 'app.js') {
+        // FIXME: Potentially super brittle. Use well-formed regex instead.
+        contents = contents.replace(`name: '@App',`, `name: '${appName}',`);
+        contents = contents.replace(`title: '@Title',`, `title: '${appTitle}',`);
+    }
 
     const newFile = await fetch(targetSiteUrl, {
         method: 'POST',
-        body: arrayBuffer, 
+        body: contents, 
         headers: {
             'binaryStringRequestBody': 'true',
             'Accept': 'application/json;odata=verbose;charset=utf-8',
@@ -1088,10 +1130,16 @@ export async function CreateList(param) {
                     <!-- <code class='line-number'>0</code> -->
                     <code>Created ${listType} '${list}'</code>
                 </div>
-                <!-- <div class='console-line'>
-                    <code class='line-number'>0</code>
-                    <code>----------------------------------------</code>
-                </div> -->
+                ${
+                    template !== 101 ?
+                    /*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code>----------------------------------------</code>
+                        </div>
+                    ` :
+                    ''
+                }
             `);
 
             installConsole.get().scrollTop = installConsole.get().scrollHeight;
@@ -1123,6 +1171,7 @@ export async function CreateSite(param) {
     const {
         url,
         title,
+        name,
         description
     } = param;
 
@@ -1301,6 +1350,316 @@ export async function Data(lists) {
 
 /**
  * 
+ * @param {*} event 
+ */
+export function DeleteApp() {
+    const modal = Modal({
+        title: false,
+        disableBackdropClose: true,
+        scrollable: true,
+        async addContent(modalBody) {
+            modalBody.classList.add('install-modal');
+
+            // Core lists
+            const coreLists = Lists();
+            console.log(coreLists);
+
+            // App lists
+            const appLists = lists;
+            console.log(coreLists);
+
+            // All Lists
+            const allLists = Lists().concat(lists);
+            console.log(allLists);
+
+            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                <h4 class='mb-3'>All <strong>${App.get('name')}</strong> lists and items will be deleted</h4>
+                <ul>
+                    ${
+                        appLists
+                        .sort((a, b) => a.list - b.list)
+                        .map(item => {
+                            return /*html*/ `
+                                <li>${item.list}</li>
+                            `
+                        }).join('\n')
+                    }
+                </ul>
+                <h4 class='mt-3 mb-3'>All <strong>Core</strong> lists and items will be deleted</h4>
+                <ul>
+                    ${
+                        coreLists
+                        .sort((a, b) => a.list - b.list)
+                        .map(item => {
+                            return /*html*/ `
+                                <li>${item.list}</li>
+                            `
+                        }).join('\n')
+                    }
+                </ul>
+                <div class='alert alert-danger mt-5' style='border: none; border-radius: 10px;'>
+                    This can't be undone. Proceed with caution.
+                </div>
+            `);
+
+            const deleteBtn = BootstrapButton({
+                async action(event) {
+                    console.log('Delete');
+
+                    modal.find('.modal-content').style.width = 'unset';
+
+                    modalBody.style.height = `${modalBody.offsetHeight}px`;
+                    modalBody.style.width = `${modalBody.offsetWidth}px`;
+                    modalBody.style.overflowY = 'unset';
+                    modalBody.style.display = 'flex';
+                    modalBody.style.flexDirection = 'column',
+                        modalBody.style.transition = 'all 300ms ease-in-out';
+                    modalBody.innerHTML = '';
+                    modalBody.style.height = '80vh';
+                    modalBody.style.width = '80vw';
+
+                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                        <h3 class='console-title mb-0'>Deleting <strong>${App.get('name')}</strong></h3>
+                    `);
+
+                    let progressCount = allLists.length;
+
+                    const progressBar = ProgressBar({
+                        parent: modalBody,
+                        totalCount: progressCount
+                    });
+
+                    Store.add({
+                        name: 'install-progress-bar',
+                        component: progressBar
+                    });
+
+                    progressBar.add();
+
+                    const deleteContainer = Container({
+                        padding: '10px',
+                        parent: modalBody,
+                        overflow: 'hidden',
+                        width: '100%',
+                        height: '100%',
+                        radius: '10px',
+                        background: '#1E1E1E'
+                    });
+
+                    deleteContainer.add();
+
+                    const deleteConsole = InstallConsole({
+                        type: 'secondary',
+                        text: '',
+                        margin: '0px',
+                        parent: deleteContainer
+                    });
+
+                    Store.add({
+                        name: 'install-console',
+                        component: deleteConsole
+                    });
+
+                    deleteConsole.add();
+                    deleteConsole.get().classList.add('console');
+
+                    // 1. CORE: Add core lists to install-console
+                    deleteConsole.append(/*html*/ `
+                            <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code>Delete core lists:</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
+
+                    coreLists.forEach(item => {
+                        const { list } = item;
+
+                        deleteConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>- ${list}</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
+                    });
+
+                    // Add spacer to console
+                    deleteConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
+
+                    // Add default lists first
+                    for (let list in coreLists) {
+                        // Create lists
+                        await DeleteList(coreLists[list]);
+                    }
+
+                    // Add spacer to console
+                    deleteConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
+
+                    // 2. USER DEFINED: Add user defined lists to install-console
+                    deleteConsole.append(/*html*/ `
+                            <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code>Delete '${App.get('name')}' lists:</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
+
+                    lists.forEach(item => {
+                        const { list } = item;
+
+                        deleteConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>- ${list}</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
+                    });
+
+                    // Add spacer to console
+                    deleteConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
+
+                    // Add default lists first
+                    for (let list in lists) {
+                        // Create lists
+                        await DeleteList(lists[list]);
+
+                        // Add spacer to console
+                        deleteConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code style='opacity: 0;'>Spacer</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
+                    }
+
+                    console.log('App deleted');
+
+
+                    let spacers = '==============';
+
+                    for (let i = 0; i < App.get('name').length; i++) {
+                        spacers = spacers + '=';
+                    }
+                    
+                    // 3. Add to console
+                    deleteConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='color: crimson !important;'>${spacers}</code>
+                        </div>
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='color: crimson !important;'>| '${App.get('name')}' deleted |</code>
+                        </div>
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='color: crimson !important;'>${spacers}</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
+
+                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                        <div class='mt-4 mb-2'>All lists and data for <strong>${App.get('name')}</strong> have been successfully deleted.</div>
+                        <div class='mb-4'>You can install it again at <strong>Site Contents > App > src > pages > app.aspx</strong></div>
+                    `);
+
+                    // Show return button
+                    const returnBtn = BootstrapButton({
+                        type: 'primary',
+                        value: 'Site Contents',
+                        classes: ['w-100'],
+                        action(event) {
+                            // Bootstrap uses jQuery .trigger, won't work with .addEventListener
+                            $(modal.get()).on('hidden.bs.modal', event => {
+                                console.log('Modal close animiation end');
+                                console.log('Launch');
+
+                                // Go to SharePoint site home page
+                                location = `${App.get('site')}/_layouts/15/viewlsts.aspx`;
+                            });
+
+                            modal.close();
+                        },
+                        parent: modalBody
+                    });
+
+                    returnBtn.add();
+
+                    // Scroll console to bottom (after launch button pushes it up);
+                    deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
+                },
+                classes: ['w-100'],
+                width: '100%',
+                parent: modalBody,
+                type: 'danger',
+                value: 'Delete all lists and data'
+            });
+
+            deleteBtn.add();
+
+            const cancelBtn = BootstrapButton({
+                action(event) {
+                    console.log('Cancel delete');
+
+                    modal.close();
+                },
+                classes: ['w-100 mt-2'],
+                width: '100%',
+                parent: modalBody,
+                type: 'light',
+                value: 'Cancel'
+            });
+
+            cancelBtn.add();
+        },
+        centered: true,
+        showFooter: false,
+    });
+
+    modal.add();
+}
+
+/**
+ * 
  * @param {*} param 
  */
 export async function DeleteAttachments(param) {
@@ -1332,6 +1691,87 @@ export async function DeleteAttachments(param) {
     }
 
     await Promise.all(responses);
+}
+
+/**
+ * Create SharePoint list item.
+ * @param {Object}   param          Interface to UpdateItem() module.   
+ * @param {string}   param.list     SharePoint list Name.
+ */
+export async function DeleteColumn(param) {
+    const {
+        list,
+        name
+    } = param;
+
+    // Don't create columns with reserved SharePoint names
+    if (name === 'Title' || name === 'Id') {
+        // Console 
+        console.log(`Column '${name}'can't be deleted`);
+
+        // Add to Install Console
+        const installConsole = Store.get('install-console');
+
+        if (installConsole) {
+            installConsole.append(/*html*/ `
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code>Column '${name}'can't be deleted</code>
+                </div>
+            `);
+
+            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+        }
+
+        const progressBar = Store.get('install-progress-bar');
+
+        if (progressBar) {
+            progressBar.update();
+        }
+
+        return;
+    }
+    
+    // Get new request digest
+    const requestDigest = await GetRequestDigest();
+    
+    const postOptions = {
+        url: `${App.get('site')}/_api/web/lists/GetByTitle('${list}')/Fields/GetByTitle('${name}')`,
+        headers: {
+            "Content-Type": "application/json;odata=verbose",
+            "Accept": "application/json;odata=verbose",
+            "X-RequestDigest": requestDigest,
+            "IF-MATCH": "*",
+            "X-HTTP-Method": "DELETE",
+        }
+    }
+
+    const deletedField = await Post(postOptions);
+
+    // Console success
+    console.log(`Deleted column '${name}'`);
+
+    // Append to install-console
+    const installConsole = Store.get('install-console');
+
+    if (installConsole) {
+        installConsole.append(/*html*/ `
+            <div class='console-line'>
+                <!-- <code class='line-number'>0</code> -->
+                <code>Deleted column '${name}' from list '${list}'</code>
+            </div>
+        `);
+
+        installConsole.get().scrollTop = installConsole.get().scrollHeight;
+    }
+
+    const progressBar = Store.get('install-progress-bar');
+
+    if (progressBar) {
+        progressBar.update();
+    }
+
+    return deletedField;
 }
 
 /**
@@ -1474,7 +1914,7 @@ export function Download(param) {
 
     // File name
     const today = new Date();
-    downloadLink.download = `${`${fileName || App.get('title')}_${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`}.csv`;
+    downloadLink.download = `${`${fileName || App.get('name')}_${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`}.csv`;
 
     // We have to create a link to the file
     downloadLink.href = window.URL.createObjectURL(csvFile);
@@ -2072,7 +2512,7 @@ export async function GetLib(param) {
  * @returns 
  */
 export async function GetWebLists() {
-    const url = `${App.get('site')}/_api/web/lists/`;
+    const url = `${App.get('site')}/_api/web/lists/?$select=*,Fields&$expand=Fields`;
     const headers = {
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -2284,7 +2724,7 @@ export async function InstallApp(param) {
         // Start loading bar animation
         const loadingBar = LoadingBar({
             displayLogo: App.get('logoLarge'),
-            displayTitle: App.get('title'),
+            displayTitle: App.get('name'),
             totalCount: preLoadLists?.length || 0,
             loadingBar: 'hidden',
             async onReady(event) {
@@ -2303,7 +2743,7 @@ export async function InstallApp(param) {
 
                             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                                 <div>
-                                    <strong>${App.get('title')}</strong> isn't installed on <a href='${App.get('site')}' target='_blank'>${App.get('site')}</a>. 
+                                    <strong>${App.get('name')}</strong> isn't installed on <a href='${App.get('site')}' target='_blank'>${App.get('site')}</a>. 
                                     Would you like to install it now? You can uninstall it later.
                                 </div>
                             `);
@@ -2341,7 +2781,7 @@ export async function InstallApp(param) {
                                 modalBody.style.width = '80vw';
 
                                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                    <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
+                                    <h3 class='console-title mb-0'>Installing <strong>${App.get('name')}</strong></h3>
                                 `);
 
                                 // TODO: Start at 2
@@ -2470,7 +2910,7 @@ export async function InstallApp(param) {
                                 installConsole.append(/*html*/ `
                                         <div class='console-line'>
                                         <!-- <code class='line-number'>0</code> -->
-                                        <code>Create '${App.get('title')}' lists:</code>
+                                        <code>Create '${App.get('name')}' lists:</code>
                                     </div>
                                 `);
 
@@ -2519,6 +2959,7 @@ export async function InstallApp(param) {
                                     installConsole.get().scrollTop = installConsole.get().scrollHeight;
                                 }
 
+                                // Set Question Types key
                                 const questionTypesKeyExists = await Get({
                                     list: 'Settings',
                                     filter: `Key eq 'QuestionTypes'`
@@ -2621,7 +3062,7 @@ export async function InstallApp(param) {
                                     // Add Release Notes
                                     const releaseNoteExists = await Get({
                                         list: 'ReleaseNotes',
-                                        filter: `Summary eq '${App.get('title')} lists created'`
+                                        filter: `Summary eq '${App.get('name')} lists created'`
                                     });
 
                                     if (releaseNoteExists[0]) {
@@ -2629,7 +3070,7 @@ export async function InstallApp(param) {
                                         installConsole.append(/*html*/ `
                                             <div class='console-line'>
                                                 <!-- <code class='line-number'>0</code> -->
-                                                <code>${App.get('title')} lists created' release note already exists.'</code>
+                                                <code>${App.get('name')} lists created' release note already exists.'</code>
                                             </div>
                                         `);
 
@@ -2640,7 +3081,7 @@ export async function InstallApp(param) {
                                         await CreateItem({
                                             list: 'ReleaseNotes',
                                             data: {
-                                                Summary: `${App.get('title')} lists created`,
+                                                Summary: `${App.get('name')} lists created`,
                                                 Description: lists.map(item => item.list).join(', ') + '.',
                                                 Status: 'Published',
                                                 MajorVersion: '0',
@@ -2650,13 +3091,13 @@ export async function InstallApp(param) {
                                             }
                                         });
 
-                                        console.log(`Added Release Note: ${App.get('title')} lists created - ${lists.map(item => item.list).join(', ')}.`);
+                                        console.log(`Added Release Note: ${App.get('name')} lists created - ${lists.map(item => item.list).join(', ')}.`);
 
                                         // Add to console
                                         installConsole.append(/*html*/ `
                                             <div class='console-line'>
                                                 <!-- <code class='line-number'>0</code> -->
-                                                <code>'${App.get('title')} lists created - ${lists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
+                                                <code>''${App.get('name')}' lists created - ${lists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
                                             </div>
                                         `);
 
@@ -2743,6 +3184,24 @@ export async function InstallApp(param) {
                                             Value: 'Yes'
                                         }
                                     });
+
+                                    // Create key 'Installed'
+                                    await CreateItem({
+                                        list: 'Settings',
+                                        data: {
+                                            Key: 'Version',
+                                            Value: '0.1.0'
+                                        }
+                                    });
+
+                                    // Create key 'Installed'
+                                    await CreateItem({
+                                        list: 'Settings',
+                                        data: {
+                                            Key: 'Build',
+                                            Value: '1.0.0'
+                                        }
+                                    });
                                 } else if (isInstalled.Value === 'No') {
                                     // Update key 'Installed'
                                     await UpdateItem({
@@ -2752,6 +3211,8 @@ export async function InstallApp(param) {
                                             Value: 'Yes'
                                         }
                                     });
+
+                                    // TODO: Update keys Version and Build
                                 }
 
                                 console.log('App installed');
@@ -2767,13 +3228,14 @@ export async function InstallApp(param) {
                                 // Scroll console to bottom
                                 installConsole.get().scrollTop = installConsole.get().scrollHeight;
 
-                                let spacers = '================';
+                                let spacers = '==============================================';
 
-                                for (let i = 0; i < App.get('title').length; i++) {
+                                for (let i = 0; i < App.get('name').length; i++) {
                                     spacers = spacers + '=';
                                 }
                                 
                                 // 3. Add to console
+                                //TODO: REMOVE hard coded version and build numbers
                                 installConsole.append(/*html*/ `
                                     <div class='console-line'>
                                         <!-- <code class='line-number'>0</code> -->
@@ -2781,7 +3243,7 @@ export async function InstallApp(param) {
                                     </div>
                                     <div class='console-line'>
                                         <!-- <code class='line-number'>0</code> -->
-                                        <code style='color: mediumseagreen !important;'>| '${App.get('title')}' installed |</code>
+                                        <code style='color: mediumseagreen !important;'>| '${App.get('name')}' installed | Build 1.0.0 | Version 1.0.0 |</code>
                                     </div>
                                     <div class='console-line'>
                                         <!-- <code class='line-number'>0</code> -->
@@ -2820,12 +3282,12 @@ export async function InstallApp(param) {
 
                             const modifyBtn = BootstrapButton({
                                 action(event) {
-                                    window.open(`${App.get('site')}/${library || 'App'}/src`);
+                                    window.open(`${App.get('site')}/${App.get('library') || 'App'}/src`);
                                 },
                                 classes: ['w-100 mt-2'],
                                 width: '100%',
                                 parent: modalBody,
-                                type: 'primary-outline',
+                                type: 'outline-primary',
                                 value: 'Modify source'
                             });
 
@@ -2885,7 +3347,7 @@ export async function InstallApp(param) {
             // Start loading bar animation
             const loadingBar = LoadingBar({
                 displayLogo: App.get('logoLarge'),
-                displayTitle: App.get('title'),
+                displayTitle: App.get('name'),
                 totalCount: preLoadLists?.length || 0,
                 loadingBar: 'hidden',
                 onReady(event) {
@@ -2897,7 +3359,7 @@ export async function InstallApp(param) {
                             modalBody.classList.add('install-modal');
 
                             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                <div><strong>${App.get('title')}</strong> isn't installed on this <a href='${App.get('site')}' target='_blank'>${App.get('site')}</a>. Would you like to install it now? You can uninstall it later.</div>
+                                <div><strong>${App.get('name')}</strong> isn't installed on this <a href='${App.get('site')}' target='_blank'>${App.get('site')}</a>. Would you like to install it now? You can uninstall it later.</div>
                             `);
 
                             const installBtn = BootstrapButton({
@@ -2917,7 +3379,7 @@ export async function InstallApp(param) {
                                     modalBody.style.width = '80vw';
 
                                     modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                        <h3 class='console-title mb-0'>Installing <strong>${App.get('title')}</strong></h3>
+                                        <h3 class='console-title mb-0'>Installing <strong>${App.get('name')}</strong></h3>
                                     `);
 
                                     const logs = [];
@@ -2945,7 +3407,7 @@ export async function InstallApp(param) {
                                         logs.push(' ');
                                     });
 
-                                    logs.push(`${App.get('title')} lists:`);
+                                    logs.push(`${App.get('name')} lists:`);
                                     lists.forEach(item => {
                                         const { list } = item;
 
@@ -2956,7 +3418,7 @@ export async function InstallApp(param) {
                                     lists.forEach(item => {
                                         const { list, fields } = item;
 
-                                        logs.push(`Created ${App.get('title')} list '${list}'`);
+                                        logs.push(`Created ${App.get('name')} list '${list}'`);
 
                                         fields.forEach(field => {
                                             const { name } = field;
@@ -3023,7 +3485,7 @@ export async function InstallApp(param) {
                                         installConsole.append(/*html*/ `
                                             <div class='console-line'>
                                                 <code class='line-number'>${line}</code>
-                                                <code>'${App.get('title')}' installed</code>
+                                                <code>'${App.get('name')}' installed</code>
                                             </div>
                                         `);
 
@@ -3067,7 +3529,7 @@ export async function InstallApp(param) {
                                 classes: ['w-100 mt-2'],
                                 width: '100%',
                                 parent: modalBody,
-                                type: 'primary-outline',
+                                type: 'outline-primary',
                                 value: 'Modify source'
                             });
 
@@ -3338,7 +3800,7 @@ export async function Log(param) {
             url: `${App.get('site')}/_api/web/lists/GetByTitle('Log')/items`,
             data: {
                 Title,
-                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
+                SessionId: sessionStorage.getItem(`${App.get('name').split(' ').join('_')}-sessionId`),
                 Message: JSON.stringify({
                     body: Message,
                     location: location.href,
@@ -3367,7 +3829,7 @@ export async function Log(param) {
             list: 'Log',
             data: {
                 Title,
-                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
+                SessionId: sessionStorage.getItem(`${App.get('name').split(' ').join('_')}-sessionId`),
                 Message: JSON.stringify({
                     body: Message,
                     location: location.href,
@@ -3430,7 +3892,7 @@ export async function LogError(param) {
         const postOptions = {
             url: `${App.get('site')}/_api/web/lists/GetByTitle('Errors')/items`,
             data: {
-                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
+                SessionId: sessionStorage.getItem(`${App.get('name').split(' ').join('_')}-sessionId`),
                 Message,
                 Error,
                 Source,
@@ -3455,7 +3917,7 @@ export async function LogError(param) {
         const newLog = await CreateItem({
             list: 'Errors',
             data: {
-                SessionId: sessionStorage.getItem(`${App.get('title').split(' ').join('_')}-sessionId`),
+                SessionId: sessionStorage.getItem(`${App.get('name').split(' ').join('_')}-sessionId`),
                 Message,
                 Error,
                 Source,
@@ -3491,6 +3953,1205 @@ export async function Post(param) {
     } catch (error) {
         // console.log(error);
     }
+}
+
+/**
+ * 
+ * @param {*} event 
+ */
+export function ReinstallApp() {
+    const modal = Modal({
+        title: false,
+        disableBackdropClose: true,
+        scrollable: true,
+        async addContent(modalBody) {
+            modalBody.classList.add('install-modal');
+
+            // Core lists
+            const coreLists = Lists();
+            console.log(coreLists);
+
+            // App lists
+            const appLists = lists;
+            console.log(coreLists);
+
+            // All Lists
+            const allLists = Lists().concat(lists);
+            console.log(allLists);
+
+            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                <h4 class='mb-3'>All <strong>${App.get('name')}</strong> lists will be reinstalled</h4>
+                <ul>
+                    ${
+                        appLists
+                        .sort((a, b) => a.list - b.list)
+                        .map(item => {
+                            return /*html*/ `
+                                <li>${item.list}</li>
+                            `
+                        }).join('\n')
+                    }
+                </ul>
+                <h4 class='mb3 mt-4'>All <strong>Core</strong> lists will be reinstalled</h4>
+                <ul>
+                    ${
+                        coreLists
+                        .sort((a, b) => a.list - b.list)
+                        .map(item => {
+                            return /*html*/ `
+                                <li>${item.list}</li>
+                            `
+                        }).join('\n')
+                    }
+                </ul>
+                <div class='alert alert-danger mt-5' style='border: none; border-radius: 10px;'>
+                    All items will be deleted. This can't be undone. Proceed with caution.
+                </div>
+            `);
+
+            const deleteBtn = BootstrapButton({
+                async action(event) {
+                    console.log('Reinstall');
+
+                    modal.find('.modal-content').style.width = 'unset';
+
+                    modalBody.style.height = `${modalBody.offsetHeight}px`;
+                    modalBody.style.width = `${modalBody.offsetWidth}px`;
+                    modalBody.style.overflowY = 'unset';
+                    modalBody.style.display = 'flex';
+                    modalBody.style.flexDirection = 'column',
+                    modalBody.style.transition = 'all 300ms ease-in-out';
+                    modalBody.innerHTML = '';
+                    modalBody.style.height = '80vh';
+                    modalBody.style.width = '80vw';
+
+                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                        <h3 class='console-title mb-0'>Reinstalling <strong>${App.get('name')}</strong></h3>
+                    `);
+
+                    let progressCount = 0;
+
+                    coreLists.forEach(item => {
+                        const { fields } = item;
+
+                        // List + 1 for delete
+                        // List + 1 for reinstall
+                        progressCount = progressCount + 2;
+
+                        fields.forEach(field => {
+                            // Field +2 (add column to list and view)
+                            progressCount = progressCount + 2;
+                        });
+                    });
+
+                    lists.forEach(item => {
+                        const { fields } = item;
+
+                        // List + 1 for delete
+                        // List + 1 for reinstall
+                        progressCount = progressCount + 2;
+
+                        fields.forEach(field => {
+                            // Field +2 (add column to list and view)
+                            progressCount = progressCount + 2;
+                        });
+                    });
+
+                    const progressBar = ProgressBar({
+                        parent: modalBody,
+                        totalCount: progressCount
+                    });
+
+                    Store.add({
+                        name: 'install-progress-bar',
+                        component: progressBar
+                    });
+
+                    progressBar.add();
+
+                    const deleteContainer = Container({
+                        padding: '10px',
+                        parent: modalBody,
+                        overflow: 'hidden',
+                        width: '100%',
+                        height: '100%',
+                        radius: '10px',
+                        background: '#1E1E1E'
+                    });
+
+                    deleteContainer.add();
+
+                    const reinstallConsole = InstallConsole({
+                        type: 'secondary',
+                        text: '',
+                        margin: '0px',
+                        parent: deleteContainer
+                    });
+
+                    Store.add({
+                        name: 'install-console',
+                        component: reinstallConsole
+                    });
+
+                    reinstallConsole.add();
+                    reinstallConsole.get().classList.add('console');
+
+                    // 1. CORE: Add core lists to install-console
+                    reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code>Delete core lists:</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    coreLists.forEach(item => {
+                        const { list } = item;
+
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>- ${list}</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    });
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    // Add default lists first
+                    for (let list in coreLists) {
+                        // Create lists
+                        await DeleteList(coreLists[list]);
+                    }
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    // 2. USER DEFINED: Add user defined lists to install-console
+                    reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code>Delete '${App.get('name')}' lists:</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    lists.forEach(item => {
+                        const { list } = item;
+
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>- ${list}</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    });
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    // Add default lists first
+                    for (let list in lists) {
+                        // Create lists
+                        await DeleteList(lists[list]);
+
+                        // Add spacer to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code style='opacity: 0;'>Spacer</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    }
+
+                    // REINSTALL ----------------------------------------------------------------------------------------
+
+                    // 1. CORE: Add core lists to install-console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code>Create core lists:</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    coreLists.forEach(item => {
+                        const { list } = item;
+
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>- ${list}</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    });
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    // Add default lists first
+                    for (let list in coreLists) {
+                        // Create lists
+                        await CreateList(coreLists[list]);
+
+                        // Add spacer to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code style='opacity: 0;'>Spacer</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    }
+
+                    // 2. USER DEFINED: Add user defined lists to install-console
+                    reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code>Create '${App.get('name')}' lists:</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    lists.forEach(item => {
+                        const { list } = item;
+
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>- ${list}</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    });
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    // Add default lists first
+                    for (let list in lists) {
+                        // Create lists
+                        await CreateList(lists[list]);
+
+                        // Add spacer to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code style='opacity: 0;'>Spacer</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    }
+
+                    const questionTypesKeyExists = await Get({
+                        list: 'Settings',
+                        filter: `Key eq 'QuestionTypes'`
+                    });
+
+                    if (questionTypesKeyExists[0]) {
+                        console.log(`Key 'Question Types' in Settings already exists.`);
+
+                        // 1. Add to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>Key 'Question Types' in Settings already exists.</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    } else {
+                        const questionTypes = App.get('questionTypes');
+                        // Add question types
+                        await CreateItem({
+                            list: 'Settings',
+                            data: {
+                                Key: 'QuestionTypes',
+                                Value: JSON.stringify(questionTypes)
+                            }
+                        });
+
+                        console.log(`Added Question Types: ${JSON.stringify(questionTypes)}`);
+
+                        // 1. Add to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>Question Types ${JSON.stringify(questionTypes)} added to 'Settings'</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    }
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    // Add Release Notes
+                    const releaseNoteExists = await Get({
+                        list: 'ReleaseNotes',
+                        filter: `Summary eq 'App installed'`
+                    });
+
+                    if (releaseNoteExists[0]) {
+                        // Add to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>'App installed' release note already exists.'</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    } else {
+                        await CreateItem({
+                            list: 'ReleaseNotes',
+                            data: {
+                                Summary: 'App installed',
+                                Description: 'Initial lists and items created.',
+                                Status: 'Published',
+                                MajorVersion: '0',
+                                MinorVersion: '1',
+                                PatchVersion: '0',
+                                ReleaseType: 'Current'
+                            }
+                        });
+
+                        console.log(`Added Release Note: App installed. Initial lists and items created.`);
+
+                        // Add to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>'App installed - Core lists and items created.' added to 'releaseNotes'</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    }
+
+                   if (lists.length) {
+                        // Add Release Notes
+                        const releaseNoteExists = await Get({
+                            list: 'ReleaseNotes',
+                            filter: `Summary eq '${App.get('name')} lists created'`
+                        });
+
+                        if (releaseNoteExists[0]) {
+                            // Add to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code>'${App.get('name')} lists created' release note already exists.'</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                        } else {
+                            // Add Release Notes
+                            await CreateItem({
+                                list: 'ReleaseNotes',
+                                data: {
+                                    Summary: `${App.get('name')} lists created`,
+                                    Description: lists.map(item => item.list).join(', ') + '.',
+                                    Status: 'Published',
+                                    MajorVersion: '0',
+                                    MinorVersion: '1',
+                                    PatchVersion: '0',
+                                    ReleaseType: 'Current'
+                                }
+                            });
+
+                            console.log(`Added Release Note: ${App.get('name')} lists created - ${lists.map(item => item.list).join(', ')}.`);
+
+                            // Add to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code>'${App.get('name')} lists created - ${lists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                        }
+                    }
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    // Create developer account
+                    const url = `${App.get('site')}/../_api/web/CurrentUser`;
+                    const fetchOptions = {
+                        headers: {
+                            'Content-Type': 'application/json; charset=UTF-8',
+                            'Accept': 'application/json; odata=verbose'
+                        }
+                    };
+                    const currentUser = await fetch(url, fetchOptions);
+                    const response = await currentUser.json();
+                    
+                    const appUser = await Get({
+                        list: App.get('usersList') || 'Users',
+                        select: coreLists.find(item => item.list === App.get('usersList') || item.list === 'Users').fields.map(field => field.name),
+                        filter: `Email eq '${response.d.Email}'`
+                    });
+            
+                    // User already exists
+                    if (appUser && appUser[0]) {
+                        console.log(`User account for '${response.d.Title}' already exists.`);
+
+                        // Add to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>User account for '${response.d.Title}' already exists.</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    } else {
+                        /** Create user */
+                        await CreateItem({
+                            list: 'Users',
+                            data: {
+                                Title: response.d.Title,
+                                Email: response.d.Email,
+                                LoginName: response.d.LoginName.split('|')[2],
+                                Role: 'Developer',
+                                Settings: App.get('userSettings')
+                            }
+                        });
+
+                        console.log(`Created user account for '${response.d.Title}' with role 'Developer'`);
+
+                        // Add to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>User account for '${response.d.Title}' created with role 'Developer'</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    }
+
+                    // Check if app is already installed
+                    const isInstalled = await GetAppSetting('Installed');
+        
+                    if (!isInstalled) {
+                        // Create key 'Installed'
+                        await CreateItem({
+                            list: 'Settings',
+                            data: {
+                                Key: 'Installed',
+                                Value: 'Yes'
+                            }
+                        });
+                    } else if (isInstalled.Value === 'No') {
+                        // Update key 'Installed'
+                        await UpdateItem({
+                            list: 'Settings',
+                            itemId: isInstalled.Id,
+                            data: {
+                                Value: 'Yes'
+                            }
+                        });
+                    }
+
+                    console.log('App installed');
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    let spacers = '==================';
+
+                    for (let i = 0; i < App.get('name').length; i++) {
+                        spacers = spacers + '=';
+                    }
+                    
+                    // 3. Add to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='color: mediumseagreen !important;'>${spacers}</code>
+                        </div>
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='color: mediumseagreen !important;'>| '${App.get('name')}' reinstalled |</code>
+                        </div>
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='color: mediumseagreen !important;'>${spacers}</code>
+                        </div>
+                    `);
+
+                    // END REINSTALL ------------------------------------------------------------------------------------
+
+                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                        <div class='mt-4 mb-2'>All lists have been successfully reinstall.</div>
+                    `);
+
+                    // Show return button
+                    const returnBtn = BootstrapButton({
+                        type: 'primary',
+                        value: 'Reload',
+                        classes: ['w-100'],
+                        action(event) {
+                            // Bootstrap uses jQuery .trigger, won't work with .addEventListener
+                            $(modal.get()).on('hidden.bs.modal', event => {
+                                console.log('Modal close animiation end');
+                                console.log('Reload');
+
+                                location.reload();
+                            });
+
+                            modal.close();
+                        },
+                        parent: modalBody
+                    });
+
+                    returnBtn.add();
+
+                    // Scroll console to bottom (after launch button pushes it up);
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                },
+                classes: ['w-100'],
+                width: '100%',
+                parent: modalBody,
+                type: 'danger',
+                value: `Reinstall ${App.get('name')}`
+            });
+
+            deleteBtn.add();
+
+            const cancelBtn = BootstrapButton({
+                action(event) {
+                    console.log('Cancel delete');
+
+                    modal.close();
+                },
+                classes: ['w-100 mt-2'],
+                width: '100%',
+                parent: modalBody,
+                type: 'light',
+                value: 'Cancel'
+            });
+
+            cancelBtn.add();
+        },
+        centered: true,
+        showFooter: false,
+    });
+
+    modal.add();
+}
+
+/**
+ * 
+ * @param {*} event 
+ */
+export function ResetApp() {
+    const modal = Modal({
+        title: false,
+        disableBackdropClose: true,
+        scrollable: true,
+        async addContent(modalBody) {
+            modalBody.classList.add('install-modal');
+
+            // Core lists
+            const coreLists = Lists();
+            console.log(coreLists);
+
+            // App lists
+            const appLists = lists;
+            console.log(coreLists);
+
+            // All Lists
+            const allLists = Lists().concat(appLists);
+            console.log(allLists);
+
+            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                <h4 class='mb-3'>Select <strong>${App.get('name')}</strong> lists to reset</span></h4>
+                ${
+                    appLists
+                    .sort((a, b) => a.list - b.list)
+                    .map(item => {
+                        return /*html*/ `
+                            <div class="form-check ml-2">
+                                <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.list.split(' ').join('-')}" data-list='${item.list}'>
+                                <label class="form-check-label" for="checkbox-${item.list.split(' ').join('-')}">
+                                    ${item.list}
+                                </label>
+                            </div>
+                        `
+                    }).join('\n')
+                }
+                <h4 class='mt-4 mb-3'>Select <strong>Core</strong> lists to reset</h4>
+                ${
+                    coreLists
+                    .filter(item => item.list !== 'Settings')
+                    .sort((a, b) => a.list - b.list)
+                    .map(item => {
+                        return /*html*/ `
+                            <div class="form-check ml-2">
+                            <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.list.split(' ').join('-')}" data-list='${item.list}'>
+                                <label class="form-check-label" for="checkbox-${item.list.split(' ').join('-')}">
+                                    ${item.list}
+                                </label>
+                            </div>
+                        `
+                    }).join('\n')
+                }
+                <div class='alert alert-danger mt-5' style='border: none; border-radius: 10px;'>
+                    All items in selected lists will be deleted. This can't be undone. Proceed with caution.
+                </div>
+            `);
+
+            const deleteBtn = BootstrapButton({
+                async action(event) {
+                    console.log('Reinstall');
+
+                    // Get checked lists
+                    const checkedLists = [...modal.findAll('.form-check-input:checked')].map(node => allLists.find(item => item.list === node.dataset.list));
+
+                    console.log(checkedLists);
+
+                    if (!checkedLists.length) {
+                        alert('Select at least one list to reset.');
+                        return;
+                    }
+
+                    modal.find('.modal-content').style.width = 'unset';
+
+                    modalBody.style.height = `${modalBody.offsetHeight}px`;
+                    modalBody.style.width = `${modalBody.offsetWidth}px`;
+                    modalBody.style.overflowY = 'unset';
+                    modalBody.style.display = 'flex';
+                    modalBody.style.flexDirection = 'column',
+                    modalBody.style.transition = 'all 300ms ease-in-out';
+                    modalBody.innerHTML = '';
+                    modalBody.style.height = '80vh';
+                    modalBody.style.width = '80vw';
+
+                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                        <h3 class='console-title mb-0'>Reseting <strong>lists</strong></h3>
+                    `);
+
+                    let progressCount = 0;
+
+                    checkedLists.forEach(item => {
+                        const { fields } = item;
+
+                        // List + 1 for delete
+                        // List + 1 for reinstall
+                        progressCount = progressCount + 2;
+
+                        fields.forEach(field => {
+                            // Field +2 (add column to list and view)
+                            progressCount = progressCount + 2;
+                        });
+                    });
+
+                    const progressBar = ProgressBar({
+                        parent: modalBody,
+                        totalCount: progressCount
+                    });
+
+                    Store.add({
+                        name: 'install-progress-bar',
+                        component: progressBar
+                    });
+
+                    progressBar.add();
+
+                    const deleteContainer = Container({
+                        padding: '10px',
+                        parent: modalBody,
+                        overflow: 'hidden',
+                        width: '100%',
+                        height: '100%',
+                        radius: '10px',
+                        background: '#1E1E1E'
+                    });
+
+                    deleteContainer.add();
+
+                    const reinstallConsole = InstallConsole({
+                        type: 'secondary',
+                        text: '',
+                        margin: '0px',
+                        parent: deleteContainer
+                    });
+
+                    Store.add({
+                        name: 'install-console',
+                        component: reinstallConsole
+                    });
+
+                    reinstallConsole.add();
+                    reinstallConsole.get().classList.add('console');
+
+                    // 1. CORE: Add core lists to install-console
+                    reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code>Delete lists:</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    checkedLists.forEach(item => {
+                        const { list } = item;
+
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>- ${list}</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    });
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    // Add default lists first
+                    for (let list in checkedLists) {
+                        // Create lists
+                        await DeleteList(checkedLists[list]);
+                    }
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    // RESET ----------------------------------------------------------------------------------------
+
+                    // 1. CORE: Add core lists to install-console
+                    reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code>Create lists:</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    checkedLists.forEach(item => {
+                        const { list } = item;
+
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>- ${list}</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    });
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    // Add default lists first
+                    for (let list in checkedLists) {
+                        // Create lists
+                        await CreateList(checkedLists[list]);
+
+                        // Add spacer to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code style='opacity: 0;'>Spacer</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    }
+
+                    // Add Release Notes
+                    const releaseNoteExists = await Get({
+                        list: 'ReleaseNotes',
+                        filter: `Summary eq 'App installed'`
+                    });
+
+                    if (releaseNoteExists[0]) {
+                        // Add to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>'App installed' release note already exists.'</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    } else {
+                        await CreateItem({
+                            list: 'ReleaseNotes',
+                            data: {
+                                Summary: 'App installed',
+                                Description: 'Initial lists and items created.',
+                                Status: 'Published',
+                                MajorVersion: '0',
+                                MinorVersion: '1',
+                                PatchVersion: '0',
+                                ReleaseType: 'Current'
+                            }
+                        });
+
+                        console.log(`Added Release Note: App installed. Initial lists and items created.`);
+
+                        // Add to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>'App installed - Core lists and items created.' added to 'releaseNotes'</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    }
+
+                   if (lists.length) {
+                        // Add Release Notes
+                        const releaseNoteExists = await Get({
+                            list: 'ReleaseNotes',
+                            filter: `Summary eq '${App.get('name')} lists created'`
+                        });
+
+                        if (releaseNoteExists[0]) {
+                            // Add to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code>'${App.get('name')} lists created' release note already exists.'</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                        } else {
+                            // Add Release Notes
+                            await CreateItem({
+                                list: 'ReleaseNotes',
+                                data: {
+                                    Summary: `${App.get('name')} lists created`,
+                                    Description: lists.map(item => item.list).join(', ') + '.',
+                                    Status: 'Published',
+                                    MajorVersion: '0',
+                                    MinorVersion: '1',
+                                    PatchVersion: '0',
+                                    ReleaseType: 'Current'
+                                }
+                            });
+
+                            console.log(`Added Release Note: ${App.get('name')} lists created - ${lists.map(item => item.list).join(', ')}.`);
+
+                            // Add to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code>'${App.get('name')} lists created - ${lists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                        }
+                    }
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    // Create developer account
+                    const url = `${App.get('site')}/../_api/web/CurrentUser`;
+                    const fetchOptions = {
+                        headers: {
+                            'Content-Type': 'application/json; charset=UTF-8',
+                            'Accept': 'application/json; odata=verbose'
+                        }
+                    };
+                    const currentUser = await fetch(url, fetchOptions);
+                    const response = await currentUser.json();
+                    
+                    const appUser = await Get({
+                        list: App.get('usersList') || 'Users',
+                        select: coreLists.find(item => item.list === App.get('usersList') || item.list === 'Users').fields.map(field => field.name),
+                        filter: `Email eq '${response.d.Email}'`
+                    });
+            
+                    // User already exists
+                    if (appUser && appUser[0]) {
+                        console.log(`User account for '${response.d.Title}' already exists.`);
+
+                        // Add to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>User account for '${response.d.Title}' already exists.</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    } else {
+                        /** Create user */
+                        await CreateItem({
+                            list: 'Users',
+                            data: {
+                                Title: response.d.Title,
+                                Email: response.d.Email,
+                                LoginName: response.d.LoginName.split('|')[2],
+                                Role: 'Developer',
+                                Settings: App.get('userSettings')
+                            }
+                        });
+
+                        console.log(`Created user account for '${response.d.Title}' with role 'Developer'`);
+
+                        // Add to console
+                        reinstallConsole.append(/*html*/ `
+                            <div class='console-line'>
+                                <!-- <code class='line-number'>0</code> -->
+                                <code>User account for '${response.d.Title}' created with role 'Developer'</code>
+                            </div>
+                        `);
+
+                        // Scroll console to bottom
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    }
+
+                    // Add spacer to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='opacity: 0;'>Spacer</code>
+                        </div>
+                    `);
+
+                    // Scroll console to bottom
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                    let spacers = '===============';
+
+                    // for (let i = 0; i < App.get('name').length; i++) {
+                    //     spacers = spacers + '=';
+                    // }
+                    
+                    // 3. Add to console
+                    reinstallConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='color: mediumseagreen !important;'>${spacers}</code>
+                        </div>
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='color: mediumseagreen !important;'>| Lists reset |</code>
+                        </div>
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code style='color: mediumseagreen !important;'>${spacers}</code>
+                        </div>
+                    `);
+
+                    // END RESET ------------------------------------------------------------------------------------
+
+                    modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                        <div class='mt-4 mb-4'>All selected lists have been successfully reset. You can safely close this modal.</div>
+                    `);
+
+                    // Show return button
+                    const returnBtn = BootstrapButton({
+                        type: 'primary',
+                        value: 'Close',
+                        classes: ['w-100'],
+                        action(event) {
+                            // Bootstrap uses jQuery .trigger, won't work with .addEventListener
+                            $(modal.get()).on('hidden.bs.modal', event => {
+                                console.log('Modal close animiation end');
+                                console.log('Reload');
+
+                                Route(location.href.split('#')[1] || '');
+                            });
+
+                            modal.close();
+                        },
+                        parent: modalBody
+                    });
+
+                    returnBtn.add();
+
+                    // Scroll console to bottom (after launch button pushes it up);
+                    reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                },
+                classes: ['w-100'],
+                width: '100%',
+                parent: modalBody,
+                type: 'danger',
+                value: `Reset lists`
+            });
+
+            deleteBtn.add();
+
+            const cancelBtn = BootstrapButton({
+                action(event) {
+                    console.log('Cancel delete');
+
+                    modal.close();
+                },
+                classes: ['w-100 mt-2'],
+                width: '100%',
+                parent: modalBody,
+                type: 'light',
+                value: 'Cancel'
+            });
+
+            cancelBtn.add();
+        },
+        centered: true,
+        showFooter: false,
+    });
+
+    modal.add();
 }
 
 /**
@@ -3559,7 +5220,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
     /** Set browswer history state */
     History({
         url: `${location.href.split('#')[0]}${(path) ? `#${path}` : ''}`,
-        title: `${App.get('title')}${(path) ? ` - ${pathAndQuery[0]}` : ''}`
+        title: `${App.get('name')}${(path) ? ` - ${pathAndQuery[0]}` : ''}`
         // title: `${App.title}${(path) ? ` - ${path}` : ''}`
     });
 
@@ -3996,6 +5657,730 @@ export function Start(param) {
             }
         }
     }
+}
+
+/**
+ * 
+ * @param {*} param
+ */
+export function UpdateApp() {
+    const modal = Modal({
+        title: false,
+        disableBackdropClose: true,
+        scrollable: true,
+        async addContent(modalBody) {
+            modalBody.classList.add('install-modal');
+
+            // Show loading
+            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center'>
+                    <div class="mb-2" style='font-weight: 600; color: darkgray'>Loading lists</div>
+                    <div class="spinner-grow" style='color: darkgray' role="status"></div>
+                </div>
+            `);
+
+            // Check lists
+            const listsToIgnore =  ['App', 'Composed Looks', 'Documents', 'Master Page Gallery', 'MicroFeed', 'Site Assets', 'Site Pages'];
+            const coreLists = Lists();
+            const appLists = lists;
+            const allLists = coreLists.concat(appLists);
+            const webLists = await GetWebLists();
+            const installedLists = webLists.map(item => item.Title).filter(x => allLists.map(item => item.list).includes(x));
+            const diffToCreate = allLists.map(item => item.list).filter(x => !webLists.map(item => item.Title).includes(x));
+            const diffToDelete = webLists.map(item => item.Title).filter(x => !allLists.map(item => item.list).includes(x) && !listsToIgnore.includes(x));
+            console.log('All Lists:', allLists);
+            console.log('Web Lists:', webLists);
+            console.log('Installed Lists:', installedLists);
+            console.log('Create:', diffToCreate);
+            console.log('Delete:', diffToDelete);
+
+            // News lists that need to be created
+            const toCreate = diffToCreate.map(list => allLists.find(item => item.list === list));
+
+            // Existing lists that need to be deleted
+            // TODO: Show checklist of lists that could be deleted, default to DO NOT Delete
+            const toDelete = diffToDelete.map(list => webLists.find(item => item.Title === list));
+
+            // Has the schema changed on any lists?
+            const fieldsToIgnore = ['ContentTypeId', 'Title', '_ModerationComments', 'File_x0020_Type', 'ID', 'Id', 'ContentType', 'Modified', 'Created', 'Author', 'Editor', '_HasCopyDestinations', '_CopySource', 'owshiddenversion', 'WorkflowVersion', '_UIVersion', '_UIVersionString', 'Attachments', '_ModerationStatus', 'Edit', 'LinkTitleNoMenu', 'LinkTitle', 'LinkTitle2', 'SelectTitle', 'InstanceID', 'Order', 'GUID', 'WorkflowInstanceID', 'FileRef', 'FileDirRef', 'Last_x0020_Modified', 'Created_x0020_Date', 'FSObjType', 'SortBehavior', 'PermMask', 'FileLeafRef', 'UniqueId', 'SyncClientId', 'ProgId', 'ScopeId', 'HTML_x0020_File_x0020_Type', '_EditMenuTableStart', '_EditMenuTableStart2', '_EditMenuTableEnd', 'LinkFilenameNoMenu', 'LinkFilename', 'LinkFilename2', 'DocIcon', 'ServerUrl', 'EncodedAbsUrl', 'BaseName', 'MetaInfo', '_Level', '_IsCurrentVersion', 'ItemChildCount', 'FolderChildCount', 'AppAuthor', 'AppEditor'];
+            const schemaAdd = [];
+            const schemaDelete = [];
+
+            installedLists
+            .map(listName => {
+                const { list, fields } = allLists.find(item => item.list === listName);
+
+                return { list, fields, web: webLists.find(item => item.Title === listName) };
+            })
+            .forEach(item => {
+                const { list, fields, web } = item;
+
+                const webFields = web.Fields.results.map(webField => {
+                    const { StaticName, TypeDisplayName } = webField
+
+                    return { name: StaticName, type: TypeDisplayName }
+                });
+
+                const fieldsToCreate = fields.map(item => item.name).filter(x => !webFields.map(item => item.name).includes(x));
+                const fieldsToDelete = webFields.map(item => item.name).filter(x => !fields.map(item => item.name).includes(x) && !fieldsToIgnore.includes(x));
+
+                if (fieldsToCreate.length) {
+                    schemaAdd.push({
+                        list,
+                        fields: fieldsToCreate
+                    });
+                }
+
+                if (fieldsToDelete.length) {
+                    schemaDelete.push({
+                        list,
+                        fields: fieldsToDelete
+                    });
+                }
+
+                console.log('List:', list);
+                console.log('--------------------');
+                // console.log('List Fields:', fields);
+                // console.log('Web Fields:', webFields);
+                console.log('Create fields:', fieldsToCreate);
+                console.log('Remove fields:', fieldsToDelete);
+                console.log(' ');
+            });
+
+            console.log('Fields to add:', schemaAdd);
+            console.log('Fields to delete:', schemaDelete);
+            
+            // Remove loading
+            modal.find('.loading-spinner').remove();
+
+            // Are there new lists in lists.js that need to be created?
+            if (toCreate.length) {
+                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                    <div class='alert alert-success mb-4'>
+                        <h4 class='mb-4'>Create lists</h4>
+                        <div class='create-lists alert alert-light'>
+                            ${
+                                toCreate
+                                .sort((a, b) => a.list - b.list)
+                                .map(item => {
+                                    return /*html*/ `
+                                        <div class="form-check ml-2">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.list.split(' ').join('-')}" data-list='${item.list}' checked>
+                                            <label class="form-check-label" for="checkbox-${item.list.split(' ').join('-')}">
+                                                ${item.list}
+                                            </label>
+                                        </div>
+                                    `
+                                }).join('\n')
+                            }
+                        </div>
+                    </div>
+                `);
+            }
+
+            // Choose columns to add
+            if (schemaAdd.length) {
+                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                    <div class='alert alert-success mb-4'>    
+                        <h4 class='mb-4'>Add new fields to installed lists</h4>
+                        <div class='schema-add'>
+                            ${
+                                schemaAdd
+                                .sort((a, b) => a.list - b.list)
+                                .map(item => {
+                                    const { list, fields } = item;
+                                    return /*html*/ `
+                                        <div class='alert alert-light'>
+                                            <h5 data-list='${list}'>${list}</h5>
+                                            ${
+                                                fields.map(field => {
+                                                    return /*html*/ `
+                                                        <div class="form-check ml-2">
+                                                            <input class="form-check-input" type="checkbox" value="${field}" id="checkbox-${field}" data-list='${list}' checked>
+                                                            <label class="form-check-label" for="checkbox-${field}">
+                                                                ${field}
+                                                            </label>
+                                                        </div>
+                                                    `
+                                                }).join('\n')
+                                            }
+                                        </div>
+                                    `;
+                                }).join('\n')
+                            }
+                        </div>
+                    </div>
+                `);
+            }
+
+            // Have lists been removed from list.js that need to be removed?
+            if (toDelete.length) {
+                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                    <div class='alert alert-danger mb-4'>
+                        <h4 class='mb-4'>Delete lists</h4>
+                        <div class='delete-lists alert alert-light'>
+                            ${
+                                diffToDelete
+                                // .sort((a, b) => a.list - b.list)
+                                .sort((a, b) => a - b)
+                                .map(item => {
+                                    return /*html*/ `
+                                        <div class="form-check ml-2">
+                                            <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.split(' ').join('-')}" data-list='${item}'>
+                                            <label class="form-check-label" for="checkbox-${item.split(' ').join('-')}">
+                                                ${item}
+                                            </label>
+                                        </div>
+                                    `
+                                }).join('\n')
+                            }
+                        </div>
+                    </div>
+                `);
+            }
+
+
+            // Choose columns to delete (DESTRUCTIVE)
+            if (schemaDelete.length) {
+                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                    <div class='alert alert-danger mb-4'>
+                        <h4 class='mb-4'>Delete fields from installed lists</h4>
+                        <div class='schema-delete'>
+                            ${
+                                schemaDelete
+                                .sort((a, b) => a.list - b.list)
+                                .map(item => {
+                                    const { list, fields } = item;
+                                    return /*html*/ `
+                                        <div class='alert alert-light'>
+                                            <h5 data-list='${list}'>${list}</h5>
+                                            ${
+                                                fields.map(field => {
+                                                    return /*html*/ `
+                                                        <div class="form-check ml-2">
+                                                            <input class="form-check-input" type="checkbox" value="${field}" id="checkbox-${field}" data-list='${list}'>
+                                                            <label class="form-check-label" for="checkbox-${field}">
+                                                                ${field}
+                                                            </label>
+                                                        </div>
+                                                    `
+                                                }).join('\n')
+                                            }
+                                        </div>
+                                    `;
+                                }).join('\n')
+                            }
+                        </div>
+                    </div>
+                `);
+            }
+
+            if (toCreate.length || toDelete.length || schemaAdd.length || schemaDelete.length) {
+                const installBtn = BootstrapButton({
+                    async action(event) {
+                        // Get checked lists
+                        const checkedCreate = [...modal.findAll('.create-lists .form-check-input:checked')].map(node => allLists.find(item => item.list === node.dataset.list));
+                        const checkedDelete = [...modal.findAll('.delete-lists .form-check-input:checked')].map(node => webLists.find(item => item.Title === node.dataset.list));
+                        const checkedSchemaAdd = [...modal.findAll('.schema-add .form-check-input:checked')].map(node => {
+                            const list = node.dataset.list;
+                            const name = node.value;
+                            const field = allLists.find(item => item.list === list).fields.find(item => item.name == name);
+
+                            return { 
+                                list, 
+                                field 
+                            };
+                        });
+                        const checkedSchemaDelete = [...modal.findAll('.schema-delete .form-check-input:checked')].map(node => {
+                            return { list: node.dataset.list, name: node.value };
+                        });
+
+                        console.log('Checked Add', checkedSchemaAdd);
+                        console.log('Checked Delete', checkedSchemaDelete);
+
+                        // if (!checkedCreate.concat(checkedDelete).length) {
+                        //     alert('Select at least one list');
+                        //     return;
+                        // }
+
+                        modal.find('.modal-content').style.width = 'unset';
+
+                        modalBody.style.height = `${modalBody.offsetHeight}px`;
+                        modalBody.style.width = `${modalBody.offsetWidth}px`;
+                        modalBody.style.overflowY = 'unset';
+                        modalBody.style.display = 'flex';
+                        modalBody.style.flexDirection = 'column',
+                        modalBody.style.transition = 'all 300ms ease-in-out';
+                        modalBody.innerHTML = '';
+                        modalBody.style.height = '80vh';
+                        modalBody.style.width = '80vw';
+
+                        modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                            <h3 class='console-title mb-0'>Reseting <strong>lists</strong></h3>
+                        `);
+
+                        // List delete and schema delete only increment progressbar once for each pass
+                        let progressCount = checkedDelete.length + + checkedSchemaDelete.length;
+
+                        // Add progress count for lists to create
+                        // TODO: Refactor to MAP => REDUCE
+                        checkedCreate.forEach(item => {
+                            const { fields } = item;
+
+                            // List + 1 for install
+                            progressCount = progressCount + 1;
+
+                            fields.forEach(field => {
+                                // Field +2 (add column to list and view)
+                                progressCount = progressCount + 2;
+                            });
+                        });
+
+                        // TODO: Refactor to MAP => REDUCE
+                        checkedSchemaAdd.forEach(item => {
+                            // +2 Create/Add to view
+                            progressCount = progressCount + 2;
+                        });
+
+                        const progressBar = ProgressBar({
+                            parent: modalBody,
+                            totalCount: progressCount
+                        });
+
+                        Store.add({
+                            name: 'install-progress-bar',
+                            component: progressBar
+                        });
+
+                        progressBar.add();
+
+                        const deleteContainer = Container({
+                            padding: '10px',
+                            parent: modalBody,
+                            overflow: 'hidden',
+                            width: '100%',
+                            height: '100%',
+                            radius: '10px',
+                            background: '#1E1E1E'
+                        });
+
+                        deleteContainer.add();
+
+                        const reinstallConsole = InstallConsole({
+                            type: 'secondary',
+                            text: '',
+                            margin: '0px',
+                            parent: deleteContainer
+                        });
+
+                        Store.add({
+                            name: 'install-console',
+                            component: reinstallConsole
+                        });
+
+                        reinstallConsole.add();
+                        reinstallConsole.get().classList.add('console');
+
+                        // CREATE LISTS ---------------------------------------------------------------------------------
+
+                        if (checkedCreate.length) {
+                            // 1. CORE: Add core lists to install-console
+                            reinstallConsole.append(/*html*/ `
+                                    <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code>Create lists:</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                            checkedCreate.forEach(item => {
+                                const { list } = item;
+
+                                reinstallConsole.append(/*html*/ `
+                                    <div class='console-line'>
+                                        <!-- <code class='line-number'>0</code> -->
+                                        <code>- ${list}</code>
+                                    </div>
+                                `);
+
+                                // Scroll console to bottom
+                                reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                            });
+
+                            // Add spacer to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='opacity: 0;'>Spacer</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                            // Add default lists first
+                            for (let list in checkedCreate) {
+                                // Create lists
+                                await CreateList(checkedCreate[list]);
+
+                                // Add spacer to console
+                                reinstallConsole.append(/*html*/ `
+                                    <div class='console-line'>
+                                        <!-- <code class='line-number'>0</code> -->
+                                        <code style='opacity: 0;'>Spacer</code>
+                                    </div>
+                                `);
+
+                                // Scroll console to bottom
+                                reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                            }
+
+                            // Add Release Notes
+                            await CreateItem({
+                                list: 'ReleaseNotes',
+                                data: {
+                                    Summary: `New app lists created`,
+                                    Description: checkedCreate.map(item => item.list).join(', ') + '.',
+                                    Status: 'Published',
+                                    MajorVersion: '0',
+                                    MinorVersion: '1',
+                                    PatchVersion: '0',
+                                    ReleaseType: 'Current'
+                                }
+                            });
+
+                            console.log(`Added Release Note: ${App.get('name')} lists created - ${checkedCreate.map(item => item.list).join(', ')}.`);
+
+                            // Add to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code>'New ${App.get('name')} lists created - ${checkedCreate.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                            // Add spacer to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='opacity: 0;'>Spacer</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                            let spacers = '===================';
+                            
+                            // 3. Add to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: mediumseagreen !important;'>${spacers}</code>
+                                </div>
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: mediumseagreen !important;'>| Lists installed |</code>
+                                </div>
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: mediumseagreen !important;'>${spacers}</code>
+                                </div>
+                                ${
+                                    checkedSchemaAdd.length || checkedDelete || checkedSchemaDelete.length ?
+                                    /*html*/ `
+                                        <div class='console-line'>
+                                            <!-- <code class='line-number'>0</code> -->
+                                            <code style='opacity: 0;'>Spacer</code>
+                                        </div>
+                                    ` :
+                                    ''
+                                }
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                        }
+
+                        // END CREATE -----------------------------------------------------------------------------------
+
+                        // ADD COLUMNS ----------------------------------------------------------------------------------
+
+                        if (checkedSchemaAdd.length) {
+                            for (let item in checkedSchemaAdd) {
+                                const { list, field } = checkedSchemaAdd[item];
+
+                                await CreateColumn({
+                                    list,
+                                    field
+                                });
+                            }
+
+                            let spacers = '===================';
+                            
+                            // Add to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='opacity: 0;'>Spacer</code>
+                                </div>
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: mediumseagreen !important;'>${spacers}</code>
+                                </div>
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: mediumseagreen !important;'>| Columns created |</code>
+                                </div>
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: mediumseagreen !important;'>${spacers}</code>
+                                </div>
+                                ${
+                                    checkedDelete.length || checkedSchemaDelete.length ?
+                                    /*html*/ `
+                                        <div class='console-line'>
+                                            <!-- <code class='line-number'>0</code> -->
+                                            <code style='opacity: 0;'>Spacer</code>
+                                        </div>
+                                    ` :
+                                    ''
+                                }
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                        }
+
+                        // END ADD COLUMNS ------------------------------------------------------------------------------
+
+                        // DELETE LISTS ---------------------------------------------------------------------------------
+
+                        if (checkedDelete.length) {
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code>Delete lists:</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                            checkedDelete.forEach(item => {
+                                const { Title} = item;
+
+                                reinstallConsole.append(/*html*/ `
+                                    <div class='console-line'>
+                                        <!-- <code class='line-number'>0</code> -->
+                                        <code>- ${Title}</code>
+                                    </div>
+                                `);
+
+                                // Scroll console to bottom
+                                reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                            });
+
+                            // Add spacer to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='opacity: 0;'>Spacer</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                            // Add default lists first
+                            for (let list in checkedDelete) {
+                                // Create lists
+                                await DeleteList({
+                                    list: checkedDelete[list].Title
+                                });
+                            }
+
+                            // Add spacer to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='opacity: 0;'>Spacer</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+
+                            // Add Release Notes
+                            await CreateItem({
+                                list: 'ReleaseNotes',
+                                data: {
+                                    Summary: `App Lists deleted`,
+                                    Description: checkedDelete.map(item => item.Title).join(', ') + '.',
+                                    Status: 'Published',
+                                    MajorVersion: '0',
+                                    MinorVersion: '1',
+                                    PatchVersion: '0',
+                                    ReleaseType: 'Current'
+                                }
+                            });
+
+                            console.log(`Added Release Note: App lists deleted - ${checkedDelete.map(item => item.Title).join(', ')}.`);
+                            
+                            // Add to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code>'${App.get('name')} lists deleted - ${checkedDelete.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                            
+                            // Add to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='opacity: 0;'>Spacer</code>
+                                </div>
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: crimson !important;'>=================</code>
+                                </div>
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: crimson !important;'>| Lists deleted |</code>
+                                </div>
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: crimson !important;'>=================</code>
+                                </div>
+                                ${
+                                    checkedSchemaDelete.length ?
+                                    /*html*/ `
+                                        <div class='console-line'>
+                                            <!-- <code class='line-number'>0</code> -->
+                                            <code style='opacity: 0;'>Spacer</code>
+                                        </div>
+                                    ` :
+                                    ''
+                                }
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                        }
+
+                        // END DELETE -----------------------------------------------------------------------------------
+
+                        // DELETE COLUMNS -------------------------------------------------------------------------------
+
+                        if (checkedSchemaDelete.length) {
+                            for (let item in checkedSchemaDelete) {
+                                const { list, name } = checkedSchemaDelete[item];
+
+                                await DeleteColumn({
+                                    list,
+                                    name
+                                });
+                            }
+
+                            // Add to console
+                            reinstallConsole.append(/*html*/ `
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='opacity: 0;'>Spacer</code>
+                                </div>
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: crimson !important;'>===================</code>
+                                </div>
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: crimson !important;'>| Columns deleted |</code>
+                                </div>
+                                <div class='console-line'>
+                                    <!-- <code class='line-number'>0</code> -->
+                                    <code style='color: crimson !important;'>===================</code>
+                                </div>
+                            `);
+
+                            // Scroll console to bottom
+                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                        }
+
+                        // END DELETE COLUMNS ---------------------------------------------------------------------------
+
+                        modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                            <div class='mt-4 mb-4'><strong>${App.get('name')}</strong> updated.</div>
+                        `);
+
+                        // Close modal button
+                        const returnBtn = BootstrapButton({
+                            type: 'primary',
+                            value: 'Close',
+                            classes: ['w-100'],
+                            action(event) {
+                                // Bootstrap uses jQuery .trigger, won't work with .addEventListener
+                                $(modal.get()).on('hidden.bs.modal', event => {
+                                    console.log('Modal close animiation end');
+                                    console.log('Reload');
+
+                                    Route(location.href.split('#')[1] || '');
+                                });
+
+                                modal.close();
+                            },
+                            parent: modalBody
+                        });
+
+                        returnBtn.add();
+
+                        // Scroll console to bottom (after launch button pushes it up);
+                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
+                    },
+                    classes: ['w-100', 'mt-2'],
+                    width: '100%',
+                    parent: modalBody,
+                    type: 'primary',
+                    value: `Update ${App.get('name')}`
+                });
+
+                installBtn.add();
+            }
+
+            if (!toCreate.length && !toDelete.length && !schemaAdd.length && !schemaDelete.length) {
+                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                    <div class='alert alert-success'><strong>${App.get('name')}</strong> is up-to-date</div>
+                `);
+            }
+
+            const cancelBtn = BootstrapButton({
+                action(event) {
+                    console.log('Cancel install');
+
+                    modal.close();
+                },
+                classes: ['w-100 mt-2'],
+                width: '100%',
+                parent: modalBody,
+                type: 'light',
+                value: 'Cancel'
+            });
+
+            cancelBtn.add();
+        },
+        centered: true,
+        showFooter: false,
+    });
+
+    modal.add();
 }
 
 /**
