@@ -2,7 +2,9 @@
   "name": "robi",
   "version": "1.0.1",
   "description": "Starter app for SharePoint 2013 on premise.",
-  "keywords": ["SharePoint"],
+  "keywords": [
+    "SharePoint"
+  ],
   "author": "Stephen Matheis",
   "license": "ISC",
   "main": "app.js",
