@@ -34,16 +34,16 @@ export default [
             //         'Three'
             //     ]
             // },
-            {
-                name: 'NewColumn',
-                display: 'New Column',
-                type: 'slot'
-            },
-            {
-                name: 'NewColumn2',
-                display: 'New Column 2',
-                type: 'mlot'
-            }
+            // {
+            //     name: 'NewColumn',
+            //     display: 'New Column',
+            //     type: 'slot'
+            // },
+            // {
+            //     name: 'NewColumn2',
+            //     display: 'New Column 2',
+            //     type: 'mlot'
+            // }
         ]
     },
     {
