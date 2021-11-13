@@ -311,7 +311,7 @@ export function Component(param) {
 
             parentElement.insertAdjacentElement(position || 'beforeend', newElement);
         } catch (error) {
-            console.log(error)
+            console.log('Parent element removed from DOM. No need to render component.');
         }
     }
 
@@ -393,16 +393,16 @@ export function Component(param) {
             return param;
         },
         get() {
-            return document.querySelector(`#${id}`);
+            return document?.querySelector(`#${id}`);
         },
         find(selector) {
-            return this.get().querySelector(selector);
+            return this.get()?.querySelector(selector);
         },
         findAll(selector) {
-            return this.get().querySelectorAll(selector);
+            return this.get()?.querySelectorAll(selector);
         },
         closest(selector) {
-            return this.get().closest(selector);
+            return this.get()?.closest(selector);
         },
         // element() {
         //     const parser = new DOMParser();
@@ -2018,7 +2018,7 @@ export async function Get(param) {
                 return data.d.results;
             }
         } catch (error) {
-            console.log(error);
+            console.log('Fetch request aborted.');
         }
     } else if (App.get('mode') === 'dev' || mode === 'dev') {
         const queryFilterString = [
@@ -5332,7 +5332,7 @@ export async function SendEmail(param) {
             },
             From: From,
             To: {
-                results: To
+                results: [To]
             },
             CC: {
                 results: CC || []
@@ -5341,6 +5341,8 @@ export async function SendEmail(param) {
             Subject: Subject
         }
     };
+
+    console.log(JSON.stringify(properties));
 
     const response = await fetch(`${App.get('site')}/_api/SP.Utilities.Utility.SendEmail`, {
         method: 'POST',

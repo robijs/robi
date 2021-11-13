@@ -36,13 +36,12 @@ export default async function Home() {
         async action(event) {
             const modal = Modal({
                 title: false,
-                disableBackdropClose: true,
+                // disableBackdropClose: true,
                 background: '#292D3E',
                 async addContent(modalBody) {
                     const loading = LoadingSpinner({
                         message: 'Loading /App/src/Lists.js',
-                        classes: ['mt-3', 'mb-3'],
-                        font: 'Inconsolata',
+                        classes: ['mt-3', 'mb-3', 'loading-file'],
                         parent: modalBody
                     });
 
@@ -69,6 +68,12 @@ export default async function Home() {
                                 indent: true
                             });
                         },
+                        'Ctrl-S'(cm) {
+                            console.log('save file');
+                        },
+                        'Ctrl-W'(cm) {
+                            console.log('close file, check if saved');
+                        }
                     });
 
                     const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('lists.js')/$value`;
@@ -89,16 +94,86 @@ export default async function Home() {
                     editor.setOption('theme', 'material-palenight');
                     editor.getDoc().setValue(value);
 
+                    // Intellisense
+                    var ExcludedIntelliSenseTriggerKeys = {
+                        "8": "backspace",
+                        "9": "tab",
+                        "13": "enter",
+                        "16": "shift",
+                        "17": "ctrl",
+                        "18": "alt",
+                        "19": "pause",
+                        "20": "capslock",
+                        "27": "escape",
+                        "33": "pageup",
+                        "34": "pagedown",
+                        "35": "end",
+                        "36": "home",
+                        "37": "left",
+                        "38": "up",
+                        "39": "right",
+                        "40": "down",
+                        "45": "insert",
+                        "46": "delete",
+                        "91": "left window key",
+                        "92": "right window key",
+                        "93": "select",
+                        "107": "add",
+                        "109": "subtract",
+                        "110": "decimal point",
+                        "111": "divide",
+                        "112": "f1",
+                        "113": "f2",
+                        "114": "f3",
+                        "115": "f4",
+                        "116": "f5",
+                        "117": "f6",
+                        "118": "f7",
+                        "119": "f8",
+                        "120": "f9",
+                        "121": "f10",
+                        "122": "f11",
+                        "123": "f12",
+                        "144": "numlock",
+                        "145": "scrolllock",
+                        "186": "semicolon",
+                        "187": "equalsign",
+                        "188": "comma",
+                        "189": "dash",
+                        "190": "period",
+                        "191": "slash",
+                        "192": "graveaccent",
+                        "220": "backslash",
+                        "222": "quote"
+                    }
+
+                    editor.on('keyup', (editor, event) => {
+                        var __Cursor = editor.getDoc().getCursor();
+                        var __Token = editor.getTokenAt(__Cursor);
+
+                        if (!editor.state.completionActive &&
+                            !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()] &&
+                            (__Token.type == "tag" || __Token.string == " " || __Token.string == "<" || __Token.string == "/"))
+                        {
+                            CodeMirror.commands.autocomplete(editor, null, { completeSingle: false });
+                        }
+                    });
+
                     // Watch for changes
                     editor.on('change', event => {
                         if (value === editor.doc.getValue()) {
+                            console.log('unchanged');
+
                             const dot = modal.find('.changed-dot');
 
                             if (dot) {
                                 dot.remove();
                             }
-                            console.log('unchanged');
+
+                            modifyBtn.get().disabled = true;
                         } else {
+                            console.log('changed');
+
                             const dot = modal.find('.changed-dot');
 
                             if (!dot) {
@@ -106,7 +181,8 @@ export default async function Home() {
                                     <div class='changed-dot' style='width: 10px; height: 10px; background: #dee2e6; border-radius: 50%; position: absolute; top: 1rem; right: 1rem;'></div>
                                 `);
                             }
-                            console.log('changed');
+
+                            modifyBtn.get().disabled = false;
                         }
                     });
 
@@ -151,19 +227,20 @@ export default async function Home() {
                             }, 1000);
                         },
                         classes: ['w-100 mt-4'],
+                        disabled: true, // enable if changed
                         width: '100%',
                         parent: modalBody,
                         type: 'success',
-                        value: 'Save'
+                        value: 'Save and close'
                     });
 
                     modifyBtn.add();
 
                     const cancelBtn = BootstrapButton({
                         action(event) {
-                            $(modal.get()).on('hidden.bs.modal', event => {
-                                console.log('modal close animiation end');
-                            });
+                            // $(modal.get()).on('hidden.bs.modal', event => {
+                            //     console.log('modal close animiation end');
+                            // });
 
                             modal.close();
                         },
@@ -181,6 +258,12 @@ export default async function Home() {
             });
 
             modal.add();
+
+            $(modal.get()).on('hide.bs.modal', event => {
+                console.log('check if saved');
+
+                // return true;
+            });
         }
     });
 

@@ -37,6 +37,10 @@
     background: #292D3E;
 }
 
+.loading-file {
+    font-family: 'Inconsolata', monospace;    
+}
+
 /* Add padding to all modals */
 /* .modal-content {
     padding: 30px;

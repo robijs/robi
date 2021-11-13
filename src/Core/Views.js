@@ -506,33 +506,36 @@ export async function Developer(param) {
 
     // attachFilesButton.add();
 
-    // /** Test Send Email */
-    // const sendEmailButton = BootstrapButton({
-    //     async action(event) {
-    //         await SendEmail({
-    //             From: 'i:0e.t|dod_adfs_provider|1098035555@mil',
-    //             To: 'i:0e.t|dod_adfs_provider|1098035555@mil',
-    //             // CC: [
-    //             //     ''
-    //             // ],
-    //             Subject: `Test Subject`,
-    //             /** @todo replace hard codeded domain */
-    //             Body: /*html*/ `
-    //                 <div style="font-family: 'Calibri', sans-serif; font-size: 11pt;">
-    //                     <p>
-    //                         Test body.
-    //                     </p>
-    //                 </div>
-    //             `
-    //         });
-    //     },
-    //     parent,
-    //     type: 'btn-outline-success',
-    //     value: 'Send Email',
-    //     margin: '0px 0px 0px 20px'
-    // });
+    /** Test Send Email */
+    const sendEmailButton = BootstrapButton({
+        async action(event) {
+            await SendEmail({
+                From: 'stephen.a.matheis.ctr@mail.mil',
+                To: 'stephen.a.matheis.ctr@mail.mil',
+                CC: [
+                    'stephen.a.matheis.ctr@mail.mil'
+                ],
+                Subject: `Test Subject`,
+                Body: /*html*/ `
+                    <div style="font-family: 'Calibri', sans-serif; font-size: 11pt;">
+                        <p>
+                            Test body. <strong>Bold</strong>. <em>Emphasized</em>.
+                        </p>
+                        <p>
+                            <a href='https://google.com'>Google</a>
+                        </p>
+                    </div>
+                `
+            });
+        },
+        parent,
+        classes: ['mt-5'],
+        type: 'outline-success',
+        value: 'Send Email',
+        margin: '0px 0px 0px 20px'
+    });
 
-    // sendEmailButton.add();
+    sendEmailButton.add();
     
     /** Open modal */
     if (param.pathParts.length === 3) {

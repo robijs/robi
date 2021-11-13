@@ -2200,6 +2200,13 @@ export async function Table(param) {
         items
     } = param;
 
+    const tableContainer = Container({
+        display: 'block',
+        parent
+    });
+
+    tableContainer.add();
+
     /** Heading */
     if (heading || list) {
         const legendHeading = Heading({
@@ -2207,7 +2214,7 @@ export async function Table(param) {
             size: headingSize,
             color: headingColor,
             margin: headingMargin || '20px 0px 15px 0px',
-            parent
+            parent: tableContainer
         });
     
         legendHeading.add();
@@ -2229,7 +2236,7 @@ export async function Table(param) {
 
     if (list) {
         // Show loading
-        parent.append(/*html*/ `
+        tableContainer.append(/*html*/ `
             <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center'>
                 <div class="mb-2" style='font-weight: 600; color: darkgray'>Loading ${list}</div>
                 <div class="spinner-grow" style='color: darkgray' role="status"></div>
@@ -2250,7 +2257,11 @@ export async function Table(param) {
         }
         
         // Remove loading
-        parent.find('.loading-spinner').remove();
+        // FIXME: Shouldn't have to use optional chaining
+        // wrap in try catch?
+        // or convert to Robi component?
+        // how would react handle this?
+        tableContainer.find('.loading-spinner')?.remove();
 
         // FIXME: Side effect, added element to fields array.
         // Add Id field
@@ -2538,7 +2549,7 @@ export async function Table(param) {
                             }
                         ]
                     },
-                    parent
+                    parent: tableContainer
                 });
     
                 newModal.add();
@@ -2664,7 +2675,7 @@ export async function Table(param) {
                         }
                     ]
                 },
-                parent
+                parent: tableContainer
             });
 
             rowModal.add();
@@ -2697,7 +2708,7 @@ export async function Table(param) {
             
             // console.log(param);
         },
-        parent
+        parent: tableContainer
     });
 
     table.add();

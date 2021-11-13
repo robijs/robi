@@ -19,11 +19,11 @@ export default [
                 display: 'Multiple lines of text',
                 type: 'mlot'
             },
-            {
-                name: 'Number',
-                display: 'Number',
-                type: 'number'
-            },
+            // {
+            //     name: 'Number',
+            //     display: 'Number',
+            //     type: 'number'
+            // },
             // {
             //     name: 'Choice',
             //     display: 'Choice',

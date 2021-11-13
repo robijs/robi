@@ -919,6 +919,7 @@ export function Banner(param) {
 export function BootstrapButton(param) {
     const {
         action,
+        disabled,
         parent,
         position,
         classes,
@@ -928,7 +929,7 @@ export function BootstrapButton(param) {
 
     const component = Component({
         html: /*html*/ `
-            <button type="button" class="btn btn-${type} ${classes?.join(' ')}">${value}</button>
+            <button type="button" class="btn btn-${type} ${classes?.join(' ')}" ${disabled ? 'disabled' : ''}>${value}</button>
         `,
         style: /*css*/ `
             
