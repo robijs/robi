@@ -34,15 +34,7 @@
             location.href = "ie.aspx";
         }
     </script>
-    <!-- <script src="../Libraries/jquery-3.4.1.js"></script>
-    <script src="../Libraries/bootstrap.bundle.min.js"></script>
-    <script src="../Libraries/datatables.min.js"></script>
-    <script src="../Libraries/dataTables.buttons.min.js"></script>
-    <script src="../Libraries/Chart.min.js"></script> -->
-    
-    <script src="../Libraries/combined.js"></script>
-
-    <!-- <script src="../Libraries/lib.js"></script> -->
+    <script src="../Libraries/lib.js"></script>
     <script type="module" src="../app.js"></script>
 </body>
 </html>
