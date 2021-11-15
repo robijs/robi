@@ -2378,6 +2378,16 @@ export function DataTable(param) {
                 border-bottom-color: lightgray;
             }
 
+            /* Toolbar row limit selector */
+            #id_wrapper .dataTables_length label {
+                display: flex;
+                align-items: center;
+            }
+
+            #id_wrapper .dataTables_length label select {
+                margin: 0px 10px;
+            }
+
             ${addCSS || ''}
         `,
         parent,
@@ -4612,15 +4622,19 @@ export function LoadingSpinner(param) {
             </div>
         `,
         style:  /*css*/ `
-           ${
-               font ?
-               /*css */ `
+            #id * {
+                color: inherit;
+            }
+        
+            ${
+                font ?
+                /*css */ `
                     #id * {
                         font-family: ${font}
                     }
-               ` :
-               ''
-           }
+                ` :
+                ''
+            }
         `,
         parent,
         position,
@@ -8545,6 +8559,8 @@ export function SiteUsage(param) {
     const screenWidth = window.screen.width;
     const chartWidth = screenWidth > 1500 ? 800 : 500;
 
+    console.log('add chart:', chartWidth);
+
     const component = Component({
         html: /*html*/ `
             <div class='dashboard-long-card'>
@@ -8677,6 +8693,8 @@ export function SiteUsage(param) {
 
     component.clearChart = () => {
         const chartContainer = component.find('.dashboard-long-card-chart-container');
+
+        console.log('clear chart:', chartWidth);
 
         chartContainer.innerHTML = /*html*/ `<canvas class="myChart" width="${chartWidth}" height="275"></canvas>`;
     }
@@ -9149,8 +9167,20 @@ export function SvgDefs(param) {
                     </symbol>
                     <!-- Bootstrap: Trash -->
                     <symbol id="icon-bs-trash" viewBox="0 0 16 16">
-                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </symbol>
+                    <!-- Bootstrap Code -->
+                    <symbol id="icon-bs-code" viewBox="0 0 16 16">
+                        <path d="M5.854 4.854a.5.5 0 1 0-.708-.708l-3.5 3.5a.5.5 0 0 0 0 .708l3.5 3.5a.5.5 0 0 0 .708-.708L2.707 8l3.147-3.146zm4.292 0a.5.5 0 0 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5a.5.5 0 0 1-.708-.708L13.293 8l-3.147-3.146z"/>
+                    </symbol>
+                    <!-- Bootstrap Hash -->
+                    <symbol id="icon-bs-hash" viewBox="0 0 16 16">
+                        <path d="M8.39 12.648a1.32 1.32 0 0 0-.015.18c0 .305.21.508.5.508.266 0 .492-.172.555-.477l.554-2.703h1.204c.421 0 .617-.234.617-.547 0-.312-.188-.53-.617-.53h-.985l.516-2.524h1.265c.43 0 .618-.227.618-.547 0-.313-.188-.524-.618-.524h-1.046l.476-2.304a1.06 1.06 0 0 0 .016-.164.51.51 0 0 0-.516-.516.54.54 0 0 0-.539.43l-.523 2.554H7.617l.477-2.304c.008-.04.015-.118.015-.164a.512.512 0 0 0-.523-.516.539.539 0 0 0-.531.43L6.53 5.484H5.414c-.43 0-.617.22-.617.532 0 .312.187.539.617.539h.906l-.515 2.523H4.609c-.421 0-.609.219-.609.531 0 .313.188.547.61.547h.976l-.516 2.492c-.008.04-.015.125-.015.18 0 .305.21.508.5.508.265 0 .492-.172.554-.477l.555-2.703h2.242l-.515 2.492zm-1-6.109h2.266l-.515 2.563H6.859l.532-2.563z"/>
+                    </symbol>
+                    <!-- Bootstrap Javascript -->
+                    <symbol id='icon-javascript' viewBox="0 0 448 512">
+                        <path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM243.8 381.4c0 43.6-25.6 63.5-62.9 63.5-33.7 0-53.2-17.4-63.2-38.5l34.3-20.7c6.6 11.7 12.6 21.6 27.1 21.6 13.8 0 22.6-5.4 22.6-26.5V237.7h42.1v143.7zm99.6 63.5c-39.1 0-64.4-18.6-76.7-43l34.3-19.8c9 14.7 20.8 25.6 41.5 25.6 17.4 0 28.6-8.7 28.6-20.8 0-14.4-11.4-19.5-30.7-28l-10.5-4.5c-30.4-12.9-50.5-29.2-50.5-63.5 0-31.6 24.1-55.6 61.6-55.6 26.8 0 46 9.3 59.8 33.7L368 290c-7.2-12.9-15-18-27.1-18-12.3 0-20.1 7.8-20.1 18 0 12.6 7.8 17.7 25.9 25.6l10.5 4.5c35.8 15.3 55.9 31 55.9 66.2 0 37.8-29.8 58.6-69.7 58.6z"/>
                     </symbol>
                     ${addSymbols()}
                 </defs>

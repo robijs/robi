@@ -1,14 +1,19 @@
 // Test
+// Changed
+// Changed 2
+// Changed 3
+// Changed 4
+// Changed 5
 
 export default [
     {
         list: 'Test',
         fields: [
-            {
-                name: 'SLOT',
-                display: 'Single line of text',
-                type: 'slot'
-            },
+            // {
+            //     name: 'SLOT',
+            //     display: 'Single line of text',
+            //     type: 'slot'
+            // },
            {
                 name: 'AddFromWeb',
                 display: 'Add From Web',

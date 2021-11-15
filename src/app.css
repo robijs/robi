@@ -1,4 +1,8 @@
-/* Override bootstrap primary button style */
+/* Override bootstrap button styles */
+.btn {
+    border-radius: 10px;
+}
+
 .btn-primary {
     background-color: royalblue;
     border-color: royalblue;
@@ -20,6 +24,26 @@
     border-color: royalblue;
 }
 
+.btn-success {
+    background-color: seagreen;
+    border-color: seagreen;
+}
+
+.btn-success:hover {
+    background-color: seagreen;
+    border-color: seagreen;
+}
+
+.btn-danger {
+    background-color: firebrick;
+    border-color: firebrick;
+}
+
+.btn-danger:hover {
+    background-color: firebrick;
+    border-color: firebrick;
+}
+
 /* Override bootstrap alert style */
 .alert {
     border: none;
@@ -39,6 +63,49 @@
 
 .loading-file {
     font-family: 'Inconsolata', monospace;    
+}
+
+.file-title {
+    background-color: #292D3E;
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px #676E95;
+    padding-top: 1rem;
+    padding-bottom: .75rem;
+    margin-bottom: .75rem;
+    z-index: 100;
+    position: sticky;
+    top: 0px;
+}
+
+.file-title * {
+    font-family: 'Inconsolata', monospace; 
+    font-size: 14px;
+    color: white;
+}
+
+.file-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+    margin-left: .75rem;
+}
+
+.file-icon {
+    font-size: 16px;
+}
+
+.file-icon-css {
+    fill: dodgerblue !important;
+}
+
+.file-icon-html {
+    fill: dodgerblue !important;
+}
+
+.file-icon-js {
+    fill: #F7DF1E !important;
 }
 
 /* Add padding to all modals */
@@ -104,6 +171,23 @@
 
     100% {
         bottom: 10px;
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Dialog boxes */
+.dialog-box {
+    animation: dialog-fade 200ms ease-in-out forwards;
+}
+
+@keyframes dialog-fade {
+    0% {
+        transform: scale(.5);
+        opacity: 0;
+    }
+
+    100% {
         transform: scale(1);
         opacity: 1;
     }

@@ -1,5 +1,5 @@
 import { AddStyle, CreateSite, CopyFile, CreateLibrary, CreateFolder, GetRequestDigest, GetItemCount, CopyRecurse, SetHomePage, DeleteColumn } from '../../Core/Actions.js'
-import { Title, Modal, BootstrapButton, SingleLineTextField, BootstrapTextarea, ProgressBar, InstallConsole, Container, LoadingSpinner } from '../../Core/Components.js'
+import { Title, Modal, BootstrapButton, SingleLineTextField, BootstrapTextarea, ProgressBar, InstallConsole, Container, LoadingSpinner, MainContainer } from '../../Core/Components.js'
 import { Lists } from '../../Core/Models.js'
 import { App } from '../../Core/Settings.js'
 import Store from '../../Core/Store.js'
@@ -40,7 +40,7 @@ export default async function Home() {
                 background: '#292D3E',
                 async addContent(modalBody) {
                     const loading = LoadingSpinner({
-                        message: 'Loading /App/src/Lists.js',
+                        message: `Loading <span style='font-weight: 300;'>/App/src/Lists.js</span>`,
                         classes: ['mt-3', 'mb-3', 'loading-file'],
                         parent: modalBody
                     });
@@ -48,6 +48,16 @@ export default async function Home() {
                     loading.add();
 
                     modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                        <div class='file-title d-none'>
+                            <span class='file-icon-container'>
+                                <svg class='icon file-icon file-icon-js'>
+                                    <use href='#icon-javascript'></use>
+                                </svg>
+                            </span>
+                            <span>
+                                /App/src/Lists.js
+                            </span>
+                        </div>
                         <textarea class='code-mirror-container robi-code-background'></textarea>
                     `);
 
@@ -68,10 +78,11 @@ export default async function Home() {
                                 indent: true
                             });
                         },
-                        'Ctrl-S'(cm) {
+                        async 'Ctrl-S'(cm) {
                             console.log('save file');
+                            await saveFile();
                         },
-                        'Ctrl-W'(cm) {
+                        'Ctrl-Q'(cm) {
                             console.log('close file, check if saved');
                         }
                     });
@@ -87,77 +98,13 @@ export default async function Home() {
                         }
                     });
                 
+                    // This will be overridden on save
                     let value = await getFileValue.text();
 
                     editor.setSize('auto', 'auto');
                     editor.setOption('viewportMargin', Infinity);
                     editor.setOption('theme', 'material-palenight');
                     editor.getDoc().setValue(value);
-
-                    // Intellisense
-                    var ExcludedIntelliSenseTriggerKeys = {
-                        "8": "backspace",
-                        "9": "tab",
-                        "13": "enter",
-                        "16": "shift",
-                        "17": "ctrl",
-                        "18": "alt",
-                        "19": "pause",
-                        "20": "capslock",
-                        "27": "escape",
-                        "33": "pageup",
-                        "34": "pagedown",
-                        "35": "end",
-                        "36": "home",
-                        "37": "left",
-                        "38": "up",
-                        "39": "right",
-                        "40": "down",
-                        "45": "insert",
-                        "46": "delete",
-                        "91": "left window key",
-                        "92": "right window key",
-                        "93": "select",
-                        "107": "add",
-                        "109": "subtract",
-                        "110": "decimal point",
-                        "111": "divide",
-                        "112": "f1",
-                        "113": "f2",
-                        "114": "f3",
-                        "115": "f4",
-                        "116": "f5",
-                        "117": "f6",
-                        "118": "f7",
-                        "119": "f8",
-                        "120": "f9",
-                        "121": "f10",
-                        "122": "f11",
-                        "123": "f12",
-                        "144": "numlock",
-                        "145": "scrolllock",
-                        "186": "semicolon",
-                        "187": "equalsign",
-                        "188": "comma",
-                        "189": "dash",
-                        "190": "period",
-                        "191": "slash",
-                        "192": "graveaccent",
-                        "220": "backslash",
-                        "222": "quote"
-                    }
-
-                    editor.on('keyup', (editor, event) => {
-                        var __Cursor = editor.getDoc().getCursor();
-                        var __Token = editor.getTokenAt(__Cursor);
-
-                        if (!editor.state.completionActive &&
-                            !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()] &&
-                            (__Token.type == "tag" || __Token.string == " " || __Token.string == "<" || __Token.string == "/"))
-                        {
-                            CodeMirror.commands.autocomplete(editor, null, { completeSingle: false });
-                        }
-                    });
 
                     // Watch for changes
                     editor.on('change', event => {
@@ -186,31 +133,18 @@ export default async function Home() {
                         }
                     });
 
+                    // Remove loading message
                     loading.remove();
+
+                    // Remove .modal-body top padding
+                    modalBody.style.paddingTop = '0px';
+
+                    // Show title
+                    modal.find('.file-title').classList.remove('d-none');
 
                     const modifyBtn = BootstrapButton({
                         async action(event) {
-                            // Disable button - Prevent user from clicking this item more than once
-                            $(event.target)
-                                .attr('disabled', '')
-                                .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving');
-
-                            const value = editor.getDoc().getValue();
-
-                            console.log(value);
-
-                            // TODO: Move to SetFile action
-                            const setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='lists.js',overwrite=true)`, {
-                                method: 'POST',
-                                body: value, 
-                                headers: {
-                                    'binaryStringRequestBody': 'true',
-                                    'Accept': 'application/json;odata=verbose;charset=utf-8',
-                                    'X-RequestDigest': srcRequestDigest
-                                }
-                            });
-
-                            console.log(setFile);
+                            await saveFile(event);
 
                             $(modal.get()).on('hidden.bs.modal', event => {
                                 location.reload(true);
@@ -221,12 +155,12 @@ export default async function Home() {
                                 $(event.target)
                                     .removeAttr('disabled')
                                     .text('Saved');
-
+    
                                 // Close modal (DOM node will be removed on hidden.bs.modal event)
                                 modal.close();
                             }, 1000);
                         },
-                        classes: ['w-100 mt-4'],
+                        classes: ['w-100', 'mt-4'],
                         disabled: true, // enable if changed
                         width: '100%',
                         parent: modalBody,
@@ -236,12 +170,44 @@ export default async function Home() {
 
                     modifyBtn.add();
 
+                    async function saveFile(event) {
+                        if (event) {
+                            // Disable button - Prevent user from clicking this item more than once
+                            $(event.target)
+                                .attr('disabled', '')
+                                .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving');
+                        }
+
+                        const currentValue = editor.getDoc().getValue();
+
+                        console.log(currentValue);
+
+                        // TODO: Move to SetFile action
+                        const setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='lists.js',overwrite=true)`, {
+                            method: 'POST',
+                            body: currentValue, 
+                            headers: {
+                                'binaryStringRequestBody': 'true',
+                                'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                'X-RequestDigest': srcRequestDigest
+                            }
+                        });
+
+                        if (setFile) {
+                            const dot = modal.find('.changed-dot');
+
+                            if (dot) {
+                                dot.remove();
+                            }
+
+                            value = currentValue;
+                            
+                            return setFile;
+                        }
+                    }
+
                     const cancelBtn = BootstrapButton({
                         action(event) {
-                            // $(modal.get()).on('hidden.bs.modal', event => {
-                            //     console.log('modal close animiation end');
-                            // });
-
                             modal.close();
                         },
                         classes: ['w-100 mt-2'],
@@ -252,18 +218,96 @@ export default async function Home() {
                     });
 
                     cancelBtn.add();
+
+                    $(modal.get()).on('hide.bs.modal', checkIfSaved);
+
+                    function checkIfSaved(event) {
+                        console.log('check if saved');
+        
+                        if (value === editor.doc.getValue()) {
+                            console.log('unchanged');
+        
+                            return true;
+                        } else {
+                            console.log('changed');
+
+                            Store.get('appcontainer').append(/*html*/ `
+                                <div class='dialog-container' style="position: fixed; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; z-index: 10000">
+                                    <div class='dialog-box' style='padding: 30px; background: white; border-radius: 20px;'>
+                                        <div class='mb-2' style=''>
+                                            Do you want to save the changes you made to list.js?
+                                        </div>
+                                        <div class='mb-4' style='font-size: 13px;'>
+                                            Your changes will be lost if you don't save them.
+                                        </div>
+                                        <div class='button-container' style='display: flex; justify-content: space-between;'>
+                                            <div style='display: flex; justify-content: flex-start;'>
+                                                <button class='btn btn-secondary btn-sm dont-save'>Don't Save</button>
+                                                <button class='btn btn-light btn-sm ml-2 cancel'>Cancel</button>
+                                            </div>
+                                            <div style='display: flex; justify-content: flex-end;'>
+                                                <button class='btn btn-success save'>Save</button>
+                                            <div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `);
+
+                            // Don't save
+                            Store.get('appcontainer').find('.dialog-box .dont-save').addEventListener('click', event => {
+                                // Remove save diaglog box
+                                Store.get('appcontainer').find('.dialog-container').remove();
+                                
+                                // Remove checkIfSaved before closing
+                                $(modal.get()).off('hide.bs.modal', checkIfSaved);
+
+                                // Close modal (DOM node will be destroyed)
+                                modal.close();
+                            });
+
+                            // Cancel
+                            Store.get('appcontainer').find('.dialog-box .cancel').addEventListener('click', event => {
+                                // Remove save dialog
+                                Store.get('appcontainer').find('.dialog-container').remove();
+                            });
+
+                            // Save
+                            Store.get('appcontainer').find('.dialog-box .save').addEventListener('click', async event => {
+                                // Save file
+                                await saveFile(event);
+
+                                // Remove save dialog
+                                Store.get('appcontainer').find('.dialog-container').remove();
+
+                                // Remove checkIfSaved before closing
+                                $(modal.get()).off('hide.bs.modal', checkIfSaved);
+
+                                // Listen for modal has closed event, reload page since file changed
+                                $(modal.get()).on('hidden.bs.modal', event => {
+                                    location.reload(true);
+                                });
+                                
+                                // Close modal
+                                setTimeout(() => {
+                                    // Enable button
+                                    $(event.target)
+                                        .removeAttr('disabled')
+                                        .text('Saved');
+        
+                                    // Close modal (DOM node will be removed on hidden.bs.modal event)
+                                    modal.close();
+                                }, 1000);
+                            });
+
+                            return false;
+                        }
+                    }
                 },
                 centered: true,
-                showFooter: false,
+                showFooter: false
             });
 
-            modal.add();
-
-            $(modal.get()).on('hide.bs.modal', event => {
-                console.log('check if saved');
-
-                // return true;
-            });
+            modal.add();            
         }
     });
 
@@ -281,7 +325,7 @@ export default async function Home() {
                path: 'App/src',
                file: 'app.js',
                appName: 'TestWithAlec'
-            })
+            });
         }
     });
 
@@ -296,7 +340,7 @@ export default async function Home() {
             DeleteColumn({
                 list: 'Test',
                 name: 'Number'
-            })
+            });
         }
     });
 
