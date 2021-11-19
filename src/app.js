@@ -3,86 +3,54 @@ import lists from './lists.js'
 import Home from './Routes/Home/Home.js'
 
 Start({
+    // ROUTES
     routes: [
         {
-            path: 'Home',
-            hide: true,
-            go() {
-                Home();
-            }  
+            path: 'Home',                                   // Must include at least on default route. Must be 'Home' or same value for settings.defaultRoute.
+            hide: true,                                     // The default route shouldn't be be listed in the sidebar.
+            go() {                                          // Instead, default route enaged on view titles and sidebar click.
+                Home();                                     // Can be linked to directly with hash fragment. Ex: https://site#defaultRoute.
+            }                                               
         }
     ],
     settings: {
-        dev: { // required: set local dev user props
-            user: { // required: placeholder account props for local dev
-                Title: "First Last",
-                Email: "first.mi.last.ctr@mail.mil",
-                LoginName: "0987654321@mil",
-                Role: "Developer"
-            },
-            errorLogging: 'on',
-            testInstall: false, // optional: (true || false)
-        },
-        name: '@App', // required: enter app name (AUTOPOPULATED if created with CREATE APP
-        title: '@Title', // required: enter app name (AUTOPOPULATED if created with CREATE APP)
-        defaultRoute: 'Home', // required: set default #route rendered if none present
-        logo: 'dha-logo-no-label-180w.png', // required: set open sidebar logo
-        logoSmall: 'dha-logo-no-label-80w.png', // required: set logo when sidebar is collapsed
-        logoLarge: 'dha-logo-no-label-386w.png', // required: set launch logo
-        primaryColor: '#24292f', // required: set theme color, used by core components
-        primaryColorRGB: '45, 61, 80', // required: same as above, but in rgb format, used by core components
-        secondaryColor: 'white', // required: set main container background color
-        sidebarBackgroundColor: '#F8F8FC', // required: set nav background color
-        sidebarTextColor: '#24292f', // required: set nav label text color
-        defaultColor: '#24292f', // required: set text color
-        titleColor: '#1c6cbb', // required: set core Title component text color
-        defaultBorder: 'solid 1px rgba(0, 0, 0, .125)', // required: set default border style for core comoponents
-        usersFields: [ // required: set user account fields, used to create users lists on install
-            {
-                name: 'Id',
-                type: 'number'
-            },
-            {
-                name: 'Title',
-                type: 'slot'
-            },
-            {
-                name: 'LoginName',
-                type: 'slot'
-            },
-            {
-                name: 'Email',
-                type: 'slot'
-            },
-            {
-                name: 'Role',
-                type: 'slot'
-            },
-            {
-                name: 'Settings',
-                type: 'mlot'
-            }
-        ],
-        userSettings: JSON.stringify({}), // requried: set user account 'Settings' field JSON value
-        userDefaultRole: 'User', // required: set default role for newly created use accounts
-        questionTypes: [ // required: define at least one questionType with title and path props
+        // REQUIRED PROPERTIES
+        defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',     // default border style for core comoponents
+        defaultColor: '#24292f',                            // text color
+        defaultRoute: 'Home',                               // default #route rendered if none present
+        logo: 'dha-logo-no-label-180w.png',                 // open sidebar logo
+        logoLarge: 'dha-logo-no-label-386w.png',            // launch logo
+        logoSmall: 'dha-logo-no-label-80w.png',             // logo when sidebar is collapsed
+        name: '@App',                                       // app name (AUTOPOPULATED if created by Robi)
+        primaryColor: '#24292f',                            // set theme color, used by core components
+        primaryColorRGB: '45, 61, 80',                      // same as above, but in rgb format, used by core components
+        questionTypes: [                                    // define at least one questionType with title and path props
             {
                 title: 'General',
                 path: 'General'
             }
         ],
-        appcontainer: '', // optional: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
-        sidebar: '', // optional: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
-        maincontainer: '', // optional: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
-        mode: '', // optional: choose 'dev' || 'prod'
-        site: '', // optional: enter site, will assume dev if location.href === localhost || 127.0.0.1
-        library: '', // optional: enter src document library, defaults to 'App'
-        usersList: 'Users', // optional: override default name for 'Users' lists,
-        lists, // optional: define app lists to be created on install
-        links: [ // optional: recommend loading shared stylesheets and preloading logos
-            {
-                href: '/app.css'
+        secondaryColor: 'white',                            // main container background color
+        sidebarBackgroundColor: '#F8F8FC',                  // nav background color
+        sidebarTextColor: '#24292f',                        // nav label text color
+        title: '@Title',                                    // site title (AUTOPOPULATED if created with CREATE APP)
+        titleColor: '#1c6cbb',                              // core Title component text color
+        userDefaultRole: 'User',                            // default role for newly created use accounts
+        userSettings: JSON.stringify({}),                   // new user account 'Settings' field default JSON value
+        // OPTIONAL PROPERTIES
+        appcontainer: '',                                   // replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
+        dev: {                                              // local dev user props
+            user: {                                         // placeholder account props for local dev
+                Title: "First Last",
+                Email: "first.mi.last.ctr@mail.mil",
+                LoginName: "0987654321@mil",
+                Role: "Developer"
             },
+            testInstall: false,                             // (true || false)
+        },
+        errorLogging: 'on',                                 // ('on' ||| 'off') - if on, sends errors to SharePoint list 'Errors'
+        library: '',                                        // src document library, defaults to 'App'
+        links: [                                            // recommend preloading assets (e.g., logos)
             {
                 rel: 'preload',
                 as: 'image',
@@ -98,6 +66,10 @@ Start({
                 as: 'image',
                 href: '/Images/dha-logo-no-label-386w.png'
             }
-        ]
+        ],
+        lists,                                              // define app lists to be created on install
+        maincontainer: '',                                  // replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
+        sidebar: '',                                        // replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
+        usersList: 'Users'                                  // override default name for 'Users' lists,
     }
 });

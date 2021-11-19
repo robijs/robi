@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../Libraries/lib.css">
+    <link rel="stylesheet" href="../app.css">
     <!-- Preloaded images dynamically imported here -->
 
 <!--[if gte mso 9]><SharePoint:CTFieldRefs runat=server Prefix="mso:" FieldList="FileLeafRef,i3e7b0477ad24f0693a0b6cb17b27bf1,TaxCatchAllLabel,_dlc_DocId,_dlc_DocIdUrl,_dlc_DocIdPersistId,mb7b7c6cb3b94febb95b36ae1f78ffc5,ba60022a341749df97d7a0ab674012b7"><xml>

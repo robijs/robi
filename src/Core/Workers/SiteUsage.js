@@ -1,12 +1,10 @@
-/** Actions */
 import { Get } from '../Actions.js'
-
-/** Models*/
+import { App } from '../Settings.js';
 import { SiteUsage } from '../Models.js'
 
 (async () => {
     onmessage = async event => {
-        const {envMode, site} = event.data;
+        const {envMode, site, bannerColor} = event.data;
 
         const items = await Get({
             list: 'Log',
@@ -83,8 +81,9 @@ import { SiteUsage } from '../Models.js'
             visits: items
         });
 
-        const background = '#2d3d501a';
-    
+        // const background = '#2d3d501a';
+        const background = bannerColor;
+
         postMessage({
             stats_1: [
                 {

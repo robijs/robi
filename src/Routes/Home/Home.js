@@ -49,17 +49,21 @@ export default async function Home() {
 
                     modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                         <div class='file-title d-none'>
-                            <span class='file-icon-container'>
-                                <svg class='icon file-icon file-icon-js'>
-                                    <use href='#icon-javascript'></use>
-                                </svg>
-                            </span>
-                            <span>
-                                /App/src/Lists.js
+                            <span class='file-title-text d-flex'>
+                                <span class='file-icon-container'>
+                                    <svg class='icon file-icon file-icon-js'>
+                                        <use href='#icon-javascript'></use>
+                                    </svg>
+                                </span>
+                                <span>
+                                    /App/src/Lists.js
+                                </span>
                             </span>
                         </div>
                         <textarea class='code-mirror-container robi-code-background'></textarea>
                     `);
+
+                    let shouldReload = false;
 
                     const editor = CodeMirror.fromTextArea(modal.find('.code-mirror-container'), {
                         mode: 'javascript',
@@ -80,7 +84,17 @@ export default async function Home() {
                         },
                         async 'Ctrl-S'(cm) {
                             console.log('save file');
+                            // Save file
                             await saveFile();
+
+                            // Add changed
+                            modalBody.querySelector('.file-title-text').insertAdjacentHTML('beforeend', /*html*/ `
+                                <div style='margin-left: 10px; color: seagreen'>CHANGED (will reload on close)</div>
+                            `);
+
+                            // Set flag
+                            shouldReload = true;
+
                         },
                         'Ctrl-Q'(cm) {
                             console.log('close file, check if saved');
@@ -123,9 +137,11 @@ export default async function Home() {
 
                             const dot = modal.find('.changed-dot');
 
+                            // #dee2e6
+
                             if (!dot) {
-                                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                    <div class='changed-dot' style='width: 10px; height: 10px; background: #dee2e6; border-radius: 50%; position: absolute; top: 1rem; right: 1rem;'></div>
+                                modalBody.querySelector('.file-title').insertAdjacentHTML('beforeend', /*html*/ `
+                                    <div class='changed-dot' style='width: 10px; height: 10px; background: white; border-radius: 50%; margin-right: .75rem;'></div>
                                 `);
                             }
 
@@ -226,6 +242,12 @@ export default async function Home() {
         
                         if (value === editor.doc.getValue()) {
                             console.log('unchanged');
+
+                            if (shouldReload) {
+                                $(modal.get()).on('hidden.bs.modal', event => {
+                                    location.reload(true);
+                                });
+                            }
         
                             return true;
                         } else {

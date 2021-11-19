@@ -39,224 +39,6 @@ import { Question as M_Question, Questions as M_Questions } from './Models.js'
 
 /**
  * 
- */
-export async function Home() {
-    /** View Parent */
-    const parent = Store.get('maincontainer');
-
-    /** View Title */
-    const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `Subtitle (Ex: Application/Abbreviation Full Name)`,
-        parent,
-        date: new Date().toLocaleString('en-US', {
-            dateStyle: 'full'
-        }),
-        type: 'across'
-    });
-
-    viewTitle.add();
-}
-
-/**
- * 
- */
-export async function Help() {
-    const parent = Store.get('maincontainer');
-
-    const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `Help`,
-        parent,
-        date: new Date().toLocaleString('default', {
-            dateStyle: 'full'
-        }),
-        type: 'across'
-    });
-
-    viewTitle.add();
-
-    /** View Container */
-    const viewContainer = Container({
-        display: 'block',
-        margin: '20px 0px 0px 0px',
-        parent
-    });
-
-    viewContainer.add();
-
-    const requestAssistanceInfo = RequestAssitanceInfo({
-        data: [
-            {
-                label: 'For help with this app, please contact:',
-                name: 'First Last',
-                title: 'TItle, Branch',
-                email: 'first.last.civ@mail.mil',
-                phone: '(555) 555-5555'
-            }
-        ],
-        parent: viewContainer
-    });
-
-    requestAssistanceInfo.add();
-}
-
-/**
- * 
- */
-export async function Unauthorized() {
-    const parent = Store.get('maincontainer');
-
-    const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `403`,
-        parent,
-        date: new Date().toLocaleString('default', {
-            dateStyle: 'full'
-        }),
-        type: 'across'
-    });
-
-    viewTitle.add();
-
-    const alertBanner = Alert({
-        type: 'warning',
-        text: `Sorry! You don't have access to this page. Please select a different option from the menu on the left.`,
-        parent,
-        margin: '20px 0px 0px 0px'
-    });
-
-    alertBanner.add();
-}
-
-/**
- * 
- */
-export async function Missing() {
-    const parent = Store.get('maincontainer');
-
-    const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `404`,
-        parent,
-        date: new Date().toLocaleString('default', {
-            dateStyle: 'full'
-        }),
-        type: 'across'
-    });
-
-    viewTitle.add();
-
-    const alertBanner = Alert({
-        type: 'info',
-        text: `Sorry! That page doesn't appear to exist. Please choose an option from the sidebar on the left.`,
-        parent,
-        margin: '20px 0px 0px 0px'
-    });
-
-    alertBanner.add();
-}
-
-/**
- * 
- * @param {*} param 
- * @returns 
- */
-export async function Users(param = {}) {
-    const {
-        itemId
-    } = param;
-
-    /** Authorize */
-    const isAuthorized = Authorize('Users');
-
-    if (!isAuthorized) {
-        return;
-    }
-
-    const parent = Store.get('maincontainer');
-
-    const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: 'Users',
-        date: `${new Date().toLocaleString('default', {
-            dateStyle: 'full'
-        })}`,
-        type: 'across',
-        parent
-    });
-
-    viewTitle.add();
-
-    const usersTable = Table({
-        list: 'Users',
-        newForm: NewUser,
-        parent
-    });
-
-    /** Open modal */
-    if (itemId) {
-        const row = usersTable.findRowById(itemId);
-
-        if (row) {
-            row.show().draw(false).node().click();
-        }
-    }
-}
-
-/**
- * 
- */
-export async function Settings() {
-    const parent = Store.get('maincontainer');
-
-    const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `Settings`,
-        parent,
-        date: new Date().toLocaleString('en-US', {
-            dateStyle: 'full'
-        }),
-        type: 'across'
-    });
-
-    viewTitle.add();
-
-    AccountInfo({
-        parent
-    });
-
-    /** Authorize */
-    if (Store.user().Role === 'Developer') {
-        DeveloperLinks({
-            parent
-        });
-    }
-
-    ReleaseNotes({
-        parent
-    });
-
-    /** Authorize */
-    if (Store.user().Role === 'Developer') {
-        SiteUsage({
-            parent
-        });
-
-        BuildInfo({
-            parent
-        });
-
-        const upgrade = UpgradeAppButton({
-            parent
-        });
-
-        upgrade.add();
-    }
-}
-
-/**
- * 
  * @param {*} param 
  * @returns 
  */
@@ -506,36 +288,36 @@ export async function Developer(param) {
 
     // attachFilesButton.add();
 
-    /** Test Send Email */
-    const sendEmailButton = BootstrapButton({
-        async action(event) {
-            await SendEmail({
-                From: 'stephen.a.matheis.ctr@mail.mil',
-                To: 'stephen.a.matheis.ctr@mail.mil',
-                CC: [
-                    'stephen.a.matheis.ctr@mail.mil'
-                ],
-                Subject: `Test Subject`,
-                Body: /*html*/ `
-                    <div style="font-family: 'Calibri', sans-serif; font-size: 11pt;">
-                        <p>
-                            Test body. <strong>Bold</strong>. <em>Emphasized</em>.
-                        </p>
-                        <p>
-                            <a href='https://google.com'>Google</a>
-                        </p>
-                    </div>
-                `
-            });
-        },
-        parent,
-        classes: ['mt-5'],
-        type: 'outline-success',
-        value: 'Send Email',
-        margin: '0px 0px 0px 20px'
-    });
+    // /** Test Send Email */
+    // const sendEmailButton = BootstrapButton({
+    //     async action(event) {
+    //         await SendEmail({
+    //             From: 'stephen.a.matheis.ctr@mail.mil',
+    //             To: 'stephen.a.matheis.ctr@mail.mil',
+    //             CC: [
+    //                 'stephen.a.matheis.ctr@mail.mil'
+    //             ],
+    //             Subject: `Test Subject`,
+    //             Body: /*html*/ `
+    //                 <div style="font-family: 'Calibri', sans-serif; font-size: 11pt;">
+    //                     <p>
+    //                         Test body. <strong>Bold</strong>. <em>Emphasized</em>.
+    //                     </p>
+    //                     <p>
+    //                         <a href='https://google.com'>Google</a>
+    //                     </p>
+    //                 </div>
+    //             `
+    //         });
+    //     },
+    //     parent,
+    //     classes: ['mt-5'],
+    //     type: 'outline-success',
+    //     value: 'Send Email',
+    //     margin: '0px 0px 0px 20px'
+    // });
 
-    sendEmailButton.add();
+    // sendEmailButton.add();
     
     /** Open modal */
     if (param.pathParts.length === 3) {
@@ -558,6 +340,98 @@ export async function Developer(param) {
             row.show().draw(false).node()?.click();
         }
     }
+}
+
+/**
+ * 
+ */
+export async function Help() {
+    const parent = Store.get('maincontainer');
+
+    const viewTitle = Title({
+        title: App.get('title'),
+        subTitle: `Help`,
+        parent,
+        date: new Date().toLocaleString('default', {
+            dateStyle: 'full'
+        }),
+        type: 'across'
+    });
+
+    viewTitle.add();
+
+    /** View Container */
+    const viewContainer = Container({
+        display: 'block',
+        margin: '20px 0px 0px 0px',
+        parent
+    });
+
+    viewContainer.add();
+
+    const requestAssistanceInfo = RequestAssitanceInfo({
+        data: [
+            {
+                label: 'For help with this app, please contact:',
+                name: 'First Last',
+                title: 'TItle, Branch',
+                email: 'first.last.civ@mail.mil',
+                phone: '(555) 555-5555'
+            }
+        ],
+        parent: viewContainer
+    });
+
+    requestAssistanceInfo.add();
+}
+
+/**
+ * 
+ */
+export async function Home() {
+    /** View Parent */
+    const parent = Store.get('maincontainer');
+
+    /** View Title */
+    const viewTitle = Title({
+        title: App.get('title'),
+        subTitle: `Subtitle (Ex: Application/Abbreviation Full Name)`,
+        parent,
+        date: new Date().toLocaleString('en-US', {
+            dateStyle: 'full'
+        }),
+        type: 'across'
+    });
+
+    viewTitle.add();
+}
+
+/**
+ * 
+ */
+export async function Missing() {
+    const parent = Store.get('maincontainer');
+
+    const viewTitle = Title({
+        title: App.get('title'),
+        subTitle: `404`,
+        parent,
+        date: new Date().toLocaleString('default', {
+            dateStyle: 'full'
+        }),
+        type: 'across'
+    });
+
+    viewTitle.add();
+
+    const alertBanner = Alert({
+        type: 'info',
+        text: `Sorry! That page doesn't appear to exist. Please choose an option from the sidebar on the left.`,
+        parent,
+        margin: '20px 0px 0px 0px'
+    });
+
+    alertBanner.add();
 }
 
 /**
@@ -1212,4 +1086,130 @@ export async function Question(param) {
     
     /** Remove Loading Indicator */
     loadingIndicator.remove();
+}
+
+/**
+ * 
+ */
+export async function Settings() {
+    const parent = Store.get('maincontainer');
+
+    const viewTitle = Title({
+        title: App.get('title'),
+        subTitle: `Settings`,
+        parent,
+        date: new Date().toLocaleString('en-US', {
+            dateStyle: 'full'
+        }),
+        type: 'across'
+    });
+
+    viewTitle.add();
+
+    AccountInfo({
+        parent
+    });
+
+    /** Authorize */
+    if (Store.user().Role === 'Developer') {
+        DeveloperLinks({
+            parent
+        });
+    }
+
+    ReleaseNotes({
+        parent
+    });
+
+    /** Authorize */
+    if (Store.user().Role === 'Developer') {
+        SiteUsage({
+            parent
+        });
+
+        BuildInfo({
+            parent
+        });
+
+        const upgrade = UpgradeAppButton({
+            parent
+        });
+
+        upgrade.add();
+    }
+}
+
+/**
+ * 
+ */
+export async function Unauthorized() {
+    const parent = Store.get('maincontainer');
+
+    const viewTitle = Title({
+        title: App.get('title'),
+        subTitle: `403`,
+        parent,
+        date: new Date().toLocaleString('default', {
+            dateStyle: 'full'
+        }),
+        type: 'across'
+    });
+
+    viewTitle.add();
+
+    const alertBanner = Alert({
+        type: 'warning',
+        text: `Sorry! You don't have access to this page. Please select a different option from the menu on the left.`,
+        parent,
+        margin: '20px 0px 0px 0px'
+    });
+
+    alertBanner.add();
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export async function Users(param = {}) {
+    const {
+        itemId
+    } = param;
+
+    /** Authorize */
+    const isAuthorized = Authorize('Users');
+
+    if (!isAuthorized) {
+        return;
+    }
+
+    const parent = Store.get('maincontainer');
+
+    const viewTitle = Title({
+        title: App.get('title'),
+        subTitle: 'Users',
+        date: `${new Date().toLocaleString('default', {
+            dateStyle: 'full'
+        })}`,
+        type: 'across',
+        parent
+    });
+
+    viewTitle.add();
+
+    const usersTable = Table({
+        list: 'Users',
+        newForm: NewUser,
+        parent
+    });
+
+    /** Open modal */
+    if (itemId) {
+        const row = usersTable.findRowById(itemId);
+
+        if (row) {
+            row.show().draw(false).node().click();
+        }
+    }
 }

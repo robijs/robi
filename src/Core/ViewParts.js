@@ -1953,7 +1953,8 @@ export async function SiteUsage(param) {
 
     worker.postMessage({
         envMode: App.get('mode'),
-        site: App.get('site')
+        site: App.get('site'),
+        bannerColor: App.get('sidebarBackgroundColor')
     });
 
     Store.addWorker(worker);

@@ -69,6 +69,7 @@
     background-color: #292D3E;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom: solid 1px #676E95;
     padding-top: 1rem;
     padding-bottom: .75rem;

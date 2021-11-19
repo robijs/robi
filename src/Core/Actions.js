@@ -1,4 +1,18 @@
-import { Toast, LoadingBar, SvgDefs, Sidebar, AppContainer, MainContainer, FixedToast, Modal, BootstrapButton, ProgressBar, InstallConsole, Container } from './Components.js'
+import { 
+    Toast,
+    LoadingBar,
+    SvgDefs,
+    Sidebar,
+    AppContainer,
+    MainContainer,
+    FixedToast,
+    Modal,
+    BootstrapButton,
+    ProgressBar,
+    InstallConsole,
+    Container,
+    LoadingSpinner
+} from './Components.js'
 import { Lists } from './Models.js'
 import { App, Routes } from './Settings.js';
 import Store from './Store.js'
@@ -237,6 +251,81 @@ export function Authorize(param) {
     } else {
         return undefined;
     }
+}
+
+export async function CheckLists(param) {
+    // Check lists
+    const listsToIgnore =  ['App', 'Composed Looks', 'Documents', 'Master Page Gallery', 'MicroFeed', 'Site Assets', 'Site Pages'];
+    const coreLists = Lists();
+    const appLists = lists;
+    const allLists = coreLists.concat(appLists);
+    const webLists = await GetWebLists();
+    const installedLists = webLists.map(item => item.Title).filter(x => allLists.map(item => item.list).includes(x));
+    const diffToCreate = allLists.map(item => item.list).filter(x => !webLists.map(item => item.Title).includes(x));
+    const diffToDelete = webLists.map(item => item.Title).filter(x => !allLists.map(item => item.list).includes(x) && !listsToIgnore.includes(x));
+    
+    console.log('All Lists:', allLists);
+    console.log('Web Lists:', webLists);
+    console.log('Installed Lists:', installedLists);
+    console.log('Create:', diffToCreate);
+    console.log('Delete:', diffToDelete);
+
+    // News lists that need to be created
+    const toCreate = diffToCreate.map(list => allLists.find(item => item.list === list));
+
+    // Existing lists that need to be deleted
+    const toDelete = diffToDelete.map(list => webLists.find(item => item.Title === list));
+
+    // Has the schema changed on any lists?
+    const fieldsToIgnore = ['ContentTypeId', 'Title', '_ModerationComments', 'File_x0020_Type', 'ID', 'Id', 'ContentType', 'Modified', 'Created', 'Author', 'Editor', '_HasCopyDestinations', '_CopySource', 'owshiddenversion', 'WorkflowVersion', '_UIVersion', '_UIVersionString', 'Attachments', '_ModerationStatus', 'Edit', 'LinkTitleNoMenu', 'LinkTitle', 'LinkTitle2', 'SelectTitle', 'InstanceID', 'Order', 'GUID', 'WorkflowInstanceID', 'FileRef', 'FileDirRef', 'Last_x0020_Modified', 'Created_x0020_Date', 'FSObjType', 'SortBehavior', 'PermMask', 'FileLeafRef', 'UniqueId', 'SyncClientId', 'ProgId', 'ScopeId', 'HTML_x0020_File_x0020_Type', '_EditMenuTableStart', '_EditMenuTableStart2', '_EditMenuTableEnd', 'LinkFilenameNoMenu', 'LinkFilename', 'LinkFilename2', 'DocIcon', 'ServerUrl', 'EncodedAbsUrl', 'BaseName', 'MetaInfo', '_Level', '_IsCurrentVersion', 'ItemChildCount', 'FolderChildCount', 'AppAuthor', 'AppEditor'];
+    const schemaAdd = [];
+    const schemaDelete = [];
+
+    installedLists
+    .map(listName => {
+        const { list, fields } = allLists.find(item => item.list === listName);
+
+        return { list, fields, web: webLists.find(item => item.Title === listName) };
+    })
+    .forEach(item => {
+        const { list, fields, web } = item;
+
+        const webFields = web.Fields.results.map(webField => {
+            const { StaticName, TypeDisplayName } = webField;
+
+            return { name: StaticName, type: TypeDisplayName }
+        });
+
+        const fieldsToCreate = fields.map(item => item.name).filter(x => !webFields.map(item => item.name).includes(x));
+        const fieldsToDelete = webFields.map(item => item.name).filter(x => !fields.map(item => item.name).includes(x) && !fieldsToIgnore.includes(x));
+
+        if (fieldsToCreate.length) {
+            schemaAdd.push({
+                list,
+                fields: fieldsToCreate
+            });
+        }
+
+        if (fieldsToDelete.length) {
+            schemaDelete.push({
+                list,
+                fields: fieldsToDelete
+            });
+        }
+
+        // console.log('List:', list);
+        // console.log('--------------------');
+        // console.log('List Fields:', fields);
+        // console.log('Web Fields:', webFields);
+        // console.log('Create fields:', fieldsToCreate);
+        // console.log('Remove fields:', fieldsToDelete);
+        // console.log(' ');
+    });
+
+    console.log('Fields to add:', schemaAdd);
+    console.log('Fields to delete:', schemaDelete);
+
+    return { toCreate, toDelete, schemaAdd, schemaDelete };
 }
 
 /**
@@ -2279,8 +2368,7 @@ export async function GetByUri(param) {
  */
 export async function GetCurrentUser(param) {
     const {
-        list,
-        fields
+        list
     } = param;
 
     const url = App.get('mode') === 'prod' ? `${App.get('site')}/_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${App.get('dev').user.LoginName}`;
@@ -2298,7 +2386,8 @@ export async function GetCurrentUser(param) {
         const email = response.d.Email;
         const appUser = await Get({
             list: list || 'Users',
-            select: fields.map(field => field.name),
+            // TODO: Replace with call to Model().Lists() map => internal field names + Id field
+            // select: fields.map(field => field.name),
             filter: `Email eq '${email}'`
         });
 
@@ -2705,7 +2794,6 @@ export async function InstallApp(param) {
         title,
         logo,
         usersList,
-        usersFields,
         beforeLoad,
         links,
         lists,
@@ -3597,7 +3685,6 @@ export async function LaunchApp(param) {
         title,
         logo,
         usersList,
-        usersFields,
         beforeLoad,
         links,
         lists,
@@ -3642,8 +3729,7 @@ export async function LaunchApp(param) {
 
     /** Get AD user and Users list item properties */
     Store.user(await GetCurrentUser({
-        list: usersList,
-        fields: usersFields
+        list: usersList
     }));
 
     /** Get current route */
@@ -3928,6 +4014,352 @@ export async function LogError(param) {
 
         return newLog;
     }
+}
+
+/**
+ * 
+ * @param {*} param 
+ */
+export async function ModifyFile(param) {
+    const { path, file } = param;
+
+    const modal = Modal({
+        title: false,
+        // disableBackdropClose: true,
+        background: '#292D3E',
+        async addContent(modalBody) {
+            const loading = LoadingSpinner({
+                message: `Loading <span style='font-weight: 300;'>${path}/${file}</span>`,
+                classes: ['mt-3', 'mb-3', 'loading-file'],
+                parent: modalBody
+            });
+
+            loading.add();
+
+            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                <div class='file-title d-none'>
+                    <span class='file-title-text d-flex'>
+                        <span class='file-icon-container'>
+                            <svg class='icon file-icon file-icon-js'>
+                                <use href='#icon-javascript'></use>
+                            </svg>
+                        </span>
+                        <span>
+                            ${path}/${file}
+                        </span>
+                    </span>
+                </div>
+                <textarea class='code-mirror-container robi-code-background'></textarea>
+            `);
+
+            let shouldReload = false;
+
+            const editor = CodeMirror.fromTextArea(modal.find('.code-mirror-container'), {
+                mode: 'javascript',
+                lineNumbers: true,
+                extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
+                foldGutter: true,
+                gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+            });
+            editor.foldCode(CodeMirror.Pos(0, 0));
+            editor.setSize(0, 0);
+            editor.setOption('extraKeys', {
+                'Ctrl-/'(cm) {
+                    editor.toggleComment({
+                        // this prop makes sure comments retain indented code
+                        // https://github.com/codemirror/CodeMirror/issues/3765#issuecomment-171819763
+                        indent: true
+                    });
+                },
+                async 'Ctrl-S'(cm) {
+                    // TODO: only save file if changed
+                    console.log('save file');
+                    // Save file
+                    await saveFile();
+
+                    // Add changed
+                    modalBody.querySelector('.file-title-text').insertAdjacentHTML('beforeend', /*html*/ `
+                        <div style='margin-left: 10px; color: seagreen'>CHANGED (will reload on close)</div>
+                    `);
+
+                    // Set flag
+                    shouldReload = true;
+
+                },
+                'Ctrl-Q'(cm) {
+                    console.log('close file, check if saved');
+                }
+            });
+
+            const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
+            const srcRequestDigest = await GetRequestDigest();
+            const getFileValue = await fetch(sourceSiteUrl, {
+                method: 'GET',
+                headers: {
+                    'binaryStringRequestBody': 'true',
+                    'Accept': 'application/json;odata=verbose;charset=utf-8',
+                    'X-RequestDigest': srcRequestDigest
+                }
+            });
+        
+            // This will be overridden on save
+            let value = await getFileValue.text();
+
+            // Wait an extra second for CodeMirror to settle
+            // For some reason, gutter width's don't apply 
+            // correctly if the editor is modified too quickly
+            setTimeout(() => {
+                setEditor();
+            }, 100);
+
+            function setEditor() {
+                editor.setSize('auto', 'auto');
+                editor.setOption('viewportMargin', Infinity);
+                editor.setOption('theme', 'material-palenight');
+                editor.getDoc().setValue(value);
+
+                // Watch for changes
+                editor.on('change', event => {
+                    if (value === editor.doc.getValue()) {
+                        console.log('unchanged');
+
+                        const dot = modal.find('.changed-dot');
+
+                        if (dot) {
+                            dot.remove();
+                        }
+
+                        saveAndCloseBtn.get().disabled = true;
+                    } else {
+                        console.log('changed');
+
+                        const dot = modal.find('.changed-dot');
+
+                        // #dee2e6
+
+                        if (!dot) {
+                            modalBody.querySelector('.file-title').insertAdjacentHTML('beforeend', /*html*/ `
+                                <div class='changed-dot' style='width: 10px; height: 10px; background: white; border-radius: 50%; margin-right: .75rem;'></div>
+                            `);
+                        }
+
+                        saveAndCloseBtn.get().disabled = false;
+                    }
+                });
+
+                // Remove loading message
+                loading.remove();
+
+                // Remove .modal-body top padding
+                modalBody.style.paddingTop = '0px';
+
+                // Show title
+                modal.find('.file-title').classList.remove('d-none');
+            }
+
+            const saveAndCloseBtn = BootstrapButton({
+                async action(event) {
+                    // TODO: only save file if changed
+                    await saveFile(event);
+
+                    $(modal.get()).on('hidden.bs.modal', event => {
+                        location.reload(true);
+                    });
+                    
+                    setTimeout(() => {
+                        // Enable button
+                        $(event.target)
+                            .removeAttr('disabled')
+                            .text('Saved');
+
+                        // Close modal (DOM node will be removed on hidden.bs.modal event)
+                        modal.close();
+                    }, 1000);
+                },
+                classes: ['w-100', 'mt-4'],
+                disabled: true, // enable if changed
+                width: '100%',
+                parent: modalBody,
+                type: 'success',
+                value: 'Save and close'
+            });
+
+            saveAndCloseBtn.add();
+
+            async function saveFile(event) {
+                if (event) {
+                    // Disable button - Prevent user from clicking this item more than once
+                    $(event.target)
+                        .attr('disabled', '')
+                        .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving');
+                }
+
+                const currentValue = editor.getDoc().getValue();
+
+                console.log(currentValue);
+
+                // TODO: Move to SetFile action
+                const setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/Add(url='${file}',overwrite=true)`, {
+                    method: 'POST',
+                    body: currentValue, 
+                    headers: {
+                        'binaryStringRequestBody': 'true',
+                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                        'X-RequestDigest': srcRequestDigest
+                    }
+                });
+
+                if (setFile) {
+                    const dot = modal.find('.changed-dot');
+
+                    if (dot) {
+                        dot.remove();
+                    }
+
+                    value = currentValue;
+                    
+                    return setFile;
+                }
+            }
+
+            const cancelBtn = BootstrapButton({
+                action(event) {
+                    modal.close();
+                },
+                classes: ['w-100 mt-2'],
+                width: '100%',
+                parent: modalBody,
+                type: 'light',
+                value: 'Close'
+            });
+
+            cancelBtn.add();
+
+            $(modal.get()).on('hide.bs.modal', checkIfSaved);
+
+            function checkIfSaved(event) {
+                console.log('check if saved');
+                console.log('param:', param);
+                console.log('value:', value);
+                console.log('editor:', editor.doc.getValue());
+
+                if (value === editor.doc.getValue()) {
+                    console.log('unchanged');
+
+                    if (shouldReload) {
+                        // Dialog box
+                        Store.get('appcontainer').append(/*html*/ `
+                            <div class='dialog-container' style="position: fixed; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; z-index: 10000">
+                                <div class='dialog-box d-flex' style='min-width: 300px; min-height: 150px; padding: 30px; background: white; border-radius: 20px;'>
+                                    <!-- Append loading spinner -->
+                                </div>
+                            </div>
+                        `);
+
+                        const loading = LoadingSpinner({
+                            message: `Reloading`,
+                            parent: Store.get('appcontainer').find('.dialog-box')
+                        });
+            
+                        loading.add();
+
+                        // Wait a second to make sure changes to list.js are committed
+                        setTimeout(() => {
+                            // Remove checkIfSaved before closing
+                            $(modal.get()).off('hide.bs.modal', checkIfSaved);
+
+                            // Reload
+                            $(modal.get()).on('hidden.bs.modal', event => {
+                                location.reload(true);
+                            });
+
+                            // Close modal (DOM node will be destroyed)
+                            modal.close();
+                        }, 1000);
+                        return false;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    console.log('changed');
+
+                    Store.get('appcontainer').append(/*html*/ `
+                        <div class='dialog-container' style="position: fixed; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; z-index: 10000">
+                            <div class='dialog-box' style='padding: 30px; background: white; border-radius: 20px;'>
+                                <div class='mb-2' style=''>
+                                    Do you want to save the changes you made to list.js?
+                                </div>
+                                <div class='mb-4' style='font-size: 13px;'>
+                                    Your changes will be lost if you don't save them.
+                                </div>
+                                <div class='button-container' style='display: flex; justify-content: space-between;'>
+                                    <div style='display: flex; justify-content: flex-start;'>
+                                        <button class='btn btn-secondary btn-sm dont-save'>Don't Save</button>
+                                        <button class='btn btn-light btn-sm ml-2 cancel'>Cancel</button>
+                                    </div>
+                                    <div style='display: flex; justify-content: flex-end;'>
+                                        <button class='btn btn-success save'>Save</button>
+                                    <div>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+
+                    // Don't save
+                    Store.get('appcontainer').find('.dialog-box .dont-save').addEventListener('click', event => {
+                        // Remove save diaglog box
+                        Store.get('appcontainer').find('.dialog-container').remove();
+                        
+                        // Remove checkIfSaved before closing
+                        $(modal.get()).off('hide.bs.modal', checkIfSaved);
+
+                        // Close modal (DOM node will be destroyed)
+                        modal.close();
+                    });
+
+                    // Cancel
+                    Store.get('appcontainer').find('.dialog-box .cancel').addEventListener('click', event => {
+                        // Remove save dialog
+                        Store.get('appcontainer').find('.dialog-container').remove();
+                    });
+
+                    // Save
+                    Store.get('appcontainer').find('.dialog-box .save').addEventListener('click', async event => {
+                        // Save file
+                        await saveFile(event);
+
+                        // Remove save dialog
+                        Store.get('appcontainer').find('.dialog-container').remove();
+
+                        // Remove checkIfSaved before closing
+                        $(modal.get()).off('hide.bs.modal', checkIfSaved);
+
+                        // Listen for modal has closed event, reload page since file changed
+                        $(modal.get()).on('hidden.bs.modal', event => {
+                            location.reload(true);
+                        });
+                        
+                        // Close modal
+                        setTimeout(() => {
+                            // Enable button
+                            $(event.target)
+                                .removeAttr('disabled')
+                                .text('Saved');
+
+                            // Close modal (DOM node will be removed on hidden.bs.modal event)
+                            modal.close();
+                        }, 1000);
+                    });
+
+                    return false;
+                }
+            }
+        },
+        centered: true,
+        showFooter: false
+    });
+
+    modal.add(); 
 }
 
 /**
@@ -5424,7 +5856,6 @@ export function Start(param) {
         title,
         logo,
         usersList,
-        usersFields,
         beforeLoad,
         links,
         lists,
@@ -5447,7 +5878,7 @@ export function Start(param) {
             .join(' ');
     }
 
-    if (App.get('dev').errorLogging === 'on') {
+    if (App.get('errorLogging') === 'on') {
         /** Format error objects for JSON.stringify() to work properly */
         function replaceErrors(key, value) {
             if (value instanceof Error) {
@@ -5501,163 +5932,6 @@ export function Start(param) {
 
         // Pass start param to InstallApp
         InstallApp(param);
-
-        async function launch() {
-            /** Set sessions storage */
-            SetSessionStorage({
-                sessionStorageData
-            });
-
-            /** Get list items */
-            const data = await Data(preLoadLists);
-
-            if (data) {
-                /** Add list items to store */
-                preLoadLists.forEach((param, index) => {
-                    const {
-                        list
-                    } = param;
-
-                    Store.add({
-                        type: 'list',
-                        list,
-                        items: data[index]
-                    });
-                });
-            }
-
-            /** Load svg definitions */
-            const svgDefs = SvgDefs({
-                svgSymbols
-            });
-
-            // console.log('SVG Defs', svgDefs);
-
-            svgDefs.add();
-
-            /** Get AD user and Users list item properties */
-            Store.user(await GetCurrentUser({
-                list: usersList,
-                fields: usersFields
-            }));
-
-            /** Get current route */
-            const path = location.href.split('#')[1];
-
-            /** Attach Router to browser back/forward event */
-            window.addEventListener('popstate', (event) => {
-                if (event.state) {
-                    Route(event.state.url.split('#')[1], {
-                        scrollTop: Store.viewScrollTop()
-                    });
-                }
-            });
-
-            /** Store routes */
-            Store.setRoutes(routes.concat(Routes));
-
-            /** Sidebar Component */
-            const sidebarParam = {
-                logo,
-                parent: appContainer,
-                path,
-                sidebarDropdown
-            };
-            
-            const sidebarComponent = sidebar ? sidebar(sidebarParam) : Sidebar(sidebarParam);
-
-            Store.add({
-                name: 'sidebar',
-                component: sidebarComponent
-            });
-
-            sidebarComponent.add();
-
-            /** Main Container */
-            const mainContainer = MainContainer({
-                parent: appContainer
-            });
-
-            Store.add({
-                name: 'maincontainer',
-                component: mainContainer
-            });
-
-            mainContainer.add();
-
-            /** Run callback defined in settings Before first view loads */
-            if (beforeLoad) {
-                await beforeLoad();
-            }
-
-            /** Show App Container */
-            appContainer.show('flex');
-
-            /** Generate Session Id */
-            const sessionId = GenerateUUID();
-
-            /** Format Title for Sessin/Local Storage keys */
-            const storageKeyPrefix = settings.title.split(' ').join('-');
-
-            /** Set Session Id */
-            sessionStorage.setItem(`${storageKeyPrefix}-sessionId`, sessionId)
-
-            /** Log in*/
-            try {
-                Log({
-                    Title:  `${Store.user().Title || 'User'} logged in`,
-                    Message: `${Store.user().Email || 'User'} successfully loaded ${title}`,
-                    StackTrace: new Error().stack,
-                    Module: import.meta.url
-                });
-            } catch (error) {
-                console.error(error);
-            }
-
-            /** Run current route on page load */
-            Route(path, {
-                log: false
-            });
-
-            /** Check Local Storage for release notes */
-            const isReleaseNotesDismissed = localStorage.getItem(`${storageKeyPrefix}-releaseNotesDismissed`);
-
-            if (!isReleaseNotesDismissed) {
-                // console.log('Show release notes message.');
-
-                /** Release Notes */
-                const releaseNotes = FixedToast({
-                    title: 'New version is live!',
-                    message: 'View release notes',
-                    bottom: '20px',
-                    right: '10px',
-                    action(event) {
-                        const modal = Modal({
-                            title: '',
-                            fade: true,
-                            background: settings.secondaryColor,
-                            centered: true,
-                            addContent(modalBody) {
-                                ReleaseNotes({
-                                    margin: '0px',
-                                    parent: modalBody,
-                                });
-                            },
-                            parent: appContainer
-                        });
-
-                        modal.add();
-                    },
-                    onClose(event) {
-                        /** Set Local Storage */
-                        localStorage.setItem(`${storageKeyPrefix}-releaseNotesDismissed`, 'true');
-                    },
-                    parent: appContainer
-                });
-
-                releaseNotes.add();
-            }
-        }
     }
 }
 
@@ -5751,6 +6025,8 @@ export function UpdateApp() {
 
             console.log('Fields to add:', schemaAdd);
             console.log('Fields to delete:', schemaDelete);
+
+            // const { toCreate, toDelete, schemaAdd, schemaDelete } = await CheckLists();
             
             // Remove loading
             modal.find('.loading-spinner').remove();

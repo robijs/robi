@@ -1,4 +1,4 @@
-import { AddStyle, AttachFiles, Component, CreateItem, CreateList, DeleteAttachments, DeleteItem, DeleteList, Get, GetAppSetting, GetADUsers, GetSiteUsers, GetWebLists, Route, UpdateApp, ResetApp, ReinstallApp, DeleteApp } from './Actions.js'
+import { AddStyle, AttachFiles, Component, CreateItem, CreateList, DeleteAttachments, DeleteItem, DeleteList, Get, GetAppSetting, GetADUsers, GetSiteUsers, GetWebLists, Route, UpdateApp, ResetApp, ReinstallApp, DeleteApp, ModifyFile } from './Actions.js'
 import { App } from '../Core/Settings.js'
 import { Lists } from './Models.js';
 import Store from './Store.js'
@@ -121,8 +121,8 @@ export function AppContainer() {
             }
             
             ::-webkit-scrollbar {
-                width: 15px;
-                height: 10px;
+                width: 12px;
+                height: 12px;
             }
             
             ::-webkit-scrollbar-track {
@@ -2319,10 +2319,24 @@ export function DataTable(param) {
                 color: ${App.get('primaryColor')};
             }
 
+            /* #id_wrapper .sorting::before,
+            #id_wrapper .sorting_asc::before,
+            #id_wrapper .sorting_desc::before {
+                right: .5em;
+            } */
+
             #id_wrapper .sorting::after,
             #id_wrapper .sorting_asc::after,
             #id_wrapper .sorting_desc::after {
-                right: .1em;
+                right: .2em;
+            }
+
+            #id_wrapper .sorting::before {
+                content: '▲';
+            }
+
+            #id_wrapper .sorting::after {
+                content: '▼';
             }
 
             /** Select Checkbox */
@@ -2768,8 +2782,22 @@ export function DevConsole(param) {
                 <div class='dev-console'>
                     <div class='dev-console-row'>
                         <div class='dev-console-text'>
+                            <div class='dev-console-label'>Modify ${App.get('name')}</div>
+                            <div class='dev-console-description'>Change list schemas in <code>App/src/lists.js</code> and app initialization settings in <code>App/src/app.js</code> right in the browser. Update app below to commit changes.</div>
+                        </div>
+                        <div class='d-flex flex-column justify-content-center'>
+                            <div class='d-flex align-items-center ml-5'>
+                                <button class='btn btn-code mb-3 dev-console-button modify-lists'>Modify Lists</button>
+                            </div>
+                            <div class='d-flex align-items-center ml-5'>
+                                <button class='btn btn-code dev-console-button modify-app'>Edit Initialization</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='dev-console-row'>
+                        <div class='dev-console-text'>
                             <div class='dev-console-label'>Update ${App.get('name')}</div>
-                            <div class='dev-console-description'>Sync ${App.get('name')} with list schema defined in <code>App/src/lists.js</code>. You can choose which new lists and columns will be created and which existing lists and columns will be deleted. </div>
+                            <div class='dev-console-description'>Sync ${App.get('name')} with list schema defined in <code>App/src/lists.js</code>. You can choose which new lists and columns will be created and which existing lists and columns will be deleted.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
                             <button class='btn btn-primary dev-console-button update'>Update ${App.get('name')}</button>
@@ -2857,15 +2885,16 @@ export function DevConsole(param) {
                 height: fit-content;
                 border-radius: 10px;
                 width: 300px;
-                border-color: transparent;
             }
 
             #id .btn-danger {
                 background: firebrick;
             }
 
-            #id .btn-success {
-                background: seagreen;
+            #id .btn-code {
+                background: #292D3E;
+                border-color: #292D3E;
+                color: white;
             }
 
             #id .btn-secondary {
@@ -2882,6 +2911,30 @@ export function DevConsole(param) {
         parent: parent,
         position,
         events: [
+            {
+                selector: '#id .modify-lists',
+                event: 'click',
+                async listener(event) {
+                    console.log('Button:', event.target.innerText);
+
+                    ModifyFile({
+                        path: 'App/src',
+                        file: 'lists.js'
+                    });
+                }
+            },
+            {
+                selector: '#id .modify-app',
+                event: 'click',
+                async listener(event) {
+                    console.log('Button:', event.target.innerText);
+
+                    ModifyFile({
+                        path: 'App/src',
+                        file: 'app.js'
+                    });
+                }
+            },
             {
                 selector: '#id .update',
                 event: 'click',
@@ -2918,7 +2971,10 @@ export function DevConsole(param) {
                     DeleteApp();
                 }
             }
-        ]
+        ],
+        onAdd() {
+            console.log('check if lists modified');
+        }
     });
 
     return component;
@@ -4616,7 +4672,7 @@ export function LoadingSpinner(param) {
 
     const component = Component({
         html: /*html*/ `
-            <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center ${classes.join(' ')}'>
+            <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center ${classes?.join(' ')}'>
                 <div class="mb-2" style='font-weight: 600; color: darkgray'>${message || 'Loading'}</div>
                 <div class="spinner-grow" style='color: darkgray' role="status"></div>
             </div>
@@ -8639,7 +8695,8 @@ export function SiteUsage(param) {
                 justify-content: space-between;
                 width: 100%;
                 font-weight: 500;
-                background: #e9ecef;
+                /* background: #e9ecef; */
+                background: ${App.get('sidebarBackgroundColor')};
                 border-radius: 8px;
                 padding: 5px;
             }
@@ -8653,7 +8710,7 @@ export function SiteUsage(param) {
             #id .info-count {
                 border-radius: 8px;
                 padding: 5px;
-                background: #2d3d501a;
+                /* background: #2d3d501a; */
                 border: none;
                 width: 70px;
                 text-align: center;
@@ -10204,6 +10261,7 @@ export function Toolbar(param) {
     });
 }
 
+// TODO: Add async call to look up latest robi build, add red dot if out-of-date
 /**
  * 
  * @param {*} param 
@@ -10220,8 +10278,8 @@ export function UpgradeAppButton(param) {
                 <div class='dev-console'>
                     <div class='dev-console-row'>
                         <div class='dev-console-text'>
-                            <div class='dev-console-label'>Upgrade Robi Build</div>
-                            <div class='dev-console-description'>Install latest Robi build from <code>path/to/source</code>.</div>
+                            <div class='dev-console-label'>Upgrade Robi</div>
+                            <div class='dev-console-description'>Install latest Robi build.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
                             <button class='btn btn-success dev-console-button upgrade'>Upgrade ${App.get('name')}</button>
@@ -10282,6 +10340,7 @@ export function UpgradeAppButton(param) {
                 font-size: 14px;
                 height: fit-content;
                 border-radius: 10px;
+                padding: 10px;
                 width: 230px;
                 border: none;
             }

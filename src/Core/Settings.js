@@ -14,22 +14,21 @@ let settings = {};
 
 const App = {
     set(param) {
-        let { mode, site, library } = param;
+        let { library } = param;
 
-        // If mode isn't explicity set, assume dev if url contains local host 
-        if (!mode) {
-            if (location.href.includes('localhost') || location.href.includes('127.0.0.1')) {
-                param.mode = 'dev';
-            } else {
-                param.mode = 'prod';
-            }
+        // Set mode
+        if (location.href.includes('localhost') || location.href.includes('127.0.0.1')) {
+            param.mode = 'dev';
+        } else {
+            param.mode = 'prod';
         }
 
         if (!library) {
             param.library = 'App';
         }
 
-        if (param.mode === 'prod' && !site) {
+        // Set site
+        if (param.mode === 'prod') {
             console.log('Site:', location.href.split(library || '/App/')[0]);
             console.log('App library:', param.library);
 
@@ -47,6 +46,37 @@ Object.freeze(App);
 
 /** Routes */
 const Routes = [
+    {
+        path: '403',
+        hide: true,
+        go() {
+            Unauthorized();
+        }
+    },
+    {
+        path: '404',
+        hide: true,
+        go() {
+            Missing();
+        }
+    },
+    {
+        path: 'Developer',
+        roles: [
+            'Developer'
+        ],
+        icon: 'code-slash',
+        go(param) {
+            Developer(param);
+        }
+    },
+    {
+        path: 'Help',
+        icon: 'info-circle',
+        go() {
+            Help();
+        }
+    },
     {
         path: 'Questions',
         icon: 'chat-right-text',
@@ -70,6 +100,13 @@ const Routes = [
         } 
     },
     {
+        path: 'Settings',
+        icon: 'bs-gear',
+        go() {
+            Settings();
+        }
+    },
+    {
         path: 'Users',
         roles: [
             'Developer',
@@ -89,52 +126,6 @@ const Routes = [
                 });
             }
         }  
-    },
-    {
-        path: 'Developer',
-        roles: [
-            'Developer'
-        ],
-        icon: 'code-slash',
-        go(param) {
-            Developer(param);
-        }
-    },
-    {
-        path: 'Help',
-        icon: 'info-circle',
-        go() {
-            Help();
-        }
-    },
-    {
-        path: 'Settings',
-        icon: 'bs-gear',
-        go() {
-            Settings();
-        }
-    },
-    {
-        path: '403',
-        hide: true,
-        go() {
-            Unauthorized();
-        }
-    },
-    {
-        path: '404',
-        hide: true,
-        go() {
-            Missing();
-        }
-    },
-    /** TEST */
-    {
-        path: 'Worker',
-        hide: true,
-        go() {
-            View_Worker();
-        }
     }
 ];
 
