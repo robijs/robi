@@ -9426,8 +9426,6 @@ export function SiteUsage(param) {
     const screenWidth = window.screen.width;
     const chartWidth = screenWidth > 1500 ? 800 : 500;
 
-    console.log('add chart:', chartWidth);
-
     const component = Component({
         html: /*html*/ `
             <div class='dashboard-long-card'>
@@ -9521,7 +9519,7 @@ export function SiteUsage(param) {
             #id .info-count {
                 border-radius: 8px;
                 padding: 5px;
-                /* background: #2d3d501a; */
+                background: rgba(${App.get('primaryColorRGB')}, 0.2);
                 border: none;
                 width: 70px;
                 text-align: center;

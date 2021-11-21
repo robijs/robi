@@ -254,6 +254,11 @@ export function Authorize(param) {
     }
 }
 
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export async function CheckLists(param) {
     // Check lists
     const listsToIgnore =  ['App', 'Composed Looks', 'Documents', 'Master Page Gallery', 'MicroFeed', 'Site Assets', 'Site Pages'];
@@ -1142,6 +1147,8 @@ export async function CreateItem(param) {
 
         return refetechedNewItem[0];
     } else if (App.get('mode') === 'dev') {
+        
+
         const body = data;
 
         body.Author = {
@@ -1167,6 +1174,15 @@ export async function CreateItem(param) {
 
         const response = await fetch(`http://localhost:3000/${list}`, options);
         const newItem = await response.json();
+        
+        if (list !== 'Log' && list !== 'Errors') {
+            console.log('Adding 1s delay to CreateItem');
+            await wait(1000);
+        }
+
+        function wait(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
         return newItem;
     }
@@ -4164,20 +4180,29 @@ export async function ModifyFile(param) {
                 }
             });
 
-            const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
-            const srcRequestDigest = await GetRequestDigest();
-            const getFileValue = await fetch(sourceSiteUrl, {
-                method: 'GET',
-                headers: {
-                    'binaryStringRequestBody': 'true',
-                    'Accept': 'application/json;odata=verbose;charset=utf-8',
-                    'X-RequestDigest': srcRequestDigest
-                }
-            });
-        
+            let fileValueRequest;
+
+            if (App.get('mode') === 'prod') {
+                const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
+                const srcRequestDigest = await GetRequestDigest();
+                fileValueRequest = await fetch(sourceSiteUrl, {
+                    method: 'GET',
+                    headers: {
+                        'binaryStringRequestBody': 'true',
+                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                        'X-RequestDigest': srcRequestDigest
+                    }
+                });
+
+            } else {
+                const devPath = path.replace('App/', '');
+                fileValueRequest = await fetch(`http://127.0.0.1:8080/${devPath}/${file}`);
+                await Wait(1000);
+            }
+
             // Overriden on save
             // FIXME: Doesn't work with app.js.
-            let value = await getFileValue.text();
+            const value = await fileValueRequest.text();
 
             // Always wait an extra 100ms for CodeMirror to settle.
             // For some reason, gutter width's won't apply 
@@ -4189,15 +4214,21 @@ export async function ModifyFile(param) {
                 setEditor();
             }, 100);
 
+            // FIXME: Remember initial codemirorr doc value
+            // compare this with current doc value
+            let initialDocValue;
+
             function setEditor() {
                 editor.setSize('auto', 'auto');
                 editor.setOption('viewportMargin', Infinity);
                 editor.setOption('theme', 'material-palenight');
                 editor.getDoc().setValue(value);
+                initialDocValue = editor.doc.getValue();
 
                 // Watch for changes
                 editor.on('change', event => {
-                    if (value === editor.doc.getValue()) {
+                    // if (value === editor.doc.getValue()) {
+                    if (initialDocValue === editor.doc.getValue()) {
                         console.log('unchanged');
 
                         const dot = modal.find('.changed-dot');
@@ -4281,7 +4312,8 @@ export async function ModifyFile(param) {
                 console.log('value:', value);
                 console.log('editor:', editor.doc.getValue());
 
-                if (value === editor.doc.getValue()) {
+                // if (value === editor.doc.getValue()) {
+                if (initialDocValue === editor.doc.getValue()) {
                     console.log('unchanged');
 
                     if (shouldReload) {
@@ -7112,4 +7144,8 @@ export async function UploadFiles(param) {
     }));
 
     return updatedItems;
+}
+
+export function Wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

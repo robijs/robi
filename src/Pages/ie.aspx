@@ -3,7 +3,7 @@
 <html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
 <head>
     <title>Please Launch App in Edge</title>
-    <link rel="shortcut icon" href="../src/Images/favicon.ico">
+    <link rel="shortcut icon" href="../Images/favicon.ico">
     <style>
         html,
         body {

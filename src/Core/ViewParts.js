@@ -2434,7 +2434,7 @@ export async function SiteUsage(param) {
     
     loadingIndicator.add();
 
-    const workerPath = App.get('mode') === 'prod' ? '../' : `${App.get('site')}/src/`
+    const workerPath = App.get('mode') === 'prod' ? '../' : `http://127.0.0.1:8080/src/`
 
     /** Worker */
     const worker = new Worker(`${workerPath}Core/Workers/SiteUsage.js`, {

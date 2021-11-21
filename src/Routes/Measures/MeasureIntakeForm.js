@@ -187,6 +187,8 @@ export default async function MeasureIntakeForm(param) {
                 for (let prop in Store.getData('new measure')) {
                     if (Store.getData('new measure')[prop]) {
                         data[prop] = Store.getData('new measure')[prop];
+                    } else {
+                        data[prop] = null;
                     }
                 }
 
@@ -248,9 +250,10 @@ export default async function MeasureIntakeForm(param) {
                 }
 
                 console.log('Done!');
+                console.log($(modal.get()));
 
                 $(modal.get()).on('hidden.bs.modal', event => {
-                    Route(`Measures/${newItem.Id}${path ? `/${path}` : ''}`)
+                    Route(`Measures/${newItem.Id}${path ? `/${path}` : ''}`);
                 });
     
                 modal.close();
