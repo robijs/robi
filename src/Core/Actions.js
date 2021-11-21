@@ -4202,7 +4202,7 @@ export async function ModifyFile(param) {
 
             // Overriden on save
             // FIXME: Doesn't work with app.js.
-            const value = await fileValueRequest.text();
+            let value = await fileValueRequest.text();
 
             // Always wait an extra 100ms for CodeMirror to settle.
             // For some reason, gutter width's won't apply 
@@ -4433,7 +4433,7 @@ export async function ModifyFile(param) {
                         .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving');
                 }
 
-                const currentValue = editor.getDoc().getValue();
+                let currentValue = editor.getDoc().getValue();
 
                 console.log(currentValue);
 
