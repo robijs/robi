@@ -1999,7 +1999,7 @@ export function DashboardBanner(param) {
  */
 export function DataTable(param) {
     const {
-        buttonBorder,
+        buttonColor,
         headers,
         headerFilter,
         columns,
@@ -2120,8 +2120,9 @@ export function DataTable(param) {
             }
 
             #id_wrapper .datatable-toolbar .btn-secondary {
-                background: ${App.get('primaryColor')};
-                border-color: ${App.get('primaryColor')};
+                /* background: ${App.get('primaryColor')};
+                border-color: ${App.get('primaryColor')}; */
+                border-color: transparent;
                 margin-right: 10px;
                 border-radius: .25rem;
             }
@@ -2195,10 +2196,9 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-html5 {
-                background: #e9ecef !important;
+                background: ${buttonColor || '#e9ecef'} !important;
                 color: #444;
                 font-weight: 500;
-                border: 1px solid ${buttonBorder || 'transparent'} !important;
             }
 
             #id_wrapper .buttons-html5 span{
@@ -2217,20 +2217,20 @@ export function DataTable(param) {
 
             /** Select and Search */
             #id_wrapper .custom-select {
-                border: 1px solid ${buttonBorder || 'transparent'};
-                background: #e9ecef;
+                background: ${buttonColor || '#e9ecef'} !important;
+                border-color: transparent;
+                font-weight: 500;
             }
 
             #id_wrapper input[type='search'] {
-                border: 1px solid ${buttonBorder || 'transparent'};
-                background: #e9ecef;
+                background: ${buttonColor || '#e9ecef'} !important;
+                border-color: transparent;
             }
 
             #id_wrapper input[type='search']:active,
             #id_wrapper input[type='search']:focus,
             #id_wrapper select:focus,
             #id_wrapper select:focus {
-                border: 1px solid ${buttonBorder || 'transparent'};
                 outline: none;
             }
 
@@ -5658,9 +5658,6 @@ export function MainContainer(param) {
         style: /*css*/ `
             .maincontainer {
                 position: relative;
-                display: 'flex';
-                flex-direction: 'column';
-                /* padding: 40px; */
                 flex: 1;
                 height: 100vh;
                 overflow: overlay;
@@ -5687,14 +5684,6 @@ export function MainContainer(param) {
         }
     }
 
-    component.paddingOff = () => {
-        component.get().style.padding = '0px';
-    }
-
-    component.paddingOn = () => {
-        component.get().style.padding = '40px'; // 15px 30px;
-    }
-
     component.eventsOff = () => {
         [...component.get().children].forEach(child => {
             child.style.pointerEvents = 'none';
@@ -5706,6 +5695,7 @@ export function MainContainer(param) {
             child.style.pointerEvents = 'initial';
         });
     }
+
     return component;
 }
 
@@ -10835,12 +10825,14 @@ export function Title(param) {
             #id.title .title-date {
                 font-size: 13px;
                 font-weight: 500;
-                color: ${App.get('primaryColor')};
+                /* color: ${App.get('primaryColor')}; */
+                color: #70767c;
                 margin: 0px;
             }
 
             #id.title .title-date * {
-                color: ${App.get('primaryColor')};
+                /* color: ${App.get('primaryColor')}; */
+                color: #70767c;
             }
 
             #id.across {
@@ -11419,6 +11411,8 @@ export function ViewContainer(param) {
         parent
     } = param;
 
+    const padding = '40px'
+
     const component = Component({
         html: /*html*/ `
             <div class='viewcontainer'></div>
@@ -11426,8 +11420,7 @@ export function ViewContainer(param) {
         style: /*css*/ `
             .viewcontainer {
                 position: relative;
-                padding: 40px;
-                flex: 1;
+                padding: ${padding};
                 height: 100vh;
                 overflow: overlay;
             }
@@ -11443,12 +11436,12 @@ export function ViewContainer(param) {
     });
 
     component.dim = (toggle) => {
-        const maincontainer = component.get();
+        const viewContainer = component.get();
 
         if (toggle) {
-            maincontainer.classList.add('dim');
+            viewContainer.classList.add('dim');
         } else {
-            maincontainer.classList.remove('dim');
+            viewContainer.classList.remove('dim');
         }
     }
 
@@ -11457,7 +11450,7 @@ export function ViewContainer(param) {
     }
 
     component.paddingOn = () => {
-        component.get().style.padding = '40px'; // 15px 30px;
+        component.get().style.padding = padding;
     }
 
     component.eventsOff = () => {

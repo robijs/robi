@@ -49,15 +49,15 @@ const Routes = [
     {
         path: '403',
         hide: true,
-        go() {
-            Unauthorized();
+        go(param) {
+            Unauthorized(param);
         }
     },
     {
         path: '404',
         hide: true,
-        go() {
-            Missing();
+        go(param) {
+            Missing(param);
         }
     },
     {
@@ -73,8 +73,8 @@ const Routes = [
     {
         path: 'Help',
         icon: 'info-circle',
-        go() {
-            Help();
+        go(param) {
+            Help(param);
         }
     },
     {
@@ -82,17 +82,20 @@ const Routes = [
         icon: 'chat-right-text',
         go(param) { 
             const {
+                parent,
                 pathParts
             } = param;
 
             if (pathParts.length === 1) {
-                Questions();
+                Questions(param);
             } else if (pathParts.length === 2) {
                 QuestionsBoard({
+                    parent,
                     path: pathParts[1]
                 });
             } else if (pathParts.length === 3) {
                 Question({
+                    parent,
                     path: pathParts[1],
                     itemId: parseInt(pathParts[2])
                 });
@@ -102,8 +105,8 @@ const Routes = [
     {
         path: 'Settings',
         icon: 'bs-gear',
-        go() {
-            Settings();
+        go(param) {
+            Settings(param);
         }
     },
     {

@@ -2661,7 +2661,7 @@ export async function Table(param) {
         addButton,
         addButtonValue,
         border,
-        buttonBorder,
+        buttonColor,
         checkboxes,
         createdRow,
         defaultButtons,
@@ -3093,7 +3093,7 @@ export async function Table(param) {
     const table = DataTable({
         headers,
         headerFilter,
-        buttonBorder,
+        buttonColor,
         checkboxes: checkboxes !== false ? true : false,
         striped: striped || false,
         border: border || false,

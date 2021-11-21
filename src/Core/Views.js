@@ -96,7 +96,7 @@ export async function Developer(param) {
         width: '100%',
         radius: '20px',
         padding: '20px 30px',
-        margin: '0px 0px 20px 0px',
+        margin: '0px 0px 40px 0px',
         parent
     });
 
@@ -130,7 +130,7 @@ export async function Developer(param) {
         buttons: [
             
         ],
-        buttonBorder: 'lightgray',
+        buttonColor: '#dee2e6',
         showId: true,
         addButton: false,
         checkboxes: false,
@@ -191,7 +191,7 @@ export async function Developer(param) {
                 displayName: 'Author'
             }
         ],
-        buttonBorder: 'lightgray',
+        buttonColor: '#dee2e6',
         showId: true,
         addButton: false,
         checkboxes: false,
@@ -328,8 +328,8 @@ export async function Developer(param) {
 /**
  * 
  */
-export async function Help() {
-    const parent = Store.get('maincontainer');
+export async function Help(param) {
+    const { parent } = param;
 
     const viewTitle = Title({
         title: App.get('title'),
@@ -371,9 +371,8 @@ export async function Help() {
 /**
  * 
  */
-export async function Home() {
-    /** View Parent */
-    const parent = Store.get('maincontainer');
+export async function Home(param) {
+    const { parent } = param;
 
     /** View Title */
     const viewTitle = Title({
@@ -392,8 +391,8 @@ export async function Home() {
 /**
  * 
  */
-export async function Missing() {
-    const parent = Store.get('maincontainer');
+export async function Missing(param) {
+    const { parent } = param;
 
     const viewTitle = Title({
         title: App.get('title'),
@@ -420,9 +419,8 @@ export async function Missing() {
 /**
  * 
  */
-export async function Questions() {
-    /** View Parent */
-    const parent = Store.get('maincontainer');
+export async function Questions(param) {
+    const { parent } = param;
 
     /** View Title */
     const viewTitle = Title({
@@ -512,12 +510,7 @@ export async function Questions() {
  * @param {*} param 
  */
 export async function QuestionsBoard(param) {
-    const {
-        path
-    } = param;
-
-    /** View Parent */
-    const parent = Store.get('maincontainer');
+    const { parent, path } = param;
 
     /** View Title */
     let viewTitle;
@@ -885,13 +878,7 @@ export async function QuestionsBoard(param) {
  * @param {*} param 
  */
 export async function Question(param) {
-    const {
-        path,
-        itemId
-    } = param;
-
-    /** View Parent */
-    const parent = Store.get('maincontainer');
+    const { parent, path, itemId } = param;
 
     /** View Title */
     let viewTitle;
@@ -1074,8 +1061,8 @@ export async function Question(param) {
 /**
  * 
  */
-export async function Settings() {
-    const parent = Store.get('maincontainer');
+export async function Settings(param) {
+    const { parent } = param;
 
     const viewTitle = Title({
         title: App.get('title'),
@@ -1125,8 +1112,8 @@ export async function Settings() {
 /**
  * 
  */
-export async function Unauthorized() {
-    const parent = Store.get('maincontainer');
+export async function Unauthorized(param) {
+    const { parent } = param;
 
     const viewTitle = Title({
         title: App.get('title'),
@@ -1155,10 +1142,8 @@ export async function Unauthorized() {
  * @param {*} param 
  * @returns 
  */
-export async function Users(param = {}) {
-    const {
-        itemId
-    } = param;
+export async function Users(param) {
+    const { parent, itemId } = param;
 
     /** Authorize */
     const isAuthorized = Authorize('Users');
@@ -1166,8 +1151,6 @@ export async function Users(param = {}) {
     if (!isAuthorized) {
         return;
     }
-
-    const parent = Store.get('maincontainer');
 
     const viewTitle = Title({
         title: App.get('title'),

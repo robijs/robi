@@ -6,7 +6,6 @@ import Store from '../../Core/Store.js'
 import { Table } from '../../Core/ViewParts.js'
 import lists from '../../lists.js'
 
-
 /**
  * 
  */
@@ -38,31 +37,10 @@ export default async function Home(param) {
 
     info.add();
 
-    // const button = BootstrapButton({
-    //     type: 'primary',
-    //     value: 'Get file',
-    //     parent,
-    //     async action(event) {
-    //         const requestDigest = await GetRequestDigest();
-    //         const getField = await fetch(`https://info.health.mil/staff/analytics/cp/ModernDev/create-app/measures-library/_api/Web/Lists(guid'87d4d8bd-475a-4c58-a4e9-2fedd198a70a')/Items(1)/AttachmentFiles('Alef.docx')/Fields`, {
-    //             method: 'GET',
-    //             headers: {
-    //                 'Accept': 'application/json;odata=verbose;charset=utf-8',
-    //                 'X-RequestDigest': requestDigest
-    //             }
-    //         });
-    //         const response = await getField.json();
-
-    //         console.log(response);
-    //     }
-    // });
-
-    // button.add();
-
     const createSiteBtn = BootstrapButton({
         value: 'Create app',
-        classes: ['mt-3'],
-        type: 'primary',
+        classes: ['ml-3'],
+        type: 'success',
         parent,
         async action(event) {
             const modal = Modal({
