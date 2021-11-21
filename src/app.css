@@ -68,6 +68,26 @@
     border-color: firebrick !important;
 }
 
+.btn-outline-danger {
+    color: firebrick !important;
+    border-color: firebrick !important;
+}
+
+.btn-outline-danger:hover {
+    color: firebrick !important;
+    border-color: firebrick !important;
+}
+
+.btn-outline-success {
+    color: seagreen !important;
+    border-color: seagreen !important;
+}
+
+.btn-outline-success:hover {
+    color: seagreen !important;
+    border-color: seagreen !important;
+}
+
 .form-control,
 .form-field-multi-line-text.editable,
 .btn.dropdown-toggle,
@@ -117,17 +137,18 @@
 }
 
 .file-title {
+    width: 100%;
     background-color: #292D3E;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border-bottom: solid 1px #676E95;
-    padding-top: 1rem;
+    /* justify-content: space-between; */
+    /* border-bottom: solid 1px #676E95; */
+    /* padding-top: 1rem; */
     padding-bottom: .75rem;
-    margin-bottom: .75rem;
-    z-index: 100;
-    position: sticky;
-    top: 0px;
+    /* margin-bottom: .75rem; */
+    /* z-index: 100; */
+    /* position: sticky; */
+    /* top: 0px; */
 }
 
 .file-title * {
@@ -140,7 +161,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 5px;
+    margin-right: 10px;
     margin-left: .75rem;
 }
 

@@ -923,13 +923,14 @@ export function BootstrapButton(param) {
         parent,
         position,
         classes,
+        style,
         type,
         value
     } = param;
 
     const component = Component({
         html: /*html*/ `
-            <button type="button" class="btn btn-${type} ${classes?.join(' ')}" ${disabled ? 'disabled' : ''}>${value}</button>
+            <button type="button" class="btn btn-${type} ${classes?.join(' ')}" ${disabled ? 'disabled' : ''} ${style ? `style='${style}'` : ''}>${value}</button>
         `,
         style: /*css*/ `
             
@@ -5707,6 +5708,10 @@ export function MainContainer(param) {
 export function Modal(param) {
     const {
         title,
+        titleStyle,
+        headerStyle,
+        footerStyle,
+        close,
         addContent,
         buttons,
         centered,
@@ -5731,19 +5736,25 @@ export function Modal(param) {
                     <div class='modal-content'>
                         ${
                             title ?
-                                /*html*/ `<div class='modal-header'>
-                                    <h5 class='modal-title'>${title || ''}</h5>
-                                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                        <!-- <span aria-hidden='true'>&times;</span> -->
-                                        <span aria-hidden='true'>Close</span>
-                                    </button>
+                                /*html*/ `<div class='modal-header' ${headerStyle ? `style='${headerStyle}'` : ''}>
+                                    <h5 class='modal-title' ${titleStyle ? `style='${titleStyle}'` : ''}>${title || ''}</h5>
+                                    ${
+                                        close !== false ?
+                                            /*html*/ `
+                                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                                <!-- <span aria-hidden='true'>&times;</span> -->
+                                                <span aria-hidden='true'>Close</span>
+                                            </button>
+                                        ` :
+                                        ''
+                                    }
                                 </div>`
                             : ''
                         }
                         <div class='modal-body'>
                             <!-- Form elements go here -->
                         </div>
-                        <div class='modal-footer${showFooter ? '' : ' hidden'}'>
+                        <div class='modal-footer${showFooter ? '' : ' hidden'}' ${footerStyle ? `style='${footerStyle}'` : ''}>
                             ${addFooterButtons()}
                         </div>
                     </div>
@@ -8753,14 +8764,16 @@ export function Sidebar(param) {
                     ${buildNav()}
                 </div>
                 <!-- Developer options --> 
-                <div>
-                    <span class='nav' data-path='add-route'>
-                        <span class='icon-container-wide'>
-                            <svg class='icon'><use href='#icon-plus'></use></svg>
-                        </span>
-                        <span class='text'>Add route</span>
-                    </span>
-                </div>
+                ${
+                    Store.user().Role === 'Developer' ?
+                    /*html*/ `
+                        <div class='add-route-container'>
+                            <button class='btn btn-outline-success add-route'>Add route</button>
+                            <button class='btn btn-outline-danger remove-route'>Remove route</button>
+                        </div>
+                    ` :
+                    ''
+                }
                 <!-- Settings -->
                 <div class='settings-container'>
                     <span class='nav ${(path === 'Settings') ? 'nav-selected' : ''} settings' data-path='Settings'>
@@ -8785,6 +8798,7 @@ export function Sidebar(param) {
                 background: ${App.gradientColor ? `linear-gradient(${App.gradientColor})` : App.get('backgroundColor')};
                 border-radius: 20px;
                 margin: 20px 0px 20px 20px;
+                height: calc(100vh - 40px);
             }
 
             /* Nav Container */
@@ -8969,13 +8983,32 @@ export function Sidebar(param) {
                     justify-content: center;
                 }
             }
+
+            /* Add route */
+            #id .add-route-container {
+                display: flex;
+                flex-direction: column;
+                padding: 0px 15px;
+                margin-top: 15px;
+                width: 100%;
+            }
+
+            #id .add-route-container .btn {
+                font-weight: 500;
+                border: none;
+                background: white;
+            }
+
+            #id .add-route-container .btn:not(:last-child) {
+                margin-bottom: 10px;
+            }
         `,
         parent: parent,
         position: 'afterbegin',
         permanent: true,
         events: [
             {
-                selector: '.nav',
+                selector: '.nav:not(.control)',
                 event: 'click',
                 listener: routeToView
             },
@@ -8995,6 +9028,16 @@ export function Sidebar(param) {
                 selector: '#id .open-close',
                 event: 'click',
                 listener: toggleSidebarMode
+            },
+            {
+                selector: '#id .add-route',
+                event: 'click',
+                listener: addRoute
+            },
+            {
+                selector: '#id .remove-route',
+                event: 'click',
+                listener: removeRoute
             }
         ],
         onAdd() {
@@ -9011,6 +9054,16 @@ export function Sidebar(param) {
             });
         }
     });
+
+    function addRoute(event) {
+        // Show modal
+        console.log('add route');
+    }
+
+    function removeRoute(event) {
+        // Show modal
+        console.log('remove route');
+    }
 
     function toggleSidebarMode(event) {
         const mode = component.get().dataset.mode;
@@ -10100,6 +10153,16 @@ export function SvgDefs(param) {
                     <!-- Bootstrap: X Lg -->
                     <symbol id="icon-bs-x-lg" viewBox="0 0 16 16">
                         <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+                    </symbol>
+                    <!-- Bootstrap: Bookmark plus -->
+                    <symbol id="icon-bs-bookmark-plus" viewBox="0 0 16 16">
+                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+                    </symbol>
+                    <!-- Bootstrap: Bookmark x -->
+                    <symbol id="icon-bs-bookmark-x" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M6.146 5.146a.5.5 0 0 1 .708 0L8 6.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 7l1.147 1.146a.5.5 0 0 1-.708.708L8 7.707 6.854 8.854a.5.5 0 1 1-.708-.708L7.293 7 6.146 5.854a.5.5 0 0 1 0-.708z"/>
+                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
                     </symbol>
                     ${addSymbols()}
                 </defs>

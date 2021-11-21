@@ -1,4 +1,24 @@
+// Comment
+
 export default [
+    {
+        list: 'TestList',
+        options: {
+            files: true,
+        },
+        fields: [
+            {
+                name: 'Summary',
+                display: `Summary`,
+                type: 'slot',
+            },
+            {
+                name: 'Description',
+                display: 'Description',
+                type: 'mlot',
+            }
+        ]
+    },
     {
         list: 'Measures',
         options: {

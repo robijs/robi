@@ -187,8 +187,6 @@ export default async function MeasureIntakeForm(param) {
                 for (let prop in Store.getData('new measure')) {
                     if (Store.getData('new measure')[prop]) {
                         data[prop] = Store.getData('new measure')[prop];
-                    } else {
-                        data[prop] = null;
                     }
                 }
 

@@ -164,6 +164,7 @@ export function Lists() {
                 {
                     name: 'Title',
                     display: 'Name',
+                    required: false,
                     type: 'slot'
                 },
                 {

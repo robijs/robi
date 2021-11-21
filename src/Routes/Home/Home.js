@@ -37,6 +37,20 @@ export default async function Home(param) {
 
     info.add();
 
+    // https://info.health.mil/staff/analytics/cp/ModernDev/create-app/App/src/Pages/app.aspx#Home
+
+    const openVSCodeBtn = BootstrapButton({
+        value: 'VS Code',
+        classes: [''],
+        type: 'dark',
+        parent,
+        async action(event) {
+            open(`vscode:${App.get('site')}/${App.get('library')}/src`);
+        }
+    });
+
+    openVSCodeBtn.add();
+
     const createSiteBtn = BootstrapButton({
         value: 'Create app',
         classes: ['ml-3'],
@@ -102,7 +116,9 @@ export default async function Home(param) {
                     installBtn.add();
 
                     modal.get().addEventListener('keypress', event => {
-                        if (event.key === 'Enter') {
+                        if (event.ctrlKey && event.code === 'Enter') {
+                            event.preventDefault();
+
                             createNewSite(event);
                         }
                     });
