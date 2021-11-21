@@ -8752,8 +8752,17 @@ export function Sidebar(param) {
                 <div class='nav-container'>
                     ${buildNav()}
                 </div>
+                <!-- Developer options --> 
+                <div>
+                    <span class='nav' data-path='add-route'>
+                        <span class='icon-container-wide'>
+                            <svg class='icon'><use href='#icon-plus'></use></svg>
+                        </span>
+                        <span class='text'>Add route</span>
+                    </span>
+                </div>
+                <!-- Settings -->
                 <div class='settings-container'>
-                    <!-- Settings -->
                     <span class='nav ${(path === 'Settings') ? 'nav-selected' : ''} settings' data-path='Settings'>
                         <span class='icon-container-wide'>
                             <svg class='icon'><use href='#icon-bs-gear'></use></svg>
