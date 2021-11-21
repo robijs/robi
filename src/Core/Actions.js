@@ -11,7 +11,8 @@ import {
     ProgressBar,
     InstallConsole,
     Container,
-    LoadingSpinner
+    LoadingSpinner,
+    ViewContainer
 } from './Components.js'
 import { Lists } from './Models.js'
 import { App, Routes } from './Settings.js';
@@ -153,7 +154,7 @@ export async function AttachFiles(param) {
     /** Destructure Interface */
     const {
         list,
-        id,
+        itemId,
         files
     } = param;
 
@@ -168,7 +169,7 @@ export async function AttachFiles(param) {
         const name = file.name;
         const fileBuffer = await getFileBuffer(file);
 
-        const upload = await fetch(`${App.get('site')}/_api/web/lists/getbytitle('${list}')/items(${id})/AttachmentFiles/add(FileName='${name}')`, {
+        const upload = await fetch(`${App.get('site')}/_api/web/lists/getbytitle('${list}')/items(${itemId})/AttachmentFiles/add(FileName='${name}')`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json; odata=verbose',
@@ -194,7 +195,7 @@ export async function AttachFiles(param) {
 
     const getUpdatedItem = await Get({
         list,
-        filter: `Id eq ${id}`,
+        filter: `Id eq ${itemId}`,
         select: `Attachments,AttachmentFiles${list === ',References' ? 'Description' : ''}`,
         expand: 'AttachmentFiles',
     });
@@ -537,16 +538,16 @@ export function Component(param) {
         },
         append(param) {
             if (param instanceof Element) {
-                this.get().insertAdjacentElement('beforeend', param);
+                this.get()?.insertAdjacentElement('beforeend', param);
             } else if (typeof param === 'string') {
-                this.get().insertAdjacentHTML('beforeend', param);
+                this.get()?.insertAdjacentHTML('beforeend', param);
             }
         },
         before(param) {
             if (param instanceof Element) {
-                this.get().insertAdjacentElement('beforebegin', param);
+                this.get()?.insertAdjacentElement('beforebegin', param);
             } else if (typeof param === 'string') {
-                this.get().insertAdjacentHTML('beforebegin', param);
+                this.get()?.insertAdjacentHTML('beforebegin', param);
             }
         },
         add(localParent) {
@@ -718,15 +719,46 @@ export async function CreateColumn(param) {
         name,
         type,
         choices,
+        fillIn,
         title,
         lookupList,
-        lookupField
+        lookupField,
+        value
     } = field;
 
-    // Don't create columns with reserved SharePoint names
-    if (name === 'Title' || name === 'Id') {
+    // Get new request digest
+    const requestDigest = await GetRequestDigest();
+    const getField = await fetch(`${App.get('site')}/_api/web/lists/getByTitle('${list}')/fields`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json;odata=verbose;charset=utf-8',
+            'X-RequestDigest': requestDigest
+        }
+    });
+    const response = await getField.json();
+
+    // Existing list columns 
+    const fields = response?.d?.results.map(item => item.Title);
+
+    // Don't create columns with reserved SharePoint names or already exist
+    if (fields.includes(name)) {
+        exists();
+
+        return;
+    }
+
+    // Robi reserves some column names as well
+    const robiFields = [ 'Files' ];
+
+    if (robiFields.includes(name)) {
+        reserved();
+
+        return;
+    }
+
+    async function exists() {
         // Console 
-        console.log(`Column '${name}' already exists`);
+        console.log(`Column '${name}' already exists or is a reserved SharePoint name.`);
 
         // Add to Install Console
         const installConsole = Store.get('install-console');
@@ -735,7 +767,39 @@ export async function CreateColumn(param) {
             installConsole.append(/*html*/ `
                 <div class='console-line'>
                     <!-- <code class='line-number'>0</code> -->
-                    <code>Column '${name}' already exists</code>
+                    <code style='color: orange'>Column '${name}' already exists or is a reserved SharePoint name.</code>
+                </div>
+            `);
+
+            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+        }
+
+        // Update column instead
+        const updatedField = await UpdateColumn(param);
+
+        const progressBar = Store.get('install-progress-bar');
+
+        if (progressBar) {
+            // +1 since not adding to column to view
+            progressBar.update();
+        }
+
+        // TODO: Update progress bar or error out if update fails
+        return updatedField;
+    }
+
+    async function reserved() {
+        // Console 
+        console.log(`Column '${name}' is reserved for Robi. A list column with this name can't be created.`);
+
+        // Add to Install Console
+        const installConsole = Store.get('install-console');
+
+        if (installConsole) {
+            installConsole.append(/*html*/ `
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code style='color: orange'>Column '${name}' is reserved for Robi. A list column with this name can't be created.</code>
                 </div>
             `);
 
@@ -745,34 +809,43 @@ export async function CreateColumn(param) {
         const progressBar = Store.get('install-progress-bar');
 
         if (progressBar) {
-            // +2 since not adding to column to view
-            progressBar.update();
+            // +1 since not adding to column to view
             progressBar.update();
         }
 
-        return;
+        // TODO: Update progress bar or error out if update fails
+        return updatedField;
     }
-    
-    // TODO: Check if field exists first
 
-    // Get new request digest
-    const requestDigest = await GetRequestDigest();
-    
     let data = {};
 
     if (type === 'choice') {
         data = { 
             __metadata: { 
                 "type": "SP.FieldChoice" 
-            }, 
+            },
             FieldTypeKind: 6,
             Title: name,
+            DefaultValue: value,
             Choices: { 
                 // __metadata: { 
                 //     "type": "Collection(Edm.String)" 
                 // }, 
                 results: choices 
-            } 
+            }
+        };
+    } else if (type === 'multichoice') {
+        data = { 
+            __metadata: { 
+                "type": "SP.FieldChoice" 
+            },
+            FieldTypeKind: 15,
+            Title: name,
+            FillInChoice: fillIn,
+            DefaultValue: value,
+            Choices: { 
+                results: choices 
+            }
         };
     } else if (type === 'lookup') {
         const listGuid = await GetListGuid(lookupList);
@@ -792,7 +865,8 @@ export async function CreateColumn(param) {
                 'type': `SP.Field`,
             },
             Title: name,
-            FieldTypeKind: fieldType(type)
+            FieldTypeKind: fieldType(type),
+            DefaultValue: value
         }
     }
 
@@ -832,6 +906,8 @@ export async function CreateColumn(param) {
                 return 7;
             case 'number':
                 return 9;
+            case 'multichoice':
+                return 15;
             case 'pp':
                 return 20;
             default:
@@ -2779,6 +2855,8 @@ export function History(param) {
     document.title = title;
 }
 
+// TODO: Remove mode and install check from InstallApp
+// TODO: Move to InitializeApp or Start
 /**
  * 
  * @param {*} param 
@@ -2812,7 +2890,7 @@ export async function InstallApp(param) {
         // Start loading bar animation
         const loadingBar = LoadingBar({
             displayLogo: App.get('logoLarge'),
-            displayTitle: App.get('name'),
+            displayTitle: App.get('title'),
             totalCount: preLoadLists?.length || 0,
             loadingBar: 'hidden',
             async onReady(event) {
@@ -3686,13 +3764,10 @@ export async function LaunchApp(param) {
         logo,
         usersList,
         beforeLoad,
-        links,
-        lists,
         preLoadLists,
         svgSymbols,
         sessionStorageData,
-        sidebarDropdown,
-        questionTypes
+        sidebarDropdown
     } = settings;
 
     /** Set sessions storage */
@@ -3722,8 +3797,6 @@ export async function LaunchApp(param) {
     const svgDefs = SvgDefs({
         svgSymbols
     });
-
-    // console.log('SVG Defs', svgDefs);
 
     svgDefs.add();
 
@@ -4082,7 +4155,7 @@ export async function ModifyFile(param) {
                         <div style='margin-left: 10px; color: seagreen'>CHANGED (will reload on close)</div>
                     `);
 
-                    // Set flag
+                    // Set reload flag
                     shouldReload = true;
 
                 },
@@ -4102,13 +4175,17 @@ export async function ModifyFile(param) {
                 }
             });
         
-            // This will be overridden on save
+            // Overriden on save
+            // FIXME: Doesn't work with app.js.
             let value = await getFileValue.text();
 
-            // Wait an extra second for CodeMirror to settle
-            // For some reason, gutter width's don't apply 
-            // correctly if the editor is modified too quickly
+            // Always wait an extra 100ms for CodeMirror to settle.
+            // For some reason, gutter width's won't apply 
+            // correctly if the editor is modified too quickly.
             setTimeout(() => {
+                // Remove loading message
+                loading.remove();
+
                 setEditor();
             }, 100);
 
@@ -4147,93 +4224,54 @@ export async function ModifyFile(param) {
                     }
                 });
 
-                // Remove loading message
-                loading.remove();
-
                 // Remove .modal-body top padding
                 modalBody.style.paddingTop = '0px';
 
                 // Show title
                 modal.find('.file-title').classList.remove('d-none');
-            }
 
-            const saveAndCloseBtn = BootstrapButton({
-                async action(event) {
-                    // TODO: only save file if changed
-                    await saveFile(event);
+                const saveAndCloseBtn = BootstrapButton({
+                    async action(event) {
+                        // TODO: only save file if changed
+                        await saveFile(event);
+    
+                        $(modal.get()).on('hidden.bs.modal', event => {
+                            location.reload(true);
+                        });
+                        
+                        setTimeout(() => {
+                            // Enable button
+                            $(event.target)
+                                .removeAttr('disabled')
+                                .text('Saved');
+    
+                            // Close modal (DOM node will be removed on hidden.bs.modal event)
+                            modal.close();
+                        }, 1000);
+                    },
+                    classes: ['w-100', 'mt-4'],
+                    disabled: true, // enable if changed
+                    width: '100%',
+                    parent: modalBody,
+                    type: 'success',
+                    value: 'Save and close'
+                });
+    
+                saveAndCloseBtn.add();
 
-                    $(modal.get()).on('hidden.bs.modal', event => {
-                        location.reload(true);
-                    });
-                    
-                    setTimeout(() => {
-                        // Enable button
-                        $(event.target)
-                            .removeAttr('disabled')
-                            .text('Saved');
-
-                        // Close modal (DOM node will be removed on hidden.bs.modal event)
+                const cancelBtn = BootstrapButton({
+                    action(event) {
                         modal.close();
-                    }, 1000);
-                },
-                classes: ['w-100', 'mt-4'],
-                disabled: true, // enable if changed
-                width: '100%',
-                parent: modalBody,
-                type: 'success',
-                value: 'Save and close'
-            });
-
-            saveAndCloseBtn.add();
-
-            async function saveFile(event) {
-                if (event) {
-                    // Disable button - Prevent user from clicking this item more than once
-                    $(event.target)
-                        .attr('disabled', '')
-                        .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving');
-                }
-
-                const currentValue = editor.getDoc().getValue();
-
-                console.log(currentValue);
-
-                // TODO: Move to SetFile action
-                const setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/Add(url='${file}',overwrite=true)`, {
-                    method: 'POST',
-                    body: currentValue, 
-                    headers: {
-                        'binaryStringRequestBody': 'true',
-                        'Accept': 'application/json;odata=verbose;charset=utf-8',
-                        'X-RequestDigest': srcRequestDigest
-                    }
+                    },
+                    classes: ['w-100 mt-2'],
+                    width: '100%',
+                    parent: modalBody,
+                    type: 'light',
+                    value: 'Close'
                 });
 
-                if (setFile) {
-                    const dot = modal.find('.changed-dot');
-
-                    if (dot) {
-                        dot.remove();
-                    }
-
-                    value = currentValue;
-                    
-                    return setFile;
-                }
+                cancelBtn.add();
             }
-
-            const cancelBtn = BootstrapButton({
-                action(event) {
-                    modal.close();
-                },
-                classes: ['w-100 mt-2'],
-                width: '100%',
-                parent: modalBody,
-                type: 'light',
-                value: 'Close'
-            });
-
-            cancelBtn.add();
 
             $(modal.get()).on('hide.bs.modal', checkIfSaved);
 
@@ -4352,6 +4390,42 @@ export async function ModifyFile(param) {
                     });
 
                     return false;
+                }
+            }
+
+            async function saveFile(event) {
+                if (event) {
+                    // Disable button - Prevent user from clicking this item more than once
+                    $(event.target)
+                        .attr('disabled', '')
+                        .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving');
+                }
+
+                const currentValue = editor.getDoc().getValue();
+
+                console.log(currentValue);
+
+                // TODO: Move to SetFile action
+                const setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/Add(url='${file}',overwrite=true)`, {
+                    method: 'POST',
+                    body: currentValue, 
+                    headers: {
+                        'binaryStringRequestBody': 'true',
+                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                        'X-RequestDigest': srcRequestDigest
+                    }
+                });
+
+                if (setFile) {
+                    const dot = modal.find('.changed-dot');
+
+                    if (dot) {
+                        dot.remove();
+                    }
+
+                    value = currentValue;
+                    
+                    return setFile;
                 }
             }
         },
@@ -5616,14 +5690,13 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
     const mainContainer = Store.get('maincontainer');
 
     /** Set scroll top */
-    // App.ViewScrollTop = mainContainer.get().scrollTop;
     Store.viewScrollTop(mainContainer.get().scrollTop);
+
+    // Turn padding back on
+    // mainContainer.paddingOn();
 
     /** Remove all events attached to the maincontainer */
     mainContainer.removeEvents();
-
-    /** Turn maincontainer padding on (default: 20px 50px) */
-    mainContainer.paddingOn();
 
     /** Empty mainconatainer DOM element */
     mainContainer.empty();
@@ -5645,17 +5718,30 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         component: sidebar
     });
 
+    // FIXME: Experimental.
+    // Trying to solve the problem where components are
+    // added to the current view after the user routes away from 
+    // the view the component is added from.
+    // 
+    // This only happens when a fetch request begins when 
+    // a view is first routed to but is aborted if the user
+    // routes away before the request can finish.
+    // Components created and added later are still 'running'
+    // in the background.
+    // 
+    // Most views use Store.get('maincontainer') as their parent.
+    // This means components will still be added because they're
+    // finding the new maincontainer for that view.
+    const viewContainer = ViewContainer({
+        parent: mainContainer,
+    });
+
+    viewContainer.add();
+
     /** Check route path */
     const pathAndQuery = path.split('?');
     const pathParts = pathAndQuery[0].split('/');
-
-    /** Set browswer history state */
-    History({
-        url: `${location.href.split('#')[0]}${(path) ? `#${path}` : ''}`,
-        title: `${App.get('name')}${(path) ? ` - ${pathAndQuery[0]}` : ''}`
-        // title: `${App.title}${(path) ? ` - ${path}` : ''}`
-    });
-
+    
     /** Only select first path, remove any ? that might be passed in */
     const route = Store.routes().find(item => item.path === pathParts[0]);
 
@@ -5665,6 +5751,13 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
         return;
     }
+
+    /** Set browswer history state */
+    History({
+        url: `${location.href.split('#')[0]}${(path) ? `#${path}` : ''}`,
+        title: `${App.get('title')}${(path) ? ` - ${pathAndQuery[0]}` : ''}`
+        // title: `${App.title}${(path) ? ` - ${path}` : ''}`
+    });
 
     sidebar.selectNav(route.path);
 
@@ -5685,6 +5778,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     /** Call .go() method */
     route.go({
+        parent: viewContainer,
         pathParts,
         props: queryStringToObject(path.split('?')[1])
     });
@@ -6000,6 +6094,8 @@ export function UpdateApp() {
                 const fieldsToCreate = fields.map(item => item.name).filter(x => !webFields.map(item => item.name).includes(x));
                 const fieldsToDelete = webFields.map(item => item.name).filter(x => !fields.map(item => item.name).includes(x) && !fieldsToIgnore.includes(x));
 
+                console.log()
+
                 if (fieldsToCreate.length) {
                     schemaAdd.push({
                         list,
@@ -6194,7 +6290,7 @@ export function UpdateApp() {
                         modalBody.style.width = '80vw';
 
                         modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                            <h3 class='console-title mb-0'>Reseting <strong>lists</strong></h3>
+                            <h3 class='console-title mb-0'>Updating <strong>lists</strong></h3>
                         `);
 
                         // List delete and schema delete only increment progressbar once for each pass
@@ -6662,6 +6758,130 @@ export function UpdateApp() {
 }
 
 /**
+ * Update SharePoint list field.
+ * @param {Object}   param          Interface to UpdateItem() module.   
+ * @param {string}   param.list     SharePoint list Name.
+ */
+export async function UpdateColumn(param) {
+    const {
+        list,
+        field
+    } = param;
+
+    const {
+        name,
+        description,
+        type,
+        choices,
+        fillIn,
+        title,
+        required,
+        lookupList,
+        lookupField,
+        value
+    } = field;
+
+    // Get new request digest
+    const requestDigest = await GetRequestDigest();
+
+    // TODO: Check if field exists first
+    const getField = await fetch(`${App.get('site')}/_api/web/lists/getByTitle('${list}')/fields/getbytitle('${name}')`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json;odata=verbose;charset=utf-8',
+            'X-RequestDigest': requestDigest
+        }
+    });
+    const response = await getField.json();
+
+    if (!response?.d) {
+        // FIXME: update progress bar or error out?
+        console.log(`Field ${name} not found in list ${list}.`);
+        return;
+    }
+
+    let data = { 
+        "__metadata": { 
+            "type": response.d.__metadata.type
+        }
+    };
+
+    // if (choices !== undefined) {
+    //     // data. = '';
+    // }
+
+    // if (fillIn !== undefined) {
+    //     // data. = '';
+    // }
+
+    // if (title !== undefined) {
+    //     // data. = '';
+    // }
+
+
+    // if (lookupList !== undefined) {
+    //     // data. = '';
+    // }
+
+    // if (lookupField !== undefined) {
+    //     // data. = '';
+    // }
+
+    if (required !== undefined) {
+        data.Required = required;
+    }
+
+    if (description !== undefined) {
+        data.Description = description;
+    }
+
+    if (value !== undefined) {
+        data.DefaultValue = value;
+    }
+
+    const postOptions = {
+        url: `${App.get('site')}/_api/web/lists/GetByTitle('${list}')/Fields/GetByTitle('${name}')`,
+        data,
+        headers: {
+            "Content-Type": "application/json;odata=verbose",
+            "Accept": "application/json;odata=verbose",
+            "IF-MATCH":  "*",
+            "X-HTTP-Method": "MERGE",
+            "X-RequestDigest": requestDigest,
+        }
+    }
+
+    await Post(postOptions);
+
+    try {
+        // Console success
+        console.log(`Updated column '${name}'`);
+
+        // Append to install-console
+        const installConsole = Store.get('install-console');
+
+        if (installConsole) {
+            installConsole.append(/*html*/ `
+                <div class='console-line'>
+                    <!-- <code class='line-number'>0</code> -->
+                    <code>Updated column '${name}'</code>
+                </div>
+            `);
+
+            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+        }
+
+        const progressBar = Store.get('install-progress-bar');
+
+        if (progressBar) {
+            progressBar.update();
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+/**
  * Update SharePoint list item.
  * @param {Object}  param          - Interface to UpdateItem() module.
  * @param {string}  param.list     - SharePoint List Name.
@@ -6761,6 +6981,75 @@ export async function UpdateItem(param) {
             return updatedItem;
         }
     }
+}
+
+/**
+ * Create SharePoint list item.
+ * @param {Object}   param          Interface to UpdateItem() module.   
+ * @param {string}   param.list     SharePoint list Name.
+ * @param {string}   [param.list]   SharePoint list item type.
+ * @param {function} param.action   Function to be run after updating item posts.
+ * @param {boolean}  [param.notify] If false, don't display notification.
+ */
+export async function UploadFile(param) {
+    const {
+        file,
+        data,
+        library
+    } = param;
+
+    // Get new request digest
+    const requestDigest = await GetRequestDigest();
+
+    console.log(file);
+
+    const [first, ...rest]  = file.name.split('.');
+    const ext = rest.pop();
+
+    let fileName = ext === 'pptx' || ext === 'txt' || ext === 'exe' ? [first].concat(rest).join('_dot_') : `${[first].concat(rest).join('_dot_')}.${ext}`;
+
+    const fileBuffer = await getFileBuffer(file);
+    const upload = await fetch(`${App.get('site')}/_api/web/folders/GetByUrl('${library}')/Files/add(overwrite=true,url='${fileName}')`, {
+        method: 'POST',
+        headers: {
+            "Accept": "application/json;odata=verbose",
+            'content-type': 'application/json; odata=verbose',
+            "X-RequestDigest": requestDigest,
+            "content-length": fileBuffer.byteLength
+        },
+        body: fileBuffer
+    });
+
+    function getFileBuffer(file) {
+        return new Promise((resolve, reject) => {
+            let fileReader = new FileReader();
+            
+            fileReader.onload = event => resolve(event.target.result);
+            fileReader.readAsArrayBuffer(file);
+        });
+    }
+
+    const response = await upload.json();
+
+    let item = await GetByUri({
+        uri: response.d.ListItemAllFields.__deferred.uri
+    });
+
+    let itemToReturn;
+
+    if (data) {
+        const updateItemParam = {
+            list: library,
+            itemId: item.Id,
+            data
+        }
+      
+        itemToReturn = await UpdateItem(updateItemParam); 
+    } else {
+        itemToReturn = item;
+    }
+
+    return itemToReturn;
 }
 
 /**

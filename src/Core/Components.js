@@ -1,4 +1,4 @@
-import { AddStyle, AttachFiles, Component, CreateItem, CreateList, DeleteAttachments, DeleteItem, DeleteList, Get, GetAppSetting, GetADUsers, GetSiteUsers, GetWebLists, Route, UpdateApp, ResetApp, ReinstallApp, DeleteApp, ModifyFile } from './Actions.js'
+import { AddStyle, AttachFiles, Component, CreateItem, CreateList, DeleteAttachments, DeleteItem, DeleteList, GenerateUUID, Get, GetAppSetting, GetADUsers, GetSiteUsers, GetWebLists, Route, UpdateApp, ResetApp, ReinstallApp, DeleteApp, ModifyFile } from './Actions.js'
 import { App } from '../Core/Settings.js'
 import { Lists } from './Models.js';
 import Store from './Store.js'
@@ -26,7 +26,7 @@ export function Alert(param) {
     const component = Component({
         html: /*html*/ `
             <div class='alert alert-${type}' role='alert'${margin ? ` style='margin: ${margin};'` : ''}>
-                ${text}
+                ${text || ''}
                 ${close ?
                     /*html*/ ` 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -965,21 +965,24 @@ export function BootstrapDropdown(param) {
     const {
         action,
         label,
+        description,
         parent,
         position,
         options,
         value,
-        margin,
-        padding
+        fieldMargin,
+        padding,
+        setWidthDelay
     } = param;
 
     const component = Component({
         html: /*html*/ `
-            <div>
+            <div class='form-field'>
                 <label>${label}</label>
+                ${description ? /*html*/`<div class='form-field-description text-muted'>${description}</div>` : ''}
                 <div class='dropdown'>
                     <button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-                        ${value}
+                        ${value || `<span style='opacity: 0;'>Choose</span>`}
                     </button>
                     <div class='dropdown-menu hidden' aria-labelledby='dropdownMenuButton'>
                         ${buildDropdown(options)}
@@ -989,7 +992,7 @@ export function BootstrapDropdown(param) {
         `,
         style: /*css*/ `
             #id {
-                margin: ${margin || '0px 0px 20px 0px'};
+                margin: ${fieldMargin || '0px 0px 20px 0px'};
                 padding: ${padding || '0px'};
             }
 
@@ -997,8 +1000,14 @@ export function BootstrapDropdown(param) {
                 font-weight: 500;
             }
 
+            #id .form-field-description {
+                font-size: 14px;
+                margin-bottom:  0.5rem;
+            }
+
             #id .dropdown-toggle {
-                font-size: .95em;
+                min-height: 33px;
+                font-size: 13px;
                 border-radius: 0.25rem;
                 border: 1px solid #ced4da;
                 display: flex;
@@ -1007,7 +1016,7 @@ export function BootstrapDropdown(param) {
             }
 
             #id .dropdown-item {
-                font-size: .95em;
+                font-size: 13px;
                 cursor: pointer;
             }
 
@@ -1032,11 +1041,11 @@ export function BootstrapDropdown(param) {
             }
         ],
         onAdd() {
-            // FIXME: Why does this work?
+            // FIXME: Why does adding a timeout work?
             setTimeout(() => {
                 component.find('.dropdown-toggle').style.width = `${component.find('.dropdown-menu').offsetWidth}px`;
                 component.find('.dropdown-menu').classList.remove('hidden');
-            }, 200);
+            }, setWidthDelay || 0);
         }
     });
 
@@ -1274,6 +1283,7 @@ export function Card(param) {
         parent,
         width,
         position,
+        radius,
         action
     } = param;
 
@@ -1294,7 +1304,7 @@ export function Card(param) {
                 min-width: ${minWidth || 'initial'};
                 min-height: ${minHeight || 'initial'};
                 width: ${width || 'initial'};
-                border-radius: 10px;
+                border-radius: ${radius || '10px'};
                 /* border: ${App.get('defaultBorder')}; */
                 border: none;
                 cursor: ${action ? 'pointer' : 'initial'};
@@ -1731,7 +1741,7 @@ export function Container(param) {
         zIndex
     } = param;
 
-    return Component({
+    const component = Component({
         html: /*html*/ `
             <div class='container'></div>
         `,
@@ -1806,6 +1816,16 @@ export function Container(param) {
 
         ]
     });
+
+    component.paddingOff = () => {
+        component.get().style.padding = '0px';
+    }
+
+    component.paddingOn = () => {
+        component.get().style.padding = '40px'; // 15px 30px;
+    }
+
+    return component;
 }
 
 /**
@@ -1979,6 +1999,7 @@ export function DashboardBanner(param) {
  */
 export function DataTable(param) {
     const {
+        buttonBorder,
         headers,
         headerFilter,
         columns,
@@ -2177,7 +2198,7 @@ export function DataTable(param) {
                 background: #e9ecef !important;
                 color: #444;
                 font-weight: 500;
-                border: 1px solid transparent !important;
+                border: 1px solid ${buttonBorder || 'transparent'} !important;
             }
 
             #id_wrapper .buttons-html5 span{
@@ -2196,12 +2217,12 @@ export function DataTable(param) {
 
             /** Select and Search */
             #id_wrapper .custom-select {
-                border: 1px solid transparent;
+                border: 1px solid ${buttonBorder || 'transparent'};
                 background: #e9ecef;
             }
 
             #id_wrapper input[type='search'] {
-                border: 1px solid transparent;
+                border: 1px solid ${buttonBorder || 'transparent'};
                 background: #e9ecef;
             }
 
@@ -2209,7 +2230,7 @@ export function DataTable(param) {
             #id_wrapper input[type='search']:focus,
             #id_wrapper select:focus,
             #id_wrapper select:focus {
-                border: 1px solid transparent;
+                border: 1px solid ${buttonBorder || 'transparent'};
                 outline: none;
             }
 
@@ -2272,7 +2293,7 @@ export function DataTable(param) {
             /** Table */
             #id_wrapper .dataTable {
                 border-collapse: collapse !important;
-                font-size: ${fontSize || '14px'};
+                font-size: ${fontSize || '13px'};
             }
 
             /** Not Bordered*/
@@ -2369,7 +2390,7 @@ export function DataTable(param) {
 
             /** Selected Row */
             #id_wrapper tbody > tr.selected {
-                background-color: ${App.get('sidebarBackgroundColor')};
+                background-color: ${App.get('backgroundColor')};
             }
 
             /** Overflow MLOT field */
@@ -2720,7 +2741,7 @@ export function DateField(param) {
         style: /*css*/ `
             /* Rows */
             #id.form-field {
-                margin-bottom: 20px;
+                margin-bottom: 10px;
             }
 
             /* Labels */
@@ -2797,7 +2818,7 @@ export function DevConsole(param) {
                     <div class='dev-console-row'>
                         <div class='dev-console-text'>
                             <div class='dev-console-label'>Update ${App.get('name')}</div>
-                            <div class='dev-console-description'>Sync ${App.get('name')} with list schema defined in <code>App/src/lists.js</code>. You can choose which new lists and columns will be created and which existing lists and columns will be deleted.</div>
+                            <div class='dev-console-description'>Sync ${App.get('name')} with list schemas defined in <code>App/src/lists.js</code>. You can choose which new lists and columns will be created and which existing lists and columns will be deleted.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
                             <button class='btn btn-primary dev-console-button update'>Update ${App.get('name')}</button>
@@ -2863,7 +2884,7 @@ export function DevConsole(param) {
                 justify-content: space-between;
                 padding: 20px 30px;
                 border-radius: 20px;
-                background: ${App.get('sidebarBackgroundColor')};
+                background: ${App.get('backgroundColor')};
             }
 
             #id .dev-console-text {
@@ -2978,6 +2999,67 @@ export function DevConsole(param) {
     });
 
     return component;
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export function Dialog(param) {
+    const {
+        classes,
+        message,
+        parent,
+        position
+    } = param;
+
+    const component = Component({
+        html: /*html*/ `
+            <div class='dialog-container'>
+                <div class='dialog-box ${classes?.join(' ')}'>
+                    ${message}
+                </div>
+            </div>
+        `,
+        style: /*css*/ `
+            /* Rows */
+            #id {
+                position: fixed;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                z-index: 10000;
+            }
+
+            #id .dialog-box {
+                min-width: 300px;
+                min-height: 150px;
+                padding: 30px;
+                background: white;
+                border-radius: 20px;
+            }
+        `,
+        parent: parent,
+        position,
+        events: [
+
+        ]
+    });
+
+    component.value = (param) => {
+        const field = component.find('.form-field-date');
+
+        if (param) {
+            field.value = new Date(param).toISOString().split('T')[0];
+        } else {
+            return field.value;
+        }
+    }
+
+    return component
 }
 
 /**
@@ -3571,6 +3653,595 @@ export function DropDownMenu(param) {
  * @returns 
  */
 export function Files(param) {
+    const {
+        allFiles,
+        description,
+        itemId,
+        width,
+        onUndo,
+        onUpload,
+        onChange,
+        padding,
+        margin,
+        parent,
+        position
+    } = param;
+
+    let {
+        files
+    } = param;
+
+    const component = Component({
+        html: /*html*/ `
+            <div>
+                ${description ? /*html*/ `<div class="form-field-description text-muted">${description}</div>` : ''}
+                <div class='files-list'>
+                    <input type='file' multiple style='display: none;' id='drop-zone-files'>
+                    <div class='drop-zone'>
+                        <!-- Hidden files input -->
+                        <div class='files-list-container'>
+                            ${renderFiles()}
+                        </div>
+                        <div class='count-undo-container'>
+                            <div class='count-container'>
+                                <span class='count'>${files?.length || 0}</span>
+                                <span>files</span>
+                                <span class='pending-count hidden'></span>
+                            </div>
+                            <!-- <span class='undo-all'>Delete all</span> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+        style: /*css*/ `
+            #id {
+                width: ${width || '100%'};
+                min-width: 350px;
+            }
+
+            #id .form-field-description {
+                font-size: 14px;
+                margin-bottom: 0.5rem;
+            }
+
+            #id .files-list {
+                width: ${width || '100%'};
+                border-radius: 20px;
+                background: ${App.get('backgroundColor')};
+                transition: all 300ms ease-in-out;
+            }
+
+            /* Drag */
+            #id .drag-over {
+                position: relative;
+                background: rgba(${App.get('primaryColorRGB')}, .15);
+            }
+
+            /* #id .drag-over::after {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                height: 100%;
+                width: 100%;
+                content: 'Drop files here'
+            } */
+
+            /* Hidden */
+            #id .hidden {
+                display: none !important;
+            }
+
+            #id .count-undo-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                margin: 5px 0px;
+                min-height: 20px;
+            }
+
+            #id .count-container {
+                font-weight: 500;
+                padding-left: 8px;
+                font-size: 14px;
+            }
+
+            /* Remove all */
+            #id .undo-all {
+                cursor: pointer;
+                background: crimson;
+                border-radius: 4px;
+                background: crimson;
+                color: white;
+                padding: 2px 4px;
+                font-size: 10px;
+                font-weight: 500;
+            }
+
+            /* File Drop Zone */
+            #id .drop-zone {
+                position: relative;
+                transition: all 150ms;
+                margin: ${margin || '10px'};
+                padding: ${padding || '40px'};
+                border-radius: 20px;
+            }
+
+            #id .drop-zone-button-container {
+                font-size: 14px;
+            }
+
+            #id .drop-zone-button { 
+                cursor: pointer;
+                display: inline-block;
+                padding: 5px 10px;
+                background: ${App.get('primaryColor')};
+                color: white;
+                font-weight: bold;
+                text-align: center;
+                border-radius: 4px;
+            }
+
+            #id .files-list-container {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #id .files-list-container .file-preview:not(:first-child) {
+                margin-top: 10px;
+            }
+
+            #id .files-list-container .file-preview:last-child {
+                margin-bottom: 5px;
+            }
+
+            #id .file-icon-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #id .file-name-container {
+                display: flex;
+                flex-direction: column;
+            }
+
+            #id .file-icon {
+                display: flex;
+            }
+
+            #id .remove-container {
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                min-width: 105px;
+            }
+
+            #id .removed {
+                transform: scale(0);
+                display: none;
+            }
+
+            /* Light 
+
+            #id .file-preview {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                padding: 10px;
+                border-radius: 8px;
+                background: #595E68;
+                transition: all 200ms;
+            }
+
+            #id .drag-over {
+                background: white;
+            }
+
+            #id .file-preview-name {
+                font-weight: 500;
+                margin: 0px 5px;
+                color: white;
+                font-size: 13px;
+            }
+
+            #id .file-size {
+                font-weight: 400;
+                margin: 0px 5px;
+                color: white;
+                font-size: 11px;
+            }
+
+            #id .file-icon .type {
+                font-size: 1.5em;
+                stroke: white;
+                fill: white;
+            }
+
+            #id .icon.remove {
+                cursor: pointer;
+                font-size: 1.2em;
+                stroke: white;
+                fill: white;
+            }
+
+            */
+
+            /* Dark */
+            #id .file-preview {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                padding: 9px 12px;
+                border-radius: 8px;
+                background: white;
+                transition: all 200ms;
+            }
+
+            #id .file-preview-name {
+                font-weight: 500;
+                margin: 0px 20px 0px 5px;
+                font-size: 12px;
+            }
+
+            #id .file-size {
+                font-weight: 400;
+                margin: 0px 20px 0px 5px;
+                font-size: 10.5px;
+                color: gray;
+            }
+
+            /** Icons */
+
+            #id .file-icon .type {
+                font-size: 1.5em;
+                fill: ${App.get('defaultColor')};
+            }
+
+            #id .file-icon .bs-file-earmark-word {
+                fill: #2B579A;
+            }
+
+            #id .file-icon .bs-file-earmark-ppt {
+                fill: #B7472A;
+            }
+
+            #id .file-icon .bs-file-earmark-excel {
+                fill: #217346;
+            }
+
+            #id .file-icon .bs-file-earmark-pdf {
+                fill: #B30B00;
+            }
+
+            #id .file-icon .bs-file-earmark {
+                fill: ${App.get('defaultColor')};
+            }
+
+            #id .remove-label {
+                display: flex;
+                flex-direction: column;
+                margin-right: 10px;
+            }
+
+            #id .remove-label .status {
+                text-align: right;
+                font-size: 12px;
+            }
+
+            #id .remove-label .tip {
+                text-align: right;
+                font-size: 10px;
+            }
+
+            #id .remove-icon {
+                min-width: 26px;
+            }
+
+            #id .icon {
+                font-size: 22px;
+            }
+
+            #id .icon.remove {
+                fill: gray;
+            }
+
+            #id .icon.undo {
+                fill: mediumseagreen;
+            }
+
+            /** Spinner */
+            .spinner {
+                text-align: center;
+            }
+            
+            .spinner > div {
+                width: 10px;
+                height: 10px;
+                background-color: white;
+                border-radius: 100%;
+                display: inline-block;
+                -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+                animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+            }
+            
+            .spinner .bounce1 {
+                -webkit-animation-delay: -0.32s;
+                animation-delay: -0.32s;
+            }
+            
+            .spinner .bounce2 {
+                -webkit-animation-delay: -0.16s;
+                animation-delay: -0.16s;
+            }
+            
+            @-webkit-keyframes sk-bouncedelay {
+                0%, 80%, 100% { -webkit-transform: scale(0) }
+                40% { -webkit-transform: scale(1.0) }
+            }
+            
+            @keyframes sk-bouncedelay {
+                0%, 80%, 100% { 
+                    -webkit-transform: scale(0);
+                    transform: scale(0);
+                } 40% { 
+                    -webkit-transform: scale(1.0);
+                    transform: scale(1.0);
+                }
+            }
+        `,
+        parent: parent,
+        position,
+        events: [
+            {
+                selector: '#id .drop-zone',
+                event: 'dragover drop',
+                listener: preventFileOpen
+            },
+            {
+                selector: '#id .drop-zone',
+                event: 'dragover dragenter',
+                listener: addDragAndDropClass
+            },
+            {
+                selector: '#id .drop-zone',
+                event: 'dragleave dragend dragexit drop',
+                listener: removeDragAndDropClass
+            },
+            {
+                selector: '#id .drop-zone',
+                event: 'drop',
+                listener: drop
+            },
+            // {
+            //     selector: '.undo-all',
+            //     event: 'click',
+            //     listener(event) {
+            //         reset();
+            //     }
+            // },
+            /**  */
+            {
+                selector: '.remove-container:not(.delete-on-remove)',
+                event: 'click',
+                listener: removeFilePreview
+            },
+            {
+                selector: `input[type='file']`,
+                event: 'change',
+                listener(event) {
+                    renderFiles(event.target.files);
+                }
+            }
+        ]
+    });
+
+    /** START: Drag and drop */
+
+    function preventFileOpen(event) {
+        event.preventDefault();
+
+        return false;
+    }
+
+    function togglePointerEvents(value) {
+        const dropZone = component.find('.drop-zone');
+
+        [...dropZone.children].forEach(child => {
+            child.style.pointerEvents = value;
+        });
+    }
+
+    function addDragAndDropClass(event) {
+        togglePointerEvents('none');
+
+        // event.target.classList.add('drag-over');
+        component.find('.files-list').classList.add('drag-over');
+    }
+
+    function removeDragAndDropClass(event) {
+        togglePointerEvents('unset');
+
+        // event.target.classList.remove('drag-over');
+        component.find('.files-list').classList.remove('drag-over');
+    }
+
+    function drop(event) {
+        addFiles(event.dataTransfer.files);
+    }
+
+    /*** END: Drag and Drop */
+
+    let newFiles = [];
+
+    function addFiles(fileList) {
+        // Use DataTransferItemList interface to access the file(s)
+        [...fileList].forEach(file => {
+            const alreadyDropped = allFiles.find(droppedFile => droppedFile.name === file.name);
+
+            if (!alreadyDropped) {
+                newFiles.push(file);
+                addPreview(file);
+                
+                // If item already created, upload right away
+                console.log(itemId);
+                if (itemId) {
+                    onUpload(file); // Waiting for update
+                } else {
+                    onChange(newFiles);
+                }
+            }
+        });
+
+        if (newFiles.length) {
+            component.find('.pending-count').innerText = `(${newFiles.length} pending)`;
+            component.find('.pending-count').classList.remove('hidden');
+        }
+    }
+
+    /** Reset */
+    function reset() {
+        // component.find('.upload').classList.add('hidden');
+        component.find('.reset').classList.add('hidden');
+        component.find('.pending-count').classList.remove('hidden');
+
+        newFiles = [];
+        component.find(`input[type='file']`).value = null;
+
+        /** Empty preview container */
+        component.find('.files-list-container').innerHTML = '';
+    }
+
+    function returnFileSize(number) {
+        if (number < 1024) {
+            return number + ' bytes';
+        } else if (number >= 1024 && number < 1048576) {
+            return (number/1024).toFixed(1) + ' KB';
+        } else if (number >= 1048576) {
+            return (number/1048576).toFixed(1) + ' MB';
+        }
+    }
+
+    function addPreview(file) {
+        component.find('.files-list-container').insertAdjacentHTML('beforeend', fileTemplate(file));
+
+        // Add remove file preview event listener
+        component.find(`.remove-container[data-filename='${file.name}']`).addEventListener('click', removeFilePreview);
+    }
+
+    function renderFiles() {
+        return files ? files.map(file => fileTemplate(file)).join('\n') : '';
+    }
+
+    function fileTemplate(file) {
+        const {
+            name,
+            size,
+            created,
+            author
+        } = file;
+
+        const ext = name.split('.').pop();
+        const icon = selectIcon(ext);
+        
+        // TODO: add event listener for deleting items that have already been uploaded
+        return /*html*/ `
+            <div class='file-preview' data-filename='${name}'>
+                <div class='file-icon-container'>
+                    <div class='file-icon'>
+                        <svg class='icon type ${icon}'><use href='#icon-${icon}'></use></svg>
+                    </div>
+                    <div class='file-name-container'>
+                        <div class='file-preview-name'>${name}</div>
+                        <div class='file-size'>${returnFileSize(size)}</div>
+                    </div>
+                </div>
+                <div class='remove-container ${created ? 'delete-on-remove' : ''}' data-filename='${name}'>
+                    <div class='remove-label'>
+                        <div class='status'>${created ? `Added on ${new Date(created).toLocaleDateString()} By ${author.split(' ').slice(0, 2).join(', ')}` : 'Pending'}</div>
+                        <div class='tip'>${created ? `${'ontouchstart' in window ? 'tap' : 'click'} to delete`: `remove`}</div>
+                    </div>
+                    <div class='remove-icon'>
+                        <svg class='icon remove'><use href='#icon-bs-${created ? 'x-circle-fill' : 'dash-circle-fill'}'></use></svg>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function removeFilePreview(event) {
+        const fileName = this.dataset.filename;
+        const file = newFiles.find(file => file.name === fileName);
+        const index = newFiles.indexOf(file);
+
+        console.log(fileName, file, newFiles, index);
+
+        newFiles.splice(index, 1);
+
+        // if (onUndo) {
+        //     onUndo(this.dataset.itemid);
+        // }
+
+        console.log(newFiles);
+
+        if (!newFiles.length) {
+            component.find('.pending-count').classList.remove('hidden');
+            component.find('.pending-count').innerText = '';
+        } else {
+            component.find('.pending-count').innerText = `(${newFiles.length} pending)`;
+        }
+        
+        this.closest('.file-preview').classList.add('removed');
+
+        setTimeout(() => {
+            this.closest('.file-preview').remove();
+        }, 150);
+    }
+
+    function selectIcon(ext) {
+        switch(ext) {
+            case 'doc':
+            case 'docx':
+                return 'bs-file-earmark-word';
+            case 'ppt':
+            case 'pptx':
+            case 'pptm':
+                return 'bs-file-earmark-ppt';
+            case 'xls':
+            case 'xlsx':
+            case 'xltx':
+            case 'xlsm':
+            case 'xltm':
+                return 'bs-file-earmark-excel';
+            case 'pdf':
+                return 'bs-file-earmark-pdf';
+            default:
+                return 'bs-file-earmark';
+        }
+    }
+
+    component.upload = () => {
+        newFiles.forEach(file => {
+            onUpload(file);
+        });
+    }
+
+    return component
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export function FilesTable(param) {
     const {
         remove,
         files,
@@ -4465,6 +5136,207 @@ export function ItemInfo(param) {
  * @param {*} param 
  * @returns 
  */
+export function LinksField(param) {
+    const {
+        label,
+        description,
+        fieldMargin,
+        maxWidth,
+        links,
+        parent,
+        position,
+        onChange
+    } = param;
+
+    const component = Component({
+        html: /*html*/ `
+            <div>
+                <label class='form-label'>${label}</label>
+                ${description ? /*html*/`<div class='form-field-description text-muted'>${description}</div>` : ''}
+                <div class="d-flex align-items-center">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Display</div>
+                        </div>
+                        <input type="text" class="form-control display" placeholder="My Dashboard">
+                    </div>
+                    <div class="input-group ml-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Address</div>
+                        </div>
+                        <input type="text" class="form-control url" placeholder="https://site.domain">
+                    </div>
+                    <button class="btn btn-primary ml-2">Add link</button>
+                </div>
+                <div class='links-container mt-3'>
+                    <!-- Formatted links go here -->
+                    ${
+                        links ? 
+                        JSON.parse(links).map(link => {
+                            const { url, display } = link;
+                            return /*html*/ `
+                                <div class='link' data-display='${display}' data-url='${url}'>
+                                    <a href='${url}' target='_blank'>${display}</a>
+                                    <span class="remove-link" type="button" data-display='${display}'>&times;</span>
+                                </div>
+                            `;
+                        }).join('\n') : 
+                        ''
+                    }
+                </div>
+            </div>
+        `,
+        style: /*css*/ `
+            #id {
+                margin: ${fieldMargin || '0px 0px 20px 0px'};
+                max-width: ${maxWidth || 'unset'};
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            #id label {
+                font-weight: 500;
+            }
+
+            #id .form-field-description {
+                font-size: 14px;
+                margin-bottom:  0.5rem;
+            }
+
+            #id .links-container {
+                position: relative;
+                min-height: 56px;
+                width: 100%;
+                border-radius: 4px;
+                border: 1px solid #ced4da;
+                padding: 10px;
+            }
+            
+            #id .input-group {
+                flex: 4
+            }
+
+            #id .btn {
+                flex: 1;
+                padding: 5.25px 12px;
+            }
+
+            #id .link {
+                display: inline-flex;
+                border-radius: 10px;
+                padding: 5px 20px;
+                background: #007bff;
+                color: white;
+            }
+
+            #id .link:not(:last-child) {
+                margin-right: 10px;
+            }
+
+            #id .link .remove-link {
+                display: inline-block;
+                margin-left: 20px;
+            }
+            
+            #id .link *,
+            #id .link *:active,
+            #id .link *:focus {
+                color: white;
+                text-decoration: none;
+            }
+        `,
+        parent,
+        position,
+        events: [
+            {
+                selector: '#id .btn',
+                event: 'click',
+                listener(event) {
+                    addLink(event);
+                }
+            },
+            {
+                selector: '#id .url',
+                event: 'keyup',
+                listener(event) {
+                    if (event.key == 'Enter') {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        addLink(event);
+                    }
+                }
+            },
+            {
+                selector: '#id .remove-link',
+                event: 'click',
+                listener: removeLink
+            }
+        ],
+        onAdd() {
+
+        }
+    });
+
+    function addLink(event) {
+        const display = component.find('.display')
+        const url = component.find('.url');
+
+        if (display.value && url.value) {
+            component.find('.links-container').insertAdjacentHTML('beforeend', /*html*/ `
+                <div class='link' data-display='${display.value}' data-url='${url.value}'>
+                    <a href='${url.value}' target='_blank'>${display.value}</a>
+                    <span class="remove-link" type="button" data-display='${display.value}'>&times;</span>
+                </div>
+            `);
+
+            component.find(`.remove-link[data-display='${display.value}']`).addEventListener('click', removeLink);
+
+            display.value = '';
+            url.value = '';
+
+            display.focus();
+
+            if (onChange) {
+                onChange(event);
+            }
+        } else {
+            // TODO: change to dialog box
+            alert('Please enter both display text and a valid address.');
+        }
+    }
+
+    function removeLink(event) {
+        this.closest('.link').remove();
+
+        if (onChange) {
+            onChange(event);
+        }
+    }
+
+    component.value = () => {
+        // TODO: return formatted links to store in mlot field
+        const links = component.findAll('.link');
+
+        console.log(links);
+
+        return [...links].map(link => {
+            return {
+                url: link.dataset.url,
+                display: link.dataset.display
+            }
+        });
+    }
+
+    return component;
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export function LoadingBar(param) {
     const {
         displayTitle,
@@ -4664,6 +5536,7 @@ export function LoadingBar(param) {
 export function LoadingSpinner(param) {
     const {
         font,
+        type,
         message,
         classes,
         parent,
@@ -4674,7 +5547,7 @@ export function LoadingSpinner(param) {
         html: /*html*/ `
             <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center ${classes?.join(' ')}'>
                 <div class="mb-2" style='font-weight: 600; color: darkgray'>${message || 'Loading'}</div>
-                <div class="spinner-grow" style='color: darkgray' role="status"></div>
+                <div class="spinner-grow ${type ? `text-${type}` : ''}" style='color: darkgray' role="status"></div>
             </div>
         `,
         style:  /*css*/ `
@@ -4785,7 +5658,9 @@ export function MainContainer(param) {
         style: /*css*/ `
             .maincontainer {
                 position: relative;
-                padding: 40px; /* 15px 30px; */
+                display: 'flex';
+                flex-direction: 'column';
+                /* padding: 40px; */
                 flex: 1;
                 height: 100vh;
                 overflow: overlay;
@@ -5181,6 +6056,159 @@ export function Modal(param) {
  * @param {*} param 
  * @returns 
  */
+export function MultiChoiceField(param) {
+    const {
+        label,
+        description,
+        choices,
+        value,
+        fillIn,
+        parent,
+        position,
+        width,
+        fieldMargin,
+        onChange
+    } = param;
+
+    const component = Component({
+        html: /*html*/ `
+            <div class='form-field'>
+                ${label ? /*html*/`<label>${label}</label>` : ''}
+                ${description ? /*html*/`<div class='form-field-description text-muted'>${description}</div>` : ''}
+                <div>
+                    ${
+                        choices.map(choice => {
+                            const id = GenerateUUID();
+
+                            return /*html*/ `
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="${id}" data-label='${choice}' ${value?.includes(choice) ? 'checked' : ''}>
+                                    <label class="custom-control-label" for="${id}">${choice}</label>
+                                </div>
+                                <!-- <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="${id}">
+                                    <label class="custom-control-label" for="${id}">${choice}</label>
+                                </div> -->
+                            `
+                        }).join('\n')
+                    }
+                    ${
+                        fillIn ?
+                        (() => {
+                            const id = GenerateUUID();
+                            // FIXME: this wil probably break if fill in choice is the same as one of the choices
+                            const otherValue = value?.find(item => !choices.includes(item));
+
+                            return /*html*/ `
+                                <div class="custom-control custom-checkbox d-flex align-items-center">
+                                    <input type="checkbox" class="custom-control-input other-checkbox" id="${id}" data-label='Other' ${otherValue ? 'checked' : ''}>
+                                    <label class="custom-control-label d-flex align-items-center other-label" for="${id}">Other</label>
+                                    <input type='text' class='form-control ml-2 Other' value='${otherValue || ''}' list='autocompleteOff' autocomplete='new-password'>
+                                </div>
+                            ` 
+                        })():
+                        ''
+                    }
+                </div>
+            </div>
+        `,
+        style: /*css*/ `
+            #id.form-field {
+                margin: ${fieldMargin || '0px 0px 20px 0px'};
+                width: inherit;
+            }
+
+            #id label {
+                font-weight: 500;
+            }
+
+            #id .form-field-description {
+                font-size: 14px;
+                margin-bottom:  0.5rem;
+            }
+            
+            #id .custom-control-label {
+                font-size: 13px;
+                font-weight: 400;
+                white-space: nowrap;
+            }
+
+            #id .custom-control-input:checked ~ .custom-control-label::before {
+                color: #fff;
+                border-color: mediumslateblue;
+                background-color: mediumslateblue;
+            }
+
+            #id .custom-control-input:focus~.custom-control-label::before {
+                box-shadow: 0 0 0 0.2rem #7b68ee6b !important;
+            }
+            
+            #id .custom-control-input:focus:not(:checked)~.custom-control-label::before {
+                border-color: #adb5bd  !important;
+            }
+            
+            /* #id .other-label.custom-control-label::before,
+            #id  .other-label.custom-control-label::after {
+                top: .5rem;
+            } */
+        `,
+        parent: parent,
+        position,
+        events: [
+            {
+                selector: '#id .custom-control-input',
+                event: 'change',
+                listener: onChange
+            },
+            {
+                selector: '#id .Other',
+                event: 'click',
+                listener(event) {
+                    component.find('input[data-label="Other"]').checked = true;
+                }
+            },
+            {
+                selector: '#id .Other',
+                event: 'focusout',
+                listener(event) {
+                    if (!event.target.value) {
+                        component.find('input[data-label="Other"]').checked = false;
+                    }
+                }
+            },
+            {
+                selector: '#id .Other',
+                event: 'keyup',
+                listener(event) {
+                    if (event.target.value) {
+                        onChange(event);
+                    }
+                }
+            }
+        ],
+    });
+
+    component.value = (param, options = {}) => {
+        const checked = component.findAll('.custom-control-input:not(.other-checkbox):checked');
+        
+        const results = [...checked].map(node => node.dataset.label);
+
+        if (fillIn) {
+            // console.log(component.find('.Other').value);
+            results.push(component.find('.Other').value);
+        }
+
+        return results;
+    }
+
+    return component
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
 export function MultiLineTextField(param) {
     const {
         label,
@@ -5196,6 +6224,7 @@ export function MultiLineTextField(param) {
         fieldMargin,
         padding,
         onKeydown,
+        onKeyup,
         onFocusout
     } = param;
 
@@ -5203,7 +6232,7 @@ export function MultiLineTextField(param) {
         html: /*html*/ `
             <div class='form-field'>
                 ${label ? /*html*/`<label>${label}${optional ? /*html*/ `<span class='optional'><i>Optional</i></span>` : ''}</label>` : ''}
-                ${description ? /*html*/`<div class='form-field-description'>${description}</div>` : ''}
+                ${description ? /*html*/`<div class='form-field-description text-muted'>${description}</div>` : ''}
                 ${readOnly ? /*html*/ `<div class='form-field-multi-line-text readonly'>${value || placeHolder}</div>` : /*html*/ `<div class='form-field-multi-line-text editable' contenteditable='true'>${value || ''}</div>`}
             </div>
         `,
@@ -5218,19 +6247,14 @@ export function MultiLineTextField(param) {
             }
 
             #id .form-field-description {
-                font-size: .95em;
-                font-weight: 400;
-                padding-left: 5px;
-                padding-top: 5px;
-                margin-bottom: 15px;
+                font-size: 14px;
+                margin-bottom:  0.5rem;
             }
 
             #id .form-field-multi-line-text {
                 color: #495057; /* Bootstrap@4.5.2 input color */
-                font-size: 1em;
                 margin-top: 2px;
                 margin-bottom: 4px;
-                /* padding: ${padding || '10px'}; */
                 padding: 0.375rem 0.75rem;
             }
 
@@ -5249,10 +6273,6 @@ export function MultiLineTextField(param) {
             #id .form-field-multi-line-text.editable:active,
             #id .form-field-multi-line-text.editable:focus {
                 outline: none;
-                box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')};
-                border-color: #80bdff;
-                outline: 0;
-                box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
             }
 
             /** Readonly */
@@ -5284,6 +6304,11 @@ export function MultiLineTextField(param) {
                 selector: '#id .form-field-multi-line-text.editable',
                 event: 'keydown',
                 listener: onKeydown
+            },
+            {
+                selector: '#id .form-field-multi-line-text.editable',
+                event: 'keyup',
+                listener: onKeyup
             }
         ]
     });
@@ -5306,293 +6331,6 @@ export function MultiLineTextField(param) {
                 return field.innerHTML;
             }
         }
-    }
-
-    return component
-}
-
-/**
- * 
- * @param {*} param 
- * @returns 
- */
-export function MultiSelectCheckbox(param) {
-    const {
-        label,
-        description,
-        options,
-        onCheck,
-        direction,
-        wrap,
-        parent,
-        width,
-        position,
-        margin,
-        padding,
-        fieldMargin
-    } = param;
-
-    const component = Component({
-        html: /*html*/ `
-            <div class='form-field'>
-                ${label ? /*html*/ `<div class='form-field-label'>${label}</div>` : ''}
-                ${description ? /*html*/`<div class='form-field-description'>${description}</div>` : ''}
-                ${createChoiceGroups()}
-            </div>   
-        `,
-        style: /*css*/ `
-            #id.form-field {
-                margin: ${fieldMargin || '0px 0px 20px 0px'};
-            }
-
-            #id .form-field-label {
-                font-size: 1.1em;
-                font-weight: bold;
-                padding: 5px 0px;
-            }
-
-            #id .form-field-description {
-                padding: 5px 0px;
-            }
-
-            #id .form-field-multi-select-container {
-                display: flex;
-                flex-direction: ${direction || 'column'};
-                flex-wrap: ${wrap || 'wrap'};
-                user-select: none;
-                /*margin: 2px 20px;*/
-                padding: ${padding || '0px 0px 20px 0px'};
-                margin: ${margin || '0px'};
-            }
-
-            #id .form-field-multi-select-container:last-child {
-                padding: 0px;
-            }
-
-            #id .form-field-multi-select-row {
-                width: ${width || '120px'};
-                /* margin-left: 20px; */
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-            }
-
-            #id .form-field-multi-select-row.flex-start {
-                width: ${width || '120px'};
-                margin-left: 20px;
-                display: flex;
-                flex-direction: row;
-                align-items: flex-start;
-            }
-
-            #id .form-field-multi-select-row.flex-start .form-field-multi-select-value,
-            #id .form-field-multi-select-row.flex-start .select-all-title {
-                margin-top: 2px;
-            }
-
-            ${direction === 'row' ?
-                /*css*/`
-                    #id .form-field-multi-select-row {
-                        margin-left: 20px;
-                        margin-bottom: 10px;
-                    }
-                ` :
-                ''
-            }
-
-            #id .form-field-multi-select-value,
-            #id .select-all-title {
-                margin-left: 5px;
-            }
-
-            #id .select-all-title {
-                color: ${App.get('primaryColor')};
-                font-weight: 500;
-                padding: 5px 0px;
-            }
-
-            #id input[type='checkbox'] {
-                position: absolute;
-                left: -10000px;
-                top: auto;
-                width: 1px;
-                height: 1px;
-                overflow: hidden;
-            }
-
-            #id input[type='checkbox'] ~ .toggle {
-                width: 20px;
-                height: 20px;
-                position: relative;
-                display: inline-block;
-                vertical-align: middle;
-                background: white;
-                border: solid 2px lightgray;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-            #id input[type='checkbox']:hover ~ .toggle {
-                border-color: mediumseagreen;
-            }
-            
-
-            #id input[type='checkbox']:checked ~ .toggle {
-                border: solid 2px mediumseagreen;
-                background: mediumseagreen url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMCA2IDkgMTcgNCAxMiI+PC9wb2x5bGluZT48L3N2Zz4=) center no-repeat;
-            }
-
-            /** List Styles */
-            #id ul {
-                margin: 0px;
-            }
-        `,
-        parent: parent,
-        position,
-        events: [
-            {
-                selector: '#id  input.select-all',
-                event: 'change',
-                listener: selectAll
-            },
-            {
-                selector: '#id input:not(.select-all)',
-                event: 'change',
-                listener: toggleSelectALL
-            }
-        ]
-    });
-
-    function createChoiceGroups() {
-        let html = ''
-
-        options.forEach(group => {
-            const {
-                title,
-                items,
-                align
-            } = group;
-
-            html += /*html*/ `
-                <div class='form-field-multi-select-container' data-group='${title}'>
-            `;
-
-            if (title !== '') {
-                html += /*html*/ `
-                    <div class='form-field-multi-select-row ${align}'>
-                        <label>
-                            <input type='checkbox' class='select-all' data-group='${title}'>
-                            <span class='toggle'></span>
-                        </label>
-                        <span class='select-all-title'>${title}<span>
-                    </div>
-                `;
-            }
-
-            items.forEach(item => {
-                html += rowTemplate(item, title, align);
-            });
-
-            html += /*html*/ `
-                </div>
-            `
-        });
-
-        return html;
-    }
-
-    function rowTemplate(item, group, align) {
-        const {
-            id,
-            value,
-            checked
-        } = item;
-
-        return /*html*/ `
-            <div class='form-field-multi-select-row ${align}'>
-                <label>
-                    <input type='checkbox' data-group='${group}' data-value='${value}' data-itemid='${id}'${checked ? ' checked' : ''}>
-                    <span class='toggle'></span>
-                </label>
-                <span class='form-field-multi-select-value'>${value}<span>
-            </div>
-        `;
-    }
-
-    /** Select all Radio buttons in group */
-    function selectAll(event) {
-        const group = this.dataset.group;
-        const state = this.checked;
-        const radioButtons = component.findAll(`input[data-group='${group}']`);
-
-        radioButtons.forEach(button => {
-            button.checked = state;
-        });
-    }
-
-    /** Auto toggle Group Title Radio button */
-    function toggleSelectALL(event) {
-        const group = this.dataset.group;
-        const all = component.findAll(`input[data-group='${group}']:not(.select-all)`).length;
-        const checked = component.findAll(`input[data-group='${group}']:not(.select-all):checked`).length;
-        const state = all === checked ? true : false;
-
-        const selectAll = component.find(`input.select-all[data-group='${group}']`);
-
-        if (selectAll) {
-            selectAll.checked = state;
-        }
-
-        if (onCheck) {
-            onCheck(event);
-        }
-    }
-
-    component.setValue = (itemId, value) => {
-        const checkbox = component.find(`input[data-itemid='${itemId}']`);
-
-        if (checkbox) {
-            checkbox.checked = value;
-        }
-    }
-
-    component.addOption = (param) => {
-        const {
-            option,
-            group
-        } = param;
-
-        const container = component.find(`.form-field-multi-select-container[data-group='${group}']`);
-
-        container.insertAdjacentHTML('beforeend', rowTemplate(option, group, true));
-    }
-
-    component.value = (type) => {
-        const rows = component.findAll('.form-field-multi-select-row input:checked');
-
-        return [...rows].map(item => {
-            if (type === 'id') {
-                return parseInt(item.dataset.itemid);
-            }
-
-            const value = item.closest('.form-field-multi-select-row').querySelector('.form-field-multi-select-value')
-
-            return value.innerText;
-        });
-    }
-
-    component.checked = () => {
-        const rows = component.findAll('.form-field-multi-select-row input:checked');
-
-        return [...rows].map(item => {
-            const id = parseInt(item.dataset.itemid);
-            const value = item.closest('.form-field-multi-select-row').querySelector('.form-field-multi-select-value').innerText;
-
-            return {
-                id,
-                value
-            };
-        });
     }
 
     return component
@@ -6175,18 +6913,9 @@ export function NumberField(param) {
         label,
         description,
         value,
-        readOnly,
         parent,
         position,
-        width,
-        margin,
-        padding,
-        background,
-        borderRadius,
-        flex,
-        maxWidth,
         fieldMargin,
-        optional,
         onChange,
         onKeydown,
         onKeyup,
@@ -6197,24 +6926,30 @@ export function NumberField(param) {
         html: /*html*/ `
             <div>
                 <label>${label}</label>
+                ${description ? /*html*/`<div class='form-field-description text-muted'>${description}</div>` : ''}
                 <input type="number" class="form-control" value="${value !== undefined ? parseFloat(value) : ''}">
             </div>
         `,
         style: /*css*/ `
             #id {
-                margin: ${margin || '0px 0px 20px 0px'};
+                margin: ${fieldMargin || '0px 0px 20px 0px'};
             }
 
             #id label {
                 font-weight: 500;
             }
 
-            #id input:active,
+            #id .form-field-description {
+                font-size: 14px;
+                margin-bottom:  0.5rem;
+            }
+
+            /* #id input:active,
             #id input:focus {
                 outline: none;
                 border: solid 1px transparent;
                 box-shadow: 0px 0px 0px 1px ${App.get('primaryColor')};
-            }
+            } */
         `,
         parent: parent,
         position,
@@ -6501,7 +7236,7 @@ export function PhoneField(param) {
         `,
         style: /*css*/ `
             #id.form-field {
-                margin-bottom: 20px;
+                margin-bottom: 10px;
             }
 
             #id .form-field-label {
@@ -7108,6 +7843,12 @@ export function QuestionsToolbar(param) {
                 min-width: 250px;
                 margin: 0rem .5rem;
             }
+
+            #id .btn-outline-primary:active {
+                color: royalblue;
+                background-color: initial;
+                border-color: royalblue;
+            }
         `,
         parent,
         position,
@@ -7204,7 +7945,7 @@ export function QuestionType(param) {
             #id {
                 border-radius: 20px;
                 padding: 20px;
-                background: ${App.get('sidebarBackgroundColor')};
+                background: ${App.get('backgroundColor')};
                 cursor: pointer;
             }
 
@@ -7630,6 +8371,180 @@ export function RequestAssitanceInfo(param) {
 
 /**
  * 
+ */
+export function SearchField(param) {
+    const {
+        margin,
+        parent,
+        onFilter,
+        onSearch,
+        onClear,
+        onSelect,
+        position
+    } = param;
+
+    const component = Action_Component({
+        html: /*html*/ `
+            <div>
+                <!-- <input class='form-control mr-sm-2' type='search' data-toggle='dropdown' placeholder='Search markets and facilites' aria-label='Search'> -->
+                <div class='toggle-search-list' data-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
+                    <input class='form-control mr-sm-2' type='search' placeholder='Search markets & facilities' aria-label='Search'>
+                </div>
+                <div class='dropdown-menu'>
+                </div>
+            </div>
+        `,
+        style: /*css*/ `
+            #id {
+                width: 100%;
+            }
+
+            #id .form-inline {
+                flex-flow: initial;
+            }
+
+            #id input[type='search'] {
+                width: 100%;
+                border-radius: .25rem;
+                font-size: 13px;
+                border: none;
+                background: #e9ecef;
+            }
+
+            #id input[type='search']::-webkit-search-cancel-button {
+                -webkit-appearance: none;
+                cursor: pointer;
+                height: 20px;
+                width: 20px;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill=''><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+            }
+
+            /** Override Bootstrap input element active/focus style */
+            #id input:active,
+            #id input:focus {
+                outline: none;
+                border: none;
+                box-shadow: none;
+            }
+
+            /** Dropdown */
+            #id .dropdown-header {
+                color: ${App.get('primaryColor')}
+            }
+
+            #id .dropdown-menu {
+                margin-top: 5px;
+                max-height: 50vh;
+                overflow-y: overlay;
+                /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 2%) 0px 0px 0px 1px; */
+                box-shadow: rgb(0 0 0 / 16%) 0px 10px 36px 0px, rgb(0 0 0 / 2%) 0px 0px 0px 1px;
+                border: none;
+            }
+
+            #id .dropdown-menu::-webkit-scrollbar-track {
+                background: white;
+            }
+            
+            #id .dropdown-item {
+                cursor: pointer;
+                font-size: 13px;
+            }
+
+            #id .dropdown-item:focus,
+            #id .dropdown-item:hover {
+                color: #16181b;
+                text-decoration: none;
+                background-color: rgba(${App.get('primaryColorRGB')}, .1);
+            }
+        `,
+        parent,
+        position,
+        events: [
+            {
+                selector: `#id .toggle-search-list`,
+                event: 'keydown',
+                listener(event) {
+                    console.log(event.key);
+
+                    if ((event.key === 'ArrowUp' || event.key === 'ArrowDown') &&  !component.find('.dropdown-menu').classList.contains('show')) {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        return false;
+                    }
+                }
+            },
+            {
+                selector: `#id input[type='search']`,
+                event: 'keyup',
+                listener(event) {
+                    if (!event.target.value) {
+                        if (component.find('.dropdown-menu').classList.contains('show')) {
+                            component.find('.toggle-search-list').click();
+                        }
+
+                        return;
+                    }
+                    
+                    onSearch(event.target.value.toLowerCase());
+                }
+            },
+            {
+                selector: `#id input[type='search']`,
+                event: 'click',
+                listener(event) {
+                    event.stopPropagation();
+                }
+            },
+            {
+                selector: `#id input[type='search']`,
+                event: 'search',
+                listener: onClear
+            },
+            {
+                selector: `#id .dropdown-menu`,
+                event: 'keydown',
+                listener(event) {
+                    if (event.key === 'Escape' || event.key === 'Backspace') {
+                        component.find('.toggle-search-list').click();
+                        component.find(`input[type='search']`).focus();
+
+                        event.preventDefault();
+
+                        return false;
+                    }
+
+                    if (event.key === 'Enter') {
+                        onSelect(event);
+                    }
+                }
+            },
+            {
+                selector: `#id .dropdown-menu`,
+                event: 'click',
+                listener(event) {
+                    onSelect(event);
+                }
+            }
+        ]
+    });
+
+    function dropdownItemTemplate(item) {
+        const {
+            label,
+            path
+        } = item;
+
+        return /*html*/ `
+            <a href='javascript:void(0)' class='dropdown-item' data-path='${path}'>${label}</a>
+        `;
+    }
+
+    return component;
+}
+
+/**
+ * 
  * @param {*} param 
  * @returns 
  */
@@ -7637,8 +8552,9 @@ export function SectionStepper(param) {
     const {
         title,
         sections,
-        scrollElement,
-        action,
+        selected,
+        route,
+        padding,
         parent,
         position
     } = param;
@@ -7652,48 +8568,17 @@ export function SectionStepper(param) {
                         ${createHTML()}
                     </div>
                 </div>
-                <div class='section-legend'>
-                    <!-- <h3>Legend</h3> -->
-                    <!-- Not Started -->
-                    <div class='section-group'>
-                        <div class='section-circle-bar-container'>
-                            <div class='section-circle not-started'></div>
-                        </div>
-                        <div class='section-name'>
-                            <span class='section-name-text'>Not Started</span>
-                        </div>
-                    </div>
-                    <!-- Started -->
-                    <div class='section-group'>
-                        <div class='section-circle-bar-container'>
-                            <div class='section-circle started'></div>
-                        </div>
-                        <div class='section-name'>
-                            <span class='section-name-text'>Started</span>
-                        </div>
-                    </div>
-                    <!-- Not Started -->
-                    <div class='section-group'>
-                        <div class='section-circle-bar-container'>
-                            <div class='section-circle complete'></div>
-                        </div>
-                        <div class='section-name'>
-                            <span class='section-name-text'>Complete</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         `,
         style: /*css*/ `
             /* Root */
             #id.section-stepper {
                 height: 100%;
-                padding: 15px 13px 5px 13px;
+                padding: ${padding || '0px'};
                 display: inline-flex;
                 flex-direction: column;
                 justify-content: space-between;
                 overflow: overlay;
-                border-right: solid 1px ${App.get('sidebarBorderColor')};
             }
 
             /* Buttons */
@@ -7711,129 +8596,63 @@ export function SectionStepper(param) {
                 background: mediumslateblue;
                 border-radius: 10px;
                 margin-bottom: 15px;
-                padding: .275rem .75rem;
+                padding: 10px;
                 cursor: pointer;
             }
 
             /* Sections */
+            #id .section-group-container {
+                font-weight: 500;
+                padding: 0px;
+                border-radius: 10px;
+                background: ${App.get('backgroundColor')};
+            }
+            
             #id .section-group {
+                cursor: pointer;
                 display: flex;
                 justify-content: flex-start;
+                /* border-radius: 10px; */
+                width: 100%;
+                padding: 10px 20px;
             }
 
-            /* Circle and Bar Container */
-            #id .section-circle-bar-container {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
+            #id .section-group:first-child {
+                margin-top: 0px;
+                border-radius: 10px 10px 0px 0px;
             }
 
-            /* Circle */
-            #id .section-circle {
-                user-select: none;
-                /* border-radius: 50%; */
-                border-radius: 25%;
-                width: 24px;
-                height: 24px;
-                padding: 6px;
-                background: ${App.get('primaryColor')};
-                border: solid 1px transparent;
-                color: white;
-                text-align: center;
-                line-height: .6;
+            #id .section-group:last-child {
+                margin-bottom: 0px;
+                border-radius: 0px 0px 10px 10px;
             }
-
-            #id .section-circle.not-started {
-                background: #e9ecef;
-                color: #444;
-            }
-
-            #id .section-circle.started {
-                /* Green */
-                color: #155724;
-                background-color: #d4edda;
-
-                /* Blue */
-                color: white;
-                background-color: #007bff;
-
-                /* Orange */
-                /* color: #212529; */
-                /* background-color: #ffc107; */
-                /* background: orange; */
-                /* color: white; */
-            }
-
-            #id .section-circle.complete {
-                color: #fff;
-                background-color: #28a745;
-                /* background: mediumseagreen;
-                color: white; */
-            }
-
-            #id .section-circle.error {
-                background: #f8d7da;
-                color: #721c24;
-                border-color: #721c24;
-            }
-
-            /* Bar */
-            #id .section-bar {
-                background: ${App.get('primaryColor')};
-                height: 10px;
-                /* width: 1px; */
-                /* margin: 5px 0px; */
+            
+            #id .section-group.selected {
+                background: #E6E2FF;
             }
 
             /* Name */
             #id .section-name {
-                font-weight: 500;
+                width: 100%;
                 white-space: nowrap;
+                font-weight: 400;
             }
 
             #id .section-name-text {
-                margin: 0px 8px;
-                font-size: 14px;
-            }
-
-            #id .section-name-text.selected {
-                border-bottom: solid 2px ${App.get('primaryColor')};
-            }
-
-            /* Legend */
-            #id .section-legend .section-group {
-                margin: 5px 0px;
-            }
-
-            #id .section-legend {
-                font-size: .8em;
-            }
-
-            #id .section-legend .section-circle {
-                width: 20px;
-                height: 20px;
-                padding: 3px;
-            }
-
-            /* Hover */
-            #id .section-group-container .section-circle:hover,
-            .section-group-container .section-name-text:hover {
-                cursor: pointer;
+                font-size: 15px;
+                margin-left: 10px;
             }
         `,
         parent,
         position: position || 'beforeend',
         events: [
-            // {
-            //     selector: '#id .section-group',
-            //     event: 'click',
-            //     listener: scrollToSection
-            // },
             {
                 selector: '#id .section-group',
                 event: 'click',
-                listener: action
+                listener(event) {
+                    const path = this.dataset.path;
+                    Route(`${route}/${path}`);
+                }
             },
             {
                 selector: '#id .section-title',
@@ -7850,55 +8669,26 @@ export function SectionStepper(param) {
     function createHTML() {
         let html = '';
 
-        sections.forEach((section, index, sections) => {
-
+        sections.forEach((section, index) => {
             const {
                 name,
-                status
+                path
             } = section;
 
-            const ReadinessTitle = 'MTF Readiness Demand Signal'
-
             html += /*html*/ `
-                <div class='section-group'>
-                    <div class='section-circle-bar-container'>
-                        <div class='section-circle ${status}' data-name='${name}'>${index + 1}</div>
+                <div class='section-group${name === selected ? ' selected' : ''}' data-path='${path}'>
+                    <div class='section-circle' data-name='${name}'>${index + 1}</div>
             `;
 
-            if (index < sections.length - 1) {
-                html += /*html*/ `
-                    <div class='section-bar'></div>
-                `;
-            }
-           
             html += /*html*/ `
-                    </div>
                     <div class='section-name'>
-                        <span class='section-name-text' data-name='${name}'>${
-                            name === 'Readiness' ? 
-                            ReadinessTitle : 
-                            name
-                        }</span>
+                        <span class='section-name-text' data-name='${name}'>${name}</span>
                     </div>
                 </div>
             `;
         });
 
         return html;
-    }
-
-    function scrollToSection(event) {
-        const maincontainer = Store.get('maincontainer');
-        const name = this.querySelector('.section-name-text').innerText;
-        const title = [...maincontainer
-            .findAll(`[class*='title'], h1, h2, h3, h4, h5, h6`)]
-            .find(node => node.innerText === name);
-        const top = title.classList.contains('section-title') ? title.parentElement.offsetTop - title.offsetHeight : title.offsetTop;
-
-        scrollElement.get().scrollTo({
-            top,
-            behavior: 'smooth'
-        });
     }
 
     component.select = section => {
@@ -7993,7 +8783,7 @@ export function Sidebar(param) {
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
-                background: ${App.gradientColor ? `linear-gradient(${App.gradientColor})` : App.get('sidebarBackgroundColor')};
+                background: ${App.gradientColor ? `linear-gradient(${App.gradientColor})` : App.get('backgroundColor')};
                 border-radius: 20px;
                 margin: 20px 0px 20px 20px;
             }
@@ -8403,6 +9193,7 @@ export function SingleLineTextField(param) {
         width,
         margin,
         padding,
+        placeholder,
         background,
         borderRadius,
         flex,
@@ -8410,8 +9201,10 @@ export function SingleLineTextField(param) {
         fieldMargin,
         optional,
         onKeydown,
+        onKeyup,
+        onKeypress,
         fontSize,
-        onFocusout
+        onFocusout,
     } = param;
 
     let events = [];
@@ -8421,6 +9214,22 @@ export function SingleLineTextField(param) {
             selector: '#id .form-control',
             event: 'keydown',
             listener: onKeydown
+        });
+    }
+
+    if (onKeyup) {
+        events.push({
+            selector: '#id .form-control',
+            event: 'keyup',
+            listener: onKeyup
+        });
+    }
+
+    if (onKeypress) {
+        events.push({
+            selector: '#id .form-control',
+            event: 'keypress',
+            listener: onKeypress
         });
     }
 
@@ -8439,29 +9248,43 @@ export function SingleLineTextField(param) {
                 <!-- ${label ? /*html*/`<label>${label}${optional ? /*html*/ `<span class='optional'><i>Optional</i></span>` : ''}</label>` : ''} -->
                 <!-- ${readOnly ? /*html*/ `<div class='form-field-single-line-text readonly'>${value || ''}</div>` : /*html*/ `<div class='form-field-single-line-text editable' contenteditable='true'>${value || ''}</div>`} -->
                 <label class='form-label'>${label}</label>
-                ${description ? /*html*/`<div class='form-field-description'>${description}</div>` : ''}
-                <div class='input-group'>
-                    ${addon ? 
-                        /*html*/ `
+                ${description ? /*html*/`<div class='form-field-description text-muted'>${description}</div>` : ''}
+                ${addon ? 
+                    /*html*/ `
+                        <div class='input-group'>
                             <div class='input-group-prepend'>
                                 <div class='input-group-text'>${addon}</div>
                             </div>
-                        ` : ''
-                    }
-                    ${
-                        readOnly ?
-                        /*html*/ `
-                            <div type='text' class='form-field-single-line-text readonly'>${value || ''}</div>
-                        ` :
-                        /*html*/ `
-                            <input type='text' class='form-control' value='${value || ''}' autocomplete='off'>
-                        `
-                    }
-                </div>         
+                            ${
+                                readOnly ?
+                                /*html*/ `
+                                    <div type='text' class='form-field-single-line-text readonly'>${value || ''}</div>
+                                ` :
+                                /*html*/ `
+                                    <!-- Edge won't respect autocomplete='off', but autocomplete='new-password' seems to work -->
+                                    <input type='text' class='form-control' value='${value || ''}' list='autocompleteOff' autocomplete='new-password' placeholder='${placeholder || ''}'>
+                                `
+                            }
+                        </div>    
+                    ` :
+                    /*html*/ `
+                        ${
+                            readOnly ?
+                            /*html*/ `
+                                <div type='text' class='form-field-single-line-text readonly'>${value || ''}</div>
+                            ` :
+                            /*html*/ `
+                                <!-- Edge won't respect autocomplete='off', but autocomplete='new-password' seems to work -->
+                                <input type='text' class='form-control' value='${value || ''}' list='autocompleteOff' autocomplete='new-password' placeholder='${placeholder || ''}'>
+                            `
+                        }
+                    `
+                }
             </div>
         `,
         style: /*css*/ `
             #id.form-field {
+                position: relative;
                 margin: ${fieldMargin || '0px 0px 20px 0px'};
                 max-width: ${maxWidth || 'unset'};
                 ${flex ? `flex: ${flex};` : ''}
@@ -8493,13 +9316,14 @@ export function SingleLineTextField(param) {
             } */
 
             #id .form-field-description {
-                padding: 5px 0px;
+                font-size: 14px;
+                margin-bottom:  0.5rem;
             }
 
             #id .form-field-single-line-text {
                 width: ${width || 'unset'};
                 min-height: 36px;
-                font-size: ${fontSize || '.85em'};
+                font-size: ${fontSize || '13px'};
                 font-weight: 500;
                 margin: ${margin || '2px 0px 4px 0px'};
                 padding: 5px 10px;
@@ -8541,12 +9365,9 @@ export function SingleLineTextField(param) {
     });
 
     component.focus = () => {
-        const field = component.find('.form-field-single-line-text');
-
-        setTimeout(() => {
-            console.log(field);
-            field.focus();
-        }, 0);
+        const field = component.find('.form-control');
+        
+        field?.focus();
     }
 
     component.addError = (param) => {
@@ -8696,7 +9517,7 @@ export function SiteUsage(param) {
                 width: 100%;
                 font-weight: 500;
                 /* background: #e9ecef; */
-                background: ${App.get('sidebarBackgroundColor')};
+                background: ${App.get('backgroundColor')};
                 border-radius: 8px;
                 padding: 5px;
             }
@@ -9239,6 +10060,50 @@ export function SvgDefs(param) {
                     <symbol id='icon-javascript' viewBox="0 0 448 512">
                         <path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zM243.8 381.4c0 43.6-25.6 63.5-62.9 63.5-33.7 0-53.2-17.4-63.2-38.5l34.3-20.7c6.6 11.7 12.6 21.6 27.1 21.6 13.8 0 22.6-5.4 22.6-26.5V237.7h42.1v143.7zm99.6 63.5c-39.1 0-64.4-18.6-76.7-43l34.3-19.8c9 14.7 20.8 25.6 41.5 25.6 17.4 0 28.6-8.7 28.6-20.8 0-14.4-11.4-19.5-30.7-28l-10.5-4.5c-30.4-12.9-50.5-29.2-50.5-63.5 0-31.6 24.1-55.6 61.6-55.6 26.8 0 46 9.3 59.8 33.7L368 290c-7.2-12.9-15-18-27.1-18-12.3 0-20.1 7.8-20.1 18 0 12.6 7.8 17.7 25.9 25.6l10.5 4.5c35.8 15.3 55.9 31 55.9 66.2 0 37.8-29.8 58.6-69.7 58.6z"/>
                     </symbol>
+                    <!-- Bootstrap: File earmark -->
+                    <symbol id="icon-bs-file-earmark" viewBox="0 0 16 16">
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                    </symbol>
+                    <!-- Bootstrap: File earmark word -->
+                    <symbol id="icon-bs-file-earmark-word" viewBox="0 0 16 16">
+                        <path d="M5.485 6.879a.5.5 0 1 0-.97.242l1.5 6a.5.5 0 0 0 .967.01L8 9.402l1.018 3.73a.5.5 0 0 0 .967-.01l1.5-6a.5.5 0 0 0-.97-.242l-1.036 4.144-.997-3.655a.5.5 0 0 0-.964 0l-.997 3.655L5.485 6.88z"/>
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                    </symbol>
+                    <!-- Bootstrap: File earmark excel -->
+                    <symbol id="icon-bs-file-earmark-excel" viewBox="0 0 16 16">
+                        <path d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z"/>
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                    </symbol>
+                    <!-- Bootstrap: File earmark ppt -->
+                    <symbol id="icon-bs-file-earmark-ppt" viewBox="0 0 16 16">
+                        <path d="M7 5.5a1 1 0 0 0-1 1V13a.5.5 0 0 0 1 0v-2h1.188a2.75 2.75 0 0 0 0-5.5H7zM8.188 10H7V6.5h1.188a1.75 1.75 0 1 1 0 3.5z"/>
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                    </symbol>
+                    <!-- Bootstrap: File earmark pdf -->
+                    <symbol id="icon-bs-file-earmark-pdf" viewBox="0 0 16 16">
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                        <path d="M4.603 14.087a.81.81 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.68 7.68 0 0 1 1.482-.645 19.697 19.697 0 0 0 1.062-2.227 7.269 7.269 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.188-.012.396-.047.614-.084.51-.27 1.134-.52 1.794a10.954 10.954 0 0 0 .98 1.686 5.753 5.753 0 0 1 1.334.05c.364.066.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.856.856 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.712 5.712 0 0 1-.911-.95 11.651 11.651 0 0 0-1.997.406 11.307 11.307 0 0 1-1.02 1.51c-.292.35-.609.656-.927.787a.793.793 0 0 1-.58.029zm1.379-1.901c-.166.076-.32.156-.459.238-.328.194-.541.383-.647.547-.094.145-.096.25-.04.361.01.022.02.036.026.044a.266.266 0 0 0 .035-.012c.137-.056.355-.235.635-.572a8.18 8.18 0 0 0 .45-.606zm1.64-1.33a12.71 12.71 0 0 1 1.01-.193 11.744 11.744 0 0 1-.51-.858 20.801 20.801 0 0 1-.5 1.05zm2.446.45c.15.163.296.3.435.41.24.19.407.253.498.256a.107.107 0 0 0 .07-.015.307.307 0 0 0 .094-.125.436.436 0 0 0 .059-.2.095.095 0 0 0-.026-.063c-.052-.062-.2-.152-.518-.209a3.876 3.876 0 0 0-.612-.053zM8.078 7.8a6.7 6.7 0 0 0 .2-.828c.031-.188.043-.343.038-.465a.613.613 0 0 0-.032-.198.517.517 0 0 0-.145.04c-.087.035-.158.106-.196.283-.04.192-.03.469.046.822.024.111.054.227.09.346z"/>
+                    </symbol>
+                    <!-- Bootstrap: X circle fill -->
+                    <symbol id="icon-bs-x-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </symbol>
+                    <!-- Bootstrap: Arrow left circle fill -->
+                    <symbol id="icon-bs-arrow-left-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                    </symbol>
+                    <!-- Bootstrap: Dash circle fill -->
+                    <symbol id="icon-bs-dash-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+                    </symbol>
+                    <!-- Bootstrap: X -->
+                    <symbol id="icon-bs-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </symbol>
+                    <!-- Bootstrap: X Lg -->
+                    <symbol id="icon-bs-x-lg" viewBox="0 0 16 16">
+                        <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+                    </symbol>
                     ${addSymbols()}
                 </defs>
             </svg>
@@ -9260,6 +10125,84 @@ export function SvgDefs(param) {
         }
 
         return html;
+    }
+
+    return component;
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export function TaggleField(param) {
+    const {
+        label,
+        description,
+        fieldMargin,
+        maxWidth,
+        tags,
+        onTagAdd,
+        onTagRemove,
+        parent,
+        position,
+    } = param;
+
+    let taggle;
+
+    const component = Component({
+        html: /*html*/ `
+            <div>
+                <label class='form-label'>${label}</label>
+                ${description ? /*html*/`<div class='form-field-description text-muted'>${description}</div>` : ''}
+                <div class='taggle-container'></div>
+            </div>
+        `,
+        style: /*css*/ `
+            #id {
+                margin: ${fieldMargin || '0px 0px 20px 0px'};
+                max-width: ${maxWidth || 'unset'};
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            #id label {
+                font-weight: 500;
+            }
+
+            #id .form-field-description {
+                font-size: 14px;
+                margin-bottom:  0.5rem;
+            }
+
+            #id .taggle-container {
+                position: relative;
+                width: 100%;
+                border-radius: 4px;
+                border: 1px solid #ced4da;
+                padding: 10px;
+            }
+        `,
+        parent,
+        position,
+        events: [
+        
+        ],
+        onAdd() {
+            // Initialize taggle
+            taggle = new Taggle(component.find('.taggle-container'), {
+                placeholder: 'Type then press enter to add tag',
+                tags: tags ? tags.split(',') : [],
+                duplicateTagClass: 'bounce',
+                onTagAdd,
+                onTagRemove
+            });
+        }
+    });
+
+    component.value = () => {
+        return taggle.getTagValues().join(', ');
     }
 
     return component;
@@ -9681,6 +10624,7 @@ export function Timer(param) {
     const {
         parent,
         start,
+        classes,
         stop,
         reset,
         position
@@ -9688,19 +10632,21 @@ export function Timer(param) {
 
     const component = Component({
         html: /*html*/ `
-            <div>
-                <div class='card'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>Run action</h5>
-                        <div class='stopwatch' id='stopwatch'>00:00:00</div>
-                        <button class='btn btn-success start'>Start</button>
-                        <button class='btn btn-danger stop'>Stop</button>
-                        <button class='btn btn-secondary reset'>Reset</button>
-                    </div>
-                </div>
+            <div class='timer ${classes?.join(' ')}'>
+                <h5 class='mb-0'>Run action</h5>
+                <div class='stopwatch' id='stopwatch'>00:00:00</div>
+                <button class='btn btn-success start'>Start</button>
+                <button class='btn btn-danger stop'>Stop</button>
+                <button class='btn btn-secondary reset'>Reset</button>
             </div>
         `,
         style: /*css*/ `
+            #id {
+                padding: 20px;
+                border-radius: 20px;
+                background: ${App.get('backgroundColor')}
+            }
+            
             .stopwatch {
                 margin: 20px 0px;
                 font-size: 1.5em;
@@ -9808,11 +10754,13 @@ export function Timer(param) {
 export function Title(param) {
     const {
         title,
+        width,
         subTitle,
         breadcrumb,
         dropdownGroups,
         maxTextWidth,
         route,
+        padding,
         margin,
         parent,
         position,
@@ -9829,7 +10777,8 @@ export function Title(param) {
             <div class='title ${type || ''}'>
                 <div class='title-subtitle'>
                     <h1 class='app-title'>${title}</h1>
-                    ${subTitle !== undefined ? `<h2>${subTitle}</h2>` : ''}
+                    <!-- ${subTitle !== undefined ? `<h2>${subTitle}</h2>` : ''} -->
+                    <h2>${subTitle || ''}</h2>
                     ${breadcrumb !== undefined ?
                         /*html*/ `
                             <h2 ${dropdownGroups && dropdownGroups.length ? `style='margin-right: 0px;'` : ''}>
@@ -9851,8 +10800,9 @@ export function Title(param) {
         `,
         style: /*css*/ `
             #id {
-                
                 margin: ${margin || '0px'};
+                padding: ${padding || '0px'};
+                ${width ? `width: ${width};` : ''}
             }
 
             #id .app-title {
@@ -10279,7 +11229,7 @@ export function UpgradeAppButton(param) {
                     <div class='dev-console-row'>
                         <div class='dev-console-text'>
                             <div class='dev-console-label'>Upgrade Robi</div>
-                            <div class='dev-console-description'>Install latest Robi build.</div>
+                            <div class='dev-console-description'>Install the latest Robi build.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
                             <button class='btn btn-success dev-console-button upgrade'>Upgrade ${App.get('name')}</button>
@@ -10320,7 +11270,7 @@ export function UpgradeAppButton(param) {
                 justify-content: space-between;
                 padding: 20px 30px;
                 border-radius: 20px;
-                background: ${App.get('sidebarBackgroundColor')};
+                background: ${App.get('backgroundColor')};
             }
 
             #id .dev-console-text {
@@ -10381,303 +11331,10 @@ export function UpgradeAppButton(param) {
                             // Show loading
                             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                                 <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center'>
-                                    <div class="mb-2" style='font-weight: 600; color: darkgray'>Loading lists</div>
+                                    <div class="mb-2" style='font-weight: 600; color: darkgray'>Upgrade Robi</div>
                                     <div class="spinner-grow" style='color: darkgray' role="status"></div>
                                 </div>
                             `);
-
-                            // Check lists
-                            const coreLists = Lists();
-                            const appLists = lists;
-                            const allLists = coreLists.concat(appLists);
-                            const webLists = await GetWebLists();
-                            const diff = allLists.map(item => item.list).filter(x => !webLists.map(item => item.Title).includes(x));
-                            console.log(webLists, allLists, diff);
-        
-                            console.log(event.target.innerText);
-
-                            const toCreate = diff.map(list => allLists.find(item => item.list === list));
-                            
-                            // Remove loading
-                            modal.find('.loading-spinner').remove();
-
-                            if (!toCreate.length) {
-                                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                    <h4 class='mb-3'>No new lists to install</h4>
-                                `);
-                            } else {
-                                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                    <h4 class='mb-1'>New lists to install</h4>
-                                    ${
-                                        toCreate
-                                        .sort((a, b) => a.list - b.list)
-                                        .map(item => {
-                                            return /*html*/ `
-                                                <div class="form-check ml-2">
-                                                    <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.list.split(' ').join('-')}" data-list='${item.list}' checked>
-                                                    <label class="form-check-label" for="checkbox-${item.list.split(' ').join('-')}">
-                                                        ${item.list}
-                                                    </label>
-                                                </div>
-                                            `
-                                        }).join('\n')
-                                    }
-                                `);
-
-                                const installBtn = BootstrapButton({
-                                    async action(event) {
-                                        console.log('Install');
-
-                                        // Get checked lists
-                                        const checkedLists = [...modal.findAll('.form-check-input:checked')].map(node => allLists.find(item => item.list === node.dataset.list));
-
-                                        console.log(checkedLists);
-
-                                        if (!checkedLists.length) {
-                                            alert('Select at least one list to reset.');
-                                            return;
-                                        }
-
-                                        modal.find('.modal-content').style.width = 'unset';
-
-                                        modalBody.style.height = `${modalBody.offsetHeight}px`;
-                                        modalBody.style.width = `${modalBody.offsetWidth}px`;
-                                        modalBody.style.overflowY = 'unset';
-                                        modalBody.style.display = 'flex';
-                                        modalBody.style.flexDirection = 'column',
-                                        modalBody.style.transition = 'all 300ms ease-in-out';
-                                        modalBody.innerHTML = '';
-                                        modalBody.style.height = '80vh';
-                                        modalBody.style.width = '80vw';
-
-                                        modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                            <h3 class='console-title mb-0'>Reseting <strong>lists</strong></h3>
-                                        `);
-
-                                        let progressCount = 0;
-
-                                        checkedLists.forEach(item => {
-                                            const { fields } = item;
-
-                                            // List + 1 for install
-                                            progressCount = progressCount + 1;
-
-                                            fields.forEach(field => {
-                                                // Field +2 (add column to list and view)
-                                                progressCount = progressCount + 2;
-                                            });
-                                        });
-
-                                        const progressBar = ProgressBar({
-                                            parent: modalBody,
-                                            totalCount: progressCount
-                                        });
-
-                                        Store.add({
-                                            name: 'install-progress-bar',
-                                            component: progressBar
-                                        });
-
-                                        progressBar.add();
-
-                                        const deleteContainer = Container({
-                                            padding: '10px',
-                                            parent: modalBody,
-                                            overflow: 'hidden',
-                                            width: '100%',
-                                            height: '100%',
-                                            radius: '10px',
-                                            background: '#1E1E1E'
-                                        });
-
-                                        deleteContainer.add();
-
-                                        const reinstallConsole = InstallConsole({
-                                            type: 'secondary',
-                                            text: '',
-                                            margin: '0px',
-                                            parent: deleteContainer
-                                        });
-
-                                        Store.add({
-                                            name: 'install-console',
-                                            component: reinstallConsole
-                                        });
-
-                                        reinstallConsole.add();
-                                        reinstallConsole.get().classList.add('console');
-
-                                        // Install ----------------------------------------------------------------------------------------
-
-                                        // 1. CORE: Add core lists to install-console
-                                        reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code>Create lists:</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                        checkedLists.forEach(item => {
-                                            const { list } = item;
-
-                                            reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <!-- <code class='line-number'>0</code> -->
-                                                    <code>- ${list}</code>
-                                                </div>
-                                            `);
-
-                                            // Scroll console to bottom
-                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                        });
-
-                                        // Add spacer to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='opacity: 0;'>Spacer</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                        // Add default lists first
-                                        for (let list in checkedLists) {
-                                            // Create lists
-                                            await CreateList(checkedLists[list]);
-
-                                            // Add spacer to console
-                                            reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <!-- <code class='line-number'>0</code> -->
-                                                    <code style='opacity: 0;'>Spacer</code>
-                                                </div>
-                                            `);
-
-                                            // Scroll console to bottom
-                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                        }
-
-                                        if (lists.length) {
-                                            // Add Release Notes
-                                            await CreateItem({
-                                                list: 'ReleaseNotes',
-                                                data: {
-                                                    Summary: `New ${App.get('name')} lists created`,
-                                                    Description: checkedLists.map(item => item.list).join(', ') + '.',
-                                                    Status: 'Published',
-                                                    MajorVersion: '0',
-                                                    MinorVersion: '1',
-                                                    PatchVersion: '0',
-                                                    ReleaseType: 'Current'
-                                                }
-                                            });
-
-                                            console.log(`Added Release Note: App lists created - ${checkedLists.map(item => item.list).join(', ')}.`);
-
-                                            // Add to console
-                                            reinstallConsole.append(/*html*/ `
-                                                <div class='console-line'>
-                                                    <!-- <code class='line-number'>0</code> -->
-                                                    <code>'New ${App.get('name')} lists created - ${checkedLists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
-                                                </div>
-                                            `);
-
-                                            // Scroll console to bottom
-                                            reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                        }
-
-                                        // Add spacer to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='opacity: 0;'>Spacer</code>
-                                            </div>
-                                        `);
-
-                                        // Scroll console to bottom
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-
-                                        let spacers = '===================';
-
-                                        // for (let i = 0; i < App.get('name').length; i++) {
-                                        //     spacers = spacers + '=';
-                                        // }
-                                        
-                                        // 3. Add to console
-                                        reinstallConsole.append(/*html*/ `
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='color: mediumseagreen !important;'>${spacers}</code>
-                                            </div>
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='color: mediumseagreen !important;'>| Lists installed |</code>
-                                            </div>
-                                            <div class='console-line'>
-                                                <!-- <code class='line-number'>0</code> -->
-                                                <code style='color: mediumseagreen !important;'>${spacers}</code>
-                                            </div>
-                                        `);
-
-                                        // END RESET ------------------------------------------------------------------------------------
-
-                                        modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                            <div class='mt-4 mb-4'>All new lists have been successfully installed. You can safely close this modal.</div>
-                                        `);
-
-                                        // Show return button
-                                        const returnBtn = BootstrapButton({
-                                            type: 'primary',
-                                            value: 'Close',
-                                            classes: ['w-100'],
-                                            action(event) {
-                                                // Bootstrap uses jQuery .trigger, won't work with .addEventListener
-                                                $(modal.get()).on('hidden.bs.modal', event => {
-                                                    console.log('Modal close animiation end');
-                                                    console.log('Reload');
-
-                                                    Route(location.href.split('#')[1] || '');
-                                                });
-
-                                                modal.close();
-                                            },
-                                            parent: modalBody
-                                        });
-
-                                        returnBtn.add();
-
-                                        // Scroll console to bottom (after launch button pushes it up);
-                                        reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
-                                    },
-                                    classes: ['w-100', 'mt-4'],
-                                    width: '100%',
-                                    parent: modalBody,
-                                    type: 'success',
-                                    value: `Upgrade build`
-                                });
-
-                                installBtn.add();
-                            }
-
-                            const cancelBtn = BootstrapButton({
-                                action(event) {
-                                    console.log('Cancel upgrade');
-
-                                    modal.close();
-                                },
-                                classes: ['w-100 mt-2'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'light',
-                                value: 'Cancel'
-                            });
-
-                            cancelBtn.add();
                         },
                         centered: true,
                         showFooter: false,
@@ -10749,5 +11406,70 @@ export function UploadButton(param) {
         ]
     });
 
+    return component;
+}
+
+/**
+ * 
+ * @param {*} param 
+ * @returns 
+ */
+export function ViewContainer(param) {
+    const {
+        parent
+    } = param;
+
+    const component = Component({
+        html: /*html*/ `
+            <div class='viewcontainer'></div>
+        `,
+        style: /*css*/ `
+            .viewcontainer {
+                position: relative;
+                padding: 40px;
+                flex: 1;
+                height: 100vh;
+                overflow: overlay;
+            }
+
+            .viewcontainer.dim {
+                filter: blur(25px);
+                user-select: none;
+                overflow: hidden,
+            }
+        `,
+        parent,
+        events: []
+    });
+
+    component.dim = (toggle) => {
+        const maincontainer = component.get();
+
+        if (toggle) {
+            maincontainer.classList.add('dim');
+        } else {
+            maincontainer.classList.remove('dim');
+        }
+    }
+
+    component.paddingOff = () => {
+        component.get().style.padding = '0px';
+    }
+
+    component.paddingOn = () => {
+        component.get().style.padding = '40px'; // 15px 30px;
+    }
+
+    component.eventsOff = () => {
+        [...component.get().children].forEach(child => {
+            child.style.pointerEvents = 'none';
+        });
+    }
+
+    component.eventsOn = () => {
+        [...component.get().children].forEach(child => {
+            child.style.pointerEvents = 'initial';
+        });
+    }
     return component;
 }

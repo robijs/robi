@@ -1,16 +1,51 @@
 import { Start } from './Core/Actions.js'
 import lists from './lists.js'
 import Home from './Routes/Home/Home.js'
+import Measures from './Routes/Measures/Measures.js'
+import MeasureIntakeForm from './Routes/Measures/MeasureIntakeForm.js'
 
 Start({
     // ROUTES
     routes: [
         {
-            path: 'Home',                                   // Must include at least on default route. Must be 'Home' or same value for settings.defaultRoute.
-            hide: true,                                     // The default route shouldn't be be listed in the sidebar.
-            go() {                                          // Instead, default route enaged on view titles and sidebar click.
-                Home();                                     // Can be linked to directly with hash fragment. Ex: https://site#defaultRoute.
-            }                                               
+            path: 'Home',                                   // Must include at least one default route.
+            hide: true,                                     // Must be 'Home' or same value for settings.defaultRoute.
+            go(param) {                                     // The default route shouldn't be be listed in the sidebar.
+                Home(param);                                // Instead, default route enaged on view titles and sidebar click.
+            }                                               // Can be linked to directly with hash fragment.
+        },                                                  // Ex: https://site#defaultRoute.
+        {
+            path: 'Measures',
+            icon: 'drawer',
+            go(param) {
+                const {
+                    parent,
+                    pathParts,
+                    props
+                } = param;
+    
+                if (pathParts.length === 1) {
+                    Measures(param);
+                } else if (pathParts.length >= 2) {
+                    const itemId = parseInt(pathParts[1]);
+
+                    if (typeof itemId === 'number' && !isNaN(itemId)) {
+                        console.log('edit form');
+                        MeasureIntakeForm({
+                            parent,
+                            itemId: itemId,
+                            path: pathParts[2],
+                            props
+                        });
+                    } else if (pathParts[1] === 'New') {
+                        MeasureIntakeForm({
+                            parent,
+                            path: pathParts[2],
+                            props
+                        });
+                    }
+                }
+            }  
         }
     ],
     settings: {
@@ -31,7 +66,7 @@ Start({
             }
         ],
         secondaryColor: 'white',                            // main container background color
-        sidebarBackgroundColor: '#F8F8FC',                  // nav background color
+        backgroundColor: '#F8F8FC',                         // nav background color
         sidebarTextColor: '#24292f',                        // nav label text color
         title: '@Title',                                    // site title (AUTOPOPULATED if created with CREATE APP)
         titleColor: '#1c6cbb',                              // core Title component text color

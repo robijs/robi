@@ -1,9 +1,11 @@
 import {
+    AddStyle,
     CreateItem,
     DeleteItem,
     Get,
     Route,
-    UpdateItem
+    UpdateItem,
+    UploadFile
 } from '../Core/Actions.js'
 import {
     Alert,
@@ -15,9 +17,13 @@ import {
     Container,
     DashboardBanner,
     DataTable,
+    Files,
     FoldingCube,
     Heading,
+    LinksField,
+    LoadingSpinner,
     Modal,
+    MultiChoiceField,
     MultiLineTextField,
     NameField,
     NewReply,
@@ -29,12 +35,14 @@ import {
     SingleLineTextField,
     SiteUsage as C_SiteUsage,
     StatusField,
+    TaggleField,
     Toast
 } from './Components.js'
 import Store from './Store.js'
 import { App } from './Settings.js'
 import { Lists, Question as M_Question, StartAndEndOfWeek } from './Models.js'
 import lists from '../lists.js'
+import AddFileTypes from '../Routes/Measures/AddFileTypes.js'
 
 /**
  * 
@@ -105,6 +113,140 @@ export async function AccountInfo(param) {
     });
 
     roleField.add();
+}
+
+/**
+ * 
+ * @param {*} param 
+ */
+export function Attachments(param) {
+    const {
+        parent,
+        label,
+        description,
+        list,
+        itemId,
+        value,
+        onChange
+    } = param;
+
+    /** Loading Indicator */
+    const loadingIndicator = LoadingSpinner({
+        label: 'Loading files',
+        margin: '40px 0px',
+        parent
+    });
+    
+    loadingIndicator.add();
+
+    const card = Container({
+        width: '100%',
+        direction: 'column',
+        margin: '0px 0px 10px 0px',
+        // padding: '20px',
+        parent
+    });
+
+    card.add();
+
+    const heading = Heading({
+        text: label,
+        margin: '0px 0px .5rem 0px',
+        weight: '500',
+        size: '16px',
+        color: App.get('defaultColor'),
+        parent: card
+    });
+
+    heading.add();
+
+    const filesList = Files({
+        // allFiles: files.map(file => {
+        //     return {
+        //         name: file.Ext === 'pptx' ? `${file.File.Name}.pptx` : file.File.Name,
+        //         size: file.File.Length,
+        //         created: file.Created,
+        //         author: file.Author.Title
+        //     }
+        // }),
+        // files: files
+        // .filter(file => file.Section === section)
+        // .sort((a, b) => a.Ext.localeCompare(b.Ext) || a.File.Name.localeCompare(b.File.Name))
+        // .map(file => {
+        //     return {
+        //         name: file.Ext === 'pptx' ? `${file.File.Name}.pptx` : file.File.Name,
+        //         size: file.File.Length,
+        //         created: file.Created,
+        //         author: file.Author.Title
+        //     }
+        // }),
+        description,
+        onChange,
+        allFiles: [],
+        files: itemId ? value?.map(item => {
+            return {
+                name: item.File.Name,
+                size: item.File.Length,
+                created: item.Created,
+                author: item.Author.Title
+            }
+        }) : value,
+        itemId,
+        async onUpload(file) {
+            console.log(file);
+
+            // /** TODO: @todo remove 'remove' event listener -> add 'cancel' event listener   */
+            filesList.find(`.remove-container[data-filename='${file.name}'] .status`).innerText = 'Queued';
+            filesList.find(`.remove-container[data-filename='${file.name}'] .tip`).innerText = 'up next';
+            filesList.find(`.remove-container[data-filename='${file.name}'] .remove-icon`).innerHTML = /*html*/ `
+                <div style='width: 22px; height: 22px; background: #ced4da; border-radius: 50%;'></div>
+            `;
+
+            // /** TODO: @todo remove 'remove' event listener -> add 'cancel' event listener   */
+            filesList.find(`.remove-container[data-filename='${file.name}'] .status`).innerText = 'Uploading';
+            filesList.find(`.remove-container[data-filename='${file.name}'] .tip`).innerText = 'please wait';
+            filesList.find(`.remove-container[data-filename='${file.name}'] .remove-icon`).innerHTML = /*html*/ `
+                <div class='spinner-grow text-secondary' role='status' style='width: 22px; height: 22px;'></div>
+            `;
+    
+            const testUpload = await UploadFile({
+                library: 'MeasuresFiles',
+                file,
+                data: {
+                    MeasureId: itemId
+                }
+            });
+
+            console.log(testUpload);
+
+            filesList.find(`.pending-count`).innerText = '';
+            filesList.find(`.pending-count`).classList.add('hidden');
+            filesList.find(`.count`).innerText = `${parseInt(filesList.find(`.count`).innerText) + 1}`;
+            filesList.find(`.remove-container[data-filename='${file.name}']`).dataset.itemid = testUpload.Id;
+            filesList.find(`.remove-container[data-filename='${file.name}'] .status`).innerText = 'Uploaded!';
+            filesList.find(`.remove-container[data-filename='${file.name}'] .tip`).innerText = `${'ontouchstart' in window ? 'tap' : 'click'} to undo`;
+            filesList.find(`.remove-container[data-filename='${file.name}'] .remove-icon`).innerHTML = /*html*/ `
+                <svg class='icon undo'><use href='#icon-bs-arrow-left-circle-fill'></use></svg>
+            `;
+
+            // dropZone.find('.upload').classList.add('hidden');
+            // dropZone.find('.upload').innerHTML = 'Upload';
+            // dropZone.find('.upload').style.pointerEvents = 'all';
+            // dropZone.find('.undo-all').classList.remove('hidden');
+            // dropZone.find('.reset').classList.remove('hidden');
+        },
+        width: '-webkit-fill-available',
+        parent: card
+    });
+
+    loadingIndicator.remove();
+
+    Store.add({
+        name: 'files',
+        component: filesList
+    });
+
+    return filesList;
 }
 
 /**
@@ -398,11 +540,21 @@ export async function EditForm(param) {
                 component = BootstrapDropdown({
                     label: display || name,
                     value: item[name] || choices[0],
+                    setWidthDelay: 200,
                     options: choices.map(choice => {
                         return {
                             label: choice
                         }
                     }),
+                    parent
+                });
+                break;
+            case 'multichoice':
+                console.log(name);
+                component = MultiChoiceField({
+                    label: display || name,
+                    choices,
+                    // value: item[name] || choices[0],
                     parent
                 });
                 break;
@@ -425,14 +577,20 @@ export async function EditForm(param) {
                 const { component, field } = item;
                 const { name, type} = field;
 
+                const value = component.value();
+                
                 switch (type) {
                     case 'slot':
                     case 'mlot':
                     case 'choice':
-                        data[name] = component.value();
+                        if (value){
+                            data[name] = value;
+                        }
                         break;
                     case 'number':
-                        data[name] = parseInt(component.value() || 0);
+                        if (value){
+                            data[name] = parseInt(value);
+                        }
                         break;
                 }
             });
@@ -863,6 +1021,332 @@ export async function Errors(param) {
 }
 
 /**
+ * 
+ * @param {*} param 
+ */
+export function FormSection(param) {
+    const { section, listInfo, item, parent: parentConatiner, heading } = param;
+    const { name, path, info, rows } = section;
+    const { list, fields } = listInfo;
+
+    const parent = Container({
+        display: 'block',
+        width: '100%',
+        padding: '0px 0px 30px 0px',
+        parent: parentConatiner
+    });
+
+    parent.add();
+
+    if (heading) {
+        const sectionTitle = Alert({
+            type: 'primary',
+            width: '100%',
+            text: /*html*/ `
+                <h6 class='mb-0'>${heading}</h6>
+            `,
+            parent
+        });
+
+        sectionTitle.add();
+    }
+
+    if (section.info) {
+        const infoAlert = Alert({
+            type: 'info',
+            text: info,
+            margin: '0px 20px 20px 20px',
+            parent
+        });
+    
+        infoAlert.add();
+    }
+
+    // TODO: Pass form name in, this is supposed to be generic
+    const formData = item ? Store.getData(`edit measure ${item.Id}`) : Store.getData('new measure') ;
+
+    console.log('Form Data:', formData);
+
+    let components = [];
+
+    rows.forEach(row => {
+        const { name: rowName, fields: rowFields, description: rowDescription, type } = row;
+
+        // console.log(rowName, rowFields);
+
+        const rowContainer = !type ? 
+            Container({
+                display: 'block',
+                width: '100%',
+                padding: '10px 20px',
+                parent
+            }) :
+            Alert({
+                // width: '100%', // causes node to spill out on the right
+                text: /*html*/ `
+                    <div class='mb-2'>${rowDescription}</div>
+                `,
+                margin: '0px 20px 20px 20px',
+                type,
+                parent
+            });
+
+        rowContainer.add();
+
+        if (rowName) {
+            rowContainer.append(/*html*/ `
+                <div class='mb-1'>
+                    <h6 style='color: ${App.get('primaryColor')}; font-weight: 700'>${rowName}</h6>
+                </div>
+            `);
+        }
+
+        const fieldRow = Container({
+            display: 'flex',
+            width: '100%',
+            parent: rowContainer
+        });
+
+        fieldRow.add();
+
+        AddStyle({
+            name: `form-row-${fieldRow.get().id}`,
+            style: /*css*/ `
+                #${fieldRow.get().id} .form-field {
+                    flex: 1;
+                }
+
+                #${fieldRow.get().id} .form-field:not(:last-child) {
+                    margin-right: 20px;
+                }
+            `
+        });
+
+        rowFields?.forEach(field => {
+            const { name, label, style, component: renderComponent, description: customDescription } = field;
+            const parent = fieldRow;
+
+            let component = {};
+
+            // Bail out if component
+            if (renderComponent) {
+                // TODO: generalize properties
+                console.log(renderComponent);
+                // component = AddFileTypes({
+                //     types: formData.FileTypes,
+                //     onChange(event) {
+                //         formData.FileTypes = component.value();
+                //     },
+                //     parent
+                // });
+
+                // component.add();
+
+            }
+
+            let fieldMargin = '0px';
+
+            if (name === 'Files') {
+                component = Attachments({
+                    label: label || display || name,
+                    description: customDescription,
+                    // value: formData[name],
+                    value: formData.Files,
+                    list,
+                    itemId: item?.Id,
+                    parent,
+                    fieldMargin,
+                    onChange(files) {
+                        console.log('files value', files);
+                        formData.Files = files;
+                    }
+                });
+            } else {
+                const { display, description: defaultDescription, type, choices, fillIn, action } = fields?.find(item => item.name === name);
+                const description = customDescription || defaultDescription;
+
+                switch (type) {
+                    case 'slot':
+                        let placeholder = '';
+                        let addon = '';
+                        
+                        if (name.toLowerCase().includes('email')) {
+                            // placeholder = 'first.mi.last.civ@mail.mil';
+                            addon = '@';
+                        } else if (name.toLowerCase().includes('name')) {
+                            // placeholder = 'First Last'
+                        } else if (name.toLowerCase().includes('office')) {
+                            // placeholder = 'Example: J-5 AED'
+                        }
+
+                        component = SingleLineTextField({
+                            label: label || display || name,
+                            description,
+                            value: formData[name],
+                            placeholder,
+                            action,
+                            addon,
+                            parent,
+                            fieldMargin,
+                            async onKeyup(event) {
+                                // Set form data
+                                formData[name] = component.value();
+
+                                // Drop down Menu
+                                const query = event.target.value;
+                                const menu = component.find('.dropdown-menu');
+
+                                console.log(query);
+
+                                if (query) {
+                                    if (!menu) {
+                                        console.log('add menu');
+                                        
+                                        const height = component.get().offsetHeight;
+                                        const width = component.get().offsetWidth;
+        
+                                        component.find('.form-control').insertAdjacentHTML('afterend', /*html*/ `
+                                            <div class='dropdown-menu show' style='position: absolute; width: ${width}px; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, ${height + 5}px);'>
+                                                <div class='d-flex justify-content-between align-items-center mt-2 mb-2 ml-3 mr-3'>
+                                                    <div style='color: mediumslateblue;'>Searching for measures with similar names...</div>
+                                                    <div class='spinner-grow spinner-grow-sm' style='color: mediumslateblue;' role='status'></div>
+                                                </div> 
+                                            </div>
+                                        `);
+
+                                        // Get list items
+                                        const listItems = await Get({
+                                            list: 'Measures'
+                                        });
+
+                                    } else {
+                                        console.log('menu already added');
+                                    }
+                                } else {
+                                    if (menu) {
+                                        console.log('remove menu');
+                                        menu.remove();
+                                    } else {
+                                        console.log('menu already removed');
+                                    }
+                                }
+
+                            }
+                        });
+                        break;
+                    case 'mlot':
+                        if (name.toLowerCase() === 'tags') {
+                            component = TaggleField({
+                                label: label || display || name,
+                                description,
+                                tags: formData[name],
+                                parent,
+                                fieldMargin,
+                                onTagAdd(event, tag) {
+                                    // console.log('tags: ', component.value());
+                                    // Set form data
+                                    formData[name] = component.value();
+                                },
+                                onTagRemove(event, tag) {
+                                    // console.log('tags: ', component.value());
+                                    // Set form data
+                                    formData[name] = component.value();
+                                }
+                            });
+                        }  else if (name.toLowerCase() === 'dashboardlinks' || name.toLowerCase() === 'links') { // TODO: I don't like this, assumes too much
+                            component = LinksField({
+                                label: label || display || name,
+                                links: formData[name],
+                                description,
+                                parent,
+                                fieldMargin,
+                                onChange(event) {
+                                    // Set form data
+                                    formData[name] = JSON.stringify(component.value());
+                                }
+                            });
+                        } else {
+                            component = MultiLineTextField({
+                                label: label || display || name,
+                                value: formData[name],
+                                description,
+                                parent,
+                                fieldMargin,
+                                onKeyup(event) {
+                                    // Set form data
+                                    formData[name] = component.value();
+                                }
+                            });
+                        }
+                        
+                        break;
+                    case 'number':
+                        component = NumberField({
+                            label: label || display || name,
+                            description,
+                            fieldMargin,
+                            parent
+                        });
+                        break;
+                    case 'choice':
+                        component = BootstrapDropdown({
+                            label: label || display || name,
+                            description,
+                            value: formData[name],
+                            options: choices.map(choice => {
+                                return {
+                                    label: choice
+                                }
+                            }),
+                            parent,
+                            fieldMargin,
+                            action(event) {
+                                formData[name] = component.value();
+                            }
+                        });
+                        break;
+                    case 'multichoice':
+                        console.log(name);
+                        component = MultiChoiceField({
+                            label: label || display || name,
+                            choices,
+                            fillIn,
+                            value: formData[name]?.results,
+                            parent,
+                            fieldMargin,
+                            onChange(event) {
+                                formData[name] = {
+                                    results: component.value()
+                                }
+                            }
+                        });
+                        break;
+                    default:
+                        console.log('missing component for field type: ', type);
+                        return;
+                }   
+            }
+    
+            // Add to DOM
+            component.add();
+
+            if (style) {
+                for (const property in style) {
+                    // console.log(`${property}: ${style[property]}`);
+                    component.get().style[property] = style[property];
+                }
+            }
+    
+            // Push to list of components
+            components.push({
+                component,
+                field
+            });
+        });
+    });
+}
+
+/**
  * @description
  * @returns {Object} - @method {getFieldValues} call that return values for User
  */
@@ -1227,15 +1711,21 @@ export async function NewForm(param) {
             .forEach(item => {
                 const { component, field } = item;
                 const { name, type} = field;
-
+                
+                const value = component.value();
+                
                 switch (type) {
                     case 'slot':
                     case 'mlot':
                     case 'choice':
-                        data[name] = component.value();
+                        if (value){
+                            data[name] = value;
+                        }
                         break;
                     case 'number':
-                        data[name] = parseInt(component.value() || 0);
+                        if (value){
+                            data[name] = parseInt(value);
+                        }
                         break;
                 }
             });
@@ -1954,7 +2444,7 @@ export async function SiteUsage(param) {
     worker.postMessage({
         envMode: App.get('mode'),
         site: App.get('site'),
-        bannerColor: App.get('sidebarBackgroundColor')
+        bannerColor: App.get('backgroundColor')
     });
 
     Store.addWorker(worker);
@@ -2171,6 +2661,7 @@ export async function Table(param) {
         addButton,
         addButtonValue,
         border,
+        buttonBorder,
         checkboxes,
         createdRow,
         defaultButtons,
@@ -2186,13 +2677,17 @@ export async function Table(param) {
         headingMargin,
         headingSize,
         list,
+        margin,
         newForm,
         onUpdate,
+        openInModal,
         order,
+        padding,
         parent,
         showId,
         striped,
-        titleDisplayName
+        titleDisplayName,
+        view
     } = param;
 
     let {
@@ -2203,6 +2698,8 @@ export async function Table(param) {
 
     const tableContainer = Container({
         display: 'block',
+        margin,
+        padding,
         parent
     });
 
@@ -2211,7 +2708,7 @@ export async function Table(param) {
     /** Heading */
     if (heading || list) {
         const legendHeading = Heading({
-            text: heading || list,
+            text: heading || (heading === '' ? '' : list),
             size: headingSize,
             color: headingColor,
             margin: headingMargin || '20px 0px 15px 0px',
@@ -2234,6 +2731,7 @@ export async function Table(param) {
     
     /** Item Id */
     const idProperty = 'Id';
+    let formFields = [];
 
     if (list) {
         // Show loading
@@ -2249,13 +2747,29 @@ export async function Table(param) {
             filter
         });
         
-        // Find list in core or user defined lists
-        fields = lists.concat(Lists()).find(item => item.list === list)?.fields;
+        // Get fields in view
+        if (view) {
+            const schema = lists
+                .concat(Lists())
+                .find(item => item.list === list);
+                
+            fields = schema?.views
+                .find(item => item.name === view)
+                ?.fields
+                .map(name => {
+                    return schema.fields.find(field => field.name === name);
+                });
+        } else {
+            // If no view, get all fields
+            fields = lists.concat(Lists()).find(item => item.list === list)?.fields;
+        }
 
         if (!fields) {
             console.log('Missing fields');
             return;
         }
+
+        formFields = lists.concat(Lists()).find(item => item.list === list)?.fields;
         
         // Remove loading
         // FIXME: Shouldn't have to use optional chaining
@@ -2263,14 +2777,6 @@ export async function Table(param) {
         // or convert to Robi component?
         // how would react handle this?
         tableContainer.find('.loading-spinner')?.remove();
-
-        // FIXME: Side effect, added element to fields array.
-        // Add Id field
-        // fields.unshift({
-        //     name: 'Id',
-        //     display: 'Id',
-        //     type: 'number'
-        // });
 
         [ { name: 'Id', display: 'Id', type: 'number' } ]
         .concat(fields)
@@ -2427,7 +2933,12 @@ export async function Table(param) {
                         const selected = table.selected();
     
                         console.log('Delete selected:', selected);
-    
+
+                        const button = tableContainer.find('.delete-item');
+                        console.log(button);
+                        button.disabled = true;
+                        button.innerHTML = /*html*/ `<span class="spinner-border" role="status" aria-hidden="true" style="width: 20px; height: 20px; border-width: 3px"></span>`;
+
                         // Delete items
                         for (let row in selected) {
                             console.log(selected[row]);
@@ -2441,6 +2952,14 @@ export async function Table(param) {
                             // Delete Row
                             table.removeRow(selected[row].Id);
                         }
+
+                        button.innerHTML = /*html*/ `
+                            <span>
+                                <svg class="icon">
+                                    <use href="#icon-bs-trash"></use>
+                                </svg>
+                            </span>
+                        `
                     }
                 }
             ]);
@@ -2491,69 +3010,73 @@ export async function Table(param) {
             className: 'add-item mr-4',
             name: 'add',
             action: function (e, dt, node, config) {
-                const newModal = Modal({
-                    contentPadding: '30px',
-                    title: `New Item`,
-                    async addContent(modalBody) {
-                        const formParam = {
-                            event: e,
-                            fields,
-                            list,
-                            modal: newModal,
-                            parent: modalBody,
-                            table
-                        };
-
-                        selectedForm = newForm ? await newForm(formParam) : await NewForm(formParam);
-
-                        newModal.showFooter();
-                    },
-                    buttons: {
-                        footer: [
-                            {
-                                value: 'Cancel',
-                                classes: 'btn-secondary',
-                                data: [
-                                    {
-                                        name: 'dismiss',
-                                        value: 'modal'
-                                    }
-                                ]
-                            },
-                            // TODO: send modal prop to form
-                            {
-                                value: 'Create',
-                                classes: 'btn-success',
-                                async onClick(event) {
-                                    // Disable button - Prevent user from clicking this item more than once
-                                    $(event.target)
-                                        .attr('disabled', '')
-                                        .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Creating');
-
-                                    // Call newForm.onCreate() and wait for it to complete
-                                    const newItem = await selectedForm?.onCreate(event);
-
-                                    if (newItem) {
-                                        table.addRow({
-                                            data: newItem
-                                        });
-                                    }
-
-                                    // Enable button
-                                    $(event.target)
-                                        .removeAttr('disabled')
-                                        .text('Created');
+                if (openInModal) {
+                    Route(`${list}/New`);
+                } else {
+                    const newModal = Modal({
+                        contentPadding: '30px',
+                        title: `New Item`,
+                        async addContent(modalBody) {
+                            const formParam = {
+                                event: e,
+                                fields: formFields,
+                                list,
+                                modal: newModal,
+                                parent: modalBody,
+                                table
+                            };
     
-                                    // Close modal (DOM node will be removed on hidden.bs.modal event)
-                                    newModal.close();
+                            selectedForm = newForm ? await newForm(formParam) : await NewForm(formParam);
+    
+                            newModal.showFooter();
+                        },
+                        buttons: {
+                            footer: [
+                                {
+                                    value: 'Cancel',
+                                    classes: 'btn-secondary',
+                                    data: [
+                                        {
+                                            name: 'dismiss',
+                                            value: 'modal'
+                                        }
+                                    ]
+                                },
+                                // TODO: send modal prop to form
+                                {
+                                    value: 'Create',
+                                    classes: 'btn-success',
+                                    async onClick(event) {
+                                        // Disable button - Prevent user from clicking this item more than once
+                                        $(event.target)
+                                            .attr('disabled', '')
+                                            .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Creating');
+    
+                                        // Call newForm.onCreate() and wait for it to complete
+                                        const newItem = await selectedForm?.onCreate(event);
+    
+                                        if (newItem) {
+                                            table.addRow({
+                                                data: newItem
+                                            });
+                                        }
+    
+                                        // Enable button
+                                        $(event.target)
+                                            .removeAttr('disabled')
+                                            .text('Created');
+        
+                                        // Close modal (DOM node will be removed on hidden.bs.modal event)
+                                        newModal.close();
+                                    }
                                 }
-                            }
-                        ]
-                    },
-                    parent: tableContainer
-                });
-    
-                newModal.add();
+                            ]
+                        },
+                        parent: tableContainer
+                    });
+        
+                    newModal.add();
+                }
             }
         });
     }
@@ -2570,6 +3093,7 @@ export async function Table(param) {
     const table = DataTable({
         headers,
         headerFilter,
+        buttonBorder,
         checkboxes: checkboxes !== false ? true : false,
         striped: striped || false,
         border: border || false,
@@ -2590,96 +3114,100 @@ export async function Table(param) {
                 item
             } = param;
 
-            /** Set row */
             selectedRow = row;
-
-            /** Set user */
             selectedItem = item;
 
-            /** Show User */
-            const rowModal = Modal({
-                title: 'Edit item',
-                contentPadding: '30px',
-                async addContent(modalBody) {
-                    const formParam = { item, table, row, fields, list, modal: rowModal, parent: modalBody };
+            // Open edit form full screen
+            if (openInModal) {
+                Route(`${list}/${selectedItem.Id}`);
+            } else {
+                // Open edit form in modal
+                const rowModal = Modal({
+                    title: 'Edit item',
+                    contentPadding: '30px',
+                    async addContent(modalBody) {
+                        const formParam = { item, table, row, fields: formFields, list, modal: rowModal, parent: modalBody };
 
-                    selectedForm = editForm ? await editForm(formParam) : await EditForm(formParam);
+                        selectedForm = editForm ? await editForm(formParam) : await EditForm(formParam);
 
-                    if (formFooter !== false) {
-                        rowModal.showFooter();
-                    }
-                },
-                buttons: {
-                    footer: [
-                        {
-                            value: 'Cancel',
-                            classes: 'btn-secondary',
-                            data: [
-                                {
-                                    name: 'dismiss',
-                                    value: 'modal'
-                                }
-                            ]
-                        },
-                        {
-                            value: 'Update',
-                            // disabled: true,
-                            classes: 'btn-primary',
-                            async onClick(event) {
-                                /** Disable button - Prevent user from clicking this item more than once */
-                                $(event.target)
-                                    .attr('disabled', '')
-                                    .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating');
-
-                                // Call newForm.onUpdate() and wait for it to complete
-                                const updatedItem = await selectedForm?.onUpdate(event);
-
-                                if (updatedItem) {
-                                    table.updateRow({
-                                        row: selectedRow,
-                                        data: updatedItem
-                                    });
-                                }
-
-                                /** Enable button */
-                                $(event.target)
-                                    .removeAttr('disabled')
-                                    .text('Updated');
-
-                                /** Hide modal */
-                                rowModal.getModal().modal('hide');
-                            }
-                        },
-                        {
-                            value: 'Delete',
-                            // disabled: true,
-                            classes: 'btn-danger',
-                            async onClick(event) {
-                                /** Disable button - Prevent user from clicking this item more than once */
-                                $(event.target)
-                                    .attr('disabled', '')
-                                    .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Deleteing');
-
-                                // Call newForm.onDelete() and wait for it to complete
-                                await selectedForm?.onDelete(event);
-
-                                table.removeRow(selectedItem.Id);
-
-                                /** Enable button */
-                                $(event.target)
-                                    .removeAttr('disabled')
-                                    .text('Deleted');
-
-                                /** Hide modal */
-                                rowModal.getModal().modal('hide');
-                            }
+                        if (formFooter !== false) {
+                            rowModal.showFooter();
                         }
-                    ]
-                },
-                parent: tableContainer
-            });
+                    },
+                    buttons: {
+                        footer: [
+                            {
+                                value: 'Cancel',
+                                classes: 'btn-secondary',
+                                data: [
+                                    {
+                                        name: 'dismiss',
+                                        value: 'modal'
+                                    }
+                                ]
+                            },
+                            {
+                                value: 'Update',
+                                // disabled: true,
+                                classes: 'btn-primary',
+                                async onClick(event) {
+                                    /** Disable button - Prevent user from clicking this item more than once */
+                                    $(event.target)
+                                        .attr('disabled', '')
+                                        .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating');
 
-            rowModal.add();
+                                    // Call newForm.onUpdate() and wait for it to complete
+                                    const updatedItem = await selectedForm?.onUpdate(event);
+
+                                    if (updatedItem) {
+                                        table.updateRow({
+                                            row: selectedRow,
+                                            data: updatedItem
+                                        });
+                                    }
+
+                                    /** Enable button */
+                                    $(event.target)
+                                        .removeAttr('disabled')
+                                        .text('Updated');
+
+                                    /** Hide modal */
+                                    rowModal.getModal().modal('hide');
+                                }
+                            },
+                            {
+                                value: 'Delete',
+                                // disabled: true,
+                                classes: 'btn-danger',
+                                async onClick(event) {
+                                    /** Disable button - Prevent user from clicking this item more than once */
+                                    $(event.target)
+                                        .attr('disabled', '')
+                                        .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Deleteing');
+
+                                    // Call newForm.onDelete() and wait for it to complete
+                                    await selectedForm?.onDelete(event);
+
+                                    table.removeRow(selectedItem.Id);
+
+                                    /** Enable button */
+                                    $(event.target)
+                                        .removeAttr('disabled')
+                                        .text('Deleted');
+
+                                    /** Hide modal */
+                                    rowModal.getModal().modal('hide');
+                                }
+                            }
+                        ]
+                    },
+                    parent: tableContainer
+                });
+
+                rowModal.add();
+            }
+
+
         },
         onSelect(param) {
             const selected = table.selected();

@@ -43,16 +43,15 @@ import { Question as M_Question, Questions as M_Questions } from './Models.js'
  * @returns 
  */
 export async function Developer(param) {
+    const { parent } = param;
+
     /** Authorize */
     const isAuthorized = Authorize('Developer');
 
     if (!isAuthorized) {
         return;
     }
-    
-    /** View Parent */
-    const parent = Store.get('maincontainer');
-    
+
     /** View Title */
     const viewTitle = Title({
         title: App.get('title'),
@@ -92,8 +91,20 @@ export async function Developer(param) {
 
     // console.log(log);
 
+    const logCard = Card({
+        background: App.get('backgroundColor'),
+        width: '100%',
+        radius: '20px',
+        padding: '20px 30px',
+        margin: '0px 0px 20px 0px',
+        parent
+    });
+
+    logCard.add();
+
     const logTable = await Table({
         heading: 'Logs',
+        headingMargin: '0px 0px 20px 0px',
         fields: [
             {
                 internalFieldName: 'Id',
@@ -119,6 +130,7 @@ export async function Developer(param) {
         buttons: [
             
         ],
+        buttonBorder: 'lightgray',
         showId: true,
         addButton: false,
         checkboxes: false,
@@ -127,7 +139,7 @@ export async function Developer(param) {
         items: log,
         editForm: LogForm,
         editFormTitle: 'Log',
-        parent
+        parent: logCard
     });
 
     logLoadingIndicator.remove();
@@ -148,8 +160,19 @@ export async function Developer(param) {
         top: '25'
     });
 
+    const errorsCard = Card({
+        background: App.get('backgroundColor'),
+        width: '100%',
+        radius: '20px',
+        padding: '20px 30px',
+        parent
+    });
+
+    errorsCard.add();
+
     const errorsTable = await Table({
         heading: 'Errors',
+        headingMargin: '0px 0px 20px 0px',
         fields: [
             {
                 internalFieldName: 'Id',
@@ -168,6 +191,7 @@ export async function Developer(param) {
                 displayName: 'Author'
             }
         ],
+        buttonBorder: 'lightgray',
         showId: true,
         addButton: false,
         checkboxes: false,
@@ -177,95 +201,54 @@ export async function Developer(param) {
         items: errors,
         editForm: ErrorForm,
         editFormTitle: 'Error',
-        parent
+        parent: errorsCard
     });
 
     errorsLoadingIndicator.remove();
 
-    // /** Data Loading Indicator */
-    // const dataLoadingIndicator = FoldingCube({
-    //     label: 'Loading data',
-    //     margin: '40px 0px',
-    //     parent
-    // });
-        
-    // dataLoadingIndicator.add();
+    /** Toggle update */
+    let run = false;
 
-    // // const items = await Get({
-    // //     list: '[LIST NAME]'
-    // // });
-    
-    // // console.log(items);
+    /** Update clock and buttons */
+    const timer = Timer({
+        parent,
+        classes: ['mt-4'],
+        start() {
+            run = true;
+            console.log(`Run: ${run}`);
 
-    // /** Alert Message */
-    // const loadingMessage = Alert({
-    //     type: 'success',
-    //     text: /*html*/ `
-    //         Data loaded
-    //     `,
-    //     margin: '20px 0px',
-    //     width: '100%',
-    //     parent
-    // });
+            update();
+        },
+        stop() {
+            run = false;
+            console.log(`Run: ${run}`);
+        },
+        reset() {
+            console.log('reset');
+        }
+    });
 
-    // loadingMessage.add();
-    
-    // /** Remove loading indicator */
-    // dataLoadingIndicator.remove();
+    timer.add();
 
-    // /** Toggle update */
-    // let run = false;
+    const items = []; // Get({ list: 'ListName' })
 
-    // /** Update clock and buttons */
-    // const timer = Timer({
-    //     parent,
-    //     start() {
-    //         run = true;
-    //         console.log(`Run: ${run}`);
-
-    //         update();
-    //     },
-    //     stop() {
-    //         run = false;
-    //         console.log(`Run: ${run}`);
-    //     },
-    //     reset() {
-    //         console.log('reset');
-    //     }
-    // });
-
-    // timer.add();
-
-    // async function update() {
-    //     /** Set items */
-    //     for (const [index, value] of items.entries()) {
-    //         if (run) {
-    //             const {
-    //                 Id,
-    //                 Title,
-    //             } = value;
-
-    //             const newItem = await CreateItem({
-    //                 list: 'FacilityPlans',
-    //                 data: {
-    //                     Status: 'Completed',
-    //                     DMISIDId: Id,
-    //                     FiscalYearId: 7
-    //                 }
-    //             });
-
-    //             console.log(`Id: ${newItem.Id} Facility: ${Title} created.`);
+    async function update() {
+        /** Set items */
+        for (let i = 0; i < items.length; i++) {
+            if (run) {
                 
-    //             if (index === items.length - 1) {
-    //                 timer.stop();
-    //             }
-    //         } else {
-    //             console.log('stoped');
+                // create, update, or delete item
+
+                if (i === items.length - 1) {
+                    timer.stop();
+                }
+            } else {
+                console.log('stoped');
                 
-    //             break;
-    //         }
-    //     }
-    // }
+                break;
+            }
+        }
+    }
 
     // /** Test Attach Files Button */
     // const attachFilesButton = UploadButton({

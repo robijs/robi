@@ -1,7 +1,7 @@
 const store = {
     elementIdCounter: 0,
     viewScrollTop: 0,
-    data: [],
+    data: {},
     abortControllers: [],
     workers: [],
     components: {},
@@ -87,20 +87,21 @@ const controller = {
         
         delete store.components[name];
     },
-    register(actionData) {
-        store.data.push(actionData);
-    },
-    deregister(actionData) {
-        const index = store.data.indexOf(actionData);
+    // register(actionData) {
+    //     store.data.push(actionData);
+    // },
+    // deregister(actionData) {
+    //     const index = store.data.indexOf(actionData);
 
-        store.data.splice(index, 1);
-    },
-    recall() {
-        return store.data;
-    },
+    //     store.data.splice(index, 1);
+    // },
+    // recall() {
+    //     return store.data;
+    // },
     empty() {
         store.components = {};
-        store.data = [];
+        // TODO: Do we want to persist data when routing?
+        // store.data = [];
     },
     user(userInfo) {
         if (typeof userInfo === 'object') {
@@ -119,6 +120,12 @@ const controller = {
         } else {
             return store.viewScrollTop;
         }
+    },
+    setData(name, data) {
+        store.data[name] = data;
+    },
+    getData(name) {
+        return store.data[name];
     },
     setRoutes(routes) {
         store.routes = routes;
