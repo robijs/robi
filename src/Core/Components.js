@@ -2809,10 +2809,10 @@ export function DevConsole(param) {
                         </div>
                         <div class='d-flex flex-column justify-content-center'>
                             <div class='d-flex align-items-center ml-5'>
-                                <button class='btn btn-code mb-3 dev-console-button modify-lists'>Modify Lists</button>
+                                <button class='btn btn-code mb-3 dev-console-button modify-lists'>Modify lists</button>
                             </div>
                             <div class='d-flex align-items-center ml-5'>
-                                <button class='btn btn-code dev-console-button modify-app'>Edit Initialization</button>
+                                <button class='btn btn-code dev-console-button modify-app'>Edit app initialization properties</button>
                             </div>
                         </div>
                     </div>

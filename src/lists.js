@@ -1,6 +1,3 @@
-// Comment
-// Did it!
-
 export default [
     {
         list: 'TestList',

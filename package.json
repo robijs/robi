@@ -14,7 +14,7 @@
   },
   "type": "module",
   "scripts": {
-    "start": "concurrently \"npx json-server --watch ./json-server/db.json --id Id\" \"npx live-server --cors --watch=./src --open=./dev/app.html --quiet\"",
+    "start": "concurrently \"npx json-server --watch ./json-server/db.json --id Id\" \"npx live-server --cors --watch=./src --ignore=./src/lists.js,./src/app.js --open=./dev/app.html --quiet\" \"node ./servers/post.js\"",
     "reset": "node ./scripts/reset.js",
     "depgraph": "depcruise --exclude \"^node_modules\" --output-type dot src | dot -T svg > dependencygraph.svg",
     "build": "webpack --config=./webpack.config.js"

@@ -14,6 +14,8 @@ createServer((req, res) => {
 
         req.on("data", data => {
             body = data;
+
+            // Handle malformed requests
             const url = decodeURI(req.url);
             const query = url.split('?')[1];
             const props = query.split('&');
@@ -22,14 +24,29 @@ createServer((req, res) => {
                 return [ key, value ];
             }));
 
-            var writableStream = createWriteStream(`../${path}/${file}`);
-
+            const writableStream = createWriteStream(`./${path}/${file}`);
             writableStream.write(data);
+
+            console.log(`\nposts.js: successfully wrote to -> ${path}/${file}\n`);
         });
 
         req.on("end", () => {
             res.writeHead(200, headers);
             res.end(body);
         });
+
+        return;
     }
+
+    if (req.method === "GET") {
+        req.on("end", () => {
+            res.writeHead(200, headers);
+            res.end(/*html*/ `
+                <h1>Post to: http://127.0.0.1:2035/?path=[path/to/file]&file=[filename.ext]</h1>
+            `);
+        });
+
+        return;
+    }
+
 }).listen(2035);

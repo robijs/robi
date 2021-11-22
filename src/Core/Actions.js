@@ -3989,10 +3989,15 @@ export async function ModifyFile(param) {
                     // Save file
                     await saveFile();
 
-                    // Add changed
-                    modal.find('.file-title-text').insertAdjacentHTML('beforeend', /*html*/ `
-                        <div style='margin-left: 10px; color: seagreen'>CHANGED (will reload on close)</div>
-                    `);
+            
+                    // Add changed message
+                    const changedMessaage = modal.find('.changed-message');
+
+                    if (!changedMessaage) {
+                        modal.find('.file-title-text').insertAdjacentHTML('beforeend', /*html*/ `
+                            <div class='changed-message' style='margin-left: 10px; color: seagreen'>CHANGED (will reload on close)</div>
+                        `);
+                    }
 
                     // Set reload flag
                     shouldReload = true;
@@ -4075,8 +4080,6 @@ export async function ModifyFile(param) {
                         console.log('changed');
 
                         const dot = modal.find('.changed-dot');
-
-                        // #dee2e6
 
                         if (!dot) {
                             modal.find('.file-title').insertAdjacentHTML('beforeend', /*html*/ `
