@@ -8746,33 +8746,32 @@ export function Sidebar(param) {
         html: /*html*/ `
             <div class='sidebar' data-mode='open'>
                 <img src ='${logoPath}/${logo}' class='logo' data-path='${App.get('defaultRoute')}'>
-                ${sidebarDropdown ?
-                    /*html*/ `
-                        <div class='dropdown-container'>
-                            <div class='dropdown-label mb-2'>${sidebarDropdown.label}</div>
-                            <div class="dropdown">
-                                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${sidebarDropdown.getSelected()}</button>
-                                <div class="dropdown-menu mt-1" aria-labelledby="dropdownMenuButton">
-                                    ${buildDropdown(sidebarDropdown.items)}
-                                </div>
-                            </div>
-                        </div>
-                    ` :
-                ''
-            }
                 <div class='nav-container'>
                     ${buildNav()}
                 </div>
                 <!-- Developer options --> 
                 ${
                     Store.user().Role === 'Developer' ?
-                    /*html*/ `
-                        <div class='add-route-container'>
-                            <button class='btn btn-outline-success add-route'>Add route</button>
-                            <button class='btn btn-outline-danger remove-route'>Remove route</button>
-                        </div>
-                    ` :
-                    ''
+                    (() => {
+                        const id = GenerateUUID();
+
+                        return /*html*/ `
+                            <div class='w-100 d-flex justify-content-end dev-buttons-container'>
+                                <div class="dropdown" style='margin-right: 15px;'>
+                                    <button class="btn w-100 open-dev-menu dropdown-toggle" type="button" id="${id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Edit routes
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="${id}">
+                                        <button class="dropdown-item add-route" type="button">Add route</button>
+                                        <button class="dropdown-item modify-route" type="button">Modify route</button>
+                                        <button class="dropdown-item hide-routes" type="button">Hide routes</button>
+                                        <div class="dropdown-divider"></div>
+                                        <button class="dropdown-item delete-routes" type="button">Delete routes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    })() : ''
                 }
                 <!-- Settings -->
                 <div class='settings-container'>
@@ -8879,6 +8878,7 @@ export function Sidebar(param) {
 
             /* Open/Close */ 
             .sidebar .open-close {
+                cursor: pointer;
                 display: flex;
                 align-items: center;
                 justify-content: flex-end;
@@ -8891,7 +8891,6 @@ export function Sidebar(param) {
             }
 
             .sidebar .open-close .icon {
-                cursor: pointer;
                 fill: ${App.get('sidebarTextColor')};
                 stroke: ${App.get('sidebarTextColor')};
                 font-size: 1em;
@@ -8985,22 +8984,25 @@ export function Sidebar(param) {
             }
 
             /* Add route */
-            #id .add-route-container {
-                display: flex;
-                flex-direction: column;
-                padding: 0px 15px;
-                margin-top: 15px;
-                width: 100%;
+            #id .dev-buttons-container.closed {
+                display: none !important;
             }
 
-            #id .add-route-container .btn {
+            #id .dev-buttons-container .open-dev-menu {
+                padding-left: 0px;
                 font-weight: 500;
-                border: none;
-                background: white;
             }
 
-            #id .add-route-container .btn:not(:last-child) {
-                margin-bottom: 10px;
+            #id .dev-buttons-container .dropdown-toggle:focus {
+                box-shadow: none !important;
+            }
+
+            #id .dev-buttons-container .dropdown-item {
+                outline: none;
+            }
+
+            #id .dev-buttons-container .delete-routes {
+                color: firebrick;
             }
         `,
         parent: parent,
@@ -9020,11 +9022,6 @@ export function Sidebar(param) {
                 }
             },
             {
-                selector: '#id .dropdown-item',
-                event: 'click',
-                listener: onDropdown
-            },
-            {
                 selector: '#id .open-close',
                 event: 'click',
                 listener: toggleSidebarMode
@@ -9035,9 +9032,19 @@ export function Sidebar(param) {
                 listener: addRoute
             },
             {
-                selector: '#id .remove-route',
+                selector: '#id .modify-route',
                 event: 'click',
-                listener: removeRoute
+                listener: modifyRoute
+            },
+            {
+                selector: '#id .hide-routes',
+                event: 'click',
+                listener: hideRoutes
+            },
+            {
+                selector: '#id .delete-routes',
+                event: 'click',
+                listener: removeRoutes
             }
         ],
         onAdd() {
@@ -9058,11 +9065,345 @@ export function Sidebar(param) {
     function addRoute(event) {
         // Show modal
         console.log('add route');
+
+        const modal = Modal({
+            title: false,
+            disableBackdropClose: true,
+            scrollable: true,
+            async addContent(modalBody) {
+                modalBody.classList.add('install-modal');
+
+                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                    <h3 class='mb-2'>Create route</h3>
+                `);
+
+                // Site title
+                const siteTitle = SingleLineTextField({
+                    label: 'Site title',
+                    parent: modalBody,
+                    onFocusout(event) {
+                        siteUrl.value(siteTitle.value().toLowerCase().split(' ').join('-'));
+                        appName.value(siteTitle.value().toTitleCase().split(' ').join(''));
+                    }
+                });
+
+                siteTitle.add();
+
+                const siteDesc = BootstrapTextarea({
+                    label: 'Site description',
+                    parent: modalBody
+                });
+
+                siteDesc.add();
+
+                // Site Url
+                const siteUrl = SingleLineTextField({
+                    label: 'Site url',
+                    addon: App.get('site') + '/',
+                    parent: modalBody
+                });
+
+                siteUrl.add();
+
+                // App name
+                const appName = SingleLineTextField({
+                    label: 'App name',
+                    parent: modalBody
+                });
+
+                appName.add();
+
+                const installBtn = BootstrapButton({
+                    action() {
+                        console.log('Create route');
+                    },
+                    classes: ['w-100 mt-5'],
+                    width: '100%',
+                    parent: modalBody,
+                    type: 'success',
+                    value: 'Create route'
+                });
+
+                installBtn.add();
+
+                const cancelBtn = BootstrapButton({
+                    action(event) {
+                        console.log('Cancel add route');
+
+                        modal.close();
+                    },
+                    classes: ['w-100 mt-2'],
+                    width: '100%',
+                    parent: modalBody,
+                    type: 'light',
+                    value: 'Cancel'
+                });
+
+                cancelBtn.add();
+            },
+            centered: true,
+            showFooter: false,
+        });
+
+        modal.add();
     }
 
-    function removeRoute(event) {
+    function modifyRoute(event) {
+        // Show modal
+        console.log('modify route');
+        
+        const modal = Modal({
+            title: false,
+            disableBackdropClose: true,
+            scrollable: true,
+            async addContent(modalBody) {
+                modalBody.classList.add('install-modal');
+
+                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                    <h3 class='mb-2'>Modify route</h3>
+                `);
+
+                // Site title
+                const siteTitle = SingleLineTextField({
+                    label: 'Site title',
+                    parent: modalBody,
+                    onFocusout(event) {
+                        siteUrl.value(siteTitle.value().toLowerCase().split(' ').join('-'));
+                        appName.value(siteTitle.value().toTitleCase().split(' ').join(''));
+                    }
+                });
+
+                siteTitle.add();
+
+                const siteDesc = BootstrapTextarea({
+                    label: 'Site description',
+                    parent: modalBody
+                });
+
+                siteDesc.add();
+
+                // Site Url
+                const siteUrl = SingleLineTextField({
+                    label: 'Site url',
+                    addon: App.get('site') + '/',
+                    parent: modalBody
+                });
+
+                siteUrl.add();
+
+                // App name
+                const appName = SingleLineTextField({
+                    label: 'App name',
+                    parent: modalBody
+                });
+
+                appName.add();
+
+                const installBtn = BootstrapButton({
+                    action() {
+                        console.log('Create route');
+                    },
+                    classes: ['w-100 mt-5'],
+                    width: '100%',
+                    parent: modalBody,
+                    type: 'primary',
+                    value: 'Modify route'
+                });
+
+                installBtn.add();
+
+                const cancelBtn = BootstrapButton({
+                    action(event) {
+                        console.log('Cancel modify route');
+
+                        modal.close();
+                    },
+                    classes: ['w-100 mt-2'],
+                    width: '100%',
+                    parent: modalBody,
+                    type: 'light',
+                    value: 'Cancel'
+                });
+
+                cancelBtn.add();
+            },
+            centered: true,
+            showFooter: false,
+        });
+
+        modal.add();
+    }
+    
+    function hideRoutes(event) {
+        // Show modal
+        console.log('hide routes');
+        
+        const modal = Modal({
+            title: false,
+            disableBackdropClose: true,
+            scrollable: true,
+            async addContent(modalBody) {
+                modalBody.classList.add('install-modal');
+
+                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                    <h3 class='mb-2'>Hide routes</h3>
+                `);
+
+                // Site title
+                const siteTitle = SingleLineTextField({
+                    label: 'Site title',
+                    parent: modalBody,
+                    onFocusout(event) {
+                        siteUrl.value(siteTitle.value().toLowerCase().split(' ').join('-'));
+                        appName.value(siteTitle.value().toTitleCase().split(' ').join(''));
+                    }
+                });
+
+                siteTitle.add();
+
+                const siteDesc = BootstrapTextarea({
+                    label: 'Site description',
+                    parent: modalBody
+                });
+
+                siteDesc.add();
+
+                // Site Url
+                const siteUrl = SingleLineTextField({
+                    label: 'Site url',
+                    addon: App.get('site') + '/',
+                    parent: modalBody
+                });
+
+                siteUrl.add();
+
+                // App name
+                const appName = SingleLineTextField({
+                    label: 'App name',
+                    parent: modalBody
+                });
+
+                appName.add();
+
+                const installBtn = BootstrapButton({
+                    action() {
+                        console.log('Create route');
+                    },
+                    classes: ['w-100 mt-5'],
+                    width: '100%',
+                    parent: modalBody,
+                    type: 'dark',
+                    value: 'Hide routes'
+                });
+
+                installBtn.add();
+
+                const cancelBtn = BootstrapButton({
+                    action(event) {
+                        console.log('Cancel remove route');
+
+                        modal.close();
+                    },
+                    classes: ['w-100 mt-2'],
+                    width: '100%',
+                    parent: modalBody,
+                    type: 'light',
+                    value: 'Cancel'
+                });
+
+                cancelBtn.add();
+            },
+            centered: true,
+            showFooter: false,
+        });
+
+        modal.add();
+    }
+
+    function removeRoutes(event) {
         // Show modal
         console.log('remove route');
+        
+        const modal = Modal({
+            title: false,
+            disableBackdropClose: true,
+            scrollable: true,
+            async addContent(modalBody) {
+                modalBody.classList.add('install-modal');
+
+                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                    <h3 class='mb-2'>Remove route</h3>
+                `);
+
+                // Site title
+                const siteTitle = SingleLineTextField({
+                    label: 'Site title',
+                    parent: modalBody,
+                    onFocusout(event) {
+                        siteUrl.value(siteTitle.value().toLowerCase().split(' ').join('-'));
+                        appName.value(siteTitle.value().toTitleCase().split(' ').join(''));
+                    }
+                });
+
+                siteTitle.add();
+
+                const siteDesc = BootstrapTextarea({
+                    label: 'Site description',
+                    parent: modalBody
+                });
+
+                siteDesc.add();
+
+                // Site Url
+                const siteUrl = SingleLineTextField({
+                    label: 'Site url',
+                    addon: App.get('site') + '/',
+                    parent: modalBody
+                });
+
+                siteUrl.add();
+
+                // App name
+                const appName = SingleLineTextField({
+                    label: 'App name',
+                    parent: modalBody
+                });
+
+                appName.add();
+
+                const installBtn = BootstrapButton({
+                    action() {
+                        console.log('Create route');
+                    },
+                    classes: ['w-100 mt-5'],
+                    width: '100%',
+                    parent: modalBody,
+                    type: 'danger',
+                    value: 'Remove routes'
+                });
+
+                installBtn.add();
+
+                const cancelBtn = BootstrapButton({
+                    action(event) {
+                        console.log('Cancel remove route');
+
+                        modal.close();
+                    },
+                    classes: ['w-100 mt-2'],
+                    width: '100%',
+                    parent: modalBody,
+                    type: 'light',
+                    value: 'Cancel'
+                });
+
+                cancelBtn.add();
+            },
+            centered: true,
+            showFooter: false,
+        });
+
+        modal.add();
     }
 
     function toggleSidebarMode(event) {
@@ -9083,6 +9424,7 @@ export function Sidebar(param) {
             component.find('.logo').src = `${logoPath}/${App.get('logoSmall')}`;
             component.find('.logo').classList.add('closed');
             component.find('.dropdown-container')?.classList.add('closed');
+            component.find('.dev-buttons-container')?.classList.add('closed');
             component.findAll('.text').forEach(item => item.classList.add('closed'));
             icon.classList.add('closed');
 
@@ -9102,7 +9444,8 @@ export function Sidebar(param) {
             /** Remove Classes */
             component.find('.logo').src = `${logoPath}/${App.get('logo')}`;
             component.find('.logo').classList.remove('closed');
-            // component.find('.dropdown-container').classList.remove('closed');
+            component.find('.dropdown-container')?.classList.remove('closed');
+            component.find('.dev-buttons-container')?.classList.remove('closed');
             component.findAll('.text').forEach(item => item.classList.remove('closed'));
             icon.classList.remove('closed');
 
@@ -9115,34 +9458,6 @@ export function Sidebar(param) {
             /** Log open action */
             console.log(`Open sidebar.`);
         }
-    }
-
-    function onDropdown(event) {
-        const key = event.target.dataset.key;
-        const value = event.target.dataset.value;
-
-        /** Update session storage */
-        sessionStorage.setItem(key, value);
-
-        /** Update label */
-        component.find('.dropdown-toggle').innerText = event.target.innerText;
-
-        /** Update dropdown menu */
-        component.find('.dropdown-menu').innerHTML = buildDropdown(sidebarDropdown.items);
-
-        /** Add events */
-        component.findAll('.dropdown-item').forEach(item => {
-            item.addEventListener('click', onDropdown);
-        });
-
-        if (sidebarDropdown.action) {
-            sidebarDropdown.action(event);
-        }
-
-        /** Route */
-        const path = location.href.split('#')[1];
-
-        Route(path);
     }
 
     function buildNav() {
@@ -9179,28 +9494,6 @@ export function Sidebar(param) {
                 <span class='text'>${routeName.split(/(?=[A-Z])/).join(' ')}</span>
             </span>
         `;
-    }
-
-    function buildDropdown(items) {
-        // console.info(items)
-        return items
-            //.filter(item => item.label !== sidebarDropdown.getSelected()) /** filter out current selection */
-            .map(item => {
-                const {
-                    label,
-                    key,
-                    value
-                } = item;
-
-                /** Highlights selected Fiscal Year @author Wilfredo Pacheco 20210810 */
-                var active = '';
-                const isSelected = sessionStorage.getItem(key) === value
-                if (isSelected) { active = 'active' }
-
-                return /*html*/ ` 
-                <span class='dropdown-item ${active}' data-key='${key}' data-value='${value}'>${label}</span>
-            `
-            }).join('\n');
     }
 
     function routeToView() {

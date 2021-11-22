@@ -247,8 +247,7 @@ export default async function MeasureIntakeForm(param) {
                     `;
                 }
 
-                console.log('Done!');
-                console.log($(modal.get()));
+                // console.log('Done!');
 
                 $(modal.get()).on('hidden.bs.modal', event => {
                     Route(`Measures/${newItem.Id}${path ? `/${path}` : ''}`);

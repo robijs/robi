@@ -1148,9 +1148,21 @@ export async function CreateItem(param) {
 
         return refetechedNewItem[0];
     } else if (App.get('mode') === 'dev') {
-        
-
         const body = data;
+
+        // DataTables and other components requied null fields.
+        // SharePoint returns them by default, but lists created with json-server don't
+        // have schemas.
+        // Append fields from lists.js with value null.
+        const { fields } = Lists().concat(lists).find(item => item.list === list);
+
+        for (let field in fields) {
+            const { name } = fields[field];
+
+            if (name in body === false) {
+                body[name] = null;
+            }
+        }
 
         body.Author = {
             Title: App.get('dev').user.Title
@@ -3996,11 +4008,13 @@ export async function ModifyFile(param) {
             });
 
             let fileValueRequest;
-
-            const requestDigest = await GetRequestDigest();
+            let requestDigest;
 
             if (App.get('mode') === 'prod') {
                 const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
+
+                requestDigest = await GetRequestDigest();
+
                 fileValueRequest = await fetch(sourceSiteUrl, {
                     method: 'GET',
                     headers: {
@@ -4259,18 +4273,29 @@ export async function ModifyFile(param) {
 
                 let currentValue = editor.getDoc().getValue();
 
-                console.log(currentValue);
+                // console.log(currentValue);
 
                 // TODO: Move to SetFile action
-                const setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/Add(url='${file}',overwrite=true)`, {
-                    method: 'POST',
-                    body: currentValue, 
-                    headers: {
-                        'binaryStringRequestBody': 'true',
-                        'Accept': 'application/json;odata=verbose;charset=utf-8',
-                        'X-RequestDigest': requestDigest
-                    }
-                });
+                let setFile;
+
+                if (App.get('mode') === 'prod') {
+                    setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/Add(url='${file}',overwrite=true)`, {
+                        method: 'POST',
+                        body: currentValue, 
+                        headers: {
+                            'binaryStringRequestBody': 'true',
+                            'Accept': 'application/json;odata=verbose;charset=utf-8',
+                            'X-RequestDigest': requestDigest
+                        }
+                    });
+                } else {
+                    const devPath = path.replace('App/', '');
+                    setFile = await fetch(`http://127.0.0.1:2035/?path=${devPath}&file=${file}`, {
+                        method: 'POST',
+                        body: currentValue
+                    });
+                    await Wait(1000);
+                }
 
                 if (setFile) {
                     const dot = modal.find('.changed-dot');
