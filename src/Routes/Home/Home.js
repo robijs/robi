@@ -1,4 +1,4 @@
-import { AddStyle, CreateSite, CopyFile, CreateLibrary, CreateFolder, GetRequestDigest, GetItemCount, CopyRecurse, SetHomePage, DeleteColumn } from '../../Core/Actions.js'
+import { AddStyle, CreateSite, CopyFile, CreateLibrary, CreateFolder, GetRequestDigest, GetItemCount, CopyRecurse, SetHomePage, DeleteColumn, Wait } from '../../Core/Actions.js'
 import { Title, Modal, BootstrapButton, SingleLineTextField, BootstrapTextarea, ProgressBar, InstallConsole, Container, LoadingSpinner, MainContainer, Alert } from '../../Core/Components.js'
 import { Lists } from '../../Core/Models.js'
 import { App } from '../../Core/Settings.js'
@@ -57,17 +57,23 @@ export default async function Home(param) {
             // REPLACE
             // routes = routes.replace(/routes:([\s\S]*?)settings:/, `routes:['test'],settings`);
             // console.log(routes);
+            let digest;
+            let request;
 
-            const src = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('app.js')/$value`;
-            const digest = await GetRequestDigest();
-            const request  = await fetch(src, {
-                method: 'GET',
-                headers: {
-                    'binaryStringRequestBody': 'true',
-                    'Accept': 'application/json;odata=verbose;charset=utf-8',
-                    'X-RequestDigest': digest
-                }
-            });
+            if (App.get('mode') === 'prod') {
+                digest = await GetRequestDigest();
+                request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('app.js')/$value`, {
+                    method: 'GET',
+                    headers: {
+                        'binaryStringRequestBody': 'true',
+                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                        'X-RequestDigest': digest
+                    }
+                });
+            } else {
+                request = await fetch(`http://127.0.0.1:8080/src/app.js`);
+                await Wait(1000);
+            }
             let value = await request.text();
 
             const routes = value.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
@@ -97,25 +103,31 @@ export default async function Home(param) {
             console.log('NEW\n----------------------------------------\n', updated);
             console.log('\n****************************************');
 
-            const setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app-test.js',overwrite=true)`, {
-                method: 'POST',
-                body: updated, 
-                headers: {
-                    'binaryStringRequestBody': 'true',
-                    'Accept': 'application/json;odata=verbose;charset=utf-8',
-                    'X-RequestDigest': digest
-                }
-            });
-            
+            let setFile;
+
+            if (App.get('mode') === 'prod') {
+                setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app-test.js',overwrite=true)`, {
+                    method: 'POST',
+                    body: updated, 
+                    headers: {
+                        'binaryStringRequestBody': 'true',
+                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                        'X-RequestDigest': digest
+                    }
+                });
+            } else {
+                setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
+                    method: 'POST',
+                    body: updated
+                });
+                await Wait(1000);
+            }
+
             console.log('Saved:', setFile);
         }
     });
 
     parseRoutes.add();
-
-    function looseJsonParse(obj){
-        return Function('"use strict";return (' + obj + ')')();
-    }
 
     const openVSCodeBtn = BootstrapButton({
         value: 'VS Code',
@@ -129,7 +141,6 @@ export default async function Home(param) {
 
     openVSCodeBtn.add();
 
-    
     const createSiteBtn = BootstrapButton({
         value: 'Create app',
         classes: ['ml-3'],

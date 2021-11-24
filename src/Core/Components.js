@@ -4679,7 +4679,7 @@ export function FixedToast(param) {
         parent,
         events: [
             {
-                selector: '#id .fixed-toast-message',
+                selector: '#id',
                 event: 'click',
                 listener(event) {
                     if (action) {
