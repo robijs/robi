@@ -3712,13 +3712,13 @@ export async function LaunchApp(param) {
 
         /** Release Notes */
         const releaseNotes = FixedToast({
-            title: 'New version is live!',
-            message: 'View release notes',
+            type: 'success',
+            title: `New version ${'0.1.0'}`, // TODO: Get current version number
+            message: `View release notes`,
             bottom: '20px',
             right: '10px',
             action(event) {
                 const modal = Modal({
-                    title: '',
                     fade: true,
                     background: settings.secondaryColor,
                     centered: true,

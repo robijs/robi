@@ -118,14 +118,16 @@ const Routes = [
         icon: 'people',
         go(param) {
             const {
+                parent,
                 pathParts
             } = param;
 
             if (pathParts.length === 1) {
-                Users();
+                Users(param);
             } else if (pathParts.length === 2) {
                 Users({
-                    itemId: parseInt(pathParts[1])
+                    itemId: parseInt(pathParts[1]),
+                    parent
                 });
             }
         }  

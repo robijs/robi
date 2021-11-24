@@ -1,91 +1,122 @@
+// This file may be edited programmatically from the front end (GUI).
+// Feel free to edit it manually. Just be sure to put @START and @END declarations in the right place.
+// Otherwise, changes made from the front end may not save properly.
+
+// @START-IMPORTS
 import { Start } from './Core/Actions.js'
 import lists from './lists.js'
 import Home from './Routes/Home/Home.js'
 import Measures from './Routes/Measures/Measures.js'
-import MeasureIntakeForm from './Routes/Measures/MeasureIntakeForm.js'
+import Test from './Routes/Test/Test.js'
+// @END-IMPORTS
 
+// @START
 Start({
-    // ROUTES
+    // Must include at least one default route.
+    // Must include a 'Home' route or same value as settings.defaultRoute.
+    // The default route's hide property value should be true (type: boolean) so it doesn't appear in the sidebar.
+    // Clicking view titles and sidebar logo routes to settings.defaultRoute.
+    // Routes can be linked to directly with hash fragment. Ex: https://site#defaultRoute.
     routes: [
+        // @START-Default
         {
-            path: 'Home',                                   // Must include at least one default route.
-            hide: true,                                     // Must be 'Home' or same value for settings.defaultRoute.
-            go(param) {                                     // The default route shouldn't be be listed in the sidebar.
-                Home(param);                                // Instead, default route enaged on view titles and sidebar click.
-            }                                               // Can be linked to directly with hash fragment.
-        },                                                  // Ex: https://site#defaultRoute.
+            path: 'Home',
+            hide: true,
+            go: Home
+        }
+        // @END-Default
+        ,
+        // @START-ROUTES
+        // @START-Measures
         {
             path: 'Measures',
             icon: 'drawer',
-            go(param) {
-                const {
-                    parent,
-                    pathParts,
-                    props
-                } = param;
-    
-                if (pathParts.length === 1) {
-                    Measures(param);
-                } else if (pathParts.length >= 2) {
-                    const itemId = parseInt(pathParts[1]);
-
-                    if (typeof itemId === 'number' && !isNaN(itemId)) {
-                        console.log('edit form');
-                        MeasureIntakeForm({
-                            parent,
-                            itemId: itemId,
-                            path: pathParts[2],
-                            props
-                        });
-                    } else if (pathParts[1] === 'New') {
-                        MeasureIntakeForm({
-                            parent,
-                            path: pathParts[2],
-                            props
-                        });
-                    }
-                }
-            }  
+            go: Measures
         }
-    ],
+        // @END-Measures
+        , // @ROUTE
+        // @START-Test
+        {
+            path: 'Test',
+            icon: 'alarm',
+            go: Test
+        }
+        // @END-Test
+        // @END-ROUTES
+    ]
+    ,
+    // REQUIRED PROPERTIES
+    // -------------------
+    // defaultBorder: default border style for core comoponents
+    // defaultColor: text color
+    // defaultRoute: default #route rendered if none present
+    // logo: open sidebar logo
+    // logoLarge: launch logo
+    // logoSmall: logo when sidebar is collapsed
+    // name: app name (AUTOPOPULATED if created by Robi)
+    // primaryColor: set theme color, used by core components
+    // primaryColorRGB: same as above, but in rgb format, used by core components
+    // questionTypes: define at least one questionType with title and path props
+    // secondaryColor: main container background color
+    // backgroundColor: nav background color
+    // sidebarTextColor: nav label text color
+    // title: site title (AUTOPOPULATED if created with CREATE APP)
+    // titleColor: core Title component text color
+    // userDefaultRole: default role for newly created use accounts
+    // userSettings: new user account 'Settings' field default JSON value
+    //
+    // OPTIONAL PROPERTIES
+    // -------------------
+    // appcontainer: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
+    // dev: local dev user props
+    // dev.LoginName: placeholder account props for local dev
+    // (true || false)
+    // ('on' || 'off') - if on, sends errors to SharePoint list 'Errors' (list is created by default)
+    // src document library, defaults to 'App'
+    // recommend preloading assets (e.g., logos)
+    // define app lists to be created on install
+    // replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
+    // replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
+    // override default name for 'Users' lists
     settings: {
+        // @START-SETTINGS
         // REQUIRED PROPERTIES
-        defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',     // default border style for core comoponents
-        defaultColor: '#24292f',                            // text color
-        defaultRoute: 'Home',                               // default #route rendered if none present
-        logo: 'dha-logo-no-label-180w.png',                 // open sidebar logo
-        logoLarge: 'dha-logo-no-label-386w.png',            // launch logo
-        logoSmall: 'dha-logo-no-label-80w.png',             // logo when sidebar is collapsed
-        name: '@App',                                       // app name (AUTOPOPULATED if created by Robi)
-        primaryColor: '#24292f',                            // set theme color, used by core components
-        primaryColorRGB: '45, 61, 80',                      // same as above, but in rgb format, used by core components
-        questionTypes: [                                    // define at least one questionType with title and path props
+        defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
+        defaultColor: '#24292f',
+        defaultRoute: 'Home',
+        logo: 'dha-logo-no-label-180w.png',
+        logoLarge: 'dha-logo-no-label-386w.png',
+        logoSmall: 'dha-logo-no-label-80w.png',
+        name: '@App',
+        primaryColor: '#24292f',
+        primaryColorRGB: '45, 61, 80',
+        questionTypes: [
             {
                 title: 'General',
                 path: 'General'
             }
         ],
-        secondaryColor: 'white',                            // main container background color
-        backgroundColor: '#F8F8FC',                         // nav background color
-        sidebarTextColor: '#24292f',                        // nav label text color
-        title: '@Title',                                    // site title (AUTOPOPULATED if created with CREATE APP)
-        titleColor: '#1c6cbb',                              // core Title component text color
-        userDefaultRole: 'User',                            // default role for newly created use accounts
-        userSettings: JSON.stringify({}),                   // new user account 'Settings' field default JSON value
-        // OPTIONAL PROPERTIES
-        appcontainer: '',                                   // replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
-        dev: {                                              // local dev user props
-            user: {                                         // placeholder account props for local dev
+        secondaryColor: 'white',
+        backgroundColor: '#F8F8FC',
+        sidebarTextColor: '#24292f',
+        title: '@Title',
+        titleColor: '#1c6cbb',
+        userDefaultRole: 'User',
+        userSettings: JSON.stringify({}),
+        // OPTIONAL PROPERTIES (defaults)
+        appcontainer: '',
+        dev: {
+            user: {
                 Title: "First Last",
                 Email: "first.mi.last.ctr@mail.mil",
                 LoginName: "0987654321@mil",
                 Role: "Developer"
             },
-            testInstall: false,                             // (true || false)
+            testInstall: false,
         },
-        errorLogging: 'on',                                 // ('on' ||| 'off') - if on, sends errors to SharePoint list 'Errors'
-        library: '',                                        // src document library, defaults to 'App'
-        links: [                                            // recommend preloading assets (e.g., logos)
+        errorLogging: 'on',
+        library: '',
+        links: [
             {
                 rel: 'preload',
                 as: 'image',
@@ -102,9 +133,11 @@ Start({
                 href: '/Images/dha-logo-no-label-386w.png'
             }
         ],
-        lists,                                              // define app lists to be created on install
-        maincontainer: '',                                  // replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
-        sidebar: '',                                        // replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
-        usersList: 'Users'                                  // override default name for 'Users' lists,
+        lists,
+        maincontainer: '',
+        sidebar: '',
+        usersList: 'Users'
+        // @END-SETTINGS
     }
 });
+// @END

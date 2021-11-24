@@ -4560,6 +4560,7 @@ export function FilesTable(param) {
 export function FixedToast(param) {
     const {
         top,
+        type,
         bottom,
         left,
         right,
@@ -4573,7 +4574,7 @@ export function FixedToast(param) {
 
     const component = Component({
         html: /*html*/ `
-            <div class='fixed-toast slide-in inverse-colors'>
+            <div class='fixed-toast slide-in ${type || 'inverse-colors'}'>
                 <div class='fixed-toast-title'>
                     <strong class='mr-auto'>${title}</strong>
                     <button type='button' class='ml-4 mb-1 close'>
@@ -4587,13 +4588,13 @@ export function FixedToast(param) {
         `,
         style: /*css*/ `
             #id.fixed-toast {
+                cursor: ${action ? 'pointer' : 'initial'};
                 position: fixed;
                 z-index: 1000;
                 font-size: 1em;
                 max-width: 385px;
                 padding: 20px;
-                box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 10%);
-                border-radius: 4px;
+                border-radius: 20px;
                 ${top ?
                 `top: ${top};` :
                 ''
@@ -4610,6 +4611,14 @@ export function FixedToast(param) {
                 `right: ${right};` :
                 ''
             }
+            }
+
+            #id.success {
+                background: #d4edda;
+            }
+
+            #id.success * {
+                color: #155724;
             }
 
             #id.inverse-colors {
@@ -4642,11 +4651,6 @@ export function FixedToast(param) {
                 justify-content: space-between;
             }
 
-            /** Message */
-            #id .fixed-toast-message {
-                cursor: pointer;
-            }
-
             @keyframes slidein {
                 from {
                     /* opacity: 0; */
@@ -4677,12 +4681,18 @@ export function FixedToast(param) {
             {
                 selector: '#id .fixed-toast-message',
                 event: 'click',
-                listener: action
+                listener(event) {
+                    if (action) {
+                        action(event);
+                    }
+                }
             },
             {
                 selector: '#id .close',
                 event: 'click',
                 listener(event) {
+                    event.stopPropagation();
+                    
                     /** Run close callback */
                     if (onClose) {
                         onClose(event);
@@ -5735,7 +5745,7 @@ export function Modal(param) {
                 <div class='modal-dialog modal-dialog-zoom ${scrollable ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
                     <div class='modal-content'>
                         ${
-                            title ?
+                            title || close !== false ?
                                 /*html*/ `<div class='modal-header' ${headerStyle ? `style='${headerStyle}'` : ''}>
                                     <h5 class='modal-title' ${titleStyle ? `style='${titleStyle}'` : ''}>${title || ''}</h5>
                                     ${
@@ -8736,8 +8746,7 @@ export function Sidebar(param) {
     const {
         parent,
         logo,
-        path,
-        sidebarDropdown
+        path
     } = param;
 
     const logoPath = App.get('mode') === 'prod' ? '../Images' : `/src/Images`;
@@ -8764,6 +8773,7 @@ export function Sidebar(param) {
                                     <div class="dropdown-menu" aria-labelledby="${id}">
                                         <button class="dropdown-item add-route" type="button">Add route</button>
                                         <button class="dropdown-item modify-route" type="button">Modify route</button>
+                                        <button class="dropdown-item modify-route" type="button">Reorder routes</button>
                                         <button class="dropdown-item hide-routes" type="button">Hide routes</button>
                                         <div class="dropdown-divider"></div>
                                         <button class="dropdown-item delete-routes" type="button">Delete routes</button>
@@ -8984,6 +8994,12 @@ export function Sidebar(param) {
             }
 
             /* Add route */
+            #id .dropdown-menu {
+                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
+                border-radius: 10px;
+                border: none;
+            }
+
             #id .dev-buttons-container.closed {
                 display: none !important;
             }

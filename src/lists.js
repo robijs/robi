@@ -8,12 +8,12 @@ export default [
             {
                 name: 'Summary',
                 display: `Summary`,
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'Description',
                 display: 'Description',
-                type: 'mlot',
+                type: 'mlot'
             }
         ]
     },
@@ -26,42 +26,42 @@ export default [
             {
                 name: 'AOEmail',
                 display: `AO's Email`,
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'AOName',
                 display: 'Action Officer (AO)',
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'AOOffice',
                 display: `AO's Office/Division`,
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'AltAOEmail',
                 display: 'Alternate AO Email',
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'AltAOName',
                 display: 'Alternate AO',
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'AltAOOffice',
                 display: 'Alternate AO Office/Division',
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'AltDSEmail',
                 display: `Alternate DS's Email`,
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'AltDSName',
                 display: 'Alternate DS',
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'AltDSOffice',
@@ -118,17 +118,17 @@ export default [
             {
                 name: 'DSEmail',
                 display: `DS's Email`,
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'DSName',
                 display: 'Data Scientist (DS)',
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'DSOffice',
                 display: `DS's Office/Division`,
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'DashboardLinks',
@@ -261,7 +261,7 @@ export default [
             {
                 name: 'FileTypes',
                 diplay: 'File Types',
-                type: 'mlot',
+                type: 'mlot'
             },
             {
                 name: 'Frequency',
@@ -355,7 +355,7 @@ export default [
                 name: 'MeasureName',
                 display: 'Measure Name',
                 description: 'Enter the complete measure name.',
-                type: 'slot',
+                type: 'slot'
             },
             {
                 name: 'MeasureSet',
@@ -420,7 +420,7 @@ export default [
             {
                 name: 'OnHoldComments',
                 display: 'On Hold Comments',
-                type: 'mlot',
+                type: 'mlot'
             },
             {
                 name: 'OnHoldEnd',
