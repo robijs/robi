@@ -9095,39 +9095,36 @@ export function Sidebar(param) {
                             <use href='#icon-bs-layout-sidebar-nested'></use>
                         </svg>
                     </span>
-                    <span>
-                        <span class='text'>Edit</span>
-                    </span>
+                    <!-- Developer options --> 
+                    ${
+                        Store.user().Role === 'Developer' ?
+                        (() => {
+                            const id = GenerateUUID();
+
+                            return /*html*/ `
+                                <div class='w-100 d-flex justify-content-end dev-buttons-container'>
+                                    <div class="dropdown">
+                                        <button class="btn w-100 open-dev-menu" type="button" id="${id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Edit
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="${id}">
+                                            <button class="dropdown-item add-route" type="button">Add route</button>
+                                            <button class="dropdown-item modify-route" type="button">Modify route</button>
+                                            <button class="dropdown-item modify-route" type="button">Reorder routes</button>
+                                            <button class="dropdown-item hide-routes" type="button">Hide routes</button>
+                                            <div class="dropdown-divider"></div>
+                                            <button class="dropdown-item delete-routes" type="button">Delete routes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        })() : ''
+                    }
                 </div>
                 <h3 class='w-100'>${App.get('title')}</h3>
                 <div class='nav-container'>
                     ${buildNav()}
                 </div>
-                <!-- Developer options --> 
-                ${
-                    Store.user().Role === 'Developer' ?
-                    (() => {
-                        const id = GenerateUUID();
-
-                        return /*html*/ `
-                            <div class='w-100 d-flex justify-content-end dev-buttons-container'>
-                                <div class="dropdown" style='margin-right: 15px;'>
-                                    <button class="btn w-100 open-dev-menu dropdown-toggle" type="button" id="${id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Edit routes
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="${id}">
-                                        <button class="dropdown-item add-route" type="button">Add route</button>
-                                        <button class="dropdown-item modify-route" type="button">Modify route</button>
-                                        <button class="dropdown-item modify-route" type="button">Reorder routes</button>
-                                        <button class="dropdown-item hide-routes" type="button">Hide routes</button>
-                                        <div class="dropdown-divider"></div>
-                                        <button class="dropdown-item delete-routes" type="button">Delete routes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    })() : ''
-                }
                 <!-- Settings -->
                 <div class='settings-container'>
                     <span class='nav ${(path === 'Settings') ? 'nav-selected' : ''} settings' data-path='Settings'>
@@ -9294,19 +9291,17 @@ export function Sidebar(param) {
                 padding: 10px 15px 5px 15px;
             }
 
-            #id .collapse-container * {
+            #id .collapse-container .btn {
                 color: ${App.get('primaryColor')};
-                fill: ${App.get('primaryColor')};
                 font-weight: 500;
+            }
+
+            #id .collapse-container .icon {
+                fill: ${App.get('primaryColor')};
             }
             
             #id .collapse-container .icon-container {
                 cursor: pointer;
-            }
-
-            #id .collapse-container .text {
-                cursor: pointer;
-                text-align: right;
             }
 
             #id .dropdown-menu {
