@@ -1,5 +1,6 @@
 // This file may be edited programmatically from the front end (GUI).
-// Feel free to edit it manually. Just be sure to put @START and @END declarations in the right place.
+// Feel free to edit it manually. 
+// Just be sure to put @START and @END declarations in the right place.
 // Otherwise, changes made from the front end may not save properly.
 
 // @START-IMPORTS
@@ -14,27 +15,17 @@ import Test from './Routes/Test/Test.js'
 Start({
     // Must include at least one default route.
     // Must include a 'Home' route or same value as settings.defaultRoute.
-    // The default route's hide property value should be true (type: boolean) so it doesn't appear in the sidebar.
-    // Clicking view titles and sidebar logo routes to settings.defaultRoute.
     // Routes can be linked to directly with hash fragment. Ex: https://site#defaultRoute.
     routes: [
-        // @START-Default
+        // @START-ROUTES
+        // @START-Home
         {
             path: 'Home',
-            hide: true,
+            icon: 'home',
             go: Home
         }
-        // @END-Default
+        // @END-Home
         ,
-        // @START-ROUTES
-        // @START-Measures
-        {
-            path: 'Measures',
-            icon: 'drawer',
-            go: Measures
-        }
-        // @END-Measures
-        , // @ROUTE
         // @START-Test
         {
             path: 'Test',
@@ -42,6 +33,14 @@ Start({
             go: Test
         }
         // @END-Test
+        , // @ROUTE
+        // @START-Measures
+        {
+            path: 'Measures',
+            icon: 'drawer',
+            go: Measures
+        }
+        // @END-Measures
         // @END-ROUTES
     ]
     ,
@@ -88,8 +87,7 @@ Start({
         logoLarge: 'dha-logo-no-label-386w.png',
         logoSmall: 'dha-logo-no-label-80w.png',
         name: '@App',
-        primaryColor: '#24292f',
-        primaryColorRGB: '45, 61, 80',
+        primaryColor: '#e63e44',
         questionTypes: [
             {
                 title: 'General',
@@ -100,7 +98,6 @@ Start({
         backgroundColor: '#F8F8FC',
         sidebarTextColor: '#24292f',
         title: '@Title',
-        titleColor: '#1c6cbb',
         userDefaultRole: 'User',
         userSettings: JSON.stringify({}),
         // OPTIONAL PROPERTIES (defaults)

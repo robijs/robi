@@ -1040,7 +1040,7 @@ export function FormSection(param) {
 
     if (heading) {
         const sectionTitle = Alert({
-            type: 'primary',
+            type: 'robi-primary',
             width: '100%',
             text: /*html*/ `
                 <h6 class='mb-0'>${heading}</h6>
@@ -1053,7 +1053,7 @@ export function FormSection(param) {
 
     if (section.info) {
         const infoAlert = Alert({
-            type: 'info',
+            type: 'robi-secondary',
             text: info,
             margin: '0px 20px 20px 20px',
             parent
@@ -1096,7 +1096,7 @@ export function FormSection(param) {
         if (rowName) {
             rowContainer.append(/*html*/ `
                 <div class='mb-1'>
-                    <h6 style='color: ${App.get('primaryColor')}; font-weight: 700'>${rowName}</h6>
+                    <h6 style='color: ${App.get('defaultColor')}; font-weight: 700'>${rowName}</h6>
                 </div>
             `);
         }

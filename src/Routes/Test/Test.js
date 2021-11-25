@@ -9,8 +9,7 @@ export default async function Test(param) {
 
     // View title
     const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `Test`,
+        title: `Test`,
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'

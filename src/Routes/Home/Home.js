@@ -14,8 +14,7 @@ export default async function Home(param) {
 
     // View title
     const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `My Dashboard`,
+        title: `My Dashboard`,
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'
@@ -106,7 +105,9 @@ export default async function Home(param) {
             let setFile;
 
             if (App.get('mode') === 'prod') {
-                setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app-test.js',overwrite=true)`, {
+                // TODO: Make a copy of app.js first
+                // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
+                setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app.js',overwrite=true)`, {
                     method: 'POST',
                     body: updated, 
                     headers: {

@@ -43,6 +43,24 @@ export function Alert(param) {
                 border-radius: 10px;
                 border: none;
             }
+
+            #id.alert-robi-primary {
+                background: ${App.get('primaryColor') + '29'};
+
+            }
+
+            #id.alert-robi-primary * {
+                color: ${App.get('primaryColor')};
+            }
+
+            #id.alert-robi-secondary {
+                background: ${App.get('backgroundColor')};
+
+            }
+
+            #id.alert-robi-secondary * {
+                color: ${App.get('defaultColor')};
+            }
             
             #id *:not(button) {
                 color: inherit;
@@ -105,7 +123,7 @@ export function AppContainer() {
             *, html {
                 font-family: ${App.fontFamily || ` -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`};
                 box-sizing: border-box;
-                color: ${App.get('primaryColor')};
+                color: ${App.get('defaultColor')};
             }
             
             body {
@@ -164,8 +182,6 @@ export function AppContainer() {
                 width: 1em;
                 height: 1em;
                 stroke-width: 0;
-                stroke: ${App.get('secondaryColor')};
-                fill: ${App.get('secondaryColor')};
             }
 
             /** Wait */
@@ -193,6 +209,299 @@ export function AppContainer() {
                     bottom: 10px;
                     transform: scale(1);
                     opacity: 1;
+                }
+            }
+
+            /* Overrides */
+            .btn {
+                font-size: 14px;
+                border-radius: 10px;
+            }
+
+            .btn:focus,
+            .btn:active {
+                box-shadow: none !important;
+            }
+
+            .btn-primary {
+                background-color: royalblue !important;
+                border-color: royalblue !important;
+            }
+
+            .btn-primary:hover {
+                background-color: royalblue !important;
+                border-color: royalblue !important;
+            }
+
+            .btn-primary:active,
+            .btn-primary:focus {
+                background-color: royalblue !important;
+                border-color: royalblue !important;
+            }
+
+            .btn-outline-primary {
+                color: royalblue !important;
+                border-color: royalblue !important;
+            }
+
+            .btn-outline-primary:hover {
+                background-color: initial !important;
+                color: royalblue !important;
+                border-color: royalblue !important;
+            }
+
+            .btn-success {
+                background-color: seagreen !important;
+                border-color: seagreen !important;
+            }
+
+            .btn-success:hover {
+                background-color: seagreen !important;
+                border-color: seagreen !important;
+            }
+
+            .btn-success:active,
+            .btn-success:focus {
+                background-color: seagreen !important;
+                border-color: seagreen !important;
+            }
+
+            .btn-danger {
+                background-color: firebrick !important;
+                border-color: firebrick !important;
+            }
+
+            .btn-danger:hover {
+                background-color: firebrick !important;
+                border-color: firebrick !important;
+            }
+
+            .btn-danger:active,
+            .btn-danger:focus {
+                background-color: firebrick !important;
+                border-color: firebrick !important;
+            }
+
+            .btn-outline-danger {
+                color: firebrick !important;
+                border-color: firebrick !important;
+            }
+
+            .btn-outline-danger:hover {
+                color: firebrick !important;
+                border-color: firebrick !important;
+            }
+
+            .btn-outline-success {
+                color: seagreen !important;
+                border-color: seagreen !important;
+            }
+
+            .btn-outline-success:hover {
+                color: seagreen !important;
+                border-color: seagreen !important;
+            }
+
+            .form-control,
+            .form-field-multi-line-text.editable,
+            .btn.dropdown-toggle,
+            .input-group-text {
+                font-size: 13px !important;
+            }
+
+            .form-control:not(.custom-select):focus,
+            .form-field-multi-line-text.editable:focus {
+                border-color: #ced4da !important;
+                box-shadow: 0 0 0 0.2rem #7b68ee6b !important;
+            }
+
+            .btn.dropdown-toggle:focus {
+                box-shadow: 0 0 0 0.2rem #7b68ee6b !important;
+            }
+
+            /* Override bootstrap alert style */
+            .alert {
+                border: none;
+                border-radius: 10px;
+            }
+
+            /* Override bootstrap drop down style */
+            .dropdown-item {
+                cursor: pointer;
+            }
+
+            .dropdown-item:active {
+                color: initial;
+                background-color: initial;
+            }
+
+            /** Code mirror */
+            .CodeMirror * {
+                color: unset;
+                font-family: 'Inconsolata', monospace;
+                font-size: 14px;
+            }
+
+            .robi-code-background {
+                background: #292D3E;
+            }
+
+            .loading-file {
+                font-family: 'Inconsolata', monospace;    
+            }
+
+            .file-title {
+                width: 100%;
+                background-color: #292D3E;
+                display: flex;
+                align-items: center;
+                /* justify-content: space-between; */
+                /* border-bottom: solid 1px #676E95; */
+                /* padding-top: 1rem; */
+                padding-bottom: .75rem;
+                /* margin-bottom: .75rem; */
+                /* z-index: 100; */
+                /* position: sticky; */
+                /* top: 0px; */
+            }
+
+            .file-title * {
+                font-family: 'Inconsolata', monospace; 
+                font-size: 14px;
+                color: white;
+            }
+
+            .file-icon-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 10px;
+                margin-left: .75rem;
+            }
+
+            .file-icon {
+                font-size: 16px;
+            }
+
+            .file-icon-css {
+                fill: dodgerblue !important;
+            }
+
+            .file-icon-html {
+                fill: dodgerblue !important;
+            }
+
+            .file-icon-js {
+                fill: #F7DF1E !important;
+            }
+
+            /* Add padding to all modals */
+            /* .modal-content {
+                padding: 30px;
+            } */
+
+            /* Intl Tel Input */
+            .iti__flag {background-image: url('./Images/flags.png');}
+
+            @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+                .iti__flag {background-image: url('./Images/flags@2x.png');}
+            }
+
+            /* Install Console */
+            .console {
+                width: 100%;
+                height: 100%;
+                overflow: overlay;
+                background: #1E1E1E;
+            }
+
+            .console * {
+                color: #CCCCCC !important;
+            }
+
+            .console-title {
+                font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
+            }
+
+            .line-number {
+                display: inline-block;
+                font-weight: 600;
+                width: 30px;
+            }
+
+            .install-modal {
+                padding: 60px;
+            }
+
+            .install-alert {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                border-radius: 10px;
+                padding: 10px 15px;
+                border: none;
+                background: #1E1E1E;
+                color: white !important;
+                animation: fade-in-bottom 200ms ease-in-out forwards;
+            };
+
+            .install-alert * {
+                color: white !important;
+            };
+
+            @keyframes fade-alert {
+                0% {
+                    bottom: -10px;
+                    transform: scale(.5);
+                    opacity: 0;
+                }
+
+                100% {
+                    bottom: 10px;
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            /* Dialog boxes */
+            .dialog-box {
+                animation: dialog-fade 200ms ease-in-out forwards;
+            }
+
+            @keyframes dialog-fade {
+                0% {
+                    transform: scale(.5);
+                    opacity: 0;
+                }
+
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            /* Taggle */
+            .bounce {
+                -webkit-animation-name: bounce;
+                animation-name: bounce;
+            }
+
+            @keyframes bounce {
+                0%,
+                20%,
+                50%,
+                80%,
+                100% {
+                    -webkit-transform: translateY(0);
+                    transform: translateY(0);
+                }
+                40% {
+                    -webkit-transform: translateY(-16px);
+                    transform: translateY(-16px);
+                }
+                60% {
+                    -webkit-transform: translateY(-7px);
+                    transform: translateY(-7px);
                 }
             }
         `,
@@ -895,7 +1204,7 @@ export function Banner(param) {
 /**
  * {@link https://getbootstrap.com/docs/4.5/components/buttons/}
  * 
- * @example btn-primary
+ * @example btn-robi-primary
  * @example btn-secondary
  * @example btn-success
  * @example btn-danger
@@ -904,7 +1213,7 @@ export function Banner(param) {
  * @example btn-light
  * @example btn-dark
  * 
- * @example btn-outline-primary
+ * @example btn-outline-robi-primary
  * @example btn-outline-secondary
  * @example btn-outline-success
  * @example btn-outline-danger
@@ -1167,7 +1476,7 @@ export function Button(param) {
                 margin: ${margin || '0px 20px 0px 0px'};
                 padding: 5px 10px;
                 font-size: .9em;
-                font-weight: 400;
+                font-weight: 500;
                 text-align: center;
                 white-space: nowrap;
                 border-radius: .25rem;
@@ -1180,8 +1489,8 @@ export function Button(param) {
             }
 
             #id.normal-button {
-                color: white;
-                background: rgba(${App.get('primaryColorRGB')}, .9);
+                color: ${App.get('primaryColor')};
+                background: #e9ecef;
                 border: solid 1px transparent;
             }
 
@@ -1315,7 +1624,7 @@ export function Card(param) {
                 font-size: 20px;
                 margin: ${padding === '0px' ? `0px` : '-20px -20px 0px -20px'}; /** FIXME: will break with passed in padding  */
                 padding: 10px 20px; /** FIXME: will break with passed in padding  */
-                font-weight: ${titleWeight || '400'};
+                font-weight: ${titleWeight || '700'};
                 background: ${titleBackground || 'white'}; /** FIXME: Experimental */ /* alternate color: #d0d0d04d */
                 border-radius: 10px 10px 0px 0px;
                 color: ${titleColor || App.get('defaultColor')};
@@ -2125,7 +2434,7 @@ export function DataTable(param) {
                 border-color: ${App.get('primaryColor')}; */
                 border-color: transparent;
                 margin-right: 10px;
-                border-radius: .25rem;
+                border-radius: 8px;
             }
 
             #id_wrapper .datatable-toolbar .btn-secondary:focus {
@@ -2138,24 +2447,23 @@ export function DataTable(param) {
 
             /** Add Item Button */
             #id_wrapper .datatable-toolbar .add-item {
-                background: seagreen;
-                border: solid 1px seagreen;
+                background: #e9ecef;
                 padding: 0px 10px;
             }
 
             #id_wrapper .datatable-toolbar .add-item span {
+                font-weight: 500;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                color: white;
+                color: ${App.get('primaryColor')};
             }
 
             #id_wrapper .datatable-toolbar .add-item .icon {
                 font-size: 16pt;
                 margin-right: 5px;
                 margin-left: -5px;
-                stroke: white;
-                fill: white;
+                fill: ${App.get('primaryColor')};;
             }
 
             /** Disabled Button */
@@ -2203,7 +2511,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-html5 span{
-                color: ${App.get('primaryColor')} !important;
+                color: ${App.get('defaultColor')} !important;
             }
 
             @media (max-width: 1366px) {
@@ -2226,6 +2534,7 @@ export function DataTable(param) {
             #id_wrapper input[type='search'] {
                 background: ${buttonColor || '#e9ecef'} !important;
                 border-color: transparent;
+                border-radius: 8px;
             }
 
             #id_wrapper input[type='search']:active,
@@ -2421,6 +2730,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .dataTables_length label select {
+                border-radius: 8px;
                 margin: 0px 10px;
             }
 
@@ -2822,7 +3132,7 @@ export function DevConsole(param) {
                             <div class='dev-console-description'>Sync ${App.get('name')} with list schemas defined in <code>App/src/lists.js</code>. You can choose which new lists and columns will be created and which existing lists and columns will be deleted.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
-                            <button class='btn btn-primary dev-console-button update'>Update ${App.get('name')}</button>
+                            <button class='btn btn-robi-primary dev-console-button update'>Update ${App.get('name')}</button>
                         </div>
                     </div>
                     <div class='dev-console-row'>
@@ -5177,7 +5487,7 @@ export function LinksField(param) {
                         </div>
                         <input type="text" class="form-control url" placeholder="https://site.domain">
                     </div>
-                    <button class="btn btn-primary ml-2">Add link</button>
+                    <button class="btn btn-robi-primary ml-2">Add link</button>
                 </div>
                 <div class='links-container mt-3'>
                     <!-- Formatted links go here -->
@@ -5850,7 +6160,7 @@ export function Modal(param) {
                 border: solid 1px seagreen;
             }
 
-            #id .btn-primary {
+            #id .btn-robi-primary {
                 background: royalblue;
                 border: solid 1px royalblue;
             }
@@ -7415,7 +7725,7 @@ export function Question(param) {
                 ${Author.Name === Store.user().LoginName ?
                     /*html*/ `
                         <div class='edit-button-container'>
-                            <button type='button' class='btn btn-primaryColor edit'>Edit question</button>
+                            <button type='button' class='btn btn-robi-primaryColor edit'>Edit question</button>
                         </div>
                     ` :
                 ''
@@ -7447,13 +7757,13 @@ export function Question(param) {
             }
 
             /** Edit button */
-            #id .btn-primaryColor {
+            #id .btn-robi-primaryColor {
                 background: ${App.get('primaryColor')};
                 color: white;
             }
 
-            #id .btn-primaryColor:focus,
-            #id .btn-primaryColor:active {
+            #id .btn-robi-primaryColor:focus,
+            #id .btn-robi-primaryColor:active {
                 box-shadow: none;
             }
             
@@ -7830,7 +8140,7 @@ export function QuestionsToolbar(param) {
     const component = Component({
         html: /*html*/ `
             <div class='btn-toolbar mb-3' role='toolbar' aria-label='Toolbar with button groups' id='App-18'>
-                <button type='button' class='btn btn-primary ask-a-question'>Ask a question</button>
+                <button type='button' class='btn ask-a-question'>Ask a question</button>
                 <div class='input-group'>
                     <input class='form-control mr-sm-2 search-questions' type='search' placeholder='Search' aria-label='Search'>
                 </div>    
@@ -7849,17 +8159,38 @@ export function QuestionsToolbar(param) {
             #id .btn:active {
                 box-shadow: none ;
             }
+
+            #id .ask-a-question {
+                background: #e9ecef;
+                color: ${App.get('primaryColor')};
+                font-weight: 500;
+            }
             
             #id .search-questions {
+                background: #e9ecef !important;
+                border-color: transparent;
+                border-radius: 8px;
                 min-width: 250px;
+                min-height: 35px;
                 margin: 0rem .5rem;
             }
 
-            #id .btn-outline-primary:active {
+            #id .btn-robi-primary {
+                color: white;
+                background: ${App.get('primaryColor')};
+            }
+
+            #id .btn-outline-robi-primary {
+                color: ${App.get('primaryColor')};
+                background-color: initial;
+                border-color: ${App.get('primaryColor')};
+            }
+
+            /* #id .btn-outline-robi-primary:active {
                 color: royalblue;
                 background-color: initial;
                 border-color: royalblue;
-            }
+            } */
         `,
         parent,
         position,
@@ -7868,20 +8199,20 @@ export function QuestionsToolbar(param) {
                 selector: '#id .filter',
                 event: 'click',
                 listener(event) {
-                    const isSelected = event.target.classList.contains('btn-outline-primary');
+                    const isSelected = event.target.classList.contains('btn-outline-robi-primary');
 
                     /** Deselect all options */
                     component.findAll('.filter').forEach(button => {
-                        button.classList.remove('btn-primary');
-                        button.classList.add('btn-outline-primary');
+                        button.classList.remove('btn-robi-primary');
+                        button.classList.add('btn-outline-robi-primary');
                     });
 
                     if (isSelected) {
-                        event.target.classList.remove('btn-outline-primary');
-                        event.target.classList.add('btn-primary');
+                        event.target.classList.remove('btn-outline-robi-primary');
+                        event.target.classList.add('btn-robi-primary');
                     } else {
-                        event.target.classList.remove('btn-primary');
-                        event.target.classList.add('btn-outline-primary');
+                        event.target.classList.remove('btn-robi-primary');
+                        event.target.classList.add('btn-outline-robi-primary');
                     }
 
                     onFilter(event.target.innerText);
@@ -7918,7 +8249,7 @@ export function QuestionsToolbar(param) {
 
         return filterOptions.map(option => {
             return /*html*/ `
-                <button type='button' class='btn ${selected === option ? 'btn-primary' : 'btn-outline-primary'} filter'>${option}</button>
+                <button type='button' class='btn ${selected === option ? 'btn-robi-primary' : 'btn-outline-robi-primary'} filter'>${option}</button>
             `
         }).join('\n');
     }
@@ -8100,7 +8431,7 @@ export function Reply(param) {
                     /*html*/ `
                         <div class='button-group'>
                             <button type='button' class='btn btn-secondary cancel'>Cancel</button>
-                            <button type='button' class='btn btn-primaryColor edit'>Edit reply</button>
+                            <button type='button' class='btn btn-robi-primaryColor edit'>Edit reply</button>
                         </div>
                     ` :
                 ''
@@ -8167,13 +8498,13 @@ export function Reply(param) {
                 display: flex !important;
             }
 
-            #id .btn-primaryColor {
+            #id .btn-robi-primaryColor {
                 background: ${App.get('primaryColor')};
                 color: white;
             }
 
-            #id .btn-primaryColor:focus,
-            #id .btn-primaryColor:active {
+            #id .btn-robi-primaryColor:focus,
+            #id .btn-robi-primaryColor:active {
                 box-shadow: none;
             }
 
@@ -8195,7 +8526,7 @@ export function Reply(param) {
 
                     const editButton = component.find('.edit');
                     editButton.innerText = 'Edit reply';
-                    editButton.classList.add('btn-primaryColor');
+                    editButton.classList.add('btn-robi-primaryColor');
                     editButton.classList.remove('btn-success');
 
                     const buttonGroup = component.find('.button-group');
@@ -8216,7 +8547,7 @@ export function Reply(param) {
 
                     if (event.target.innerText === 'Edit reply') {
                         event.target.innerText = 'Update';
-                        event.target.classList.remove('btn-primaryColor');
+                        event.target.classList.remove('btn-robi-primaryColor');
                         event.target.classList.add('btn-success');
 
                         cardText.setAttribute('contenteditable', true);
@@ -8229,7 +8560,7 @@ export function Reply(param) {
                         onEdit(cardText.innerHTML);
 
                         event.target.innerText = 'Edit reply';
-                        event.target.classList.add('btn-primaryColor');
+                        event.target.classList.add('btn-robi-primaryColor');
                         event.target.classList.remove('btn-success');
 
                         cardText.setAttribute('contenteditable', false);
@@ -8584,12 +8915,18 @@ export function SectionStepper(param) {
         style: /*css*/ `
             /* Root */
             #id.section-stepper {
-                height: 100%;
                 padding: ${padding || '0px'};
+                /* height: 100%;
                 display: inline-flex;
                 flex-direction: column;
                 justify-content: space-between;
+                overflow: overlay; */
+            }
+
+            #id .section-title-group {
                 overflow: overlay;
+                /* height: 100%; */
+                border-radius: 10px;
             }
 
             /* Buttons */
@@ -8602,9 +8939,10 @@ export function SectionStepper(param) {
             /* Title */
             #id .section-title {
                 font-size: 1em;
+                font-weight: 700;
                 text-align: center;
-                color: white;
-                background: mediumslateblue;
+                background: #e9ecef;
+                color: ${App.get('primaryColor')};
                 border-radius: 10px;
                 margin-bottom: 15px;
                 padding: 10px;
@@ -8639,7 +8977,7 @@ export function SectionStepper(param) {
             }
             
             #id .section-group.selected {
-                background: #E6E2FF;
+                background: ${App.get('primaryColor') + '29'};
             }
 
             /* Name */
@@ -8745,16 +9083,23 @@ export function SectionStepper(param) {
 export function Sidebar(param) {
     const {
         parent,
-        logo,
         path
     } = param;
-
-    const logoPath = App.get('mode') === 'prod' ? '../Images' : `/src/Images`;
 
     const component = Component({
         html: /*html*/ `
             <div class='sidebar' data-mode='open'>
-                <img src ='${logoPath}/${logo}' class='logo' data-path='${App.get('defaultRoute')}'>
+                <div class='w-100 d-flex justify-content-between align-items-center collapse-container'>
+                    <span class='icon-container collapse'>
+                        <svg class='icon'>
+                            <use href='#icon-bs-layout-sidebar-nested'></use>
+                        </svg>
+                    </span>
+                    <span>
+                        <span class='text'>Edit</span>
+                    </span>
+                </div>
+                <h3 class='w-100'>${App.get('title')}</h3>
                 <div class='nav-container'>
                     ${buildNav()}
                 </div>
@@ -8789,33 +9134,41 @@ export function Sidebar(param) {
                         <span class='icon-container-wide'>
                             <svg class='icon'><use href='#icon-bs-gear'></use></svg>
                         </span>
-                        <span class='text'>Settings</span>
-                    </span>
-                    <!-- Open / Close -->
-                    <span class='open-close'>
-                        <svg class='icon'><use href='#icon-caret-left'></use></svg>
+                        <!-- <span class='text'>Settings</span> -->
                     </span>
                 </div>
             </div>
         `,
         style: /*css*/ `
             #id.sidebar {
+                user-select: none;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
-                background: ${App.gradientColor ? `linear-gradient(${App.gradientColor})` : App.get('backgroundColor')};
-                border-radius: 20px;
-                margin: 20px 0px 20px 20px;
-                height: calc(100vh - 40px);
+                background: ${App.gradientColor ? `linear-gradient(${App.get('gradientColor')})` : App.get('backgroundColor')};
+                border-right: solid 1px #d6d8db80;
+                height: 100vh;
+                min-width: 250px;
+                transition: width, min-width 300ms
+            }
+
+            #id.sidebar.closed {
+                min-width: 0vw;
+            }
+
+            /* Title */
+            #id h3 {
+                padding: 0px 23px 10px 23px; /* -2px on the sides */
+                margin: 0px;
+                font-weight: 700;
             }
 
             /* Nav Container */
             .nav-container {
-                background: white;
-                margin: 0px 15px;
-                border-radius: 10px;
                 overflow: overlay;
+                width: 100%;
+                padding: 0px 17px; /* +2px on the sides */
             }
 
             /* Settings */
@@ -8826,64 +9179,57 @@ export function Sidebar(param) {
                 align-items: center;
                 justify-content: flex-end;
                 width: calc(100% - 30px);
-            }
-
-            .settings {
-                border-radius: 10px;
-                background: white;
-                margin: 0px 15px;
+                margin: 20px 15px;
             }
 
             .sidebar .nav {
                 display: flex;
                 align-items: center;
                 width: 100%;
-                min-height: 42px; /** TODO: Variable. Set manually */
+                height: 42.5px;
                 cursor: pointer;
                 text-align: left;
                 font-size: 1em;
                 font-weight: 400;
-                color: ${App.get('secondaryColor')};
+                border-radius: 10px;
             }
 
-            .sidebar .nav-selected {
-                box-shadow: 0px -1px 0px 0px #e4e4e6;
-                background: #e4e4e6;
-            }
-
-            .sidebar .nav .icon-container {
+            .sidebar .icon-container {
                 display: flex;
-                padding: 10px 15px;
+                padding: 10px;
             }
 
-            
-            .sidebar .nav .icon-container-wide {
+            .sidebar .icon-container-wide {
                 display: flex;
-                padding: 10px 15px;
+                padding: 10px;
             }
 
             .sidebar .nav .icon {
-                fill: ${App.get('sidebarTextColor')};
-                stroke: ${App.get('sidebarTextColor')};
+                fill: ${App.get('primaryColor')};
+                stroke: ${App.get('primaryColor')};
                 font-size: 22px;
             }
 
-            .sidebar .nav .text {
+            .sidebar .text {
                 flex: 1;
                 color: ${App.get('sidebarTextColor')};
                 font-size: 15px;
                 font-weight: 500;
-                padding: 9px 15px 9px 15px;
+                padding: 10px 5px;
             }
 
-            .sidebar .nav:not(:last-child):not(.settings) .text {
-                border-bottom: solid 1px #e4e4e6;
+            /* Selected */
+            .sidebar .nav-selected {
+                background: ${App.get('primaryColor')};
             }
 
-            .sidebar .nav .icon:hover,
-            .sidebar .nav-selected .icon {
-                fill: ${App.get('sidebarTextColor')};
-                stroke: ${App.get('sidebarTextColor')};
+            .sidebar .nav.nav-selected  .icon {
+                fill: white;
+                stroke: white;
+            }
+
+            .sidebar .nav.nav-selected .text {
+                color: white;
             }
 
             /* Open/Close */ 
@@ -8914,59 +9260,9 @@ export function Sidebar(param) {
                 height: 31px;
                 object-fit: scale-down;
             }
-
-            /* Drop down */
-            #id .dropdown-container {
-                margin-bottom: 10px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-
-            #id .dropdown-container.closed {
-                display: none;
-            }
-            
-            #id .dropdown-label {
-                color: ${App.get('sidebarTextColor')};
-                font-size: 1.1em;
-                font-weight: 500;
-            }
-
-            #id .dropdown-toggle {
-                font-size: 14px;
-            }
-
-            #id .btn:focus,
-            #id .btn:active {
-                box-shadow: none;
-            }
-
-            #id .dropdown-menu {
-                min-width: initial;
-            }
-
-            #id .dropdown-item {
-                font-size: 14px;
-                padding: 6px 12px;
-                cursor: pointer;
-            }
-
-            #id .dropdown-item::after {
-                display: inline-block;
-                margin-left: .255em;
-                vertical-align: .255em;
-                content: "";
-                border-top: .3em solid transparent;
-                border-right: .3em solid transparent;
-                border-bottom: 0;
-                border-left: .3em solid transparent;
-                box-sizing: border-box;
-            }
             
             /* Collapse */
-            #id.sidebar .nav .text.closed {
+            #id.sidebar .text.closed {
                 display: none;
             }
 
@@ -8994,6 +9290,25 @@ export function Sidebar(param) {
             }
 
             /* Add route */
+            #id .collapse-container {
+                padding: 10px 15px 5px 15px;
+            }
+
+            #id .collapse-container * {
+                color: ${App.get('primaryColor')};
+                fill: ${App.get('primaryColor')};
+                font-weight: 500;
+            }
+            
+            #id .collapse-container .icon-container {
+                cursor: pointer;
+            }
+
+            #id .collapse-container .text {
+                cursor: pointer;
+                text-align: right;
+            }
+
             #id .dropdown-menu {
                 box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
                 border-radius: 10px;
@@ -9038,7 +9353,7 @@ export function Sidebar(param) {
                 }
             },
             {
-                selector: '#id .open-close',
+                selector: '#id .collapse',
                 event: 'click',
                 listener: toggleSidebarMode
             },
@@ -9436,16 +9751,17 @@ export function Sidebar(param) {
 
     function closeSidebar(mode, icon) {
         if (mode !== 'closed') {
+            // FIXME: Experimental
+            // TODO: Instead, trigger on close sidebar animationend?
+            setTimeout(() => {
+                component.find('h3').innerText = App.get('title')[0];
+            }, 100);
+
             /** Add classes */
-            component.find('.logo').src = `${logoPath}/${App.get('logoSmall')}`;
-            component.find('.logo').classList.add('closed');
-            component.find('.dropdown-container')?.classList.add('closed');
+            component.get().classList.add('closed');
             component.find('.dev-buttons-container')?.classList.add('closed');
             component.findAll('.text').forEach(item => item.classList.add('closed'));
             icon.classList.add('closed');
-
-            /** Update icon */
-            icon.querySelector('.icon use').setAttribute('href', '#icon-caret-right');
 
             /** Set mode */
             component.get().dataset.mode = 'closed';
@@ -9458,15 +9774,16 @@ export function Sidebar(param) {
     function openSidebar(mode, icon) {
         if (mode !== 'open') {
             /** Remove Classes */
-            component.find('.logo').src = `${logoPath}/${App.get('logo')}`;
-            component.find('.logo').classList.remove('closed');
-            component.find('.dropdown-container')?.classList.remove('closed');
-            component.find('.dev-buttons-container')?.classList.remove('closed');
-            component.findAll('.text').forEach(item => item.classList.remove('closed'));
-            icon.classList.remove('closed');
-
-            /** Update icon */
-            icon.querySelector('.icon use').setAttribute('href', '#icon-caret-left');
+            component.get().classList.remove('closed');
+            
+            // FIXME: Experimental
+            // TODO: Instead, trigger on close sidebar animationend?
+            setTimeout(() => {
+                component.find('h3').innerText = App.get('title');
+                component.find('.dev-buttons-container')?.classList.remove('closed');
+                component.findAll('.text').forEach(item => item.classList.remove('closed'));
+                icon.classList.remove('closed');
+            }, 100);
 
             /** Set mode */
             component.get().dataset.mode = 'open';
@@ -10473,6 +10790,11 @@ export function SvgDefs(param) {
                         <path fill-rule="evenodd" d="M6.146 5.146a.5.5 0 0 1 .708 0L8 6.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 7l1.147 1.146a.5.5 0 0 1-.708.708L8 7.707 6.854 8.854a.5.5 0 1 1-.708-.708L7.293 7 6.146 5.854a.5.5 0 0 1 0-.708z"/>
                         <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
                     </symbol>
+                    <!-- Bootstrap: Layout sidebar nested -->
+                    <symbol id="icon-bs-layout-sidebar-nested" viewBox="0 0 16 16">
+                        <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h12zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
+                        <path d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
+                    </symbol>
                     ${addSymbols()}
                 </defs>
             </svg>
@@ -11174,10 +11496,6 @@ export function Title(param) {
                 ${width ? `width: ${width};` : ''}
             }
 
-            #id .app-title {
-                cursor: pointer;
-            }
-
             #id .title-subtitle {
                 display: flex;
                 flex-direction: row;
@@ -11186,10 +11504,8 @@ export function Title(param) {
             }
 
             #id.title h1 {
-                font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
-                font-size: 1.6em;
-                font-weight: 900;
-                color: ${App.get('titleColor')};
+                font-size: 1.75em;
+                font-weight: 700;
                 margin-top: 0px;
                 margin-bottom: 10px;
             }
@@ -11197,8 +11513,8 @@ export function Title(param) {
             #id.title h2 {
                 font-size: 1.1em;
                 font-weight: 500;
-                color: ${App.get('primaryColor')};
                 margin: 0px;
+                color: ${App.get('defaultColor') + 'ab'};
             }
 
             #id.title .title-date {
@@ -11224,14 +11540,14 @@ export function Title(param) {
             }
 
             #id.across h2 {
-                margin: 0px 40px;
+                margin: 0px 20px;
             }
 
             /* a, spacer */
             #id a,
             #id ._breadcrumb-spacer,
             #id ._breadcrumb {
-                color: #1c6cbb
+                color: ${App.get('primaryColor')}
             }
 
             /** Breadcrumb */
@@ -11241,7 +11557,7 @@ export function Title(param) {
 
             #id .route {
                 cursor: pointer;
-                color: #1c6cbb;
+                color: ${App.get('primaryColor')};
             }
 
             #id .current-page {
@@ -11273,7 +11589,7 @@ export function Title(param) {
             }
 
             #id .nav-pills .show > .nav-link {
-                color: #1c6cbb;
+                color: ${App.get('primaryColor')};
                 background-color: initial;
             }
 
@@ -11307,13 +11623,6 @@ export function Title(param) {
         parent,
         position,
         events: [
-            {
-                selector: '#id .app-title',
-                event: 'click',
-                listener(event) {
-                    action ? action(event) : Route('Home');
-                }
-            },
             {
                 selector: '#id .route',
                 event: 'click',
@@ -11790,7 +12099,7 @@ export function ViewContainer(param) {
         parent
     } = param;
 
-    const padding = '40px'
+    const padding = '51px'
 
     const component = Component({
         html: /*html*/ `

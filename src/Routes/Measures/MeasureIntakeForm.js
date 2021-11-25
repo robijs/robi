@@ -24,24 +24,24 @@ export default async function MeasureIntakeForm(param) {
     // Store.get('maincontainer').paddingOff();
     parent.paddingOff();
     
-    /** View Container */
-    const container = Container({
+    /** Form ontainer */
+    const formContainer = Container({
         height: '100%',
         width: '100%',
-        padding: '20px 0px 0px 20px;',
+        padding: '51px 0px 0px 51px;',
         parent
     });
 
-    container.add();
+    formContainer.add();
 
     /** Left Container */
     const leftContainer = Container({
-        // background: '#ebebff',
+        radius: '10px',
         overflow: 'overlay',
         height: '100%',
         minWidth: 'fit-content',
         direction: 'column',
-        parent: container
+        parent: formContainer
     });
 
     leftContainer.add();
@@ -52,16 +52,13 @@ export default async function MeasureIntakeForm(param) {
         height: '100%',
         direction: 'column',
         overflowX: 'overlay',
-        // padding: '20px 50px',
-        // align: 'center',
-        parent: container
+        parent: formContainer
     });
 
     rightContainer.add();
 
     /** View Title */
     const viewTitle = Title({
-        // TODO: Add Measure Id here
         title: itemId ? `Edit Measure #${itemId}` : 'New Measure',
         subTitle: section.name,
         padding: '0px 20px 20px 20px',
@@ -79,7 +76,7 @@ export default async function MeasureIntakeForm(param) {
     const projectContainer = Container({
         padding: '0px 0px 5px 0px',
         width: '100%',
-        height: '100%', // FIXME: Experimental.
+        height: '100%',
         direction: 'column',
         overflow: 'overlay',
         align: 'center',
@@ -110,6 +107,16 @@ export default async function MeasureIntakeForm(param) {
     /** Section Stepper */
     const subPath = itemId ? itemId : 'New';
 
+    const sectionStepperContainer = Container({
+        direction: 'column',
+        height: '100%',
+        justify: 'space-between',
+        padding: '0px 31px 51px 0px',
+        parent: leftContainer
+    });
+
+    sectionStepperContainer.add();
+
     const sectionStepper = SectionStepper({
         title: {
             text: 'All Sections',
@@ -118,31 +125,31 @@ export default async function MeasureIntakeForm(param) {
             }
         },
         route: `Measures/${subPath}`,
-        padding: '0px 20px 20px 0px',
+        // padding: '0px 31px 11px 0px',
         sections: listInfo.sections,
         selected: section.name,
-        parent: leftContainer
+        parent: sectionStepperContainer
     });
 
     sectionStepper.add();
 
-    // Checklist
-    sectionStepper.append(/*html*/ `
-        <div class='route-container' style='height: 100%; width: 100%; border-raidus: 20px;'>
-            <div class='' style='text-align: center; padding: 40px 0px; cursor: pointer; color: white; margin: 15px 0px; width: 100%; border-radius: 10px; background: red;'>Checklist (IN-OP)</div>
-        </div>
-    `);
+    // // Checklist
+    // sectionStepperContainer.append(/*html*/ `
+    //     <div class='route-container' style='width: 100%; border-raidus: 20px;'>
+    //         <div class='' style='text-align: center; padding: 40px 0px; cursor: pointer; color: white; margin: 15px 0px; width: 100%; border-radius: 10px; background: red;'>Checklist (IN-OP)</div>
+    //     </div>
+    // `);
 
-    // MOP Uploader
-    sectionStepper.find('.route-container').insertAdjacentHTML('beforeend', /*html*/ `
-        <div class='' style='text-align: center; padding: 40px 0px; cursor: pointer; color: white; margin: 15px 0px; width: 100%; border-radius: 10px; background: blue;'>MOP Uploader (IN-OP)</div>
-    `);
+    // // MOP Uploader
+    // sectionStepperContainer.find('.route-container').insertAdjacentHTML('beforeend', /*html*/ `
+    //     <div class='' style='text-align: center; padding: 40px 0px; cursor: pointer; color: white; margin: 15px 0px; width: 100%; border-radius: 10px; background: blue;'>MOP Uploader (IN-OP)</div>
+    // `);
 
     // Button container
     const buttonContainer = Container({
         width: '100%',
         direction: 'column',
-        parent: sectionStepper
+        parent: sectionStepperContainer
     });
 
     buttonContainer.add();

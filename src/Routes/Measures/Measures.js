@@ -34,8 +34,7 @@ export default async function Measures({ parent,pathParts, props }) {
 
     // View title
     const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `Measures`,
+        title: `Measures`,
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'

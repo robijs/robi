@@ -9,21 +9,9 @@
     <link rel="shortcut icon" href="../Images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap" rel="preload" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap" rel="preload" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../Libraries/lib.css">
-    <link rel="stylesheet" href="../app.css">
-    <!-- Preloaded images dynamically imported here -->
-
-<!--[if gte mso 9]><SharePoint:CTFieldRefs runat=server Prefix="mso:" FieldList="FileLeafRef,i3e7b0477ad24f0693a0b6cb17b27bf1,TaxCatchAllLabel,_dlc_DocId,_dlc_DocIdUrl,_dlc_DocIdPersistId,mb7b7c6cb3b94febb95b36ae1f78ffc5,ba60022a341749df97d7a0ab674012b7"><xml>
-<mso:CustomDocumentProperties>
-<mso:_dlc_DocId msdt:dt="string">K75DWSHUVDYD-716334741-43</mso:_dlc_DocId>
-<mso:_dlc_DocIdItemGuid msdt:dt="string">b50d2199-4293-42ac-a39e-466402226e31</mso:_dlc_DocIdItemGuid>
-<mso:_dlc_DocIdUrl msdt:dt="string">https://info.health.mil/staff/analytics/cp/ModernDev/create-app/_layouts/15/DocIdRedir.aspx?ID=K75DWSHUVDYD-716334741-43, K75DWSHUVDYD-716334741-43</mso:_dlc_DocIdUrl>
-</mso:CustomDocumentProperties>
-</xml></SharePoint:CTFieldRefs><![endif]-->
 </head>
 <body>
     <div id="app"></div>

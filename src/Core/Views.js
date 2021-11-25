@@ -7,9 +7,7 @@ import {
     FoldingCube,
     Card,
     Modal,
-    BootstrapButton,
     Timer,
-    UploadButton,
     QuestionsToolbar,
     DevConsole,
     QuestionType,
@@ -17,8 +15,6 @@ import {
 } from '../Core/Components.js'
 import { App } from '../Core/Settings.js'
 import Store from '../Core/Store.js'
-
-/** View Parts */
 import {
     Table,
     NewUser,
@@ -33,8 +29,6 @@ import {
     QuestionCards,
     NewQuestion
 } from '../Core/ViewParts.js'
-
-/** Models */
 import { Question as M_Question, Questions as M_Questions } from './Models.js'
 
 /**
@@ -54,8 +48,7 @@ export async function Developer(param) {
 
     /** View Title */
     const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: 'Developer',
+        title: 'Developer',
         parent,
         date: new Date().toLocaleString('default', {
             dateStyle: 'full'
@@ -332,8 +325,7 @@ export async function Help(param) {
     const { parent } = param;
 
     const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `Help`,
+        title: `Help`,
         parent,
         date: new Date().toLocaleString('default', {
             dateStyle: 'full'
@@ -371,32 +363,11 @@ export async function Help(param) {
 /**
  * 
  */
-export async function Home(param) {
-    const { parent } = param;
-
-    /** View Title */
-    const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `Subtitle (Ex: Application/Abbreviation Full Name)`,
-        parent,
-        date: new Date().toLocaleString('en-US', {
-            dateStyle: 'full'
-        }),
-        type: 'across'
-    });
-
-    viewTitle.add();
-}
-
-/**
- * 
- */
 export async function Missing(param) {
     const { parent } = param;
 
     const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `404`,
+        title: '404',
         parent,
         date: new Date().toLocaleString('default', {
             dateStyle: 'full'
@@ -424,8 +395,7 @@ export async function Questions(param) {
 
     /** View Title */
     const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `Questions`,
+        title: `Questions`,
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'
@@ -1065,8 +1035,7 @@ export async function Settings(param) {
     const { parent } = param;
 
     const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `Settings`,
+        title: `Settings`,
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'
@@ -1116,8 +1085,7 @@ export async function Unauthorized(param) {
     const { parent } = param;
 
     const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: `403`,
+        title: `403`,
         parent,
         date: new Date().toLocaleString('default', {
             dateStyle: 'full'
@@ -1153,8 +1121,7 @@ export async function Users(param) {
     }
 
     const viewTitle = Title({
-        title: App.get('title'),
-        subTitle: 'Users',
+        title: 'Users',
         date: `${new Date().toLocaleString('default', {
             dateStyle: 'full'
         })}`,
