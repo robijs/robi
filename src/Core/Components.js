@@ -2596,6 +2596,7 @@ export function DataTable(param) {
 
             /** Pagination */
             #id_wrapper .page-item .page-link {
+                background: transparent;
                 color: unset;
                 border: none; /* FIXME: Experimental */
                 padding: 3px 7px;
