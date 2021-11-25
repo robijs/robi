@@ -1,7 +1,7 @@
-// This file may be edited programmatically from the front end (GUI).
-// Feel free to edit it manually. 
+// This file may be edited programmatically from the front-end GUI.
+// If you know the API feel free to edit it manually.
 // Just be sure to put @START and @END declarations in the right place.
-// Otherwise, changes made from the front end may not save properly.
+// Otherwise, changes made by other developers may not save properly.
 
 // @START-IMPORTS
 import { Start } from './Core/Actions.js'
@@ -13,9 +13,8 @@ import Test from './Routes/Test/Test.js'
 
 // @START
 Start({
-    // Must include at least one default route.
-    // Must include a 'Home' route or same value as settings.defaultRoute.
-    // Routes can be linked to directly with hash fragment. Ex: https://site#defaultRoute.
+    // Must include at least one route with the same path value as settings.defaultRoute.
+    // Routes can be linked to directly with hash fragment. Ex: https://site#path.
     routes: [
         // @START-ROUTES
         // @START-Measures
@@ -26,14 +25,6 @@ Start({
         }
         // @END-Measures
         , // @ROUTE
-        // @START-Test
-        {
-            path: 'Test',
-            icon: 'alarm',
-            go: Test
-        }
-        // @END-Test
-        , // @ROUTE
         // @START-Home
         {
             path: 'Home',
@@ -41,6 +32,14 @@ Start({
             go: Home
         }
         // @END-Home
+        , // @ROUTE
+        // @START-Test
+        {
+            path: 'Test',
+            icon: 'alarm',
+            go: Test
+        }
+        // @END-Test
         // @END-ROUTES
     ]
     ,
