@@ -44,27 +44,9 @@ export function Alert(param) {
                 border: none;
             }
 
-            #id.alert-robi-primary {
-                background: ${App.get('primaryColor') + '29'};
-
-            }
-
-            #id.alert-robi-primary * {
-                color: ${App.get('primaryColor')};
-            }
-
-            #id.alert-robi-secondary {
-                background: ${App.get('backgroundColor')};
-
-            }
-
-            #id.alert-robi-secondary * {
-                color: ${App.get('defaultColor')};
-            }
-            
-            #id *:not(button) {
+            /* #id *:not(button) {
                 color: inherit;
-            }
+            } */
 
             #id.alert-blank {
                 padding: 0px;    
@@ -239,6 +221,21 @@ export function AppContainer() {
                 border-color: royalblue !important;
             }
 
+            /* Light */
+            .btn-light:hover {
+                color: #212529 !important;
+                background-color: #f8f9fa !important;
+                border-color: #f8f9fa !important;
+                }
+
+            .btn-light:active,
+            .btn-light:focus {
+                color: #212529 !important;
+                background-color: #f8f9fa !important;
+                border-color: #f8f9fa !important;
+            }
+            /* End light */
+
             .btn-outline-primary {
                 color: royalblue !important;
                 border-color: royalblue !important;
@@ -311,12 +308,14 @@ export function AppContainer() {
 
             .form-control:not(.custom-select):focus,
             .form-field-multi-line-text.editable:focus {
-                border-color: #ced4da !important;
-                box-shadow: 0 0 0 0.2rem #7b68ee6b !important;
+                /* border-color: #ced4da !important; */
+                /* box-shadow: 0 0 0 0.2rem #7b68ee6b !important; */
+                border-color: transparent !important;
+                box-shadow: 0 0 0 0.2rem ${App.get('primaryColor') + '6b'} !important;
             }
 
             .btn.dropdown-toggle:focus {
-                box-shadow: 0 0 0 0.2rem #7b68ee6b !important;
+                box-shadow: 0 0 0 0.2rem ${App.get('primaryColor') + '6b'} !important;
             }
 
             /* Override bootstrap alert style */
@@ -325,6 +324,24 @@ export function AppContainer() {
                 border-radius: 10px;
             }
 
+            .alert-robi-primary {
+                background: ${App.get('primaryColor') + '29'};
+
+            }
+
+            .alert-robi-primary * {
+                color: ${App.get('primaryColor')};
+            }
+
+            .alert-robi-secondary {
+                background: ${App.get('backgroundColor')};
+
+            }
+
+            .alert-robi-secondary * {
+                color: ${App.get('defaultColor')};
+            }
+            
             /* Override bootstrap drop down style */
             .dropdown-item {
                 cursor: pointer;
@@ -1242,7 +1259,12 @@ export function BootstrapButton(param) {
             <button type="button" class="btn btn-${type} ${classes?.join(' ')}" ${disabled ? 'disabled' : ''} ${style ? `style='${style}'` : ''}>${value}</button>
         `,
         style: /*css*/ `
-            
+            #id.btn-robi {
+                background: #e9ecef !important;
+                /* color: ${App.get('primaryColor')}; */
+                color: seagreen;
+                font-weight: 500;
+            }
         `,
         parent,
         position,
@@ -4908,19 +4930,28 @@ export function FixedToast(param) {
                 ${top ?
                 `top: ${top};` :
                 ''
-            }
+                }
                 ${bottom ?
-                `bottom: ${bottom};` :
-                ''
-            }
+                    `bottom: ${bottom};` :
+                    ''
+                }
                 ${left ?
-                `left: ${left};` :
-                ''
-            }
+                    `left: ${left};` :
+                    ''
+                }
                 ${right ?
-                `right: ${right};` :
-                ''
+                    `right: ${right};` :
+                    ''
+                }
             }
+
+            #id.robi {
+                background: ${App.get('backgroundColor')};
+                /* box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px; */
+            }
+
+            #id.robi * {
+                color: ${App.get('primaryColor')};
             }
 
             #id.success {
@@ -6063,7 +6094,8 @@ export function Modal(param) {
                                             /*html*/ `
                                             <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                                 <!-- <span aria-hidden='true'>&times;</span> -->
-                                                <span aria-hidden='true'>Close</span>
+                                                <!-- <span aria-hidden='true'>&times;</span> -->
+                                                <svg class='icon'><use href='#icon-bs-x-circle-fill'></use></svg>
                                             </button>
                                         ` :
                                         ''
@@ -6086,33 +6118,6 @@ export function Modal(param) {
             #id .modal-title {
                 color: ${App.get('primaryColor')};
             }
-
-            /* Override default bootstrap padding */
-            /* #id .modal-header {
-                padding: 40px 40px 0px 40px;
-            }
-
-            #id .modal-body{
-                padding: 40px;
-            }
-
-            #id .modal-footer {
-                padding: 0px 40px 40px 40px;;
-            } */
-
-            /** Modal Dialog */
-            /* 
-            #id .modal-dialog {
-                max-height: -webkit-fill-available;
-                overflow: overlay;
-                border-radius: 4px;
-            }
-
-            @media (min-width: 576px) {
-                #id .modal-dialog {
-                    margin: 1.6rem auto; 
-                }
-            } */
 
             #id.modal {
                 overflow-y: overlay;
@@ -6189,14 +6194,13 @@ export function Modal(param) {
 
             /** Close */
             #id .close {
-                font-size: 1em;
                 font-weight: 500;
                 text-shadow: unset;
                 opacity: 1;
             }
 
-            #id .close span {
-                color: ${App.get('primaryColor')};
+            #id .close .icon {
+                fill: lightgray;
             }
 
             /** Footer */
@@ -8691,7 +8695,7 @@ export function RequestAssitanceInfo(param) {
             } = item;
 
             return /*html*/ `
-                <div class="alert alert-info" role="alert">
+                <div class="alert alert-robi-secondary" role="alert">
                     <p class="mb-3">${label}</p>
                     <div>
                         <h5 class="mb-1">${name}</h5>

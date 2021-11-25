@@ -1,5 +1,5 @@
-import { Authorize, Get, CreateItem, UpdateItem, DeleteItem, Route, AttachFiles, UploadFiles, SendEmail, AddStyle, UploadFile } from '../../Core/Actions.js'
-import { Title, Alert, Container, FoldingCube, Card, Modal, BootstrapButton, SectionStepper, LoadingSpinner } from '../../Core/Components.js'
+import { Get, CreateItem, UpdateItem, Route, UploadFile } from '../../Core/Actions.js'
+import { Title, Container, FoldingCube, Card, Modal, BootstrapButton, SectionStepper, LoadingSpinner } from '../../Core/Components.js'
 import { FormSection } from '../../Core/ViewParts.js'
 import { App } from '../../Core/Settings.js'
 import Store from '../../Core/Store.js'
@@ -111,7 +111,7 @@ export default async function MeasureIntakeForm(param) {
         direction: 'column',
         height: '100%',
         justify: 'space-between',
-        padding: '0px 31px 51px 0px',
+        padding: '0px 31px 21px 0px',
         parent: leftContainer
     });
 
@@ -267,7 +267,8 @@ export default async function MeasureIntakeForm(param) {
         },
         classes: ['mb-2', 'w-100'],
         parent: buttonContainer,
-        type: itemId ? 'primary' : 'success',
+        // type: itemId ? 'primary' : 'success',
+        type: 'robi',
         value: itemId ? 'Update' : 'Create measure'
     });
 
@@ -277,6 +278,8 @@ export default async function MeasureIntakeForm(param) {
     const cancelButton = BootstrapButton({
         action(event) {
             console.log('Check if data saved, then route to measures');
+            console.log(path);
+            // Route(path.split('/')[0]);
         },
         classes: ['w-100'],
         parent: buttonContainer,

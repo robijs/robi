@@ -3708,11 +3708,9 @@ export async function LaunchApp(param) {
     const isReleaseNotesDismissed = localStorage.getItem(`${storageKeyPrefix}-releaseNotesDismissed`);
 
     if (!isReleaseNotesDismissed) {
-        // console.log('Show release notes message.');
-
         /** Release Notes */
         const releaseNotes = FixedToast({
-            type: 'success',
+            type: 'robi',
             title: `New version ${'0.1.0'}`, // TODO: Get current version number
             message: `View release notes`,
             bottom: '20px',
