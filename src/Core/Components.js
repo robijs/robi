@@ -10191,26 +10191,29 @@ export function SiteUsage(param) {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
-                font-weight: 500;
-                /* background: #e9ecef; */
-                background: ${App.get('backgroundColor')};
+                background: #e9ecef;
                 border-radius: 8px;
                 padding: 5px;
+            }
+
+            #id .info-group * {
+                color: ${App.get('primaryColor')};
             }
 
             #id .info-label {
                 padding: 5px;
                 font-size: 13px;
                 width: 80px;
+                font-weight: 500;
             }
 
             #id .info-count {
                 border-radius: 8px;
                 padding: 5px;
-                background: rgba(${App.get('primaryColorRGB')}, 0.2);
                 border: none;
                 width: 70px;
                 text-align: center;
+                font-weight: 700;
             }
         `,
         parent,

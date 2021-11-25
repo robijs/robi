@@ -18,14 +18,14 @@ Start({
     // Routes can be linked to directly with hash fragment. Ex: https://site#defaultRoute.
     routes: [
         // @START-ROUTES
-        // @START-Home
+        // @START-Measures
         {
-            path: 'Home',
-            icon: 'home',
-            go: Home
+            path: 'Measures',
+            icon: 'drawer',
+            go: Measures
         }
-        // @END-Home
-        ,
+        // @END-Measures
+        , // @ROUTE
         // @START-Test
         {
             path: 'Test',
@@ -34,13 +34,13 @@ Start({
         }
         // @END-Test
         , // @ROUTE
-        // @START-Measures
+        // @START-Home
         {
-            path: 'Measures',
-            icon: 'drawer',
-            go: Measures
+            path: 'Home',
+            icon: 'home',
+            go: Home
         }
-        // @END-Measures
+        // @END-Home
         // @END-ROUTES
     ]
     ,

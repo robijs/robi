@@ -82,8 +82,9 @@ export default async function Home(param) {
             // console.log('Routes:', routes[0]);
 
             const newOrder = [
+                'Measures',
                 'Test',
-                'Measures'
+                'Home'
             ];
 
             const newRoutes = newOrder.map(path => {
