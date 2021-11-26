@@ -1,4 +1,4 @@
-import { AddStyle, CreateSite, CopyFile, CreateLibrary, CreateFolder, GetRequestDigest, GetItemCount, CopyRecurse, SetHomePage, DeleteColumn, Wait } from '../../Core/Actions.js'
+import { Style, CreateSite, CopyFile, CreateLibrary, CreateFolder, GetRequestDigest, GetItemCount, CopyRecurse, SetHomePage, DeleteColumn, Wait } from '../../Core/Actions.js'
 import { Title, Modal, BootstrapButton, SingleLineTextField, BootstrapTextarea, ProgressBar, InstallConsole, Container, LoadingSpinner, MainContainer, Alert } from '../../Core/Components.js'
 import { Lists } from '../../Core/Models.js'
 import { App } from '../../Core/Settings.js'

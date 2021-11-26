@@ -1,5 +1,5 @@
 import {
-    AddStyle,
+    Style,
     CreateItem,
     DeleteItem,
     Get,
@@ -1110,7 +1110,7 @@ export function FormSection(param) {
 
         fieldRow.add();
 
-        AddStyle({
+        Style({
             name: `form-row-${fieldRow.get().id}`,
             style: /*css*/ `
                 #${fieldRow.get().id} .form-field {

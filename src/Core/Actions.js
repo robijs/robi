@@ -119,7 +119,7 @@ export function AddLinks(param) {
  * 
  * @param {*} param 
  */
-export function AddStyle(param) {
+export function Style(param) {
     const {
         name,
         style
