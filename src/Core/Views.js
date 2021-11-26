@@ -467,12 +467,6 @@ export async function Questions(param) {
 
         questionType.add();
     });
-
-    // const qppQuestions = QuestionTypes({
-    //     parent: viewContainer
-    // });
-
-    // qppQuestions.add();
 }
 
 /**

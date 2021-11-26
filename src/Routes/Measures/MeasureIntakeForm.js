@@ -111,7 +111,7 @@ export default async function MeasureIntakeForm(param) {
         direction: 'column',
         height: '100%',
         justify: 'space-between',
-        padding: '0px 31px 21px 0px',
+        padding: '0px 31px 5px 0px',
         parent: leftContainer
     });
 
@@ -149,6 +149,7 @@ export default async function MeasureIntakeForm(param) {
     const buttonContainer = Container({
         width: '100%',
         direction: 'column',
+        margin: '15px 0px 0px 0px',
         parent: sectionStepperContainer
     });
 

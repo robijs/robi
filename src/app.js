@@ -20,23 +20,15 @@ Start({
         // @START-Measures
         {
             path: 'Measures',
-            icon: 'drawer',
+            icon: 'bs-journals',
             go: Measures
         }
         // @END-Measures
         , // @ROUTE
-        // @START-Home
-        {
-            path: 'Home',
-            icon: 'home',
-            go: Home
-        }
-        // @END-Home
-        , // @ROUTE
         // @START-Test
         {
             path: 'Test',
-            icon: 'alarm',
+            icon: 'bs-pause-btn',
             go: Test
         }
         // @END-Test

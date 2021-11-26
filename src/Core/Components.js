@@ -1496,12 +1496,12 @@ export function Button(param) {
                 cursor: pointer;
                 display: ${display || 'inline-block'};
                 margin: ${margin || '0px 20px 0px 0px'};
-                padding: 5px 10px;
+                padding: 5px 25px;
                 font-size: .9em;
                 font-weight: 500;
                 text-align: center;
                 white-space: nowrap;
-                border-radius: .25rem;
+                border-radius: 10px;
                 width: ${width || 'fit-content'};
             }
 
@@ -2448,12 +2448,10 @@ export function DataTable(param) {
 
             #id_wrapper .btn {
                 font-size: .9em;
-                padding: 4px 8px;
+                padding: 5px 20px;
             }
 
             #id_wrapper .datatable-toolbar .btn-secondary {
-                /* background: ${App.get('primaryColor')};
-                border-color: ${App.get('primaryColor')}; */
                 border-color: transparent;
                 margin-right: 10px;
                 border-radius: 8px;
@@ -2470,7 +2468,6 @@ export function DataTable(param) {
             /** Add Item Button */
             #id_wrapper .datatable-toolbar .add-item {
                 background: #e9ecef;
-                padding: 0px 10px;
             }
 
             #id_wrapper .datatable-toolbar .add-item span {
@@ -4947,12 +4944,12 @@ export function FixedToast(param) {
             }
 
             #id.robi {
-                background: ${App.get('backgroundColor')};
-                /* box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px; */
+                background: ${App.get('primaryColor')};
+                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
             }
 
             #id.robi * {
-                color: ${App.get('primaryColor')};
+                color: white;
             }
 
             #id.success {
@@ -8909,8 +8906,8 @@ export function SectionStepper(param) {
     const component = Component({
         html: /*html*/ `
             <div class='section-stepper'>
+                ${title ? /*html*/`<div class='section-title'>${title.text}</div>` : ''}
                 <div class='section-title-group'>
-                    ${title ? /*html*/`<div class='section-title'>${title.text}</div>` : ''}
                     <div class='section-group-container'>
                         ${createHTML()}
                     </div>
@@ -8920,7 +8917,12 @@ export function SectionStepper(param) {
         style: /*css*/ `
             /* Root */
             #id.section-stepper {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
                 padding: ${padding || '0px'};
+                overflow: auto;
+                border-radius: 10px;
                 /* height: 100%;
                 display: inline-flex;
                 flex-direction: column;
@@ -9320,7 +9322,6 @@ export function Sidebar(param) {
             }
 
             #id .dev-buttons-container .open-dev-menu {
-                padding-left: 0px;
                 font-weight: 500;
             }
 
@@ -9382,12 +9383,11 @@ export function Sidebar(param) {
             /** Window resize event */
             window.addEventListener('resize', event => {
                 const mode = component.get().dataset.mode;
-                const icon = component.find('.open-close');
 
                 if (window.innerWidth <= 1250) {
-                    closeSidebar(mode, icon);
+                    closeSidebar(mode);
                 } else {
-                    openSidebar(mode, icon);
+                    openSidebar(mode);
                 }
             });
         }
@@ -9749,7 +9749,7 @@ export function Sidebar(param) {
         }
     }
 
-    function closeSidebar(mode, icon) {
+    function closeSidebar(mode) {
         if (mode !== 'closed') {
             // FIXME: Experimental
             // TODO: Instead, trigger on close sidebar animationend?
@@ -9761,7 +9761,6 @@ export function Sidebar(param) {
             component.get().classList.add('closed');
             component.find('.dev-buttons-container')?.classList.add('closed');
             component.findAll('.text').forEach(item => item.classList.add('closed'));
-            icon.classList.add('closed');
 
             /** Set mode */
             component.get().dataset.mode = 'closed';
@@ -9771,7 +9770,7 @@ export function Sidebar(param) {
         }
     }
 
-    function openSidebar(mode, icon) {
+    function openSidebar(mode) {
         if (mode !== 'open') {
             /** Remove Classes */
             component.get().classList.remove('closed');
@@ -9782,7 +9781,6 @@ export function Sidebar(param) {
                 component.find('h3').innerText = App.get('title');
                 component.find('.dev-buttons-container')?.classList.remove('closed');
                 component.findAll('.text').forEach(item => item.classList.remove('closed'));
-                icon.classList.remove('closed');
             }, 100);
 
             /** Set mode */
@@ -10797,6 +10795,11 @@ export function SvgDefs(param) {
                     <symbol id="icon-bs-layout-sidebar-nested" viewBox="0 0 16 16">
                         <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h12zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
                         <path d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
+                    </symbol>
+                    <!-- Bootstrap: Journals -->
+                    <symbol id="icon-bs-journals" viewBox="0 0 16 16">
+                        <path d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2z"/>
+                        <path d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0z"/>
                     </symbol>
                     ${addSymbols()}
                 </defs>

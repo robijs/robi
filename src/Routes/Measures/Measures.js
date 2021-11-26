@@ -5,7 +5,12 @@ import { Table } from '../../Core/ViewParts.js'
 import Store from '../../Core/Store.js'
 import MeasureIntakeForm from './MeasureIntakeForm.js'
 
-export default async function Measures({ parent,pathParts, props }) {
+export default async function Measures({ parent, pathParts, props }) {
+    
+    // TODO: Move to Table()
+    // TODO: pass in form components and path as params
+    // TODO: immediately route to form if path is list/new or list/#
+    // FIXME: User shouldn't have to define route selection logic
     let itemId;
 
     if (pathParts.length >= 2) {
@@ -44,6 +49,7 @@ export default async function Measures({ parent,pathParts, props }) {
 
     viewTitle.add();
 
+    // Table
     const newTable = Table({
         list: 'Measures',
         view: 'Measures',
@@ -54,6 +60,7 @@ export default async function Measures({ parent,pathParts, props }) {
     });
 
     // Open modal
+    // TODO: Move to Table()
     if (itemId) {
         const row = measuresTable.findRowById(itemId);
 

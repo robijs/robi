@@ -1103,6 +1103,7 @@ export function FormSection(param) {
 
         const fieldRow = Container({
             display: 'flex',
+            align: 'flex-end',
             width: '100%',
             parent: rowContainer
         });
@@ -2357,8 +2358,8 @@ export async function ReleaseNotes(param) {
 
     if (releaseNotes?.length === 0) {
         const alertInfo = Alert({
-            text: 'No release notes have been published for any version',
-            type: 'secondary',
+            text: 'Release notes haven\'t been published for any version yet.',
+            type: 'robi-secondary',
             margin: '20px 0px 0px 0px',
             parent: releaseNotesCard
         });
