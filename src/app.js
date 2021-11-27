@@ -6,7 +6,6 @@
 // @START-IMPORTS
 import { Start } from './Core/Actions.js'
 import lists from './lists.js'
-import Home from './Routes/Home/Home.js'
 import Measures from './Routes/Measures/Measures.js'
 import Test from './Routes/Test/Test.js'
 // @END-IMPORTS
@@ -73,7 +72,7 @@ Start({
         // REQUIRED PROPERTIES
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
         defaultColor: '#24292f',
-        defaultRoute: 'Home',
+        defaultRoute: 'Measures',
         logo: 'dha-logo-no-label-180w.png',
         logoLarge: 'dha-logo-no-label-386w.png',
         logoSmall: 'dha-logo-no-label-80w.png',

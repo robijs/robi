@@ -647,6 +647,261 @@
       "Created": "Fri, 26 Nov 2021 19:31:19 GMT",
       "Modified": "Fri, 26 Nov 2021 19:31:19 GMT",
       "Id": 38
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Core/Actions.js:3695:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 19:45:24 GMT",
+      "Modified": "Sat, 27 Nov 2021 19:45:24 GMT",
+      "Id": 39
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Core/Actions.js:3695:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 19:45:24 GMT",
+      "Modified": "Sat, 27 Nov 2021 19:45:24 GMT",
+      "Id": 40
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to 404\",\"location\":\"http://127.0.0.1:8080/dev/app.html#404\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:5650:29)\\n    at Route (http://127.0.0.1:8080/src/Core/Actions.js:5630:9)\\n    at LaunchApp (http://127.0.0.1:8080/src/Core/Actions.js:3703:5)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 19:45:24 GMT",
+      "Modified": "Sat, 27 Nov 2021 19:45:24 GMT",
+      "Id": 41
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to 404\",\"location\":\"http://127.0.0.1:8080/dev/app.html#404\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:5650:29)\\n    at Route (http://127.0.0.1:8080/src/Core/Actions.js:5630:9)\\n    at LaunchApp (http://127.0.0.1:8080/src/Core/Actions.js:3703:5)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 19:45:24 GMT",
+      "Modified": "Sat, 27 Nov 2021 19:45:24 GMT",
+      "Id": 42
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#404\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Core/Actions.js:3695:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 19:45:45 GMT",
+      "Modified": "Sat, 27 Nov 2021 19:45:45 GMT",
+      "Id": 43
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Core/Actions.js:5650:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Core/Components.js:9837:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 19:45:46 GMT",
+      "Modified": "Sat, 27 Nov 2021 19:45:46 GMT",
+      "Id": 44
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Core/Actions.js:3695:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 19:46:23 GMT",
+      "Modified": "Sat, 27 Nov 2021 19:46:23 GMT",
+      "Id": 45
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Core/Actions.js:3695:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 20:03:36 GMT",
+      "Modified": "Sat, 27 Nov 2021 20:03:36 GMT",
+      "Id": 46
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Core/Actions.js:3695:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 20:03:40 GMT",
+      "Modified": "Sat, 27 Nov 2021 20:03:40 GMT",
+      "Id": 47
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Core/Actions.js:3695:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 20:03:43 GMT",
+      "Modified": "Sat, 27 Nov 2021 20:03:43 GMT",
+      "Id": 48
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Core/Actions.js:3695:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36 Edg/96.0.1054.34",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 20:03:54 GMT",
+      "Modified": "Sat, 27 Nov 2021 20:03:54 GMT",
+      "Id": 49
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"@http://127.0.0.1:8080/src/Core/Actions.js:3695:34\\nasyncFunctionResume@[native code]\\n@[native code]\\npromiseReactionJobWithoutPromise@[native code]\\npromiseReactionJob@[native code]\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 20:07:53 GMT",
+      "Modified": "Sat, 27 Nov 2021 20:07:53 GMT",
+      "Id": 50
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"@http://127.0.0.1:8080/src/Core/Actions.js:3695:34\\nasyncFunctionResume@[native code]\\n@[native code]\\npromiseReactionJobWithoutPromise@[native code]\\npromiseReactionJob@[native code]\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 20:23:11 GMT",
+      "Modified": "Sat, 27 Nov 2021 20:23:11 GMT",
+      "Id": 51
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"@http://127.0.0.1:8080/src/Core/Actions.js:3695:34\\nasyncFunctionResume@[native code]\\n@[native code]\\npromiseReactionJobWithoutPromise@[native code]\\npromiseReactionJob@[native code]\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 20:23:16 GMT",
+      "Modified": "Sat, 27 Nov 2021 20:23:16 GMT",
+      "Id": 52
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded @Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Core/Actions.js:3695:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36",
+      "Module": "http://127.0.0.1:8080/src/Core/Actions.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Sat, 27 Nov 2021 20:37:12 GMT",
+      "Modified": "Sat, 27 Nov 2021 20:37:12 GMT",
+      "Id": 53
     }
   ],
   "Users": [
