@@ -19,20 +19,25 @@ export function Modal(param) {
                 <!-- <div class='modal-dialog modal-dialog-zoom ${scrollable !== false ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'> -->
                 <div class='modal-dialog modal-dialog-zoom ${scrollable ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
                     <div class='modal-content'>
-                        ${title || close !== false ?
-                /*html*/ `<div class='modal-header' ${headerStyle ? `style='${headerStyle}'` : ''}>
+                        ${
+                            title && close !== false ?
+                            /*html*/ `
+                                <div class='modal-header' ${headerStyle ? `style='${headerStyle}'` : ''}>
                                     <h5 class='modal-title' ${titleStyle ? `style='${titleStyle}'` : ''}>${title || ''}</h5>
-                                    ${close !== false ?
-                        /*html*/ `
+                                    ${
+                                        close !== false ?
+                                        /*html*/ `
                                             <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                                 <!-- <span aria-hidden='true'>&times;</span> -->
                                                 <!-- <span aria-hidden='true'>&times;</span> -->
                                                 <svg class='icon'><use href='#icon-bs-x-circle-fill'></use></svg>
                                             </button>
-                                        ` :
-                    ''}
-                                </div>`
-                : ''}
+                                        ` : ''
+                                    }
+                                </div>
+                            `
+                            : ''
+                        }
                         <div class='modal-body'>
                             <!-- Form elements go here -->
                         </div>
