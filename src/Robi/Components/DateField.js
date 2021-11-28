@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function DateField(param) {
     const {
         label, date, parent, position

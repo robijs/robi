@@ -6,7 +6,6 @@ import { Component } from '../Actions/Component.js'
  * @param {Object} param
  * @returns
  */
-
 export function StatusField(param) {
     const {
         action, label, parent, position, value, margin, padding

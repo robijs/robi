@@ -2,7 +2,8 @@ import { Title } from './Title.js'
 import { Alert } from './Alert.js'
 
 /**
- *
+ * 
+ * @param {*} param 
  */
 export async function Unauthorized(param) {
     const { parent } = param;

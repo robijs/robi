@@ -15,7 +15,6 @@ import { LogForm } from './LogForm.js'
  * @param {*} param
  * @returns
  */
-
 export async function Developer(param) {
     const { parent } = param;
 

@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function LoadingBar(param) {
     const {
         displayTitle, displayLogo, displayText, loadingBar, onReady, parent, totalCount

@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function Toolbar(param) {
     const {
         justify, margin, parent, position

@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function SingleLineTextField(param) {
     const {
         addon, label, description, value, readOnly, parent, position, width, margin, padding, placeholder, background, borderRadius, flex, maxWidth, fieldMargin, optional, onKeydown, onKeyup, onKeypress, fontSize, onFocusout,

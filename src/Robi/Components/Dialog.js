@@ -5,7 +5,6 @@ import { Component } from '../Actions/Component.js'
  * @param {*} param
  * @returns
  */
-
 export function Dialog(param) {
     const {
         classes, message, parent, position

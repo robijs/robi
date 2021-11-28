@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function Button(param) {
     const {
         type, value, display, margin, parent, action, disabled, width

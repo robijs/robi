@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function Banner(param) {
     const {
         text, fixed, parent, position, type

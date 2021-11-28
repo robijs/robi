@@ -9,7 +9,6 @@ import { Wait } from './Wait.js'
  *
  * @param {*} param
  */
-
 export async function ModifyFile(param) {
     const { path, file } = param;
 

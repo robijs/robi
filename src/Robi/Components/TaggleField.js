@@ -5,7 +5,6 @@ import { Component } from '../Actions/Component.js'
  * @param {*} param
  * @returns
  */
-
 export function TaggleField(param) {
     const {
         label, description, fieldMargin, maxWidth, tags, onTagAdd, onTagRemove, parent, position,

@@ -12,7 +12,6 @@ import { Post } from './Post.js'
  * @param {function} param.action   Function to be run after updating item posts.
  * @param {boolean}  [param.notify] If false, don't display notification.
  */
-
 export async function LogError(param) {
     const {
         Message, Error, Source, Line, ColumnNumber

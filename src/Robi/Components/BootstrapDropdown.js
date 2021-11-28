@@ -5,7 +5,6 @@ import { Component } from '../Actions/Component.js'
  * @param {*} param
  * @returns
  */
-
 export function BootstrapDropdown(param) {
     const {
         action, label, description, parent, position, options, value, fieldMargin, padding, setWidthDelay

@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function TasksList(param) {
     const {
         label, labelWeight, labelSize, options, onCheck, direction, wrap, parent, width, position, margin, padding, fieldMargin, onAddNewItem, onDelete

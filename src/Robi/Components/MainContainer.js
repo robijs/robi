@@ -5,7 +5,6 @@ import { Component } from '../Actions/Component.js'
  * @param {*} param
  * @returns
  */
-
 export function MainContainer(param) {
     const {
         parent

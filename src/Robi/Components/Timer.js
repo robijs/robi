@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function Timer(param) {
     const {
         parent, start, classes, stop, reset, position

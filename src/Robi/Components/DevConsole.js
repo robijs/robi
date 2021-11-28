@@ -11,7 +11,6 @@ import { App } from '../Core.js'
  * @param {*} param
  * @returns
  */
-
 export function DevConsole(param) {
     const { parent, position } = param;
 

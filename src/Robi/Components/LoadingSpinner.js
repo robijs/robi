@@ -5,7 +5,6 @@ import { Component } from '../Actions/Component.js'
  * @param {*} param
  * @returns
  */
-
 export function LoadingSpinner(param) {
     const {
         font, type, message, classes, parent, position

@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function Files(param) {
     const {
         allFiles, description, itemId, width, onUndo, onUpload, onChange, padding, margin, parent, position

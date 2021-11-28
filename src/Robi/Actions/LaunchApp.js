@@ -16,7 +16,6 @@ import { Store, Routes } from '../Core.js'
  *
  * @param {*} param
  */
-
 export async function LaunchApp(param) {
     const {
         routes, sidebar, settings

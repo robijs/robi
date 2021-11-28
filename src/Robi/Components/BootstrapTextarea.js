@@ -5,7 +5,6 @@ import { Component } from '../Actions/Component.js'
  * @param {*} param
  * @returns
  */
-
 export function BootstrapTextarea(param) {
     const {
         label, parent, position, classes, value,

@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function FoldingCube(param) {
     const {
         label, margin, parent, position

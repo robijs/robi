@@ -7,7 +7,6 @@ import { DropDownMenu } from './DropDownMenu.js'
  * @param {*} param
  * @returns
  */
-
 export function DropDownField(param) {
     const {
         label, labelAfter, description, value, direction, required, parent, position, width, editable, fieldMargin, maxWidth, focusout, onError, onEmpty, onSetValue

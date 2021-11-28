@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function DataTable(param) {
     const {
         buttonColor, headers, headerFilter, columns, buttons, cursor, checkboxes, striped, border, paging, search, info, ordering, order, rowId, addCSS, data, onRowClick, onSearch, onDraw, toolbar, fontSize, nowrap, onSelect, // How do you turn select on?  i see the event but no option to enable it;

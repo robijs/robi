@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function FixedToast(param) {
     const {
         top, type, bottom, left, right, title, message, action, onClose, parent, position

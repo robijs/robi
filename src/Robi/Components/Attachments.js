@@ -7,7 +7,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function Attachments(param) {
     const {
         attachments, list, itemId, label, labelWeight, labelSize, parent, position, onDelete

@@ -6,7 +6,6 @@ import { GetRequestDigest } from './GetRequestDigest.js'
  * @param {*} param
  * @returns
  */
-
 export async function SetHomePage(param = {}) {
     const { file, web, site } = param;
 

@@ -5,7 +5,6 @@ import { Component } from '../Actions/Component.js'
  * @param {*} param
  * @returns
  */
-
 export function UploadButton(param) {
     const {
         action, parent, position, margin, type, value

@@ -10,7 +10,6 @@ import { GetRequestDigest } from './GetRequestDigest.js'
  * @param {number}  param.itemId   - Item Id of item in param.list.
  * @param {boolean} [param.notify] - If false, don't display notification.
  */
-
 export async function UpdateItem(param) {
     const {
         list, itemId, select, expand, data

@@ -5,7 +5,6 @@ import { Component } from '../Actions/Component.js'
  * @param {*} param
  * @returns
  */
-
 export function Container(param) {
     const {
         align, background, border, borderBottom, borderLeft, borderRight, borderTop, display, flex, flexwrap, shadow, direction, height, justify, margin, padding, parent, position, radius, width, maxWidth, minWidth, overflow, overflowX, overflowY, userSelect, layoutPosition, top, bottom, left, right, zIndex

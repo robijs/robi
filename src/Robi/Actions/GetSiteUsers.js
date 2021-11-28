@@ -5,7 +5,6 @@ import { App } from '../Core.js'
  * @param {*} param
  * @returns
  */
-
 export function GetSiteUsers(param) {
     const {
         query

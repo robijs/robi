@@ -6,7 +6,6 @@ import { Component } from '../Actions/Component.js'
  * @param {*} param
  * @returns
  */
-
 export function InstallConsole(param) {
     const {
         text, close, margin, width, parent, position

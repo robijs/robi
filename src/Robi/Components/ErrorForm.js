@@ -12,7 +12,6 @@ import { Logs } from "./Logs.js"
  * @description
  * @returns {Object} - @method {getFieldValues} call that return values for User
  */
-
 export function ErrorForm(param) {
     const {
         row, table, item, parent

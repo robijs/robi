@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function PercentField(param) {
     const {
         label, description, value, readOnly, parent, position, width, margin, padding, background, borderRadius, flex, maxWidth, fieldMargin, optional, onKeydown, onFocusout

@@ -3,7 +3,8 @@ import { Container } from './Container.js'
 import { RequestAssitanceInfo } from './RequestAssitanceInfo.js'
 
 /**
- *
+ * 
+ * @param {*} param 
  */
 export async function Help(param) {
     const { parent } = param;

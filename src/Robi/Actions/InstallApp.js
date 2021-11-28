@@ -15,7 +15,6 @@ import { LaunchApp } from './LaunchApp.js'
  *
  * @param {*} param
  */
-
 export function InstallApp(param) {
     const { settings, loadingBar, isInstalled } = param;
     const { lists, questionTypes } = settings;

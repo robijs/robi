@@ -6,7 +6,6 @@ import { App, Store } from '../Core.js'
  *
  * @param {*} param
  */
-
 export async function AccountInfo(param) {
     const {
         parent,

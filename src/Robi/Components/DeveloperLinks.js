@@ -7,7 +7,6 @@ import lists from '../../lists.js'
  *
  * @param {*} param
  */
-
 export async function DeveloperLinks(param) {
     const {
         parent,

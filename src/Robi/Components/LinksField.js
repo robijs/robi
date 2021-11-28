@@ -5,7 +5,6 @@ import { Component } from '../Actions/Component.js'
  * @param {*} param
  * @returns
  */
-
 export function LinksField(param) {
     const {
         label, description, fieldMargin, maxWidth, links, parent, position, onChange

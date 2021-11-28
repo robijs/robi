@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function QuestionsToolbar(param) {
     const {
         selected, parent, onFilter, onSearch, onClear, onAsk, position

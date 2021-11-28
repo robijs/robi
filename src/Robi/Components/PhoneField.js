@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function PhoneField(param) {
     const {
         label, parent, position, onSetValue

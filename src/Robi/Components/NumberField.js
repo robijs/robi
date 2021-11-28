@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function NumberField(param) {
     const {
         label, description, value, parent, position, fieldMargin, onChange, onKeydown, onKeyup, onFocusout

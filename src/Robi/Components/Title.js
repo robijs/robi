@@ -2,17 +2,10 @@ import { Component } from '../Actions/Component.js'
 import { App } from '../Core.js';
 
 /**
- *
- * @param {object} param
- *
- * @example Title({
- *     title: 'Test',
- *     parent: someOtherComponent
- * });
- *
- * @returns {Object} Component.
+ * 
+ * @param {*} param 
+ * @returns 
  */
-
 export function Title(param) {
     const {
         title, width, subTitle, breadcrumb, dropdownGroups, maxTextWidth, route, padding, margin, parent, position, date, type, action

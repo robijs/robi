@@ -10,7 +10,6 @@ import { SingleLineTextField } from './SingleLineTextField.js'
  *
  * @param {*} param
  */
-
 export async function Logs(param) {
     const {
         sessionId, parent

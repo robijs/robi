@@ -1,9 +1,10 @@
 import { App } from '../Core.js';
 
 /**
- *
+ * 
+ * @param {*} param 
+ * @returns 
  */
-
 export function SearchField(param) {
     const {
         margin, parent, onFilter, onSearch, onClear, onSelect, position

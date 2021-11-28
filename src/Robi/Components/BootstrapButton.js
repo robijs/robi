@@ -25,7 +25,6 @@ import { App } from '../Core.js';
  * @param {Object} param
  * @returns
  */
-
 export function BootstrapButton(param) {
     const {
         action, disabled, parent, position, classes, style, type, value

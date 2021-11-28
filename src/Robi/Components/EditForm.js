@@ -11,7 +11,6 @@ import { SingleLineTextField } from './SingleLineTextField.js'
  * @param {*} param
  * @returns
  */
-
 export async function EditForm(param) {
     const { event, fields, item, list, modal, parent, table } = param;
 

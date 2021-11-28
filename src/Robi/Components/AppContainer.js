@@ -5,7 +5,6 @@ import { App } from '../Core.js';
  *
  * @returns
  */
-
 export function AppContainer() {
     const component = Component({
         html: /*html*/ `

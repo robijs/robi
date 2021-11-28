@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function SiteUsage(param) {
     const {
         border, margin, padding, data, parent, position, onClick

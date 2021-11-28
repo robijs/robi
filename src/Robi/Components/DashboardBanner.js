@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function DashboardBanner(param) {
     const {
         margin, padding, border, parent, data, background, position, width, weight
