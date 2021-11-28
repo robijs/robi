@@ -1,5 +1,5 @@
-import { Component } from '../Actions.js';
-import { App } from '../Core/Settings.js';
+import { Component } from '../Actions/Component.js'
+import { App } from '../Core.js';
 import { Modal } from './Modal';
 
 // TODO: Add async call to look up latest robi build, add red dot if out-of-date

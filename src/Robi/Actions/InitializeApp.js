@@ -1,6 +1,5 @@
-import { LoadingBar } from './Components.js'
-import { App } from '../Core.js'
-import { Store } from '../Core.js'
+import { LoadingBar } from '../Components/LoadingBar.js'
+import { App, Store } from '../Core.js'
 import { TestInstall } from './TestInstall.js'
 import { LaunchApp } from './LaunchApp.js'
 import { InstallApp } from './InstallApp.js'

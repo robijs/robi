@@ -1,10 +1,10 @@
-import { App } from '../Settings.js'
-import { Post } from '../Actions.js'
-
+import { App } from '../Core.js'
+import { Post } from './Post.js'
 
 /**
- *
- * @returns
+ * 
+ * @param {*} param 
+ * @returns 
  */
 export async function GetRequestDigest(param = {}) {
     const { web, site } = param;
@@ -18,4 +18,3 @@ export async function GetRequestDigest(param = {}) {
 
     return getRequestDigest.d.GetContextWebInformation.FormDigestValue;
 }
-

@@ -1,4 +1,3 @@
-
 /**
  * {@link https://stackoverflow.com/a/2117523}
  */

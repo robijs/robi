@@ -1,11 +1,10 @@
-import { Component } from '../Actions.js';
+import { Component } from '../Actions/Component.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function Alert(param) {
     const {
         text, close, margin, width, parent, position

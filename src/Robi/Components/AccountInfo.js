@@ -1,6 +1,6 @@
-import { Card, SingleLineTextField } from './Components.js';
-import Store from './Store.js';
-import { App } from './Settings.js';
+import { Card } from './Card.js'
+import { SingleLineTextField } from './SingleLineTextField.js'
+import { App, Store } from '../Core.js'
 
 /**
  *

@@ -1,5 +1,5 @@
 import { App } from '../Core.js'
-import { UpdateItem } from './UpdateItem';
+import { UpdateItem } from './UpdateItem.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { GetByUri } from './GetByUri.js'
 

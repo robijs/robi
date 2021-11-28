@@ -1,9 +1,10 @@
-import { Component, DeleteApp } from '../Actions.js';
-import { UpdateApp } from "./UpdateApp";
-import { ResetApp } from "./ResetApp";
-import { ReinstallApp } from "./ReinstallApp";
-import { ModifyFile } from "./ModifyFile";
-import { App } from '../Core/Settings.js';
+import { Component } from '../Actions/Component.js'
+import { DeleteApp } from '../Actions/DeleteApp.js'
+import { UpdateApp } from '../Actions/UpdateApp.js'
+import { ResetApp } from '../Actions/ResetApp.js'
+import { ReinstallApp } from '../Actions/ReinstallApp.js'
+import { ModifyFile } from '../Actions/ModifyFile.js'
+import { App } from '../Core.js'
 
 /**
  *

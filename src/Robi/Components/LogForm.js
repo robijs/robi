@@ -1,11 +1,11 @@
-import { Container, SingleLineTextField } from './Components.js';
-import { Errors } from './Errors';
+import { Container } from './Container.js'
+import { SingleLineTextField } from './SingleLineTextField.js'
+import { Errors } from './Errors.js'
 
 /**
  * @description
  * @returns {Object} - @method {getFieldValues} call that return values for User
  */
-
 export function LogForm(param) {
     const {
         item, parent

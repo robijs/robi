@@ -1,6 +1,6 @@
 import { Get } from '../Core/Actions.js';
 import { Title, Container, QuestionType } from '../Core/Components.js';
-import { App } from '../Core/Settings.js';
+import { App } from '../Core.js';
 
 /**
  *

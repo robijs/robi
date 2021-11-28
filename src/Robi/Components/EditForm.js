@@ -1,8 +1,10 @@
-import { DeleteItem, UpdateItem } from '../Core/Actions.js';
-import {
-    BootstrapDropdown, MultiChoiceField,
-    MultiLineTextField, NumberField, SingleLineTextField
-} from './Components.js';
+import { DeleteItem } from '../Actions/DeleteItem.js'
+import { UpdateItem } from '../Actions/UpdateItem.js'
+import { BootstrapDropdown } from './BootstrapDropdown.js'
+import { MultiChoiceField } from './MultiChoiceField.js'
+import { MultiLineTextField } from './MultiLineTextField.js'
+import { NumberField } from './NumberField.js'
+import { SingleLineTextField } from './SingleLineTextField.js'
 
 /**
  *

@@ -1,13 +1,12 @@
-import { Component, CreateItem } from '../Actions.js';
-import { App } from '../Core/Settings.js';
-import Store from '../Store.js';
+import { Component } from '../Actions/Component.js'
+import { CreateItem } from '../Actions/CreateItem.js'
+import { App, Store } from '../Core.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function Comments(param) {
     const {
         comments, parent, position, width, parentId

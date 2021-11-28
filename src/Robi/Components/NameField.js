@@ -1,7 +1,7 @@
-import { Component } from '../Actions.js';
+import { Component } from '../Actions/Component.js'
 import { Route } from "./Route";
 import { GetSiteUsers } from "./GetSiteUsers";
-import { App } from '../Core/Settings.js';
+import { App } from '../Core.js';
 
 /**
  *

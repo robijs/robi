@@ -1,21 +1,18 @@
-import {
-    Modal,
-    BootstrapButton,
-    ProgressBar,
-    InstallConsole,
-    Container
-} from './Components.js'
+import { Modal } from '../Components/Modal.js'
+import { BootstrapButton } from '../Components/BootstrapButton.js'
+import { ProgressBar } from '../Components/ProgressBar.js'
+import { InstallConsole } from '../Components/InstallConsole.js'
+import { Container } from '../Components/Container.js'
 import { Lists } from '../Models/Lists.js'
 import { App, Store } from '../Core.js'
 import { Route } from './Route.js'
 import { GetWebLists } from './GetWebLists.js'
-import lists from '../lists.js'
+import lists from '../../lists.js'
 
 /**
  *
  * @param {*} param
  */
-
 export function UpdateApp() {
     const modal = Modal({
         title: false,

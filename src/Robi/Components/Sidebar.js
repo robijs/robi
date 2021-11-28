@@ -1,6 +1,6 @@
 import { Component, GenerateUUID } from '../Actions.js';
 import { Route } from "./Route";
-import { App } from '../Core/Settings.js';
+import { App } from '../Core.js';
 import Store from '../Store.js';
 import { BootstrapButton } from './BootstrapButton';
 import { BootstrapTextarea } from './BootstrapTextarea';

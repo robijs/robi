@@ -1,84 +1,59 @@
-import { App, Store } from '../Core.js'
+import { App } from '../Core.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { Post } from './Post.js'
 
 /**
- * Create SharePoint list item.
- * @param {Object}   param          Interface to UpdateItem() module.   
- * @param {string}   param.list     SharePoint list Name.
+ * Update SharePoint list item.
+ * @param {Object}  param          - Interface to UpdateItem() module.
+ * @param {string}  param.list     - SharePoint List Name.
+ * @param {number}  param.itemId   - Item Id of item in param.list.
+ * @param {boolean} [param.notify] - If false, don't display notification.
  */
-export async function DeleteColumn(param) {
+export async function DeleteItem(param) {
     const {
         list,
-        name
+        itemId,
+        filter,
     } = param;
 
-    // Don't create columns with reserved SharePoint names
-    if (name === 'Title' || name === 'Id') {
-        // Console 
-        console.log(`Column '${name}'can't be deleted`);
+    if (App.get('mode') === 'prod') {
+        /** Get item by id */
+        const getItems = await Get({
+            list,
+            filter: itemId ? `Id eq ${itemId}` : filter
+        });
 
-        // Add to Install Console
-        const installConsole = Store.get('install-console');
+        // const item = getItems[0];
 
-        if (installConsole) {
-            installConsole.append(/*html*/ `
-                <div class='console-line'>
-                    <!-- <code class='line-number'>0</code> -->
-                    <code>Column '${name}'can't be deleted</code>
-                </div>
-            `);
+        /** Get new request digest */
+        const requestDigest = await GetRequestDigest();
 
-            installConsole.get().scrollTop = installConsole.get().scrollHeight;
+        await Promise.all(getItems.map(item => {
+            const postOptions = {
+                url: item.__metadata.uri,
+                headers: {
+                    "Content-Type": "application/json;odata=verbose",
+                    "Accept": "application/json;odata=verbose",
+                    "X-HTTP-Method": "DELETE",
+                    "X-RequestDigest": requestDigest,
+                    "If-Match": item.__metadata.etag
+                }
+            }
+
+            return Post(postOptions);
+        }));
+    } else if (App.get('mode') === 'dev') {
+        const options = {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json;odata=verbose",
+                "Accept": "application/json;odata=verbose",
+            }
         }
 
-        const progressBar = Store.get('install-progress-bar');
+        const response = await fetch(`http://localhost:3000/${list}/${itemId}`, options);
+        const deletedItem = await response.json();
 
-        if (progressBar) {
-            progressBar.update();
-        }
-
-        return;
+        return deletedItem;
     }
-    
-    // Get new request digest
-    const requestDigest = await GetRequestDigest();
-    
-    const postOptions = {
-        url: `${App.get('site')}/_api/web/lists/GetByTitle('${list}')/Fields/GetByTitle('${name}')`,
-        headers: {
-            "Content-Type": "application/json;odata=verbose",
-            "Accept": "application/json;odata=verbose",
-            "X-RequestDigest": requestDigest,
-            "IF-MATCH": "*",
-            "X-HTTP-Method": "DELETE",
-        }
-    }
-
-    const deletedField = await Post(postOptions);
-
-    // Console success
-    console.log(`Deleted column '${name}'`);
-
-    // Append to install-console
-    const installConsole = Store.get('install-console');
-
-    if (installConsole) {
-        installConsole.append(/*html*/ `
-            <div class='console-line'>
-                <!-- <code class='line-number'>0</code> -->
-                <code>Deleted column '${name}' from list '${list}'</code>
-            </div>
-        `);
-
-        installConsole.get().scrollTop = installConsole.get().scrollHeight;
-    }
-
-    const progressBar = Store.get('install-progress-bar');
-
-    if (progressBar) {
-        progressBar.update();
-    }
-
-    return deletedField;
 }

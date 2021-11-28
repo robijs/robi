@@ -1,4 +1,4 @@
-import { App } from '../Core/Settings.js';
+import { App } from '../Core.js';
 
 /**
  *

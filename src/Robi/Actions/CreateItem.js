@@ -1,4 +1,4 @@
-import { Toast } from './Components.js'
+import { Toast } from '../Components/Toast.js'
 import { Get } from './Get.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { Post } from './Post.js'

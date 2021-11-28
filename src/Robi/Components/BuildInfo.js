@@ -1,12 +1,12 @@
-import { Get } from '../Core/Actions.js';
-import { Card, SingleLineTextField } from './Components.js';
-import { App } from './Settings.js';
+import { Get } from '../Actions/Get.js'
+import { Card } from './Card.js'
+import { SingleLineTextField } from './SingleLineTextField.js'
+import { App } from '../Core.js'
 
 /**
  *
  * @param {*} param
  */
-
 export async function BuildInfo(param) {
     const {
         parent,

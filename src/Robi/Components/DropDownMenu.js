@@ -1,12 +1,12 @@
-import { Component, Get } from '../Actions.js';
-import { App } from '../Core/Settings.js';
+import { Component } from '../Actions/Component.js'
+import { Get } from '../Actions/Component.js'
+import { App } from '../Core.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function DropDownMenu(param) {
     const {
         dropDownField, field, data, list, onSetValue

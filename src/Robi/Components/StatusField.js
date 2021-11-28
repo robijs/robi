@@ -1,4 +1,4 @@
-import { Component } from '../Actions.js';
+import { Component } from '../Actions/Component.js'
 
 /**
  * {@link https://getbootstrap.com/docs/4.5/components/dropdowns/}

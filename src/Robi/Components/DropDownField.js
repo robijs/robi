@@ -1,6 +1,6 @@
-import { Component } from '../Actions.js';
-import { App } from '../Core/Settings.js';
-import { DropDownMenu } from "./DropDownMenu";
+import { Component } from '../Actions/Component.js'
+import { App } from '../Core.js';
+import { DropDownMenu } from './DropDownMenu.js'
 
 /**
  *

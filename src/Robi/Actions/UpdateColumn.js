@@ -1,6 +1,5 @@
-import { App } from '../Core.js'
-import { Store } from '../Core.js';
-import { Post } from './Post';
+import { App, Store } from '../Core.js'
+import { Post } from './Post.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 
 /**

@@ -1,7 +1,7 @@
-import { ViewContainer } from './Components.js'
+import { ViewContainer } from '../Components/ViewContainer.js'
 import { App, Store } from '../Core.js'
-import { History } from './History';
-import { Log } from './Log';
+import { History } from './History.js'
+import { Log } from './Log.js'
 
 /**
  *
@@ -9,7 +9,6 @@ import { Log } from './Log';
  * @param {*} options
  * @returns
  */
-
 export function Route(path = App.get('defaultRoute'), options = {}) {
     const {
         scrollTop

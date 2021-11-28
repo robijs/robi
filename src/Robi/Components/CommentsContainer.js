@@ -1,12 +1,11 @@
-import { Get } from '../Core/Actions.js';
-import { Comments } from './Components.js';
-import { App } from './Settings.js';
+import { Get } from '../Actions/Get.js'
+import { Comments } from './Comments.js'
+import { App } from '../Core.js'
 
 /**
  *
  * @param {*} param
  */
-
 export async function CommentsContainer(param) {
     const {
         parentId, parent, position, width

@@ -1,12 +1,12 @@
-import { AttachFiles, Component } from '../Actions.js';
-import { App } from '../Core/Settings.js';
+import { Component } from '../Actions/Component.js'
+import { AttachFiles } from '../Actions/AttachFiles.js'
+import { App } from '../Core.js';
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function AttachFilesButton(param) {
     const {
         value, list, id, margin, onAdd, parent, action

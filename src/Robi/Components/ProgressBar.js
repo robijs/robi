@@ -1,4 +1,4 @@
-import { Component } from '../Actions.js';
+import { Component } from '../Actions/Component.js'
 
 /**
  *

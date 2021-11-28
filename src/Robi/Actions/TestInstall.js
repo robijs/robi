@@ -1,13 +1,11 @@
-import {
-    LoadingBar,
-    Modal,
-    BootstrapButton,
-    ProgressBar,
-    InstallConsole,
-    Container
-} from './Components.js'
+import { LoadingBar } from '../Components/LoadingBar.js'
+import { Modal } from '../Components/Modal.js'
+import { BootstrapButton } from '../Components/BootstrapButton.js'
+import { ProgressBar } from '../Components/ProgressBar.js'
+import { InstallConsole } from '../Components/InstallConsole.js'
+import { Container } from '../Components/Container.js'
 import { App, Store } from '../Core.js'
-import lists from '../lists.js'
+import lists from '../../lists.js'
 import { LaunchApp } from './LaunchApp.js'
 
 /**

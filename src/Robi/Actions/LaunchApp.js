@@ -1,11 +1,10 @@
-import {
-    SvgDefs,
-    Sidebar, MainContainer,
-    FixedToast,
-    Modal
-} from './Components.js'
-import { Store, Routes } from '../Core.js';
-import { ReleaseNotes } from './ReleaseNotes.js'
+import { SvgDefs } from '../Components/SvgDefs.js'
+import { Sidebar } from '../Components/Sidebar.js'
+import { MainContainer } from '../Components/MainContainer.js'
+import { FixedToast } from '../Components/FixedToast.js'
+import { Modal } from '../Components/Modal.js'
+import { Store, Routes } from '../Core.js'
+import { ReleaseNotes } from '../Components/ReleaseNotes.js'
 import { SetSessionStorage } from './SetSessionStorage.js'
 import { Route } from './Route.js'
 import { Log } from './Log.js'

@@ -5,7 +5,7 @@ import {
     Modal,
     QuestionsToolbar
 } from '../Core/Components.js';
-import { App } from '../Core/Settings.js';
+import { App } from '../Core.js';
 import Store from '../Core/Store.js';
 import {
     QuestionCards,

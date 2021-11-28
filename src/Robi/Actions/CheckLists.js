@@ -1,5 +1,5 @@
 import { Lists } from '../Models/Lists.js'
-import lists from '../lists.js'
+import lists from '../../lists.js'
 
 /**
  * 

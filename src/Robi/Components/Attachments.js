@@ -1,5 +1,6 @@
-import { Component, DeleteAttachments } from '../Actions.js';
-import { App } from '../Core/Settings.js';
+import { Component } from '../Actions/Component.js'
+import { DeleteAttachments } from '../Actions/DeleteAttachments.js'
+import { App } from '../Core.js';
 
 /**
  *

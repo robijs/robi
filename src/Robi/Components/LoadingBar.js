@@ -1,5 +1,5 @@
-import { Component } from '../Actions.js';
-import { App } from '../Core/Settings.js';
+import { Component } from '../Actions/Component.js'
+import { App } from '../Core.js';
 
 /**
  *

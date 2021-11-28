@@ -1,13 +1,14 @@
-import { UploadFile } from '../Core/Actions.js';
-import { Container, Files, Heading, LoadingSpinner } from './Components.js';
-import Store from './Store.js';
-import { App } from './Settings.js';
+import { UploadFile } from '../Actions/UploadFile.js'
+import { Container } from './Container.js'
+import { Files } from './Files.js'
+import { Heading } from './Heading.js'
+import { LoadingSpinner } from './LoadingSpinner.js'
+import { App, Store } from '../Core.js'
 
 /**
  *
  * @param {*} param
  */
-
 export function AttachmentsContainer(param) {
     const {
         parent, label, description, list, itemId, value, onChange

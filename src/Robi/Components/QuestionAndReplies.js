@@ -3,7 +3,7 @@ import {
     Title, Container,
     FoldingCube
 } from '../Core/Components.js';
-import { App } from '../Core/Settings.js';
+import { App } from '../Core.js';
 import Store from '../Core/Store.js';
 import { QuestionContainer } from '../Core/ViewParts.js';
 import { QuestionsModel } from './Models.js';

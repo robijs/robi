@@ -1,8 +1,11 @@
-import { UpdateItem } from '../Core/Actions.js';
-import { Container, SingleLineTextField, StatusField, Toast } from './Components.js';
-import Store from './Store.js';
-import { CommentsContainer } from './CommentsContainer';
-import { Logs } from "./Logs";
+import { UpdateItem } from '../Actions/UpdateItem.js'
+import { Container } from './Container.js'
+import { SingleLineTextField } from './SingleLineTextField.js'
+import { StatusField } from './StatusField.js'
+import { Toast } from './Toast.js'
+import Store from './Store.js'
+import { CommentsContainer } from './CommentsContainer.js'
+import { Logs } from "./Logs.js"
 
 /**
  * EditUser

@@ -1,4 +1,4 @@
-import { CreateList } from './CreateList'
+import { CreateList } from './CreateList.js'
 
 /**
  * Create SharePoint list item.

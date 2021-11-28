@@ -1,5 +1,5 @@
 import { Component, DeleteItem } from '../Actions.js';
-import { App } from '../Core/Settings.js';
+import { App } from '../Core.js';
 
 /**
  *

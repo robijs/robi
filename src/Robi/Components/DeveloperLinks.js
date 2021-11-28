@@ -1,9 +1,7 @@
-import {
-    Button,
-    Card
-} from './Components.js';
-import { App } from './Settings.js';
-import lists from '../lists.js';
+import { Card } from './Card.js'
+import { Button } from './Button.js'
+import { App } from '../Core.js'
+import lists from '../../lists.js'
 
 /**
  *

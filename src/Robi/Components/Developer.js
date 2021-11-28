@@ -1,13 +1,14 @@
-import { Authorize, Get } from '../Core/Actions.js';
-import {
-    Title, FoldingCube,
-    Card, Timer, DevConsole
-} from '../Core/Components.js';
-import { App } from '../Core/Settings.js';
-import {
-    Table, ErrorForm,
-    LogForm
-} from '../Core/ViewParts.js';
+import { Authorize } from '../Actions/Authorize.js'
+import { Get } from '../Actions/Get.js'
+import { Title } from './Title.js'
+import { FoldingCube } from './FoldingCube.js'
+import { Card } from './Card.js'
+import { Timer } from './Timer.js'
+import { DevConsole } from './DevConsole.js'
+import { App } from '../Core.js'
+import { Table } from './Table.js' 
+import { ErrorForm } from './ErrorForm.js'
+import { LogForm } from './LogForm.js'
 
 /**
  *
