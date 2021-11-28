@@ -1,5 +1,5 @@
 // Import Component from Actions. Used to create a Robi component.
-import { Component } from '../Core/Actions.js'
+import { Component } from '../Robi/Robi.js'
 
 /**
  * This is an example component. 
