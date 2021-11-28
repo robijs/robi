@@ -25,7 +25,7 @@ export default async function Test(param) {
     
     const info = Alert({
         margin: '20px 0px',
-        type: 'info',
+        type: 'robi-primary',
         text: '<strong>My Dashboard</strong> coming soon. Please stay tuned!',
         parent
     });

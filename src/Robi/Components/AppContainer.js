@@ -1,3 +1,4 @@
+import { HSLDarker } from '../Actions/Colors.js';
 import { Component } from '../Actions/Component.js'
 import { App } from '../Core.js';
 
@@ -261,17 +262,17 @@ export function AppContainer() {
             }
 
             .alert-robi-primary {
-                background: ${App.get('primaryColor') + '29'} !important;
-
+                background: ${App.get('primaryColor') + '20'} !important;
+                color: hsl(${HSLDarker(App.get('primaryColorHSL'), 5)}) !important;
             }
 
             .alert-robi-primary *:not(.btn) {
-                color: ${App.get('primaryColor')} !important;
+                color: hsl(${HSLDarker(App.get('primaryColorHSL'), 5)}) !important;
             }
 
             .alert-robi-secondary {
                 background: ${App.get('backgroundColor')} !important;
-
+                color: ${App.get('defaultColor')} !important;
             }
 
             .alert-robi-secondary *:not(.btn) {
