@@ -86,16 +86,6 @@ export async function DeveloperLinks(param) {
         ]
     });
 
-    // addSection({
-    //     title: `Schemas`,
-    //     buttons: [
-    //     ]
-    // });
-    // addSection({
-    //     title: `Business Rules`,
-    //     buttons: [
-    //     ]
-    // });
     function addSection(param) {
         const {
             title, buttons
@@ -104,7 +94,6 @@ export async function DeveloperLinks(param) {
         /** Pages */
         const card = Card({
             title,
-            titleColor: App.get('primaryColor'),
             width: '100%',
             margin: '20px 0px 0px 0px',
             parent

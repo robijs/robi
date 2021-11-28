@@ -16,7 +16,6 @@ export async function ReleaseNotesContainer(param) {
 
     const releaseNotesCard = Card({
         title: 'Release Notes',
-        titleColor: App.get('primaryColor'),
         width: '100%',
         margin: margin || '20px 0px 0px 0px',
         parent
@@ -25,6 +24,7 @@ export async function ReleaseNotesContainer(param) {
     releaseNotesCard.add();
 
     /** Loading Indicator */
+    //TODO: replace with loading spinner
     const loadingIndicator = FoldingCube({
         label: 'Loading release notes',
         margin: '40px 0px',

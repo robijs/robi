@@ -1,5 +1,5 @@
-import { Get } from '../Actions.js.js.js'
-import { SiteUsageModel } from '../Models.js'
+import { Get } from '../Actions/Get.js'
+import { SiteUsageModel } from '../Models/SiteUsageModel.js'
 
 (async () => {
     onmessage = async event => {

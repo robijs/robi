@@ -4,7 +4,7 @@ import { AccountInfo } from './AccountInfo.js'
 import { BuildInfo } from './BuildInfo.js'
 import { DeveloperLinks } from './DeveloperLinks.js'
 import { ReleaseNotesContainer } from './ReleaseNotesContainer.js'
-import { SiteUsage } from './SiteUsage.js'
+import { SiteUsageContainer } from './SiteUsageContainer.js'
 import { Store } from '../Core.js'
 
 /**
@@ -42,7 +42,7 @@ export async function Settings(param) {
 
     /** Authorize */
     if (Store.user().Role === 'Developer') {
-        SiteUsage({
+        SiteUsageContainer({
             parent
         });
 

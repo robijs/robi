@@ -13,9 +13,11 @@ export async function AccountInfo(param) {
 
     const accountInfoCard = Card({
         title: 'Account',
-        titleColor: App.get('primaryColor'),
         width: '100%',
         margin: '20px 0px 0px 0px',
+        background: App.get('backgroundColor'),
+        titleBorder: 'none',
+        radius: '20px',
         parent
     });
 

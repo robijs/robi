@@ -2,8 +2,9 @@ import { Toast } from '../Components/Toast.js'
 import { Get } from './Get.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { Post } from './Post.js'
+import { Wait } from './Wait.js'
+import { Lists } from '../Models/Lists.js'
 import { App } from '../Core.js'
-import { Lists } from '../../Core/Models.js'
 import lists from '../../lists.js'
 
 /**

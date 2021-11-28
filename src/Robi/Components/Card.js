@@ -39,10 +39,10 @@ export function Card(param) {
                 margin: ${padding === '0px' ? `0px` : '-20px -20px 0px -20px'}; /** FIXME: will break with passed in padding  */
                 padding: 10px 20px; /** FIXME: will break with passed in padding  */
                 font-weight: ${titleWeight || '700'};
-                background: ${titleBackground || 'white'}; /** FIXME: Experimental */ /* alternate color: #d0d0d04d */
+                background: ${titleBackground || 'inherit'}; /** FIXME: Experimental */ /* alternate color: #d0d0d04d */
                 border-radius: 10px 10px 0px 0px;
                 color: ${titleColor || App.get('defaultColor')};
-                border-bottom: ${App.get('defaultBorder')};
+                border-bottom: ${titleBorder || App.get('defaultBorder')};
             }
 
             #id .round-card-description {

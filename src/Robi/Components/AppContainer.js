@@ -135,19 +135,22 @@ export function AppContainer() {
             }
 
             /* Robi buttons */
-            .btn-robi-reverse {
+            .btn-robi-reverse,
+            .btn-robi-reverse:hover {
                 background: ${App.get('primaryColor')};
                 color: white !important;
                 font-weight: 500;
             }
 
-            .btn-robi {
+            .btn-robi,
+            .btn-robi:hover {
                 color: ${App.get('primaryColor')};
                 background: #e9ecef;
                 font-weight: 500;
             }
 
-            .btn-robi-success {
+            .btn-robi-success,
+            .btn-robi-success:hover {
                 color: seagreen;
                 background: #e9ecef;
                 font-weight: 500;
@@ -157,7 +160,7 @@ export function AppContainer() {
                 color: #212529 !important;
                 background-color: #f8f9fa !important;
                 border-color: #f8f9fa !important;
-                }
+            }
 
             .btn-light:active,
             .btn-light:focus {

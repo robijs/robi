@@ -17,7 +17,6 @@ export async function SiteUsageContainer(param) {
     /** Dashboard */
     const dashboardCard = Card({
         title: 'Site Usage',
-        titleColor: App.get('primaryColor'),
         width: '100%',
         minHeight: '620px',
         margin: '20px 0px 0px 0px',
@@ -38,7 +37,7 @@ export async function SiteUsageContainer(param) {
     const workerPath = App.get('mode') === 'prod' ? '../' : `http://127.0.0.1:8080/src/`;
 
     /** Worker */
-    const worker = new Worker(`${workerPath}Core/Workers/SiteUsage.js`, {
+    const worker = new Worker(`${workerPath}Robi/Workers/SiteUsage.js`, {
         type: 'module'
     });
 

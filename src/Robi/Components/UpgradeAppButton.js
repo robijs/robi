@@ -22,7 +22,7 @@ export function UpgradeAppButton(param) {
                             <div class='dev-console-description'>Install the latest Robi build.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
-                            <button class='btn btn-success dev-console-button upgrade'>Upgrade ${App.get('name')}</button>
+                            <button class='btn btn-robi-success dev-console-button upgrade'>Upgrade ${App.get('name')}</button>
                         </div>
                     </div>
                 </div>

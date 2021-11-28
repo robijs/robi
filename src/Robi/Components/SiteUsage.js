@@ -16,7 +16,7 @@ export function SiteUsage(param) {
     } = data;
 
     const screenWidth = window.screen.width;
-    const chartWidth = screenWidth > 1500 ? 800 : 500;
+    const chartWidth = screenWidth > 1500 ? 775 : 500;
 
     const component = Component({
         html: /*html*/ `

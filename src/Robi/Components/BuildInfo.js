@@ -14,7 +14,6 @@ export async function BuildInfo(param) {
 
     const accountInfoCard = Card({
         title: 'Build',
-        titleColor: App.get('primaryColor'),
         width: '100%',
         margin: '20px 0px 0px 0px',
         parent
