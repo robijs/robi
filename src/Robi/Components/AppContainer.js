@@ -288,6 +288,11 @@ export function AppContainer() {
                 color: initial;
                 background-color: initial;
             }
+            
+            /* Robi text */
+            .text-robi {
+                color: ${App.get('primaryColor')} !important;
+            }
 
             /** Code mirror */
             .CodeMirror * {

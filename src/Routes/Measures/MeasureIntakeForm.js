@@ -165,8 +165,8 @@ export async function MeasureIntakeForm(param) {
                         modal.find('.modal-content').style.width = 'unset';
 
                         const loading = LoadingSpinner({
-                            message: `<span style='color: seagreen;'>Creating Measure<span>`,
-                            type: 'success',
+                            message: `<span style='color: ${App.get('primaryColor')};'>Creating Measure<span>`,
+                            type: 'robi',
                             classes: ['p-4'],
                             parent: modalBody
                         });
