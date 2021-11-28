@@ -33,6 +33,8 @@ const App = {
             console.log('App library:', param.library);
 
             param.site = location.href.split(library || '/App/')[0];
+        } else {
+            param.site = 'http://localhost';
         }
 
         // Format color
