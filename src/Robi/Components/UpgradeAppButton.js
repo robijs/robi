@@ -1,13 +1,12 @@
 import { Component } from '../Actions/Component.js'
-import { App } from '../Core.js';
-import { Modal } from './Modal';
+import { Modal } from './Modal.js'
+import { App } from '../Core.js'
 
 // TODO: Add async call to look up latest robi build, add red dot if out-of-date
 /**
  *
  * @param {*} param
  */
-
 export function UpgradeAppButton(param) {
     const {
         parent, position

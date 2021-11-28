@@ -1,16 +1,13 @@
-import { Authorize } from '../Core/Actions.js';
-import { Title } from '../Core/Components.js';
-import {
-    Table,
-    NewUser
-} from '../Core/ViewParts.js';
+import { Authorize } from '../Actions/Authorize.js'
+import { Title } from './Title.js'
+import { Table } from './Table.js'
+import { NewUser } from './NewUser.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export async function Users(param) {
     const { parent, itemId } = param;
 

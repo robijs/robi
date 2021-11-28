@@ -6,7 +6,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function Modal(param) {
     const {
         title, titleStyle, headerStyle, footerStyle, close, addContent, buttons, centered, fade, background, fullSize, showFooter, scrollable, contentPadding, parent, disableBackdropClose, position

@@ -1,23 +1,22 @@
-import { Get, CreateItem, UpdateItem, Route } from '../Core/Actions.js';
-import {
-    Title, Container,
-    FoldingCube,
-    Modal,
-    QuestionsToolbar
-} from '../Core/Components.js';
-import { App } from '../Core.js';
-import Store from '../Core/Store.js';
-import {
-    QuestionCards,
-    NewQuestion
-} from '../Core/ViewParts.js';
-import { QuestionModel, QuestionsModel } from './Models.js';
+import { Get } from '../Actions/Get.js'
+import { CreateItem } from '../Actions/CreateItem.js'
+import { UpdateItem } from '../Actions/UpdateItem.js'
+import { Route  } from '../Actions/Route.js'
+import { Title } from './Title.js'
+import { Container } from './Container.js'
+import { FoldingCube } from './FoldingCube.js'
+import { Modal } from './Modal.js'
+import { QuestionsToolbar } from './QuestionsToolbar.js'
+import { QuestionCards } from './QuestionCards.js'
+import { NewQuestion } from './NewQuestion.js'
+import { QuestionModel } from '../Models/QuestionModel.js'
+import { QuestionsModel } from '../Models/QuestionsModel.js'
+import { App, Store } from '../Core.js'
 
 /**
  *
  * @param {*} param
  */
-
 export async function QuestionBoard(param) {
     const { parent, path } = param;
 

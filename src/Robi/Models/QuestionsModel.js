@@ -1,13 +1,12 @@
-import Store from './Store.js';
-import { Get } from './Actions.js';
-import { Question } from './Question';
+import { Store } from '../Core.js'
+import { Get } from '../Actions/Get.js'
+import { QuestionModel } from './QuestionModel.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export async function QuestionsModel(param) {
     const {
         filter
@@ -32,7 +31,7 @@ export async function QuestionsModel(param) {
     const Model_Questions = questions.map(question => {
         // question.replies = replies.filter(reply => reply.QuestionId === question.Id);
         // return question;
-        return Question({
+        return QuestionModel({
             question,
             replies: replies.filter(reply => reply.QuestionId === question.Id)
         });

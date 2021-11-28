@@ -1,15 +1,12 @@
-import { Get, CreateItem, UpdateItem, Route, UploadFile } from '../../Core/Actions.js'
-import { Title, Container, FoldingCube, Card, Modal, BootstrapButton, SectionStepper, LoadingSpinner } from '../../Core/Components.js'
-import { FormSection } from '../../Core/ViewParts.js'
-import { App } from '../../Core/Settings.js'
-import Store from '../../Core/Store.js'
+import { Title, Container, FoldingCube, Card, Modal, BootstrapButton, SectionStepper, LoadingSpinner, FormSection } from '../../Robi/RobiUI.js'
+import { App, Store, Get, CreateItem, UpdateItem, Route, UploadFile } from '../../Robi/Robi.js'
 import lists from '../../lists.js'
 
 /**
  * 
  * @param {*} param ./Sections/FormSection.js
  */
-export default async function MeasureIntakeForm(param) {
+export async function MeasureIntakeForm(param) {
     const {
         parent,
         itemId,
@@ -88,7 +85,7 @@ export default async function MeasureIntakeForm(param) {
     /** Scroll listener */
     projectContainer.get().addEventListener('scroll', event => {
         if (event.target.scrollTop > 0) {
-            projectContainer.get().style.borderTop = `solid 1px #e4e4e6`;
+            projectContainer.get().style.borderTop = `solid 1px #d6d8db80`;
         } else {
             projectContainer.get().style.borderTop = `none`;
         }
@@ -269,7 +266,7 @@ export default async function MeasureIntakeForm(param) {
         classes: ['mb-2', 'w-100'],
         parent: buttonContainer,
         // type: itemId ? 'primary' : 'success',
-        type: 'robi',
+        type: 'robi-success',
         value: itemId ? 'Update' : 'Create measure'
     });
 

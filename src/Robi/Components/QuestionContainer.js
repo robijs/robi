@@ -1,18 +1,17 @@
-import { CreateItem, UpdateItem } from '../Core/Actions.js';
-import {
-    Modal,
-    NewReply,
-    Question, Reply
-} from './Components.js';
-import Store from './Store.js';
-import { QuestionModel } from './Models.js';
-import { EditQuestion } from './EditQuestion';
+import { CreateItem } from '../Actions/CreateItem.js'
+import { UpdateItem } from '../Actions/UpdateItem.js'
+import { Modal } from './Modal.js'
+import { NewReply } from './NewReply.js'
+import { Question } from './Question.js'
+import { Reply } from './Reply.js'
+import { Store } from '../Core.js'
+import { QuestionModel } from '../Models/QuestionModel.js'
+import { EditQuestion } from './EditQuestion.js'
 
 /**
  *
  * @param {*} param
  */
-
 export function QuestionContainer(param) {
     const {
         question, parent

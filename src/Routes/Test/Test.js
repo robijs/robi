@@ -1,8 +1,8 @@
-import { Title } from '../../Core/Components.js'
-import { App } from '../../Core/Settings.js'
+import { Title } from '../../Robi/RobiUI.js'
 
 /**
  * 
+ * @param {*} param 
  */
 export default async function Test(param) {
     const { parent } = param;

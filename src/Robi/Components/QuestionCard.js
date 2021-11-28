@@ -1,12 +1,11 @@
 import { Component } from '../Actions/Component.js'
-import { Route } from "./Route";
+import { Route } from '../Actions/Route.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function QuestionCard(param) {
     const {
         question, label, path, margin, parent, position
@@ -40,24 +39,27 @@ export function QuestionCard(param) {
                 <div class='card-body'>
                     <h5 class='card-title'>
                         <span>${Title}</span>
-                        ${Featured ?
-            /*html*/ `
+                        ${
+                            Featured ?
+                            /*html*/ `
                                 <span class='badge badge-info' role='alert'>Featured</span>
-                            ` :
-                ''}
-                        ${label === 'new' ?
-            /*html*/ `
+                            ` : ''
+                        }
+                        ${
+                            label === 'new' ?
+                            /*html*/ `
                                 <span class='badge badge-warning' role='alert'>New</span>
-                            ` :
-                ''}
-                        ${replyCount ?
-            /*html*/ `
+                            ` : ''
+                        }
+                        ${
+                            replyCount ?
+                            /*html*/ `
                                 <span class='reply-count'>
                                     <span class='reply-count-label'>Replies</span>
                                     <span class='badge badge-secondary'>${replyCount}</span>
                                 </span>
-                            ` :
-                ''}
+                            ` : ''
+                        }
                     </h5>
                     <!-- <h6 class='card-subtitle mb-2 text-muted'>Asked by ${Author.Title} ${formatDate(Created)}</h6> -->
                     <h6 class='card-subtitle mb-2 text-muted'>${Author.Title} ${formatDate(Created)}</h6>

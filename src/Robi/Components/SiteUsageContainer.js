@@ -1,13 +1,14 @@
-import { Card, DashboardBanner, FoldingCube, SiteUsage } from './Components.js';
-import Store from './Store.js';
-import { App } from './Settings.js';
-import { StartAndEndOfWeek } from './Models.js';
+import { Card } from './Card.js' 
+import { DashboardBanner } from './DashboardBanner.js' 
+import { FoldingCube } from './FoldingCube.js' 
+import { SiteUsage } from './SiteUsage.js' 
+import { App, Store } from '../Core.js'
+import { StartAndEndOfWeek } from '../Models/StartAndEndOfWeek.js'
 
 /**
  *
  * @param {*} param
  */
-
 export async function SiteUsageContainer(param) {
     const {
         parent

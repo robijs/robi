@@ -1,17 +1,21 @@
-import { Style, Get } from '../Core/Actions.js';
-import {
-    Alert, BootstrapDropdown, Container, LinksField, MultiChoiceField,
-    MultiLineTextField, NumberField, SingleLineTextField, TaggleField
-} from './Components.js';
-import Store from './Store.js';
-import { App } from './Settings.js';
-import { AttachmentsContainer } from './AttachmentsContainer.js';
+import { Get } from '../Actions/Get.js'
+import { Style } from '../Actions/Style.js'
+import { Alert } from './Alert.js'
+import { BootstrapDropdown } from './BootstrapDropdown.js'
+import { Container } from './Container.js'
+import { LinksField } from './LinksField.js'
+import { MultiChoiceField } from './MultiChoiceField.js'
+import { MultiLineTextField } from './MultiLineTextField.js'
+import { NumberField } from './NumberField.js'
+import { SingleLineTextField } from './SingleLineTextField.js'
+import { TaggleField } from './TaggleField.js'
+import { AttachmentsContainer } from './AttachmentsContainer.js'
+import { App, Store } from '../Core.js'
 
 /**
  *
  * @param {*} param
  */
-
 export function FormSection(param) {
     const { section, listInfo, item, parent: parentConatiner, heading } = param;
     const { name, path, info, rows } = section;
@@ -194,8 +198,8 @@ export function FormSection(param) {
                                         component.find('.form-control').insertAdjacentHTML('afterend', /*html*/ `
                                             <div class='dropdown-menu show' style='position: absolute; width: ${width}px; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, ${height + 5}px);'>
                                                 <div class='d-flex justify-content-between align-items-center mt-2 mb-2 ml-3 mr-3'>
-                                                    <div style='color: mediumslateblue;'>Searching for measures with similar names...</div>
-                                                    <div class='spinner-grow spinner-grow-sm' style='color: mediumslateblue;' role='status'></div>
+                                                    <div style='color: ${App.get('primaryColor')};'>Searching for measures with similar names...</div>
+                                                    <div class='spinner-grow spinner-grow-sm' style='color: ${App.get('primaryColor')};' role='status'></div>
                                                 </div> 
                                             </div>
                                         `);

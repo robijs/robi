@@ -1,12 +1,11 @@
 import { Component } from '../Actions/Component.js'
-import Store from '../Store.js';
+import { Store } from '../Core.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function Toast(param) {
     const {
         text, type, delay, parent, position

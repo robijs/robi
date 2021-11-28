@@ -2,6 +2,9 @@ import { Toast } from '../Components/Toast.js'
 import { Get } from './Get.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { Post } from './Post.js'
+import { App } from '../Core.js'
+import { Lists } from '../../Core/Models.js'
+import lists from '../../lists.js'
 
 /**
  * Create SharePoint list item.

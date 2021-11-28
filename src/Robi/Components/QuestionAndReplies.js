@@ -1,18 +1,16 @@
-import { Get, Route } from '../Core/Actions.js';
-import {
-    Title, Container,
-    FoldingCube
-} from '../Core/Components.js';
-import { App } from '../Core.js';
-import Store from '../Core/Store.js';
-import { QuestionContainer } from '../Core/ViewParts.js';
-import { QuestionsModel } from './Models.js';
+import { Get } from '../Actions/Get.js'
+import { Route } from '../Actions/Route.js'
+import { Title } from './Title.js'
+import { Container } from './Container.js'
+import { FoldingCube } from './FoldingCube.js'
+import { QuestionContainer } from './QuestionContainer.js'
+import { QuestionsModel } from '../Models/QuestionsModel.js'
+import { App, Store } from '../Core.js'
 
 /**
  *
  * @param {*} param
  */
-
 export async function QuestionAndReplies(param) {
     const { parent, path, itemId } = param;
 

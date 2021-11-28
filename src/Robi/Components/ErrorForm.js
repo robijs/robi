@@ -3,7 +3,7 @@ import { Container } from './Container.js'
 import { SingleLineTextField } from './SingleLineTextField.js'
 import { StatusField } from './StatusField.js'
 import { Toast } from './Toast.js'
-import Store from './Store.js'
+import { Store } from '../Core.js'
 import { CommentsContainer } from './CommentsContainer.js'
 import { Logs } from "./Logs.js"
 

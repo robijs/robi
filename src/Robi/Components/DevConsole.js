@@ -26,10 +26,10 @@ export function DevConsole(param) {
                         </div>
                         <div class='d-flex flex-column justify-content-center'>
                             <div class='d-flex align-items-center ml-5'>
-                                <button class='btn btn-code mb-3 dev-console-button modify-lists'>Modify lists</button>
+                                <button class='btn btn-robi mb-3 dev-console-button modify-lists'>Modify lists</button>
                             </div>
                             <div class='d-flex align-items-center ml-5'>
-                                <button class='btn btn-code dev-console-button modify-app'>Edit app initialization properties</button>
+                                <button class='btn btn-robi dev-console-button modify-app'>Edit app initialization properties</button>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@ export function DevConsole(param) {
                             <div class='dev-console-description'>Sync ${App.get('name')} with list schemas defined in <code>App/src/lists.js</code>. You can choose which new lists and columns will be created and which existing lists and columns will be deleted.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
-                            <button class='btn btn-robi-primary dev-console-button update'>Update ${App.get('name')}</button>
+                            <button class='btn btn-robi dev-console-button update'>Update ${App.get('name')}</button>
                         </div>
                     </div>
                     <div class='dev-console-row'>
@@ -48,7 +48,7 @@ export function DevConsole(param) {
                             <div class='dev-console-description'>Delete and recreate selected lists. All items from selected lists will be deleted. This can't be undone.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
-                            <button class='btn btn-secondary dev-console-button reset'>Choose lists to reset</button>
+                            <button class='btn btn-robi dev-console-button reset'>Choose lists to reset</button>
                         </div>
                     </div>
                     <div class='dev-console-row'>
@@ -57,16 +57,16 @@ export function DevConsole(param) {
                             <div class='dev-console-description'>Delete and recreate all lists. Resets all settings. All items will be deleted. This can't be undone.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
-                            <button class='btn btn-secondary dev-console-button reinstall'>Remove data and reinstall ${App.get('name')}</button>
+                            <button class='btn btn-robi dev-console-button reinstall'>Remove data and reinstall ${App.get('name')}</button>
                         </div>
                     </div>
-                    <div class='dev-console-row'>
+                    <div class='dev-console-row alert-robi-primary'>
                         <div class='dev-console-text'>
                             <div class='dev-console-label'>Delete ${App.get('name')}</div>
                             <div class='dev-console-description'>Delete all lists and remove all settings. All items will be deleted. This can't be undone. You will need to install the app again later.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
-                            <button class='btn btn-danger dev-console-button delete'>Delete all lists and data</button>
+                            <button class='btn btn-robi-reverse dev-console-button delete'>Delete all lists and data</button>
                         </div>
                     </div>
                 </div>

@@ -1,12 +1,11 @@
 import { Component } from '../Actions/Component.js'
-import { App } from '../Core.js';
+import { App } from '../Core.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function Heading(param) {
     const {
         text, size, color, height, weight, margin, padding, parent, width, align

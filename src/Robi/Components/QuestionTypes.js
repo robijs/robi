@@ -1,15 +1,17 @@
-import { Get } from '../Core/Actions.js';
-import { Title, Container, QuestionType } from '../Core/Components.js';
+import { Get } from '../Actions/Get.js'
+import { Title } from './Title.js'
+import { Container } from './Container.js'
+import { QuestionType } from './QuestionType.js'
 import { App } from '../Core.js';
 
 /**
- *
+ * 
+ * @param {*} param 
  */
-
 export async function QuestionTypes(param) {
     const { parent } = param;
 
-    /** View Title */
+    // View Title
     const viewTitle = Title({
         title: `Questions`,
         parent,
@@ -21,7 +23,7 @@ export async function QuestionTypes(param) {
 
     viewTitle.add();
 
-    /** View Container */
+    // View Container
     const viewContainer = Container({
         display: 'inline-flex',
         direction: 'column',
@@ -31,7 +33,7 @@ export async function QuestionTypes(param) {
 
     viewContainer.add();
 
-    /** Check local storage for questionTypes */
+    // Check local storage for questionTypes
     let questionTypes = JSON.parse(localStorage.getItem(`${App.get('name').split(' ').join('-')}-questionTypes`));
 
     if (!questionTypes) {
@@ -42,7 +44,6 @@ export async function QuestionTypes(param) {
             filter: `Key eq 'QuestionTypes'`
         });
 
-        // localStorage.setItem(`${App.get('name').split(' ').join('-')}-questionTypes`, JSON.stringify(questionTypesResponse[0].Value));
         localStorage.setItem(`${App.get('name').split(' ').join('-')}-questionTypes`, questionTypesResponse[0].Value);
         questionTypes = JSON.parse(localStorage.getItem(`${App.get('name').split(' ').join('-')}-questionTypes`));
 
@@ -60,17 +61,6 @@ export async function QuestionTypes(param) {
             title, path
         } = type;
 
-        // const card = Card({
-        //     title,
-        //     description: '',
-        //     parent: viewContainer,
-        //     margin: '0px 0px 20px 0px',
-        //     width: '100%',
-        //     action(event) {
-        //         Route(`Questions/${path}`);
-        //     }
-        // });
-        // card.add();
         const questionType = QuestionType({
             title,
             path,

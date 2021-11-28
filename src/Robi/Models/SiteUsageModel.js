@@ -1,11 +1,10 @@
-import { StartAndEndOfWeek } from "./StartAndEndOfWeek";
+import { StartAndEndOfWeek } from './StartAndEndOfWeek.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function SiteUsageModel(param) {
     const {
         visits,

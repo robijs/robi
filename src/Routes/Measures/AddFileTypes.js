@@ -1,4 +1,4 @@
-import { Component, GenerateUUID } from '../../Core/Actions.js'
+import { Component, GenerateUUID } from '../../Robi/Robi.js'
 
 /**
  * 

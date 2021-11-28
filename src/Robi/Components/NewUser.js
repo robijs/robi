@@ -1,15 +1,14 @@
-import { Get } from '../Core/Actions.js';
-import {
-    Alert,
-    BootstrapDropdown, NameField, SingleLineTextField
-} from './Components.js';
+import { Get } from '../Actions/Get.js'
+import { Alert } from './Alert.js'
+import { BootstrapDropdown } from './BootstrapDropdown.js'
+import { NameField } from './NameField.js'
+import { SingleLineTextField } from './SingleLineTextField.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export async function NewUser(param) {
     const {
         table, modal, parent, list, event

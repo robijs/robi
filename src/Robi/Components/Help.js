@@ -1,12 +1,10 @@
-import {
-    Title, Container,
-    RequestAssitanceInfo
-} from '../Core/Components.js';
+import { Title } from './Title.js'
+import { Container } from './Container.js'
+import { RequestAssitanceInfo } from './RequestAssitanceInfo.js'
 
 /**
  *
  */
-
 export async function Help(param) {
     const { parent } = param;
 

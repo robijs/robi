@@ -1,13 +1,11 @@
 import { Component } from '../Actions/Component.js'
-import { App } from '../Core.js';
-import Store from '../Store.js';
+import { App, Store } from '../Core.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function Reply(param) {
     const {
         reply, label, margin, onEdit, parent, position

@@ -1,11 +1,11 @@
-import { MultiLineTextField, SingleLineTextField } from './Components.js';
+import { MultiLineTextField } from './MultiLineTextField.js'
+import { SingleLineTextField } from './SingleLineTextField.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function NewQuestion(param) {
     const {
         parent, modal

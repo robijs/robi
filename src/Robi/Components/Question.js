@@ -1,13 +1,11 @@
 import { Component } from '../Actions/Component.js'
-import { App } from '../Core.js';
-import Store from '../Store.js';
+import { App, Store } from '../Core.js';
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function Question(param) {
     const {
         question, margin, parent, onEdit, position
@@ -27,11 +25,12 @@ export function Question(param) {
                     <div class='card-body'>
                         <h5 class='card-title'>
                             <span class='title-text'>${Title}</span>
-                            ${Featured ?
-            /*html*/ `
+                            ${
+                                Featured ?
+                                /*html*/ `
                                     <span class='badge badge-info' role='alert'>Featured</span>
-                                ` :
-                ''}
+                                ` : ''
+                            }
                         </h5>
                         <h6 class='card-subtitle mb-2 text-muted'>${Author.Title} ${formatDate(Created)}</h6>
                         <div class='card-text mb-2'>${Body || ''}</div>
@@ -39,13 +38,14 @@ export function Question(param) {
                     </div>
                     ${buildFooter(lastReply)}
                 </div>
-                ${Author.Name === Store.user().LoginName ?
-            /*html*/ `
-                        <div class='edit-button-container'>
-                            <button type='button' class='btn btn-robi-primaryColor edit'>Edit question</button>
-                        </div>
-                    ` :
-                ''}
+                    ${
+                        Author.Name === Store.user().LoginName ?
+                        /*html*/ `
+                            <div class='edit-button-container'>
+                                <button type='button' class='btn btn-robi-primaryColor edit'>Edit question</button>
+                            </div>
+                        ` : ''
+                    }
                 <div class='reply-count'>
                     <span class='reply-count-label'>Replies</span>
                     <span class='badge badge-secondary reply-count-value'>${replyCount}</span>

@@ -1,15 +1,14 @@
-import { Get } from '../Core/Actions.js';
-import {
-    Alert,
-    Card, FoldingCube, ReleaseNotes
-} from './Components.js';
-import { App } from './Settings.js';
+import { Get } from '../Actions/Get.js'
+import { Alert } from './Alert.js'
+import { Card } from './Card.js'
+import { FoldingCube } from './FoldingCube.js'
+import { ReleaseNotes } from './ReleaseNotes.js'
+import { App } from '../Core.js'
 
 /**
  *
  * @param {*} param
  */
-
 export async function ReleaseNotesContainer(param) {
     const {
         parent, margin

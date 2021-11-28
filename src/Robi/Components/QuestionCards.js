@@ -1,12 +1,13 @@
-import { Alert, Container, QuestionCard } from './Components.js';
-import Store from './Store.js';
+import { Alert } from './Alert.js'
+import { Container } from './Container.js'
+import { QuestionCard } from './QuestionCard.js'
+import { Store } from '../Core.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function QuestionCards(param) {
     const {
         parent, path, questions

@@ -1,12 +1,9 @@
-import {
-    Title,
-    Alert
-} from '../Core/Components.js';
+import { Title } from './Title.js'
+import { Alert } from './Alert.js'
 
 /**
  *
  */
-
 export async function Unauthorized(param) {
     const { parent } = param;
 

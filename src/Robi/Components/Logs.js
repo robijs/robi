@@ -1,11 +1,10 @@
-import {
-    Get,
-    Route
-} from '../Core/Actions.js';
-import {
-    Alert,
-    BootstrapButton, Container, FoldingCube, SingleLineTextField
-} from './Components.js';
+import { Get } from '../Actions/Get.js'
+import { Route } from '../Actions/Route.js'
+import { Alert } from './Alert.js'
+import { BootstrapButton } from './BootstrapButton.js'
+import { Container } from './Container.js'
+import { FoldingCube } from './FoldingCube.js'
+import { SingleLineTextField } from './SingleLineTextField.js'
 
 /**
  *

@@ -1,25 +1,20 @@
-import {
-    DeleteItem,
-    Get,
-    Route
-} from '../Core/Actions.js';
-import {
-    Container,
-    DataTable,
-    Heading,
-    Modal
-} from './Components.js';
-import { Lists } from '../Models/Lists.js';
-import lists from '../lists.js';
-import { EditForm } from './EditForm';
-import { NewForm } from './NewForm';
+import { DeleteItem } from '../Actions/DeleteItem.js'
+import { Get } from '../Actions/Get.js'
+import { Route } from '../Actions/Route.js'
+import { Container } from './Container.js'
+import { DataTable } from './DataTable.js'
+import { Heading } from './Heading.js'
+import { Modal } from './Modal.js'
+import { EditForm } from './EditForm.js'
+import { NewForm } from './NewForm.js'
+import { Lists } from '../Models/Lists.js'
+import lists from '../../lists.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export async function Table(param) {
     const {
         addButton, addButtonValue, border, buttonColor, checkboxes, createdRow, defaultButtons, displayForm, editForm, editFormTitle, filter, formFooter, formTitleField, headerFilter, heading, headingColor, headingMargin, headingSize, list, margin, newForm, onUpdate, openInModal, order, padding, parent, showId, striped, titleDisplayName, view

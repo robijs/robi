@@ -36,12 +36,7 @@ export function BootstrapButton(param) {
             <button type="button" class="btn btn-${type} ${classes?.join(' ')}" ${disabled ? 'disabled' : ''} ${style ? `style='${style}'` : ''}>${value}</button>
         `,
         style: /*css*/ `
-            #id.btn-robi {
-                background: #e9ecef !important;
-                /* color: ${App.get('primaryColor')}; */
-                color: seagreen;
-                font-weight: 500;
-            }
+
         `,
         parent,
         position,

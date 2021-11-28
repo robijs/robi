@@ -1,12 +1,10 @@
-import {
-    Title,
-    Alert
-} from '../Core/Components.js';
+import { Title } from './Title.js'
+import { Alert } from './Alert.js'
 
 /**
- *
+ * 
+ * @param {*} param 
  */
-
 export async function Missing(param) {
     const { parent } = param;
 

@@ -1,12 +1,14 @@
-import { CreateItem } from '../Core/Actions.js';
-import { BootstrapDropdown, MultiLineTextField, NumberField, SingleLineTextField } from './Components.js';
+import { CreateItem } from '../Actions/CreateItem.js'
+import { BootstrapDropdown } from './BootstrapDropdown.js'
+import { MultiLineTextField } from './MultiLineTextField.js'
+import { NumberField } from './NumberField.js'
+import { SingleLineTextField } from './SingleLineTextField.js' 
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export async function NewForm(param) {
     const { event, fields, list, modal, parent, table } = param;
 

@@ -1,11 +1,11 @@
-import { Component, GenerateUUID } from '../Actions.js';
-import { Route } from "./Route";
-import { App } from '../Core.js';
-import Store from '../Store.js';
-import { BootstrapButton } from './BootstrapButton';
-import { BootstrapTextarea } from './BootstrapTextarea';
-import { Modal } from './Modal';
-import { SingleLineTextField } from "./SingleLineTextField";
+import { Component } from '../Actions/Component.js'
+import { GenerateUUID } from '../Actions/GenerateUUID.js'
+import { Route } from '../Actions/Route.js'
+import { BootstrapButton } from './BootstrapButton.js'
+import { BootstrapTextarea } from './BootstrapTextarea.js'
+import { Modal } from './Modal.js'
+import { SingleLineTextField } from './SingleLineTextField.js'
+import { App, Store} from '../Core.js'
 
 /**
  *
@@ -662,8 +662,6 @@ export function Sidebar(param) {
     function toggleSidebarMode(event) {
         const mode = component.get().dataset.mode;
 
-        console.log(mode);
-
         if (mode === 'open') {
             closeSidebar(mode, this);
         } else if (mode === 'closed') {
@@ -686,9 +684,6 @@ export function Sidebar(param) {
 
             /** Set mode */
             component.get().dataset.mode = 'closed';
-
-            /** Log close action */
-            console.log(`Close sidebar.`);
         }
     }
 
@@ -707,9 +702,6 @@ export function Sidebar(param) {
 
             /** Set mode */
             component.get().dataset.mode = 'open';
-
-            /** Log open action */
-            console.log(`Open sidebar.`);
         }
     }
 

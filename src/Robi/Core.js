@@ -1,14 +1,12 @@
-import {
-    Help,
-    Missing,
-    Unauthorized,
-    Users,
-    Settings,
-    Developer,
-    QuestionTypes,
-    QuestionBoard,
-    QuestionAndReplies
-} from './Views.js'
+import { Help } from './Components/Help.js'
+import { Missing } from './Components/Missing.js'
+import { Unauthorized } from './Components/Unauthorized.js'
+import { Users } from './Components/Users.js'
+import { Settings } from './Components/Settings.js'
+import { Developer } from './Components/Developer.js'
+import { QuestionTypes } from './Components/QuestionTypes.js'
+import { QuestionBoard } from './Components/QuestionBoard.js'
+import { QuestionAndReplies } from './Components/QuestionAndReplies.js'
 
 let settings = {};
 
@@ -176,7 +174,7 @@ const Routes = [
     }
 ];
 
-const data = {
+const store = {
     elementIdCounter: 0,
     viewScrollTop: 0,
     data: {},
@@ -203,7 +201,7 @@ const Store = {
                         items
                     } = param;
         
-                    data.lists[list] = items;
+                    store.lists[list] = items;
                     break;
                 }
             case 'model':
@@ -213,7 +211,7 @@ const Store = {
                         model
                     } = param;
         
-                    data.models[name] = model;
+                    store.models[name] = model;
                     break;
                 }
             default:
@@ -222,48 +220,48 @@ const Store = {
                         name
                     } = param;
         
-                    data.components[name] = param;
+                    store.components[name] = param;
                     break;
                 }
         }
     },
     addWorker(worker) {
-        data.workers.push(worker);
+        store.workers.push(worker);
     },
     terminateWorkers() {
-        data.workers.forEach(worker => {
+        store.workers.forEach(worker => {
             worker.terminate();
         });
     },
     addAbortController(controller) {
-        data.abortControllers.push(controller);
+        store.abortControllers.push(controller);
     },
     getAbortControllers() {
-        return data.abortControllers;
+        return store.abortControllers;
     },
     abortAll() {
-        data.abortControllers.forEach(controller => {
+        store.abortControllers.forEach(controller => {
             controller.abort();
         });
     },
     get(name) {
-        if (data.components[name]) {
-            return data.components[name].component;
-        } else if (data.lists[name]) {
-            return data.lists[name];
-        } else if(data.models[name]) {
-            return data.models[name];
+        if (store.components[name]) {
+            return store.components[name].component;
+        } else if (store.lists[name]) {
+            return store.lists[name];
+        } else if(store.models[name]) {
+            return store.models[name];
         } else {
             return undefined;
         }
     },
     getNextId() {
-        return `App-${data.elementIdCounter++}`; 
+        return `App-${store.elementIdCounter++}`; 
     },
     remove(name) {
-        data.components[name].component.remove();
+        store.components[name].component.remove();
         
-        delete data.components[name];
+        delete store.components[name];
     },
     // register(actionData) {
     //     store.data.push(actionData);
@@ -277,39 +275,39 @@ const Store = {
     //     return store.data;
     // },
     empty() {
-        data.components = {};
+        store.components = {};
         // TODO: Do we want to persist data when routing?
         // store.data = [];
     },
     user(userInfo) {
         if (typeof userInfo === 'object') {
-            data.user = userInfo;
+            store.user = userInfo;
         } else {
-            return data.user;
+            return store.user;
         }
     },
     viewScrollTop(param) {
         if (param) {
             if (typeof param === 'number') {
-                data.viewScrollTop = param;
+                store.viewScrollTop = param;
             } else {
                 console.log(`${param} is not a number`);
             }
         } else {
-            return data.viewScrollTop;
+            return store.viewScrollTop;
         }
     },
     setData(name, data) {
-        data.data[name] = data;
+        store.data[name] = data;
     },
     getData(name) {
-        return data.data[name];
+        return store.data[name];
     },
     setRoutes(routes) {
-        data.routes = routes;
+        store.routes = routes;
     },
     routes() {
-        return data.routes;
+        return store.routes;
     }
 }
 

@@ -5,7 +5,6 @@ import { Component } from '../Actions/Component.js'
  * @param {*} param
  * @returns
  */
-
 export function ReleaseNotes(param) {
     const {
         version, notes, parent, position

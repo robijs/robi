@@ -1,17 +1,16 @@
-import { Title, UpgradeAppButton } from '../Core/Components.js';
-import Store from '../Core/Store.js';
-import {
-    AccountInfo,
-    BuildInfo,
-    DeveloperLinks,
-    ReleaseNotesContainer,
-    SiteUsage
-} from '../Core/ViewParts.js';
+import { Title } from './Title.js'
+import { UpgradeAppButton } from './UpgradeAppButton.js'
+import { AccountInfo } from './AccountInfo.js'
+import { BuildInfo } from './BuildInfo.js'
+import { DeveloperLinks } from './DeveloperLinks.js'
+import { ReleaseNotesContainer } from './ReleaseNotesContainer.js'
+import { SiteUsage } from './SiteUsage.js'
+import { Store } from '../Core.js'
 
 /**
- *
+ * 
+ * @param {*} param 
  */
-
 export async function Settings(param) {
     const { parent } = param;
 

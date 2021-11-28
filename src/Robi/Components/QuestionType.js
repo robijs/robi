@@ -1,13 +1,12 @@
 import { Component } from '../Actions/Component.js'
-import { Route } from "./Route";
-import { App } from '../Core.js';
+import { Route } from '../Actions/Route.js'
+import { App } from '../Core.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function QuestionType(param) {
     const {
         title, path, questions, parent, position

@@ -1,11 +1,11 @@
-import { Component, GenerateUUID } from '../Actions.js';
+import { Component } from '../Actions/Component.js'
+import { GenerateUUID } from '../Actions/GenerateUUID.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-
 export function MultiChoiceField(param) {
     const {
         label, description, choices, value, fillIn, parent, position, width, fieldMargin, onChange

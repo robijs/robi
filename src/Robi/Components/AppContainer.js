@@ -135,7 +135,25 @@ export function AppContainer() {
                 border-color: royalblue !important;
             }
 
-            /* Light */
+            /* Robi buttons */
+            .btn-robi-reverse {
+                background: ${App.get('primaryColor')};
+                color: white !important;
+                font-weight: 500;
+            }
+
+            .btn-robi {
+                color: ${App.get('primaryColor')};
+                background: #e9ecef;
+                font-weight: 500;
+            }
+
+            .btn-robi-success {
+                color: seagreen;
+                background: #e9ecef;
+                font-weight: 500;
+            }
+
             .btn-light:hover {
                 color: #212529 !important;
                 background-color: #f8f9fa !important;
@@ -148,7 +166,6 @@ export function AppContainer() {
                 background-color: #f8f9fa !important;
                 border-color: #f8f9fa !important;
             }
-            /* End light */
 
             .btn-outline-primary {
                 color: royalblue !important;
@@ -220,16 +237,19 @@ export function AppContainer() {
                 font-size: 13px !important;
             }
 
-            .form-control:not(.custom-select):focus,
-            .form-field-multi-line-text.editable:focus {
+            .form-control:not(.custom-select):focus {
                 /* border-color: #ced4da !important; */
                 /* box-shadow: 0 0 0 0.2rem #7b68ee6b !important; */
                 border-color: transparent !important;
-                box-shadow: 0 0 0 0.2rem ${App.get('primaryColor') + '6b'} !important;
+                box-shadow: 0 0 0 3px ${App.get('primaryColor') + '6b'} !important;
             }
 
+            .form-field-multi-line-text.editable:focus,
             .btn.dropdown-toggle:focus {
-                box-shadow: 0 0 0 0.2rem ${App.get('primaryColor') + '6b'} !important;
+                /* border-color: #ced4da !important; */
+                /* box-shadow: 0 0 0 0.2rem #7b68ee6b !important; */
+                border-color: transparent !important;
+                box-shadow: 0 0 0 4px ${App.get('primaryColor') + '6b'} !important;
             }
 
             /* Override bootstrap alert style */
@@ -239,21 +259,21 @@ export function AppContainer() {
             }
 
             .alert-robi-primary {
-                background: ${App.get('primaryColor') + '29'};
+                background: ${App.get('primaryColor') + '29'} !important;
 
             }
 
-            .alert-robi-primary * {
-                color: ${App.get('primaryColor')};
+            .alert-robi-primary *:not(.btn) {
+                color: ${App.get('primaryColor')} !important;
             }
 
             .alert-robi-secondary {
-                background: ${App.get('backgroundColor')};
+                background: ${App.get('backgroundColor')} !important;
 
             }
 
-            .alert-robi-secondary * {
-                color: ${App.get('defaultColor')};
+            .alert-robi-secondary *:not(.btn) {
+                color: ${App.get('defaultColor')} !important;
             }
             
             /* Override bootstrap drop down style */

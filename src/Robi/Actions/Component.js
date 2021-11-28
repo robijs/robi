@@ -46,14 +46,6 @@ export function Component(param) {
         const parsedHTML = parser.parseFromString(html, 'text/html');
         const newElement = parsedHTML.body.firstElementChild;
 
-        if (inlineStyle) {
-            newElement.style = inlineStyle
-                .split('\n')
-                .map(style => style.trim())
-                .join(' ')
-                .trim();
-        }
-
         newElement.id = id;
 
         try {

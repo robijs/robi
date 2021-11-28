@@ -1,4 +1,5 @@
-import { Component, DeleteItem } from '../Actions.js';
+import { Component } from '../Actions/Component.js'
+import { DeleteItem } from '../Actions/DeleteItem.js'
 import { App } from '../Core.js';
 
 /**
@@ -6,7 +7,6 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-
 export function FilesTable(param) {
     const {
         remove, files, list, label, labelWeight, labelSize, parent, position, onAdd, onDelete
