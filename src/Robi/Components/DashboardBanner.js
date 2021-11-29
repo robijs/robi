@@ -61,7 +61,8 @@ export function DashboardBanner(param) {
             }
 
             #id .dashboard-banner-value {
-                font-size: 28px;
+                white-space: nowrap;
+                font-size: 22px;
                 font-weight: 600;
             }
         `,

@@ -128,18 +128,22 @@ import { SiteUsageModel } from '../Models/SiteUsageModel.js'
                 },
                 {
                     label: 'Most Active Visitor',
-                    value: visitors[0],
+                    value: formatName(visitors[0]),
                     description: 'Developer',
                     background
                 },
                 {
                     label: 'Last Visit',
                     value: new Date(items[0].Created).toLocaleDateString() + ' ' + new Date(items[0].Created).toLocaleTimeString('default', { timeStyle: 'short', hour12: false }),
-                    description: items[0].Author.Title,
+                    description: formatName(items[0].Author.Title),
                     background
                 }
             ],
             model
         });
+    }
+
+    function formatName(name) {
+        return name.split(' ').slice(0, 2).join(' ');
     }
 })();

@@ -3,6 +3,7 @@ import { App, Store } from '../Core.js'
 import { TestInstall } from './TestInstall.js'
 import { LaunchApp } from './LaunchApp.js'
 import { InstallApp } from './InstallApp.js'
+import { GetAppSetting } from './GetAppSetting.js'
 
 /**
  *
