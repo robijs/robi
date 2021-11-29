@@ -53,32 +53,38 @@ export function SingleLineTextField(param) {
                 <!-- ${readOnly ? /*html*/ `<div class='form-field-single-line-text readonly'>${value || ''}</div>` : /*html*/ `<div class='form-field-single-line-text editable' contenteditable='true'>${value || ''}</div>`} -->
                 <label class='form-label'>${label}</label>
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
-                ${addon ?
-            /*html*/ `
+                ${
+                    addon ?
+                    /*html*/ `
                         <div class='input-group'>
                             <div class='input-group-prepend'>
                                 <div class='input-group-text'>${addon}</div>
                             </div>
-                            ${readOnly ?
-                    /*html*/ `
+                            ${
+                                readOnly ?
+                                /*html*/ `
                                     <div type='text' class='form-field-single-line-text readonly'>${value || ''}</div>
                                 ` :
-                    /*html*/ `
+                                /*html*/ `
                                     <!-- Edge won't respect autocomplete='off', but autocomplete='new-password' seems to work -->
                                     <input type='text' class='form-control' value='${value || ''}' list='autocompleteOff' autocomplete='new-password' placeholder='${placeholder || ''}'>
-                                `}
+                                `
+                            }
                         </div>    
                     ` :
-            /*html*/ `
-                        ${readOnly ?
-                /*html*/ `
+                    /*html*/ `
+                        ${
+                            readOnly ?
+                            /*html*/ `
                                 <div type='text' class='form-field-single-line-text readonly'>${value || ''}</div>
                             ` :
-                /*html*/ `
+                            /*html*/ `
                                 <!-- Edge won't respect autocomplete='off', but autocomplete='new-password' seems to work -->
                                 <input type='text' class='form-control' value='${value || ''}' list='autocompleteOff' autocomplete='new-password' placeholder='${placeholder || ''}'>
-                            `}
-                    `}
+                            `   
+                        }
+                    `
+                }
             </div>
         `,
         style: /*css*/ `

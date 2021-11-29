@@ -47,8 +47,10 @@ export function Question(param) {
                         ` : ''
                     }
                 <div class='reply-count'>
-                    <span class='reply-count-label'>Replies</span>
-                    <span class='badge badge-secondary reply-count-value'>${replyCount}</span>
+                    <span class='reply-count-value'>
+                        <span>${replyCount}</span>
+                    </span>
+                    <span class='reply-count-label'>${replyCount === 1 ? 'Reply' : 'Replies'}</span>
                 </div>
             </div>
         `,
@@ -56,6 +58,12 @@ export function Question(param) {
             #id {
                 width: 100%;
                 margin: ${margin || '0px'};
+            }
+
+            #id .card {
+                background: ${App.get('backgroundColor')};
+                border: none;
+                border-radius: 20px;
             }
 
             #id .card-title {
@@ -68,8 +76,17 @@ export function Question(param) {
                 font-weight: 400;
             }
 
+            #id .card-text {
+                font-size: 13px;
+            }
+
             #id .question-card-body {
                 padding: 1.75rem;
+            }
+
+            #id .card-footer {
+                border-radius: 0px 0px 20px 20px;
+                background: inherit;
             }
 
             /** Edit button */
@@ -92,13 +109,31 @@ export function Question(param) {
             /** Replies */
             #id .reply-count {
                 margin: 20px 0px;
-                font-size: 1.3em;
+                font-size: 16px;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                justify-content: end;
             }
             
-            #id .badge-info {
-                padding: 4px 8px;
-                margin: 0px;
-                font-weight: 400;
+            #id .reply-count-value {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 30px;
+                width: 30px;
+                cursor: pointer;
+                margin: 5px;
+                padding: 5px;
+                font-weight: bold;
+                text-align: center;
+                border-radius: 50%;
+                color: white;
+                background: ${App.get('primaryColor')};
+            }
+
+            #id .reply-count-value * {
+                color: white;
             }
         `,
         parent,
@@ -121,9 +156,9 @@ export function Question(param) {
 
         return `
             ${new Date(date).toLocaleDateString()} ${new Date(date).toLocaleTimeString('default', {
-            hour: 'numeric',
-            minute: 'numeric'
-        })}
+                hour: 'numeric',
+                minute: 'numeric'
+            })}
         `;
     }
 
@@ -167,7 +202,7 @@ export function Question(param) {
         } = lastReply;
 
         return /*html*/ `
-            <span>
+            <span style='font-size: 14px; font-weight: 500'>
                 <span>Last reply by ${Author.Title}</span>
                 <span>${formatDate(Created)}</span>
             </span>

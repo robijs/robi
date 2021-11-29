@@ -1,4 +1,5 @@
 import { Component } from '../Actions/Component.js'
+import { App } from '../Core.js'
 
 /**
  *
@@ -24,12 +25,12 @@ export function ReleaseNotes(param) {
 
             #id .release-notes-version {
                 font-size: 1.4em;
-                color: mediumpurple;
+                color: ${App.get('primaryColor')};
                 margin-bottom: 10px;
             }
 
             #id .release-notes-version strong {
-                color: mediumpurple;
+                color: ${App.get('primaryColor')};
             }
         `,
         parent: parent,

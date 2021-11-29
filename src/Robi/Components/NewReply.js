@@ -39,61 +39,63 @@ export function NewReply(param) {
             /* New Comment */
             #id .new-comment-container {
                 display: flex;
-                background: white;
-                border-radius: 4px;
+                background: #F8F8FC;
+                border-radius: 20px;
             }
 
             #id .new-comment {
                 overflow-wrap: anywhere;
                 flex: 2;
-                font-size: .9em;
+                font-size: 13px;
                 font-weight: 500;
                 padding: 10px 20px;
-                border-radius: 4px 0px 0px 4px;
-                border-left: solid 1px rgba(0, 0, 0, .1);
-                border-top: solid 1px rgba(0, 0, 0, .1);
-                border-bottom: solid 1px rgba(0, 0, 0, .1);
+                border-radius: 20px 0px 0px 20px;
+                border-left: solid 3px #F8F8FC;
+                border-top: solid 3px #F8F8FC;
+                border-bottom: solid 3px #F8F8FC;
             }
 
             #id .new-comment:active,
             #id .new-comment:focus{
                 outline: none;
-                border-left: solid 1px ${App.get('primaryColor')};
-                border-top: solid 1px ${App.get('primaryColor')};
-                border-bottom: solid 1px ${App.get('primaryColor')};
+                border-left: solid 3px ${App.get('primaryColor') + '6b'};
+                border-top: solid 3px ${App.get('primaryColor') + '6b'};
+                border-bottom: solid 3px ${App.get('primaryColor') + '6b'};
             }
 
-            #id .new-comment-button-container,
             #id .new-comment-button-container {
-                border-radius: 0px 4px 4px 0px;
-                border-right: solid 1px rgba(0, 0, 0, .1);
-                border-top: solid 1px rgba(0, 0, 0, .1);
-                border-bottom: solid 1px rgba(0, 0, 0, .1);
+                display: flex;
+                align-items: end;
+                border-radius: 0px 20px 20px 0px;
+                border-right: solid 3px #F8F8FC;
+                border-top: solid 3px #F8F8FC;
+                border-bottom: solid 3px #F8F8FC;
             }
 
             #id .new-comment:active ~ .new-comment-button-container,
             #id .new-comment:focus ~ .new-comment-button-container {
-                border-radius: 0px 4px 4px 0px;
-                border-right: solid 1px ${App.get('primaryColor')};
-                border-top: solid 1px ${App.get('primaryColor')};
-                border-bottom: solid 1px ${App.get('primaryColor')};
+                border-radius: 0px 20px 20px 0px;
+                border-right: solid 3px ${App.get('primaryColor') + '6b'};
+                border-top: solid 3px ${App.get('primaryColor') + '6b'};
+                border-bottom: solid 3px ${App.get('primaryColor') + '6b'};
             }
 
             /* Button */
             #id .new-comment-button {
                 cursor: pointer;
-                display: inline-block;
+                display: flex;
                 margin: 5px;
-                padding: 5px 7.5px;
+                padding: 5px;
                 font-weight: bold;
                 text-align: center;
-                border-radius: 4px;
+                border-radius: 50%;
                 color: white;
-                background: ${App.get('primaryColor')};
+                background: #e9ecef;
             }
 
             #id .new-comment-button .icon {
                 font-size: 1.2em;
+                fill: ${App.get('primaryColor')};
             }
 
             /* Label */
@@ -115,6 +117,20 @@ export function NewReply(param) {
                         component.find('.new-comment-button').click();
                     }
                 }
+            },
+            {
+                selector: '#id .new-comment',
+                event: 'paste',
+                async listener(event) {
+                    // cancel paste
+                    event.preventDefault();
+
+                    // get text representation of clipboard
+                    const text = (event.originalEvent || event).clipboardData.getData('text/plain');
+
+                    // insert text manually
+                    event.target.innerText = text;
+            }
             },
             {
                 selector: '#id .new-comment-button',

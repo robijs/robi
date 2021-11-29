@@ -1,5 +1,6 @@
 import { Component } from '../Actions/Component.js'
 import { Route } from '../Actions/Route.js'
+import { App } from '../Core.js'
 
 /**
  *
@@ -48,7 +49,7 @@ export function QuestionCard(param) {
                         ${
                             label === 'new' ?
                             /*html*/ `
-                                <span class='badge badge-warning' role='alert'>New</span>
+                                <span class='badge badge-success' role='alert'>New</span>
                             ` : ''
                         }
                         ${
@@ -75,11 +76,22 @@ export function QuestionCard(param) {
                 max-width: 700px;
                 margin: ${margin || '0px'};
                 cursor: pointer;
+                background: ${App.get('backgroundColor')};
+                border: none;
+                border-radius: 20px;
             }
 
             #id .card-title {
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
+            }
+            
+            #id .card-title .badge {
+                font-size: 12px;
+                font-weight: 500;
+                padding: 5px 10px;
+                border-radius: 8px;
             }
 
             #id .reply-count {

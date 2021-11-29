@@ -31,7 +31,7 @@ Start({
             go: Test
         }
         // @END-Test
-        // @END-ROUTES
+        , // @ROUTE// @END-ROUTES
     ]
     ,
     // REQUIRED PROPERTIES

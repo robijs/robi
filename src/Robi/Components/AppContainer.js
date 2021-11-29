@@ -14,6 +14,7 @@ export function AppContainer() {
         style: /*css*/ `
             .appcontainer {
                 display: none;
+                background: ${App.get('secondaryColor')};
             }
 
             *, html {
@@ -289,6 +290,11 @@ export function AppContainer() {
                 background-color: initial;
             }
             
+            /** Bootstrap badge colors */
+            .badge-success {
+                background: seagreen !important;
+            }
+
             /* Robi text */
             .text-robi {
                 color: ${App.get('primaryColor')} !important;
@@ -423,10 +429,6 @@ export function AppContainer() {
             }
 
             /* Dialog boxes */
-            .dialog-box {
-                animation: dialog-fade 200ms ease-in-out forwards;
-            }
-
             @keyframes dialog-fade {
                 0% {
                     transform: scale(.5);
@@ -439,12 +441,11 @@ export function AppContainer() {
                 }
             }
 
-            /* Taggle */
-            .bounce {
-                -webkit-animation-name: bounce;
-                animation-name: bounce;
+            .dialog-box {
+                animation: dialog-fade 200ms ease-in-out forwards;
             }
 
+            /* Taggle */
             @keyframes bounce {
                 0%,
                 20%,
@@ -463,6 +464,27 @@ export function AppContainer() {
                     transform: translateY(-7px);
                 }
             }
+
+            .bounce {
+                -webkit-animation-name: bounce;
+                animation-name: bounce;
+            }
+
+            /* Shrink app */
+            @keyframes shrink-app {
+                from {
+                    transform: scale(1);
+                }
+
+                to {
+                    transform: scale(.92);
+                }
+            }
+
+            .shrink-app {
+                animation: 400ms ease-in-out forwards shrink-app;
+            }
+
         `,
         position: 'afterbegin',
         events: []

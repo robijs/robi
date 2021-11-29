@@ -51,7 +51,9 @@ export async function QuestionTypes(param) {
     }
 
     const questions = await Get({
-        list: 'Questions'
+        list: 'Questions',
+        select: '*,Author/Name,Author/Title,Editor/Name,Editor/Title',
+        expand: `Author/Id,Editor/Id`,
     });
 
     console.log(questions);

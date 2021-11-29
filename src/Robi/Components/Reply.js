@@ -18,22 +18,24 @@ export function Reply(param) {
     const component = Component({
         html: /*html*/ `
             <div class='card'>
-                ${Author.Name === Store.user().LoginName ?
-            /*html*/ `
+                ${
+                    Author.Name === Store.user().LoginName ?
+                    /*html*/ `
                         <div class='button-group'>
                             <button type='button' class='btn btn-secondary cancel'>Cancel</button>
                             <button type='button' class='btn btn-robi-primaryColor edit'>Edit reply</button>
                         </div>
-                    ` :
-                ''}
+                    ` : ''
+                }
                 <div class='card-body'>
                     <h6 class='card-subtitle mb-2 text-muted'>
                         <span>${Author.Title} ${formatDate(Created)}</span>
-                        ${label === 'new' ?
-            /*html*/ `
-                                <span class='badge badge-warning' role='alert'>New</span>
-                            ` :
-                ''}
+                        ${
+                            label === 'new' ?
+                            /*html*/ `
+                                <span class='badge badge-success' role='alert'>New</span>
+                            ` : ''
+                        }
                     </h6>
                     <div class='card-text mb-2'>${Body || ''}</div>
                     <h6 class='card-subtitle mt-2 text-muted edit-text'>${edited(Created, Modified) ? `Last edited by ${Editor.Title} ${formatDate(Modified)} ` : ''}</h6>
@@ -45,6 +47,9 @@ export function Reply(param) {
                 width: 100%;
                 margin: ${margin || '0px'};
                 position: relative;
+                background: ${App.get('backgroundColor')};
+                border: none;
+                border-radius: 20px;
             }
 
             #id .card-title {
@@ -53,12 +58,17 @@ export function Reply(param) {
             }
 
             #id .card-subtitle {
-                font-size: .9em;
+                font-size: 14px;
                 font-weight: 400;
+                text-align: right;
             }
 
             #id .question-card-body {
                 padding: 1.75rem;
+            }
+
+            #id .card-text {
+                font-size: 13px;
             }
 
             /* Reply */

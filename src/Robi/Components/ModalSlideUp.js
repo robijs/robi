@@ -6,7 +6,7 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-export function Modal(param) {
+export function ModalSlideUp(param) {
     const {
         title, titleStyle, headerStyle, footerStyle, close, addContent, buttons, centered, fade, background, fullSize, showFooter, scrollable, contentPadding, parent, disableBackdropClose, position
     } = param;
@@ -14,11 +14,10 @@ export function Modal(param) {
     const component = Component({
         html: /*html*/ `
             <!-- Modal -->
-            <!-- <div class='modal${fade ? ' fade' : ''}' tabindex='-1' role='dialog' aria-hidden='true'> -->
-            <div class='modal fade' tabindex='-1' role='dialog' aria-hidden='true' ${disableBackdropClose ? 'data-keyboard="false" data-backdrop="static"' : ''}>
+            <div class='modal animate' tabindex='-1' role='dialog' aria-hidden='true' ${disableBackdropClose ? 'data-keyboard="false" data-backdrop="static"' : ''}>
                 <!-- <div class='modal-dialog modal-dialog-zoom ${scrollable !== false ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'> -->
                 <div class='modal-dialog modal-dialog-zoom ${scrollable ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
-                    <div class='modal-content'>
+                    <div class='modal-content animate-bottom'>
                         ${
                             !title ?
                             /*html*/ `` :
@@ -69,7 +68,7 @@ export function Modal(param) {
 
             /** Modal Content */
             #id .modal-content {
-                border-radius: 10px;
+                border-radius: 20px;
                 border: none;
                 background: ${background || ''};
                 padding: ${contentPadding || '0px'};
@@ -192,7 +191,32 @@ export function Modal(param) {
                         margin: 40px !important;
                     }
                 ` :
-                ''}
+            ''}
+
+            /* Slide up animation */
+            #id .modal-dialog {
+                position: relative;
+                transform: translateY(30px) !important;
+                width: calc(100vw - 50px);
+                max-width: 100%;
+            }
+
+            .animate-bottom {
+                min-height: 100vh;
+                animation: animatebottom 500ms ease-in-out;
+            }
+              
+            @keyframes animatebottom {
+                from {
+                    bottom: -300px;
+                    opacity: 0;
+                }
+                
+                to {
+                    bottom: 0;
+                    opacity: 1;
+                }
+            }
         `,
         parent,
         position,

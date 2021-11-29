@@ -16,10 +16,10 @@ export function NewQuestion(param) {
         label: 'Question',
         description: '',
         width: '100%',
-        fieldMargin: '0px 40px 20px 40px',
         parent,
         onKeydown(event) {
-            if (event.target.innerText) {
+            if (event.target.value) {
+                console.log(modal.getButton('Submit'));
                 modal.getButton('Submit').disabled = false;
             } else {
                 modal.getButton('Submit').disabled = true;
@@ -36,7 +36,6 @@ export function NewQuestion(param) {
         label: 'Description',
         description: '',
         width: '100%',
-        fieldMargin: '20px 40px',
         optional: true,
         parent,
         onKeydown(event) {

@@ -4,6 +4,7 @@ import { Route } from '../Actions/Route.js'
 import { Container } from './Container.js'
 import { DataTable } from './DataTable.js'
 import { Heading } from './Heading.js'
+import { LoadingSpinner } from './LoadingSpinner.js'
 import { Modal } from './Modal.js'
 import { EditForm } from './EditForm.js'
 import { NewForm } from './NewForm.js'
@@ -62,13 +63,14 @@ export async function Table(param) {
     let formFields = [];
 
     if (list) {
-        // Show loading
-        tableContainer.append(/*html*/ `
-            <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center'>
-                <div class="mb-2" style='font-weight: 600; color: darkgray'>Loading ${list}</div>
-                <div class="spinner-grow" style='color: darkgray' role="status"></div>
-            </div>
-        `);
+        // Show loading spinner
+        const loadingSpinner = LoadingSpinner({
+            type: 'robi', 
+            message: `Loading ${list}`,
+            parent: tableContainer
+        });
+
+        loadingSpinner.add();
 
         items = await Get({
             list,
@@ -101,10 +103,7 @@ export async function Table(param) {
 
         // Remove loading
         // FIXME: Shouldn't have to use optional chaining
-        // wrap in try catch?
-        // or convert to Robi component?
-        // how would react handle this?
-        tableContainer.find('.loading-spinner')?.remove();
+        loadingSpinner.remove();
 
         [{ name: 'Id', display: 'Id', type: 'number' }]
             .concat(fields)

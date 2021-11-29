@@ -46,6 +46,7 @@ import { Logs } from './Components/Logs.js'
 import { MainContainer } from './Components/MainContainer.js'
 import { Missing } from './Components/Missing.js'
 import { Modal } from './Components/Modal.js'
+import { ModalSlideUp } from './Components/ModalSlideUp.js'
 import { MultiChoiceField } from './Components/MultiChoiceField.js'
 import { MultiLineTextField } from './Components/MultiLineTextField.js'
 import { NameField } from './Components/NameField.js'
@@ -140,6 +141,7 @@ export {
     MainContainer,
     Missing,
     Modal,
+    ModalSlideUp,
     MultiChoiceField,
     MultiLineTextField,
     NameField,

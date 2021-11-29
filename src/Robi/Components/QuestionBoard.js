@@ -238,6 +238,7 @@ export async function QuestionBoard(param) {
         onAsk() {
             const modal = Modal({
                 title: 'Ask a question',
+                contentPadding: '30px',
                 showFooter: true,
                 background: App.get('secondaryColor'),
                 addContent(modalBody) {
