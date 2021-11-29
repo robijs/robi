@@ -1,4 +1,5 @@
 import { Component } from '../Actions/Component.js'
+import { App } from '../Core.js';
 
 /**
  *
@@ -17,17 +18,17 @@ export function ProgressBar(param) {
             </div>
         `,
         style: /*css*/ `
-            .loading-bar-container {
+            #id.loading-bar-container {
                 width: 100%;
                 margin: 1rem 0rem;
-                background: lightgray;
+                background: ${App.get('backgroundColor')};
                 border-radius: 10px;
             }
             
-            .loading-bar-status {
+            #id .loading-bar-status {
                 width: 0%;
                 height: 15px;
-                background: lightslategray;
+                background: ${App.get('primaryColor')};
                 border-radius: 10px;
                 transition: width 100ms ease-in-out;
             }

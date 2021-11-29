@@ -1,4 +1,5 @@
 import { GetRequestDigest  } from './GetRequestDigest.js'
+import { App } from '../Core.js'
 
 /**
  * 

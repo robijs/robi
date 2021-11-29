@@ -61,7 +61,7 @@ export async function CreateList(param) {
             progressBar.update();
 
             // +2 for each field
-            if (fields.length) {
+            if (fields?.length) {
                 for (let i = 0; i < fields.length; i++) {
                     progressBar.update();
                     progressBar.update();

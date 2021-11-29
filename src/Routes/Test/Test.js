@@ -795,7 +795,7 @@ export default async function Test(param) {
                         // Scroll console to bottom
                         installConsole.get().scrollTop = installConsole.get().scrollHeight;
 
-                        let spacers = '==============';
+                        let spacers = '===========';
 
                         for (let i = 0; i < title.length; i++) {
                             spacers = spacers + '=';
@@ -831,9 +831,12 @@ export default async function Test(param) {
                             </div>
                         `);
 
+                        // Update title
+                        modal.find('.console-title').innerHTML = `${modal.find('.console-title').innerHTML.replace('Creating', 'Created')}`
+
                         // Show launch button
                         const installAppBtn = BootstrapButton({
-                            type: 'primary',
+                            type: 'robi-reverse',
                             value: 'Install app',
                             classes: ['mt-3', 'w-100'],
                             action(event) {
@@ -856,7 +859,7 @@ export default async function Test(param) {
                             classes: ['w-100 mt-2'],
                             width: '100%',
                             parent: modalBody,
-                            type: 'outline-primary',
+                            type: 'robi',
                             value: 'Modify source'
                         });
 
@@ -875,7 +878,7 @@ export default async function Test(param) {
                             classes: ['w-100 mt-2'],
                             width: '100%',
                             parent: modalBody,
-                            type: 'light',
+                            type: '',
                             value: 'Close'
                         });
 
@@ -894,7 +897,7 @@ export default async function Test(param) {
                         classes: ['w-100 mt-2'],
                         width: '100%',
                         parent: modalBody,
-                        type: 'light',
+                        type: '',
                         value: 'Cancel'
                     });
 

@@ -69,7 +69,7 @@ export function Modal(param) {
 
             /** Modal Content */
             #id .modal-content {
-                border-radius: 10px;
+                border-radius: 20px;
                 border: none;
                 background: ${background || ''};
                 padding: ${contentPadding || '0px'};

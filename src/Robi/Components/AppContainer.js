@@ -182,6 +182,18 @@ export function AppContainer() {
                 border-color: royalblue !important;
             }
 
+            .btn-subtle-primary {
+                color: royalblue !important;
+                border-color: ${App.get('backgroundColor')} !important;
+                background-color: ${App.get('backgroundColor')} !important;
+            }
+
+            .btn-subtle-primary:hover {
+                color: royalblue !important;
+                border-color: ${App.get('backgroundColor')} !important;
+                background-color: ${App.get('backgroundColor')} !important;
+            }
+
             .btn-success {
                 background-color: seagreen !important;
                 border-color: seagreen !important;

@@ -2,6 +2,7 @@ import { App } from '../Core.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { CopyFile } from './CopyFile.js'
 import { GetFolders } from './GetFolders.js'
+import { CreateFolder } from './CreateFolder.js'
 
 //@START
 /**
