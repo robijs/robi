@@ -27,12 +27,13 @@ export function Sidebar(param) {
                         </svg>
                     </span>
                     <!-- Developer options --> 
-                    ${Store.user().Role === 'Developer' ?
-                (() => {
-                    const id = GenerateUUID();
+                    ${
+                        Store.user().Role === 'Developer' ?
+                        (() => {
+                            const id = GenerateUUID();
 
-                    return /*html*/ `
-                                <div class='w-100 d-flex justify-content-end dev-buttons-container'>
+                            return /*html*/ `
+                                <div class='dev-buttons-container'>
                                     <div class="dropdown">
                                         <button class="btn w-100 open-dev-menu" type="button" id="${id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Edit
@@ -48,9 +49,12 @@ export function Sidebar(param) {
                                     </div>
                                 </div>
                             `;
-                })() : ''}
+                        })() : ''
+                    }
                 </div>
-                <h3 class='w-100'>${App.get('title')}</h3>
+                <div class='title-container'>
+                    <h3 class='title'>${App.get('title')}</h3>
+                </div>
                 <div class='nav-container'>
                     ${buildNav()}
                 </div>
@@ -71,12 +75,10 @@ export function Sidebar(param) {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
-                align-items: center;
                 background: ${App.gradientColor ? `linear-gradient(${App.get('gradientColor')})` : App.get('backgroundColor')};
                 border-right: solid 1px #d6d8db80;
                 height: 100vh;
-                min-width: 250px;
-                transition: width, min-width 300ms
+                transition: width 300ms, min-width 300ms
             }
 
             #id.sidebar.closed {
@@ -88,6 +90,7 @@ export function Sidebar(param) {
                 padding: 0px 23px 10px 23px; /* -2px on the sides */
                 margin: 0px;
                 font-weight: 700;
+                width: 100%;
             }
 
             /* Nav Container */
@@ -95,6 +98,7 @@ export function Sidebar(param) {
                 overflow: overlay;
                 width: 100%;
                 padding: 0px 17px; /* +2px on the sides */
+                overflow-x: hidden;
             }
 
             /* Settings */
@@ -122,12 +126,12 @@ export function Sidebar(param) {
 
             .sidebar .icon-container {
                 display: flex;
-                padding: 10px;
+                padding: 10px 15px;
             }
 
             .sidebar .icon-container-wide {
                 display: flex;
-                padding: 10px;
+                padding: 10px 15px;
             }
 
             .sidebar .nav .icon {
@@ -141,7 +145,15 @@ export function Sidebar(param) {
                 color: ${App.get('sidebarTextColor')};
                 font-size: 15px;
                 font-weight: 500;
-                padding: 10px 5px;
+                padding: 10px 0px;
+                min-width: 200px;
+                transition: width 300ms, min-width 300ms;
+            }
+
+            .sidebar .text.collapsed {
+                min-width: 0px;
+                overflow: hidden;
+                flex: 0;
             }
 
             /* Selected */
@@ -178,16 +190,6 @@ export function Sidebar(param) {
                 font-size: 1em;
             }
 
-            /* Logo */
-            #id .logo {
-                cursor: pointer;
-                margin: 15px 0px;
-                transition: all 150ms;
-                height: 31px;
-                object-fit: scale-down;
-            }
-            
-            /* Collapse */
             #id.sidebar .text.closed {
                 display: none;
             }
@@ -215,9 +217,9 @@ export function Sidebar(param) {
                 }
             }
 
-            /* Add route */
+            /* Edit menu */
             #id .collapse-container {
-                padding: 10px 15px 5px 15px;
+                padding: 10px 5px 5px 5px;
             }
 
             #id .collapse-container .btn {
@@ -239,6 +241,11 @@ export function Sidebar(param) {
                 border: none;
             }
 
+            #id .dev-buttons-container {
+                width: 50.41px;
+                transition: width 150ms ease, opacity 150ms ease;
+            }
+
             #id .dev-buttons-container.closed {
                 display: none !important;
             }
@@ -257,6 +264,64 @@ export function Sidebar(param) {
 
             #id .dev-buttons-container .delete-routes {
                 color: firebrick;
+            }
+
+            @keyframes fade-out-left {
+                from {
+                    transform: translateX(0px);
+                    opacity: 1;
+                    width: 0px;
+                }
+                to {
+                    transform: translateX(-${App.get('title').length + 20}px);
+                    opacity: 0;
+                    width: 0px;
+                }
+            }
+
+            @keyframes fade-out {
+                from {
+                    opacity: 1;
+                }
+                to {
+                    opacity: 0;
+                }
+            }
+
+            @keyframes fade-in {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
+            @keyframes fade-in-right {
+                from {
+                    transform: translateX(-${App.get('title').length + 20}px);
+                    opacity: 0;
+                    width: 0px;
+                }
+                to {
+                    transform: translateX(0px);
+                    opacity: 1;
+                    width: 0px;
+                }
+            }
+            
+            .fade-in {
+                animation: 150ms ease-in-out fade-in;
+            }
+
+            
+            .fade-out-left {
+                animation: 300ms ease-in-out fade-out-left;
+            }
+
+
+            .fade-in-right {
+                animation: 300ms ease-in-out fade-in-right;
             }
         `,
         parent: parent,
@@ -302,7 +367,16 @@ export function Sidebar(param) {
             }
         ],
         onAdd() {
-            /** Window resize event */
+            setTimeout(() => {
+                // Set nav width
+                component.findAll('.text').forEach(node => {
+                    console.log(node.offsetWidth);
+                    node.style.width = `${node.offsetWidth}px`;
+                    node.dataset.width = `${node.offsetWidth}px`;
+                });
+            }, 0); // FIXME: Will this always work, even on CarePoint/LaunchPad?
+
+            // Window resize event
             window.addEventListener('resize', event => {
                 const mode = component.get().dataset.mode;
 
@@ -659,6 +733,7 @@ export function Sidebar(param) {
         modal.add();
     }
 
+    // FIXME: Disable close/open button until animationend
     function toggleSidebarMode(event) {
         const mode = component.get().dataset.mode;
 
@@ -668,39 +743,59 @@ export function Sidebar(param) {
             openSidebar(mode, this);
         }
     }
-
+    
     function closeSidebar(mode) {
         if (mode !== 'closed') {
-            // FIXME: Experimental
-            // TODO: Instead, trigger on close sidebar animationend?
-            setTimeout(() => {
-                component.find('h3').innerText = App.get('title')[0];
-            }, 100);
+            // Collapse nav text nodes
+            component.findAll('.text').forEach(item => {
+                item.classList.add('collapsed');
+                item.style.width = '0px';
+            });
 
-            /** Add classes */
-            component.get().classList.add('closed');
-            component.find('.dev-buttons-container')?.classList.add('closed');
-            component.findAll('.text').forEach(item => item.classList.add('closed'));
+            // Fade out long title to the left
+            component.find('.title').addEventListener('animationend', event => {
+                console.log(event.target);
+                event.target.remove();
+                // Set short title
+                component.find('.title-container').insertAdjacentHTML('beforeend', /*html*/ `
+                    <h3 class='fade-in title' style='text-align: center;'>${App.get('title')[0]}</h3>                
+                `);
+            });
+            component.find('.title').classList.add('fade-out-left');
 
-            /** Set mode */
+            // Set fade up
+            component.find('.dev-buttons-container').style.opacity = '0';
+            component.find('.dev-buttons-container').style.width = '0px';
+
+            // Set mode
             component.get().dataset.mode = 'closed';
         }
     }
 
     function openSidebar(mode) {
         if (mode !== 'open') {
-            /** Remove Classes */
-            component.get().classList.remove('closed');
+            // Reset nav text node width
+            component.findAll('.text').forEach(item => {
+                item.classList.remove('collapsed');
+                item.style.width = item.dataset.width;
+            });
 
-            // FIXME: Experimental
-            // TODO: Instead, trigger on close sidebar animationend?
-            setTimeout(() => {
-                component.find('h3').innerText = App.get('title');
-                component.find('.dev-buttons-container')?.classList.remove('closed');
-                component.findAll('.text').forEach(item => item.classList.remove('closed'));
-            }, 100);
+            // Fade in long title from the left
+            // TODO: fadeout short title first
+            component.find('.title').remove();
+            component.find('.title-container').insertAdjacentHTML('beforeend', /*html*/ `
+                <h3 class='title fade-in-right'>${App.get('title')}</h3>
+            `);
+            component.find('.title').addEventListener('animationend', event => {
+                console.log(event.target);
+                event.target.classList.remove('fade-in-right');
+            });
 
-            /** Set mode */
+            // Set fade up
+            component.find('.dev-buttons-container').style.opacity = '1';
+            component.find('.dev-buttons-container').style.width = '50.41px';
+
+            // Set mode
             component.get().dataset.mode = 'open';
         }
     }
