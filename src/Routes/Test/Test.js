@@ -10,7 +10,7 @@ export default async function Test(param) {
 
     // View title
     const viewTitle = Title({
-        title: `Test`,
+        title: /* @START-Title */'Changed',/* @END-Title */
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'
@@ -31,6 +31,67 @@ export default async function Test(param) {
     });
 
     info.add();
+
+    const editTitle = BootstrapButton({
+        value: 'Edit title',
+        classes: ['mr-3'],
+        type: 'robi',
+        parent,
+        async action(event) {
+            let digest;
+            let request;
+
+            if (App.get('mode') === 'prod') {
+                digest = await GetRequestDigest();
+                request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/Test')/Files('Test.js')/$value`, {
+                    method: 'GET',
+                    headers: {
+                        'binaryStringRequestBody': 'true',
+                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                        'X-RequestDigest': digest
+                    }
+                });
+            } else {
+                request = await fetch(`http://127.0.0.1:8080/src/Routes/Test/Test.js`);
+                await Wait(1000);
+            }
+
+            const value = await request.text();
+            const newTitle = `'Changed',`;
+            const updated = value.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */${newTitle}/* @END-Title */`);
+
+            console.log('OLD\n----------------------------------------\n', value);
+            console.log('\n****************************************');
+            console.log('NEW\n----------------------------------------\n', updated);
+            console.log('\n****************************************');
+
+            let setFile;
+
+            if (App.get('mode') === 'prod') {
+                // TODO: Make a copy of app.js first
+                // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
+                setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/Test')/Files/Add(url='Test.js',overwrite=true)`, {
+                    method: 'POST',
+                    body: updated, 
+                    headers: {
+                        'binaryStringRequestBody': 'true',
+                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                        'X-RequestDigest': digest
+                    }
+                });
+            } else {
+                setFile = await fetch(`http://127.0.0.1:2035/?path=src/Routes/Test&file=Test.js`, {
+                    method: 'POST',
+                    body: updated
+                });
+                await Wait(1000);
+            }
+
+            console.log('Saved:', setFile);
+        }
+    });
+
+    editTitle.add();
 
     const shrinkApp = BootstrapButton({
         value: 'Shrink app',
@@ -77,7 +138,7 @@ export default async function Test(param) {
             headerStyle: 'border-bottom: solid 1px #676E95; padding-bottom: 0px;',
             footerStyle: 'border-top: solid 1px #676E95;',
             close: false,
-            scrollable: false,
+            scrollable: true,
             background: '#292D3E',
             centered: true,
             showFooter: false,
@@ -89,7 +150,7 @@ export default async function Test(param) {
                 });
     
                 loading.add();
-    
+
                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                     <!-- <div class='file-title d-none'>
                         <span class='file-title-text d-flex'>
@@ -111,6 +172,7 @@ export default async function Test(param) {
                 const editor = CodeMirror.fromTextArea(modal.find('.code-mirror-container'), {
                     mode: 'javascript',
                     lineNumbers: true,
+                    lineWrapping: true,
                     extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
                     foldGutter: true,
                     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]

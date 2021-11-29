@@ -59,7 +59,7 @@ export function ModalSlideUp(param) {
             }
 
             #id.modal {
-                overflow-y: overlay;
+                overflow-y: hidden;
             }
 
             #id.modal.show {
@@ -68,7 +68,7 @@ export function ModalSlideUp(param) {
 
             /** Modal Content */
             #id .modal-content {
-                border-radius: 20px;
+                border-radius: 20px 20px 0px 0px;
                 border: none;
                 background: ${background || ''};
                 padding: ${contentPadding || '0px'};
@@ -78,6 +78,11 @@ export function ModalSlideUp(param) {
             #id .modal-header {
                 border-bottom: none;
                 /* cursor: move; */
+            }
+
+            /* Body */
+            #id .modal-body {
+                padding-bottom: 100px;
             }
             
             /** Footer */
@@ -197,7 +202,7 @@ export function ModalSlideUp(param) {
             #id .modal-dialog {
                 position: relative;
                 transform: translateY(30px) !important;
-                width: calc(100vw - 50px);
+                width: calc(100vw - 10px);
                 max-width: 100%;
             }
 

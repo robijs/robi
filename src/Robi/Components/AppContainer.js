@@ -499,7 +499,7 @@ export function AppContainer() {
                 }
 
                 to {
-                    transform: scale(.92);
+                    transform: scale(.95);
                 }
             }
 
