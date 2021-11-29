@@ -1,4 +1,5 @@
 import { Component } from '../Actions/Component.js'
+import { App } from '../Core.js'
 
 /**
  *
@@ -28,7 +29,7 @@ export function LinksField(param) {
                         </div>
                         <input type="text" class="form-control url" placeholder="https://site.domain">
                     </div>
-                    <button class="btn btn-robi-primary ml-2">Add link</button>
+                    <button class="btn btn-robi ml-2">Add link</button>
                 </div>
                 <div class='links-container mt-3'>
                     <!-- Formatted links go here -->
@@ -38,7 +39,17 @@ export function LinksField(param) {
                     return /*html*/ `
                                 <div class='link' data-display='${display}' data-url='${url}'>
                                     <a href='${url}' target='_blank'>${display}</a>
-                                    <span class="remove-link" type="button" data-display='${display}'>&times;</span>
+                                    <!--<span class="remove-link" type="button" data-display='${display}'>&times;</span> -->
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span class="icon-container">
+                                            <svg class="icon x-circle-fill">
+                                                <use href="#icon-bs-x-circle-fill"></use>
+                                            </svg>
+                                            <svg class="icon circle-fill">
+                                                <use href="#icon-bs-circle-fill"></use>
+                                            </svg>
+                                        </span>
+                                    </button>
                                 </div>
                             `;
                 }).join('\n') :
@@ -68,7 +79,7 @@ export function LinksField(param) {
                 position: relative;
                 min-height: 56px;
                 width: 100%;
-                border-radius: 4px;
+                border-radius: 10px;
                 border: 1px solid #ced4da;
                 padding: 10px;
             }
@@ -85,9 +96,10 @@ export function LinksField(param) {
             #id .link {
                 display: inline-flex;
                 border-radius: 10px;
-                padding: 5px 20px;
-                background: #007bff;
-                color: white;
+                padding: 5px 5px 5px 20px;
+                background: #e9ecef;
+                color: #007bff;
+                font-weight: 500;
             }
 
             #id .link:not(:last-child) {
@@ -102,8 +114,49 @@ export function LinksField(param) {
             #id .link *,
             #id .link *:active,
             #id .link *:focus {
-                color: white;
+                color: #007bff;
                 text-decoration: none;
+            }
+
+            /* Remove */
+            #id .close:focus {
+                outline: none;
+            }
+
+            #id .close {
+                font-weight: 500;
+                text-shadow: unset;
+                opacity: 1;
+                margin-left: 15px;
+            }
+
+            #id .close .icon-container {
+                position: relative;
+                display: flex;
+            }
+
+            #id .close .circle-fill {
+                position: absolute;
+                fill: white ;
+                top: 2px;
+                left: 2px;
+                transition: all 300ms ease;
+            }
+
+            #id .close .icon-container:hover > .circle-fill {
+                fill: ${App.get('primaryColor')};
+            }
+
+            #id .close .x-circle-fill {
+                width: .85em;
+                height: .85em;
+                fill: darkgray;
+                z-index: 10;
+            }
+
+            #id .close .circle-fill {
+                width: .7em;
+                height: .7em;
             }
         `,
         parent,

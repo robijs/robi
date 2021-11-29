@@ -241,17 +241,27 @@ export function AppContainer() {
                 font-size: 13px !important;
             }
 
+            .form-control,
+            .form-field-multi-line-text.editable,
+            .btn.dropdown-toggle {
+                border-radius: 10px !important;
+            }
+
+            .input-group .input-group-text {
+                border-radius: 10px 0px 0px 10px !important;
+            }
+
+            .input-group .form-control {
+                border-radius: 0px 10px 10px 0px !important;
+            }
+
             .form-control:not(.custom-select):focus {
-                /* border-color: #ced4da !important; */
-                /* box-shadow: 0 0 0 0.2rem #7b68ee6b !important; */
                 border-color: transparent !important;
                 box-shadow: 0 0 0 3px ${App.get('primaryColor') + '6b'} !important;
             }
 
             .form-field-multi-line-text.editable:focus,
             .btn.dropdown-toggle:focus {
-                /* border-color: #ced4da !important; */
-                /* box-shadow: 0 0 0 0.2rem #7b68ee6b !important; */
                 border-color: transparent !important;
                 box-shadow: 0 0 0 4px ${App.get('primaryColor') + '6b'} !important;
             }

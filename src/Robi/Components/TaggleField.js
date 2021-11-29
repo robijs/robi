@@ -41,7 +41,7 @@ export function TaggleField(param) {
             #id .taggle-container {
                 position: relative;
                 width: 100%;
-                border-radius: 4px;
+                border-radius: 10px;
                 border: 1px solid #ced4da;
                 padding: 10px;
             }

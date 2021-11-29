@@ -2,6 +2,7 @@ import { Component } from '../Actions/Component.js'
 import { Route } from '../Actions/Route.js'
 import { App } from '../Core.js'
 
+// TODO: If selected group is hidden, scroll container
 /**
  *
  * @param {*} param
@@ -26,22 +27,15 @@ export function SectionStepper(param) {
         style: /*css*/ `
             /* Root */
             #id.section-stepper {
-                height: 100%;
                 display: flex;
                 flex-direction: column;
                 padding: ${padding || '0px'};
                 overflow: auto;
                 border-radius: 10px;
-                /* height: 100%;
-                display: inline-flex;
-                flex-direction: column;
-                justify-content: space-between;
-                overflow: overlay; */
             }
 
             #id .section-title-group {
                 overflow: overlay;
-                /* height: 100%; */
                 border-radius: 10px;
             }
 
@@ -70,30 +64,29 @@ export function SectionStepper(param) {
                 font-weight: 500;
                 padding: 0px;
                 border-radius: 10px;
-                background: ${App.get('backgroundColor')};
             }
             
             #id .section-group {
                 cursor: pointer;
                 display: flex;
                 justify-content: flex-start;
-                /* border-radius: 10px; */
+                border-radius: 10px;
                 width: 100%;
                 padding: 10px 20px;
             }
-
-            #id .section-group:first-child {
-                margin-top: 0px;
-                border-radius: 10px 10px 0px 0px;
-            }
-
-            #id .section-group:last-child {
-                margin-bottom: 0px;
-                border-radius: 0px 0px 10px 10px;
-            }
             
             #id .section-group.selected {
-                background: ${App.get('primaryColor') + '29'};
+                background: ${App.get('primaryColor')};
+                color: white;
+            }
+
+            #id .section-group.selected * {
+                color: white;
+            }
+
+            /* Number */
+            #id .section-circle {
+                color: ${App.get('primaryColor')};
             }
 
             /* Name */

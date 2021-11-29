@@ -117,6 +117,11 @@ export function QuestionCard(param) {
                 font-weight: 400;
             }
 
+            #id .card-footer {
+                border-radius: 0px 0px 20px 20px;
+                background: inherit;
+            }
+
             /** Alert */
             #id .badge-info {
                 font-size: .8em;

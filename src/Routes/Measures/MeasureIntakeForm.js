@@ -17,15 +17,15 @@ export async function MeasureIntakeForm(param) {
     const listInfo = lists.find(item => item.list === 'Measures');
     const section = path ? listInfo.sections.find(item => item.path === path) : { name: 'All Sections' };
 
-    /** Turn off Main Container Padding */
-    // Store.get('maincontainer').paddingOff();
+    // Turn off view container default padding
     parent.paddingOff();
     
     /** Form ontainer */
     const formContainer = Container({
         height: '100%',
         width: '100%',
-        padding: '51px 0px 0px 51px;',
+        // padding: '51px 0px 0px 51px',
+        padding: '51px 0px 0px 31px',
         parent
     });
 
@@ -107,7 +107,6 @@ export async function MeasureIntakeForm(param) {
     const sectionStepperContainer = Container({
         direction: 'column',
         height: '100%',
-        justify: 'space-between',
         padding: '0px 31px 5px 0px',
         parent: leftContainer
     });
