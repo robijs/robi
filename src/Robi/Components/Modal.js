@@ -28,9 +28,14 @@ export function Modal(param) {
                                         close !== false ?
                                         /*html*/ `
                                             <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                                                <!-- <span aria-hidden='true'>&times;</span> -->
-                                                <!-- <span aria-hidden='true'>&times;</span> -->
-                                                <svg class='icon'><use href='#icon-bs-x-circle-fill'></use></svg>
+                                                <span class='icon-container'>
+                                                    <svg class='icon x-circle-fill'>
+                                                        <use href='#icon-bs-x-circle-fill'></use>
+                                                    </svg>
+                                                    <svg class='icon circle-fill'>
+                                                        <use href='#icon-bs-circle-fill'></use>
+                                                    </svg>
+                                                <span>
                                             </button>
                                         ` : ''
                                     }
@@ -134,8 +139,28 @@ export function Modal(param) {
                 opacity: 1;
             }
 
-            #id .close .icon {
-                fill: lightgray;
+            #id .close .icon-container {
+                position: relative;
+                display: flex;
+            }
+
+            #id .close .circle-fill {
+                position: absolute;
+                fill: darkgray;
+                top: 2px;
+                left: 2px;
+                transition: all 300ms ease;
+            }
+
+            #id .close .icon-container:hover > .circle-fill {
+                fill: ${App.get('primaryColor')};
+            }
+
+            #id .close .x-circle-fill {
+                width: 1.2em;
+                height: 1.2em;
+                fill: #e9ecef;
+                z-index: 10;
             }
 
             /** Footer */

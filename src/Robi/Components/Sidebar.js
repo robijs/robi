@@ -122,7 +122,12 @@ export function Sidebar(param) {
                 font-size: 1em;
                 font-weight: 400;
                 border-radius: 10px;
+                transition: background-color 100ms ease;
             }
+
+            /* .sidebar .nav:not(.nav-selected):hover {
+                background-color: ${App.get('primaryColor') + '20'};
+            } */
 
             .sidebar .icon-container {
                 display: flex;
@@ -168,38 +173,6 @@ export function Sidebar(param) {
 
             .sidebar .nav.nav-selected .text {
                 color: white;
-            }
-
-            /* Open/Close */ 
-            .sidebar .open-close {
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-                width: 100%;
-                text-align: left;
-                font-size: 1em;
-                font-weight: 400;
-                padding: 15px 0px;
-                color: ${App.get('secondaryColor')};
-            }
-
-            .sidebar .open-close .icon {
-                fill: ${App.get('sidebarTextColor')};
-                stroke: ${App.get('sidebarTextColor')};
-                font-size: 1em;
-            }
-
-            #id.sidebar .text.closed {
-                display: none;
-            }
-
-            #id.sidebar .logo.closed {
-                width: 40px;
-            }
-
-            #id.sidebar .open-close.closed {
-                justify-content: center;
             }
 
             @media (max-width: 1300px) {
@@ -781,7 +754,6 @@ export function Sidebar(param) {
             });
 
             // Fade in long title from the left
-            // TODO: fadeout short title first
             component.find('.title').remove();
             component.find('.title-container').insertAdjacentHTML('beforeend', /*html*/ `
                 <h3 class='title fade-in-right'>${App.get('title')}</h3>
