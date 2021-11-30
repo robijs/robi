@@ -1,6 +1,7 @@
 import { Component } from '../Actions/Component.js'
 import { GenerateUUID } from '../Actions/GenerateUUID.js'
 import { Route } from '../Actions/Route.js'
+import { Wait } from '../Actions/Wait.js'
 import { BootstrapButton } from './BootstrapButton.js'
 import { BootstrapTextarea } from './BootstrapTextarea.js'
 import { Modal } from './Modal.js'
@@ -399,24 +400,8 @@ export function Sidebar(param) {
                 routepath.add();
 
                 const installBtn = BootstrapButton({
-                    action() {
+                    async action() {
                         console.log('Add route');
-
-                        //Update routes
-                        // const routes = app.match(/routes:([\s\S]*?)settings:/);
-
-                        // console.log(routes);
-
-                        // console.log('One: ', routes[0]);
-                        // console.log('Two: ', routes[1]);
-
-                        // console.log(looseJsonParse(
-                        //     routes[1]
-                        // ));
-
-                        // REPLACE
-                        // routes = routes.replace(/routes:([\s\S]*?)settings:/, `routes:['test'],settings`);
-                        // console.log(routes);
                         let digest;
                         let request;
 
@@ -439,23 +424,27 @@ export function Sidebar(param) {
                         const routes = value.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
                         const ordered = routes[1].split(', // @ROUTE');
 
+                        console.log(ordered);
+
+                        return;
+
                         // console.log('App.js:', value);
                         // console.log('Routes:', routes[0]);
 
-                        const newOrder = [
-                            'Measures',
-                            'Test',
-                            'Home'
-                        ];
+                        // const newOrder = [
+                        //     'Measures',
+                        //     'Test',
+                        //     'Home'
+                        // ];
 
-                        const newRoutes = newOrder.map(path => {
-                            const route = ordered.find(item => item.includes(`// @START-${path}`));
-                            // console.log(`Path: // @START-${path} -> Route: ${route}`);
+                        // const newRoutes = newOrder.map(path => {
+                        //     const route = ordered.find(item => item.includes(`// @START-${path}`));
+                        //     // console.log(`Path: // @START-${path} -> Route: ${route}`);
 
-                            return route;
-                        }).join(', // @ROUTE');
+                        //     return route;
+                        // }).join(', // @ROUTE');
 
-                        console.log(newRoutes);
+                        // console.log(newRoutes);
 
                         const updated = value.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes}// @END-ROUTES`);
 

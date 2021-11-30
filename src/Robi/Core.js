@@ -9,43 +9,49 @@ import { QuestionTypes } from './Components/QuestionTypes.js'
 import { QuestionBoard } from './Components/QuestionBoard.js'
 import { QuestionAndReplies } from './Components/QuestionAndReplies.js'
 
-let settings = {};
+let appSettings = {};
 
 const App = {
     set(param) {
-        let { library, primaryColor } = param;
+        const { routes, settings } = param;
+        const { library, primaryColor, defaultRoute } = settings;
 
         // Set mode
         if (location.href.includes('localhost') || location.href.includes('127.0.0.1')) {
-            param.mode = 'dev';
+            settings.mode = 'dev';
         } else {
-            param.mode = 'prod';
+            settings.mode = 'prod';
         }
 
         // Set library
         if (!library) {
-            param.library = 'App';
+            settings.library = 'App';
         }
 
         // Set site
-        if (param.mode === 'prod') {
+        if (settings.mode === 'prod') {
             console.log('Site:', location.href.split(library || '/App/')[0]);
-            console.log('App library:', param.library);
+            console.log('App library:', settings.library);
 
-            param.site = location.href.split(library || '/App/')[0];
+            settings.site = location.href.split(library || '/App/')[0];
         } else {
-            param.site = 'http://localhost';
+            settings.site = 'http://localhost';
+        }
+
+        // Set default route
+        if (!defaultRoute) {
+            settings.defaultRoute = routes.map(route => route.path)[0];
         }
 
         // Format color
-        param.primaryColorRGB = HexToRGB(NameToHex(primaryColor) || primaryColor);
-        param.primaryColorHSL = HexToHSL(NameToHex(primaryColor) || primaryColor);
+        settings.primaryColorRGB = HexToRGB(NameToHex(primaryColor) || primaryColor);
+        settings.primaryColorHSL = HexToHSL(NameToHex(primaryColor) || primaryColor);
 
         // Set all
-        settings = param;
+        appSettings = settings;
     },
     get(prop) {
-        return settings[prop];
+        return appSettings[prop];
     }
 }
 

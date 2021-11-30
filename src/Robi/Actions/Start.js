@@ -19,7 +19,7 @@ export function Start(param) {
     } = settings;
 
     // Set app settings
-    App.set(settings);
+    App.set(param);
 
     // toTitleCase string method polyfil
     String.prototype.toTitleCase = function () {
