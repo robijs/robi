@@ -10,7 +10,7 @@ export default async function Test(param) {
 
     // View title
     const viewTitle = Title({
-        title: /* @START-Title */'Changed',/* @END-Title */
+        title: /* @START-Title */'Test',/* @END-Title */
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'

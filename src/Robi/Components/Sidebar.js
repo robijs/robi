@@ -122,7 +122,7 @@ export function Sidebar(param) {
                 font-size: 1em;
                 font-weight: 400;
                 border-radius: 10px;
-                transition: background-color 100ms ease;
+                /* transition: background-color 100ms ease; */
             }
 
             /* .sidebar .nav:not(.nav-selected):hover {
@@ -374,54 +374,125 @@ export function Sidebar(param) {
                 modalBody.classList.add('install-modal');
 
                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                    <h3 class='mb-2'>Create route</h3>
+                    <h3 class='mb-2'>Add route</h3>
                 `);
 
-                // Site title
-                const siteTitle = SingleLineTextField({
-                    label: 'Site title',
+                // Route title
+                const routeTitle = SingleLineTextField({
+                    label: 'Title',
                     parent: modalBody,
                     onFocusout(event) {
-                        siteUrl.value(siteTitle.value().toLowerCase().split(' ').join('-'));
-                        appName.value(siteTitle.value().toTitleCase().split(' ').join(''));
+                        routepath.value(routeTitle.value().toLowerCase().split(' ').join('-'));
+                        appName.value(routeTitle.value().toTitleCase().split(' ').join(''));
                     }
                 });
 
-                siteTitle.add();
+                routeTitle.add();
 
-                const siteDesc = BootstrapTextarea({
-                    label: 'Site description',
+                // Route path
+                const routepath = SingleLineTextField({
+                    label: 'Path',
+                    addon: App.get('site') + '/App/src/pages/app.aspx#',
                     parent: modalBody
                 });
 
-                siteDesc.add();
-
-                // Site Url
-                const siteUrl = SingleLineTextField({
-                    label: 'Site url',
-                    addon: App.get('site') + '/',
-                    parent: modalBody
-                });
-
-                siteUrl.add();
-
-                // App name
-                const appName = SingleLineTextField({
-                    label: 'App name',
-                    parent: modalBody
-                });
-
-                appName.add();
+                routepath.add();
 
                 const installBtn = BootstrapButton({
                     action() {
-                        console.log('Create route');
+                        console.log('Add route');
+
+                        //Update routes
+                        // const routes = app.match(/routes:([\s\S]*?)settings:/);
+
+                        // console.log(routes);
+
+                        // console.log('One: ', routes[0]);
+                        // console.log('Two: ', routes[1]);
+
+                        // console.log(looseJsonParse(
+                        //     routes[1]
+                        // ));
+
+                        // REPLACE
+                        // routes = routes.replace(/routes:([\s\S]*?)settings:/, `routes:['test'],settings`);
+                        // console.log(routes);
+                        let digest;
+                        let request;
+
+                        if (App.get('mode') === 'prod') {
+                            digest = await GetRequestDigest();
+                            request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('app.js')/$value`, {
+                                method: 'GET',
+                                headers: {
+                                    'binaryStringRequestBody': 'true',
+                                    'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                    'X-RequestDigest': digest
+                                }
+                            });
+                        } else {
+                            request = await fetch(`http://127.0.0.1:8080/src/app.js`);
+                            await Wait(1000);
+                        }
+                        let value = await request.text();
+
+                        const routes = value.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
+                        const ordered = routes[1].split(', // @ROUTE');
+
+                        // console.log('App.js:', value);
+                        // console.log('Routes:', routes[0]);
+
+                        const newOrder = [
+                            'Measures',
+                            'Test',
+                            'Home'
+                        ];
+
+                        const newRoutes = newOrder.map(path => {
+                            const route = ordered.find(item => item.includes(`// @START-${path}`));
+                            // console.log(`Path: // @START-${path} -> Route: ${route}`);
+
+                            return route;
+                        }).join(', // @ROUTE');
+
+                        console.log(newRoutes);
+
+                        const updated = value.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes}// @END-ROUTES`);
+
+                        console.log('OLD\n----------------------------------------\n', value);
+                        console.log('\n****************************************');
+                        console.log('NEW\n----------------------------------------\n', updated);
+                        console.log('\n****************************************');
+
+                        let setFile;
+
+                        if (App.get('mode') === 'prod') {
+                            // TODO: Make a copy of app.js first
+                            // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
+                            setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app.js',overwrite=true)`, {
+                                method: 'POST',
+                                body: updated, 
+                                headers: {
+                                    'binaryStringRequestBody': 'true',
+                                    'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                    'X-RequestDigest': digest
+                                }
+                            });
+                        } else {
+                            setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
+                                method: 'POST',
+                                body: updated
+                            });
+                            await Wait(1000);
+                        }
+
+                        console.log('Saved:', setFile);
                     },
                     classes: ['w-100 mt-5'],
                     width: '100%',
                     parent: modalBody,
-                    type: 'success',
-                    value: 'Create route'
+                    type: 'robi',
+                    value: 'Add route'
                 });
 
                 installBtn.add();

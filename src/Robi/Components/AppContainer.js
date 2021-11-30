@@ -255,7 +255,8 @@ export function AppContainer() {
 
             .form-control,
             .form-field-multi-line-text.editable,
-            .btn.dropdown-toggle {
+            .btn.dropdown-toggle,
+            .dropdown-menu {
                 border-radius: 10px !important;
             }
 
