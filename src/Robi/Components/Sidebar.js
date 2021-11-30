@@ -148,7 +148,6 @@ export function Sidebar(param) {
 
             .sidebar .text {
                 flex: 1;
-                color: ${App.get('sidebarTextColor')};
                 font-size: 15px;
                 font-weight: 500;
                 padding: 10px 0px;

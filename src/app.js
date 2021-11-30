@@ -16,14 +16,6 @@ Start({
     // Routes can be linked to directly with hash fragment. Ex: https://site#path.
     routes: [
         // @START-ROUTES
-        // @START-Measures
-        {
-            path: 'Measures',
-            icon: 'bs-journals',
-            go: Measures
-        }
-        // @END-Measures
-        , // @ROUTE
         // @START-Test
         {
             path: 'Test',
@@ -31,6 +23,14 @@ Start({
             go: Test
         }
         // @END-Test
+        , // @ROUTE
+        // @START-Measures
+        {
+            path: 'Measures',
+            icon: 'bs-journals',
+            go: Measures
+        }
+        // @END-Measures
         // @END-ROUTES
     ]
     ,
@@ -40,7 +40,7 @@ Start({
         // -------------------
         // defaultBorder: default border style for core comoponents
         // defaultColor: text color
-        // defaultRoute: default #route rendered if none present
+        // defaultRoute: set default route, defaults to first path in routes array
         // logo: open sidebar logo
         // logoLarge: launch logo
         // logoSmall: logo when sidebar is collapsed
@@ -50,13 +50,13 @@ Start({
         // questionTypes: define at least one questionType with title and path props
         // secondaryColor: main container background color
         // backgroundColor: nav background color
-        // sidebarTextColor: nav label text color
         // title: site title (AUTOPOPULATED if created with CREATE APP)
         // titleColor: core Title component text color
         // userDefaultRole: default role for newly created use accounts
         // userSettings: new user account 'Settings' field default JSON value
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
         defaultColor: '#24292f',
+        defaultRoute: '',
         logo: 'dha-logo-no-label-180w.png',
         logoLarge: 'dha-logo-no-label-386w.png',
         logoSmall: 'dha-logo-no-label-80w.png',
@@ -70,7 +70,6 @@ Start({
         ],
         secondaryColor: 'white',
         backgroundColor: '#F8F8FC',
-        sidebarTextColor: '#24292f',
         title: '@Title',
         userDefaultRole: 'User',
         userSettings: JSON.stringify({}),
