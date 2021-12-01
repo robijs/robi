@@ -1,4 +1,4 @@
-import { Title, Modal, ModalSlideUp, BootstrapButton, SingleLineTextField, BootstrapTextarea, ProgressBar, InstallConsole, Container, LoadingSpinner, MainContainer, Alert } from '../../Robi/RobiUI.js'
+import { Title, Modal, ModalSlideUp, BootstrapButton, SingleLineTextField, BootstrapTextarea, ProgressBar, InstallConsole, Container, LoadingSpinner, Sortable } from '../../Robi/RobiUI.js'
 import { App, Store, CreateSite, CreateLibrary, GetRequestDigest, GetItemCount, CopyRecurse, SetHomePage, Wait } from '../../Robi/Robi.js'
 
 /**
@@ -10,7 +10,7 @@ export default async function Test(param) {
 
     // View title
     const viewTitle = Title({
-        title: /* @START-Title */'Test',/* @END-Title */
+        title: /* @START-Title */'Test'/* @END-Title */,
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'
@@ -20,21 +20,33 @@ export default async function Test(param) {
 
     viewTitle.add();
 
-    // TODO: Get user role
-    // TODO: Add My Measures, based on role
-    
-    const info = Alert({
-        margin: '20px 0px',
-        type: 'robi-primary',
-        text: '<strong>My Dashboard</strong> coming soon. Please stay tuned!',
+    // Sortable
+    const sortable = Sortable({
         parent
     });
 
-    info.add();
+    sortable.add();
+
+    const createDirBtn = BootstrapButton({
+        value: 'Create dir',
+        classes: ['mr-3', 'mt-3'],
+        type: 'robi',
+        parent,
+        async action(event) {
+            await fetch(`http://127.0.0.1:2035/?path=src/Routes/NewRouteDir&file=Test.js`, {
+                method: 'POST',
+                body: 'Test'
+            });
+
+            await Wait(1000);
+        }
+    });
+
+    createDirBtn.add();
 
     const editTitle = BootstrapButton({
         value: 'Edit title',
-        classes: ['mr-3'],
+        classes: ['mr-3', 'mt-3'],
         type: 'robi',
         parent,
         async action(event) {
@@ -57,7 +69,7 @@ export default async function Test(param) {
             }
 
             const value = await request.text();
-            const newTitle = `'Changed',`;
+            const newTitle = `'Changed'`;
             const updated = value.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */${newTitle}/* @END-Title */`);
 
             console.log('OLD\n----------------------------------------\n', value);
@@ -95,7 +107,7 @@ export default async function Test(param) {
 
     const shrinkApp = BootstrapButton({
         value: 'Shrink app',
-        classes: ['mr-3'],
+        classes: ['mr-3', 'mt-3'],
         type: 'robi',
         parent,
         async action(event) {
@@ -532,7 +544,7 @@ export default async function Test(param) {
 
     const parseRoutes = BootstrapButton({
         value: 'Parse routes',
-        classes: ['mr-3'],
+        classes: ['mr-3', 'mt-3'],
         type: 'robi',
         parent,
         async action(event) {
@@ -577,8 +589,7 @@ export default async function Test(param) {
 
             const newOrder = [
                 'Measures',
-                'Test',
-                'Home'
+                'Test'
             ];
 
             const newRoutes = newOrder.map(path => {
@@ -627,7 +638,7 @@ export default async function Test(param) {
 
     const openVSCodeBtn = BootstrapButton({
         value: 'VS Code',
-        classes: [''],
+        classes: ['mr-3', 'mt-3'],
         type: 'robi',
         parent,
         async action(event) {
@@ -639,7 +650,7 @@ export default async function Test(param) {
 
     const createSiteBtn = BootstrapButton({
         value: 'Create app',
-        classes: ['ml-3'],
+        classes: ['mr-3', 'mt-3'],
         type: 'robi-success',
         parent,
         async action(event) {

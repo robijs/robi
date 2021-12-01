@@ -27,6 +27,7 @@ export async function ModifyFile(param) {
                 </span>
             </div>
         `,
+        classes: ['scrollbar-wide'],
         titleStyle: 'width: 100%;',
         headerStyle: 'border-bottom: solid 1px #676E95; padding-bottom: 0px;',
         footerStyle: 'border-top: solid 1px #676E95;',
@@ -36,6 +37,9 @@ export async function ModifyFile(param) {
         centered: true,
         showFooter: false,
         async addContent(modalBody) {
+            // Change modal default styles
+            modal.find('.modal-dialog').style.maxWidth = '100%';
+            modal.find('.modal-dialog').style.margin = '1.75rem';
             modalBody.style.height = '100vh';
 
             const loading = LoadingSpinner({
@@ -47,18 +51,6 @@ export async function ModifyFile(param) {
             loading.add();
 
             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                <!-- <div class='file-title d-none'>
-                    <span class='file-title-text d-flex'>
-                        <span class='file-icon-container'>
-                            <svg class='icon file-icon file-icon-js'>
-                                <use href='#icon-javascript'></use>
-                            </svg>
-                        </span>
-                        <span>
-                            ${path}/${file}
-                        </span>
-                    </span>
-                </div> -->
                 <textarea class='code-mirror-container robi-code-background h-100'></textarea>
             `);
 
@@ -67,6 +59,7 @@ export async function ModifyFile(param) {
             const editor = CodeMirror.fromTextArea(modal.find('.code-mirror-container'), {
                 mode: 'javascript',
                 lineNumbers: true,
+                lineWrapping: true,
                 extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
                 foldGutter: true,
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]

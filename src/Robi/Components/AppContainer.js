@@ -16,11 +16,9 @@ export function AppContainer() {
                 display: none;
                 background: ${App.get('secondaryColor')};
             }
-
-            *, html {
-                font-family: ${App.fontFamily || ` -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`};
+            
+            *, ::after, ::before {
                 box-sizing: border-box;
-                color: ${App.get('defaultColor')};
             }
             
             body {
@@ -29,6 +27,8 @@ export function AppContainer() {
                 box-sizing: border-box;
                 background: ${App.get('secondaryColor')};
                 overflow: hidden;
+                font-family: ${App.fontFamily || ` -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`};
+                color: ${App.get('defaultColor')};
             }
             
             body::-webkit-scrollbar { 

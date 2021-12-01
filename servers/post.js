@@ -1,5 +1,5 @@
 import { createServer } from 'http';
-import { createWriteStream } from 'fs';
+import { createWriteStream, mkdirSync } from 'fs';
 
 createServer((req, res) => {
     const headers = {
@@ -15,7 +15,7 @@ createServer((req, res) => {
         req.on("data", data => {
             body = data;
 
-            // Handle malformed requests
+            // TODO: Handle malformed requests
             const url = decodeURI(req.url);
             const query = url.split('?')[1];
             const props = query.split('&');
@@ -23,6 +23,10 @@ createServer((req, res) => {
                 const [ key, value ] = prop.split('=');
                 return [ key, value ];
             }));
+
+            // Make dirs if they don't exist
+            // console.log(path);
+            mkdirSync(`./${path}`, { recursive: true });
 
             const writableStream = createWriteStream(`./${path}/${file}`);
             writableStream.write(data);

@@ -49,11 +49,11 @@ export function BootstrapButton(param) {
     });
 
     component.enable = () => {
-        component.get().disabled = true;
+        component.get().disabled = false;
     };
 
     component.disable = () => {
-        component.get().disabled = false;
+        component.get().disabled = true;
     };
 
     return component;

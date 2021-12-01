@@ -7,7 +7,7 @@ import { Component } from '../Actions/Component.js'
  */
 export function Alert(param) {
     const {
-        text, close, margin, width, parent, position
+        text, classes, close, margin, width, parent, position, top, zIndex
     } = param;
 
     let {
@@ -16,7 +16,7 @@ export function Alert(param) {
 
     const component = Component({
         html: /*html*/ `
-            <div class='alert alert-${type}' role='alert'${margin ? ` style='margin: ${margin};'` : ''}>
+            <div class='alert alert-${type} ${classes?.join(' ')}' role='alert'${margin ? ` style='margin: ${margin};'` : ''}>
                 ${text || ''}
                 ${close ?
             /*html*/ ` 
@@ -42,13 +42,38 @@ export function Alert(param) {
                 padding: 0px;    
             }
             
-            ${width ?
-            /*css*/ `
+            ${
+                width ?
+                /*css*/ `
                     #id {
                         width: ${width};
                     }
                 ` :
-                ''}
+                ''
+            }
+
+            @keyframes alert-in {
+                0% {
+                    transform: translateY(-50px);
+                    /* transform: scale(0) translateY(-50px); */
+                    /* transform-origin: top left; */
+                    opacity: 0;
+                }
+
+                100% {
+                    transform: translateY(0px);
+                    /* transform: scale(1) translateY(0px); */
+                    /* transform-origin: top left; */
+                    z-index: 1000;
+                    opacity: 1;
+                }
+            }
+
+            .alert-in {
+                position: absolute;
+                top: ${top || 0}px;
+                animation: 200ms ease-in-out forwards alert-in;
+            }
         `,
         parent,
         position

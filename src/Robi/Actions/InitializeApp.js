@@ -55,10 +55,12 @@ export function InitializeApp(param) {
         console.log('Mode: dev');
 
         if (App.get('dev').testInstall) {
-            TestInstall({
-                settings,
-                loadingBar
-            });
+            console.log('TODO: Mirror prod install process');
+            // TODO: Mirror prod install process
+            // TestInstall({
+            //     settings,
+            //     loadingBar
+            // });
         } else {
             LaunchApp(param);
         }

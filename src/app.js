@@ -5,9 +5,10 @@
 
 // @START-IMPORTS
 import { Start } from './Robi/Robi.js'
-import lists from './lists.js'
 import Measures from './Routes/Measures/Measures.js'
 import Test from './Routes/Test/Test.js'
+
+import Route from './Routes/Route/Route.js'
 // @END-IMPORTS
 
 // @START
@@ -16,6 +17,14 @@ Start({
     // Routes can be linked to directly with hash fragment. Ex: https://site#path.
     routes: [
         // @START-ROUTES
+        // @START-Measures
+        {
+            path: 'Measures',
+            icon: 'bs-journals',
+            go: Measures
+        }
+        // @END-Measures
+        , // @ROUTE
         // @START-Test
         {
             path: 'Test',
@@ -24,13 +33,13 @@ Start({
         }
         // @END-Test
         , // @ROUTE
-        // @START-Measures
+        // @START-Route
         {
-            path: 'Measures',
-            icon: 'bs-journals',
-            go: Measures
+            path: 'Route',
+            icon: 'pencil',
+            go: Route
         }
-        // @END-Measures
+        // @END-Route
         // @END-ROUTES
     ]
     ,

@@ -92,8 +92,10 @@ import { UpgradeAppButton } from './Components/UpgradeAppButton.js'
 import { UploadButton } from './Components/UploadButton.js'
 import { Users } from './Components/Users.js'
 import { ViewContainer } from './Components/ViewContainer.js'
+import { Sortable } from './Components/Sortable.js'
 
 export {
+    Sortable,
     AccountInfo,
     Alert,
     AppContainer,

@@ -1,5 +1,4 @@
-import { Table, Title, Container, FoldingCube, Card } from '../../Robi/RobiUI.js'
-import { App, Store, Get } from '../../Robi/Robi.js'
+import { Table, Title, Alert } from '../../Robi/RobiUI.js'
 import { MeasureIntakeForm  } from './MeasureIntakeForm.js'
 
 export default async function Measures({ parent, pathParts, props }) {
@@ -46,8 +45,20 @@ export default async function Measures({ parent, pathParts, props }) {
 
     viewTitle.add();
 
+    // TODO: Get user role
+    // TODO: Add My Measures, based on role
+    
+    const info = Alert({
+        margin: '20px 0px',
+        type: 'robi-primary',
+        text: '<strong>My Dashboard</strong> coming soon. Please stay tuned!',
+        parent
+    });
+
+    info.add();
+
     // Table
-    const newTable = Table({
+    const newTable = await Table({
         list: 'Measures',
         view: 'Measures',
         openInModal: true,

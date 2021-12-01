@@ -1,4 +1,5 @@
 import { Component } from '../Actions/Component.js'
+import { App } from '../Core.js'
 
 /**
  *
@@ -7,7 +8,7 @@ import { Component } from '../Actions/Component.js'
  */
 export function BootstrapDropdown(param) {
     const {
-        action, label, description, parent, position, options, value, fieldMargin, padding, setWidthDelay
+        action, label, description, parent, position, options, value, fieldMargin, padding, setWidthDelay, maxHeight, maxWidth, valueType, buttonStyle
     } = param;
 
     const component = Component({
@@ -16,11 +17,13 @@ export function BootstrapDropdown(param) {
                 <label>${label}</label>
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
                 <div class='dropdown'>
-                    <button class='btn dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                    <button class='btn dropdown-toggle' ${buttonStyle ? `style='${buttonStyle}'` : ''} type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                         ${value || `<span style='opacity: 0;'>Choose</span>`}
                     </button>
                     <div class='dropdown-menu hidden' aria-labelledby='dropdownMenuButton'>
-                        ${buildDropdown(options)}
+                        <div class='scroll-container'>
+                            ${buildDropdown(options)}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,9 +44,9 @@ export function BootstrapDropdown(param) {
             }
 
             #id .dropdown-toggle {
-                min-height: 33px;
+                min-height: 33.5px;
                 font-size: 13px;
-                border-radius: 0.25rem;
+                border-radius: 0.125rem 0px;
                 border: 1px solid #ced4da;
                 display: flex;
                 justify-content: space-between;
@@ -59,6 +62,31 @@ export function BootstrapDropdown(param) {
                 display: block;
                 visibility: hidden;
             }
+
+            #id .dropdown-menu {
+                margin: .125rem;
+                padding: .125rem;
+                ${maxWidth ? `max-width: ${maxWidth};` : ''}
+                ${maxWidth ? `min-width: ${maxWidth};` : ''}
+            }
+
+            #id .dropdown-item {
+                border-radius: 8px;
+            }
+
+            #id .dropdown-item:hover {
+                background: ${App.get('primaryColor') + '20'};
+            }
+
+            #id .scroll-container {
+                overflow: overlay;
+                ${maxHeight ? `max-height: ${maxHeight};` : ''}
+                ${maxWidth ? `max-width: ${maxWidth};` : ''}
+            }
+
+            #id .scroll-container::-webkit-scrollbar-thumb {
+                min-height: 20px;
+            }
         `,
         parent,
         position,
@@ -67,18 +95,25 @@ export function BootstrapDropdown(param) {
                 selector: `#id .dropdown-item`,
                 event: 'click',
                 listener(event) {
-                    component.find('.dropdown-toggle').innerText = event.target.innerText;
+                    if (valueType === 'html') {
+                        // component.find('.dropdown-toggle').innerHTML = this.querySelector('[data-target="true"').innerHTML;
+                        component.find('.dropdown-toggle').innerHTML = this.innerHTML;
+                    } else {
+                        component.find('.dropdown-toggle').innerText = event.target.innerText;
+                    }
 
                     if (action) {
                         action(event);
                     }
                 }
             }
+            // TODO: Add scroll through this with up and down arrow keys
         ],
         onAdd() {
             // FIXME: Why does adding a timeout work?
             setTimeout(() => {
-                component.find('.dropdown-toggle').style.width = `${component.find('.dropdown-menu').offsetWidth}px`;
+                // FIXME: assumes maxWidth is px
+                component.find('.dropdown-toggle').style.width = `${component.find('.dropdown-menu').offsetWidth || (parseInt(maxWidth?.replace('px')) || 160)}px`;
                 component.find('.dropdown-menu').classList.remove('hidden');
             }, setWidthDelay || 0);
         }
@@ -112,9 +147,17 @@ export function BootstrapDropdown(param) {
         const field = component.find('.dropdown-toggle');
 
         if (param !== undefined) {
-            field.innerText = param;
+            if (valueType === 'html') {
+                field.innerHTML = param;
+            } else {
+                field.innerText = param;
+            }
         } else {
-            return field.innerText;
+            if (valueType === 'html') {
+                return component.find('.dropdown-toggle');
+            } else {
+                return field.innerText;
+            }
         }
     };
 

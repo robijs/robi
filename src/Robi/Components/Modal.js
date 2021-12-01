@@ -6,16 +6,12 @@ import { App } from '../Core.js';
  * @param {*} param
  * @returns
  */
-export function Modal(param) {
-    const {
-        title, titleStyle, headerStyle, footerStyle, close, addContent, buttons, centered, fade, background, fullSize, showFooter, scrollable, contentPadding, parent, disableBackdropClose, position
-    } = param;
-
+export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, close, addContent, buttons, centered, fade, background, fullSize, showFooter, scrollable, contentPadding, parent, disableBackdropClose, position, shadow }) {
     const component = Component({
         html: /*html*/ `
             <!-- Modal -->
             <!-- <div class='modal${fade ? ' fade' : ''}' tabindex='-1' role='dialog' aria-hidden='true'> -->
-            <div class='modal fade' tabindex='-1' role='dialog' aria-hidden='true' ${disableBackdropClose ? 'data-keyboard="false" data-backdrop="static"' : ''}>
+            <div class='modal fade ${ classes?.length ? classes.join(' ') : ''}' tabindex='-1' role='dialog' aria-hidden='true' ${disableBackdropClose ? 'data-keyboard="false" data-backdrop="static"' : ''}>
                 <!-- <div class='modal-dialog modal-dialog-zoom ${scrollable !== false ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'> -->
                 <div class='modal-dialog modal-dialog-zoom ${scrollable ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
                     <div class='modal-content'>
@@ -192,7 +188,25 @@ export function Modal(param) {
                         margin: 40px !important;
                     }
                 ` :
-                ''}
+            ''}
+            
+            /* Passed in classes */
+            #id.scrollbar-wide .modal-body::-webkit-scrollbar {
+                width: 35px;
+            }
+
+            #id.scrollbar-wide .modal-body::-webkit-scrollbar-thumb {
+                min-height: 50px;
+            }
+
+            ${
+                shadow ? 
+                /* css */ `
+                    #id .modal-content {
+                        box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
+                    }
+                ` : ''
+            }
         `,
         parent,
         position,

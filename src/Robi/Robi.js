@@ -69,8 +69,10 @@ import { UpdateItem } from './Actions/UpdateItem.js'
 import { UploadFile } from './Actions/UploadFile.js'
 import { UploadFiles } from './Actions/UploadFiles.js'
 import { Wait } from './Actions/Wait.js'
+import { AddRoute } from './Actions/AddRoute.js'
 
 export {
+    AddRoute,
     App,
     Store,
     Routes,

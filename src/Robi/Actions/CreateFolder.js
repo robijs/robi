@@ -23,7 +23,8 @@ export async function CreateFolder(param) {
     const requestDigest = await GetRequestDigest();
 
     const postOptions = {
-        url: `${site || App.get('site')}/${web}/_api/web/folders`,
+        // url: `${site || App.get('site')}/${web}/_api/web/folders`,
+        url: `${web ? `${site}/${web}` : App.get('site')}/_api/web/folders`,
         data: {
             "__metadata":{
                 "type":"SP.Folder"

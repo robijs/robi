@@ -29,6 +29,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     /** Get references to core app components */
     const appContainer = Store.get('appcontainer');
+    const svgDefs = Store.get('svgdefs');
     const sidebar = Store.get('sidebar');
     const mainContainer = Store.get('maincontainer');
 
@@ -50,6 +51,10 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
     Store.add({
         name: 'appcontainer',
         component: appContainer
+    });
+    Store.add({
+        name: 'svgdefs',
+        component: svgDefs
     });
     Store.add({
         name: 'maincontainer',

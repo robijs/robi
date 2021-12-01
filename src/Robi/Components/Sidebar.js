@@ -1,23 +1,19 @@
 import { Component } from '../Actions/Component.js'
 import { GenerateUUID } from '../Actions/GenerateUUID.js'
 import { Route } from '../Actions/Route.js'
-import { Wait } from '../Actions/Wait.js'
 import { BootstrapButton } from './BootstrapButton.js'
 import { BootstrapTextarea } from './BootstrapTextarea.js'
 import { Modal } from './Modal.js'
 import { SingleLineTextField } from './SingleLineTextField.js'
 import { App, Store} from '../Core.js'
+import { AddRoute } from '../Robi.js'
 
 /**
  *
  * @param {*} param
  * @returns
  */
-export function Sidebar(param) {
-    const {
-        parent, path
-    } = param;
-
+export function Sidebar({ parent, path }) {
     const component = Component({
         html: /*html*/ `
             <div class='sidebar' data-mode='open'>
@@ -40,12 +36,14 @@ export function Sidebar(param) {
                                             Edit
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="${id}">
-                                            <button class="dropdown-item add-route" type="button">Add route</button>
-                                            <button class="dropdown-item modify-route" type="button">Modify route</button>
-                                            <button class="dropdown-item modify-route" type="button">Reorder routes</button>
-                                            <button class="dropdown-item hide-routes" type="button">Hide routes</button>
-                                            <div class="dropdown-divider"></div>
-                                            <button class="dropdown-item delete-routes" type="button">Delete routes</button>
+                                            <div class="grown-in-top-left">
+                                                <!-- <button class="dropdown-item add-route" type="button">Add route</button> -->
+                                                <button class="dropdown-item modify-route" type="button">Modify route</button>
+                                                <button class="dropdown-item modify-route" type="button">Reorder routes</button>
+                                                <button class="dropdown-item hide-routes" type="button">Hide routes</button>
+                                                <div class="dropdown-divider"></div>
+                                                <button class="dropdown-item delete-routes" type="button">Delete routes</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -58,6 +56,21 @@ export function Sidebar(param) {
                 </div>
                 <div class='nav-container'>
                     ${buildNav()}
+                </div>
+                <div style='padding: 0px 15px; overflow: hidden;'>
+                ${
+                    Store.user().Role === 'Developer' ?
+                    /*html*/ `
+                        <span class='nav add-route'>
+                            <span class='icon-container' style='padding: 0px;'>
+                                <span class='square d-flex' style='padding: 0px; margin: 7px'>
+                                    <svg class='icon' style='font-size: 28;'><use href='#icon-bs-plus'></use></svg>
+                                </span>
+                            </span>
+                            <span class='text' data-width='200px' style='white-space: nowrap; color: ${App.get('primaryColor')}'>New Route</span>
+                        </span>
+                    `: ''
+                }
                 </div>
                 <!-- Settings -->
                 <div class='settings-container'>
@@ -88,7 +101,7 @@ export function Sidebar(param) {
 
             /* Title */
             #id h3 {
-                padding: 0px 23px 10px 23px; /* -2px on the sides */
+                padding: 0px 20px 10px 20px;
                 margin: 0px;
                 font-weight: 700;
                 width: 100%;
@@ -98,7 +111,7 @@ export function Sidebar(param) {
             .nav-container {
                 overflow: overlay;
                 width: 100%;
-                padding: 0px 17px; /* +2px on the sides */
+                padding: 0px 15px;
                 overflow-x: hidden;
             }
 
@@ -132,17 +145,16 @@ export function Sidebar(param) {
 
             .sidebar .icon-container {
                 display: flex;
-                padding: 10px 15px;
+                padding: 10px 10px;
             }
 
             .sidebar .icon-container-wide {
                 display: flex;
-                padding: 10px 15px;
+                padding: 10px 10px;
             }
 
             .sidebar .nav .icon {
                 fill: ${App.get('primaryColor')};
-                stroke: ${App.get('primaryColor')};
                 font-size: 22px;
             }
 
@@ -192,7 +204,7 @@ export function Sidebar(param) {
 
             /* Edit menu */
             #id .collapse-container {
-                padding: 10px 5px 5px 5px;
+                padding: 10px 15px;
             }
 
             #id .collapse-container .btn {
@@ -202,6 +214,7 @@ export function Sidebar(param) {
 
             #id .collapse-container .icon {
                 fill: ${App.get('primaryColor')};
+                font-size: 22px;
             }
             
             #id .collapse-container .icon-container {
@@ -209,9 +222,11 @@ export function Sidebar(param) {
             }
 
             #id .dropdown-menu {
-                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
+                /* box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px; */
+                background: transparent;
                 border-radius: 10px;
                 border: none;
+                padding: none;
             }
 
             #id .dev-buttons-container {
@@ -225,6 +240,7 @@ export function Sidebar(param) {
 
             #id .dev-buttons-container .open-dev-menu {
                 font-weight: 500;
+                font-size: 15px;
             }
 
             #id .dev-buttons-container .dropdown-toggle:focus {
@@ -233,10 +249,20 @@ export function Sidebar(param) {
 
             #id .dev-buttons-container .dropdown-item {
                 outline: none;
+                font-size: 14px;
             }
 
             #id .dev-buttons-container .delete-routes {
                 color: firebrick;
+            }
+
+            #id .square {
+                background: #e9ecef;
+                border-radius: 6px;
+            }
+
+            #id .add-route {
+                transition: width 150ms ease, opacity 150ms ease;
             }
 
             @keyframes fade-out-left {
@@ -282,6 +308,19 @@ export function Sidebar(param) {
                     width: 0px;
                 }
             }
+
+            @keyframes grown-in-top-left {
+                from {
+                    transform: scale(0);
+                    transform-origin: top left;
+                    opacity: 0;
+                }
+                to {
+                    transform: scale(1);
+                    transform-origin: top left;
+                    opacity: 1;
+                }
+            }
             
             .fade-in {
                 animation: 150ms ease-in-out fade-in;
@@ -296,13 +335,21 @@ export function Sidebar(param) {
             .fade-in-right {
                 animation: 300ms ease-in-out fade-in-right;
             }
+
+            .grown-in-top-left {
+                animation: 150ms ease-in-out forwards grown-in-top-left;
+                background: white;
+                border-radius: 10px;
+                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
+                padding: .5rem 0;
+            }
         `,
         parent: parent,
         position: 'afterbegin',
         permanent: true,
         events: [
             {
-                selector: '.nav:not(.control)',
+                selector: '.nav:not(.control):not(.add-route)',
                 event: 'click',
                 listener: routeToView
             },
@@ -321,7 +368,9 @@ export function Sidebar(param) {
             {
                 selector: '#id .add-route',
                 event: 'click',
-                listener: addRoute
+                listener(event) {
+                    AddRoute();
+                }
             },
             {
                 selector: '#id .modify-route',
@@ -343,7 +392,6 @@ export function Sidebar(param) {
             setTimeout(() => {
                 // Set nav width
                 component.findAll('.text').forEach(node => {
-                    console.log(node.offsetWidth);
                     node.style.width = `${node.offsetWidth}px`;
                     node.dataset.width = `${node.offsetWidth}px`;
                 });
@@ -361,151 +409,6 @@ export function Sidebar(param) {
             });
         }
     });
-
-    function addRoute(event) {
-        // Show modal
-        console.log('add route');
-
-        const modal = Modal({
-            title: false,
-            disableBackdropClose: true,
-            scrollable: true,
-            async addContent(modalBody) {
-                modalBody.classList.add('install-modal');
-
-                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                    <h3 class='mb-2'>Add route</h3>
-                `);
-
-                // Route title
-                const routeTitle = SingleLineTextField({
-                    label: 'Title',
-                    parent: modalBody,
-                    onFocusout(event) {
-                        routepath.value(routeTitle.value().toLowerCase().split(' ').join('-'));
-                        appName.value(routeTitle.value().toTitleCase().split(' ').join(''));
-                    }
-                });
-
-                routeTitle.add();
-
-                // Route path
-                const routepath = SingleLineTextField({
-                    label: 'Path',
-                    addon: App.get('site') + '/App/src/pages/app.aspx#',
-                    parent: modalBody
-                });
-
-                routepath.add();
-
-                const installBtn = BootstrapButton({
-                    async action() {
-                        console.log('Add route');
-                        let digest;
-                        let request;
-
-                        if (App.get('mode') === 'prod') {
-                            digest = await GetRequestDigest();
-                            request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('app.js')/$value`, {
-                                method: 'GET',
-                                headers: {
-                                    'binaryStringRequestBody': 'true',
-                                    'Accept': 'application/json;odata=verbose;charset=utf-8',
-                                    'X-RequestDigest': digest
-                                }
-                            });
-                        } else {
-                            request = await fetch(`http://127.0.0.1:8080/src/app.js`);
-                            await Wait(1000);
-                        }
-                        let value = await request.text();
-
-                        const routes = value.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
-                        const ordered = routes[1].split(', // @ROUTE');
-
-                        console.log(ordered);
-
-                        return;
-
-                        // console.log('App.js:', value);
-                        // console.log('Routes:', routes[0]);
-
-                        // const newOrder = [
-                        //     'Measures',
-                        //     'Test',
-                        //     'Home'
-                        // ];
-
-                        // const newRoutes = newOrder.map(path => {
-                        //     const route = ordered.find(item => item.includes(`// @START-${path}`));
-                        //     // console.log(`Path: // @START-${path} -> Route: ${route}`);
-
-                        //     return route;
-                        // }).join(', // @ROUTE');
-
-                        // console.log(newRoutes);
-
-                        const updated = value.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes}// @END-ROUTES`);
-
-                        console.log('OLD\n----------------------------------------\n', value);
-                        console.log('\n****************************************');
-                        console.log('NEW\n----------------------------------------\n', updated);
-                        console.log('\n****************************************');
-
-                        let setFile;
-
-                        if (App.get('mode') === 'prod') {
-                            // TODO: Make a copy of app.js first
-                            // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
-                            setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app.js',overwrite=true)`, {
-                                method: 'POST',
-                                body: updated, 
-                                headers: {
-                                    'binaryStringRequestBody': 'true',
-                                    'Accept': 'application/json;odata=verbose;charset=utf-8',
-                                    'X-RequestDigest': digest
-                                }
-                            });
-                        } else {
-                            setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
-                                method: 'POST',
-                                body: updated
-                            });
-                            await Wait(1000);
-                        }
-
-                        console.log('Saved:', setFile);
-                    },
-                    classes: ['w-100 mt-5'],
-                    width: '100%',
-                    parent: modalBody,
-                    type: 'robi',
-                    value: 'Add route'
-                });
-
-                installBtn.add();
-
-                const cancelBtn = BootstrapButton({
-                    action(event) {
-                        console.log('Cancel add route');
-
-                        modal.close();
-                    },
-                    classes: ['w-100 mt-2'],
-                    width: '100%',
-                    parent: modalBody,
-                    type: 'light',
-                    value: 'Cancel'
-                });
-
-                cancelBtn.add();
-            },
-            centered: true,
-            showFooter: false,
-        });
-
-        modal.add();
-    }
 
     function modifyRoute(event) {
         // Show modal
@@ -765,7 +668,6 @@ export function Sidebar(param) {
         modal.add();
     }
 
-    // FIXME: Disable close/open button until animationend
     function toggleSidebarMode(event) {
         const mode = component.get().dataset.mode;
 
@@ -795,9 +697,14 @@ export function Sidebar(param) {
             });
             component.find('.title').classList.add('fade-out-left');
 
-            // Set fade up
+            // Fade out Edit
             component.find('.dev-buttons-container').style.opacity = '0';
+            component.find('.dev-buttons-container').style.pointerEvents = 'none';
             component.find('.dev-buttons-container').style.width = '0px';
+
+            // Fade out New route
+            component.find('.add-route').style.opacity = '0';
+            component.find('.add-route').style.pointerEvents = 'none';
 
             // Set mode
             component.get().dataset.mode = 'closed';
@@ -822,9 +729,16 @@ export function Sidebar(param) {
                 event.target.classList.remove('fade-in-right');
             });
 
-            // Set fade up
+            // Fade in Edit
             component.find('.dev-buttons-container').style.opacity = '1';
+            component.find('.dev-buttons-container').style.pointerEvents = 'auto';
+            // TODO: Get actual width on load
+            // FIXME: remove hard coded width
             component.find('.dev-buttons-container').style.width = '50.41px';
+
+            // Fade in New route
+            component.find('.add-route').style.opacity = '1';
+            component.find('.add-route').style.pointerEvents = 'auto';
 
             // Set mode
             component.get().dataset.mode = 'open';

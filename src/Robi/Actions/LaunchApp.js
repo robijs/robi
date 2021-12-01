@@ -1,6 +1,6 @@
 import { Data } from './Data.js'
 import { GetCurrentUser } from './GetCurrentUser.js'
-import {GenerateUUID } from './GenerateUUID.js'
+import { GenerateUUID } from './GenerateUUID.js'
 import { SetSessionStorage } from './SetSessionStorage.js'
 import { Route } from './Route.js'
 import { Log } from './Log.js'
@@ -54,6 +54,11 @@ export async function LaunchApp(param) {
     });
 
     svgDefs.add();
+
+    Store.add({
+        name: 'svgdefs',
+        component: svgDefs
+    });
 
     /** Get AD user and Users list item properties */
     Store.user(await GetCurrentUser({

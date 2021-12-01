@@ -61,6 +61,7 @@ Object.freeze(App);
 const Routes = [
     {
         path: '403',
+        type: 'system',
         hide: true,
         go(param) {
             Unauthorized(param);
@@ -68,6 +69,7 @@ const Routes = [
     },
     {
         path: '404',
+        type: 'system',
         hide: true,
         go(param) {
             Missing(param);
@@ -75,6 +77,7 @@ const Routes = [
     },
     {
         path: 'Developer',
+        type: 'system',
         roles: [
             'Developer'
         ],
@@ -85,6 +88,7 @@ const Routes = [
     },
     {
         path: 'Help',
+        type: 'system',
         icon: 'info-circle',
         go(param) {
             Help(param);
@@ -92,6 +96,7 @@ const Routes = [
     },
     {
         path: 'Questions',
+        type: 'system',
         icon: 'chat-right-text',
         go(param) {
             const {
@@ -117,6 +122,7 @@ const Routes = [
     },
     {
         path: 'Settings',
+        type: 'system',
         icon: 'bs-gear',
         go(param) {
             Settings(param);
@@ -124,6 +130,7 @@ const Routes = [
     },
     {
         path: 'Users',
+        type: 'system',
         roles: [
             'Developer',
             'Administrator'
