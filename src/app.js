@@ -17,14 +17,6 @@ Start({
     // Routes can be linked to directly with hash fragment. Ex: https://site#path.
     routes: [
         // @START-ROUTES
-        // @START-Measures
-        {
-            path: 'Measures',
-            icon: 'bs-journals',
-            go: Measures
-        }
-        // @END-Measures
-        , // @ROUTE
         // @START-Test
         {
             path: 'Test',
@@ -32,6 +24,14 @@ Start({
             go: Test
         }
         // @END-Test
+        , // @ROUTE
+        // @START-Measures
+        {
+            path: 'Measures',
+            icon: 'bs-journals',
+            go: Measures
+        }
+        // @END-Measures
         , // @ROUTE
         // @START-Route
         {

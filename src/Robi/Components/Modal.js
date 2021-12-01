@@ -348,8 +348,14 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
         return $(`#${component.get().id}`);
     };
 
-    component.close = () => {
-        return $(`#${component.get().id}`).modal('hide');
+    component.close = (onClose) => {
+        if (onClose) {
+            $(component.get()).on('hidden.bs.modal', event => {
+                onClose(event);
+            });
+        }
+
+        $(`#${component.get().id}`).modal('hide');
     };
 
     component.getButton = value => {

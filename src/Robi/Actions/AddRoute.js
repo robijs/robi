@@ -97,6 +97,7 @@ export async function AddRoute(param) {
 
             const addRouteBtn = BootstrapButton({
                 async action() {
+                    // TODO: Generalize show save modal and blur background
                     // Update app.js first or live-server will reload when
                     // Route/Path/Path.js is created
                     const modal = Modal({
@@ -129,6 +130,11 @@ export async function AddRoute(param) {
 
                     await updateApp();
                     await createRoute();
+
+                    if (App.get('mode') === 'prod') {
+                        await Wait(1500);
+                        location.reload();
+                    }
 
                     modal.close();
 

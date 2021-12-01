@@ -6,7 +6,9 @@ import { BootstrapTextarea } from './BootstrapTextarea.js'
 import { Modal } from './Modal.js'
 import { SingleLineTextField } from './SingleLineTextField.js'
 import { App, Store} from '../Core.js'
-import { AddRoute } from '../Robi.js'
+import { AddRoute } from '../Actions/AddRoute.js'
+import { OrderRoutes } from '../Actions/OrderRoutes.js'
+import { BlurOnSave } from '../Actions/BlurOnSave.js'
 
 /**
  *
@@ -136,7 +138,7 @@ export function Sidebar({ parent, path }) {
                 font-size: 1em;
                 font-weight: 400;
                 border-radius: 10px;
-                /* transition: background-color 100ms ease; */
+                transition: width 300ms ease;
             }
 
             /* .sidebar .nav:not(.nav-selected):hover {
@@ -230,6 +232,7 @@ export function Sidebar({ parent, path }) {
             }
 
             #id .dev-buttons-container {
+                position: relative;
                 width: 50.41px;
                 transition: width 150ms ease, opacity 150ms ease;
             }
@@ -321,6 +324,17 @@ export function Sidebar({ parent, path }) {
                     opacity: 1;
                 }
             }
+
+            @keyframes grab-show {
+                from {
+                    width: 0px;
+                    opacity: 0;
+                }
+                to {
+                    width: 22px;
+                    opacity: 1;
+                }
+            }
             
             .fade-in {
                 animation: 150ms ease-in-out fade-in;
@@ -342,6 +356,62 @@ export function Sidebar({ parent, path }) {
                 border-radius: 10px;
                 box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
                 padding: .5rem 0;
+            }
+
+            .grab {
+                width: 22px;
+                opacity: 1;
+                padding: 10px 0px;
+                display: flex;
+            }
+
+            .grab-show {
+                animation: 300ms ease-in-out grab-show;
+            }
+
+            .grab-show-reverse {
+                animation: 300ms ease-in-out forwards grab-show;
+                animation-direction: reverse;
+            }
+
+            #id .nav.ui-sortable-handle {
+                width: auto;
+                background: ${App.get('backgroundColor')};
+            }
+
+            #id .nav.ui-sortable-helper {
+                width: auto;
+                background: ${App.get('backgroundColor')};
+                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
+            }
+
+            #id .edit-buttons {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                opacity: 0;
+                transition: opacity 150ms ease;
+            }
+
+            #id .save-edit,
+            #id .cancel-edit {
+                cursor: pointer;
+                font-size: 15px;
+            }
+
+            #id .save-edit {
+                margin-right: 10px;
+                font-weight: 500;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 150ms ease;
+            }
+
+            #id .save-edit * {
+                color: ${App.get('primaryColor')};
             }
         `,
         parent: parent,
@@ -411,89 +481,123 @@ export function Sidebar({ parent, path }) {
     });
 
     function modifyRoute(event) {
-        // Show modal
-        console.log('modify route');
+        // Find sortable nav
+        const nav = component.findAll('.nav-container .nav:not([data-type="system"])');
+        const startOrder = [...nav].map(node => node.dataset.path);
 
-        const modal = Modal({
-            title: false,
-            disableBackdropClose: true,
-            scrollable: true,
-            async addContent(modalBody) {
-                modalBody.classList.add('install-modal');
+        console.log(startOrder);
 
-                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                    <h3 class='mb-2'>Modify route</h3>
-                `);
+        // disable edit
+        component.find('.open-dev-menu').disabled = true;
+        component.find('.open-dev-menu').style.opacity = '0';
 
-                // Site title
-                const siteTitle = SingleLineTextField({
-                    label: 'Site title',
-                    parent: modalBody,
-                    onFocusout(event) {
-                        siteUrl.value(siteTitle.value().toLowerCase().split(' ').join('-'));
-                        appName.value(siteTitle.value().toTitleCase().split(' ').join(''));
-                    }
+        // Show cancel
+        component.find('.dev-buttons-container').insertAdjacentHTML('beforeend', /*html*/ `
+            <div class='d-flex edit-buttons'>
+                <div class='save-edit'>
+                    <span>Save</span>
+                </div>
+                <div class='cancel-edit'>
+                    <span>Cancel</span>
+                </div>
+            </div>
+        `);
+
+        // Transition
+        component.find('.edit-buttons').style.opacity = '1';
+
+        // Add cancel behavior
+        component.find('.cancel-edit').addEventListener('click', event => {
+            // Remove sortable
+            $(`#${component.get().id} .nav-container`).sortable('destroy');
+
+            // Remove grab handles
+            component.findAll('.nav-container .nav .grab').forEach(node => {
+                node.addEventListener('animationend', event => {
+                    // Select node
+                    const selected = location.href.split('#')[1].split('/')[0];
+                    component.find(`.nav[data-path='${selected}']`)?.classList.add('nav-selected');
+
+                    // Remove cancel edit button
+                    component.find('.edit-buttons')?.remove();
+
+                    // Turn edit back on
+                    component.find('.open-dev-menu').disabled = false;
+                    component.find('.open-dev-menu').style.opacity = '1';
+
+                    // Remove grab
+                    node.remove();
                 });
-
-                siteTitle.add();
-
-                const siteDesc = BootstrapTextarea({
-                    label: 'Site description',
-                    parent: modalBody
-                });
-
-                siteDesc.add();
-
-                // Site Url
-                const siteUrl = SingleLineTextField({
-                    label: 'Site url',
-                    addon: App.get('site') + '/',
-                    parent: modalBody
-                });
-
-                siteUrl.add();
-
-                // App name
-                const appName = SingleLineTextField({
-                    label: 'App name',
-                    parent: modalBody
-                });
-
-                appName.add();
-
-                const installBtn = BootstrapButton({
-                    action() {
-                        console.log('Create route');
-                    },
-                    classes: ['w-100 mt-5'],
-                    width: '100%',
-                    parent: modalBody,
-                    type: 'primary',
-                    value: 'Modify route'
-                });
-
-                installBtn.add();
-
-                const cancelBtn = BootstrapButton({
-                    action(event) {
-                        console.log('Cancel modify route');
-
-                        modal.close();
-                    },
-                    classes: ['w-100 mt-2'],
-                    width: '100%',
-                    parent: modalBody,
-                    type: 'light',
-                    value: 'Cancel'
-                });
-
-                cancelBtn.add();
-            },
-            centered: true,
-            showFooter: false,
+                node.classList.add('grab-show-reverse');
+            });
         });
 
-        modal.add();
+        // Add save behavior
+        component.find('.save-edit').addEventListener('click', async event => {
+            const blur = BlurOnSave({
+                message: 'Updating route order'
+            });
+
+            await OrderRoutes({
+                order: [...component.findAll('.nav-container .nav:not([data-type="system"])')].map(node => node.dataset.path)
+            });
+
+            await blur.off((event) => {
+                console.log(event);
+                location.reload();
+            });
+        });
+
+        // Show grab handle
+        nav.forEach(node => {
+            // Remove selected
+            node.classList.remove('nav-selected');
+
+            node.insertAdjacentHTML('afterbegin', /*html*/ `
+                <div class='grab'>
+                    <svg class='icon'><use href='#icon-bs-list'></use></svg>
+                </div>
+            `);
+
+            // Remove animation
+            node.querySelector('.grab').addEventListener('animationend', event => {
+                node.querySelector('.grab').classList.remove('grab-show');
+            });
+            node.querySelector('.grab').classList.add('grab-show');
+        });
+
+        // Make sortable
+        $(`#${component.get().id} .nav-container`).sortable({
+            items: '.nav:not([data-type="system"])'
+        });
+        
+        $(`#${component.get().id} .nav-container`).disableSelection();
+
+        $(`#${component.get().id} .nav-container`).on('sortstop', (event, ui) => {
+            const newOrder = [...component.findAll('.nav-container .nav:not([data-type="system"])')].map(node => node.dataset.path);
+            // console.log(startOrder,  newOrder, arraysMatch(startOrder, newOrder));
+
+            if (arraysMatch(startOrder, newOrder)) {
+                component.find('.save-edit').style.opacity = '0';
+                component.find('.save-edit').style.pointerEvents = 'none';
+            } else {
+                component.find('.save-edit').style.opacity = '1';
+                component.find('.save-edit').style.pointerEvents = 'auto';
+            }
+        });
+
+        function arraysMatch(arr1, arr2) {
+            // Check if the arrays are the same length
+            if (arr1.length !== arr2.length) return false;
+        
+            // Check if all items exist and are in the same order
+            for (var i = 0; i < arr1.length; i++) {
+                if (arr1[i] !== arr2[i]) return false;
+            }
+        
+            // Otherwise, return true
+            return true;
+        };
     }
 
     function hideRoutes(event) {
@@ -750,27 +854,27 @@ export function Sidebar({ parent, path }) {
             .filter(route => route.path !== 'Settings' && !route.hide)
             .map(route => {
                 const {
-                    path, icon, roles
+                    path, icon, roles, type
                 } = route;
 
                 if (roles) {
                     if (roles.includes(Store.user().Role)) {
-                        return navTemplate(path, icon);
+                        return navTemplate(path, icon, type);
                     } else {
                         return '';
                     }
                 } else {
-                    return navTemplate(path, icon);
+                    return navTemplate(path, icon, type);
                 }
 
             }).join('\n');
     }
 
-    function navTemplate(routeName, icon) {
+    function navTemplate(routeName, icon, type) {
         const firstPath = path ? path.split('/')[0] : undefined;
 
         return /*html*/ `
-            <span class='nav ${(firstPath === routeName || firstPath === undefined && routeName === App.get('defaultRoute')) ? 'nav-selected' : ''}' data-path='${routeName}'>
+            <span class='nav ${(firstPath === routeName || firstPath === undefined && routeName === App.get('defaultRoute')) ? 'nav-selected' : ''}' data-path='${routeName}' data-type='${type || ''}'>
                 <span class='icon-container'>
                     <svg class='icon'><use href='#icon-${icon}'></use></svg>
                 </span>
@@ -780,6 +884,12 @@ export function Sidebar({ parent, path }) {
     }
 
     function routeToView() {
+        if (this.classList.contains('ui-sortable-handle')) {
+            console.log(`don't route when sorting`);
+
+            return;
+        }
+
         component.findAll('.nav').forEach((nav) => {
             nav.classList.remove('nav-selected');
         });

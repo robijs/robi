@@ -18,7 +18,7 @@ export function Sortable({ parent, position }) {
                 <div class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</div>
                 <div class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</div> -->
                 
-                <div class="nav">
+                <div class="nav ui-state-disabled">
                     Item 1
                 </div>
                 <div class="nav">
@@ -63,7 +63,11 @@ export function Sortable({ parent, position }) {
         parent,
         events: [],
         onAdd() {
-            $(`#${component.get().id}`).sortable();
+            $(`#${component.get().id}`).sortable({
+                items: 'div:not(.ui-state-disabled)'
+            });
+
+            $(`#${component.get().id}`).disableSelection();
         }
     });
 

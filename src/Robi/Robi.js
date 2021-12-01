@@ -70,9 +70,13 @@ import { UploadFile } from './Actions/UploadFile.js'
 import { UploadFiles } from './Actions/UploadFiles.js'
 import { Wait } from './Actions/Wait.js'
 import { AddRoute } from './Actions/AddRoute.js'
+import { OrderRoutes } from './Actions/OrderRoutes.js'
+import { BlurOnSave } from './Actions/BlurOnSave.js'
 
 export {
     AddRoute,
+    OrderRoutes,
+    BlurOnSave,
     App,
     Store,
     Routes,
