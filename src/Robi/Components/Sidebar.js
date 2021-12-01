@@ -9,6 +9,7 @@ import { App, Store} from '../Core.js'
 import { AddRoute } from '../Actions/AddRoute.js'
 import { OrderRoutes } from '../Actions/OrderRoutes.js'
 import { BlurOnSave } from '../Actions/BlurOnSave.js'
+import { HideRoutes } from '../Actions/HideRoutes.js'
 
 /**
  *
@@ -40,8 +41,8 @@ export function Sidebar({ parent, path }) {
                                         <div class="dropdown-menu" aria-labelledby="${id}">
                                             <div class="grown-in-top-left">
                                                 <!-- <button class="dropdown-item add-route" type="button">Add route</button> -->
-                                                <button class="dropdown-item modify-route" type="button">Modify route</button>
-                                                <button class="dropdown-item modify-route" type="button">Reorder routes</button>
+                                                <button class="dropdown-item modify-routes" type="button">Modify routes</button>
+                                                <button class="dropdown-item reorder-routes" type="button">Reorder routes</button>
                                                 <button class="dropdown-item hide-routes" type="button">Hide routes</button>
                                                 <div class="dropdown-divider"></div>
                                                 <button class="dropdown-item delete-routes" type="button">Delete routes</button>
@@ -335,6 +336,17 @@ export function Sidebar({ parent, path }) {
                     opacity: 1;
                 }
             }
+
+            @keyframes grab-show-switch {
+                from {
+                    width: 0px;
+                    opacity: 0;
+                }
+                to {
+                    width: 44px;
+                    opacity: 1;
+                }
+            }
             
             .fade-in {
                 animation: 150ms ease-in-out fade-in;
@@ -358,19 +370,35 @@ export function Sidebar({ parent, path }) {
                 padding: .5rem 0;
             }
 
-            .grab {
+            .grab:not(.switch) {
                 width: 22px;
                 opacity: 1;
                 padding: 10px 0px;
                 display: flex;
             }
 
-            .grab-show {
+            .grab.switch {
+                width: 44px;
+                height: 42.5px;
+                opacity: 1;
+                padding: 10px 0px;
+            }
+
+            .grab-show:not(.switch) {
                 animation: 300ms ease-in-out grab-show;
             }
 
-            .grab-show-reverse {
+            .grab-show.switch {
+                animation: 300ms ease-in-out grab-show-switch;
+            }
+
+            .grab-show-reverse:not(.switch) {
                 animation: 300ms ease-in-out forwards grab-show;
+                animation-direction: reverse;
+            }
+
+            .grab-show-reverse.switch {
+                animation: 300ms ease-in-out forwards grab-show-switch;
                 animation-direction: reverse;
             }
 
@@ -443,9 +471,14 @@ export function Sidebar({ parent, path }) {
                 }
             },
             {
-                selector: '#id .modify-route',
+                selector: '#id .modify-routes',
                 event: 'click',
-                listener: modifyRoute
+                listener: modifyRoutes
+            },
+            {
+                selector: '#id .reorder-routes',
+                event: 'click',
+                listener: reorderRoutes
             },
             {
                 selector: '#id .hide-routes',
@@ -480,7 +513,16 @@ export function Sidebar({ parent, path }) {
         }
     });
 
-    function modifyRoute(event) {
+    function reorderRoutes(event) {
+        console.log('reorder routes');
+
+        // Disable all routes
+        component.findAll('.nav-container .nav').forEach(node => {
+            node.classList.remove('nav-selected');
+            node.dataset.shouldroute = 'no';
+            node.style.cursor = 'initial';
+        });
+
         // Find sortable nav
         const nav = component.findAll('.nav-container .nav:not([data-type="system"])');
         const startOrder = [...nav].map(node => node.dataset.path);
@@ -508,6 +550,12 @@ export function Sidebar({ parent, path }) {
 
         // Add cancel behavior
         component.find('.cancel-edit').addEventListener('click', event => {
+            // Enable route
+            component.findAll('.nav-container .nav').forEach(node => {
+                node.dataset.shouldroute = 'yes';
+                node.style.cursor = 'pointer';
+            });
+        
             // Remove sortable
             $(`#${component.get().id} .nav-container`).sortable('destroy');
 
@@ -539,7 +587,7 @@ export function Sidebar({ parent, path }) {
             });
 
             await OrderRoutes({
-                order: [...component.findAll('.nav-container .nav:not([data-type="system"])')].map(node => node.dataset.path)
+                routes: [...component.findAll('.nav-container .nav:not([data-type="system"])')].map(node => node.dataset.path)
             });
 
             await blur.off((event) => {
@@ -550,9 +598,6 @@ export function Sidebar({ parent, path }) {
 
         // Show grab handle
         nav.forEach(node => {
-            // Remove selected
-            node.classList.remove('nav-selected');
-
             node.insertAdjacentHTML('afterbegin', /*html*/ `
                 <div class='grab'>
                     <svg class='icon'><use href='#icon-bs-list'></use></svg>
@@ -600,90 +645,130 @@ export function Sidebar({ parent, path }) {
         };
     }
 
+    // TODO: show hidden routes in order
     function hideRoutes(event) {
-        // Show modal
         console.log('hide routes');
 
-        const modal = Modal({
-            title: false,
-            disableBackdropClose: true,
-            scrollable: true,
-            async addContent(modalBody) {
-                modalBody.classList.add('install-modal');
-
-                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                    <h3 class='mb-2'>Hide routes</h3>
-                `);
-
-                // Site title
-                const siteTitle = SingleLineTextField({
-                    label: 'Site title',
-                    parent: modalBody,
-                    onFocusout(event) {
-                        siteUrl.value(siteTitle.value().toLowerCase().split(' ').join('-'));
-                        appName.value(siteTitle.value().toTitleCase().split(' ').join(''));
-                    }
-                });
-
-                siteTitle.add();
-
-                const siteDesc = BootstrapTextarea({
-                    label: 'Site description',
-                    parent: modalBody
-                });
-
-                siteDesc.add();
-
-                // Site Url
-                const siteUrl = SingleLineTextField({
-                    label: 'Site url',
-                    addon: App.get('site') + '/',
-                    parent: modalBody
-                });
-
-                siteUrl.add();
-
-                // App name
-                const appName = SingleLineTextField({
-                    label: 'App name',
-                    parent: modalBody
-                });
-
-                appName.add();
-
-                const installBtn = BootstrapButton({
-                    action() {
-                        console.log('Create route');
-                    },
-                    classes: ['w-100 mt-5'],
-                    width: '100%',
-                    parent: modalBody,
-                    type: 'dark',
-                    value: 'Hide routes'
-                });
-
-                installBtn.add();
-
-                const cancelBtn = BootstrapButton({
-                    action(event) {
-                        console.log('Cancel remove route');
-
-                        modal.close();
-                    },
-                    classes: ['w-100 mt-2'],
-                    width: '100%',
-                    parent: modalBody,
-                    type: 'light',
-                    value: 'Cancel'
-                });
-
-                cancelBtn.add();
-            },
-            centered: true,
-            showFooter: false,
+            // Disable all routes
+        component.findAll('.nav-container .nav').forEach(node => {
+                node.classList.remove('nav-selected');
+                node.dataset.shouldroute = 'no';
+                node.style.cursor = 'initial';
         });
 
-        modal.add();
+        // disable edit
+        component.find('.open-dev-menu').disabled = true;
+        component.find('.open-dev-menu').style.opacity = '0';
+
+        // Show cancel
+        component.find('.dev-buttons-container').insertAdjacentHTML('beforeend', /*html*/ `
+            <div class='d-flex edit-buttons'>
+                <div class='save-edit'>
+                    <span>Save</span>
+                </div>
+                <div class='cancel-edit'>
+                    <span>Cancel</span>
+                </div>
+            </div>
+        `);
+
+        // Transition
+        component.find('.edit-buttons').style.opacity = '1';
+
+        // Add cancel behavior
+        component.find('.cancel-edit').addEventListener('click', event => {
+                // Enable route
+                component.findAll('.nav-container .nav').forEach(node => {
+                    node.dataset.shouldroute = 'yes';
+                    node.style.cursor = 'pointer';
+                });
+            
+            // Remove grab handles
+            component.findAll('.nav-container .nav .grab').forEach(node => {
+                node.addEventListener('animationend', event => {
+                    // Select node
+                    const selected = location.href.split('#')[1].split('/')[0];
+                    component.find(`.nav[data-path='${selected}']`)?.classList.add('nav-selected');
+
+                    // Remove cancel edit button
+                    component.find('.edit-buttons')?.remove();
+
+                    // Turn edit back on
+                    component.find('.open-dev-menu').disabled = false;
+                    component.find('.open-dev-menu').style.opacity = '1';
+
+                    // Remove grab
+                    node.remove();
+                });
+                node.classList.add('grab-show-reverse');
+            });
+        });
+
+        // Add save behavior
+        component.find('.save-edit').addEventListener('click', async event => {
+            const blur = BlurOnSave({
+                message: 'Hiding routes'
+            });
+
+            //TODO: remove nav from DOM
+            const routes = toHide();
+            
+            component.findAll('.nav-container .nav:not([data-type="system"])').forEach(node => {
+                if (routes.includes(node.dataset.path)) {
+                    node.remove();
+                }
+            })
+
+            await HideRoutes({
+                routes
+            });
+
+            await blur.off((event) => {
+                console.log(event);
+                location.reload();
+            });
+        });
+
+        // Show hide switch
+        const nav = component.findAll('.nav-container .nav:not([data-type="system"])');
+        nav.forEach(node => {
+            const id = GenerateUUID();
+
+            node.insertAdjacentHTML('beforeend', /*html*/ `
+                <div class="custom-control custom-switch grab switch">
+                    <input type="checkbox" class="custom-control-input" id='${id}'>
+                    <label class="custom-control-label" for="${id}">Hide</label>
+                </div>
+            `);
+
+            // Switch change
+            node.querySelector('.custom-control-input').addEventListener('change', event => {
+                const checked = toHide();
+                console.log(checked);
+
+                if (checked.length) {
+                    component.find('.save-edit').style.opacity = '1';
+                    component.find('.save-edit').style.pointerEvents = 'auto';
+                } else {
+                    component.find('.save-edit').style.opacity = '0';
+                    component.find('.save-edit').style.pointerEvents = 'none';
+                }
+            });
+
+            // Remove animation
+            node.querySelector('.grab').addEventListener('animationend', event => {
+                node.querySelector('.grab').classList.remove('grab-show');
+            });
+            node.querySelector('.grab').classList.add('grab-show');
+        });
+
+        function toHide() {
+            return [...component.findAll('.nav .custom-control-input:checked')].map(node => node.closest('.nav').dataset.path);
+        }
+    }
+
+    function modifyRoutes(event) {
+        console.log('modify routes');
     }
 
     function removeRoutes(event) {
@@ -884,7 +969,7 @@ export function Sidebar({ parent, path }) {
     }
 
     function routeToView() {
-        if (this.classList.contains('ui-sortable-handle')) {
+        if (this.classList.contains('ui-sortable-handle') || this.dataset.shouldroute === 'no') {
             console.log(`don't route when sorting`);
 
             return;

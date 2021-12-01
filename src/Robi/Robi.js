@@ -72,11 +72,13 @@ import { Wait } from './Actions/Wait.js'
 import { AddRoute } from './Actions/AddRoute.js'
 import { OrderRoutes } from './Actions/OrderRoutes.js'
 import { BlurOnSave } from './Actions/BlurOnSave.js'
+import { HideRoutes } from './Actions/HideRoutes.js'
 
 export {
     AddRoute,
     OrderRoutes,
     BlurOnSave,
+    HideRoutes,
     App,
     Store,
     Routes,

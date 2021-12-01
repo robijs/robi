@@ -388,13 +388,6 @@ export function AppContainer() {
                 padding: 30px;
             } */
 
-            /* Intl Tel Input */
-            .iti__flag {background-image: url('./Images/flags.png');}
-
-            @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-                .iti__flag {background-image: url('./Images/flags@2x.png');}
-            }
-
             /* Install Console */
             .console {
                 width: 100%;
@@ -508,6 +501,24 @@ export function AppContainer() {
                 animation: 400ms ease-in-out forwards shrink-app;
             }
 
+            /* Switches */
+            .custom-control-input:checked ~ .custom-control-label::before {
+                color: #fff;
+                border-color: ${App.get('primaryColor')};
+                background-color: ${App.get('primaryColor')};
+            }
+
+            .custom-control-input:focus ~ .custom-control-label::before {
+                box-shadow: 0 0 0 4px ${App.get('primaryColor') + '6b'} !important;
+            }
+
+            .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+                border-color: ${App.get('primaryColor')};
+            }
+            
+            .custom-control-input:active {
+                background: ${App.get('primaryColor')};
+            }
         `,
         position: 'afterbegin',
         events: []

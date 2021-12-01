@@ -2,11 +2,12 @@ import { App } from '../Core.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { Wait } from './Wait.js'
 
+//TODO: comment out associated import
 /**
  *
  * @param {*} param
  */
-export async function OrderRoutes({ routes }) {
+export async function HideRoutes({ routes }) {
     console.log(routes);
 
     let digest;
@@ -31,18 +32,22 @@ export async function OrderRoutes({ routes }) {
     const allRoutes = value.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
     const routeObjects = allRoutes[1].split(', // @ROUTE');
 
-    // console.log('App.js:', value);
-    // console.log('Routes:', routes[0]);
+    // Add hide property
+    console.log(routeObjects);
+    const newRoutes = routeObjects.map(route => {
+        const [ query, path ] = route.match(/path: '([\s\S]*?)',/);
 
-    const newRoutes = routes.map(path => {
-        // FIXME: change to regex, will find routes that are similar
-        const route = routeObjects.find(item => item.includes(`// @START-${path}`));
-        // console.log(`Path: // @START-${path} -> Route: ${route}`);
+        if (routes.includes(path)) {
+            console.log(path);
+            console.log('hide route');
+            
+            // FIXME: will it always been 12 spaces?
+            // FIXME: can we guarentee that this search is alawys unique?
+            route = route.replace(`path: '${path}',`, `path: '${path}',\n            hide: true,`);
+        }
 
         return route;
     }).join(', // @ROUTE');
-
-    console.log(newRoutes);
 
     const updated = value.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes}// @END-ROUTES`);
 
