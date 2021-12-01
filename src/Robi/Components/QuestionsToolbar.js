@@ -15,7 +15,7 @@ export function QuestionsToolbar(param) {
         html: /*html*/ `
             <div class='btn-toolbar mb-3' role='toolbar' aria-label='Toolbar with button groups' id='App-18'>
                 <button type='button' class='btn ask-a-question'>Ask a question</button>
-                <div class='input-group'>
+                <div class='ml-2 mr-2'>
                     <input class='form-control mr-sm-2 search-questions' type='search' placeholder='Search' aria-label='Search'>
                 </div>    
                 <div class='btn-group mr-2' role='group' aria-label='First group'>
@@ -46,7 +46,6 @@ export function QuestionsToolbar(param) {
                 border-radius: 8px;
                 min-width: 250px;
                 min-height: 35px;
-                margin: 0rem .5rem;
             }
 
             #id .btn-robi-primary {
