@@ -147,7 +147,8 @@ export async function CreateList(param) {
         for (let field in fields) {
             await CreateColumn({
                 list,
-                field: fields[field]
+                field: fields[field],
+                view: template === 101 ? 'All Documents' : 'All Items'
             });
         }
 

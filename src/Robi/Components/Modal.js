@@ -17,7 +17,18 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
                     <div class='modal-content'>
                         ${
                             !title ?
-                            /*html*/ `` :
+                            /*html*/ `
+                                <!-- <button type='button' class='close' style='position: absolute; right: 0px;' data-dismiss='modal' aria-label='Close'>
+                                    <span class='icon-container' style='right: 20px; top: 20px;'>
+                                        <svg class='icon x-circle-fill'>
+                                            <use href='#icon-bs-x-circle-fill'></use>
+                                        </svg>
+                                        <svg class='icon circle-fill' style='z-index: 1;'>
+                                            <use href='#icon-bs-circle-fill'></use>
+                                        </svg>
+                                    <span>
+                                </button> -->
+                            ` :
                             /*html*/ `
                                 <div class='modal-header' ${headerStyle ? `style='${headerStyle}'` : ''}>
                                     <h5 class='modal-title' ${titleStyle ? `style='${titleStyle}'` : ''}>${title || ''}</h5>

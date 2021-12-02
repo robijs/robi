@@ -8,32 +8,38 @@ import { App } from '../Core.js';
  */
 export function DateField(param) {
     const {
-        label, date, parent, position
+        label, description, parent, position, margin, value
     } = param;
 
     const component = Component({
         html: /*html*/ `
             <div class='form-field'>
-                <div class='form-field-label'>${label}</div>
-                <input class='form-field-date' type='date' ${date ? `value=${date.toISOString().split('T')[0]}` : ''}>
+                <label class='form-label'>${label}</label>
+                ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
+                <input class='form-field-date form-control' type='date' ${value ? `value=${new Date(value).toISOString().split('T')[0]}` : ''}>
             </div>
         `,
         style: /*css*/ `
             /* Rows */
             #id.form-field {
-                margin-bottom: 10px;
+                margin: ${margin || '0px 0px 20px 0px'};
             }
 
             /* Labels */
-            #id .form-field-label {
-                font-size: 1.1em;
-                font-weight: bold;
-                padding: 5px;
+            #id label {
+                font-weight: 500;
             }
 
             #id .form-field-date {
-                font-size: .9em;
-                font-weight: 500;
+                width: auto;
+            }
+
+            #id .form-field-description {
+                font-size: 14px;
+                margin-bottom:  0.5rem;
+            }
+
+            /* #id .form-field-date {
                 margin-top: 2px;
                 margin-bottom: 4px;
                 padding: 10px;
@@ -47,7 +53,7 @@ export function DateField(param) {
                 outline: none;
                 border: solid 1px transparent;
                 box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')};
-            }
+            } */
         `,
         parent: parent,
         position,

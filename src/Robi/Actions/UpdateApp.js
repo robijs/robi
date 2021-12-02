@@ -7,6 +7,11 @@ import { Lists } from '../Models/Lists.js'
 import { App, Store } from '../Core.js'
 import { Route } from './Route.js'
 import { GetWebLists } from './GetWebLists.js'
+import { CreateList } from './CreateList.js'
+import { CreateItem } from './CreateItem.js'
+import { CreateColumn } from './CreateColumn.js'
+import { DeleteList } from './DeleteList.js'
+import { DeleteColumn } from './DeleteColumn.js'
 import lists from '../../lists.js'
 
 /**

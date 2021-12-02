@@ -16,7 +16,7 @@ export function Alert(param) {
 
     const component = Component({
         html: /*html*/ `
-            <div class='alert alert-${type} ${classes?.join(' ')}' role='alert'${margin ? ` style='margin: ${margin};'` : ''}>
+            <div class='alert alert-${type} ${classes?.join(' ')}' role='alert'>
                 ${text || ''}
                 ${close ?
             /*html*/ ` 
@@ -32,6 +32,7 @@ export function Alert(param) {
                 font-size: 14px;
                 border-radius: 10px;
                 border: none;
+                margin: ${margin || '0px 0px 10px 0px'};
             }
 
             /* #id *:not(button) {

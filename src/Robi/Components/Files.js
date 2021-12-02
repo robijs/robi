@@ -42,6 +42,7 @@ export function Files(param) {
             #id {
                 width: ${width || '100%'};
                 min-width: 350px;
+                position: relative;
             }
 
             #id .form-field-description {
@@ -152,6 +153,7 @@ export function Files(param) {
             #id .file-name-container {
                 display: flex;
                 flex-direction: column;
+                ${itemId ? 'cursor: pointer;' : ''}
             }
 
             #id .file-icon {
@@ -278,6 +280,7 @@ export function Files(param) {
             #id .remove-label .status {
                 text-align: right;
                 font-size: 12px;
+                white-space: nowrap;
             }
 
             #id .remove-label .tip {
@@ -383,6 +386,13 @@ export function Files(param) {
                 listener(event) {
                     renderFiles(event.target.files);
                 }
+            },
+            {
+                selector: `#id .file-name-container`,
+                event: 'click',
+                listener(event) {
+                    window.open(files.find(file => file.name = this.dataset.filename).url, '_self');
+                }
             }
         ]
     });
@@ -433,7 +443,7 @@ export function Files(param) {
                 addPreview(file);
 
                 // If item already created, upload right away
-                console.log(itemId);
+                // console.log(itemId);
                 if (itemId) {
                     onUpload(file); // Waiting for update
                 } else {
@@ -484,7 +494,7 @@ export function Files(param) {
 
     function fileTemplate(file) {
         const {
-            name, size, created, author
+            name, size, created, author, uri
         } = file;
 
         const ext = name.split('.').pop();
@@ -497,14 +507,14 @@ export function Files(param) {
                     <div class='file-icon'>
                         <svg class='icon type ${icon}'><use href='#icon-${icon}'></use></svg>
                     </div>
-                    <div class='file-name-container'>
+                    <div class='file-name-container' data-filename='${name}'>
                         <div class='file-preview-name'>${name}</div>
                         <div class='file-size'>${returnFileSize(size)}</div>
                     </div>
                 </div>
                 <div class='remove-container ${created ? 'delete-on-remove' : ''}' data-filename='${name}'>
                     <div class='remove-label'>
-                        <div class='status'>${created ? `Added on ${new Date(created).toLocaleDateString()} By ${author.split(' ').slice(0, 2).join(', ')}` : 'Pending'}</div>
+                        <div class='status'>${created ? `Added on ${new Date(created).toLocaleDateString()} By ${author.split(' ').slice(0, 2).join(' ')}` : 'Pending'}</div>
                         <div class='tip'>${created ? `${'ontouchstart' in window ? 'tap' : 'click'} to delete` : `remove`}</div>
                     </div>
                     <div class='remove-icon'>

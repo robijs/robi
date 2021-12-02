@@ -18,16 +18,8 @@ export async function UploadFile(param) {
 
     // Get new request digest
     const requestDigest = await GetRequestDigest();
-
-    console.log(file);
-
-    const [first, ...rest] = file.name.split('.');
-    const ext = rest.pop();
-
-    let fileName = ext === 'pptx' || ext === 'txt' || ext === 'exe' ? [first].concat(rest).join('_dot_') : `${[first].concat(rest).join('_dot_')}.${ext}`;
-
     const fileBuffer = await getFileBuffer(file);
-    const upload = await fetch(`${App.get('site')}/_api/web/folders/GetByUrl('${library}')/Files/add(overwrite=true,url='${fileName}')`, {
+    const upload = await fetch(`${App.get('site')}/_api/web/folders/GetByUrl('${library}')/Files/add(overwrite=true,url='${file.name}')`, {
         method: 'POST',
         headers: {
             "Accept": "application/json;odata=verbose",
@@ -59,6 +51,8 @@ export async function UploadFile(param) {
         const updateItemParam = {
             list: library,
             itemId: item.Id,
+            select: `*,Author/Title,Editor/Title`,
+            expand: `File,Author,Editor`,
             data
         };
 

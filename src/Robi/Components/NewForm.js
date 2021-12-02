@@ -1,5 +1,6 @@
 import { CreateItem } from '../Actions/CreateItem.js'
 import { BootstrapDropdown } from './BootstrapDropdown.js'
+import { DateField } from './DateField.js'
 import { MultiLineTextField } from './MultiLineTextField.js'
 import { NumberField } from './NumberField.js'
 import { SingleLineTextField } from './SingleLineTextField.js' 
@@ -46,6 +47,13 @@ export async function NewForm(param) {
                             label: choice
                         };
                     }),
+                    parent
+                });
+                break;
+            case 'date':
+                component = DateField({
+                    label: display || name,
+                    value: '',
                     parent
                 });
                 break;

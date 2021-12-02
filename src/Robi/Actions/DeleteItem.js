@@ -1,4 +1,5 @@
 import { App } from '../Core.js'
+import { Get } from './Get.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { Post } from './Post.js'
 

@@ -47,7 +47,7 @@ export function SectionStepper(param) {
             }
 
             /* Title */
-            #id .section-title {
+            /* #id .section-title {
                 font-size: 1em;
                 font-weight: 700;
                 text-align: center;
@@ -56,6 +56,15 @@ export function SectionStepper(param) {
                 border-radius: 10px;
                 margin-bottom: 15px;
                 padding: 10px;
+                cursor: pointer;
+            } */
+
+            #id .section-title {
+                font-size: 18px;
+                font-weight: 700;
+                color: ${App.get('primaryColor')};
+                border-radius: 10px;
+                padding: 10px 20px;
                 cursor: pointer;
             }
 

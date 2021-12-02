@@ -18,7 +18,7 @@ import lists from '../../lists.js'
  */
 export async function Table(param) {
     const {
-        addButton, addButtonValue, border, buttonColor, checkboxes, createdRow, defaultButtons, displayForm, editForm, editFormTitle, filter, formFooter, formTitleField, headerFilter, heading, headingColor, headingMargin, headingSize, list, margin, newForm, onUpdate, openInModal, order, padding, parent, showId, striped, titleDisplayName, view
+        addButton, addButtonValue, border, buttonColor, checkboxes, createdRow, defaultButtons, displayForm, editForm, editFormTitle, exportButtons, filter, formFooter, formTitleField, headerFilter, heading, headingColor, headingMargin, headingSize, list, margin, newForm, newFormTitle, newFormData, onUpdate, openInModal, order, padding, parent, showId, striped, titleDisplayName, view, width
     } = param;
 
     let {
@@ -27,6 +27,7 @@ export async function Table(param) {
 
     const tableContainer = Container({
         display: 'block',
+        width,
         margin,
         padding,
         parent
@@ -37,7 +38,7 @@ export async function Table(param) {
     /** Heading */
     if (heading || list) {
         const legendHeading = Heading({
-            text: heading || (heading === '' ? '' : list),
+            text: heading || (heading === '' ? '' : list.split(/(?=[A-Z])/).join(' ')),
             size: headingSize,
             color: headingColor,
             margin: headingMargin || '20px 0px 15px 0px',
@@ -72,7 +73,7 @@ export async function Table(param) {
 
         loadingSpinner.add();
 
-        items = await Get({
+        items = items || await Get({
             list,
             filter
         });
@@ -87,7 +88,14 @@ export async function Table(param) {
                 .find(item => item.name === view)
                 ?.fields
                 .map(name => {
-                    return schema.fields.find(field => field.name === name);
+                    // FIXME: Set default SharePoint Fields (won't be listed in schema)
+                    // TODO: Only set 'Name' as an option if schema.template === 101
+                    const spFields = ['Created', 'Modified', 'Author', 'Editor', 'Name'];
+                    if (spFields.includes(name)) {
+                        return { name };
+                    } else {
+                        return schema.fields.find(field => field.name === name);
+                    }
                 });
         } else {
             // If no view, get all fields
@@ -149,13 +157,14 @@ export async function Table(param) {
 
                 else if (name === 'Author') {
                     columnOptions.render = (data, type, row) => {
-                        return data.Title;
+                        return data.Title.split(' ').slice(0, 2).join(' ');
                     };
                 }
 
                 else if (name.includes('Created') || name.includes('Date')) {
                     columnOptions.render = (data, type, row) => {
-                        return new Date(data).toLocaleString();
+                        // return data ? new Date(data).toLocaleString() : '';
+                        return data ? new Date(data).toLocaleDateString() : '';
                     };
                 }
 
@@ -289,38 +298,40 @@ export async function Table(param) {
             ]);
         }
 
-        buttons = buttons.concat([
-            {
-                extend: 'excelHtml5',
-                // className: 'ml-50',
-                exportOptions: {
-                    header: false,
-                    footer: false,
-                    columns: ':not(.do-not-export):not(.select-checkbox)'
+        if (exportButtons !== false) {
+            buttons = buttons.concat([
+                {
+                    extend: 'excelHtml5',
+                    // className: 'ml-50',
+                    exportOptions: {
+                        header: false,
+                        footer: false,
+                        columns: ':not(.do-not-export):not(.select-checkbox)'
+                    }
+                },
+                {
+                    extend: 'csvHtml5',
+                    exportOptions: {
+                        header: false,
+                        footer: false,
+                        columns: ':not(.do-not-export):not(.select-checkbox)'
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    exportOptions: {
+                        columns: ':not(.do-not-export):not(.select-checkbox)'
+                    }
                 }
-            },
-            {
-                extend: 'csvHtml5',
-                exportOptions: {
-                    header: false,
-                    footer: false,
-                    columns: ':not(.do-not-export):not(.select-checkbox)'
-                }
-            },
-            {
-                extend: 'pdfHtml5',
-                orientation: 'landscape',
-                exportOptions: {
-                    columns: ':not(.do-not-export):not(.select-checkbox)'
-                }
-            }
-            // {
-            //     extend: 'copyHtml5',
-            //     exportOptions: {
-            //         columns: [3,4,5,6,7,8,9,10,11]
-            //     }
-            // },
-        ]);
+                // {
+                //     extend: 'copyHtml5',
+                //     exportOptions: {
+                //         columns: [3,4,5,6,7,8,9,10,11]
+                //     }
+                // },
+            ]);
+        }
     }
 
     if (addButton !== false) {
@@ -339,7 +350,7 @@ export async function Table(param) {
                 } else {
                     const newModal = Modal({
                         contentPadding: '30px',
-                        title: `New Item`,
+                        title: newFormTitle || `New Item`,
                         async addContent(modalBody) {
                             const formParam = {
                                 event: e,
@@ -379,7 +390,13 @@ export async function Table(param) {
                                         // Call newForm.onCreate() and wait for it to complete
                                         const newItem = await selectedForm?.onCreate(event);
 
-                                        if (newItem) {
+                                        if (Array.isArray(newItem)) {
+                                            newItem.forEach(item => {
+                                                table.addRow({
+                                                    data: item
+                                                });
+                                            })
+                                        } else {
                                             table.addRow({
                                                 data: newItem
                                             });
@@ -445,7 +462,7 @@ export async function Table(param) {
             } else {
                 // Open edit form in modal
                 const rowModal = Modal({
-                    title: 'Edit item',
+                    title: editFormTitle || `Edit Item`,
                     contentPadding: '30px',
                     async addContent(modalBody) {
                         const formParam = { item, table, row, fields: formFields, list, modal: rowModal, parent: modalBody };

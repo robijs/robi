@@ -2,24 +2,6 @@ import { AddFileTypes } from './Routes/Measures/AddFileTypes.js'
 
 export default [
     {
-        list: 'TestList',
-        options: {
-            files: true,
-        },
-        fields: [
-            {
-                name: 'Summary',
-                display: `Summary`,
-                type: 'slot'
-            },
-            {
-                name: 'Description',
-                display: 'Description',
-                type: 'mlot'
-            }
-        ]
-    },
-    {
         list: 'Measures',
         options: {
             files: true
@@ -73,6 +55,7 @@ export default [
             {
                 name: 'AnnualUpdateSchedule',
                 display: 'Annual Update Schedule',
+                description: `What's the current update schedule?`,
                 type: 'choice',
                 value: null,
                 choices: [
@@ -153,8 +136,9 @@ export default [
             {
                 name: 'DataAggLevels',
                 display: 'Data Aggregation Levels',
-                type: 'choice',
-                value: null,
+                description: 'Select all that apply',
+                type: 'multichoice',
+                fillIn: false,
                 choices: [
                     'Child MTF',
                     'Clinic',
@@ -284,6 +268,7 @@ export default [
             {
                 name: 'GenesisIncluded',
                 display: 'GENESIS Included?',
+                description: 'Is your measure available for drill down to our Genesis sites?',
                 type: 'choice',
                 value: null,
                 choices: [
@@ -454,6 +439,7 @@ export default [
             {
                 name: 'PQACategory',
                 display: 'Primary Quad Aim Category',
+                description: 'Which Quad Aim category is supported by your measure?',
                 type: 'choice',
                 value: null,
                 choices: [
@@ -499,6 +485,18 @@ export default [
                     'Red Shift',
                     'SQL Farm',
                     'Teradata'
+                ]
+            },
+            {
+                name: 'ReviewFocusArea',
+                display: 'MHS Review focus area',
+                description: `Which MHS review focus area (if any) is linked to your measure?`,
+                type: 'choice',
+                value: null,
+                choices: [
+                    'Access',
+                    'Safety',
+                    'Quality'
                 ]
             },
             {
@@ -791,6 +789,14 @@ export default [
                         ]
                     },
                     {
+                        fields: [
+                            {
+                                name: 'ProgLang',
+                                label: 'Which programming language is the measure coded in? (more than one selection allowed)'
+                            }
+                        ]
+                    },
+                    {
                         description: 'For DBA/BI Developers Only',
                         type: 'warning',
                         fields: [
@@ -935,6 +941,15 @@ export default [
                 path: 'PerformanceSection',
                 rows: [
                     {
+                        // name: 'Annual Update Schedule',
+                        fields: [
+                            {
+                                name: 'AnnualUpdateSchedule',
+                                label: false
+                            }
+                        ]
+                    },
+                    {
                         name: 'Baseline Information',
                         fields: [
                             {
@@ -946,6 +961,36 @@ export default [
                                 label: 'And what is the value?'
                             }
                         ]
+                    },
+                    {
+                        fields: [
+                            {
+                                name: 'ExistingBenchmarks',
+                                label: 'Does this measure have existing benchmarks?'
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                name: 'Benchmarks',
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                name: 'ExistingTargets',
+                                label: 'Does this measure have existing targets?'
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                name: 'Target',
+                            }
+                        ]
                     }
                 ]
             },
@@ -953,7 +998,43 @@ export default [
                 name: 'Miscellaneous',
                 path: 'Misc',
                 rows: [
-
+                    {
+                        fields: [
+                            {
+                                name: 'GenesisIncluded',
+                                label: 'Is a GENESIS site included?'
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                name: 'CareAvailability',
+                                label: 'Direct Care versus Purchased Care Availability'
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                name: 'DataAggLevels'
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                name: 'PQACategory'
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                name: 'ReviewFocusArea'
+                            }
+                        ]
+                    }
                 ]
             }
         ],
@@ -1060,6 +1141,98 @@ export default [
                     'Completed'
                 ]
             }
+        ],
+        views: [
+            {
+                name: 'Checklist',
+                fields: [
+                    'Step',
+                    'Assigned',
+                    'Start',
+                    'End',
+                    'Status',
+                ]
+            }
         ]
-    }
+    },
+    {
+        list: 'DataFiles',
+        template: 101,
+        fields: [
+            {
+                name: 'MeasureId',
+                type: 'number'
+            },
+            {
+                name: 'ShortTitle',
+                display: 'Short Title',
+                type: 'slot'
+            },
+            {
+                name: 'MIPLink',
+                type: 'slot'
+            },
+            {
+                name: 'DataThroughDate',
+                display: 'Through Date',
+                type: 'date'
+            },
+            {
+                name: 'DataPulledDate',
+                display: 'Pulled Date',
+                type: 'date'
+            }
+        ],
+        views: [
+            {
+                name: 'DataFiles',
+                fields: [
+                    'Name',
+                    'DataThroughDate',
+                    'DataPulledDate',
+                    'Created',
+                    'Author'
+                ]
+            },
+            {
+                name: 'Form',
+                fields: [
+                    'ShortTitle',
+                    'Name',
+                    'DataThroughDate',
+                    'DataPulledDate',
+                    'Created',
+                    'Author'
+                ]
+            }
+        ]
+    },
+    // {
+    //     list: 'MeasuresData',
+    //     options: {
+    //         files: true
+    //     },
+    //     fields: [
+    //         {
+    //             name: 'MeasureId',
+    //             type: 'number'
+    //         },
+    //         {
+    //             name: 'ShortTitle',
+    //             type: 'slot'
+    //         },
+    //         {
+    //             name: 'MIPLink',
+    //             type: 'slot'
+    //         },
+    //         {
+    //             name: 'DataThroughDate',
+    //             type: 'date'
+    //         },
+    //         {
+    //             name: 'DataPulledDate',
+    //             type: 'date'
+    //         }
+    //     ]
+    // }
 ]

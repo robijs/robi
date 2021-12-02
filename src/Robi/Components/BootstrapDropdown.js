@@ -20,7 +20,7 @@ export function BootstrapDropdown(param) {
                     <button class='btn dropdown-toggle' ${buttonStyle ? `style='${buttonStyle}'` : ''} type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                         ${value || `<span style='opacity: 0;'>Choose</span>`}
                     </button>
-                    <div class='dropdown-menu hidden' aria-labelledby='dropdownMenuButton'>
+                    <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
                         <div class='scroll-container'>
                             ${buildDropdown(options)}
                         </div>
@@ -45,6 +45,7 @@ export function BootstrapDropdown(param) {
 
             #id .dropdown-toggle {
                 min-height: 33.5px;
+                min-width: 160px;
                 font-size: 13px;
                 border-radius: 0.125rem 0px;
                 border: 1px solid #ced4da;
@@ -56,11 +57,6 @@ export function BootstrapDropdown(param) {
             #id .dropdown-item {
                 font-size: 13px;
                 cursor: pointer;
-            }
-
-            #id .hidden {
-                display: block;
-                visibility: hidden;
             }
 
             #id .dropdown-menu {
@@ -110,12 +106,12 @@ export function BootstrapDropdown(param) {
             // TODO: Add scroll through this with up and down arrow keys
         ],
         onAdd() {
-            // FIXME: Why does adding a timeout work?
-            setTimeout(() => {
-                // FIXME: assumes maxWidth is px
-                component.find('.dropdown-toggle').style.width = `${component.find('.dropdown-menu').offsetWidth || (parseInt(maxWidth?.replace('px')) || 160)}px`;
-                component.find('.dropdown-menu').classList.remove('hidden');
-            }, setWidthDelay || 0);
+            // // FIXME: Why does adding a timeout work?
+            // setTimeout(() => {
+            //     // FIXME: assumes maxWidth is px
+            //     component.find('.dropdown-toggle').style.width = `${component.find('.dropdown-menu').offsetWidth || (parseInt(maxWidth?.replace('px')) || 160)}px`;
+            //     component.find('.dropdown-menu').classList.remove('hidden');
+            // }, setWidthDelay || 100);
         }
     });
 
@@ -159,6 +155,12 @@ export function BootstrapDropdown(param) {
                 return field.innerText;
             }
         }
+    };
+
+    component.selected = () => {
+        const field = component.find('.dropdown-toggle');
+
+        return options.find(item => item.label === field.innerText)?.path
     };
 
     return component;

@@ -11,7 +11,7 @@ import { App, Store } from '../Core.js'
  */
 export function AttachmentsContainer(param) {
     const {
-        parent, label, description, list, itemId, value, onChange
+        parent, label, description, list, itemId, value, onChange, library
     } = param;
 
     /** Loading Indicator */
@@ -45,30 +45,12 @@ export function AttachmentsContainer(param) {
     heading.add();
 
     const filesList = Files({
-        // allFiles: files.map(file => {
-        //     return {
-        //         name: file.Ext === 'pptx' ? `${file.File.Name}.pptx` : file.File.Name,
-        //         size: file.File.Length,
-        //         created: file.Created,
-        //         author: file.Author.Title
-        //     }
-        // }),
-        // files: files
-        // .filter(file => file.Section === section)
-        // .sort((a, b) => a.Ext.localeCompare(b.Ext) || a.File.Name.localeCompare(b.File.Name))
-        // .map(file => {
-        //     return {
-        //         name: file.Ext === 'pptx' ? `${file.File.Name}.pptx` : file.File.Name,
-        //         size: file.File.Length,
-        //         created: file.Created,
-        //         author: file.Author.Title
-        //     }
-        // }),
         description,
         onChange,
         allFiles: [],
         files: itemId ? value?.map(item => {
             return {
+                url: item.OData__dlc_DocIdUrl.Url,
                 name: item.File.Name,
                 size: item.File.Length,
                 created: item.Created,
@@ -94,7 +76,7 @@ export function AttachmentsContainer(param) {
             `;
 
             const testUpload = await UploadFile({
-                library: 'MeasuresFiles',
+                library: library || 'MeasuresFiles',
                 file,
                 data: {
                     MeasureId: itemId

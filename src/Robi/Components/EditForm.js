@@ -5,6 +5,7 @@ import { MultiChoiceField } from './MultiChoiceField.js'
 import { MultiLineTextField } from './MultiLineTextField.js'
 import { NumberField } from './NumberField.js'
 import { SingleLineTextField } from './SingleLineTextField.js'
+import { DateField } from './DateField.js'
 
 /**
  *
@@ -64,6 +65,13 @@ export async function EditForm(param) {
                         label: display || name,
                         choices,
                         // value: item[name] || choices[0],
+                        parent
+                    });
+                    break;
+                case 'date':
+                    component = DateField({
+                        label: display || name,
+                        value: item[name],
                         parent
                     });
                     break;

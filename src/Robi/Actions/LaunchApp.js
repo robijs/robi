@@ -9,7 +9,7 @@ import { Sidebar } from '../Components/Sidebar.js'
 import { MainContainer } from '../Components/MainContainer.js'
 import { FixedToast } from '../Components/FixedToast.js'
 import { Modal } from '../Components/Modal.js'
-import { ReleaseNotes } from '../Components/ReleaseNotes.js'
+import { ReleaseNotesContainer } from '../Components/ReleaseNotesContainer.js'
 import { Store, Routes } from '../Core.js'
 
 /**
@@ -162,8 +162,9 @@ export async function LaunchApp(param) {
                     fade: true,
                     background: settings.secondaryColor,
                     centered: true,
+                    close: true,
                     addContent(modalBody) {
-                        ReleaseNotes({
+                        ReleaseNotesContainer({
                             margin: '0px',
                             parent: modalBody,
                         });

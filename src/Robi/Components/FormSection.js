@@ -67,7 +67,7 @@ export function FormSection(param) {
         // console.log(rowName, rowDescription);
         const rowContainer = type ?
             Alert({
-                margin: '0px 20px 20px 20px',
+                margin: '10px 20px',
                 type,
                 parent
             }) :
@@ -96,7 +96,6 @@ export function FormSection(param) {
 
         const fieldRow = Container({
             display: 'flex',
-            align: 'flex-end',
             width: '100%',
             parent: rowContainer
         });
