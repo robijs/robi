@@ -250,7 +250,7 @@ export async function Table(param) {
                             <use href='#icon-bs-trash'></use>
                         </svg>
                     `,
-                    className: 'delete-item mr-4',
+                    className: 'delete-item',
                     name: 'delete',
                     enabled: false,
                     action: async function (e, dt, node, config) {
@@ -331,7 +331,7 @@ export async function Table(param) {
                 </svg>
                 <span>${addButtonValue || 'Add item'}</span>
             `,
-            className: 'add-item mr-4',
+            className: 'add-item',
             name: 'add',
             action: function (e, dt, node, config) {
                 if (openInModal) {

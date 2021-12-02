@@ -8,7 +8,7 @@ import { App } from '../Core.js';
  */
 export function Title(param) {
     const {
-        title, width, subTitle, breadcrumb, dropdownGroups, maxTextWidth, route, padding, margin, parent, position, date, type, action
+        title, width, subTitle, subTitleColor, breadcrumb, dropdownGroups, maxTextWidth, route, padding, margin, parent, position, date, type, action
     } = param;
 
     /**
@@ -63,7 +63,7 @@ export function Title(param) {
                 font-size: 1.1em;
                 font-weight: 500;
                 margin: 0px;
-                color: ${App.get('defaultColor') + 'ab'};
+                color: ${subTitleColor || App.get('defaultColor')};
             }
 
             #id.title .title-date {

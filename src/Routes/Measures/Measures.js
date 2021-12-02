@@ -51,7 +51,7 @@ export default async function Measures({ parent, pathParts, props }) {
     const info = Alert({
         margin: '20px 0px',
         type: 'robi-primary',
-        text: '<strong>My Dashboard</strong> coming soon. Please stay tuned!',
+        text: '<strong>My Dashboard</strong> coming soon!',
         parent
     });
 

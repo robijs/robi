@@ -3,6 +3,7 @@ import { GetRequestDigest } from './GetRequestDigest.js'
 import { Post } from './Post.js'
 import { CreateLibrary } from './CreateLibrary.js'
 import { CreateColumn } from './CreateColumn.js'
+import { UpdateColumn } from './UpdateColumn.js'
 
 /**
  * Create SharePoint list item.
@@ -127,6 +128,16 @@ export async function CreateList(param) {
             console.log(`Files enabled. Create '${list}Files' doc lib.`);
             const filesLib = await CreateLibrary({
                 name: `${list}Files`
+            });
+
+            await CreateColumn({
+                list: `${list}Files`,
+                field: {
+                    name: 'ParentId',
+                    type: 'number'
+                },
+                view: 'All Documents',
+                updateProgressCount: false
             });
             
             console.log(`${list}Files:`, filesLib);

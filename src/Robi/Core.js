@@ -277,6 +277,9 @@ const Store = {
             return store.viewScrollTop;
         }
     },
+    removeData(name) {
+        delete store.data[name];
+    },
     setData(name, data) {
         store.data[name] = data;
     },

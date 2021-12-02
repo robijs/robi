@@ -64,21 +64,17 @@ export function FormSection(param) {
     rows.forEach(row => {
         const { name: rowName, fields: rowFields, description: rowDescription, type } = row;
 
-        // console.log(rowName, rowFields);
-        const rowContainer = !type ?
+        // console.log(rowName, rowDescription);
+        const rowContainer = type ?
+            Alert({
+                margin: '0px 20px 20px 20px',
+                type,
+                parent
+            }) :
             Container({
                 display: 'block',
                 width: '100%',
                 padding: '10px 20px',
-                parent
-            }) :
-            Alert({
-                // width: '100%', // causes node to spill out on the right
-                text: /*html*/ `
-                    <div class='mb-2'>${rowDescription}</div>
-                `,
-                margin: '0px 20px 20px 20px',
-                type,
                 parent
             });
 
@@ -89,6 +85,12 @@ export function FormSection(param) {
                 <div class='mb-1'>
                     <h6 style='color: ${App.get('defaultColor')}; font-weight: 700'>${rowName}</h6>
                 </div>
+            `);
+        }
+
+        if (rowDescription) {
+            rowContainer.append(/*html*/ `
+                <div class="mb-2" style='font-size: 14px;'>${rowDescription}</div>
             `);
         }
 
@@ -117,26 +119,22 @@ export function FormSection(param) {
         rowFields?.forEach(field => {
             const { name, label, style, component: renderComponent, description: customDescription } = field;
             const parent = fieldRow;
-
+            let fieldMargin = '0px';
             let component = {};
 
-            // Bail out if component
+            // Render passed in component
             if (renderComponent) {
-                // TODO: generalize properties
-                console.log(renderComponent);
-                // component = AddFileTypes({
-                //     types: formData.FileTypes,
-                //     onChange(event) {
-                //         formData.FileTypes = component.value();
-                //     },
-                //     parent
-                // });
-                // component.add();
+                component = renderComponent({ 
+                    parent,
+                    formData,
+                    getComponent() {
+                        return component;
+                    } 
+                });
             }
-
-            let fieldMargin = '0px';
-
-            if (name === 'Files') {
+            
+            // If field name is Files, render drop zone
+            else if (name === 'Files') {
                 component = AttachmentsContainer({
                     label: label || display || name,
                     description: customDescription,
@@ -151,7 +149,10 @@ export function FormSection(param) {
                         formData.Files = files;
                     }
                 });
-            } else {
+            }
+            
+            // Render field by type
+            else {
                 const { display, description: defaultDescription, type, choices, fillIn, action } = fields?.find(item => item.name === name);
                 const description = customDescription || defaultDescription;
 
@@ -186,11 +187,11 @@ export function FormSection(param) {
                                 const query = event.target.value;
                                 const menu = component.find('.dropdown-menu');
 
-                                console.log(query);
+                                // console.log(query);
 
                                 if (query) {
                                     if (!menu) {
-                                        console.log('add menu');
+                                        // console.log('add menu');
 
                                         const height = component.get().offsetHeight;
                                         const width = component.get().offsetWidth;
@@ -210,14 +211,14 @@ export function FormSection(param) {
                                         });
 
                                     } else {
-                                        console.log('menu already added');
+                                        // console.log('menu already added');
                                     }
                                 } else {
                                     if (menu) {
-                                        console.log('remove menu');
+                                        // console.log('remove menu');
                                         menu.remove();
                                     } else {
-                                        console.log('menu already removed');
+                                        // console.log('menu already removed');
                                     }
                                 }
 
@@ -317,9 +318,10 @@ export function FormSection(param) {
                 }
             }
 
-            // Add to DOM
+            // Add component to DOM
             component.add();
 
+            // Apply passed in styles
             if (style) {
                 for (const property in style) {
                     // console.log(`${property}: ${style[property]}`);
@@ -327,11 +329,13 @@ export function FormSection(param) {
                 }
             }
 
-            // Push to list of components
+            // Push component to list of components
             components.push({
                 component,
                 field
             });
         });
     });
+
+    return components;
 }

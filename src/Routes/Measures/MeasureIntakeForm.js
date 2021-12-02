@@ -58,7 +58,7 @@ export async function MeasureIntakeForm(param) {
     const viewTitle = Title({
         title: itemId ? `Edit Measure #${itemId} Intake Form` : 'New Measure Intake Form',
         subTitle: section.name,
-        padding: '0px 20px 20px 20px',
+        padding: '0px 20px 10px 20px',
         width: '100%',
         parent: rightContainer,
         type: 'across',
@@ -94,7 +94,7 @@ export async function MeasureIntakeForm(param) {
     /** Plan Container */
     const planContainer = Container({
         width: '100%',
-        padding: '0px 20px 0px 0px;',
+        padding: '10px 20px 0px 0px;',
         direction: 'column',
         parent: projectContainer
     });
@@ -253,6 +253,9 @@ export async function MeasureIntakeForm(param) {
 
                 // console.log('Done!');
 
+                // Remove stored measure
+                Store.removeData('new measure');
+
                 $(modal.get()).on('hidden.bs.modal', event => {
                     Route(`Measures/${newItem.Id}${path ? `/${path}` : ''}`);
                 });
@@ -265,7 +268,7 @@ export async function MeasureIntakeForm(param) {
         classes: ['mb-2', 'w-100'],
         parent: buttonContainer,
         // type: itemId ? 'primary' : 'success',
-        type: 'robi-success',
+        type: 'robi',
         value: itemId ? 'Update' : 'Create measure'
     });
 
@@ -275,8 +278,7 @@ export async function MeasureIntakeForm(param) {
     const cancelButton = BootstrapButton({
         action(event) {
             console.log('Check if data saved, then route to measures');
-            console.log(path);
-            // Route(path.split('/')[0]);
+            // history.back();
         },
         classes: ['w-100'],
         parent: buttonContainer,

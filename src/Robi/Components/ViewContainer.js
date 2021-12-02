@@ -10,7 +10,8 @@ export function ViewContainer(param) {
         parent
     } = param;
 
-    const padding = '51px';
+    // Collapse container height
+    const padding = '62px';
 
     const component = Component({
         html: /*html*/ `

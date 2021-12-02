@@ -110,6 +110,10 @@ export function AppContainer() {
             }
 
             /* Overrides */
+            button:focus {
+                outline: none;
+            }
+
             .btn {
                 font-size: 14px;
                 border-radius: 10px;
@@ -513,11 +517,34 @@ export function AppContainer() {
             }
 
             .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
-                border-color: ${App.get('primaryColor')};
+                border-color: ${App.get('primaryColor') + '6b'};
             }
             
             .custom-control-input:active {
                 background: ${App.get('primaryColor')};
+            }
+
+            /* Dropdown */
+            .dropdown-item {
+                font-size: 13px;
+                cursor: pointer;
+            }
+
+            .dropdown-menu {
+                margin: .125rem;
+                padding: .125rem;
+            }
+
+            .dropdown-item {
+                border-radius: 8px;
+            }
+
+            .dropdown-item:hover {
+                background: ${App.get('primaryColor') + '20'};
+            }
+
+            .scroll-container {
+                overflow: overlay;
             }
         `,
         position: 'afterbegin',

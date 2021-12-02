@@ -75,7 +75,8 @@ export function DataTable(param) {
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
+                overflow: auto;
             }
 
             #id_wrapper .datatable-toolbar .cell {
@@ -119,6 +120,7 @@ export function DataTable(param) {
 
             #id_wrapper .datatable-toolbar .add-item span {
                 font-weight: 500;
+                white-space: nowrap;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -178,16 +180,6 @@ export function DataTable(param) {
 
             #id_wrapper .buttons-html5 span{
                 color: ${App.get('defaultColor')} !important;
-            }
-
-            @media (max-width: 1366px) {
-                #id_wrapper .datatable-toolbar .add-item {
-                    margin-right: 30px;
-                }
-
-                #id_wrapper .buttons-html5.ml-50 {
-                    margin-left: 25px;
-                }
             }
 
             /** Select and Search */
@@ -360,7 +352,7 @@ export function DataTable(param) {
                 margin-top: -18px;
                 top: auto;
                 text-shadow: none;
-                color: ${App.get('defaultColor')};
+                color: ${App.get('primaryColor')};
                 font-weight: bolder;
                 font-size: 10pt;
             }
@@ -368,6 +360,7 @@ export function DataTable(param) {
             /** Selected Row */
             #id_wrapper tbody > tr.selected {
                 background-color: ${App.get('backgroundColor')};
+                color:  ${App.get('primaryColor')};
             }
 
             /** Overflow MLOT field */

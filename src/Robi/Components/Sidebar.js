@@ -109,6 +109,7 @@ export function Sidebar({ parent, path }) {
                 margin: 0px;
                 font-weight: 700;
                 width: 100%;
+                white-space: nowrap;
             }
 
             /* Nav Container */
@@ -346,7 +347,7 @@ export function Sidebar({ parent, path }) {
                     opacity: 0;
                 }
                 to {
-                    /* width: 44px; */
+                    width: 44px;
                     opacity: 1;
                 }
             }
@@ -359,11 +360,9 @@ export function Sidebar({ parent, path }) {
                 animation: 150ms ease-in-out fade-in;
             }
 
-            
             .fade-out-left {
-                animation: 300ms ease-in-out fade-out-left;
+                animation: 150ms ease-in-out fade-out-left;
             }
-
 
             .fade-in-right {
                 animation: 300ms ease-in-out fade-in-right;
@@ -385,7 +384,8 @@ export function Sidebar({ parent, path }) {
             }
 
             .grab.switch {
-                /* width: 44px; */
+                width: 44px;
+                transform: translateX(44px);
                 height: 42.5px;
                 opacity: 1;
                 padding: 10px 0px;
@@ -511,7 +511,7 @@ export function Sidebar({ parent, path }) {
             window.addEventListener('resize', event => {
                 const mode = component.get().dataset.mode;
 
-                if (window.innerWidth <= 1250) {
+                if (window.innerWidth <= 1305) {
                     closeSidebar(mode);
                 } else {
                     openSidebar(mode);
@@ -520,6 +520,7 @@ export function Sidebar({ parent, path }) {
         }
     });
 
+    // TODO: blur maincontainer (add transition) and remove pointer events
     function reorderRoutes(event) {
         console.log('reorder routes');
 
@@ -660,6 +661,7 @@ export function Sidebar({ parent, path }) {
     }
 
     // TODO: show hidden routes in order
+    // TODO: blur maincontainer (add transition) and remove pointer events
     function hideRoutes(event) {
         console.log('hide routes');
 
@@ -713,6 +715,7 @@ export function Sidebar({ parent, path }) {
                 component.find('.edit-buttons')?.remove();
 
                 // Remove hide
+                console.log(component.find('.hide-label'));
                 component.find('.hide-label')?.remove();
 
                 // Turn edit back on
@@ -756,7 +759,7 @@ export function Sidebar({ parent, path }) {
         // Add hide label
         // TODO: add absolutely positioned hide label
         component.find('.title-container').insertAdjacentHTML('beforeend', /*html*/ `
-            <div class='d-flex justify-content-end position-absolute hide-label' style='bottom: -10px; right: 25px;'>
+            <div class='d-flex justify-content-end position-absolute hide-label' style='bottom: -12px; right: 25px; font-size: 14px; font-weight: 500;'>
                 <div>Hide</div>
             </div>
         `);
@@ -800,10 +803,12 @@ export function Sidebar({ parent, path }) {
         }
     }
 
+    // TODO: blur maincontainer (add transition) and remove pointer events
     function modifyRoutes(event) {
         console.log('modify routes');
     }
 
+    // TODO: blur maincontainer (add transition) and remove pointer events
     function removeRoutes(event) {
         // Show modal
         console.log('remove route');

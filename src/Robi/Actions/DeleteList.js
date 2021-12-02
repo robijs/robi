@@ -12,6 +12,8 @@ import { Post } from './Post.js'
 export async function DeleteList(param) {
     const {
         list,
+        options,
+        updateProgressCount
     } = param;
 
     if (App.get('mode') === 'prod') {
@@ -52,8 +54,16 @@ export async function DeleteList(param) {
 
         const progressBar = Store.get('install-progress-bar');
 
-        if (progressBar) {
+        if (progressBar && updateProgressCount !== false) {
             progressBar.update();
+        }
+
+        // Delete files
+        if (options?.files) {
+            await DeleteList({
+                list: `${list}Files`,
+                updateProgressCount: false
+            });
         }
     } else if (App.get('mode') === 'dev') {
         const options = {

@@ -7,12 +7,12 @@ import { Component } from '../Actions/Component.js'
  */
 export function Container(param) {
     const {
-        align, background, border, borderBottom, borderLeft, borderRight, borderTop, display, flex, flexwrap, shadow, direction, height, justify, margin, padding, parent, position, radius, width, maxWidth, minWidth, overflow, overflowX, overflowY, userSelect, layoutPosition, top, bottom, left, right, zIndex
+        html, align, background, border, borderBottom, borderLeft, borderRight, borderTop, display, flex, flexwrap, shadow, direction, height, justify, margin, padding, parent, position, radius, width, maxWidth, minWidth, overflow, overflowX, overflowY, userSelect, layoutPosition, top, bottom, left, right, zIndex
     } = param;
 
     const component = Component({
         html: /*html*/ `
-            <div class='container'></div>
+            <div class='container'>${html || ''}</div>
         `,
         style: /*css*/ `
             #id {

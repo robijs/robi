@@ -219,6 +219,7 @@ export function LinksField(param) {
         }
     }
 
+    // FIXME: doesn't work
     function removeLink(event) {
         this.closest('.link').remove();
 

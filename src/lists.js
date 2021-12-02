@@ -1,3 +1,5 @@
+import { AddFileTypes } from './Routes/Measures/AddFileTypes.js'
+
 export default [
     {
         list: 'TestList',
@@ -899,19 +901,31 @@ export default [
                     {
                         name: 'Data Delivery',
                         description: /*html*/ `
-                            <h5 class='mb-1'>Measure Automation</h5>
-                            <div class='mb-2'>Automating "data ingestion" in the MIP requires that all files imported are formatted and labelled (file name) according to a specific set of rules. In the fields below, please specify how data will be delivered.</div>
-                            <div class='mb-2'>For example: TOC Third Next Metric Monthly is currently broken out by services due to the file sizes.  For this measure there would be four files for submission (Air Force, Army, Navy, and DHA), so the user would select "4" from the first drop down menu.</div>
-                            <div class='mb-2'>Next, you will need to use the "Click here" link to add each file. These files will be shown in the box below next time this form is opened.</div>
+                            <div class='mt-3 mb-1 font-weight-bold'>MEASURE AUTOMATION</div>
+                            <div class='mb-2'>Automating <strong><em>data ingestion</strong></em> in the MIP requires that all files imported are formatted and labelled (file name) according to a specific set of rules. In the fields below, please specify how data will be delivered.</div>
+                            <div class='mb-1 font-weight-bold'>EXAMPLE</div>
+                            <div class='mb-2'>Third Next Metric Monthly (TNMM) is currently broken out by service due to file sizes. There are four (4) files to submit, one for each service: Air Force, Army, Navy, and DHA. For this measure you would enter <strong>4</strong> in the field below.</div>
                         `,
                         fields: [
                             {
                                 name: 'NumberOfUploads',
                                 label: 'How many files will be uploaded during each reporting period?'
-                            },
-                            // {
-                            //     component: 'AddFileTypes',
-                            // }
+                            }
+                        ]
+                    },
+                    {
+                        fields: [
+                            {
+                                component({ parent, formData, getComponent }) {
+                                    return AddFileTypes({
+                                        files: formData.FileTypes,
+                                        onChange() {
+                                            formData.FileTypes = JSON.stringify(getComponent().value());
+                                        },
+                                        parent
+                                    });
+                                }
+                            }
                         ]
                     }
                 ]

@@ -26,7 +26,7 @@ export function DashboardBanner(param) {
                 border: ${border || App.get('defaultBorder')};
                 display: flex;
                 justify-content: space-between;
-                overflow: overlay;
+                /* overflow: overlay; */ /* FIXME: overflow causes flashing on fast viewport width changes */
                 ${width ? `width: ${width};` : ''}
             }
 

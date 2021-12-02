@@ -1,5 +1,6 @@
 import { Component } from '../Actions/Component.js'
 import { GenerateUUID } from '../Actions/GenerateUUID.js'
+import { App } from '../Core.js'
 
 /**
  *
@@ -72,16 +73,16 @@ export function MultiChoiceField(param) {
 
             #id .custom-control-input:checked ~ .custom-control-label::before {
                 color: #fff;
-                border-color: mediumslateblue;
-                background-color: mediumslateblue;
+                border-color: ${App.get('primarColor')};
+                background-color: ${App.get('primarColor')};
             }
 
             #id .custom-control-input:focus~.custom-control-label::before {
-                box-shadow: 0 0 0 0.2rem #7b68ee6b !important;
+                box-shadow: 0 0 0 0.2rem ${App.get('primarColor') + '6b'} !important;
             }
             
             #id .custom-control-input:focus:not(:checked)~.custom-control-label::before {
-                border-color: #adb5bd  !important;
+                border-color: ${App.get('primarColor') + '6b'}  !important;
             }
             
             /* #id .other-label.custom-control-label::before,

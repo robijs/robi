@@ -12,7 +12,8 @@ export async function AddColumnToView(param) {
     const {
         list,
         view,
-        name
+        name,
+        updateProgressCount
     } = param;
 
     // Get new request digest
@@ -48,7 +49,7 @@ export async function AddColumnToView(param) {
 
     const progressBar = Store.get('install-progress-bar');
 
-    if (progressBar) {
+    if (progressBar && updateProgressCount !== false) {
         progressBar.update();
     }
 

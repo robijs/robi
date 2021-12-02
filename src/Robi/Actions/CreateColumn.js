@@ -12,7 +12,9 @@ import { Post } from './Post.js'
 export async function CreateColumn(param) {
     const {
         list,
-        field
+        field,
+        view,
+        updateProgressCount
     } = param;
 
     const {
@@ -77,7 +79,7 @@ export async function CreateColumn(param) {
 
         const progressBar = Store.get('install-progress-bar');
 
-        if (progressBar) {
+        if (progressBar && updateProgressCount !== false) {
             // +1 since not adding to column to view
             progressBar.update();
         }
@@ -109,7 +111,7 @@ export async function CreateColumn(param) {
 
         const progressBar = Store.get('install-progress-bar');
 
-        if (progressBar) {
+        if (progressBar && updateProgressCount !== false) {
             // +1 since not adding to column to view
             progressBar.update();
         }
@@ -237,14 +239,16 @@ export async function CreateColumn(param) {
 
     const progressBar = Store.get('install-progress-bar');
 
-    if (progressBar) {
+    if (progressBar && updateProgressCount !== false) {
         progressBar.update();
     }
 
     /** Add column to All Items view */
     await AddColumnToView({
         list,
-        name
+        name,
+        view,
+        updateProgressCount
     });
 
     return newField.d;
