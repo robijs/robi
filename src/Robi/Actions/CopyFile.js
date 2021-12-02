@@ -23,9 +23,11 @@ export async function CopyFile(param) {
 
     let contents = file === 'app.js' ? await getFileValue.text() : await getFileValue.arrayBuffer() ;
 
-    // TODO: Add check for App/src path so other paths that you might want to copy from aren't affected
+    // TODO: Add check for App/src path so other paths that you might want to copy an app.js file from aren't affected
     if (file === 'app.js') {
         // FIXME: Potentially super brittle. Use well-formed regex instead.
+        contents = contents.replace(/\/\* @START-Name \*\/([\s\S]*?)\/\* @END-Name \*\//, `/* @START-Name */'${appName}'/* @END-Name */`);
+        contents = contents.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */'${appName}'/* @END-Title */`);
         contents = contents.replace(`name: '@App',`, `name: '${appName}',`);
         contents = contents.replace(`title: '@Title',`, `title: '${appTitle}',`);
     }

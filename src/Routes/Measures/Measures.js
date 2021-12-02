@@ -61,6 +61,7 @@ export default async function Measures({ parent, pathParts, props }) {
     const newTable = await Table({
         list: 'Measures',
         view: 'Measures',
+        addButtonValue: 'New Measure Intake Form',
         openInModal: true,
         heading: '',
         margin: '20px 0px',

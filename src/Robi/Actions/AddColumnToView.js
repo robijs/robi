@@ -1,6 +1,7 @@
 import { App } from '../Core.js'
 import { Store } from '../Core.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
+import { Post } from './Post.js'
 
 /**
  * Create SharePoint list item.

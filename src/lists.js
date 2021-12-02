@@ -1,4 +1,3 @@
-// Changed
 export default [
     {
         list: 'TestList',
@@ -941,25 +940,6 @@ export default [
                 path: 'Misc',
                 rows: [
 
-                ]
-            },
-            {
-                name: 'New Section',
-                path: 'NewSection',
-                rows: [
-                    {
-                        name: 'Baseline Information',
-                        fields: [
-                            {
-                                name: 'Baseline',
-                                label: 'What is the baseline time period?'
-                            },
-                            {
-                                name: 'BaselineValue',
-                                label: 'And what is the value?'
-                            }
-                        ]
-                    }
                 ]
             }
         ],

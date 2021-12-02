@@ -4,10 +4,13 @@ import { ProgressBar } from '../Components/ProgressBar.js'
 import { InstallConsole } from '../Components/InstallConsole.js'
 import { Container } from '../Components/Container.js'
 import { Lists } from '../Models/Lists.js'
-import { App } from '../Core.js'
-import { Store } from '../Core.js'
+import { Get } from './Get.js'
 import { UpdateItem } from './UpdateItem.js'
+import { CreateItem } from './CreateItem.js'
+import { CreateList } from './CreateList.js'
 import { LaunchApp } from './LaunchApp.js'
+import { App, Store } from '../Core.js'
+import lists from '../../lists.js'
 
 // TODO: Remove mode and install check from InstallApp
 // TODO: Move to InitializeApp or Start
@@ -17,7 +20,7 @@ import { LaunchApp } from './LaunchApp.js'
  */
 export function InstallApp(param) {
     const { settings, loadingBar, isInstalled } = param;
-    const { lists, questionTypes } = settings;
+    const { questionTypes } = settings;
     const coreLists = Lists();
 
     console.log('Installing app...');

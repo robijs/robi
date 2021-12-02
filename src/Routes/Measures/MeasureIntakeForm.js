@@ -25,7 +25,7 @@ export async function MeasureIntakeForm(param) {
         height: '100%',
         width: '100%',
         // padding: '51px 0px 0px 51px',
-        padding: '51px 0px 0px 31px',
+        padding: '20px 0px 0px 31px', // same height as collapse container
         parent
     });
 
@@ -56,7 +56,7 @@ export async function MeasureIntakeForm(param) {
 
     /** View Title */
     const viewTitle = Title({
-        title: itemId ? `Edit Measure #${itemId}` : 'New Measure',
+        title: itemId ? `Edit Measure #${itemId} Intake Form` : 'New Measure Intake Form',
         subTitle: section.name,
         padding: '0px 20px 20px 20px',
         width: '100%',

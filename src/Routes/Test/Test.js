@@ -868,7 +868,7 @@ export default async function Test(param) {
                         // Scroll console to bottom
                         installConsole.get().scrollTop = installConsole.get().scrollHeight;
 
-                        let spacers = '===========';
+                        let spacers = '==============';
 
                         for (let i = 0; i < title.length; i++) {
                             spacers = spacers + '=';

@@ -59,9 +59,8 @@ Start({
         logo: 'dha-logo-no-label-180w.png',
         logoLarge: 'dha-logo-no-label-386w.png',
         logoSmall: 'dha-logo-no-label-80w.png',
-        name: '@App',
-        // primaryColor: '#e63e44',
-        primaryColor: '#1E90FF',
+        name: /* @START-Name */'App'/* @START-Name */,
+        primaryColor: '#e63e44',
         questionTypes: [
             {
                 title: 'General',
@@ -70,7 +69,7 @@ Start({
         ],
         secondaryColor: 'white',
         backgroundColor: '#F8F8FC',
-        title: '@Title',
+        title: /* @START-Name */'Title'/* @START-Name */,
         userDefaultRole: 'User',
         userSettings: JSON.stringify({}),
         // OPTIONAL PROPERTIES (defaults)
