@@ -7,7 +7,6 @@
 import { Start } from './Robi/Robi.js'
 import Measures from './Routes/Measures/Measures.js'
 import Test from './Routes/Test/Test.js'
-import Route from './Routes/Route/Route.js'
 // @END-IMPORTS
 
 // @START
@@ -61,7 +60,8 @@ Start({
         logoLarge: 'dha-logo-no-label-386w.png',
         logoSmall: 'dha-logo-no-label-80w.png',
         name: '@App',
-        primaryColor: '#e63e44',
+        // primaryColor: '#e63e44',
+        primaryColor: '#1E90FF',
         questionTypes: [
             {
                 title: 'General',

@@ -54,7 +54,7 @@ export function Sidebar({ parent, path }) {
                         })() : ''
                     }
                 </div>
-                <div class='title-container'>
+                <div class='title-container position-relative'>
                     <h3 class='title'>${App.get('title')}</h3>
                 </div>
                 <div class='nav-container'>
@@ -88,6 +88,7 @@ export function Sidebar({ parent, path }) {
         `,
         style: /*css*/ `
             #id.sidebar {
+                position: relative;
                 user-select: none;
                 display: flex;
                 flex-direction: column;
@@ -112,6 +113,7 @@ export function Sidebar({ parent, path }) {
 
             /* Nav Container */
             .nav-container {
+                position: relative;
                 overflow: overlay;
                 width: 100%;
                 padding: 0px 15px;
@@ -167,6 +169,7 @@ export function Sidebar({ parent, path }) {
                 font-weight: 500;
                 padding: 10px 0px;
                 min-width: 200px;
+                white-space: nowrap;
                 transition: width 300ms, min-width 300ms;
             }
 
@@ -343,9 +346,13 @@ export function Sidebar({ parent, path }) {
                     opacity: 0;
                 }
                 to {
-                    width: 44px;
+                    /* width: 44px; */
                     opacity: 1;
                 }
+            }
+
+            .fade-out {
+                animation: 300ms ease-in-out fade-out;
             }
             
             .fade-in {
@@ -378,7 +385,7 @@ export function Sidebar({ parent, path }) {
             }
 
             .grab.switch {
-                width: 44px;
+                /* width: 44px; */
                 height: 42.5px;
                 opacity: 1;
                 padding: 10px 0px;
@@ -555,27 +562,34 @@ export function Sidebar({ parent, path }) {
                 node.dataset.shouldroute = 'yes';
                 node.style.cursor = 'pointer';
             });
+
+            // Animate cancel fade out
+            component.find('.cancel-edit').addEventListener('animationend', event => {
+                console.log('cancel end');
+
+                // Select node
+                const selected = location.href.split('#')[1].split('/')[0];
+                component.find(`.nav[data-path='${selected}']`).style.transition = 'background-color 200ms ease';
+                component.find(`.nav[data-path='${selected}']`)?.classList.add('nav-selected');
+                setTimeout(() => {
+                    component.find(`.nav[data-path='${selected}']`).style.transition = 'auto';
+                }, 200);
+
+                // Remove cancel edit button
+                component.find('.edit-buttons')?.remove();
+
+                // Turn edit back on
+                component.find('.open-dev-menu').disabled = false;
+                component.find('.open-dev-menu').style.opacity = '1';
+            });
+            component.find('.cancel-edit').classList.add('fade-out');
         
             // Remove sortable
             $(`#${component.get().id} .nav-container`).sortable('destroy');
 
             // Remove grab handles
             component.findAll('.nav-container .nav .grab').forEach(node => {
-                node.addEventListener('animationend', event => {
-                    // Select node
-                    const selected = location.href.split('#')[1].split('/')[0];
-                    component.find(`.nav[data-path='${selected}']`)?.classList.add('nav-selected');
-
-                    // Remove cancel edit button
-                    component.find('.edit-buttons')?.remove();
-
-                    // Turn edit back on
-                    component.find('.open-dev-menu').disabled = false;
-                    component.find('.open-dev-menu').style.opacity = '1';
-
-                    // Remove grab
-                    node.remove();
-                });
+                node.addEventListener('animationend', () => node.remove());
                 node.classList.add('grab-show-reverse');
             });
         });
@@ -677,29 +691,39 @@ export function Sidebar({ parent, path }) {
 
         // Add cancel behavior
         component.find('.cancel-edit').addEventListener('click', event => {
-                // Enable route
-                component.findAll('.nav-container .nav').forEach(node => {
-                    node.dataset.shouldroute = 'yes';
-                    node.style.cursor = 'pointer';
-                });
-            
+            // Enable route
+            component.findAll('.nav-container .nav').forEach(node => {
+                node.dataset.shouldroute = 'yes';
+                node.style.cursor = 'pointer';
+            });
+
+            // Animate cancel fade out
+            component.find('.cancel-edit').addEventListener('animationend', event => {
+                console.log('end cancel');
+
+                // Select node
+                const selected = location.href.split('#')[1].split('/')[0];
+                component.find(`.nav[data-path='${selected}']`).style.transition = 'background-color 200ms ease';
+                component.find(`.nav[data-path='${selected}']`)?.classList.add('nav-selected');
+                setTimeout(() => {
+                    component.find(`.nav[data-path='${selected}']`).style.transition = 'auto';
+                }, 200);
+
+                // Remove cancel edit button
+                component.find('.edit-buttons')?.remove();
+
+                // Remove hide
+                component.find('.hide-label')?.remove();
+
+                // Turn edit back on
+                component.find('.open-dev-menu').disabled = false;
+                component.find('.open-dev-menu').style.opacity = '1';
+            });
+            component.find('.cancel-edit').classList.add('fade-out');
+        
             // Remove grab handles
             component.findAll('.nav-container .nav .grab').forEach(node => {
-                node.addEventListener('animationend', event => {
-                    // Select node
-                    const selected = location.href.split('#')[1].split('/')[0];
-                    component.find(`.nav[data-path='${selected}']`)?.classList.add('nav-selected');
-
-                    // Remove cancel edit button
-                    component.find('.edit-buttons')?.remove();
-
-                    // Turn edit back on
-                    component.find('.open-dev-menu').disabled = false;
-                    component.find('.open-dev-menu').style.opacity = '1';
-
-                    // Remove grab
-                    node.remove();
-                });
+                node.addEventListener('animationend', () => node.remove());
                 node.classList.add('grab-show-reverse');
             });
         });
@@ -729,6 +753,14 @@ export function Sidebar({ parent, path }) {
             });
         });
 
+        // Add hide label
+        // TODO: add absolutely positioned hide label
+        component.find('.title-container').insertAdjacentHTML('beforeend', /*html*/ `
+            <div class='d-flex justify-content-end position-absolute hide-label' style='bottom: -10px; right: 25px;'>
+                <div>Hide</div>
+            </div>
+        `);
+
         // Show hide switch
         const nav = component.findAll('.nav-container .nav:not([data-type="system"])');
         nav.forEach(node => {
@@ -737,7 +769,8 @@ export function Sidebar({ parent, path }) {
             node.insertAdjacentHTML('beforeend', /*html*/ `
                 <div class="custom-control custom-switch grab switch">
                     <input type="checkbox" class="custom-control-input" id='${id}'>
-                    <label class="custom-control-label" for="${id}">Hide</label>
+                    <!-- <label class="custom-control-label" for="${id}">Hide</label> -->
+                    <label class="custom-control-label" for="${id}"></label>
                 </div>
             `);
 
