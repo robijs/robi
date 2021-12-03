@@ -3,16 +3,16 @@ import { BootstrapButton } from '../Components/BootstrapButton.js'
 import { ProgressBar } from '../Components/ProgressBar.js'
 import { InstallConsole } from '../Components/InstallConsole.js'
 import { Container } from '../Components/Container.js'
-import { Lists } from '../Models/Lists.js'
-import { App, Store } from '../Core.js'
+import { LoadingSpinner } from '../Components/LoadingSpinner.js'
+import { CheckLists } from './CheckLists.js'
+import { Style } from './Style.js'
 import { Route } from './Route.js'
-import { GetWebLists } from './GetWebLists.js'
 import { CreateList } from './CreateList.js'
 import { CreateItem } from './CreateItem.js'
 import { CreateColumn } from './CreateColumn.js'
 import { DeleteList } from './DeleteList.js'
 import { DeleteColumn } from './DeleteColumn.js'
-import lists from '../../lists.js'
+import { App, Store } from '../Core.js'
 
 /**
  *
@@ -26,109 +26,61 @@ export function UpdateApp() {
         async addContent(modalBody) {
             modalBody.classList.add('install-modal');
 
+            Style({
+                name: 'update-app',
+                style: /*css*/ `
+                    #${modal.get().id} .alert {
+                        border-radius: 20px;
+                    } 
+                `
+            });
+
             // Show loading
-            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center'>
-                    <div class="mb-2" style='font-weight: 600; color: darkgray'>Loading lists</div>
-                    <div class="spinner-grow" style='color: darkgray' role="status"></div>
-                </div>
-            `);
+            const loadingSpinner = LoadingSpinner({
+                type: 'robi',
+                parent: modalBody
+            });
 
-            // Check lists
-            const listsToIgnore = ['App', 'Composed Looks', 'Documents', 'Master Page Gallery', 'MicroFeed', 'Site Assets', 'Site Pages'];
-            const coreLists = Lists();
-            const appLists = lists;
-            const allLists = coreLists.concat(appLists);
-            const webLists = await GetWebLists();
-            const installedLists = webLists.map(item => item.Title).filter(x => allLists.map(item => item.list).includes(x));
-            const diffToCreate = allLists.map(item => item.list).filter(x => !webLists.map(item => item.Title).includes(x));
-            const diffToDelete = webLists.map(item => item.Title).filter(x => !allLists.map(item => item.list).includes(x) && !listsToIgnore.includes(x));
-            console.log('All Lists:', allLists);
-            console.log('Web Lists:', webLists);
-            console.log('Installed Lists:', installedLists);
-            console.log('Create:', diffToCreate);
-            console.log('Delete:', diffToDelete);
+            loadingSpinner.add();
 
-            // News lists that need to be created
-            const toCreate = diffToCreate.map(list => allLists.find(item => item.list === list));
+            const {
+                allLists,
+                webLists,
+                diffToDelete,
+                toCreate,
+                toDelete,
+                schemaAdd,
+                schemaDelete
+            } = await CheckLists();
 
-            // Existing lists that need to be deleted
-            // TODO: Show checklist of lists that could be deleted, default to DO NOT Delete
-            const toDelete = diffToDelete.map(list => webLists.find(item => item.Title === list));
-
-            // Has the schema changed on any lists?
-            const fieldsToIgnore = ['ContentTypeId', 'Title', '_ModerationComments', 'File_x0020_Type', 'ID', 'Id', 'ContentType', 'Modified', 'Created', 'Author', 'Editor', '_HasCopyDestinations', '_CopySource', 'owshiddenversion', 'WorkflowVersion', '_UIVersion', '_UIVersionString', 'Attachments', '_ModerationStatus', 'Edit', 'LinkTitleNoMenu', 'LinkTitle', 'LinkTitle2', 'SelectTitle', 'InstanceID', 'Order', 'GUID', 'WorkflowInstanceID', 'FileRef', 'FileDirRef', 'Last_x0020_Modified', 'Created_x0020_Date', 'FSObjType', 'SortBehavior', 'PermMask', 'FileLeafRef', 'UniqueId', 'SyncClientId', 'ProgId', 'ScopeId', 'HTML_x0020_File_x0020_Type', '_EditMenuTableStart', '_EditMenuTableStart2', '_EditMenuTableEnd', 'LinkFilenameNoMenu', 'LinkFilename', 'LinkFilename2', 'DocIcon', 'ServerUrl', 'EncodedAbsUrl', 'BaseName', 'MetaInfo', '_Level', '_IsCurrentVersion', 'ItemChildCount', 'FolderChildCount', 'AppAuthor', 'AppEditor'];
-            const schemaAdd = [];
-            const schemaDelete = [];
-
-            installedLists
-                .map(listName => {
-                    const { list, fields } = allLists.find(item => item.list === listName);
-
-                    return { list, fields, web: webLists.find(item => item.Title === listName) };
-                })
-                .forEach(item => {
-                    const { list, fields, web } = item;
-
-                    const webFields = web.Fields.results.map(webField => {
-                        const { StaticName, TypeDisplayName } = webField;
-
-                        return { name: StaticName, type: TypeDisplayName };
-                    });
-
-                    const fieldsToCreate = fields.map(item => item.name).filter(x => !webFields.map(item => item.name).includes(x));
-                    const fieldsToDelete = webFields.map(item => item.name).filter(x => !fields.map(item => item.name).includes(x) && !fieldsToIgnore.includes(x));
-
-                    console.log();
-
-                    if (fieldsToCreate.length) {
-                        schemaAdd.push({
-                            list,
-                            fields: fieldsToCreate
-                        });
-                    }
-
-                    if (fieldsToDelete.length) {
-                        schemaDelete.push({
-                            list,
-                            fields: fieldsToDelete
-                        });
-                    }
-
-                    console.log('List:', list);
-                    console.log('--------------------');
-                    // console.log('List Fields:', fields);
-                    // console.log('Web Fields:', webFields);
-                    console.log('Create fields:', fieldsToCreate);
-                    console.log('Remove fields:', fieldsToDelete);
-                    console.log(' ');
-                });
-
-            console.log('Fields to add:', schemaAdd);
-            console.log('Fields to delete:', schemaDelete);
-
-            // const { toCreate, toDelete, schemaAdd, schemaDelete } = await CheckLists();
             // Remove loading
-            modal.find('.loading-spinner').remove();
+            loadingSpinner.remove();
 
             // Are there new lists in lists.js that need to be created?
             if (toCreate.length) {
                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                    <div class='alert alert-success mb-4'>
-                        <h4 class='mb-4'>Create lists</h4>
-                        <div class='create-lists alert alert-light'>
+                    <div class='alert alert-robi-primary-high-contrast mb-4'>
+                        <h4 class='mb-2'>Create lists</h4>
+                        <div class='create-lists alert'>
                             ${toCreate
-                        .sort((a, b) => a.list - b.list)
-                        .map(item => {
-                            return /*html*/ `
-                                        <div class="form-check ml-2">
-                                            <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.list.split(' ').join('-')}" data-list='${item.list}' checked>
-                                            <label class="form-check-label" for="checkbox-${item.list.split(' ').join('-')}">
-                                                ${item.list}
-                                            </label>
-                                        </div>
-                                    `;
-                        }).join('\n')}
+                            .sort((a, b) => a.list - b.list)
+                            .map(item => {
+                                return /*html*/ `
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="checkbox-${item.list.split(' ').join('-')}" data-list='${item.list}' checked>
+                                        <label class="custom-control-label" for="checkbox-${item.list.split(' ').join('-')}">
+                                            ${item.list}
+                                        </label>
+                                    </div>
+
+                                    <!-- <div class="form-check ml-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.list.split(' ').join('-')}" data-list='${item.list}' checked>
+                                        <label class="form-check-label" for="checkbox-${item.list.split(' ').join('-')}">
+                                            ${item.list}
+                                        </label>
+                                    </div> -->
+                                `;
+                            }).join('\n')}
                         </div>
                     </div>
                 `);
@@ -137,28 +89,35 @@ export function UpdateApp() {
             // Choose columns to add
             if (schemaAdd.length) {
                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                    <div class='alert alert-success mb-4'>    
-                        <h4 class='mb-4'>Add new fields to installed lists</h4>
+                    <div class='alert alert-robi-primary-high-contrast mb-4'>    
+                        <h4 class='mb-2'>Add new fields to installed lists</h4>
                         <div class='schema-add'>
                             ${schemaAdd
                         .sort((a, b) => a.list - b.list)
                         .map(item => {
                             const { list, fields } = item;
                             return /*html*/ `
-                                        <div class='alert alert-light'>
-                                            <h5 data-list='${list}'>${list}</h5>
-                                            ${fields.map(field => {
-                                return /*html*/ `
-                                                        <div class="form-check ml-2">
-                                                            <input class="form-check-input" type="checkbox" value="${field}" id="checkbox-${field}" data-list='${list}' checked>
-                                                            <label class="form-check-label" for="checkbox-${field}">
-                                                                ${field}
-                                                            </label>
-                                                        </div>
-                                                    `;
-                            }).join('\n')}
-                                        </div>
-                                    `;
+                                <div class='alert'>
+                                    <h5 data-list='${list}'>${list}</h5>
+                                    ${fields.map(field => {
+                                        return /*html*/ `
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" value="${field}" id="checkbox-${field}" data-list='${list}' checked>
+                                                <label class="custom-control-label" for="checkbox-${field}">
+                                                    ${field}
+                                                </label>
+                                            </div>
+
+                                            <!-- <div class="form-check ml-2">
+                                                <input class="form-check-input" type="checkbox" value="${field}" id="checkbox-${field}" data-list='${list}' checked>
+                                                <label class="form-check-label" for="checkbox-${field}">
+                                                    ${field}
+                                                </label>
+                                            </div> -->
+                                        `;
+                                    }).join('\n')}
+                                </div>
+                            `;
                         }).join('\n')}
                         </div>
                     </div>
@@ -168,22 +127,29 @@ export function UpdateApp() {
             // Have lists been removed from list.js that need to be removed?
             if (toDelete.length) {
                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                    <div class='alert alert-danger mb-4'>
-                        <h4 class='mb-4'>Delete lists</h4>
-                        <div class='delete-lists alert alert-light'>
+                    <div class='alert alert-robi-secondary mb-4'>
+                        <h4 class='mb-2'>Delete lists</h4>
+                        <div class='delete-lists alert'>
                             ${diffToDelete
-                        // .sort((a, b) => a.list - b.list)
-                        .sort((a, b) => a - b)
-                        .map(item => {
-                            return /*html*/ `
-                                        <div class="form-check ml-2">
-                                            <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.split(' ').join('-')}" data-list='${item}'>
-                                            <label class="form-check-label" for="checkbox-${item.split(' ').join('-')}">
-                                                ${item}
-                                            </label>
-                                        </div>
-                                    `;
-                        }).join('\n')}
+                            // .sort((a, b) => a.list - b.list)
+                            .sort((a, b) => a - b)
+                            .map(item => {
+                                return /*html*/ `
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="checkbox-${item.split(' ').join('-')}" data-list='${item}'>
+                                        <label class="custom-control-label" for="checkbox-${item.split(' ').join('-')}">
+                                            ${item}
+                                        </label>
+                                    </div>
+
+                                    <!-- <div class="form-check ml-2">
+                                        <input class="form-check-input" type="checkbox" value="" id="checkbox-${item.split(' ').join('-')}" data-list='${item}'>
+                                        <label class="form-check-label" for="checkbox-${item.split(' ').join('-')}">
+                                            ${item}
+                                        </label>
+                                    </div> -->
+                                `;
+                            }).join('\n')}
                         </div>
                     </div>
                 `);
@@ -193,28 +159,35 @@ export function UpdateApp() {
             // Choose columns to delete (DESTRUCTIVE)
             if (schemaDelete.length) {
                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                    <div class='alert alert-danger mb-4'>
-                        <h4 class='mb-4'>Delete fields from installed lists</h4>
+                    <div class='alert alert-robi-secondary mb-4'>
+                        <h4 class='mb-2'>Delete fields from installed lists</h4>
                         <div class='schema-delete'>
                             ${schemaDelete
                         .sort((a, b) => a.list - b.list)
                         .map(item => {
                             const { list, fields } = item;
                             return /*html*/ `
-                                        <div class='alert alert-light'>
-                                            <h5 data-list='${list}'>${list}</h5>
-                                            ${fields.map(field => {
-                                return /*html*/ `
-                                                        <div class="form-check ml-2">
-                                                            <input class="form-check-input" type="checkbox" value="${field}" id="checkbox-${field}" data-list='${list}'>
-                                                            <label class="form-check-label" for="checkbox-${field}">
-                                                                ${field}
-                                                            </label>
-                                                        </div>
-                                                    `;
-                            }).join('\n')}
-                                        </div>
-                                    `;
+                                <div class='alert'>
+                                    <h5 data-list='${list}'>${list}</h5>
+                                    ${fields.map(field => {
+                                        return /*html*/ `
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" value="${field}" id="checkbox-${field}" data-list='${list}'>
+                                                <label class="custom-control-label" for="checkbox-${field}">
+                                                    ${field}
+                                                </label>
+                                            </div>
+
+                                            <!-- <div class="form-check ml-2">
+                                                <input class="form-check-input" type="checkbox" value="${field}" id="checkbox-${field}" data-list='${list}'>
+                                                <label class="form-check-label" for="checkbox-${field}">
+                                                    ${field}
+                                                </label>
+                                            </div> -->
+                                        `;
+                                    }).join('\n')}
+                                </div>
+                            `;
                         }).join('\n')}
                         </div>
                     </div>
@@ -225,9 +198,9 @@ export function UpdateApp() {
                 const installBtn = BootstrapButton({
                     async action(event) {
                         // Get checked lists
-                        const checkedCreate = [...modal.findAll('.create-lists .form-check-input:checked')].map(node => allLists.find(item => item.list === node.dataset.list));
-                        const checkedDelete = [...modal.findAll('.delete-lists .form-check-input:checked')].map(node => webLists.find(item => item.Title === node.dataset.list));
-                        const checkedSchemaAdd = [...modal.findAll('.schema-add .form-check-input:checked')].map(node => {
+                        const checkedCreate = [...modal.findAll('.create-lists input:checked')].map(node => allLists.find(item => item.list === node.dataset.list));
+                        const checkedDelete = [...modal.findAll('.delete-lists input:checked')].map(node => webLists.find(item => item.Title === node.dataset.list));
+                        const checkedSchemaAdd = [...modal.findAll('.schema-add input:checked')].map(node => {
                             const list = node.dataset.list;
                             const name = node.value;
                             const field = allLists.find(item => item.list === list).fields.find(item => item.name == name);
@@ -237,7 +210,7 @@ export function UpdateApp() {
                                 field
                             };
                         });
-                        const checkedSchemaDelete = [...modal.findAll('.schema-delete .form-check-input:checked')].map(node => {
+                        const checkedSchemaDelete = [...modal.findAll('.schema-delete input:checked')].map(node => {
                             return { list: node.dataset.list, name: node.value };
                         });
 
@@ -306,7 +279,7 @@ export function UpdateApp() {
                             width: '100%',
                             height: '100%',
                             radius: '10px',
-                            background: '#1E1E1E'
+                            background: '#343a40'
                         });
 
                         deleteContainer.add();
@@ -395,13 +368,13 @@ export function UpdateApp() {
                                 }
                             });
 
-                            console.log(`Added Release Note: ${App.get('name')} lists created - ${checkedCreate.map(item => item.list).join(', ')}.`);
+                            console.log(`Added Release Note: ${App.get('title')} lists created - ${checkedCreate.map(item => item.list).join(', ')}.`);
 
                             // Add to console
                             reinstallConsole.append(/*html*/ `
                                 <div class='console-line'>
                                     <!-- <code class='line-number'>0</code> -->
-                                    <code>'New ${App.get('name')} lists created - ${checkedCreate.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
+                                    <code>'New ${App.get('title')} lists created - ${checkedCreate.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
                                 </div>
                             `);
 
@@ -572,7 +545,7 @@ export function UpdateApp() {
                             reinstallConsole.append(/*html*/ `
                                 <div class='console-line'>
                                     <!-- <code class='line-number'>0</code> -->
-                                    <code>'${App.get('name')} lists deleted - ${checkedDelete.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
+                                    <code>'${App.get('title')} lists deleted - ${checkedDelete.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
                                 </div>
                             `);
 
@@ -649,12 +622,14 @@ export function UpdateApp() {
 
                         // END DELETE COLUMNS ---------------------------------------------------------------------------
                         modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                            <div class='mt-4 mb-4'><strong>${App.get('name')}</strong> updated.</div>
+                            <div class='mt-4 mb-4'><strong>${App.get('title')}</strong> updated.</div>
                         `);
+
+                        modal.find('.console-title').innerHTML = `${App.get('title')} <strong>updated</strong>`;
 
                         // Close modal button
                         const returnBtn = BootstrapButton({
-                            type: 'primary',
+                            type: 'robi',
                             value: 'Close',
                             classes: ['w-100'],
                             action(event) {
@@ -679,8 +654,8 @@ export function UpdateApp() {
                     classes: ['w-100', 'mt-2'],
                     width: '100%',
                     parent: modalBody,
-                    type: 'primary',
-                    value: `Update ${App.get('name')}`
+                    type: 'robi-reverse',
+                    value: `Update ${App.get('title')}`
                 });
 
                 installBtn.add();
@@ -688,7 +663,7 @@ export function UpdateApp() {
 
             if (!toCreate.length && !toDelete.length && !schemaAdd.length && !schemaDelete.length) {
                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                    <div class='alert alert-success'><strong>${App.get('name')}</strong> is up-to-date</div>
+                    <div class='alert alert-robi-primary-high-contrast'><strong>${App.get('title')}</strong> is up-to-date</div>
                 `);
             }
 

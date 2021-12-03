@@ -30,6 +30,11 @@ export function Start(param) {
             .join(' ');
     };
 
+    // splitCameCase
+    String.prototype.splitCamelCase = function () {
+        return this.split(/(?=[A-Z])/).join(' ');
+    }
+
     if (App.get('errorLogging') === 'on') {
         /** Format error objects for JSON.stringify() to work properly */
         function replaceErrors(key, value) {

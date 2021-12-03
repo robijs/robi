@@ -33,14 +33,15 @@ export function LinksField(param) {
                 </div>
                 <div class='links-container mt-3'>
                     <!-- Formatted links go here -->
-                    ${links ?
-                JSON.parse(links).map(link => {
-                    const { url, display } = link;
-                    return /*html*/ `
+                    ${
+                        links ?
+                        JSON.parse(links).map(link => {
+                            const { url, display } = link;
+
+                            return /*html*/ `
                                 <div class='link' data-display='${display}' data-url='${url}'>
                                     <a href='${url}' target='_blank'>${display}</a>
-                                    <!--<span class="remove-link" type="button" data-display='${display}'>&times;</span> -->
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close remove-link" data-dismiss="modal" aria-label="Close">
                                         <span class="icon-container">
                                             <svg class="icon x-circle-fill">
                                                 <use href="#icon-bs-x-circle-fill"></use>
@@ -52,8 +53,8 @@ export function LinksField(param) {
                                     </button>
                                 </div>
                             `;
-                }).join('\n') :
-                ''}
+                        }).join('\n') : ''
+                }
                 </div>
             </div>
         `,
@@ -100,15 +101,11 @@ export function LinksField(param) {
                 background: #e9ecef;
                 color: #007bff;
                 font-weight: 500;
+                font-size: 13px;
             }
 
             #id .link:not(:last-child) {
                 margin-right: 10px;
-            }
-
-            #id .link .remove-link {
-                display: inline-block;
-                margin-left: 20px;
             }
             
             #id .link *,
@@ -199,7 +196,16 @@ export function LinksField(param) {
             component.find('.links-container').insertAdjacentHTML('beforeend', /*html*/ `
                 <div class='link' data-display='${display.value}' data-url='${url.value}'>
                     <a href='${url.value}' target='_blank'>${display.value}</a>
-                    <span class="remove-link" type="button" data-display='${display.value}'>&times;</span>
+                    <button type="button" class="close remove-link" data-display='${display.value}' data-dismiss="modal" aria-label="Close">
+                        <span class="icon-container">
+                            <svg class="icon x-circle-fill">
+                                <use href="#icon-bs-x-circle-fill"></use>
+                            </svg>
+                            <svg class="icon circle-fill">
+                                <use href="#icon-bs-circle-fill"></use>
+                            </svg>
+                        </span>
+                    </button>
                 </div>
             `);
 
@@ -221,6 +227,8 @@ export function LinksField(param) {
 
     // FIXME: doesn't work
     function removeLink(event) {
+        console.log('remove link');
+
         this.closest('.link').remove();
 
         if (onChange) {

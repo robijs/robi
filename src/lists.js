@@ -1,6 +1,15 @@
 import { AddFileTypes } from './Routes/Measures/AddFileTypes.js'
 
 export default [
+  	{
+      	list: 'TestList',
+      	fields: [
+          {
+              name: 'Test',
+              type: 'slot'
+          }
+        ]
+    },
     {
         list: 'Measures',
         options: {
@@ -122,13 +131,11 @@ export default [
                 render(data, type, row) {
                     const links = JSON.parse(data);
 
-                    // console.log(links);
-
                     return links ? links.map(link => {
                         const { url, display } = link;
 
                         return /*html*/ `
-                            <a href='${url}'>${display.trim()}</a>
+                            <a href='${url}' target='_blank'>${display.trim()}</a>
                         `
                     }).join(', ') : '';
                 }
@@ -416,26 +423,32 @@ export default [
                 value: null
             },
             {
+                name: 'OnHoldName',
+                display: 'On Hold Name',
+                type: 'mlot',
+                value: null
+            },
+            {
                 name: 'OnHoldStart',
                 display: 'On Hold Start Date',
                 type: 'date',
                 value: null
             },
-            {
-                name: 'OtherDataLocation',
-                display: 'Other Data Location',
-                type: 'slot'
-            },
-            {
-                name: 'OtherDataSource',
-                display: 'Other Data Source',
-                type: 'mlot'
-            },
-            {
-                name: 'OtherProgLang',
-                display: 'Other Programming Language',
-                type: 'slot'
-            },
+            // {
+            //     name: 'OtherDataLocation',
+            //     display: 'Other Data Location',
+            //     type: 'slot'
+            // },
+            // {
+            //     name: 'OtherDataSource',
+            //     display: 'Other Data Source',
+            //     type: 'mlot'
+            // },
+            // {
+            //     name: 'OtherProgLang',
+            //     display: 'Other Programming Language',
+            //     type: 'slot'
+            // },
             {
                 name: 'PQACategory',
                 display: 'Primary Quad Aim Category',
@@ -454,6 +467,7 @@ export default [
                 display: 'Programming Language',
                 description: 'Select all that apply',
                 type: 'multichoice',
+                fillIn: true,
                 value: null,
                 choices: [
                     'ANSI SQL',
@@ -1074,20 +1088,11 @@ export default [
                     '6. Feasibility study accepted by AO (AO)',
                     '7. Methodology developed (DS)',
                     '8. Checklist items reviewed (DS)',
-                    '8.a. Quality check on data (i.e., data accuracy and data reliability) (DS)',
-                    '8.b. Methodology validation (DS)',
-                    '8.c. Data source validation (DS)',
-                    '8.d. FY improvement target established (DS)',
                     '9. Methodology and data accepted by AO (AO)',
-                    '10.Data delivered to MOP (DS)',
+                    '10. Data delivered to MOP (DS)',
                     '11. Data delivery completed (Information Delivery)',
                     '12. Data visualization completed (BI)',
                     '13. Measure forwarded to Governance (OCR)',
-                    '13.a. Intake Form completed, including methodology and all required information (DS)',
-                    '13.b. Target established (DS)',
-                    '13.c. Measure ready to be queried through the Measures Library query tool (DS)',
-                    '13.d. Measure results are available in a database and ready to be exported (DS)',
-                    '13.e. Measure visualization is available (DS)',
                     '14. Measure approved by Governance (OCR)',
                     '15. Measure published in library (DS)'
                 ]
@@ -1206,33 +1211,5 @@ export default [
                 ]
             }
         ]
-    },
-    // {
-    //     list: 'MeasuresData',
-    //     options: {
-    //         files: true
-    //     },
-    //     fields: [
-    //         {
-    //             name: 'MeasureId',
-    //             type: 'number'
-    //         },
-    //         {
-    //             name: 'ShortTitle',
-    //             type: 'slot'
-    //         },
-    //         {
-    //             name: 'MIPLink',
-    //             type: 'slot'
-    //         },
-    //         {
-    //             name: 'DataThroughDate',
-    //             type: 'date'
-    //         },
-    //         {
-    //             name: 'DataPulledDate',
-    //             type: 'date'
-    //         }
-    //     ]
-    // }
+    }
 ]

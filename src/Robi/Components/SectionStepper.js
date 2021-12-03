@@ -64,7 +64,7 @@ export function SectionStepper(param) {
                 font-weight: 700;
                 color: ${App.get('primaryColor')};
                 border-radius: 10px;
-                padding: 10px 20px;
+                padding: 8px 20px 10px 20px; /* -2px on top to align baseline with view title */
                 cursor: pointer;
             }
 

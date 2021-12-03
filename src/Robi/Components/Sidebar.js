@@ -18,6 +18,7 @@ import { HideRoutes } from '../Actions/HideRoutes.js'
  */
 export function Sidebar({ parent, path }) {
     const component = Component({
+        name: 'sidebar',
         html: /*html*/ `
             <div class='sidebar' data-mode='open'>
                 <div class='w-100 d-flex justify-content-between align-items-center collapse-container'>
@@ -373,7 +374,7 @@ export function Sidebar({ parent, path }) {
                 background: white;
                 border-radius: 10px;
                 box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
-                padding: .5rem 0;
+                padding: .5rem;
             }
 
             .grab:not(.switch) {
@@ -759,7 +760,7 @@ export function Sidebar({ parent, path }) {
         // Add hide label
         // TODO: add absolutely positioned hide label
         component.find('.title-container').insertAdjacentHTML('beforeend', /*html*/ `
-            <div class='d-flex justify-content-end position-absolute hide-label' style='bottom: -12px; right: 25px; font-size: 14px; font-weight: 500;'>
+            <div class='d-flex justify-content-end position-absolute hide-label' style='bottom: -5px; right: 25px; font-size: 14px; font-weight: 500;'>
                 <div>Hide</div>
             </div>
         `);

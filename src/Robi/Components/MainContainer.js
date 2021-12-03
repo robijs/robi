@@ -11,6 +11,7 @@ export function MainContainer(param) {
     } = param;
 
     const component = Component({
+        name: 'maincontainer',
         html: /*html*/ `
             <div class='maincontainer'></div>
         `,

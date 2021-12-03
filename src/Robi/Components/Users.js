@@ -29,7 +29,7 @@ export async function Users(param) {
 
     viewTitle.add();
 
-    const usersTable = Table({
+    const usersTable = await Table({
         list: 'Users',
         newForm: NewUser,
         parent
@@ -40,7 +40,11 @@ export async function Users(param) {
         const row = usersTable.findRowById(itemId);
 
         if (row) {
-            row.show().draw(false).node().click();
+            if (row.show) {
+                row.show().draw(false).node().click();
+            } else {
+                row.draw(false).node().click();
+            }
         }
     }
 }

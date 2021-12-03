@@ -59,8 +59,8 @@ Start({
         logo: 'dha-logo-no-label-180w.png',
         logoLarge: 'dha-logo-no-label-386w.png',
         logoSmall: 'dha-logo-no-label-80w.png',
-        name: /* @START-Name */'MeasuresLibrary'/* @START-Name */,
-        primaryColor: '#e63e44',
+        name: /* @START-Name */'MeasuresLibrary'/* @END-Name */,
+        primaryColor: /* @START-Color */'#e63e44'/* @END-Color */,
         questionTypes: [
             {
                 title: 'General',
@@ -69,7 +69,7 @@ Start({
         ],
         secondaryColor: 'white',
         backgroundColor: '#F8F8FC',
-        title: /* @START-Title */'Measures Library'/* @START-Title */,
+        title: /* @START-Title */'Measures Library'/* @END-Title */,
         userDefaultRole: 'User',
         userSettings: JSON.stringify({}),
         // OPTIONAL PROPERTIES (defaults)
@@ -84,7 +84,7 @@ Start({
         // maincontainer: replace default maincontainer with your component (type function, typically imported from /Components/myComponent.js)
         // sidebar: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
         // usersLists: override default name for 'Users' lists
-        appcontainer: '',
+        appcontainer: null,
         dev: {
             user: {
                 Title: "First Last",
@@ -113,8 +113,8 @@ Start({
                 href: '/Images/dha-logo-no-label-386w.png'
             }
         ],
-        maincontainer: '',
-        sidebar: '',
+        maincontainer: null,
+        sidebar: null,
         usersList: 'Users'
         // @END-SETTINGS
     }

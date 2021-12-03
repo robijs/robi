@@ -30,7 +30,7 @@ export function Component(param) {
         }
 
         const css = /*html*/ `
-            <style type='text/css' data-name='${name || id}'>
+            <style type='text/css' data-name='${name || id}' data-type='component' data-locked='${name ? 'yes' : 'no'}' >
                 ${style.replace(/#id/g, `#${id}`)}
             </style>
         `;

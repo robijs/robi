@@ -18,7 +18,7 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
                         ${
                             !title ?
                             /*html*/ `
-                                <!-- <button type='button' class='close' style='position: absolute; right: 0px;' data-dismiss='modal' aria-label='Close'>
+                                <button type='button' class='close ${close ? '' : 'd-none'}' style='position: absolute; right: 0px;' data-dismiss='modal' aria-label='Close'>
                                     <span class='icon-container' style='right: 20px; top: 20px;'>
                                         <svg class='icon x-circle-fill'>
                                             <use href='#icon-bs-x-circle-fill'></use>
@@ -27,7 +27,7 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
                                             <use href='#icon-bs-circle-fill'></use>
                                         </svg>
                                     <span>
-                                </button> -->
+                                </button>
                             ` :
                             /*html*/ `
                                 <div class='modal-header' ${headerStyle ? `style='${headerStyle}'` : ''}>

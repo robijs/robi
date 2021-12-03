@@ -18,7 +18,7 @@ export function LoadingBar(param) {
             <div class='loading-bar'>
                 <div class='loading-message'>
                     <!-- <div class='loading-message-logo'></div> -->
-                    <img class='loading-message-logo' src='${logoPath}/${displayLogo}' />
+                    <!-- <img class='loading-message-logo' src='${logoPath}/${displayLogo}' /> -->
                     <div class='loading-message-title'>${displayTitle}</div>
                     <div class='loading-bar-container ${loadingBar || ''}'>
                         <div class='loading-bar-status'></div>

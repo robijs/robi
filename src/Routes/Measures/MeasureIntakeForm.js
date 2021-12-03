@@ -1,8 +1,9 @@
-import { Title, Container, FoldingCube, Card, Modal, BootstrapButton, SectionStepper, LoadingSpinner, FormSection, MultiLineTextField, DateField, Alert } from '../../Robi/RobiUI.js'
+import { Title, Table, Container, FoldingCube, Card, Modal, BootstrapButton, SectionStepper, LoadingSpinner, FormSection, MultiLineTextField, DateField, Alert } from '../../Robi/RobiUI.js'
 import { App, Store, Get, CreateItem, UpdateItem, Route, UploadFile } from '../../Robi/Robi.js'
 import lists from '../../lists.js'
-import { Checklist } from './Checklist.js';
-import { DataFiles } from './DataFiles.js';
+import { EditDataFile } from './EditDataFile.js'
+import { NewDataFile } from './NewDataFile.js'
+import { OnHold } from './OnHold.js';
 
 /**
  * 
@@ -17,15 +18,15 @@ export async function MeasureIntakeForm(param) {
 
     // TODO: generalize this
     // Bail out for checklist and data
-    if (path === 'Checklist') {
-        Checklist(param);
-        return;
-    }
+    // if (path === 'Checklist') {
+    //     Checklist(param);
+    //     return;
+    // }
 
-    if (path === 'DataFiles') {
-        DataFiles(param);
-        return;
-    }
+    // if (path === 'DataFiles') {
+    //     DataFiles(param);
+    //     return;
+    // }
 
     // Set new measure data
     const listInfo = lists.find(item => item.list === 'Measures');
@@ -71,13 +72,17 @@ export async function MeasureIntakeForm(param) {
     /** View Title */
     const viewTitle = Title({
         title: itemId ? `Measure #${itemId} Intake Form` : 'New Measure Intake Form',
-        subTitle: section.name,
+        subTitle: section?.name || path.splitCamelCase(),
         padding: '0px 20px 10px 20px',
         width: '100%',
         parent: rightContainer,
         type: 'across',
         action(event) {
-            Route(`Measures/${subPath}`);
+            console.log('scroll');
+            projectContainer.get().scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
     });
 
@@ -137,7 +142,7 @@ export async function MeasureIntakeForm(param) {
         route: `Measures/${subPath}`,
         // padding: '0px 31px 11px 0px',
         sections: listInfo.sections,
-        selected: section.name,
+        selected: section ? section.name : undefined,
         parent: sectionStepperContainer
     });
 
@@ -325,7 +330,7 @@ export async function MeasureIntakeForm(param) {
                 filter: `Id eq ${itemId}`
             });
 
-            item = item[0];
+            item = item ? item[0] : undefined;
 
             const files = await Get({
                 list: 'MeasuresFiles',
@@ -345,7 +350,7 @@ export async function MeasureIntakeForm(param) {
             });
 
             // FIXME: hack. could be slow with large doc libs.
-            dataFiles = dataFiles.map(file => {
+            dataFiles = dataFiles?.map(file => {
                 file.Name = file.File.Name;
 
                 return file;
@@ -371,246 +376,19 @@ export async function MeasureIntakeForm(param) {
             console.log(`Edit measure data not set. Item: `, Store.getData(`edit measure ${itemId}`));
         }
 
-        // Place measure on hold
-        if (item.Status === 'On Hold') {
-            const bannerContainer = Container({
-                width: '100%',
-                padding: '0px 20px 10px 0px',
-                parent: viewTitle,
-                position: 'afterend'
-            });
+        // Add place measure on hold / remove hold button and modal
+        OnHold({
+            item,
+            path,
+            parent: viewTitle,
+        });
 
-            bannerContainer.add();
-
-            const banner = Alert({
-                type: 'robi-primary',
-                classes: ['w-100'],
-                text: `This measure was placed on hold <strong>${new Date(item.OnHoldStart).toLocaleDateString()}</strong>. Remove it to make changes.`,
-                parent: bannerContainer,
-            });
-            
-            banner.add();
-
-            const removeHold = BootstrapButton({
-                type: 'robi-success',
-                value: 'Remove hold',
-                parent: viewTitle,
-                action(event) {
-                    const removeHoldModal = Modal({
-                        title: false,
-                        scrollable: true,
-                        async addContent(modalBody) {
-                            modalBody.classList.add('install-modal');
-    
-                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                <h3 class='mb-2 mb-2'>Remove hold on Measure #${itemId}</h3>
-                            `);
-    
-                            const start = DateField({
-                                label: 'Start Date',
-                                value: item.OnHoldStart,
-                                parent: modalBody
-                            });
-                        
-                            start.add();
-    
-                            const end = DateField({
-                                label: 'Estimated End Date',
-                                value: item.OnHoldEnd,
-                                parent: modalBody
-                            });
-                        
-                            end.add();
-    
-                            const notes = MultiLineTextField({
-                                label: 'Comments',
-                                value: item.OnHoldComments,
-                                parent: modalBody
-                            });
-                        
-                            notes.add();
-
-                            const message = Alert({
-                                type: 'robi-primary',
-                                text: 'Removing the hold on this mesaure will reset the dates and comments above.',
-                                parent: modalBody
-                            });
-    
-                            message.add();
-
-                            const onHoldBtn = BootstrapButton({
-                                async action() {
-                                    onHoldBtn.get().disabled = true;
-                                    onHoldBtn.get().innerHTML = /*html*/ `
-                                        <span class="spinner-border" role="status" aria-hidden="true" style="width: 20px; height: 20px; border-width: 3px"></span> Removing hold
-                                    `;
-
-                                    const updatedItem = await UpdateItem({
-                                        itemId,
-                                        list: 'Measures',
-                                        data: {
-                                            OnHoldEnd: null,
-                                            OnHoldStart: null,
-                                            OnHoldComments: null,
-                                            Status: null
-                                        }
-                                    });
-
-                                    // Remove stored measure
-                                    Store.removeData(`edit measure ${itemId}`);
-    
-                                    $(removeHoldModal.get()).on('hidden.bs.modal', event => {
-                                        Route(`Measures/${itemId}${path ? `/${path}` : ''}`)
-                                    });
-
-                                    removeHoldModal.close();
-                                },
-                                // disabled: true,
-                                classes: ['w-100 mt-5'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'robi',
-                                value: 'Remove hold'
-                            });
-                
-                            onHoldBtn.add();
-                
-                            const cancelBtn = BootstrapButton({
-                                action(event) {
-                                    removeHoldModal.close();
-                                },
-                                classes: ['w-100 mt-2'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'light',
-                                value: 'Cancel'
-                            });
-                
-                            cancelBtn.add();
-    
-                            function toSPDate(date) {
-                                const hours = new Date().getUTCHours()
-                                const hh = hours < 10 ? `0${hours}` : hours;
-                                return `${date}T${hh}:00:00Z`;
-                            }
-                        },
-                        centered: true,
-                        showFooter: false,
-                    });
-                
-                    removeHoldModal.add();
-                }
-            });
-    
-            removeHold.add();
-        } else {
-            const placeOnHold = BootstrapButton({
-                type: 'robi',
-                value: 'Place on hold',
-                parent: viewTitle,
-                action(event) {
-                    const onHoldModal = Modal({
-                        title: false,
-                        scrollable: true,
-                        async addContent(modalBody) {
-                            modalBody.classList.add('install-modal');
-    
-                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                <h3 class='mb-2 mb-2'>Place Measure #${itemId} on hold</h3>
-                            `);
-    
-                            const start = DateField({
-                                label: 'Start Date',
-                                parent: modalBody
-                            });
-                        
-                            start.add();
-    
-                            const end = DateField({
-                                label: 'Estimated End Date',
-                                parent: modalBody
-                            });
-                        
-                            end.add();
-    
-                            const notes = MultiLineTextField({
-                                label: 'Comments',
-                                parent: modalBody
-                            });
-                        
-                            notes.add();
-                            const onHoldBtn = BootstrapButton({
-                                async action() {
-                                    onHoldBtn.get().disabled = true;
-                                    onHoldBtn.get().innerHTML = /*html*/ `
-                                        <span class="spinner-border" role="status" aria-hidden="true" style="width: 20px; height: 20px; border-width: 3px"></span> Placing on hold
-                                    `;
-
-                                    const updatedItem = await UpdateItem({
-                                        itemId,
-                                        list: 'Measures',
-                                        data: {
-                                            OnHoldEnd: toSPDate(end.value()),
-                                            OnHoldStart: toSPDate(start.value()),
-                                            OnHoldComments: notes.value(),
-                                            Status: 'On Hold'
-                                        }
-                                    });
-
-                                    // Remove stored measure
-                                    Store.removeData(`edit measure ${itemId}`);
-    
-                                    $(onHoldModal.get()).on('hidden.bs.modal', event => {
-                                        Route(`Measures/${itemId}${path ? `/${path}` : ''}`)
-                                    });
-
-                                    onHoldModal.close();
-                                },
-                                // disabled: true,
-                                classes: ['w-100 mt-5'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'robi',
-                                value: 'Place on hold'
-                            });
-                
-                            onHoldBtn.add();
-                
-                            const cancelBtn = BootstrapButton({
-                                action(event) {
-                                    onHoldModal.close();
-                                },
-                                classes: ['w-100 mt-2'],
-                                width: '100%',
-                                parent: modalBody,
-                                type: 'light',
-                                value: 'Cancel'
-                            });
-                
-                            cancelBtn.add();
-    
-                            function toSPDate(date) {
-                                const hours = new Date().getUTCHours()
-                                const hh = hours < 10 ? `0${hours}` : hours;
-                                return `${date}T${hh}:00:00Z`;
-                            }
-                        },
-                        centered: true,
-                        showFooter: false,
-                    });
-                
-                    onHoldModal.add();
-                }
-            });
-    
-            placeOnHold.add();
-        }
-
-        // Extra tools
+        // TODO: Wrap in component
+        // Add Data and checklist info panels
         leftContainer.append(/*html*/ `
             <div class='w-100 mb-2' style='padding-right: 31px;'>
                 <div class='mb-2 data-files' style='background: ${App.get('backgroundColor')}; border-radius: 20px; padding: 15px 30px; cursor: pointer;'>
-                    <div style='font-weight: 500;'>Data</div>
+                    <div style='font-weight: 500;'>Data Files</div>
                     <div style=''>${dataFiles.length} ${dataFiles.length === 1 ? 'file' : 'files'}</div>
                 </div>
                 <div class='checklist' style='background: ${App.get('backgroundColor')}; border-radius: 20px; padding: 15px 30px; cursor: pointer;'>
@@ -621,8 +399,10 @@ export async function MeasureIntakeForm(param) {
         `);
 
         // TODO: generalize route
-        leftContainer.find('.data-files').addEventListener('click', () => Route(`Measures/${itemId}/DataFiles`));
-        leftContainer.find('.checklist').addEventListener('click', () => Route(`Measures/${itemId}/Checklist`));
+        leftContainer.find('.data-files')?.addEventListener('click', () => Route(`Measures/${itemId}/DataFiles`));
+        leftContainer.find('.checklist')?.addEventListener('click', () => Route(`Measures/${itemId}/Checklist`));
+
+
     } else {
         const newMeasureData = Store.getData('new measure');
 
@@ -636,7 +416,46 @@ export async function MeasureIntakeForm(param) {
         }
     }
 
-    // Render sections
+    // If path is #Measures/[Item Id]/DataFiles show table and exit
+    if (path === 'DataFiles') {
+        await Table({
+            list: 'DataFiles',
+            items: dataFiles,
+            addButton: item.Status === 'On Hold' ? false : true,
+            heading: '',
+            view: 'DataFiles',
+            buttons: [],
+            exportButtons: false,
+            defaultButtons: item.Status === 'On Hold' ? false : undefined,
+            addButtonValue: 'Upload data file',
+            width: '100%',
+            parent: planContainer,
+            newForm: NewDataFile,
+            newFormTitle: 'New data file',
+            editForm: EditDataFile,
+            editFormTitle: 'Edit data file'
+        });
+
+        return;
+    }
+
+    // If path is #Measures/[Item Id]/Checklist show table and exit
+    if (path === 'Checklist') {
+        await Table({
+            list: 'MeasuresChecklist',
+            items: checklist,
+            heading: '',
+            view: 'Checklist',
+            buttons: [],
+            defaultButtons: false,
+            width: '100%',
+            parent: planContainer
+        });
+
+        return;
+    }
+
+    // If path is #Measures/[Item Id] with no section render all sections
     if (section.name === 'All Sections') {
         listInfo.sections.forEach(section => {
             const { name } = section;
@@ -649,14 +468,17 @@ export async function MeasureIntakeForm(param) {
                 parent: planContainer
             });
         });
-    } else {
-        FormSection({
-            item,
-            section,
-            listInfo,
-            parent: planContainer
-        });
+
+        return;
     }
+    
+    // Show section based on path
+    FormSection({
+        item,
+        section,
+        listInfo,
+        parent: planContainer
+    });
 
     function addHeading(text) {
         viewTitle.setSubtitle(text);

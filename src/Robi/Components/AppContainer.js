@@ -8,6 +8,7 @@ import { App } from '../Core.js';
  */
 export function AppContainer() {
     const component = Component({
+        name: 'appcontainer',
         html: /*html*/ `
             <div class='appcontainer'></div>
         `,
@@ -88,28 +89,7 @@ export function AppContainer() {
                 cursor: wait !important;
             }
 
-            /* Override default Bootstrap Alert */
-            #id .alert {
-                font-size: 14px;
-                border-radius: 10px;
-                border: none;
-            }
-            
-            @keyframes fade-in-bottom {
-                0% {
-                    bottom: -10px;
-                    transform: scale(.5);
-                    opacity: 0;
-                }
-            
-                100% {
-                    bottom: 10px;
-                    transform: scale(1);
-                    opacity: 1;
-                }
-            }
-
-            /* Overrides */
+            /* Button */
             button:focus {
                 outline: none;
             }
@@ -140,7 +120,6 @@ export function AppContainer() {
                 border-color: royalblue !important;
             }
 
-            /* Robi buttons */
             .btn-robi-reverse,
             .btn-robi-reverse:hover {
                 background: ${App.get('primaryColor')};
@@ -283,10 +262,25 @@ export function AppContainer() {
                 box-shadow: 0 0 0 4px ${App.get('primaryColor') + '6b'} !important;
             }
 
-            /* Override bootstrap alert style */
+            /* Alert */
             .alert {
+                font-size: 14px;
                 border: none;
                 border-radius: 10px;
+            }
+            
+            @keyframes fade-in-bottom {
+                0% {
+                    bottom: -10px;
+                    transform: scale(.5);
+                    opacity: 0;
+                }
+            
+                100% {
+                    bottom: 10px;
+                    transform: scale(1);
+                    opacity: 1;
+                }
             }
 
             .alert-robi-primary {
@@ -298,6 +292,15 @@ export function AppContainer() {
                 color: hsl(${HSLDarker(App.get('primaryColorHSL'), 5)}) !important;
             }
 
+            .alert-robi-primary-high-contrast {
+                background: ${App.get('primaryColor') + '19'} !important;
+                color: hsl(${HSLDarker(App.get('primaryColorHSL'), 10)}) !important;
+            }
+
+            .alert-robi-primary-high-contrast *:not(.btn) {
+                color: hsl(${HSLDarker(App.get('primaryColorHSL'), 10)}) !important;
+            }
+
             .alert-robi-secondary {
                 background: ${App.get('backgroundColor')} !important;
                 color: ${App.get('defaultColor')} !important;
@@ -307,7 +310,7 @@ export function AppContainer() {
                 color: ${App.get('defaultColor')} !important;
             }
             
-            /* Override bootstrap drop down style */
+            /* Dropdown */
             .dropdown-item {
                 cursor: pointer;
             }
@@ -317,12 +320,12 @@ export function AppContainer() {
                 background-color: initial;
             }
             
-            /** Bootstrap badge colors */
+            /** Badge */
             .badge-success {
                 background: seagreen !important;
             }
 
-            /* Robi text */
+            /* Text */
             .text-robi {
                 color: ${App.get('primaryColor')} !important;
             }
@@ -397,11 +400,11 @@ export function AppContainer() {
                 width: 100%;
                 height: 100%;
                 overflow: overlay;
-                background: #1E1E1E;
+                background: #343a40;
             }
 
             .console * {
-                color: #CCCCCC !important;
+                color: white !important;
             }
 
             .console-title {
@@ -425,7 +428,8 @@ export function AppContainer() {
                 border-radius: 10px;
                 padding: 10px 15px;
                 border: none;
-                background: #1E1E1E;
+                /* #1E1E1E */
+                background: #343a40;
                 color: white !important;
                 animation: fade-in-bottom 200ms ease-in-out forwards;
             };

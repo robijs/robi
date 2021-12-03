@@ -14,6 +14,9 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         scrollTop
     } = options;
 
+    /** Remove styles in head */
+    document.querySelectorAll(`head style[data-locked='no']`).forEach(node => node.remove());
+
     /** Remove modal overlay */
     const overlay = document.querySelector('.modal-backdrop');
 

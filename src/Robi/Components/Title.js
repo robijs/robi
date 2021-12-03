@@ -11,9 +11,6 @@ export function Title(param) {
         title, width, subTitle, subTitleColor, breadcrumb, dropdownGroups, maxTextWidth, route, padding, margin, parent, position, date, type, action
     } = param;
 
-    /**
-     * @todo show ticking time
-     */
     const component = Component({
         html: /*html*/ `
             <div class='title ${type || ''}'>
@@ -22,18 +19,18 @@ export function Title(param) {
                     <!-- ${subTitle !== undefined ? `<h2>${subTitle}</h2>` : ''} -->
                     <h2>${subTitle || ''}</h2>
                     ${breadcrumb !== undefined ?
-            /*html*/ `
-                            <h2 ${dropdownGroups && dropdownGroups.length ? `style='margin-right: 0px;'` : ''}>
-                                ${buildBreadcrumb(breadcrumb)}
-                                ${dropdownGroups && dropdownGroups.length ? `<span class='_breadcrumb-spacer'>/</span>` : ''}
-                                ${dropdownGroups && dropdownGroups.length ?
-                /*html*/ `
-                                        ${buildDropdown(dropdownGroups)}
-                                    ` :
+                    /*html*/ `
+                        <h2 ${dropdownGroups && dropdownGroups.length ? `style='margin-right: 0px;'` : ''}>
+                            ${buildBreadcrumb(breadcrumb)}
+                            ${dropdownGroups && dropdownGroups.length ? `<span class='_breadcrumb-spacer'>/</span>` : ''}
+                            ${dropdownGroups && dropdownGroups.length ?
+                            /*html*/ `
+                                    ${buildDropdown(dropdownGroups)}
+                                ` :
+                            ''}
+                        </h2>
+                    ` :
                     ''}
-                            </h2>
-                        ` :
-                ''}
                 </div>
                 ${date !== undefined ? `<div class='title-date'>${date}</div>` : ''}
             </div>
@@ -57,6 +54,7 @@ export function Title(param) {
                 font-weight: 700;
                 margin-top: 0px;
                 margin-bottom: 10px;
+                cursor: ${action ? 'pointer' : 'auto'};
             }
 
             #id.title h2 {
@@ -176,6 +174,15 @@ export function Title(param) {
                 selector: '#id .route',
                 event: 'click',
                 listener: goToRoute
+            },
+            {
+                selector: '#id .app-title',
+                event: 'click',
+                listener(event) {
+                    if (action) {
+                        action(event);
+                    }
+                }
             }
         ]
     });

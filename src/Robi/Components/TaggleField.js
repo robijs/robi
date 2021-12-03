@@ -45,6 +45,10 @@ export function TaggleField(param) {
                 border: 1px solid #ced4da;
                 padding: 10px;
             }
+
+            #id .taggle .close {
+                text-shadow: none;
+            }
         `,
         parent,
         position,

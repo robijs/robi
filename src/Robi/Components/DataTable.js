@@ -73,6 +73,7 @@ export function DataTable(param) {
                 padding: 0px 15px;
                 margin: 0px 0px 10px 0px;
                 width: 100%;
+                min-height: 33.33px;
                 display: flex;
                 justify-content: space-between;
                 flex-wrap: nowrap;
@@ -566,6 +567,13 @@ export function DataTable(param) {
                 if (rowData.target.classList.contains('select-checkbox')) {
                     return;
                 }
+
+                if (rowData.target.tagName.toLowerCase() === 'a') {
+                    console.log(`Clicked link. Didn't fire onRowClick().`);
+
+                    return;
+                }
+
                 rowData = $(tableId).DataTable().row(this).data();
 
                 if (rowData && onRowClick) {

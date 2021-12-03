@@ -68,13 +68,17 @@ export default async function Measures({ parent, pathParts, props }) {
         parent
     });
 
-    // Open modal
     // TODO: Move to Table()
+    // Open modal
     if (itemId) {
         const row = measuresTable.findRowById(itemId);
 
         if (row) {
-            row.show().draw(false).node().click();
+            if (row.show) {
+                row.show().draw(false).node().click();
+            } else {
+                row.draw(false).node().click();
+            }
         }
     }
 }

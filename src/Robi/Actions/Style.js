@@ -15,7 +15,7 @@ export function Style(param) {
     }
 
     const css = /*html*/ `
-        <style type='text/css' data-name='${name || id}'>
+        <style type='text/css' data-name='${name || id}' data-type='style'>
             ${style}
         </style>
     `;
