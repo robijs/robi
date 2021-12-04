@@ -89,6 +89,11 @@ export function AppContainer() {
                 cursor: wait !important;
             }
 
+            /* Code */
+            code {
+                color: ${App.get('primaryColor')};
+            }
+
             /* Button */
             button:focus {
                 outline: none;
