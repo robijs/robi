@@ -32,7 +32,7 @@ export function FormSection(param) {
 
     if (heading) {
         const sectionTitle = Alert({
-            type: 'robi-primary',
+            type: 'robi-secondary',
             width: '100%',
             text: /*html*/ `
                 <h6 class='mb-0'>${heading}</h6>

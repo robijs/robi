@@ -825,7 +825,7 @@ export default [
                     },
                     {
                         description: 'For DBA/BI Developers Only',
-                        type: 'warning',
+                        type: 'robi-primary-high-contrast',
                         fields: [
                             {
                                 name: 'MIPNameLoc',
