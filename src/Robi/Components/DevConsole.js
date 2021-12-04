@@ -152,7 +152,7 @@ export function DevConsole(param) {
             #id .changed {
                 border-radius: 20px;
                 position: absolute;
-                top: 10px;
+                top: 4px;
                 right: 30px;
             }
 

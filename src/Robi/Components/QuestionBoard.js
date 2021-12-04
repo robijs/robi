@@ -12,6 +12,7 @@ import { NewQuestion } from './NewQuestion.js'
 import { QuestionModel } from '../Models/QuestionModel.js'
 import { QuestionsModel } from '../Models/QuestionsModel.js'
 import { App, Store } from '../Core.js'
+import { LoadingSpinner } from './LoadingSpinner.js'
 
 /**
  *
@@ -36,7 +37,7 @@ export async function QuestionBoard(param) {
 
         /** Set temporary title  */
         viewTitle = Title({
-            title: App.get('name'),
+            title: 'Questions',
             breadcrumb: [
                 {
                     label: 'Questions',
@@ -44,7 +45,7 @@ export async function QuestionBoard(param) {
                 },
                 {
                     label: /*html*/ `
-                        <div style='height: 20px; width: 20px;' class='spinner-grow text-secondary' role='status'></div>
+                        <div style='height: 20px; width: 20px;' class='spinner-grow text-robi' role='status'></div>
                     `,
                     path: '',
                     currentPage: true
@@ -85,7 +86,7 @@ export async function QuestionBoard(param) {
 
         /** Set new title with drop down options */
         viewTitle = Title({
-            title: App.get('name'),
+            title: 'Questions',
             breadcrumb: [
                 {
                     label: 'Questions',
@@ -326,9 +327,9 @@ export async function QuestionBoard(param) {
     qppQuestionsToolbar.add();
 
     /** Loading Indicator */
-    const loadingIndicator = FoldingCube({
-        label: 'Loading Questions',
-        margin: '40px 0px',
+    const loadingIndicator = LoadingSpinner({
+        message: 'Loading questions',
+        type: 'robi',
         parent: viewContainer
     });
 
@@ -338,7 +339,7 @@ export async function QuestionBoard(param) {
     const questionsContainer = Container({
         display: 'flex',
         direction: 'column',
-        width: 'fit-content',
+        width: '100%',
         margin: '30px 0px',
         parent: viewContainer
     });

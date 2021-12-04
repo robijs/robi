@@ -22,7 +22,6 @@ export function QuestionCards(param) {
         parent,
         display: 'flex',
         width: '100%',
-        justify: 'flex-end',
     });
 
     alertContainer.add();
@@ -31,25 +30,13 @@ export function QuestionCards(param) {
     const lightAlert = Alert({
         type: 'blank',
         text: `${questions.length} question${questions.length === 1 ? '' : 's'}`,
-        margin: '20px 0px -10px 0px',
+        margin: '20px 0px 10px 0px',
         parent: alertContainer
     });
 
     lightAlert.add();
 
     /** Questions */
-    // questions.forEach(question => {
-    //     const thisQuestionsReplies = replies.filter(reply => reply.QuestionId === question.Id);
-    //     const questionCard = QPPQuestionCard({
-    //         question,
-    //         replyCount: thisQuestionsReplies.length,
-    //         lastReply: thisQuestionsReplies[0],
-    //         path: `Questions/${path}`,
-    //         margin: '20px 0px',
-    //         parent
-    //     });
-    //     questionCard.add();
-    // });
     questions
         .sort((a, b) => {
             a = a.Id;

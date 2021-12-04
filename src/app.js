@@ -61,6 +61,7 @@ Start({
         logoSmall: 'dha-logo-no-label-80w.png',
         name: /* @START-Name */'MeasuresLibrary'/* @END-Name */,
         primaryColor: /* @START-Color */'#e63e44'/* @END-Color */,
+        // primaryColor: /* @START-Color */'#4169e1'/* @END-Color */,
         questionTypes: [
             {
                 title: 'General',

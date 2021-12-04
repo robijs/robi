@@ -13,7 +13,6 @@ export default async function Measures({ parent, pathParts, props }) {
         itemId = parseInt(pathParts[1]);
 
         if (typeof itemId === 'number' && !isNaN(itemId)) {
-            console.log('edit form');
             MeasureIntakeForm({
                 parent,
                 itemId: itemId,
@@ -58,7 +57,7 @@ export default async function Measures({ parent, pathParts, props }) {
     info.add();
 
     // Table
-    const newTable = await Table({
+    await Table({
         list: 'Measures',
         view: 'Measures',
         addButtonValue: 'New Measure Intake Form',

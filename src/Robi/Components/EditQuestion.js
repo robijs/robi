@@ -18,10 +18,7 @@ export function EditQuestion(param) {
     /** Title */
     const titleField = SingleLineTextField({
         label: 'Question',
-        description: '',
         value: Title,
-        width: '100%',
-        fieldMargin: '0px 40px 20px 40px',
         parent,
         onKeydown(event) {
             if (event.target.innerText) {
@@ -39,11 +36,7 @@ export function EditQuestion(param) {
     /** Body */
     const bodyField = MultiLineTextField({
         label: 'Description',
-        description: '',
         value: Body,
-        width: '100%',
-        fieldMargin: '20px 40px',
-        optional: true,
         parent,
         onKeydown(event) {
             submit(event);

@@ -26,7 +26,8 @@ export function QuestionContainer(param) {
         parent,
         onEdit(event) {
             const modal = Modal({
-                title: 'Ask a question',
+                title: 'Edit Question',
+                contentPadding: '30px',
                 showFooter: true,
                 addContent(modalBody) {
                     editQuestionForm = EditQuestion({
@@ -49,7 +50,7 @@ export function QuestionContainer(param) {
                         },
                         {
                             value: 'Update',
-                            classes: 'btn-success',
+                            classes: 'btn-robi',
                             async onClick(event) {
                                 /** Disable button */
                                 event.target.disabled = true;
@@ -171,8 +172,14 @@ export function QuestionContainer(param) {
     const newReply = NewReply({
         width: '100%',
         parent,
-        async action(value) {
-            // console.log(value);
+        async action({ value, button, field }) {
+            // Disable button - Prevent user from clicking this item more than once
+            button.disabled = true;
+            button.querySelector('.icon').classList.add('d-none');
+            button.insertAdjacentHTML('beforeend', /*html*/ `
+                <span style="width: 16px; height: 16px;" class="spinner-border spinner-border-sm text-robi" role="status" aria-hidden="true"></span>
+            `);
+
             /** Create item */
             const newItem = await CreateItem({
                 list: 'Questions',
@@ -196,7 +203,6 @@ export function QuestionContainer(param) {
             /** Add to replies */
             replies.push(newItem);
 
-            // console.log(newItem);
             /** Add to DOM */
             const replyComponent = Reply({
                 reply: newItem,
@@ -214,6 +220,14 @@ export function QuestionContainer(param) {
             });
 
             replyComponent.add();
+
+            // Reset field
+            field.innerHTML = '';
+
+            // Enable button
+            button.querySelector('.spinner-border').remove();
+            button.querySelector('.icon').classList.remove('d-none');
+            button.disabled = false;
         }
     });
 

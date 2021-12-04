@@ -57,7 +57,7 @@ export function FormSection(param) {
     // TODO: Pass form name in, this is supposed to be generic
     const formData = item ? Store.getData(`edit measure ${item.Id}`) : Store.getData('new measure');
 
-    console.log('Form Data:', formData);
+    // console.log('Form Data:', formData);
 
     let components = [];
 
@@ -296,7 +296,6 @@ export function FormSection(param) {
                         });
                         break;
                     case 'multichoice':
-                        console.log(name);
                         component = MultiChoiceField({
                             label: label || display || name,
                             choices,

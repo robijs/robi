@@ -22,6 +22,7 @@ export async function AddRoute(param) {
         scrollable: true,
         async addContent(modalBody) {
             modalBody.classList.add('install-modal');
+            addRouteModal.find('.modal-dialog').style.maxWidth = 'fit-content';
 
             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                 <h3 class='mb-2'>Add route</h3>
@@ -54,6 +55,11 @@ export async function AddRoute(param) {
                 label: 'Path',
                 addon: App.get('site') + '/App/src/pages/app.aspx#',
                 parent: modalBody,
+                onKeydown(event) {
+                    if (event.code === 'Space' || event.code === 'Tab') {
+                        return false;
+                    }
+                },
                 onKeyup(event) {
                     canEnable();
 
@@ -132,7 +138,9 @@ export async function AddRoute(param) {
                     await createRoute();
 
                     if (App.get('mode') === 'prod') {
-                        await Wait(1500);
+                        // Wait additional 2s
+                        console.log('Waiting...');
+                        await Wait(2000);
                         location.reload();
                     }
 
@@ -246,7 +254,7 @@ export async function AddRoute(param) {
                         if (App.get('mode') === 'prod') {
                             // Create Route dir
                             await CreateFolder({
-
+                                path: `App/src/Routes/${routePath.value()}`
                             });
 
                             // Create Route file

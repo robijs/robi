@@ -8,7 +8,7 @@ import { App } from '../Core.js';
  */
 export function NewReply(param) {
     const {
-        width, action, parent, position
+        width, action, parent, position, margin
     } = param;
 
     const component = Component({
@@ -34,6 +34,7 @@ export function NewReply(param) {
                 width: ${width || '100%'};
                 max-height: 80vw;
                 padding-bottom: 20px;
+                margin: ${margin || '20px 0px 0px 0px'};
             }
 
             /* New Comment */
@@ -46,8 +47,8 @@ export function NewReply(param) {
             #id .new-comment {
                 overflow-wrap: anywhere;
                 flex: 2;
-                font-size: 13px;
-                font-weight: 500;
+                /* font-size: 13px; */
+                /* font-weight: 500; */
                 padding: 10px 20px;
                 border-radius: 20px 0px 0px 20px;
                 border-left: solid 3px #F8F8FC;
@@ -84,8 +85,8 @@ export function NewReply(param) {
             #id .new-comment-button {
                 cursor: pointer;
                 display: flex;
-                margin: 5px;
-                padding: 5px;
+                margin: 6px;
+                padding: 8px;
                 font-weight: bold;
                 text-align: center;
                 border-radius: 50%;
@@ -94,7 +95,6 @@ export function NewReply(param) {
             }
 
             #id .new-comment-button .icon {
-                font-size: 1.2em;
                 fill: ${App.get('primaryColor')};
             }
 
@@ -140,9 +140,11 @@ export function NewReply(param) {
                     const value = field.innerHTML;
 
                     if (value) {
-                        action(value);
-
-                        field.innerHTML = '';
+                        action({
+                            value,
+                            button: this,
+                            field,
+                        });
                     } else {
                         console.log('new comment field is empty');
                     }

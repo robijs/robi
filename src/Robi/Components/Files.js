@@ -29,7 +29,7 @@ export function Files(param) {
                         <div class='count-undo-container'>
                             <div class='count-container'>
                                 <span class='count'>${files?.length || 0}</span>
-                                <span>files</span>
+                                <span>${files?.length === 1 ? 'file' : 'files'}</span>
                                 <span class='pending-count hidden'></span>
                             </div>
                             <!-- <span class='undo-all'>Delete all</span> -->
@@ -88,7 +88,7 @@ export function Files(param) {
 
             #id .count-container {
                 font-weight: 500;
-                padding-left: 8px;
+                padding-left: 15px;
                 font-size: 14px;
             }
 
@@ -225,9 +225,10 @@ export function Files(param) {
                 align-items: center;
                 justify-content: space-between;
                 width: 100%;
-                padding: 9px 12px;
-                border-radius: 8px;
-                background: white;
+                /* padding: 9px 12px; */
+                padding: 9px 0px;
+                border-radius: 15px;
+                /* background: white; */
                 transition: all 200ms;
             }
 

@@ -45,7 +45,7 @@ export function AddFileTypes(param) {
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-robi add-file" disabled>Add file</button>
+                    <button class="btn btn-robi add-file" disabled>Add file type</button>
                 </div>
                 <div class='mt-3' style='font-size: 14px; font-weight: 500; padding-left: 12px;'>
                     <span class='file-count'>${filesAsArray?.length || '0'}</span>

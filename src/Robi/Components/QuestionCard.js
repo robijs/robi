@@ -63,9 +63,9 @@ export function QuestionCard(param) {
                         }
                     </h5>
                     <!-- <h6 class='card-subtitle mb-2 text-muted'>Asked by ${Author.Title} ${formatDate(Created)}</h6> -->
-                    <h6 class='card-subtitle mb-2 text-muted'>${Author.Title} ${formatDate(Created)}</h6>
+                    <h6 class='card-subtitle mb-2 text-muted'>${Author.Title.split(' ').splice(0, 2).join(' ')} ${formatDate(Created)}</h6>
                     <div class='card-text mb-2'>${Body || ''}</div>
-                    <h6 class='card-subtitle mt-2 text-muted edit-text'>${edited(Created, Modified) ? `Last edited by ${Editor.Title} ${formatDate(Modified)} ` : ''}</h6>
+                    <h6 class='card-subtitle mt-2 text-muted edit-text'>${edited(Created, Modified) ? `Last edited by ${Editor.Title.split(' ').splice(0, 2).join(' ')} ${formatDate(Modified)} ` : ''}</h6>
                 </div>
                 ${buildFooter(lastReply)}
             </div>
@@ -73,7 +73,6 @@ export function QuestionCard(param) {
         style: /*css*/ `
             #id {
                 width: 100%;
-                max-width: 700px;
                 margin: ${margin || '0px'};
                 cursor: pointer;
                 background: ${App.get('backgroundColor')};
@@ -190,7 +189,7 @@ export function QuestionCard(param) {
             return /*html*/ `
                 <div class='card-footer question-last-reply'>
                     <span>
-                        <span>Last reply by ${Author.Title}</span>
+                        <span>Last reply by ${Author.Title.split(' ').splice(0, 2).join(' ')}</span>
                         <span>${formatDate(Created)}</span>
                     </span>
                     <p class='card-text mt-2'>${Body}</p>

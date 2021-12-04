@@ -2,7 +2,7 @@ import { Get } from '../Actions/Get.js'
 import { Route } from '../Actions/Route.js'
 import { Title } from './Title.js'
 import { Container } from './Container.js'
-import { FoldingCube } from './FoldingCube.js'
+import { LoadingSpinner } from './LoadingSpinner.js'
 import { QuestionContainer } from './QuestionContainer.js'
 import { QuestionsModel } from '../Models/QuestionsModel.js'
 import { App, Store } from '../Core.js'
@@ -29,7 +29,7 @@ export async function QuestionAndReplies(param) {
 
         /** Set temporary title  */
         viewTitle = Title({
-            title: App.get('name'),
+            title: 'Question',
             breadcrumb: [
                 {
                     label: 'Questions',
@@ -37,7 +37,7 @@ export async function QuestionAndReplies(param) {
                 },
                 {
                     label: /*html*/ `
-                        <div style='height: 20px; width: 20px;' class='spinner-grow text-secondary' role='status'></div>
+                        <div style='height: 20px; width: 20px;' class='spinner-grow text-robi' role='status'></div>
                     `,
                     path: '',
                     currentPage: true
@@ -78,7 +78,7 @@ export async function QuestionAndReplies(param) {
 
         /** Set new title with drop down options */
         viewTitle = Title({
-            title: App.get('name'),
+            title: 'Question',
             breadcrumb: [
                 {
                     label: 'Questions',
@@ -101,7 +101,7 @@ export async function QuestionAndReplies(param) {
                 },
                 {
                     name: /*html*/ `
-                        <div style='height: 20px; width: 20px;' class='spinner-grow text-secondary' role='status'></div>
+                        <div style='height: 20px; width: 20px;' class='spinner-grow text-robi' role='status'></div>
                     `,
                     dataName: 'loading-questions',
                     items: []
@@ -132,9 +132,9 @@ export async function QuestionAndReplies(param) {
     viewContainer.add();
 
     /** Loading Indicator */
-    const loadingIndicator = FoldingCube({
-        label: 'Loading Question',
-        margin: '40px 0px',
+    const loadingIndicator = LoadingSpinner({
+        message: 'Loading question',
+        type: 'robi',
         parent: viewContainer
     });
 

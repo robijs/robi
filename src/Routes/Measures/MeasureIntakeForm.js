@@ -1,8 +1,9 @@
 import { Title, Table, Container, FoldingCube, Card, Modal, BootstrapButton, SectionStepper, LoadingSpinner, FormSection, MultiLineTextField, DateField, Alert } from '../../Robi/RobiUI.js'
-import { App, Store, Get, CreateItem, UpdateItem, Route, UploadFile } from '../../Robi/Robi.js'
+import { App, Store, Get, CreateItem, UpdateItem, Route, UploadFile, Style } from '../../Robi/Robi.js'
 import lists from '../../lists.js'
 import { EditDataFile } from './EditDataFile.js'
 import { NewDataFile } from './NewDataFile.js'
+import { NewStep } from './NewStep.js'
 import { OnHold } from './OnHold.js';
 
 /**
@@ -159,10 +160,76 @@ export async function MeasureIntakeForm(param) {
     buttonContainer.add();
 
     // Save button
+    // TODO: Indicate when item has been changed (like with modify file)
+    // TODO: Disable update on load, enable if changed
+    // TODO: Remove changed indicator and disable button if all changes reverted
+    // TODO: Add a revert changes button
     const saveButton = BootstrapButton({
         async action(event) {
-            if (Store.getData('new measure')) {
+            if (itemId) {
+                console.log(`Update Measure #${itemId}`);
+
                 // Save modal
+                const modal = Modal({
+                    title: false,
+                    disableBackdropClose: true,
+                    scrollable: true,
+                    async addContent(modalBody) {
+                        modal.find('.modal-content').style.width = 'unset';
+
+                        const loading = LoadingSpinner({
+                            message: `<span style='color: ${App.get('primaryColor')};'>Saving changes to Measure #${itemId}<span>`,
+                            type: 'robi',
+                            classes: ['p-4'],
+                            parent: modalBody
+                        });
+            
+                        loading.add();
+                    },
+                    centered: true,
+                    showFooter: false,
+                });
+
+                modal.add();
+
+                const allFields = listInfo?.fields.map(field => [field.name, null]);
+                const dummyItem = Object.fromEntries(allFields);
+                const item = Store.getData(`edit measure ${itemId}`);
+                const data = {}
+
+                for (let prop in dummyItem) {
+                    if (item[prop]) {
+                        data[prop] = item[prop];
+                    }
+                }
+
+                console.log(data);
+
+                // Set measure Id
+                const updatedItem = await UpdateItem({
+                    list: 'Measures',
+                    itemId: itemId,
+                    data
+                });
+
+                // Add Files prop and value to updated item returned from SP
+                updatedItem.Files = item.Files;
+
+                // Replace stored measure
+                Store.setData(`edit measure ${itemId}`, updatedItem);
+
+                // Re-route on close modal
+                // FIXME: Is this necessary?
+                $(modal.get()).on('hidden.bs.modal', event => {
+                    Route(`Measures/${itemId}${path ? `/${path}` : ''}`);
+                });
+    
+                // Close save modal
+                modal.close();
+            } else {
+                console.log('Create new measure');
+
+                // Create modal
                 const modal = Modal({
                     title: false,
                     disableBackdropClose: true,
@@ -184,8 +251,6 @@ export async function MeasureIntakeForm(param) {
                 });
 
                 modal.add();
-
-                console.log('Create new measure');
 
                 const files = Store.getData('new measure').Files;
 
@@ -268,8 +333,6 @@ export async function MeasureIntakeForm(param) {
                 });
     
                 modal.close();
-            } else {
-                console.log(`Update measure ${itemId}`);
             }
         },
         classes: ['mb-2', 'w-100'],
@@ -280,6 +343,35 @@ export async function MeasureIntakeForm(param) {
     });
 
     saveButton.add();
+
+    // Back button
+    const publishButton = BootstrapButton({
+        action(event) {
+            console.log('Check if data saved, then route to measures');
+            alert('publish');
+        },
+        classes: ['w-100', 'mb-2'],
+        parent: buttonContainer,
+        type: 'robi',
+        value: 'Publish measure'
+    });
+
+    publishButton.add();
+
+    // Back button
+    const storeButton = BootstrapButton({
+        action(event) {
+            console.log('Check if data saved, then route to measures');
+            alert('save');
+            // history.back();
+        },
+        classes: ['w-100', 'mb-2'],
+        parent: buttonContainer,
+        type: 'robi',
+        value: 'Save measure'
+    });
+
+    storeButton.add();
 
     // Back button
     const cancelButton = BootstrapButton({
@@ -301,12 +393,18 @@ export async function MeasureIntakeForm(param) {
     let dataFiles;
     let checklist;
 
+    // TODO: With the way it works now, each measure loaded get's stored with a unique phase.
+    // This means that on subsequent visits to tthe same item, the data is found and not fetched.
+    // Generally, this is good. But it means data could be out of date if another user has made
+    // changes. Reloading the page would refetch.
+    // 
+    // Also, the stored item is updated if changes are made or saved.
     if (itemId) {
         // Get stored data
         const editMeasureData = Store.getData(`edit measure ${itemId}`);
 
         if (editMeasureData) {
-            console.log(`Edit measure data ${itemId} already set. Data:`, editMeasureData);
+            console.log(`Measure #${itemId} found. Item:`, editMeasureData);
 
             // FIXME: this means we can no longer compare server vs client state
             // TODO: store item with it's own name
@@ -314,8 +412,9 @@ export async function MeasureIntakeForm(param) {
             dataFiles = Store.getData(`measure ${itemId} data files`);
             checklist = Store.getData(`measure ${itemId} checklist`);
         } else {
-            loading = FoldingCube({
-                label: `Loading Measure #${itemId} intake form`,
+            loading = LoadingSpinner({
+                message: `Loading Measure #${itemId} intake form`,
+                type: 'robi',
                 parent: planContainer,
                 position: 'afterend'
             });
@@ -364,7 +463,7 @@ export async function MeasureIntakeForm(param) {
                 filter: `MeasureId eq ${itemId}`
             });
 
-            console.log(dataFiles, checklist);
+            // console.log(dataFiles, checklist);
     
             loading.remove();
 
@@ -373,7 +472,7 @@ export async function MeasureIntakeForm(param) {
             Store.setData(`measure ${itemId} data files`, dataFiles);
             Store.setData(`measure ${itemId} checklist`, checklist);
     
-            console.log(`Edit measure data not set. Item: `, Store.getData(`edit measure ${itemId}`));
+            console.log(`Measure #${itemId} item missing. Item: `, Store.getData(`edit measure ${itemId}`));
         }
 
         // Add place measure on hold / remove hold button and modal
@@ -401,8 +500,28 @@ export async function MeasureIntakeForm(param) {
         // TODO: generalize route
         leftContainer.find('.data-files')?.addEventListener('click', () => Route(`Measures/${itemId}/DataFiles`));
         leftContainer.find('.checklist')?.addEventListener('click', () => Route(`Measures/${itemId}/Checklist`));
-
-
+        
+        // Print CSS
+        Style({
+            name: 'print-measure',
+            style: /*css*/ `
+                @media print {
+                    #${Store.get('sidebar').get().id} {
+                        display: none !important;
+                    }
+    
+                    #${leftContainer.get().id} {
+                        display: none !important;
+                    }
+    
+                    #${Store.get('maincontainer').get().id},
+                    #${parent.get().id} {
+                        overflow: visible;
+                        height: 100%;
+                    }
+                }
+            `
+        });
     } else {
         const newMeasureData = Store.getData('new measure');
 
@@ -449,7 +568,9 @@ export async function MeasureIntakeForm(param) {
             buttons: [],
             defaultButtons: false,
             width: '100%',
-            parent: planContainer
+            parent: planContainer,
+            newForm: NewStep,
+            newFormTitle: 'New step',
         });
 
         return;

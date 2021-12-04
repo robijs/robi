@@ -80,6 +80,7 @@ export async function Table(param) {
 
         // Get fields in view
         if (view) {
+            console.log(view);
             const schema = lists
                 .concat(Lists())
                 .find(item => item.list === list);
@@ -97,9 +98,13 @@ export async function Table(param) {
                         return schema.fields.find(field => field.name === name);
                     }
                 });
+
+            formFields = fields;
         } else {
             // If no view, get all fields
+            // FIXME: redundant
             fields = lists.concat(Lists()).find(item => item.list === list)?.fields;
+            formFields = lists.concat(Lists()).find(item => item.list === list)?.fields;
         }
 
         if (!fields) {
@@ -107,10 +112,7 @@ export async function Table(param) {
             return;
         }
 
-        formFields = lists.concat(Lists()).find(item => item.list === list)?.fields;
-
         // Remove loading
-        // FIXME: Shouldn't have to use optional chaining
         loadingSpinner.remove();
 
         [{ name: 'Id', display: 'Id', type: 'number' }]
@@ -362,6 +364,11 @@ export async function Table(param) {
                             };
 
                             selectedForm = newForm ? await newForm(formParam) : await NewForm(formParam);
+
+                            // Set button value
+                            if (selectedForm.label) {
+                                newModal.getButton('Create').innerText = selectedForm.label;
+                            }
 
                             newModal.showFooter();
                         },

@@ -10,6 +10,7 @@ import { AddRoute } from '../Actions/AddRoute.js'
 import { OrderRoutes } from '../Actions/OrderRoutes.js'
 import { BlurOnSave } from '../Actions/BlurOnSave.js'
 import { HideRoutes } from '../Actions/HideRoutes.js'
+import { Wait } from '../Actions/Wait.js'
 
 /**
  *
@@ -172,7 +173,7 @@ export function Sidebar({ parent, path }) {
                 padding: 10px 0px;
                 min-width: 200px;
                 white-space: nowrap;
-                transition: width 300ms, min-width 300ms;
+                transition: width 300ms, min-width 300ms, opacity 400ms;
             }
 
             .sidebar .text.collapsed {
@@ -666,7 +667,7 @@ export function Sidebar({ parent, path }) {
     function hideRoutes(event) {
         console.log('hide routes');
 
-            // Disable all routes
+        // Disable all routes
         component.findAll('.nav-container .nav').forEach(node => {
                 node.classList.remove('nav-selected');
                 node.dataset.shouldroute = 'no';
@@ -689,7 +690,7 @@ export function Sidebar({ parent, path }) {
             </div>
         `);
 
-        // Transition
+        // Make visible
         component.find('.edit-buttons').style.opacity = '1';
 
         // Add cancel behavior
@@ -750,6 +751,10 @@ export function Sidebar({ parent, path }) {
             await HideRoutes({
                 routes
             });
+
+            // Wait an additional 2 seconds
+            console.log('Waiting...')
+            await Wait(2000);
 
             await blur.off((event) => {
                 console.log(event);
@@ -912,6 +917,7 @@ export function Sidebar({ parent, path }) {
             component.findAll('.text').forEach(item => {
                 item.classList.add('collapsed');
                 item.style.width = '0px';
+                item.style.opacity = '0';
             });
 
             // Fade out long title to the left
@@ -945,6 +951,7 @@ export function Sidebar({ parent, path }) {
             component.findAll('.text').forEach(item => {
                 item.classList.remove('collapsed');
                 item.style.width = item.dataset.width;
+                item.style.opacity = '1';
             });
 
             // Fade in long title from the left

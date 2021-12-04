@@ -29,7 +29,7 @@ export function Reply(param) {
                 }
                 <div class='card-body'>
                     <h6 class='card-subtitle mb-2 text-muted'>
-                        <span>${Author.Title} ${formatDate(Created)}</span>
+                        <span>${Author.Title.split(' ').slice(0, 2).join(' ')} • ${formatDate(Created)}</span>
                         ${
                             label === 'new' ?
                             /*html*/ `
@@ -38,7 +38,7 @@ export function Reply(param) {
                         }
                     </h6>
                     <div class='card-text mb-2'>${Body || ''}</div>
-                    <h6 class='card-subtitle mt-2 text-muted edit-text'>${edited(Created, Modified) ? `Last edited by ${Editor.Title} ${formatDate(Modified)} ` : ''}</h6>
+                    <h6 class='card-subtitle mt-2 text-muted edit-text'>${edited(Created, Modified) ? `Last edited by ${Editor.Title.slice(0, 2).join(' ')} ${formatDate(Modified)} ` : ''}</h6>
                 </div>
             </div>
         `,
@@ -67,9 +67,9 @@ export function Reply(param) {
                 padding: 1.75rem;
             }
 
-            #id .card-text {
+            /* #id .card-text {
                 font-size: 13px;
-            }
+            } */
 
             /* Reply */
             #id .button-group {

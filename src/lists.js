@@ -1,6 +1,19 @@
 import { AddFileTypes } from './Routes/Measures/AddFileTypes.js'
 
 export default [
+    {
+        list: 'DemoList',
+        fields: [
+        {
+            name: 'Test',
+            type: 'slot'
+        },
+        {
+            name: 'NewColumn',
+            type: 'mlot'
+        }
+      ]
+    },
   	{
       	list: 'TestList',
       	fields: [
@@ -1152,6 +1165,7 @@ export default [
                 name: 'Checklist',
                 fields: [
                     'Step',
+                    'Notes',
                     'Assigned',
                     'Start',
                     'End',
@@ -1173,10 +1187,10 @@ export default [
                 display: 'Short Title',
                 type: 'slot'
             },
-            {
-                name: 'MIPLink',
-                type: 'slot'
-            },
+            // {
+            //     name: 'MIPLink',
+            //     type: 'slot'
+            // },
             {
                 name: 'DataThroughDate',
                 display: 'Through Date',

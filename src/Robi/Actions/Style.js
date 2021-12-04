@@ -5,6 +5,7 @@
 export function Style(param) {
     const {
         name,
+        locked,
         style
     } = param;
 
@@ -15,7 +16,7 @@ export function Style(param) {
     }
 
     const css = /*html*/ `
-        <style type='text/css' data-name='${name || id}' data-type='style'>
+        <style type='text/css' data-name='${name || id}' data-type='style' data-locked='${locked ? 'yes' : 'no'}'>
             ${style}
         </style>
     `;

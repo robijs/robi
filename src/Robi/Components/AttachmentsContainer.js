@@ -11,8 +11,11 @@ import { App, Store } from '../Core.js'
  */
 export function AttachmentsContainer(param) {
     const {
-        parent, label, description, list, itemId, value, onChange, library
+        parent, label, description, list, itemId, onChange, library
     } = param;
+
+    let { value } = param;
+    value = value || [];
 
     /** Loading Indicator */
     const loadingIndicator = LoadingSpinner({
@@ -76,14 +79,18 @@ export function AttachmentsContainer(param) {
             `;
 
             const testUpload = await UploadFile({
-                library: library || 'MeasuresFiles',
+                library: library || `${list}Files`,
                 file,
                 data: {
-                    MeasureId: itemId
+                    ParentId: itemId
                 }
             });
 
             console.log(testUpload);
+            console.log(`Measure #${itemId} Files`, value);
+            value.push(testUpload)
+
+            onChange(value);
 
             filesList.find(`.pending-count`).innerText = '';
             filesList.find(`.pending-count`).classList.add('hidden');

@@ -65,6 +65,7 @@ export async function OrderRoutes({ routes }) {
                 'X-RequestDigest': digest
             }
         });
+        // await Wait (1500);
     } else {
         setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
             method: 'POST',

@@ -57,39 +57,6 @@ export async function NewDataFile(param) {
     fileTypes.add();
     fileTypes.find('.timing').addEventListener('click', () => Route(`Measures/${itemId}/Timing`));
 
-    // Data through date
-    const throughDate = DateField({
-        label: 'Data through date',
-        description: `
-            What is the last date of the reporting period this dataset applies to? Also known as <strong><em>End of the Measurement Period</em></strong>.
-        `,
-        value: '',
-        parent
-    });
-
-    throughDate.add();
-
-    // Data pulled date
-    const pulledDate = DateField({
-        label: 'Data through date',
-        description: `
-            What date was this data pulled from its soruce?
-        `,
-        value: '',
-        parent
-    });
-
-    pulledDate.add();
-
-    // MIP Link
-    const mipLink = SingleLineTextField({
-        label: 'MIP Link',
-        description: '(Eg. "SFM-PRDDWSP.IWP_J5.dbo.table_name")',
-        parent
-    });
-
-    mipLink.add();
-
     let toUpload = [];
     const attachments = AttachmentsContainer({
         label: 'Drop data files to upload here',
@@ -97,8 +64,10 @@ export async function NewDataFile(param) {
         onChange(files) {
             toUpload = files;
 
+            console.log(files, toUpload);
+
             // Get file type
-            const fileType = fileTypes.selected().toLowerCase();
+            const fileType = fileTypes.selected()?.toLowerCase();
 
             // Check files
             toUpload.forEach(file => {
@@ -123,6 +92,9 @@ export async function NewDataFile(param) {
                         });
 
                         pathExists.add();
+
+                        // Remove file from toUpload
+                        toUpload.splice(toUpload.indexOf(file), 1);
 
                         setTimeout(() => {
                             attachments.find(`.file-preview[data-filename='${file.name}']`).remove();
@@ -190,6 +162,39 @@ export async function NewDataFile(param) {
 
     attachments.add();
 
+    // Data through date
+    const throughDate = DateField({
+        label: 'Data through date',
+        description: `
+            What is the last date of the reporting period this dataset applies to? Also known as <strong><em>End of the Measurement Period</em></strong>.
+        `,
+        value: '',
+        parent
+    });
+
+    throughDate.add();
+
+    // Data pulled date
+    const pulledDate = DateField({
+        label: 'Data pulled date',
+        description: `
+            What date was this data pulled from its soruce?
+        `,
+        value: '',
+        parent
+    });
+
+    pulledDate.add();
+
+    // MIP Link
+    // const mipLink = SingleLineTextField({
+    //     label: 'MIP Link',
+    //     description: '(Eg. "SFM-PRDDWSP.IWP_J5.dbo.table_name")',
+    //     parent
+    // });
+
+    // mipLink.add();
+
     // const filterFields = ['Id', 'MeasureId'];
     // const fieldsToCreate = fields?.filter(field => !filterFields.includes(field.name));
     // const components = fieldsToCreate?.map((field, index) => {
@@ -246,6 +251,7 @@ export async function NewDataFile(param) {
     // });
 
     return {
+        label: 'Upload',
         async onCreate(event) {
             const data = {
                 MIPLink: mipLink.value() || null,
@@ -265,7 +271,7 @@ export async function NewDataFile(param) {
 
                 const ext = file.name.split('.').at(-1);
                 // const newName = `ml_${itemId}_${fileTypes.value().replaceAll(' ', '_').toLowerCase()}_${formatDate(pulledDate.value())}_${formatDate(throughDate.value())}.${ext}`;
-                const newName = `ml_${itemId}_${fileTypes.value().replaceAll(' ', '_').toLowerCase()}_${formatDate(pulledDate.value())}_${formatDate(throughDate.value())}`;
+                const newName = `ml_${itemId}_${fileTypes.value().replaceAll(' ', '_').toLowerCase()}_${formatDate(data.DataPulledDate)}_${formatDate(data.DataThroughDate)}`;
                 data.FileLeafRef = newName;
 
                 // /** TODO: @todo remove 'remove' event listener -> add 'cancel' event listener   */

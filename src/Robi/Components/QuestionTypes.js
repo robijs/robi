@@ -2,7 +2,8 @@ import { Get } from '../Actions/Get.js'
 import { Title } from './Title.js'
 import { Container } from './Container.js'
 import { QuestionType } from './QuestionType.js'
-import { App } from '../Core.js';
+import { App } from '../Core.js'
+import { LoadingSpinner } from './LoadingSpinner.js'
 
 /**
  * 
@@ -24,14 +25,23 @@ export async function QuestionTypes(param) {
     viewTitle.add();
 
     // View Container
-    const viewContainer = Container({
-        display: 'inline-flex',
-        direction: 'column',
-        margin: '20px 0px 0px 0px',
+    const container = Container({
+        display: 'block',
+        width: '100%',
+        margin: '30px 0px 0px 0px',
         parent
     });
 
-    viewContainer.add();
+    container.add();
+
+    // Loading
+    const loading = LoadingSpinner({
+        type: 'robi',
+        message: 'Loading questions',
+        parent
+    });
+
+    loading.add();
 
     // Check local storage for questionTypes
     let questionTypes = JSON.parse(localStorage.getItem(`${App.get('name').split(' ').join('-')}-questionTypes`));
@@ -56,6 +66,8 @@ export async function QuestionTypes(param) {
         expand: `Author/Id,Editor/Id`,
     });
 
+    loading.remove();
+
     console.log(questions);
 
     questionTypes.forEach(type => {
@@ -67,7 +79,7 @@ export async function QuestionTypes(param) {
             title,
             path,
             questions: questions.filter(item => item.QuestionType === title),
-            parent
+            parent: container
         });
 
         questionType.add();

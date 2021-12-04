@@ -15,6 +15,8 @@ export function Question(param) {
         Title, Body, Featured, Author, Editor, Created, Modified, replies
     } = question;
 
+    console.log(question);
+
     const replyCount = replies.length;
     const lastReply = replies[0];
 
@@ -32,17 +34,17 @@ export function Question(param) {
                                 ` : ''
                             }
                         </h5>
-                        <h6 class='card-subtitle mb-2 text-muted'>${Author.Title} ${formatDate(Created)}</h6>
+                        <h6 class='card-subtitle mb-2 text-muted'>${Author.Title.split(' ').slice(0, 2).join(' ')} • ${formatDate(Created)}</h6>
                         <div class='card-text mb-2'>${Body || ''}</div>
                         <h6 class='card-subtitle mt-2 text-muted edit-text'>${edited(Created, Modified) ? `Last edited by ${Editor.Title} ${formatDate(Modified)} ` : ''}</h6>
                     </div>
                     ${buildFooter(lastReply)}
                 </div>
                     ${
-                        Author.Name === Store.user().LoginName ?
+                        Author.Name.split('|').at(-1) === Store.user().LoginName ?
                         /*html*/ `
                             <div class='edit-button-container'>
-                                <button type='button' class='btn btn-robi-primaryColor edit'>Edit question</button>
+                                <button type='button' class='btn btn-robi edit'>Edit question</button>
                             </div>
                         ` : ''
                     }
@@ -76,9 +78,9 @@ export function Question(param) {
                 font-weight: 400;
             }
 
-            #id .card-text {
+            /* #id .card-footer .card-text {
                 font-size: 13px;
-            }
+            } */
 
             #id .question-card-body {
                 padding: 1.75rem;
@@ -89,17 +91,6 @@ export function Question(param) {
                 background: inherit;
             }
 
-            /** Edit button */
-            #id .btn-robi-primaryColor {
-                background: ${App.get('primaryColor')};
-                color: white;
-            }
-
-            #id .btn-robi-primaryColor:focus,
-            #id .btn-robi-primaryColor:active {
-                box-shadow: none;
-            }
-            
             #id .edit-button-container {
                 display: flex;
                 justify-content: flex-end;
@@ -202,8 +193,9 @@ export function Question(param) {
         } = lastReply;
 
         return /*html*/ `
-            <span style='font-size: 14px; font-weight: 500'>
-                <span>Last reply by ${Author.Title}</span>
+            <span class='text-muted' style='font-size: 14px;'>
+                <span>Last reply by ${Author.Title.split(' ').slice(0, 2).join(' ')}</span>
+                on
                 <span>${formatDate(Created)}</span>
             </span>
             <p class='card-text mt-2'>${Body}</p>
