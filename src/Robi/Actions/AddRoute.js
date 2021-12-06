@@ -140,7 +140,7 @@ export async function AddRoute(param) {
                     if (App.get('mode') === 'prod') {
                         // Wait additional 2s
                         console.log('Waiting...');
-                        await Wait(2000);
+                        await Wait(3000);
                         location.reload();
                     }
 
@@ -170,7 +170,7 @@ export async function AddRoute(param) {
 
                         // Set import
                         const imports = content.match(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/);
-                        const newImports = imports[1] + `\nimport ${routePath.value()} from './Routes/${routePath.value()}/${routePath.value()}.js'\n`
+                        const newImports = imports[1] + `import ${routePath.value()} from './Routes/${routePath.value()}/${routePath.value()}.js'\n`
                         updatedContent = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS${newImports}// @END-IMPORTS`);
 
                         // Set routes

@@ -4,7 +4,7 @@ import lists from '../../lists.js'
 import { EditDataFile } from './EditDataFile.js'
 import { NewDataFile } from './NewDataFile.js'
 import { NewStep } from './NewStep.js'
-import { OnHold } from './OnHold.js';
+import { OnHold } from './OnHold.js'
 
 /**
  * 
@@ -17,18 +17,6 @@ export async function MeasureIntakeForm(param) {
         path
     } = param;
 
-    // TODO: generalize this
-    // Bail out for checklist and data
-    // if (path === 'Checklist') {
-    //     Checklist(param);
-    //     return;
-    // }
-
-    // if (path === 'DataFiles') {
-    //     DataFiles(param);
-    //     return;
-    // }
-
     // Set new measure data
     const listInfo = lists.find(item => item.list === 'Measures');
     const section = path ? listInfo.sections.find(item => item.path === path) : { name: 'All Sections' };
@@ -36,45 +24,49 @@ export async function MeasureIntakeForm(param) {
     // Turn off view container default padding
     parent.paddingOff();
     
-    /** Form ontainer */
+    // Form Container
     const formContainer = Container({
         height: '100%',
         width: '100%',
         // padding: '51px 0px 0px 51px',
-        padding: '20px 0px 0px 31px', // same height as collapse container
+        // padding: '20px 0px 0px 31px', // same height as collapse container
+        padding: '0px',
         parent
     });
 
     formContainer.add();
 
-    /** Left Container */
+    // Left Container
     const leftContainer = Container({
-        radius: '10px',
+        // radius: '10px',
         overflow: 'overlay',
         height: '100%',
         minWidth: 'fit-content',
         direction: 'column',
+        padding: '20px',
+        borderRight: 'solid 1px #d6d8db80',
         parent: formContainer
     });
 
     leftContainer.add();
 
-    /** Right Container */
+    // Right Container
     const rightContainer = Container({
         flex: '1',
         height: '100%',
         direction: 'column',
         overflowX: 'overlay',
+        padding: '20px 0px 0px 0px',
         parent: formContainer
     });
 
     rightContainer.add();
 
-    /** View Title */
+    // View Title
     const viewTitle = Title({
         title: itemId ? `Measure #${itemId} Intake Form` : 'New Measure Intake Form',
         subTitle: section?.name || path.splitCamelCase(),
-        padding: '0px 20px 10px 20px',
+        padding: '0px 30px 10px 30px',
         width: '100%',
         parent: rightContainer,
         type: 'across',
@@ -89,9 +81,10 @@ export async function MeasureIntakeForm(param) {
 
     viewTitle.add();
 
-    /** Project Container */
+    // Project Container
     const projectContainer = Container({
-        padding: '0px 0px 5px 0px',
+        name: 'project',
+        padding: '0px',
         width: '100%',
         height: '100%',
         direction: 'column',
@@ -102,7 +95,8 @@ export async function MeasureIntakeForm(param) {
 
     projectContainer.add();
 
-    /** Scroll listener */
+    // TODO: Move to Container method
+    // Scroll listener
     projectContainer.get().addEventListener('scroll', event => {
         if (event.target.scrollTop > 0) {
             projectContainer.get().style.borderTop = `solid 1px #d6d8db80`;
@@ -111,23 +105,24 @@ export async function MeasureIntakeForm(param) {
         }
     });
 
-    /** Plan Container */
+    // Plan Container
     const planContainer = Container({
         width: '100%',
-        padding: '10px 20px 0px 0px;',
+        name: 'plan',
+        padding: '10px 20px 0px 20px;',
         direction: 'column',
         parent: projectContainer
     });
 
     planContainer.add();
 
-    /** Section Stepper */
+    // Section Stepper
     const subPath = itemId ? itemId : 'New';
 
     const sectionStepperContainer = Container({
         direction: 'column',
-        height: '100%',
-        padding: '0px 31px 5px 0px',
+        // height: '100%',
+        // padding: '0px 31px 5px 0px',
         parent: leftContainer
     });
 
@@ -485,7 +480,7 @@ export async function MeasureIntakeForm(param) {
         // TODO: Wrap in component
         // Add Data and checklist info panels
         leftContainer.append(/*html*/ `
-            <div class='w-100 mb-2' style='padding-right: 31px;'>
+            <div class='w-100 mt-2'>
                 <div class='mb-2 data-files' style='background: ${App.get('backgroundColor')}; border-radius: 20px; padding: 15px 30px; cursor: pointer;'>
                     <div style='font-weight: 500;'>Data Files</div>
                     <div style=''>${dataFiles.length} ${dataFiles.length === 1 ? 'file' : 'files'}</div>

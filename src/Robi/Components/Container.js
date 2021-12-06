@@ -7,12 +7,12 @@ import { Component } from '../Actions/Component.js'
  */
 export function Container(param) {
     const {
-        html, align, background, border, borderBottom, borderLeft, borderRight, borderTop, display, flex, flexwrap, shadow, direction, height, justify, margin, padding, parent, position, radius, width, maxWidth, minWidth, overflow, overflowX, overflowY, userSelect, layoutPosition, top, bottom, left, right, zIndex
+        name, html, align, background, border, borderBottom, borderLeft, borderRight, borderTop, display, flex, flexwrap, shadow, direction, height, justify, margin, padding, parent, position, radius, width, maxWidth, minWidth, overflow, overflowX, overflowY, userSelect, layoutPosition, top, bottom, left, right, zIndex
     } = param;
 
     const component = Component({
         html: /*html*/ `
-            <div class='container'>${html || ''}</div>
+            <div class='container' data-name='${name || ''}'>${html || ''}</div>
         `,
         style: /*css*/ `
             #id {
@@ -32,11 +32,11 @@ export function Container(param) {
                 margin: ${margin || '0'};
                 padding: ${padding || '0'};
                 border-radius: ${radius || 'unset'};
+                border: ${border || 'initial'};
                 border-top: ${borderTop || 'none'};
                 border-right: ${borderRight || 'none'};
                 border-bottom: ${borderBottom || 'none'};
                 border-left: ${borderLeft || 'none'};
-                border: ${border || 'initial'};
                 box-shadow: ${shadow || 'none'};
                 flex: ${flex || 'unset'};
                 display: ${display || 'flex'};

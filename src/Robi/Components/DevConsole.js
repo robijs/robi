@@ -125,6 +125,7 @@ export function DevConsole(param) {
                 height: fit-content;
                 border-radius: 10px;
                 width: 300px;
+                position: relative;
             }
 
             #id .btn-danger {
@@ -152,8 +153,10 @@ export function DevConsole(param) {
             #id .changed {
                 border-radius: 20px;
                 position: absolute;
-                top: 4px;
-                right: 30px;
+                width: 100%;
+                left: 0px;
+                top: 45px;
+            }
             }
 
             #id .changed-text {
@@ -227,7 +230,7 @@ export function DevConsole(param) {
             }
         ],
         async onAdd() {
-            component.find('.update-row').insertAdjacentHTML('beforeend', /*html*/ `
+            component.find('.update-row .dev-console-button').insertAdjacentHTML('beforeend', /*html*/ `
                 <div class='changed'>
                     <div class="spinner-grow text-robi" style='width: 16px; height: 16px;'>
                         <span class="sr-only">Checking on list changes...</span>

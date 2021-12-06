@@ -7,6 +7,9 @@
 import { Start } from './Robi/Robi.js'
 import Measures from './Routes/Measures/Measures.js'
 import Test from './Routes/Test/Test.js'
+
+import Route from './Routes/Route/Route.js'
+import Newroute from './Routes/Newroute/Newroute.js'
 // @END-IMPORTS
 
 // @START
@@ -30,6 +33,24 @@ Start({
             go: Test
         }
         // @END-Test
+        , // @ROUTE
+        // @START-Route
+        {
+            path: 'Route',
+            hide: true,
+            icon: 'bs-circle-fill',
+            go: Route
+        }
+        // @END-Route
+        , // @ROUTE
+        // @START-Newroute
+        {
+            path: 'Newroute',
+            hide: true,
+            icon: 'pencil',
+            go: Newroute
+        }
+        // @END-Newroute
         // @END-ROUTES
     ]
     ,

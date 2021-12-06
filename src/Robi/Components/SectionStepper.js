@@ -30,13 +30,13 @@ export function SectionStepper(param) {
                 display: flex;
                 flex-direction: column;
                 padding: ${padding || '0px'};
-                overflow: auto;
                 border-radius: 10px;
+                /* overflow: auto; */
             }
 
             #id .section-title-group {
                 overflow: overlay;
-                border-radius: 10px;
+                /* border-radius: 10px; */
             }
 
             /* Buttons */

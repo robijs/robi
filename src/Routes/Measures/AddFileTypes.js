@@ -49,7 +49,7 @@ export function AddFileTypes(param) {
                 </div>
                 <div class='mt-3' style='font-size: 14px; font-weight: 500; padding-left: 12px;'>
                     <span class='file-count'>${filesAsArray?.length || '0'}</span>
-                    <span class='file-count-text'>${filesAsArray?.length === 1 ? 'file' : 'files'}</span>
+                    <span class='file-count-text'>${filesAsArray?.length === 1 ? 'file type' : 'file types'}</span>
                 </div>
                 <div class='types-container mt-3'>
                     <!-- Formatted links go here -->

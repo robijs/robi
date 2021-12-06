@@ -8,7 +8,7 @@ export function OnHold({ item, parent, path }) {
     if (Status === 'On Hold') {
         const bannerContainer = Container({
             width: '100%',
-            padding: '0px 20px 10px 0px',
+            padding: '0px 30px 10px 30px',
             parent,
             position: 'afterend'
         });

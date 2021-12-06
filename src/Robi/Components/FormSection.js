@@ -31,13 +31,21 @@ export function FormSection(param) {
     parent.add();
 
     if (heading) {
+        const headingContainer = Container({
+            padding: '0px 10px',
+            parent,
+        });
+
+        headingContainer.add();
+
         const sectionTitle = Alert({
             type: 'robi-secondary',
             width: '100%',
+            margin: '0px 0px 20px 0px',
             text: /*html*/ `
                 <h6 class='mb-0'>${heading}</h6>
             `,
-            parent
+            parent: headingContainer
         });
 
         sectionTitle.add();
@@ -47,7 +55,7 @@ export function FormSection(param) {
         const infoAlert = Alert({
             type: 'robi-secondary',
             text: info,
-            margin: '0px 20px 20px 20px',
+            margin: '0px 10px 20px 10px',
             parent
         });
 
@@ -90,7 +98,7 @@ export function FormSection(param) {
 
         if (rowDescription) {
             rowContainer.append(/*html*/ `
-                <div class="mb-2" style='font-size: 14px;'>${rowDescription}</div>
+                <div class="mb-4" style='font-size: 14px;'>${rowDescription}</div>
             `);
         }
 

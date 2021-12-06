@@ -90,6 +90,23 @@ export function DataTable(param) {
                 margin: 0px;
             }
 
+            /* Striped */
+            #id_wrapper .table-striped tbody tr:nth-of-type(odd) {
+                background-color: inherit;
+            }
+
+            #id_wrapper .table-striped tbody tr:nth-of-type(even) td {
+                background-color: ${App.get('backgroundColor')};
+            }
+
+            #id_wrapper .table-striped tbody tr:nth-of-type(even) td:first-child {
+                border-radius: 10px 0px 0px 10px;
+            }
+
+            #id_wrapper .table-striped tbody tr:nth-of-type(even) td:last-child {
+                border-radius: 0px 10px 10px 0px;
+            }
+
             /** Buttons */
             #id_wrapper .btn-group {
                 margin: 0px 10px 0px 0px;
@@ -160,8 +177,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .datatable-toolbar .delete-item .icon {
-                stroke: firebrick;
-                fill: firebrick;
+                fill: ${App.get('primaryColor')};
             }
 
             /** HTML5 Buttons */

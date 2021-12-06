@@ -46,7 +46,7 @@ export function AppContainer() {
             }
             
             ::-webkit-scrollbar-thumb {
-                background: gray;
+                background: lightgray;
                 width: 8px;
                 height: 8px;
                 border: 3px solid transparent;
