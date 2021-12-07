@@ -36,7 +36,7 @@ export function Authorize(param) {
     if (roles) {
         if (roles.includes(role)) {
             /** Authorized if role is included in roles array */
-            console.log(`Role ${role} authorized to access View ${view}.`)
+            console.log(`${Store.user().Title} authorized to access '${view}' as a '${role}'`)
             return true;
         } else {
             /** Unauthroized if role is not included in roles array */

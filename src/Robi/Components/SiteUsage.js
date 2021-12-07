@@ -45,7 +45,7 @@ export function SiteUsage(param) {
                 border-radius: 4px;
                 border: ${border || App.get('defaultBorder')};
                 display: flex;
-                flex: 1;
+                /* flex: 1; */
                 overflow: auto;
             }
 
@@ -80,11 +80,13 @@ export function SiteUsage(param) {
 
             /** Chart */
             #id .dashboard-long-card-chart-container {
-                margin-right: 30px;
+                margin-right: 15px;
+                margin-bottom: 15px;
             }
 
             #id .dashboard-long-card-chart-title {
-                color: ${App.get('primaryColor')};
+                margin-top: 15px;
+                color: ${App.get('defaultColor')};
                 font-size: 1.1em;
                 font-weight: 500;
                 text-align: center;
@@ -95,20 +97,11 @@ export function SiteUsage(param) {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
-                background: #e9ecef;
-                border-radius: 8px;
-                padding: 5px;
             }
 
-            #id .info-group * {
-                color: ${App.get('primaryColor')};
-            }
-
-            #id .info-label {
-                padding: 5px;
-                font-size: 13px;
-                width: 80px;
-                font-weight: 500;
+            #id .info-group button {
+                flex: 1;
+                white-space: nowrap;
             }
 
             #id .info-count {
@@ -140,8 +133,8 @@ export function SiteUsage(param) {
     function createInfoGroup(label, property) {
         return /*html*/ `
             <div class="info-group" data-label='${property}'>
-                <div class='info-label'>${label}</div>
                 <div class="info-count">${visits[property].length}</div>
+                <button type='button' class='btn btn-robi'>${label}</button>
             </div>
         `;
     }

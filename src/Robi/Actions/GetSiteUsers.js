@@ -25,7 +25,8 @@ export function GetSiteUsers(param) {
         `/_vti_bin/listdata.svc/UserInformationList`,
         `?$top=200`,
         `&$select=Name,Account,WorkEmail`,
-        `&$filter=substringof('i:0e.t|dod_adfs_provider|', Account) and (substringof('${query}', Name) or substringof('${query}', WorkEmail))&$orderby=Name`
+        // `&$filter=substringof('i:0e.t|dod_adfs_provider|', Account) and (substringof('${query}', Name) or substringof('${query}', WorkEmail))&$orderby=Name`
+        `&$filter=substringof('${query}', Account) or (substringof('${query}', Name) or substringof('${query}', WorkEmail))&$orderby=Name`
     ].join('');
     const init = {
         headers: {
@@ -43,8 +44,8 @@ export function GetSiteUsers(param) {
             // return data.d.results;
             return data.d;
         })
-            .catch(error => {
-                // console.log(error);
-            })
+        .catch(error => {
+            // console.log(error);
+        })
     };
 }

@@ -146,6 +146,13 @@ export function AppContainer() {
                 font-weight: 500;
             }
 
+            .btn-robi-light,
+            .btn-robi-light:hover {
+                color: ${App.get('primaryColor')};
+                background: inherit;
+                font-weight: 500;
+            }
+
             .btn-light:hover {
                 color: #212529 !important;
                 background-color: #f8f9fa !important;
@@ -313,16 +320,6 @@ export function AppContainer() {
 
             .alert-robi-secondary *:not(.btn) {
                 color: ${App.get('defaultColor')} !important;
-            }
-            
-            /* Dropdown */
-            .dropdown-item {
-                cursor: pointer;
-            }
-
-            .dropdown-item:active {
-                color: initial;
-                background-color: initial;
             }
             
             /** Badge */
@@ -534,26 +531,31 @@ export function AppContainer() {
             }
 
             /* Dropdown */
-            .dropdown-item {
-                font-size: 13px;
-                cursor: pointer;
-            }
-
             .dropdown-menu {
                 margin: .125rem;
                 padding: .125rem;
             }
+            
+            .scroll-container {
+                overflow: overlay;
+            }
 
             .dropdown-item {
+                cursor: pointer;
+                font-size: 13px;
                 border-radius: 8px;
             }
 
-            .dropdown-item:hover {
-                background: ${App.get('primaryColor') + '20'};
+            .dropdown-item:active {
+                color: initial;
+                background-color: initial;
             }
 
-            .scroll-container {
-                overflow: overlay;
+            .dropdown-item:focus,
+            .dropdown-item:hover {
+                color: ${App.get('defaultColor')};
+                text-decoration: none;
+                background-color: ${App.get('primaryColor') + '20'};
             }
         `,
         position: 'afterbegin',

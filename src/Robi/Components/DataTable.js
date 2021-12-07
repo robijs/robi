@@ -92,18 +92,18 @@ export function DataTable(param) {
 
             /* Striped */
             #id_wrapper .table-striped tbody tr:nth-of-type(odd) {
-                background-color: inherit;
-            }
-
-            #id_wrapper .table-striped tbody tr:nth-of-type(even) td {
                 background-color: ${App.get('backgroundColor')};
             }
 
-            #id_wrapper .table-striped tbody tr:nth-of-type(even) td:first-child {
+            #id_wrapper .table-striped tbody tr:nth-of-type(even) td {
+                background-color: inherit;
+            }
+
+            #id_wrapper .table-striped tbody tr:nth-of-type(odd) td:first-child {
                 border-radius: 10px 0px 0px 10px;
             }
 
-            #id_wrapper .table-striped tbody tr:nth-of-type(even) td:last-child {
+            #id_wrapper .table-striped tbody tr:nth-of-type(odd) td:last-child {
                 border-radius: 0px 10px 10px 0px;
             }
 
@@ -304,6 +304,11 @@ export function DataTable(param) {
                 border-bottom-width: 1px;
             }
 
+            #id_wrapper .table-striped:not(.table-border) thead th {
+                vertical-align: bottom;
+                border-bottom-width: 0px;
+            }
+
             /** Cells */
             #id_wrapper td,
             #id_wrapper th {
@@ -374,13 +379,57 @@ export function DataTable(param) {
                 font-size: 10pt;
             }
 
-            /** Selected Row */
+            /* Selected Row */
             #id_wrapper tbody > tr.selected {
-                background-color: ${App.get('backgroundColor')};
+                background-color: inherit !important;
+            }
+
+            #id_wrapper tbody > tr.selected td {
+                background-color: ${App.get('primaryColor') + '10'} !important;
                 color:  ${App.get('primaryColor')};
             }
 
-            /** Overflow MLOT field */
+            #id_wrapper tbody > tr.selected td:first-child {
+                border-radius: 10px 0px 0px 10px;
+            }
+
+            #id_wrapper tbody > tr.selected td:last-child {
+                border-radius: 0px 10px 10px 0px;
+            }
+
+            #id .btlr-10 {
+                border-top-left-radius: 10px;
+            }
+            
+            #id .btrr-10 {
+                border-top-right-radius: 10px;
+            }
+
+            #id .bbrr-10 {
+                border-bottom-right-radius: 10px;
+            }
+
+            #id .bblr-10 {
+                border-bottom-left-radius: 10px;
+            }
+
+            #id .btlr-0 {
+                border-top-left-radius: 0px !important;
+            }
+            
+            #id .btrr-0 {
+                border-top-right-radius: 0px !important;
+            }
+
+            #id .bbrr-0 {
+                border-bottom-right-radius: 0px !important;
+            }
+
+            #id .bblr-0 {
+                border-bottom-left-radius: 0px !important;
+            }
+
+            /* Overflow MLOT field */
             #id_wrapper tbody td .dt-mlot {
                 max-width: 200px;
                 text-overflow: ellipsis;

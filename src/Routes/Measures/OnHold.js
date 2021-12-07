@@ -16,11 +16,13 @@ export function OnHold({ item, parent, path }) {
         bannerContainer.add();
 
         const user = JSON.parse(OnHoldName);
+        const userName = user.Title.split(' ').slice(0, 2).join(' ');
+        const userLink = Store.user().Role === 'Developer' || Store.user().Role === 'Administrator' ? `<a href='${App.get('site')}#Users/${user.Id}' target='_blank'>${userName}</a>` : ''
 
         const banner = Alert({
             type: 'robi-primary',
             classes: ['w-100'],
-            text: `This measure was placed on hold <strong>${new Date(OnHoldStart).toLocaleDateString()}</strong> by <strong><a href='${App.get('site')}#Users/${user.Id}' target='_blank'>${user.Title.split(' ').slice(0, 2).join(' ')}</a></strong>. Remove it to make changes or upload data files.`,
+            text: `This measure was placed on hold <strong>${new Date(OnHoldStart).toLocaleDateString()}</strong> by <strong>${userLink}</strong>. Remove it to make changes or upload data files.`,
             parent: bannerContainer,
         });
         

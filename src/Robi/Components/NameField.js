@@ -13,23 +13,35 @@ export function NameField(param) {
         label, description, fieldMargin, parent, position, onSelect, onClear, onSearch
     } = param;
 
+    /*
+        <!--<div class='dropdown-menu show' style='position: absolute; width: ${width}px; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, ${height + 5}px);'>
+            <div class='d-flex justify-content-between align-items-center mt-2 mb-2 ml-3 mr-3'>
+                <div style='color: ${App.get('primaryColor')};'>Searching...</div>
+                <div class='spinner-grow spinner-grow-sm' style='color: ${App.get('primaryColor')};' role='status'></div>
+            </div> 
+        </div> -->
+    */
     const component = Component({
         html: /*html*/ `
             <div class='form-field'>
-                <div class='form-field-label'>${label}</div>
+                <label>${label}</label>
                 ${description ? /*html*/ `<div class='form-field-description'>${description}</div>` : ''}
-                <div class='input-group'>
+                <div class=''>
                     <div class='toggle-search-list' data-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
                         <input class='form-field-name form-control mr-sm-2' type='search' placeholder='Search' aria-label='Search'>
                     </div>
                     <div class='dropdown-menu'>
-                    <!-- Show search spinner by -->
-                        <a href='javascript:void(0)' class='dropdown-item' data-path=''>
+                        <!-- Show search spinner by -->
+                        <div class='d-flex justify-content-between align-items-center mt-2 mb-2 ml-3 mr-3'>
+                            <div style='color: ${App.get('primaryColor')};'>Searching...</div>
+                            <div class='spinner-grow spinner-grow-sm' style='color: ${App.get('primaryColor')}; font-size: 13px;' role='status'></div>
+                        </div> 
+                        <!-- <a href='javascript:void(0)' class='dropdown-item' data-path=''>
                             <span class='searching'>
                                 <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> 
                                 Searching for CarePoint accounts...
                             <span>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -41,10 +53,8 @@ export function NameField(param) {
             }
 
             /* Labels */
-            #id .form-field-label {
-                font-size: 1.1em;
-                font-weight: bold;
-                padding: 5px 0px;
+            #id label {
+                font-weight: 500;
             }
 
             #id .form-field-description {
@@ -59,7 +69,7 @@ export function NameField(param) {
                 margin-bottom: 4px;
                 margin-right: 20px;
                 min-height: 36px;
-                max-width: 300px;
+                // max-width: 300px;
                 min-width: 300px;
                 padding: 5px 10px;
                 background: white;
@@ -110,6 +120,11 @@ export function NameField(param) {
                 outline: none;
                 border: none;
             }
+
+            /* Scroll container */
+            #id .scroll-container {
+                max-height: 300px;
+            }
         `,
         parent: parent,
         position,
@@ -148,12 +163,16 @@ export function NameField(param) {
 
                     /** Reset list */
                     menu.innerHTML = /*html*/ `
-                        <a href='javascript:void(0)' class='dropdown-item' data-path=''>
+                        <div class='d-flex justify-content-between align-items-center mt-2 mb-2 ml-3 mr-3'>
+                            <div style='color: ${App.get('primaryColor')}; font-size: 13px;'>Searching...</div>
+                            <div class='spinner-grow spinner-grow-sm' style='color: ${App.get('primaryColor')};' role='status'></div>
+                        </div>
+                        <!-- <a href='javascript:void(0)' class='dropdown-item' data-path=''>
                             <span class='searching'>
                                 <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> 
                                 Searching for CarePoint accounts...
                             <span>
-                        </a>
+                        </a> -->
                     `;
 
                     /** Search accounts */
@@ -238,10 +257,11 @@ export function NameField(param) {
 
             menu.innerHTML = /*html*/ `
                 <div class='dropdown-item-container'>
-                    ${items.map(item => dropdownItemTemplate(item)).join('\n')}
+                    <div class='scroll-container'>
+                        ${items.map(item => dropdownItemTemplate(item)).join('\n')}
+                    </div>
                 </div>
             `;
-
         } else {
             if (menu.classList.contains('show')) {
                 component.find('.toggle-search-list').click();
@@ -281,11 +301,13 @@ export function NameField(param) {
 
         queries.push(newSearch);
 
-        console.log(newSearch);
+        // console.log(newSearch);
 
         const response = await newSearch.response;
 
         if (response) {
+            console.log(response);
+
             data = response.map(user => {
                 const {
                     Name
@@ -312,17 +334,19 @@ export function NameField(param) {
 
     /** Add none found message */
     function addNoneFoundMessage() {
-        const message = component.find('.none-found');
+        console.log('none found');
 
-        if (!message) {
-            const html = /*html*/ `
-                <span class='none-found' style='color: firebrick;'>
-                    No accounts found that match this name.
-                </span>
-            `;
+        // const message = component.find('.none-found');
 
-            component.get().insertAdjacentHTML('beforeend', html);
-        }
+        // if (!message) {
+        //     const html = /*html*/ `
+        //         <span class='none-found' style='color: firebrick;'>
+        //             No accounts found that match this name.
+        //         </span>
+        //     `;
+
+        //     component.get().insertAdjacentHTML('beforeend', html);
+        // }
     }
 
     /** Remove none found message */
@@ -337,7 +361,9 @@ export function NameField(param) {
     component.focus = () => {
         const field = component.find('.form-field-name');
 
-        field.focus();
+        setTimeout(() => {
+            field.focus();
+        }, 0);
     };
 
     component.addError = (param) => {

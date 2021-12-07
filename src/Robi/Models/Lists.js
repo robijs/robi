@@ -125,7 +125,13 @@ export function Lists() {
             list: 'Roles',
             fields: [
                 {
-                    name: "Role",
+                    name: 'Title',
+                    required: false,
+                    value: 'View',
+                    type: 'slot'
+                },
+                {
+                    name: 'Role',
                     type: 'slot'
                 }
             ]
@@ -185,6 +191,17 @@ export function Lists() {
                 {
                     name: "Settings",
                     type: 'mlot'
+                }
+            ],
+            views: [
+                {
+                    name: 'Users',
+                    fields: [
+                        'Title',
+                        'Email',
+                        'LoginName',
+                        'Role'
+                    ]
                 }
             ]
         }

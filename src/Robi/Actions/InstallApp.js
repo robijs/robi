@@ -481,7 +481,8 @@ export function InstallApp(param) {
                         }
                     });
 
-                    // Create key 'Installed'
+                    // TODO: Pull from settings if installing a pre-existing app from a backup with a version number different from the default 0.1.0
+                    // Create key 'Version'
                     await CreateItem({
                         list: 'Settings',
                         data: {
@@ -490,7 +491,8 @@ export function InstallApp(param) {
                         }
                     });
 
-                    // Create key 'Installed'
+                    // TODO: Pull actual Robi build # from source of truth (where to put that?)
+                    // Create key 'Build'
                     await CreateItem({
                         list: 'Settings',
                         data: {

@@ -387,7 +387,7 @@ export async function Table(param) {
                                 // TODO: send modal prop to form
                                 {
                                     value: 'Create',
-                                    classes: 'btn-success',
+                                    classes: 'btn-robi',
                                     async onClick(event) {
                                         // Disable button - Prevent user from clicking this item more than once
                                         $(event.target)
@@ -496,7 +496,7 @@ export async function Table(param) {
                             {
                                 value: 'Update',
                                 // disabled: true,
-                                classes: 'btn-primary',
+                                classes: 'btn-robi',
                                 async onClick(event) {
                                     /** Disable button - Prevent user from clicking this item more than once */
                                     $(event.target)
@@ -525,7 +525,7 @@ export async function Table(param) {
                             {
                                 value: 'Delete',
                                 // disabled: true,
-                                classes: 'btn-danger',
+                                classes: 'btn-robi-light',
                                 async onClick(event) {
                                     /** Disable button - Prevent user from clicking this item more than once */
                                     $(event.target)
@@ -559,20 +559,25 @@ export async function Table(param) {
         onSelect(param) {
             const selected = table.selected();
 
-            console.log('select', selected);
+            // console.log('select', selected);
 
             if (selected.length > 0) {
                 table.DataTable().buttons('delete:name').enable();
             }
+
+            setSelectedRadius();
         },
         onDeselect(param) {
             const selected = table.selected();
 
-            console.log('deselect', selected);
+            // console.log('deselect', selected);
 
             if (selected.length === 0) {
                 table.DataTable().buttons('delete:name').disable();
             }
+
+            setSelectedRadius();
+            removeSelectedRadius();
         },
         onDraw(param) {
             const {
@@ -586,6 +591,49 @@ export async function Table(param) {
     });
 
     table.add();
+
+    function setSelectedRadius() {
+        // Find all rows
+        const rows = table.findAll('tbody tr.selected');
+        console.log('selected', rows);
+
+        // Reset
+        rows.forEach(row => {
+            row.querySelector('td:first-child').classList.remove('btlr-0', 'bblr-0');
+            row.querySelector('td:last-child').classList.remove('btrr-0', 'bbrr-0');
+        });
+
+        // Remove radius from first and last row
+        if (rows.length >= 2) {
+            rows[0].querySelector('td:first-child').classList.add('bblr-0');
+            rows[0].querySelector('td:last-child').classList.add('bbrr-0');
+
+            rows[rows.length - 1].querySelector('td:first-child').classList.add('btlr-0');
+            rows[rows.length - 1].querySelector('td:last-child').classList.add('btrr-0');
+        }
+
+        // Remove radius from middle rows (every row except first and last)
+        if (rows.length >= 3) {
+            const middle = [...rows].filter((row, index) => index !== 0 && index !== rows.length - 1);
+            middle.forEach(row => {
+                row.querySelector('td:first-child').classList.add('btlr-0', 'bblr-0');
+                row.querySelector('td:last-child').classList.add('btrr-0', 'bbrr-0');
+            });
+            console.log(middle);
+        }
+    }
+
+    function removeSelectedRadius() {
+        // Find all rows
+        const rows = table.findAll('tbody tr:not(.selected)');
+        console.log('unselected', rows);
+
+        // Reset
+        rows.forEach(row => {
+            row.querySelector('td:first-child').classList.remove('btlr-0', 'bblr-0');
+            row.querySelector('td:last-child').classList.remove('btrr-0', 'bbrr-0');
+        });
+    }
 
     return table;
 }

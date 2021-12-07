@@ -1,6 +1,6 @@
 import { Card } from './Card.js' 
 import { DashboardBanner } from './DashboardBanner.js' 
-import { FoldingCube } from './FoldingCube.js' 
+import { LoadingSpinner } from './LoadingSpinner.js' 
 import { SiteUsage } from './SiteUsage.js' 
 import { App, Store } from '../Core.js'
 import { StartAndEndOfWeek } from '../Models/StartAndEndOfWeek.js'
@@ -18,7 +18,7 @@ export async function SiteUsageContainer(param) {
     const dashboardCard = Card({
         title: 'Site Usage',
         width: '100%',
-        minHeight: '620px',
+        minHeight: '600px',
         margin: '20px 0px 0px 0px',
         parent
     });
@@ -26,9 +26,10 @@ export async function SiteUsageContainer(param) {
     dashboardCard.add();
 
     /** Loading Indicator */
-    const loadingIndicator = FoldingCube({
-        label: 'Loading Site Usage Information',
-        margin: '40px 0px',
+    const loadingIndicator = LoadingSpinner({
+        message: 'Loading site usage data',
+        type: 'robi',
+        classes: ['flex-grow-1'],
         parent: dashboardCard
     });
 

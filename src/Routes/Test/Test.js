@@ -20,12 +20,43 @@ export default async function Test(param) {
 
     viewTitle.add();
 
-    // Sortable
-    const sortable = Sortable({
-        parent
+    // // Sortable
+    // const sortable = Sortable({
+    //     parent
+    // });
+
+    // sortable.add();
+
+    const getSiteUsersBtn = BootstrapButton({
+        value: 'Create dir',
+        classes: ['mr-3', 'mt-3'],
+        type: 'robi',
+        parent,
+        async action(event) {
+            const url = [
+                `${App.get('site')}`,
+                `/_vti_bin/listdata.svc/UserInformationList`,
+                `?$top=200`,
+                `&$select=Name,Account,WorkEmail`,
+                // `&$filter=substringof('i:0e.t|dod_adfs_provider|', Account) and (substringof('${query}', Name) or substringof('${query}', WorkEmail))&$orderby=Name`
+                `&$filter=substringof('${query}', Account) or (substringof('${query}', Name) or substringof('${query}', WorkEmail))&$orderby=Name`
+            ].join('');
+            const init = {
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    'Accept': 'application/json; odata=verbose'
+                },
+                signal: abortController.signal
+            };
+
+            const response = await fetch(url, init);
+            const data = await response.json();
+
+            console.log(data);
+        }
     });
 
-    sortable.add();
+    getSiteUsersBtn.add();
 
     const createDirBtn = BootstrapButton({
         value: 'Create dir',

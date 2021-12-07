@@ -76,8 +76,8 @@ export async function NewUser(param) {
     // nameField.add();
     /** Name Field */
     const nameField = NameField({
-        label: 'Search CarePoint Accounts',
-        description: 'If an account is found, Account and Email Fields will be set automatically.',
+        label: 'Name',
+        // description: 'If an account is found, Account and Email Fields will be set automatically.',
         parent,
         onSearch(query) {
             console.log(query);
@@ -99,7 +99,7 @@ export async function NewUser(param) {
     /** Read Only Card */
     const readOnlyCard = Alert({
         text: '',
-        type: 'secondary',
+        type: 'robi-secondary',
         parent
     });
 
@@ -144,8 +144,10 @@ export async function NewUser(param) {
 
     roleField.add();
 
-    // Focus in name field
-    nameField.focus();
+    // Focus name field
+    setTimeout(() => {
+        nameField.focus();
+    }, 200);
 
     return {
         async onCreate(event) {
