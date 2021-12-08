@@ -1,4 +1,4 @@
-import { CreateItem } from '../../Robi/Robi.js'
+import { Get, CreateItem, Store } from '../../Robi/Robi.js'
 import { BootstrapDropdown, DateField, MultiLineTextField, NumberField, SingleLineTextField } from  '../../Robi/RobiUI.js'
 
 /**
@@ -67,9 +67,10 @@ export async function NewStep(param) {
 
     return {
         async onCreate(event) {
+            // FIXME: don't rely on hacking the url, pass in the itemId
+            const MeasureId = parseInt(location.href.split('#')[1].split('/')[1])
             const data = {
-                // FIXME: don't rely on hacking the url, pass in the itemId
-                MeasureId: parseInt(location.href.split('#')[1].split('/')[1])
+                MeasureId
             };
 
             components
@@ -100,9 +101,19 @@ export async function NewStep(param) {
                 data
             });
 
+            // TODO: Hack. Don't just get all items. Add/remove from store as needed.
+            // Get all checklist items
+            const checklist = await Get({
+                list: 'MeasuresChecklist',
+                select: `*,Author/Title,Editor/Title`,
+                expand: `File,Author,Editor`,
+                filter: `MeasureId eq ${MeasureId}`
+            });
+
+            // Set store
+            Store.setData(`measure ${MeasureId} checklist`, checklist);
 
             // TODO: Add to stored checklist items
-
             return newItem;
         }
     };

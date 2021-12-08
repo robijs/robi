@@ -1,8 +1,9 @@
-import { Table, Title, Alert } from '../../Robi/RobiUI.js'
-import { MeasureIntakeForm  } from './MeasureIntakeForm.js'
+import { Title } from '../../Robi/RobiUI.js'
+import { MeasureIntakeForm } from './MeasureIntakeForm.js'
+import { MyMeasures } from './MyMeasures.js'
+import { AllMeasures } from './AllMeasures.js'
 
 export default async function Measures({ parent, pathParts, props }) {
-    
     // TODO: Move to Table()
     // TODO: pass in form components and path as params
     // TODO: immediately route to form if path is list/new or list/#
@@ -44,28 +45,7 @@ export default async function Measures({ parent, pathParts, props }) {
 
     viewTitle.add();
 
-    // TODO: Get user role
-    // TODO: Add My Measures, based on role
-    
-    const info = Alert({
-        margin: '20px 0px',
-        type: 'robi-primary',
-        text: '<strong>My Dashboard</strong> coming soon!',
-        parent
-    });
-
-    info.add();
-
-    // Table
-    await Table({
-        list: 'Measures',
-        view: 'Measures',
-        addButtonValue: 'New Measure Intake Form',
-        openInModal: true,
-        heading: '',
-        margin: '20px 0px',
-        parent
-    });
+    AllMeasures({ parent });
 
     // TODO: Move to Table()
     // Open modal

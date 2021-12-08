@@ -3,7 +3,7 @@ import { GetRequestDigest } from './GetRequestDigest.js'
 import { Post } from './Post.js'
 import { CreateLibrary } from './CreateLibrary.js'
 import { CreateColumn } from './CreateColumn.js'
-import { UpdateColumn } from './UpdateColumn.js'
+import { CreateItem } from './CreateItem.js'
 
 /**
  * Create SharePoint list item.
@@ -17,7 +17,8 @@ export async function CreateList(param) {
         options,
         web,
         fields,
-        template
+        template,
+        items,
     } = param;
 
     // Get new request digest
@@ -150,6 +151,31 @@ export async function CreateList(param) {
                 field: fields[field],
                 view: template === 101 ? 'All Documents' : 'All Items'
             });
+        }
+
+        // Create items
+        if (items) {
+            for (let item in items) {
+                const newItem = await CreateItem({
+                    list: list,
+                    data: items[item]
+                });
+    
+                if (installConsole) {
+                    installConsole.append(/*html*/ `
+                        <div class='console-line'>
+                            <!-- <code class='line-number'>0</code> -->
+                            <code>Created item in list '${list}' with Id ${newItem.Id}</code>
+                        </div>
+                    `);
+        
+                    installConsole.get().scrollTop = installConsole.get().scrollHeight;
+                }
+        
+                if (progressBar) {
+                    progressBar.update();
+                }
+            }
         }
 
         return newList.d;

@@ -279,7 +279,7 @@ export function UpdateApp() {
                             width: '100%',
                             height: '100%',
                             radius: '10px',
-                            background: '#343a40'
+                            background: App.get('backgroundColor')
                         });
 
                         deleteContainer.add();
@@ -444,15 +444,15 @@ export function UpdateApp() {
                                 </div>
                                 <div class='console-line'>
                                     <!-- <code class='line-number'>0</code> -->
-                                    <code style='color: mediumseagreen !important;'>${spacers}</code>
+                                    <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
                                 </div>
                                 <div class='console-line'>
                                     <!-- <code class='line-number'>0</code> -->
-                                    <code style='color: mediumseagreen !important;'>| Columns created |</code>
+                                    <code style='color: ${App.get('primaryColor')} !important;'>| Columns created |</code>
                                 </div>
                                 <div class='console-line'>
                                     <!-- <code class='line-number'>0</code> -->
-                                    <code style='color: mediumseagreen !important;'>${spacers}</code>
+                                    <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
                                 </div>
                                 ${checkedDelete.length || checkedSchemaDelete.length ?
                                     /*html*/ `
@@ -560,15 +560,15 @@ export function UpdateApp() {
                                 </div>
                                 <div class='console-line'>
                                     <!-- <code class='line-number'>0</code> -->
-                                    <code style='color: crimson !important;'>=================</code>
+                                    <code style='color: ${App.get('primaryColor')} !important;'>=================</code>
                                 </div>
                                 <div class='console-line'>
                                     <!-- <code class='line-number'>0</code> -->
-                                    <code style='color: crimson !important;'>| Lists deleted |</code>
+                                    <code style='color: ${App.get('primaryColor')} !important;'>| Lists deleted |</code>
                                 </div>
                                 <div class='console-line'>
                                     <!-- <code class='line-number'>0</code> -->
-                                    <code style='color: crimson !important;'>=================</code>
+                                    <code style='color: ${App.get('primaryColor')} !important;'>=================</code>
                                 </div>
                                 ${checkedSchemaDelete.length ?
                                 /*html*/ `
@@ -621,9 +621,6 @@ export function UpdateApp() {
                         }
 
                         // END DELETE COLUMNS ---------------------------------------------------------------------------
-                        modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                            <div class='mt-4 mb-4'><strong>${App.get('title')}</strong> updated.</div>
-                        `);
 
                         modal.find('.console-title').innerHTML = `${App.get('title')} <strong>updated</strong>`;
 

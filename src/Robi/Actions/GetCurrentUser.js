@@ -34,6 +34,11 @@ export async function GetCurrentUser(param) {
 
         if (appUser && appUser[0]) {
             console.log(`%cUser: ${appUser[0].Title}.`, 'background: seagreen; color: white');
+
+            // Add SiteId prop to Users list item
+            appUser[0].SiteId = response.d.Id;
+
+            // Return Users list item
             return appUser[0];
         } else {
             console.log(response.d);

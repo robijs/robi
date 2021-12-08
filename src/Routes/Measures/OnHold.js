@@ -1,15 +1,20 @@
 import { Container, Modal, BootstrapButton, MultiLineTextField, DateField, Alert } from '../../Robi/RobiUI.js'
 import { App, Store, UpdateItem, Route } from '../../Robi/Robi.js'
 
-export function OnHold({ item, parent, path }) {
+export function OnHold({ item, bannerParent, buttonParent, path }) {
     const { Id, OnHoldStart, OnHoldEnd, OnHoldComments, OnHoldName, Status } = item;
 
-    // Place measure on hold
+    // If measure is still 'Under Development', do nothing
+    if (Status === 'Under Development') {
+        return;
+    }
+
+    // If measure is not on hold, show 'Place on hold' button
     if (Status === 'On Hold') {
         const bannerContainer = Container({
             width: '100%',
             padding: '0px 30px 10px 30px',
-            parent,
+            parent: bannerParent,
             position: 'afterend'
         });
 
@@ -17,7 +22,7 @@ export function OnHold({ item, parent, path }) {
 
         const user = JSON.parse(OnHoldName);
         const userName = user.Title.split(' ').slice(0, 2).join(' ');
-        const userLink = Store.user().Role === 'Developer' || Store.user().Role === 'Administrator' ? `<a href='${App.get('site')}#Users/${user.Id}' target='_blank'>${userName}</a>` : ''
+        const userLink = Store.user().Role === 'Developer' || Store.user().Role === 'Administrator' ? `<a class='alert-link' href='${App.get('site')}#Users/${user.Id}' target='_blank'>${userName}</a>` : ''
 
         const banner = Alert({
             type: 'robi-primary',
@@ -30,8 +35,9 @@ export function OnHold({ item, parent, path }) {
 
         const removeHold = BootstrapButton({
             type: 'robi',
+            classes: ['ml-2'],
             value: 'Remove hold',
-            parent,
+            parent: buttonParent,
             action() {
                 const removeHoldModal = Modal({
                     title: false,
@@ -135,11 +141,15 @@ export function OnHold({ item, parent, path }) {
         });
 
         removeHold.add();
-    } else {
+    } 
+    
+    // If measure is already on hold, show 'Remove hold' button
+    else {
         const placeOnHold = BootstrapButton({
             type: 'robi',
+            classes: ['ml-2'],
             value: 'Place on hold',
-            parent,
+            parent: buttonParent,
             action() {
                 const onHoldModal = Modal({
                     title: false,

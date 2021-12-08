@@ -22,6 +22,7 @@ export function Heading(param) {
                 height: ${height || 'unset'};
                 display: flex;
                 align-items: center;
+                justify-content: space-between;
                 margin: ${margin || '50px 0px 20px 0px'};
                 padding: ${padding || '0px'};
                 width: ${width || 'initial'};

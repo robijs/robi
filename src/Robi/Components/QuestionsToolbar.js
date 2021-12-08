@@ -13,12 +13,12 @@ export function QuestionsToolbar(param) {
 
     const component = Component({
         html: /*html*/ `
-            <div class='btn-toolbar mb-3' role='toolbar' aria-label='Toolbar with button groups' id='App-18'>
+            <div class='btn-toolbar mb-3' role='toolbar'>
                 <button type='button' class='btn ask-a-question'>Ask a question</button>
                 <div class='ml-2 mr-2'>
                     <input class='form-control mr-sm-2 search-questions' type='search' placeholder='Search' aria-label='Search'>
                 </div>    
-                <div class='btn-group mr-2' role='group' aria-label='First group'>
+                <div class='btn-group mr-2' role='group'>
                     ${buildFilters()}
                 </div>
             </div>

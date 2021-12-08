@@ -1,5 +1,5 @@
-import { CreateItem, Route, Store, App, UploadFile } from '../../Robi/Robi.js'
-import { BootstrapDropdown, MultiLineTextField, NumberField, SingleLineTextField, DateField, AttachmentsContainer, Alert } from '../../Robi/RobiUI.js'
+import { Get, Route, Store, UploadFile } from '../../Robi/Robi.js'
+import { BootstrapDropdown, DateField, AttachmentsContainer, Alert } from '../../Robi/RobiUI.js'
 
 /**
  *
@@ -17,7 +17,7 @@ export async function NewDataFile(param) {
     if (!FileTypes) {
         const alertInfo = Alert({
             type: 'robi-primary',
-            text: `There are no file types associated with this measure. <strong class='timing' style='cursor: pointer;'>Click here</strong> to go to the Timing section of the intake form to add file types.`,
+            text: `There are no file types associated with this measure. <strong class='timing' style='cursor: pointer;'>Click here</strong> to add file types.`,
             parent
         });
 
@@ -32,7 +32,7 @@ export async function NewDataFile(param) {
     const fileTypes = BootstrapDropdown({
         label: 'File Type',
         description: `
-            If your file isn't in this list, <strong class='timing' style='cursor: pointer;'>Click here</strong> to go to the Timing section of the intake form to add additional file types. Only .txt, .xls, .xlsx, .or csv file types will be accepted. All other file types will not be processed.
+            If your file type isn't available, <strong class='timing' style='cursor: pointer;'>Click here</strong> to add additional file types. Keep in mind that only <strong>.txt, .xls, .xlsx</strong>, .or <strong>.csv</strong> file types will be accepted. All other file types will not be processed.
         `,
         options: JSON.parse(FileTypes).map(choice => {
             const { name, type } = choice;
@@ -186,75 +186,10 @@ export async function NewDataFile(param) {
 
     pulledDate.add();
 
-    // MIP Link
-    // const mipLink = SingleLineTextField({
-    //     label: 'MIP Link',
-    //     description: '(Eg. "SFM-PRDDWSP.IWP_J5.dbo.table_name")',
-    //     parent
-    // });
-
-    // mipLink.add();
-
-    // const filterFields = ['Id', 'MeasureId'];
-    // const fieldsToCreate = fields?.filter(field => !filterFields.includes(field.name));
-    // const components = fieldsToCreate?.map((field, index) => {
-    //     const { name, display, type, choices, action } = field;
-
-    //     let component = {};
-
-    //     switch (type) {
-    //         case 'slot':
-    //             component = SingleLineTextField({
-    //                 label: display || name,
-    //                 parent
-    //             });
-    //             break;
-    //         case 'mlot':
-    //             component = MultiLineTextField({
-    //                 label: display || name,
-    //                 parent
-    //             });
-    //             break;
-    //         case 'number':
-    //             component = NumberField({
-    //                 label: display || name,
-    //                 parent
-    //             });
-    //             break;
-    //         case 'choice':
-    //             component = BootstrapDropdown({
-    //                 label: display || name,
-    //                 value: choices[0],
-    //                 options: choices.map(choice => {
-    //                     return {
-    //                         label: choice
-    //                     };
-    //                 }),
-    //                 parent
-    //             });
-    //             break;
-    //         case 'date':
-    //             component = DateField({
-    //                 label: display || name,
-    //                 value: '',
-    //                 parent
-    //             });
-    //             break;
-    //     }
-
-    //     component.add();
-
-    //     return {
-    //         component,
-    //         field
-    //     };
-    // });
-
     return {
         label: 'Upload',
         async onCreate(event) {
             const data = {
-                MIPLink: mipLink.value() || null,
                 DataThroughDate: toSPDate(throughDate.value()),
                 DataPulledDate: toSPDate(pulledDate.value()),
                 MeasureId: itemId
@@ -320,6 +255,25 @@ export async function NewDataFile(param) {
                 const hh = hours < 10 ? `0${hours}` : hours;
                 return `${date}T${hh}:00:00Z`;
             }
+            
+            // TODO: Hack. Don't just get all items. Add/remove from store as needed.
+            // Get all data files
+            let dataFiles =  await Get({
+                list: 'DataFiles',
+                select: `*,File/Name,File/Length,Author/Title,Editor/Title`,
+                expand: `File,Author,Editor`,
+                filter: `MeasureId eq ${itemId}`
+            });
+    
+            // FIXME: hack. could be slow with large doc libs.
+            dataFiles = dataFiles?.map(file => {
+                file.Name = file.File.Name;
+    
+                return file;
+            });
+
+            // Set store
+            Store.setData(`measure ${itemId} data files`, dataFiles);
 
             return uploads.map(file => {
                 file.Name = file.File.Name;

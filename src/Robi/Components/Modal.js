@@ -218,6 +218,21 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
                     }
                 ` : ''
             }
+
+            /* No title */
+            ${
+                !title ?
+                /*css*/ `
+                    #id .modal-body::-webkit-scrollbar {
+                        width: 25px;
+                    }
+
+                    #id .modal-body::-webkit-scrollbar-thumb {
+                        border: 8px solid transparent;
+                        border-radius: 20px;
+                    }
+                ` : ''
+            }
         `,
         parent,
         position,

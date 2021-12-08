@@ -1,7 +1,7 @@
-// This file may be edited programmatically from the front-end GUI.
+// This file may be edited programmatically.
 // If you know the API feel free to edit it manually.
 // Just be sure to put @START and @END declarations in the right place.
-// Otherwise, changes made by other developers may not save properly.
+// Otherwise, changes made by other developers may not render properly.
 
 // @START-IMPORTS
 import { Start } from './Robi/Robi.js'
@@ -58,9 +58,9 @@ Start({
         // @START-SETTINGS
         // REQUIRED PROPERTIES
         // -------------------
-        // defaultBorder: default border style for core comoponents
+        // defaultBorder: border style for core comoponents
         // defaultColor: text color
-        // defaultRoute: set default route, defaults to first path in routes array
+        // defaultRoute: route navigated to if no #path is present in URL, defaults to first path in routes array
         // logo: open sidebar logo
         // logoLarge: launch logo
         // logoSmall: logo when sidebar is collapsed
@@ -70,31 +70,28 @@ Start({
         // questionTypes: define at least one questionType with title and path props
         // secondaryColor: main container background color
         // backgroundColor: nav background color
+        // theme: ('Blue' | 'Brown' | 'Gray' | 'Green' | 'Gold' | 'Magenta' | 'Orange' | 'Pink' | 'Purple' | 'Red' | 'Slate' | 'Teal')
         // title: site title (AUTOPOPULATED if created with CREATE APP)
         // titleColor: core Title component text color
         // userDefaultRole: default role for newly created use accounts
         // userSettings: new user account 'Settings' field default JSON value
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
-        defaultColor: '#24292f',
         defaultRoute: '',
         logo: 'dha-logo-no-label-180w.png',
         logoLarge: 'dha-logo-no-label-386w.png',
         logoSmall: 'dha-logo-no-label-80w.png',
-        name: /* @START-Name */'MeasuresLibrary'/* @END-Name */,
-        primaryColor: /* @START-Color */'#e63e44'/* @END-Color */,
-        // primaryColor: /* @START-Color */'#4169e1'/* @END-Color */,
+        name: /* @START-name */'MeasuresLibrary'/* @END-name */,
         questionTypes: [
             {
                 title: 'General',
                 path: 'General'
             }
         ],
-        secondaryColor: 'white',
-        backgroundColor: '#F8F8FC',
-        title: /* @START-Title */'Measures Library'/* @END-Title */,
+        theme: /* @START-theme */'Red'/* @END-theme */,
+        title: /* @START-title */'Measures Library'/* @END-title */,
         userDefaultRole: 'User',
-        userSettings: JSON.stringify({}),
-        // OPTIONAL PROPERTIES (defaults)
+        userSettings: /* @START-userSettings */JSON.stringify({})/* @END-userSettings */,
+        // OPTIONAL PROPERTIES
         // -------------------
         // appcontainer: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
         // dev.user: local dev user props

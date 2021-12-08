@@ -44,7 +44,7 @@ export function InstallApp(param) {
                 classes: ['w-100 mt-5'],
                 width: '100%',
                 parent: modalBody,
-                type: 'primary',
+                type: 'robi-reverse',
                 value: 'Install'
             });
 
@@ -66,7 +66,7 @@ export function InstallApp(param) {
                 modalBody.style.overflowY = 'unset';
                 modalBody.style.display = 'flex';
                 modalBody.style.flexDirection = 'column',
-                    modalBody.style.transition = 'all 300ms ease-in-out';
+                modalBody.style.transition = 'all 300ms ease-in-out';
                 modalBody.innerHTML = '';
                 modalBody.style.height = '80vh';
                 modalBody.style.width = '80vw';
@@ -82,32 +82,34 @@ export function InstallApp(param) {
                 let progressCount = 0;
 
                 coreLists.forEach(item => {
-                    const { fields } = item;
+                    const { fields, items } = item;
 
-                    // List + 1
+                    // + 1 for each list
                     progressCount = progressCount + 1;
 
-                    fields.forEach(field => {
-                        // Field +2 (add column to list and view)
-                        progressCount = progressCount + 2;
-                    });
+                    // +2 for each field
+                    progressCount = progressCount + ((fields.length * 2) || 0);
+
+                    // +1 for each item
+                    progressCount = progressCount + (items?.length || 0);
                 });
 
                 lists.forEach(item => {
-                    const { fields, options } = item;
+                    const { fields, options, items } = item;
 
                     if (options?.files) {
-                        // Files list + 1
+                        // + 1 for files library 
                         progressCount = progressCount + 1;
                     }
 
-                    // List + 1
+                    // +1 for each list
                     progressCount = progressCount + 1;
 
-                    fields.forEach(field => {
-                        // Field +2 (add column to list and view)
-                        progressCount = progressCount + 2;
-                    });
+                    // +2 for each field
+                    progressCount = progressCount + ((fields.length * 2) || 0);
+
+                    // +1 for each item
+                    progressCount = progressCount + (items?.length || 0);
                 });
 
                 const progressBar = ProgressBar({
@@ -128,8 +130,8 @@ export function InstallApp(param) {
                     overflow: 'hidden',
                     width: '100%',
                     height: '100%',
-                    radius: '10px',
-                    background: '#1E1E1E'
+                    radius: '20px',
+                    background: App.get('backgroundColor')
                 });
 
                 installContainer.add();
@@ -358,7 +360,7 @@ export function InstallApp(param) {
                     // Add Release Notes
                     const releaseNoteExists = await Get({
                         list: 'ReleaseNotes',
-                        filter: `Summary eq '${App.get('name')} lists created'`
+                        filter: `Summary eq '${App.get('title')} lists created'`
                     });
 
                     if (releaseNoteExists[0]) {
@@ -366,7 +368,7 @@ export function InstallApp(param) {
                         installConsole.append(/*html*/ `
                             <div class='console-line'>
                                 <!-- <code class='line-number'>0</code> -->
-                                <code>${App.get('name')} lists created' release note already exists.'</code>
+                                <code>${App.get('title')} lists created' release note already exists.'</code>
                             </div>
                         `);
 
@@ -377,7 +379,7 @@ export function InstallApp(param) {
                         await CreateItem({
                             list: 'ReleaseNotes',
                             data: {
-                                Summary: `${App.get('name')} lists created`,
+                                Summary: `${App.get('title')} lists created`,
                                 Description: lists.map(item => item.list).join(', ') + '.',
                                 Status: 'Published',
                                 MajorVersion: '0',
@@ -387,13 +389,13 @@ export function InstallApp(param) {
                             }
                         });
 
-                        console.log(`Added Release Note: ${App.get('name')} lists created - ${lists.map(item => item.list).join(', ')}.`);
+                        console.log(`Added Release Note: ${App.get('title')} lists created - ${lists.map(item => item.list).join(', ')}.`);
 
                         // Add to console
                         installConsole.append(/*html*/ `
                             <div class='console-line'>
                                 <!-- <code class='line-number'>0</code> -->
-                                <code>''${App.get('name')}' lists created - ${lists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
+                                <code>''${App.get('title')}' lists created - ${lists.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
                             </div>
                         `);
 
@@ -537,15 +539,15 @@ export function InstallApp(param) {
                 installConsole.append(/*html*/ `
                     <div class='console-line'>
                         <!-- <code class='line-number'>0</code> -->
-                        <code style='color: mediumseagreen !important;'>${spacers}</code>
+                        <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
                     </div>
                     <div class='console-line'>
                         <!-- <code class='line-number'>0</code> -->
-                        <code style='color: mediumseagreen !important;'>| '${App.get('name')}' installed | Build 1.0.0 | Version 1.0.0 |</code>
+                        <code style='color: ${App.get('primaryColor')} !important;'>| '${App.get('name')}' installed | Build 1.0.0 | Version 1.0.0 |</code>
                     </div>
                     <div class='console-line'>
                         <!-- <code class='line-number'>0</code> -->
-                        <code style='color: mediumseagreen !important;'>${spacers}</code>
+                        <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
                     </div>
                 `);
 
@@ -554,7 +556,7 @@ export function InstallApp(param) {
 
                 // Show launch button
                 const launchBtn = BootstrapButton({
-                    type: 'primary',
+                    type: 'robi',
                     value: 'Launch app',
                     classes: ['mt-3', 'w-100'],
                     action(event) {
@@ -585,7 +587,7 @@ export function InstallApp(param) {
                 classes: ['w-100 mt-2'],
                 width: '100%',
                 parent: modalBody,
-                type: 'outline-primary',
+                type: 'robi-light',
                 value: 'Modify source'
             });
 
@@ -602,7 +604,7 @@ export function InstallApp(param) {
                         // Show alert
                         appContainer.get().insertAdjacentHTML('afterend', /*html*/ `
                             <div class='position-absolute install-alert mb-0'>
-                                Installation cancelled. You can safely close this page. Reload page to resume install.
+                                Installation cancelled. Reload to resume install.
                             </div>
                         `);
                     });
@@ -612,7 +614,7 @@ export function InstallApp(param) {
                 classes: ['w-100 mt-2'],
                 width: '100%',
                 parent: modalBody,
-                type: 'light',
+                type: '',
                 value: 'Cancel'
             });
 

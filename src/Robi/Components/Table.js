@@ -18,7 +18,7 @@ import lists from '../../lists.js'
  */
 export async function Table(param) {
     const {
-        addButton, addButtonValue, border, buttonColor, checkboxes, createdRow, defaultButtons, displayForm, editForm, editFormTitle, exportButtons, filter, formFooter, formTitleField, headerFilter, heading, headingColor, headingMargin, headingSize, list, margin, newForm, newFormTitle, newFormData, onUpdate, openInModal, order, padding, parent, showId, striped, titleDisplayName, view, width
+        addButton, addButtonValue, border, buttonColor, checkboxes, createdRow, defaultButtons, displayForm, editForm, editFormTitle, exportButtons, filter, formFooter, formTitleField, headerFilter, heading, headingColor, headingMargin, headingSize, list, margin, newForm, newFormTitle, newFormData, onDelete, onUpdate, openInModal, order, padding, parent, showId, striped, titleDisplayName, toolbar, view, width
     } = param;
 
     let {
@@ -36,16 +36,22 @@ export async function Table(param) {
     tableContainer.add();
 
     /** Heading */
+    let legendHeading;
+
     if (heading || list) {
-        const legendHeading = Heading({
+        legendHeading = Heading({
             text: heading || (heading === '' ? '' : list.split(/(?=[A-Z])/).join(' ')),
             size: headingSize,
             color: headingColor,
-            margin: headingMargin || '20px 0px 15px 0px',
+            margin: headingMargin || (toolbar ? '20px 0px 30px 0px' : '20px 0px 15px 0px'),
             parent: tableContainer
         });
 
         legendHeading.add();
+    }
+
+    if (toolbar) {
+        toolbar({ parent: legendHeading || parent });
     }
 
     /** Columns */
@@ -73,14 +79,16 @@ export async function Table(param) {
 
         loadingSpinner.add();
 
+        // TODO: Only select fields from view
         items = items || await Get({
             list,
+            select: '*,Author/Name,Author/Title,Editor/Name,Editor/Title',
+            expand: `Author/Id,Editor/Id`,
             filter
         });
 
         // Get fields in view
         if (view) {
-            console.log(view);
             const schema = lists
                 .concat(Lists())
                 .find(item => item.list === list);
@@ -266,11 +274,7 @@ export async function Table(param) {
                     enabled: false,
                     action: async function (e, dt, node, config) {
                         const selected = table.selected();
-
-                        console.log('Delete selected:', selected);
-
                         const button = tableContainer.find('.delete-item');
-                        console.log(button);
                         button.disabled = true;
                         button.innerHTML = /*html*/ `<span class="spinner-border" role="status" aria-hidden="true" style="width: 20px; height: 20px; border-width: 3px"></span>`;
 
@@ -286,6 +290,10 @@ export async function Table(param) {
 
                             // Delete Row
                             table.removeRow(selected[row].Id);
+                        }
+
+                        if (onDelete) {
+                            await onDelete(table);
                         }
 
                         button.innerHTML = /*html*/ `
@@ -366,11 +374,13 @@ export async function Table(param) {
                             selectedForm = newForm ? await newForm(formParam) : await NewForm(formParam);
 
                             // Set button value
-                            if (selectedForm.label) {
+                            if (selectedForm?.label) {
                                 newModal.getButton('Create').innerText = selectedForm.label;
                             }
 
-                            newModal.showFooter();
+                            if (selectedForm) {
+                                newModal.showFooter();
+                            }
                         },
                         buttons: {
                             footer: [
@@ -586,16 +596,21 @@ export async function Table(param) {
 
             // const data = table.rows({ search: 'applied' }).data().toArray();
             // console.log(param);
+
+            setSelectedRadius();
+            removeSelectedRadius();
         },
         parent: tableContainer
     });
 
     table.add();
 
+
+    // FIXME: This only works if selected are grouped together
+    // TODO: Handle multiple groups and spaced our selection
     function setSelectedRadius() {
         // Find all rows
         const rows = table.findAll('tbody tr.selected');
-        console.log('selected', rows);
 
         // Reset
         rows.forEach(row => {
@@ -619,14 +634,12 @@ export async function Table(param) {
                 row.querySelector('td:first-child').classList.add('btlr-0', 'bblr-0');
                 row.querySelector('td:last-child').classList.add('btrr-0', 'bbrr-0');
             });
-            console.log(middle);
         }
     }
 
     function removeSelectedRadius() {
         // Find all rows
         const rows = table.findAll('tbody tr:not(.selected)');
-        console.log('unselected', rows);
 
         // Reset
         rows.forEach(row => {

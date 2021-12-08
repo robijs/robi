@@ -7,7 +7,15 @@ import { GetRequestDigest } from './GetRequestDigest.js'
  * @returns 
  */
 export async function CopyFile(param) {
-    const { source, target, path, file, appName, appTitle } = param;
+    const {
+        source,
+        target,
+        path,
+        file,
+        appName,
+        appTitle,
+        theme
+    } = param;
 
     const sourceSiteUrl = source + "/_api/web/GetFolderByServerRelativeUrl('" + path + "')/Files('" + file + "')/$value";
     const targetSiteUrl = target + "/_api/web/GetFolderByServerRelativeUrl('" + path + "')/Files/Add(url='" + file + "',overwrite=true)";
@@ -21,15 +29,31 @@ export async function CopyFile(param) {
         }
     });
 
-    let contents = file === 'app.js' ? await getFileValue.text() : await getFileValue.arrayBuffer() ;
+    let contents = file === 'app.js' ? await getFileValue.text() : await getFileValue.arrayBuffer();
 
     // TODO: Add check for App/src path so other paths that you might want to copy an app.js file from aren't affected
     if (file === 'app.js') {
-        // FIXME: Not working
-        // TODO: find out why it's not working
-        contents = contents.replace(/\/\* @START-Name \*\/([\s\S]*?)\/\* @END-Name \*\//, `/* @START-Name */'${appName}'/* @END-Name */`);
-        contents = contents.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */'${appTitle}'/* @END-Title */`);
+        console.log('CopyFile.js', {
+            source,
+            target,
+            path,
+            file,
+            appName,
+            appTitle,
+            theme
+        });
+
+        // Name
+        contents = contents.replace(/\/\* @START-name \*\/([\s\S]*?)\/\* @END-name \*\//, `/* @START-name */'${appName}'/* @END-name */`);
+
+        // Title
+        contents = contents.replace(/\/\* @START-title \*\/([\s\S]*?)\/\* @END-title \*\//, `/* @START-title */'${appTitle}'/* @END-title */`);
+
+        // Theme
+        contents = contents.replace(/\/\* @START-theme \*\/([\s\S]*?)\/\* @END-theme \*\//, `/* @START-theme */'${theme}'/* @END-theme */`);
     }
+
+    console.log(contents);
 
     const newFile = await fetch(targetSiteUrl, {
         method: 'POST',

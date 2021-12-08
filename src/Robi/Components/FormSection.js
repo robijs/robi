@@ -186,50 +186,51 @@ export function FormSection(param) {
                             addon,
                             parent,
                             fieldMargin,
-                            async onKeyup(event) {
-                                // Set form data
-                                formData[name] = component.value();
+                            // TODO: Complete compare against published measures
+                            // async onKeyup(event) {
+                            //     // Set form data
+                            //     formData[name] = component.value();
 
-                                // Drop down Menu
-                                const query = event.target.value;
-                                const menu = component.find('.dropdown-menu');
+                            //     // Drop down Menu
+                            //     const query = event.target.value;
+                            //     const menu = component.find('.dropdown-menu');
 
-                                // console.log(query);
+                            //     // console.log(query);
 
-                                if (query) {
-                                    if (!menu) {
-                                        // console.log('add menu');
+                            //     if (query) {
+                            //         if (!menu) {
+                            //             // console.log('add menu');
 
-                                        const height = component.get().offsetHeight;
-                                        const width = component.get().offsetWidth;
+                            //             const height = component.get().offsetHeight;
+                            //             const width = component.get().offsetWidth;
 
-                                        component.find('.form-control').insertAdjacentHTML('afterend', /*html*/ `
-                                            <div class='dropdown-menu show' style='font-size: 13px; position: absolute; width: ${width}px; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, ${height + 5}px);'>
-                                                <div class='d-flex justify-content-between align-items-center mt-2 mb-2 ml-3 mr-3'>
-                                                    <div style='color: ${App.get('primaryColor')};'>Searching for measures with similar names...</div>
-                                                    <div class='spinner-grow spinner-grow-sm' style='color: ${App.get('primaryColor')};' role='status'></div>
-                                                </div> 
-                                            </div>
-                                        `);
+                            //             component.find('.form-control').insertAdjacentHTML('afterend', /*html*/ `
+                            //                 <div class='dropdown-menu show' style='font-size: 13px; position: absolute; width: ${width}px; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, ${height + 5}px);'>
+                            //                     <div class='d-flex justify-content-between align-items-center mt-2 mb-2 ml-3 mr-3'>
+                            //                         <div style='color: ${App.get('primaryColor')};'>Searching for measures with similar names...</div>
+                            //                         <div class='spinner-grow spinner-grow-sm' style='color: ${App.get('primaryColor')};' role='status'></div>
+                            //                     </div> 
+                            //                 </div>
+                            //             `);
 
-                                        // Get list items
-                                        const listItems = await Get({
-                                            list: 'Measures'
-                                        });
+                            //             // Get list items
+                            //             const listItems = await Get({
+                            //                 list: 'Measures'
+                            //             });
 
-                                    } else {
-                                        // console.log('menu already added');
-                                    }
-                                } else {
-                                    if (menu) {
-                                        // console.log('remove menu');
-                                        menu.remove();
-                                    } else {
-                                        // console.log('menu already removed');
-                                    }
-                                }
+                            //         } else {
+                            //             // console.log('menu already added');
+                            //         }
+                            //     } else {
+                            //         if (menu) {
+                            //             // console.log('remove menu');
+                            //             menu.remove();
+                            //         } else {
+                            //             // console.log('menu already removed');
+                            //         }
+                            //     }
 
-                            }
+                            // }
                         });
                         break;
                     case 'mlot':

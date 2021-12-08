@@ -31,6 +31,7 @@ export async function Users(param) {
 
     const usersTable = await Table({
         list: 'Users',
+        heading: '',
         view: 'Users',
         newForm: NewUser,
         parent

@@ -133,7 +133,7 @@ export function ResetApp() {
                         width: '100%',
                         height: '100%',
                         radius: '10px',
-                        background: '#1E1E1E'
+                        background: App.get('backgroundColor')
                     });
 
                     deleteContainer.add();
@@ -442,15 +442,15 @@ export function ResetApp() {
                     reinstallConsole.append(/*html*/ `
                         <div class='console-line'>
                             <!-- <code class='line-number'>0</code> -->
-                            <code style='color: mediumseagreen !important;'>${spacers}</code>
+                            <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
                         </div>
                         <div class='console-line'>
                             <!-- <code class='line-number'>0</code> -->
-                            <code style='color: mediumseagreen !important;'>| Lists reset |</code>
+                            <code style='color: ${App.get('primaryColor')} !important;'>| Lists reset |</code>
                         </div>
                         <div class='console-line'>
                             <!-- <code class='line-number'>0</code> -->
-                            <code style='color: mediumseagreen !important;'>${spacers}</code>
+                            <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
                         </div>
                     `);
 
@@ -461,7 +461,7 @@ export function ResetApp() {
 
                     // Show return button
                     const returnBtn = BootstrapButton({
-                        type: 'primary',
+                        type: 'robi-light',
                         value: 'Close',
                         classes: ['w-100'],
                         action(event) {
@@ -486,7 +486,7 @@ export function ResetApp() {
                 classes: ['w-100'],
                 width: '100%',
                 parent: modalBody,
-                type: 'danger',
+                type: 'robi-reverse',
                 value: `Reset lists`
             });
 
@@ -501,7 +501,7 @@ export function ResetApp() {
                 classes: ['w-100 mt-2'],
                 width: '100%',
                 parent: modalBody,
-                type: 'light',
+                type: '',
                 value: 'Cancel'
             });
 

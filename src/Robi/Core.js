@@ -8,13 +8,14 @@ import { Developer } from './Components/Developer.js'
 import { QuestionTypes } from './Components/QuestionTypes.js'
 import { QuestionBoard } from './Components/QuestionBoard.js'
 import { QuestionAndReplies } from './Components/QuestionAndReplies.js'
+import { Themes }from './Models/Themes.js'
 
 let appSettings = {};
 
 const App = {
     set(param) {
         const { routes, settings } = param;
-        const { library, primaryColor, defaultRoute } = settings;
+        const { library, primaryColor, defaultRoute, theme } = settings;
 
         // Set mode
         if (location.href.includes('localhost') || location.href.includes('127.0.0.1')) {
@@ -43,9 +44,22 @@ const App = {
             settings.defaultRoute = routes.map(route => route.path)[0];
         }
 
-        // Format color
-        settings.primaryColorRGB = HexToRGB(NameToHex(primaryColor) || primaryColor);
-        settings.primaryColorHSL = HexToHSL(NameToHex(primaryColor) || primaryColor);
+        // Set colors
+        const { primary, secondary, background, color } = Themes.find(item => item.name === theme);
+
+        // Primary
+        settings.primaryColor = NameToHex(primary);
+        settings.primaryColorRGB = HexToRGB(settings.primaryColor);
+        settings.primaryColorHSL = HexToHSL(settings.primaryColor);
+
+        // Secondary
+        settings.secondaryColor = secondary;
+
+        // Background
+        settings.backgroundColor = background;
+
+        // Default color
+        settings.defaultColor = color;
 
         // Set all
         appSettings = settings;

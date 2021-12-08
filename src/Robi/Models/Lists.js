@@ -134,6 +134,17 @@ export function Lists() {
                     name: 'Role',
                     type: 'slot'
                 }
+            ],
+            items: [
+                {
+                    Role: 'Administrator'
+                },
+                {
+                    Role: 'Developer'
+                },
+                {
+                    Role: 'User'
+                }
             ]
         },
         {

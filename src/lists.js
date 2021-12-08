@@ -2,28 +2,6 @@ import { AddFileTypes } from './Routes/Measures/AddFileTypes.js'
 
 export default [
     {
-        list: 'DemoList',
-        fields: [
-        {
-            name: 'Test',
-            type: 'slot'
-        },
-        {
-            name: 'NewColumn',
-            type: 'mlot'
-        }
-      ]
-    },
-  	{
-      	list: 'TestList',
-      	fields: [
-          {
-              name: 'Test',
-              type: 'slot'
-          }
-        ]
-    },
-    {
         list: 'Measures',
         options: {
             files: true
@@ -439,7 +417,6 @@ export default [
                 name: 'OnHoldName',
                 display: 'On Hold Name',
                 type: 'mlot',
-                value: null
             },
             {
                 name: 'OnHoldStart',
@@ -447,21 +424,6 @@ export default [
                 type: 'date',
                 value: null
             },
-            // {
-            //     name: 'OtherDataLocation',
-            //     display: 'Other Data Location',
-            //     type: 'slot'
-            // },
-            // {
-            //     name: 'OtherDataSource',
-            //     display: 'Other Data Source',
-            //     type: 'mlot'
-            // },
-            // {
-            //     name: 'OtherProgLang',
-            //     display: 'Other Programming Language',
-            //     type: 'slot'
-            // },
             {
                 name: 'PQACategory',
                 display: 'Primary Quad Aim Category',
@@ -494,6 +456,15 @@ export default [
                     'Tableau',
                     'T-SQL'
                 ]
+            },
+            {
+                name: 'Publisher',
+                type: 'mlot',
+            },
+            {
+                name: 'Published',
+                display: 'Published Date',
+                type: 'date'
             },
             {
                 name: 'Rationale',
@@ -1072,9 +1043,10 @@ export default [
                     'MeasureId',
                     'MeasureName',
                     'AOName',
-                    'AltAOName',
                     'Frequency',
-                    'DashboardLinks'
+                    'DashboardLinks',
+                    'Author',
+                    'Status',
                 ]
             }
         ]
@@ -1101,11 +1073,20 @@ export default [
                     '6. Feasibility study accepted by AO (AO)',
                     '7. Methodology developed (DS)',
                     '8. Checklist items reviewed (DS)',
+                    '8.a. Quality check on data (i.e., data accuracy and data reliability) (DS)',
+                    '8.b. Methodology validation (DS)',
+                    '8.c. Data source validation (DS)',
+                    '8.d. FY improvement target established (DS)',
                     '9. Methodology and data accepted by AO (AO)',
                     '10. Data delivered to MOP (DS)',
                     '11. Data delivery completed (Information Delivery)',
                     '12. Data visualization completed (BI)',
                     '13. Measure forwarded to Governance (OCR)',
+                    '13.a. Intake Form completed, including methodology and all required information (DS)',
+                    '13.b. Target established (DS)',
+                    '13.c. Measure ready to be queried through the Measures Library query tool (DS)',
+                    '13.d. Measure results are available in a database and ready to be exported (DS)',
+                    '13.e. Measure visualization is available (DS)',
                     '14. Measure approved by Governance (OCR)',
                     '15. Measure published in library (DS)'
                 ]
@@ -1152,7 +1133,7 @@ export default [
                 display: 'Status',
                 value: 'Not Started',
                 type: 'choice',
-                description: 'Marking an item <strong>Completed</strong> implies that the Person assigned to this step has completed all required actions. (This does not imply that the same step assigned to a different person is also completed.)',
+                description: 'Marking an item <strong>Completed</strong> confirms that the person assigned to this step has completed all required actions. (This does not mean that the same step assigned to a different person is also completed.)',
                 choices: [
                     'Not Started',
                     'In Progress',

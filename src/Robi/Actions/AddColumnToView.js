@@ -3,6 +3,7 @@ import { Store } from '../Core.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { Post } from './Post.js'
 
+// @START
 /**
  * Create SharePoint list item.
  * @param {Object}   param          Interface to UpdateItem() module.   

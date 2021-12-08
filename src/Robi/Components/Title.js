@@ -91,7 +91,7 @@ export function Title(param) {
             }
 
             /* a, spacer */
-            #id a,
+            #id a:not(.alert-link),
             #id ._breadcrumb-spacer,
             #id ._breadcrumb {
                 color: ${App.get('primaryColor')}

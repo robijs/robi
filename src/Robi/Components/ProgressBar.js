@@ -8,7 +8,7 @@ import { App } from '../Core.js';
  */
 export function ProgressBar(param) {
     const {
-        parent, totalCount
+        primary, parent, totalCount
     } = param;
 
     const component = Component({
@@ -28,7 +28,7 @@ export function ProgressBar(param) {
             #id .loading-bar-status {
                 width: 0%;
                 height: 15px;
-                background: ${App.get('primaryColor')};
+                background: ${primary || App.get('primaryColor')};
                 border-radius: 10px;
                 transition: width 100ms ease-in-out;
             }

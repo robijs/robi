@@ -11,8 +11,15 @@ import { CreateFolder } from './CreateFolder.js'
  * @returns 
  */
 export async function CopyRecurse(param) {
-    const { path, filter, targetWeb, appName, appTitle } = param;
-
+    const { 
+        path,
+        filter,
+        targetWeb,
+        appName,
+        appTitle,
+        theme,
+    } = param;
+    
     // 1. Look for files at top level of source site
     const url = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files`;
     
@@ -43,7 +50,8 @@ export async function CopyRecurse(param) {
                 path,
                 file: Name,
                 appName,
-                appTitle
+                appTitle,
+                theme
             });
 
             console.log(`File '${Name}' copied.`);
@@ -73,7 +81,8 @@ export async function CopyRecurse(param) {
             path: `${path}/${Name}`,
             targetWeb,
             appName,
-            appTitle
+            appTitle,
+            theme
         });
     }
 

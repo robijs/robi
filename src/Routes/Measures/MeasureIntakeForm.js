@@ -5,6 +5,9 @@ import { EditDataFile } from './EditDataFile.js'
 import { NewDataFile } from './NewDataFile.js'
 import { NewStep } from './NewStep.js'
 import { OnHold } from './OnHold.js'
+import { Publish } from './Publish.js'
+import { DataFiles } from './DataFiles.js'
+import { Checklist } from './Checklist.js'
 
 /**
  * 
@@ -16,6 +19,18 @@ export async function MeasureIntakeForm(param) {
         itemId,
         path
     } = param;
+
+    // If path is #Measures/[Item Id]/DataFiles
+    if (path === 'DataFiles') {
+        DataFiles(param)
+        return;
+    }
+
+    // If path is #Measures/[Item Id]/Checklist
+    if (path === 'Checklist') {
+        Checklist(param);
+        return;
+    }
 
     // Set new measure data
     const listInfo = lists.find(item => item.list === 'Measures');
@@ -64,7 +79,7 @@ export async function MeasureIntakeForm(param) {
 
     // View Title
     const viewTitle = Title({
-        title: itemId ? `Measure #${itemId} Intake Form` : 'New Measure Intake Form',
+        title: itemId ? `Measure #${itemId}` : 'New Measure',
         subTitle: section?.name || path.splitCamelCase(),
         padding: '0px 30px 10px 30px',
         width: '100%',
@@ -261,6 +276,9 @@ export async function MeasureIntakeForm(param) {
                     }
                 }
 
+                // Set status
+                data.Status = 'Under Development';
+
                 console.log(data);
 
                 // Create measure
@@ -334,49 +352,20 @@ export async function MeasureIntakeForm(param) {
         parent: buttonContainer,
         // type: itemId ? 'primary' : 'success',
         type: 'robi',
-        value: itemId ? 'Update intake form' : 'Create measure'
+        value: itemId ? 'Update measure information' : 'Create new measure'
     });
 
     saveButton.add();
 
-    // Back button
-    const publishButton = BootstrapButton({
-        action(event) {
-            console.log('Check if data saved, then route to measures');
-            alert('publish');
-        },
-        classes: ['w-100', 'mb-2'],
-        parent: buttonContainer,
-        type: 'robi',
-        value: 'Publish measure'
-    });
-
-    publishButton.add();
-
-    // Back button
-    const storeButton = BootstrapButton({
-        action(event) {
-            console.log('Check if data saved, then route to measures');
-            alert('save');
-            // history.back();
-        },
-        classes: ['w-100', 'mb-2'],
-        parent: buttonContainer,
-        type: 'robi',
-        value: 'Save measure'
-    });
-
-    storeButton.add();
-
-    // Back button
+    // Cancel button
     const cancelButton = BootstrapButton({
         action(event) {
-            console.log('Check if data saved, then route to measures');
-            // history.back();
+            // TODO: Generalize;
+            Route('Measures');
         },
         classes: ['w-100'],
         parent: buttonContainer,
-        type: 'light',
+        type: '',
         value: 'Back'
     });
 
@@ -388,12 +377,12 @@ export async function MeasureIntakeForm(param) {
     let dataFiles;
     let checklist;
 
-    // TODO: With the way it works now, each measure loaded get's stored with a unique phase.
-    // This means that on subsequent visits to tthe same item, the data is found and not fetched.
-    // Generally, this is good. But it means data could be out of date if another user has made
-    // changes. Reloading the page would refetch.
+    // Each measure loaded get's stored with a unique phrase base on it's Item Id.
+    // On subsequent visits to the same item the stored data is found and not refetched.
+    // Generally, this is good. But data could be out of date if another user has made changes.
+    // Reloading the page would refetch.
     // 
-    // Also, the stored item is updated if changes are made or saved.
+    // The stored item is updated if changes are made or saved.
     if (itemId) {
         // Get stored data
         const editMeasureData = Store.getData(`edit measure ${itemId}`);
@@ -408,7 +397,7 @@ export async function MeasureIntakeForm(param) {
             checklist = Store.getData(`measure ${itemId} checklist`);
         } else {
             loading = LoadingSpinner({
-                message: `Loading Measure #${itemId} intake form`,
+                message: `Loading Measure #${itemId}`,
                 type: 'robi',
                 parent: planContainer,
                 position: 'afterend'
@@ -470,31 +459,49 @@ export async function MeasureIntakeForm(param) {
             console.log(`Measure #${itemId} item missing. Item: `, Store.getData(`edit measure ${itemId}`));
         }
 
+        // Button container 
+        const buttonContainer = Container({
+            parent: viewTitle
+        });
+
+        buttonContainer.add();
+
+        // Publish
+        Publish({
+            item,
+            path,
+            bannerParent: viewTitle,
+            buttonParent: buttonContainer
+        });
+
         // Add place measure on hold / remove hold button and modal
         OnHold({
             item,
             path,
-            parent: viewTitle,
+            bannerParent: viewTitle,
+            buttonParent: buttonContainer
         });
 
         // TODO: Wrap in component
         // Add Data and checklist info panels
-        leftContainer.append(/*html*/ `
-            <div class='w-100 mt-2'>
-                <div class='mb-2 data-files' style='background: ${App.get('backgroundColor')}; border-radius: 20px; padding: 15px 30px; cursor: pointer;'>
-                    <div style='font-weight: 500;'>Data Files</div>
-                    <div style=''>${dataFiles.length} ${dataFiles.length === 1 ? 'file' : 'files'}</div>
+        if (item.Status !== 'Under Development') {
+            leftContainer.append(/*html*/ `
+                <div class='w-100 mt-2' style='height: 100%; display: flex; flex-direction: column; justify-content: end;'>
+                    <div class='mb-2 data-files' style='background: #e9ecef; border-radius: 10px; padding: 15px 30px; cursor: pointer;'>
+                        <div style='font-weight: 500; color: ${App.get('primaryColor')};'>Data Files</div>
+                        <div style=''>${dataFiles.length} ${dataFiles.length === 1 ? 'file' : 'files'}</div>
+                    </div>
+                    <div class='checklist' style='background: #e9ecef; border-radius: 10px; padding: 15px 30px; cursor: pointer;'>
+                        <div style='font-weight: 500; color: ${App.get('primaryColor')};'>Checklist</div>
+                        <div style=''>${checklist.length} ${checklist.length === 1 ? 'step' : 'steps'}</div>
+                    </div>
                 </div>
-                <div class='checklist' style='background: ${App.get('backgroundColor')}; border-radius: 20px; padding: 15px 30px; cursor: pointer;'>
-                    <div style='font-weight: 500;'>Checklist</div>
-                    <div style=''>${checklist.length} ${checklist.length === 1 ? 'step' : 'steps'}</div>
-                </div>
-            </div>
-        `);
+            `);
 
-        // TODO: generalize route
-        leftContainer.find('.data-files')?.addEventListener('click', () => Route(`Measures/${itemId}/DataFiles`));
-        leftContainer.find('.checklist')?.addEventListener('click', () => Route(`Measures/${itemId}/Checklist`));
+            // TODO: generalize route
+            leftContainer.find('.data-files')?.addEventListener('click', () => Route(`Measures/${itemId}/DataFiles`));
+            leftContainer.find('.checklist')?.addEventListener('click', () => Route(`Measures/${itemId}/Checklist`));
+        }
         
         // Print CSS
         Style({
@@ -524,52 +531,58 @@ export async function MeasureIntakeForm(param) {
             console.log('New measure data already set. Data:', newMeasureData);
         } else {
             const allFields = listInfo?.fields.map(field => [field.name, null]);
-            Store.setData('new measure', Object.fromEntries(allFields));
+            const data = Object.fromEntries(allFields);
+
+            // Set AO
+            data.AOName = Store.user().Title.split(' ').slice(0, 2).join(' ');
+            data.AOEmail = Store.user().Email;
+
+            Store.setData('new measure', data);
     
             console.log('New measure data not set. Fields:', Store.getData('new measure'));
         }
     }
 
-    // If path is #Measures/[Item Id]/DataFiles show table and exit
-    if (path === 'DataFiles') {
-        await Table({
-            list: 'DataFiles',
-            items: dataFiles,
-            addButton: item.Status === 'On Hold' ? false : true,
-            heading: '',
-            view: 'DataFiles',
-            buttons: [],
-            exportButtons: false,
-            defaultButtons: item.Status === 'On Hold' ? false : undefined,
-            addButtonValue: 'Upload data file',
-            width: '100%',
-            parent: planContainer,
-            newForm: NewDataFile,
-            newFormTitle: 'New data file',
-            editForm: EditDataFile,
-            editFormTitle: 'Edit data file'
-        });
+    // // If path is #Measures/[Item Id]/DataFiles show table and exit
+    // if (path === 'DataFiles') {
+    //     await Table({
+    //         list: 'DataFiles',
+    //         items: dataFiles,
+    //         addButton: item.Status === 'On Hold' ? false : true,
+    //         heading: '',
+    //         view: 'DataFiles',
+    //         buttons: [],
+    //         exportButtons: false,
+    //         defaultButtons: item.Status === 'On Hold' ? false : undefined,
+    //         addButtonValue: 'Upload data file',
+    //         width: '100%',
+    //         parent: planContainer,
+    //         newForm: NewDataFile,
+    //         newFormTitle: 'New data file',
+    //         editForm: EditDataFile,
+    //         editFormTitle: 'Edit data file'
+    //     });
 
-        return;
-    }
+    //     return;
+    // }
 
-    // If path is #Measures/[Item Id]/Checklist show table and exit
-    if (path === 'Checklist') {
-        await Table({
-            list: 'MeasuresChecklist',
-            items: checklist,
-            heading: '',
-            view: 'Checklist',
-            buttons: [],
-            defaultButtons: false,
-            width: '100%',
-            parent: planContainer,
-            newForm: NewStep,
-            newFormTitle: 'New step',
-        });
+    // // If path is #Measures/[Item Id]/Checklist show table and exit
+    // if (path === 'Checklist') {
+    //     await Table({
+    //         list: 'MeasuresChecklist',
+    //         items: checklist,
+    //         heading: '',
+    //         view: 'Checklist',
+    //         buttons: [],
+    //         defaultButtons: false,
+    //         width: '100%',
+    //         parent: planContainer,
+    //         newForm: NewStep,
+    //         newFormTitle: 'New step',
+    //     });
 
-        return;
-    }
+    //     return;
+    // }
 
     // If path is #Measures/[Item Id] with no section render all sections
     if (section.name === 'All Sections') {
@@ -595,39 +608,4 @@ export async function MeasureIntakeForm(param) {
         listInfo,
         parent: planContainer
     });
-
-    function addHeading(text) {
-        viewTitle.setSubtitle(text);
-
-        if (item) {
-            const card = Card({
-                background: App.get('backgroundColor'),
-                width: '100%',
-                parent: planContainer
-            });
-
-            card.add();
-
-            card.append(/*html*/ `
-                <div class='d-flex justify-content-between'>
-                    <div class='mb-2'>
-                        <strong>Measure ID</strong>
-                        <span class="badge ${item ? 'bg-dark': 'bg-success'} ml-2" style="color: white; font-size: 14px;">${item?.Id || 'New'}</span>
-                    </div>
-                    <div class='mb-2'>
-                        <strong>Measure Status</strong>
-                        <select class='mi-select ml-2' value='${item?.MeasureStatus || ''}'>
-                            <option class='mi-option' value='Under Development'>Under Development</option>
-                            <option class='mi-option' value='Published'>Published</option>
-                            <option class='mi-option' value='Archived'>Archived</option>
-                        </select>
-                    </div>
-                    <div>
-                        <strong>Last Updated</strong>
-                        <span class="badge bg-dark ml-2" style="color: white; font-size: 14px;">${new Date(item.Created).toLocaleDateString()}</span>
-                    </div>   
-                </div>
-            `);
-        }
-    }
 }

@@ -103,7 +103,7 @@ export function DeleteApp() {
                         width: '100%',
                         height: '100%',
                         radius: '10px',
-                        background: '#1E1E1E'
+                        background: App.get('backgroundColor')
                     });
 
                     deleteContainer.add();
@@ -242,29 +242,30 @@ export function DeleteApp() {
                     deleteConsole.append(/*html*/ `
                         <div class='console-line'>
                             <!-- <code class='line-number'>0</code> -->
-                            <code style='color: crimson !important;'>${spacers}</code>
+                            <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
                         </div>
                         <div class='console-line'>
                             <!-- <code class='line-number'>0</code> -->
-                            <code style='color: crimson !important;'>| '${App.get('name')}' deleted |</code>
+                            <code style='color: ${App.get('primaryColor')} !important;'>| '${App.get('name')}' deleted |</code>
                         </div>
                         <div class='console-line'>
                             <!-- <code class='line-number'>0</code> -->
-                            <code style='color: crimson !important;'>${spacers}</code>
+                            <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
                         </div>
                     `);
 
                     // Scroll console to bottom
                     deleteConsole.get().scrollTop = deleteConsole.get().scrollHeight;
 
+                    // TODO: Convert path below to Install button with href to ${App.get('library)}/src/pages/app.aspx
                     modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                        <div class='mt-4 mb-2'>All lists and data for <strong>${App.get('name')}</strong> have been successfully deleted.</div>
-                        <div class='mb-4'>You can install it again at <strong>Site Contents > App > src > pages > app.aspx</strong></div>
+                        <div class='mt-4 mb-2'>All lists and data for <strong>${App.get('name')}</strong> were successfully deleted.</div>
+                        <div class='mb-4'>Go to <a href='${App.get('site')}/${App.get('library')}/src/pages/app.aspx'>Site Contents > App > src > pages > app.aspx</a> to reinstall.</div>
                     `);
 
                     // Show return button
                     const returnBtn = BootstrapButton({
-                        type: 'primary',
+                        type: 'robi',
                         value: 'Site Contents',
                         classes: ['w-100'],
                         action(event) {
@@ -290,7 +291,7 @@ export function DeleteApp() {
                 classes: ['w-100'],
                 width: '100%',
                 parent: modalBody,
-                type: 'danger',
+                type: 'robi-reverse',
                 value: 'Delete all lists and data'
             });
 
@@ -305,7 +306,7 @@ export function DeleteApp() {
                 classes: ['w-100 mt-2'],
                 width: '100%',
                 parent: modalBody,
-                type: 'light',
+                type: '',
                 value: 'Cancel'
             });
 

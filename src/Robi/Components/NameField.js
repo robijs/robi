@@ -63,13 +63,11 @@ export function NameField(param) {
             }
 
             #id .form-field-name {
-                /* font-size: .9em; */
-                /* font-weight: 500; */
                 margin-top: 2px;
                 margin-bottom: 4px;
                 margin-right: 20px;
                 min-height: 36px;
-                // max-width: 300px;
+                /* max-width: 300px; */
                 min-width: 300px;
                 padding: 5px 10px;
                 background: white;

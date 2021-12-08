@@ -1,4 +1,5 @@
 import { Card } from './Card.js'
+import { Container } from './Container.js'
 import { Button } from './Button.js'
 import { App } from '../Core.js'
 import lists from '../../lists.js'
@@ -32,12 +33,29 @@ export async function DeveloperLinks(param) {
 
     addSection({
         title: `App Lists`,
-        buttons: lists.map(item => {
+        buttons: lists
+        .filter(item => item.template !== 101)
+        .map(item => {
+            const { list, options } = item;
+
+            return {
+                value: list,
+                url: `${App.get('site')}/Lists/${list}`,
+                files: options?.files
+            };
+        })
+    });
+
+    addSection({
+        title: `App Libraries`,
+        buttons: lists
+        .filter(item => item.template === 101)
+        .map(item => {
             const { list } = item;
 
             return {
                 value: list,
-                url: `${App.get('site')}/Lists/${list}`
+                url: `${App.get('site')}/${list}`
             };
         })
     });
@@ -73,7 +91,7 @@ export async function DeveloperLinks(param) {
     });
 
     addSection({
-        title: `Libraries`,
+        title: `Core Libraries`,
         buttons: [
             {
                 value: `App`,
@@ -103,20 +121,53 @@ export async function DeveloperLinks(param) {
 
         buttons.forEach(button => {
             const {
-                value, url
+                value, url, files
             } = button;
 
-            const settingsButton = Button({
-                type: 'normal',
-                value,
-                margin: '10px 0px 0px 0px',
-                parent: card,
-                async action(event) {
-                    window.open(url);
-                }
-            });
 
-            settingsButton.add();
+            if (files) {
+                const buttonContainer = Container({
+                    parent: card
+                });
+
+                buttonContainer.add();
+
+                const settingsButton = Button({
+                    type: 'normal',
+                    value,
+                    margin: '10px 0px 0px 0px',
+                    parent: buttonContainer,
+                    async action(event) {
+                        window.open(url);
+                    }
+                });
+    
+                settingsButton.add();
+
+                const filesButton = Button({
+                    type: 'normal',
+                    value: `${value}Files`,
+                    margin: '10px 0px 0px 10px',
+                    parent: buttonContainer,
+                    async action(event) {
+                        window.open(`${url}Files`);
+                    }
+                });
+    
+                filesButton.add();
+            } else {
+                const settingsButton = Button({
+                    type: 'normal',
+                    value,
+                    margin: '10px 0px 0px 0px',
+                    parent: card,
+                    async action(event) {
+                        window.open(url);
+                    }
+                });
+    
+                settingsButton.add();
+            }
         });
     }
 }

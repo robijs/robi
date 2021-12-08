@@ -89,6 +89,18 @@ export function AppContainer() {
                 cursor: wait !important;
             }
 
+            /* Links */
+            a:hover {
+                color: ${App.get('primaryColor')};
+                text-decoration: underline;
+            }
+            
+            a {
+                color: ${App.get('primaryColor')};
+                text-decoration: none;
+                background-color: transparent;
+            }
+
             /* Code */
             code {
                 color: ${App.get('primaryColor')};
@@ -402,15 +414,11 @@ export function AppContainer() {
                 width: 100%;
                 height: 100%;
                 overflow: overlay;
-                background: #343a40;
+                background: ${App.get('backgroundColor')};
             }
 
             .console * {
-                color: white !important;
-            }
-
-            .console-title {
-                font-family: 'M PLUS Rounded 1c', sans-serif; /* FIXME: experimental */
+                color: ${App.get('defaultColor')} !important;
             }
 
             .line-number {
@@ -430,8 +438,7 @@ export function AppContainer() {
                 border-radius: 10px;
                 padding: 10px 15px;
                 border: none;
-                /* #1E1E1E */
-                background: #343a40;
+                background: ${App.get('backgroundColor')};
                 color: white !important;
                 animation: fade-in-bottom 200ms ease-in-out forwards;
             };
