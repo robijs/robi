@@ -7,9 +7,6 @@
 import { Start } from './Robi/Robi.js'
 import Measures from './Routes/Measures/Measures.js'
 import Test from './Routes/Test/Test.js'
-
-import Route from './Routes/Route/Route.js'
-import Newroute from './Routes/Newroute/Newroute.js'
 // @END-IMPORTS
 
 // @START
@@ -33,24 +30,6 @@ Start({
             go: Test
         }
         // @END-Test
-        , // @ROUTE
-        // @START-Route
-        {
-            path: 'Route',
-            hide: true,
-            icon: 'bs-circle-fill',
-            go: Route
-        }
-        // @END-Route
-        , // @ROUTE
-        // @START-Newroute
-        {
-            path: 'Newroute',
-            hide: true,
-            icon: 'pencil',
-            go: Newroute
-        }
-        // @END-Newroute
         // @END-ROUTES
     ]
     ,
@@ -77,9 +56,9 @@ Start({
         // userSettings: new user account 'Settings' field default JSON value
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
         defaultRoute: '',
-        logo: 'dha-logo-no-label-180w.png',
-        logoLarge: 'dha-logo-no-label-386w.png',
-        logoSmall: 'dha-logo-no-label-80w.png',
+        // logo: 'dha-logo-no-label-180w.png',
+        // logoLarge: 'dha-logo-no-label-386w.png',
+        // logoSmall: 'dha-logo-no-label-80w.png',
         name: /* @START-name */'MeasuresLibrary'/* @END-name */,
         questionTypes: [
             {
@@ -116,21 +95,21 @@ Start({
         errorLogging: 'on',
         library: '',
         links: [
-            {
-                rel: 'preload',
-                as: 'image',
-                href: '/Images/dha-logo-no-label-80w.png'
-            },
-            {
-                rel: 'preload',
-                as: 'image',
-                href: '/Images/dha-logo-no-label-180w.png'
-            },
-            {
-                rel: 'preload',
-                as: 'image',
-                href: '/Images/dha-logo-no-label-386w.png'
-            }
+            // {
+            //     rel: 'preload',
+            //     as: 'image',
+            //     href: '/Images/dha-logo-no-label-80w.png'
+            // },
+            // {
+            //     rel: 'preload',
+            //     as: 'image',
+            //     href: '/Images/dha-logo-no-label-180w.png'
+            // },
+            // {
+            //     rel: 'preload',
+            //     as: 'image',
+            //     href: '/Images/dha-logo-no-label-386w.png'
+            // }
         ],
         maincontainer: null,
         sidebar: null,
