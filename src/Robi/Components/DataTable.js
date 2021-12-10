@@ -229,6 +229,11 @@ export function DataTable(param) {
                 outline: none;
             }
 
+            #id_wrapper input[type='search']:active,
+            #id_wrapper input[type='search']:focus {
+                box-shadow: none !important;
+            }
+
             #id_wrapper input[type='search']::-webkit-search-cancel-button {
                 -webkit-appearance: none;
                 cursor: pointer;
