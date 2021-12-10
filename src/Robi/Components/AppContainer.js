@@ -421,6 +421,15 @@ export function AppContainer() {
                 color: ${App.get('defaultColor')} !important;
             }
 
+            .console::-webkit-scrollbar {
+                width: 35px;
+            }
+
+            .console::-webkit-scrollbar-thumb {
+                min-height: 50px;
+                border-radius: 20px;
+            }
+
             .line-number {
                 display: inline-block;
                 font-weight: 600;

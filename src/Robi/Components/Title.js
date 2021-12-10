@@ -8,13 +8,25 @@ import { App } from '../Core.js';
  */
 export function Title(param) {
     const {
-        title, width, subTitle, subTitleColor, breadcrumb, dropdownGroups, maxTextWidth, route, padding, margin, parent, position, date, type, action
+        back, title, width, subTitle, subTitleColor, breadcrumb, dropdownGroups, maxTextWidth, route, padding, margin, parent, position, date, type, action
     } = param;
 
     const component = Component({
         html: /*html*/ `
             <div class='title ${type || ''}'>
                 <div class='title-subtitle'>
+                    ${
+                        back ? 
+                        /*html*/ `
+                            <div class='d-flex justify-content-center align-items-center' style='width: 62px; height: 35.59px; position: absolute; left: -62px; cursor: pointer;'>
+                                <div class='d-flex justify-content-center align-items-center back-btn' style='' title='Back'>
+                                    <svg class='icon' style='fill: ${App.get('primaryColor')}; font-size: 26px;'>
+                                        <use href='#icon-bs-arrow-left-cirlce-fill'></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        ` : ''
+                    }
                     <h1 class='app-title'>${title}</h1>
                     <!-- ${subTitle !== undefined ? `<h2>${subTitle}</h2>` : ''} -->
                     <h2>${subTitle || ''}</h2>
@@ -25,8 +37,8 @@ export function Title(param) {
                             ${dropdownGroups && dropdownGroups.length ? `<span class='_breadcrumb-spacer'>/</span>` : ''}
                             ${dropdownGroups && dropdownGroups.length ?
                             /*html*/ `
-                                    ${buildDropdown(dropdownGroups)}
-                                ` :
+                                ${buildDropdown(dropdownGroups)}
+                            ` :
                             ''}
                         </h2>
                     ` :
@@ -43,6 +55,7 @@ export function Title(param) {
             }
 
             #id .title-subtitle {
+                position: relative;
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
@@ -50,7 +63,7 @@ export function Title(param) {
             }
 
             #id.title h1 {
-                font-size: 1.75em;
+                font-size: 1.75rem;
                 font-weight: 700;
                 margin-top: 0px;
                 margin-bottom: 10px;
@@ -58,7 +71,7 @@ export function Title(param) {
             }
 
             #id.title h2 {
-                font-size: 1.1em;
+                font-size: 1.1rem;
                 font-weight: 500;
                 margin: 0px;
                 color: ${subTitleColor || App.get('defaultColor')};
@@ -182,6 +195,13 @@ export function Title(param) {
                     if (action) {
                         action(event);
                     }
+                }
+            },
+            {
+                selector: '#id .back-btn',
+                event: 'click',
+                listener(event) {
+                    history.back();
                 }
             }
         ]

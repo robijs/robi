@@ -231,6 +231,10 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
                         border: 8px solid transparent;
                         border-radius: 20px;
                     }
+
+                    #id .modal-body::-webkit-scrollbar-button {
+                        height: 10px;
+                    }
                 ` : ''
             }
         `,

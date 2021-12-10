@@ -1,5 +1,5 @@
 import { Title, BootstrapButton, LoadingSpinner, Table } from '../../Robi/RobiUI.js'
-import { Store, Get, Route } from '../../Robi/Robi.js'
+import { App, Store, Get, Route } from '../../Robi/Robi.js'
 import { EditDataFile } from './EditDataFile.js'
 import { NewDataFile } from './NewDataFile.js'
 
@@ -20,8 +20,17 @@ export async function DataFiles(param) {
         return;
     }
 
+    // parent.append(/*html*/ `
+    //     <div class='d-flex justify-content-center align-items-center back-btn' style='height: 62px; padding: 0px 27px; position: absolute; top: 0px; left: 0px; cursor: pointer;' title='Back'>
+    //         <svg class='icon' style='fill: ${App.get('primaryColor')}; font-size: 22px;'>
+    //             <use href='#icon-bs-arrow-left-cirlce-fill'></use>
+    //         </svg>
+    //     </div>
+    // `);
+
     // View Title
     const viewTitle = Title({
+        back: true,
         title: `Measure #${itemId}`,
         subTitle: 'Data Files',
         parent,
@@ -167,7 +176,7 @@ export async function DataFiles(param) {
         action() {
             history.back();
         },
-        classes: ['w-100', 'ml-2'],
+        classes: ['w-100'],
         parent,
         type: '',
         value: 'Back'

@@ -12,8 +12,8 @@ export async function AllMeasures({ parent }) {
     tableContainer.add();
     
     // Table
-    let filter = `Status eq 'Published'`;
-    let selected = 'Published';
+    let filter = `Status eq 'Published' or Status eq 'On Hold' or (Author eq ${Store.user().SiteId} or AOEmail eq '${Store.user().Email}' or AltAOEmail eq '${Store.user().Email}')`;
+    let selected = 'All';
 
     await displayTable();
 
@@ -32,16 +32,20 @@ export async function AllMeasures({ parent }) {
                 const toolbar = MeasuresToolbar({
                     selected,
                     options: [
+                        'All',
                         'Published',
-                        'On Hold',
                         'Under Development',
-                        'All'
+                        'Mine',
+                        'On Hold'
                     ],
                     parent,
                     async onFilter(option) {
                         selected = option;
 
                         switch(option) {
+                            case 'Mine':
+                                filter = `(Author eq ${Store.user().SiteId} or AOEmail eq '${Store.user().Email}' or AltAOEmail eq '${Store.user().Email}' or DSEmail eq '${Store.user().Email}' or AltDSEmail eq '${Store.user().Email}')`;
+                                break;
                             case 'Published':
                                 filter = `Status eq 'Published'`;
                                 break;
@@ -49,7 +53,7 @@ export async function AllMeasures({ parent }) {
                                 filter = `Status eq 'On Hold'`;
                                 break;
                             case 'Under Development':
-                                filter = `(Author eq ${Store.user().SiteId} or AOEmail eq '${Store.user().Email}' or AltAOEmail eq '${Store.user().Email}') and (Status eq 'Under Development')`;
+                                filter = `Status eq 'Under Development'`;
                                 break;
                             case 'All':
                                 filter = `Status eq 'Published' or Status eq 'On Hold' or (Author eq ${Store.user().SiteId} or AOEmail eq '${Store.user().Email}' or AltAOEmail eq '${Store.user().Email}')`;

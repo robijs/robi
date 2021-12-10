@@ -153,7 +153,7 @@ export async function Checklist(param) {
         action() {
             history.back();
         },
-        classes: ['w-100', 'ml-2'],
+        classes: ['w-100'],
         parent,
         type: '',
         value: 'Back'

@@ -8,6 +8,7 @@ import { Store } from '../Core.js'
 export function Component(param) {
     const {
         name,
+        locked,
         html,
         style,
         parent,
@@ -30,7 +31,7 @@ export function Component(param) {
         }
 
         const css = /*html*/ `
-            <style type='text/css' data-name='${name || id}' data-type='component' data-locked='${name ? 'yes' : 'no'}' >
+            <style type='text/css' data-name='${name || id}' data-type='component' data-locked='${name || locked ? 'yes' : 'no'}' >
                 ${style.replace(/#id/g, `#${id}`)}
             </style>
         `;

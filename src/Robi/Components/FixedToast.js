@@ -12,6 +12,7 @@ export function FixedToast(param) {
     } = param;
 
     const component = Component({
+        locked: true,
         html: /*html*/ `
             <div class='fixed-toast slide-in ${type || 'inverse-colors'}'>
                 <div class='fixed-toast-title'>
