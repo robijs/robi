@@ -8,6 +8,7 @@ import { App, Store } from '../Core.js'
 import lists from '../../lists.js'
 import { LaunchApp } from './LaunchApp.js'
 
+// @START
 /**
  *
  * @param {*} param
@@ -246,3 +247,4 @@ export function TestInstall(param) {
         component: loadingBar
     });
 }
+// @END

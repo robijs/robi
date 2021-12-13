@@ -52,3 +52,4 @@ export function Authorize(param) {
         return undefined;
     }
 }
+// @END

@@ -12,6 +12,7 @@ import { DeleteList } from './DeleteList.js'
 import { CreateList } from './CreateList.js'
 import { CreateItem } from './CreateItem.js'
 
+// @START
 /**
  *
  * @param {*} event
@@ -513,3 +514,4 @@ export function ResetApp() {
 
     modal.add();
 }
+// @END

@@ -1,5 +1,6 @@
 import { App } from '../Core.js'
 
+// @START
 /**
  * 
  * @param {*} param 
@@ -28,3 +29,4 @@ export async function GetList(param) {
         }
     }
 }
+// @END

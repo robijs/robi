@@ -1,6 +1,7 @@
 import { App } from '../Core.js'
 import { Post } from './Post.js'
 
+// @START
 /**
  * 
  * @param {*} param 
@@ -18,3 +19,4 @@ export async function GetRequestDigest(param = {}) {
 
     return getRequestDigest.d.GetContextWebInformation.FormDigestValue;
 }
+// @END

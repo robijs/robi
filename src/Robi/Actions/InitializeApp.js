@@ -5,6 +5,7 @@ import { LaunchApp } from './LaunchApp.js'
 import { InstallApp } from './InstallApp.js'
 import { GetAppSetting } from './GetAppSetting.js'
 
+// @START
 /**
  *
  * @param {*} param
@@ -66,3 +67,4 @@ export function InitializeApp(param) {
         }
     }
 }
+// @END

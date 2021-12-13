@@ -1,5 +1,6 @@
 import { App } from '../Core.js'
 
+// @START
 /**
  * 
  * @param {*} param 
@@ -46,3 +47,4 @@ export async function GetItemCount(param) {
         // console.log(error);
     }
 }
+// @END

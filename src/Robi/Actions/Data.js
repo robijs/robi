@@ -1,5 +1,6 @@
 import { Store } from '../Core.js'
 
+// @START
 /**
  * 
  * @param {*} lists 
@@ -38,3 +39,4 @@ export async function Data(lists) {
 
     return responses
 }
+// @END

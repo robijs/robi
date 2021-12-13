@@ -1,5 +1,6 @@
 import { App } from '../Core.js'
 
+// @START
 /**
  * 
  * @param {*} param 
@@ -24,3 +25,4 @@ export async function GetWebLists() {
         }
     }
 }
+// @END

@@ -1,3 +1,4 @@
+// @START
 /**
  * {@link https://stackoverflow.com/a/2117523}
  */
@@ -6,3 +7,4 @@ export function GenerateUUID() {
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
 }
+// @END

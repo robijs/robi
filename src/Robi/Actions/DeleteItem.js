@@ -3,6 +3,7 @@ import { Get } from './Get.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { Post } from './Post.js'
 
+// @START
 /**
  * Update SharePoint list item.
  * @param {Object}  param          - Interface to UpdateItem() module.
@@ -58,3 +59,4 @@ export async function DeleteItem(param) {
         return deletedItem;
     }
 }
+// @END

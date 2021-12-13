@@ -1,3 +1,4 @@
+// @START
 /**
  *
  * @param {*} param
@@ -16,3 +17,4 @@ export function History(param) {
 
     document.title = title;
 }
+// @END

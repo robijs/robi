@@ -1,3 +1,4 @@
+// @START
 /**
  * 
  * @param {*} param 
@@ -34,3 +35,4 @@ export async function GetByUri(param) {
         return data.d;
     }
 }
+// @END

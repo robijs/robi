@@ -12,6 +12,7 @@ import { Modal } from '../Components/Modal.js'
 import { ReleaseNotesContainer } from '../Components/ReleaseNotesContainer.js'
 import { Store, Routes } from '../Core.js'
 
+// @START
 /**
  *
  * @param {*} param
@@ -184,3 +185,4 @@ export async function LaunchApp(param) {
         releaseNotes.add();
     }
 }
+// @END

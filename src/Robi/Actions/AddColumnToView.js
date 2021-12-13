@@ -56,3 +56,4 @@ export async function AddColumnToView(param) {
 
     return newField.d;
 }
+// @END

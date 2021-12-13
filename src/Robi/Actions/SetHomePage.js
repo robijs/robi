@@ -1,6 +1,7 @@
 import { App } from '../Core.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 
+// @START
 /**
  *
  * @param {*} param
@@ -33,3 +34,4 @@ export async function SetHomePage(param = {}) {
 
     return response;
 }
+// @END

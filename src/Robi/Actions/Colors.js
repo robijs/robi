@@ -1,5 +1,5 @@
+// @START
 /** {@link https://css-tricks.com/converting-color-spaces-in-javascript/} */
-
 const Colors = {
     "aliceblue": "#f0f8ff", "antiquewhite": "#faebd7", "aqua": "#00ffff", "aquamarine": "#7fffd4", "azure": "#f0ffff",
     "beige": "#f5f5dc", "bisque": "#ffe4c4", "black": "#000000", "blanchedalmond": "#ffebcd", "blue": "#0000ff", "blueviolet": "#8a2be2", "brown": "#a52a2a", "burlywood": "#deb887",
@@ -122,3 +122,4 @@ export {
     HexToRGB,
     HSLDarker
 }
+// @END

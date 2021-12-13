@@ -2,6 +2,7 @@ import { App } from '../Core.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { GetByUri } from './GetByUri.js'
 
+// @START
 /**
  * Create SharePoint list item.
  * @param {Object}   param          Interface to UpdateItem() module.
@@ -62,3 +63,4 @@ export async function UploadFiles(param) {
 
     return updatedItems;
 }
+// @END

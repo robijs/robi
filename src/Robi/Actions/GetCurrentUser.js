@@ -2,6 +2,7 @@ import { Get } from './Get.js'
 import { CreateItem } from './CreateItem.js'
 import { App } from '../Core.js'
 
+// @START
 /**
  * 
  * @param {*} param 
@@ -111,3 +112,4 @@ export async function GetCurrentUser(param) {
         }
     }
 }
+// @END

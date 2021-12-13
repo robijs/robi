@@ -1,5 +1,6 @@
 import { Get } from './Get.js'
 
+// @START
 /**
  * 
  * @param {*} param 
@@ -24,3 +25,4 @@ export async function GetAttachments(param) {
         console.log(error);
     }
 }
+// @END
