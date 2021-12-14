@@ -1,4 +1,4 @@
-import { mkdir, readdir, readFile, writeFile } from 'fs/promises';
+import { readdir, readFile, writeFile } from 'fs/promises'
 
 let license = [
     `// Copyright ${new Date().getFullYear()} Stephen Matheis`,
@@ -66,6 +66,7 @@ async function getFiles(path) {
 
 async function buildFile({ paths, imports, importFile, file }) {
     let output = license.join('\n');
+    let body = '';
     let importNames = [];
 
     // Imports
@@ -73,18 +74,52 @@ async function buildFile({ paths, imports, importFile, file }) {
         importNames = importNames.concat(await readdir(path)); 
     }
 
+    // output += [
+    //     '',
+    //     'import {',
+    //     importNames.map(name => `    ${name.replace('.js', '')}`).join(',\n'),
+    //     `} from './${importFile}'`,
+    //     ''
+    // ].join('\n');
+
+    for (const path of paths) {
+        body += await getFiles(path);
+        // output += await getFiles(path);
+    }
+
+    // output += [
+    //     '',
+    //     'import {',
+    //     importNames.map(name => `    ${name.replace('.js', '')}`).join(',\n'),
+    //     `} from './${importFile}'`,
+    //     ''
+    // ].join('\n');
+
     output += [
         '',
         'import {',
-        importNames.map(name => `    ${name.replace('.js', '')}`).join(',\n'),
+        importNames
+        .filter(file => {
+            const name = file.replace('.js', '')
+            const found = body.includes(`${name}(`);
+            
+            if (found) {
+                return file;
+            }
+        })
+        .map(name => `    ${name.replace('.js', '')}`).join(',\n'),
         `} from './${importFile}'`,
         ''
     ].join('\n');
 
-    for (const path of paths) {
-        output += await getFiles(path);
-    }
+    // importNames.forEach(file => {
+    //     const name = file.replace('.js', '')
+    //     console.log(`Function: ${name}`);
+    //     const found = body.search(`${name}\\(`);
+    //     console.log(found);
+    // });
 
-    await mkdir('../src/Robi/dist', { recursive: true });
-    await writeFile(`../src/Robi/dist/${file}`, output);
+    output += body;
+
+    await writeFile(`../src/Robi/${file}`, output);
 }

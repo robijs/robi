@@ -476,6 +476,40 @@
       "Created": "Tue, 14 Dec 2021 04:21:58 GMT",
       "Modified": "Tue, 14 Dec 2021 04:21:58 GMT",
       "Id": 28
+    },
+    {
+      "SessionId": null,
+      "Message": "Store is not defined",
+      "Error": "ReferenceError: Store is not defined\n    at Sidebar (http://127.0.0.1:8080/src/Robi/RobiUI.js:13009:25)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4646:64)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 04:45:58 GMT",
+      "Modified": "Tue, 14 Dec 2021 04:45:58 GMT",
+      "Id": 29
+    },
+    {
+      "SessionId": null,
+      "Message": "Store is not defined",
+      "Error": "ReferenceError: Store is not defined\n    at Sidebar (http://127.0.0.1:8080/src/Robi/RobiUI.js:13009:25)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4646:64)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 04:52:09 GMT",
+      "Modified": "Tue, 14 Dec 2021 04:52:09 GMT",
+      "Id": 30
     }
   ],
   "Log": [
@@ -2365,6 +2399,108 @@
       "Created": "Tue, 14 Dec 2021 04:25:22 GMT",
       "Modified": "Tue, 14 Dec 2021 04:25:22 GMT",
       "Id": 111
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4749:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 04:27:52 GMT",
+      "Modified": "Tue, 14 Dec 2021 04:27:52 GMT",
+      "Id": 112
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4749:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 04:28:24 GMT",
+      "Modified": "Tue, 14 Dec 2021 04:28:24 GMT",
+      "Id": 113
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4749:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 04:36:27 GMT",
+      "Modified": "Tue, 14 Dec 2021 04:36:27 GMT",
+      "Id": 114
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4749:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 04:40:25 GMT",
+      "Modified": "Tue, 14 Dec 2021 04:40:25 GMT",
+      "Id": 115
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4698:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 04:48:44 GMT",
+      "Modified": "Tue, 14 Dec 2021 04:48:44 GMT",
+      "Id": 116
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4749:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 04:51:46 GMT",
+      "Modified": "Tue, 14 Dec 2021 04:51:46 GMT",
+      "Id": 117
     }
   ],
   "Users": [
