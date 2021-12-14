@@ -1,6 +1,7 @@
 import { Component } from '../Actions/Component.js'
 import { App } from '../Core.js'
 
+// @START-File
 /**
  *
  * @param {*} param
@@ -88,3 +89,4 @@ export function TableToolbar(param) {
 
     return component;
 }
+// @END-File

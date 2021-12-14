@@ -655,7 +655,6 @@ export function BlurOnSave({ message }) {
 export async function CheckLists() {
     const listsToIgnore = ['App', 'Composed Looks', 'Documents', 'Master Page Gallery', 'MicroFeed', 'Site Assets', 'Site Pages'];
     const coreLists = Lists();
-    // const appLists = lists;
     const appLists = App.lists();
     const allLists = coreLists.concat(appLists);
     const filesLists = allLists.filter(item => item.options?.files).map(item => { return { list: `${item.list}Files` } }); // Don't include ListNameFiles if options.files is true
@@ -2407,6 +2406,7 @@ export function DeleteApp() {
             console.log(coreLists);
 
             // All Lists
+            const lists = App.lists();
             const allLists = Lists().concat(lists);
             console.log(allLists);
 
@@ -5418,12 +5418,12 @@ export function ReinstallApp() {
             console.log(coreLists);
 
             // App lists
-            // const appLists = lists;
             const appLists = App.lists();
-            console.log(coreLists);
+            console.log(appLists);
 
             // All Lists
-            const allLists = Lists().concat(lists);
+            const lists = App.lists();
+            const allLists = Lists().concat(appLists);
             console.log(allLists);
 
             modalBody.insertAdjacentHTML('beforeend', /*html*/ `

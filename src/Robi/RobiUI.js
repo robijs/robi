@@ -4122,6 +4122,8 @@ export async function DeveloperLinks(param) {
         parent,
     } = param;
 
+    const lists = App.lists();
+
     addSection({
         title: 'SharePoint',
         buttons: [
@@ -15270,14 +15272,47 @@ export function SvgDefs(param) {
  */
 export async function Table(param) {
     const {
-        addButton, addButtonValue, border, buttonColor, checkboxes, createdRow, defaultButtons, displayForm, editForm, editFormTitle, exportButtons, filter, formFooter, formTitleField, headerFilter, heading, headingColor, headingMargin, headingSize, list, margin, newForm, newFormTitle, newFormData, onDelete, onUpdate, openInModal, order, padding, parent, showId, striped, titleDisplayName, toolbar, view, width
+        addButton,
+        addButtonValue,
+        border,
+        buttonColor,
+        checkboxes,
+        createdRow,
+        defaultButtons,
+        displayForm,
+        editForm,
+        editFormTitle,
+        exportButtons,
+        filter,
+        formFooter,
+        formTitleField,
+        headerFilter,
+        heading,
+        headingColor,
+        headingMargin,
+        headingSize,
+        list,
+        margin,
+        newForm,
+        newFormTitle,
+        newFormData,
+        onDelete,
+        onUpdate,
+        openInModal,
+        order,
+        padding,
+        parent,
+        showId,
+        striped,
+        titleDisplayName,
+        toolbar,
+        view,
+        width
     } = param;
 
     let {
         buttons, fields, items
     } = param;
-
-    const lists = App.lists();
 
     const tableContainer = Container({
         display: 'block',
@@ -15297,16 +15332,17 @@ export async function Table(param) {
             text: heading || (heading === '' ? '' : list.split(/(?=[A-Z])/).join(' ')),
             size: headingSize,
             color: headingColor,
-            margin: headingMargin || (toolbar ? '20px 0px 30px 0px' : '20px 0px 15px 0px'),
+            // margin: headingMargin || (toolbar ? '20px 0px 30px 0px' : '20px 0px 15px 0px'),
+            margin: headingMargin || '20px 0px 15px 0px',
             parent: tableContainer
         });
 
         legendHeading.add();
     }
 
-    if (toolbar) {
-        toolbar({ parent: legendHeading || parent });
-    }
+    // if (toolbar) {
+    //     toolbar({ parent: legendHeading || parent });
+    // }
 
     /** Columns */
     const headers = [];
@@ -15318,6 +15354,9 @@ export async function Table(param) {
             data: null,
         });
     }
+
+    // App Lists
+    const lists = App.lists();
 
     /** Item Id */
     const idProperty = 'Id';
@@ -15338,7 +15377,7 @@ export async function Table(param) {
             list,
             select: '*,Author/Name,Author/Title,Editor/Name,Editor/Title',
             expand: `Author/Id,Editor/Id`,
-            filter
+            // filter
         });
 
         // Get fields in view
@@ -15693,6 +15732,16 @@ export async function Table(param) {
         });
     }
 
+    // Toolbar
+    if (toolbar) {
+        const toolbar = TableToolbar({
+            options: toolbar,
+            parent
+        });
+    
+        toolbar.add();
+    }
+
     /** Selected form */
     let selectedItem;
     let selectedRow;
@@ -15903,6 +15952,94 @@ export async function Table(param) {
     }
 
     return table;
+}
+
+/**
+ *
+ * @param {*} param
+ * @returns
+ */
+export function TableToolbar(param) {
+    const {
+        parent, options, position
+    } = param;
+
+    const component = Component({
+        html: /*html*/ `
+            <div class='btn-toolbar' role='toolbar'>
+                <div class='btn-group' role='group'>
+                    ${buildFilters()}
+                </div>
+            </div>
+        `,
+        style: /*css*/ `
+            #id {
+                align-items: center;
+                font-size: 14px;
+            }
+
+            #id .btn:focus,
+            #id .btn:active {
+                box-shadow: none ;
+            }
+
+            #id .ask-a-question {
+                background: #e9ecef;
+                color: ${App.get('primaryColor')};
+                font-weight: 500;
+            }
+            
+            #id .search-questions {
+                background: #e9ecef !important;
+                border-color: transparent;
+                border-radius: 8px;
+                min-width: 250px;
+                min-height: 35px;
+            }
+
+            #id .btn-robi-primary {
+                color: white;
+                background: ${App.get('primaryColor')};
+            }
+
+            #id .btn-outline-robi-primary {
+                color: ${App.get('primaryColor')};
+                background-color: initial;
+                border-color: ${App.get('primaryColor')};
+            }
+        `,
+        parent,
+        position,
+        events: [
+            {
+                selector: '#id .filter',
+                event: 'click',
+                listener(event) {
+                    // // Deselect all options
+                    // component.findAll('.filter').forEach(button => {
+                    //     button.classList.remove('btn-robi-primary');
+                    //     button.classList.add('btn-outline-robi-primary');
+                    // });
+
+                    // // Select clicked button
+                    // this.classList.remove('btn-outline-robi-primary');
+                    // this.classList.add('btn-robi-primary');
+
+                    // onFilter(event.target.innerText);
+                }
+            }
+        ]
+    });
+
+    function buildFilters() {
+        return options.map((option, index) => {
+            return /*html*/ `
+                <button type='button' class='btn ${index === 0 ? 'btn-robi-primary' : 'btn-outline-robi-primary'} filter'>${option}</button>
+            `;
+        }).join('\n');
+    }
+
+    return component;
 }
 
 /**

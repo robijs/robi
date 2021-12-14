@@ -10,8 +10,8 @@ import { EditForm } from './EditForm.js'
 import { NewForm } from './NewForm.js'
 import { TableToolbar } from './TableToolbar.js'
 import { Lists } from '../Models/Lists.js'
-import lists from '../../lists.js'
 
+// @START-File
 /**
  *
  * @param {*} param
@@ -101,6 +101,9 @@ export async function Table(param) {
             data: null,
         });
     }
+
+    // App Lists
+    const lists = App.lists();
 
     /** Item Id */
     const idProperty = 'Id';
@@ -697,3 +700,4 @@ export async function Table(param) {
 
     return table;
 }
+// @END-File

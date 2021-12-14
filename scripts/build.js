@@ -21,12 +21,12 @@ try {
     // Robi
     await buildFile({
         paths: [
-            '../src/Robi/Actions',
-            '../src/Robi/Core',
-            '../src/Robi/Models'
+            './src/Robi/Actions',
+            './src/Robi/Core',
+            './src/Robi/Models'
         ],
         imports: [
-            '../src/Robi/Components'
+            './src/Robi/Components'
         ],
         importFile: 'RobiUI.js',
         file:'Robi.js'
@@ -35,12 +35,12 @@ try {
     // RobiUI
     await buildFile({
         paths: [
-            '../src/Robi/Components',
+            './src/Robi/Components',
         ],
         imports: [
-            '../src/Robi/Actions',
-            '../src/Robi/Core',
-            '../src/Robi/Models'
+            './src/Robi/Actions',
+            './src/Robi/Core',
+            './src/Robi/Models'
         ],
         importFile: 'Robi.js',
         file: 'RobiUI.js'
@@ -126,5 +126,7 @@ async function buildFile({ paths, imports, importFile, file }) {
 
     output += body;
 
-    await writeFile(`../src/Robi/${file}`, output);
+    await writeFile(`./src/Robi/${file}`, output);
+
+    console.log(`Built ${file} in src/Robi`);
 }

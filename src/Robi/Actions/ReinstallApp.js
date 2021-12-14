@@ -33,7 +33,7 @@ export function ReinstallApp() {
             console.log(appLists);
 
             // All Lists
-            const lists 
+            const lists = App.lists();
             const allLists = Lists().concat(appLists);
             console.log(allLists);
 
