@@ -12,7 +12,8 @@ import { CreateItem } from './CreateItem.js'
 import { CreateColumn } from './CreateColumn.js'
 import { DeleteList } from './DeleteList.js'
 import { DeleteColumn } from './DeleteColumn.js'
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 
 // @START-File
 /**

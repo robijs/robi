@@ -11,7 +11,8 @@ import { CreateLibrary } from './CreateLibrary.js'
 import { CreateSite } from './CreateSite.js'
 import { CopyRecurse } from './CopyRecurse.js'
 import { SetHomePage } from './SetHomePage.js'
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 
 // @START-File
 /**

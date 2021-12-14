@@ -3,7 +3,7 @@ import { Alert } from './Alert.js'
 import { Card } from './Card.js'
 import { FoldingCube } from './FoldingCube.js'
 import { ReleaseNotes } from './ReleaseNotes.js'
-import { App } from '../Core.js'
+import { App } from '../Core/App.js'
 
 /**
  *

@@ -5,7 +5,7 @@ import { ResetApp } from '../Actions/ResetApp.js'
 import { ReinstallApp } from '../Actions/ReinstallApp.js'
 import { ModifyFile } from '../Actions/ModifyFile.js'
 import { CheckLists } from '../Actions/CheckLists.js'
-import { App } from '../Core.js'
+import { App } from '../Core/App.js'
 
 /**
  *

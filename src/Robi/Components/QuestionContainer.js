@@ -4,7 +4,7 @@ import { Modal } from './Modal.js'
 import { NewReply } from './NewReply.js'
 import { Question } from './Question.js'
 import { Reply } from './Reply.js'
-import { Store } from '../Core.js'
+import { Store } from '../Core/Store.js'
 import { QuestionModel } from '../Models/QuestionModel.js'
 import { EditQuestion } from './EditQuestion.js'
 

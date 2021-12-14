@@ -11,7 +11,8 @@ import { QuestionCards } from './QuestionCards.js'
 import { NewQuestion } from './NewQuestion.js'
 import { QuestionModel } from '../Models/QuestionModel.js'
 import { QuestionsModel } from '../Models/QuestionsModel.js'
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 import { LoadingSpinner } from './LoadingSpinner.js'
 
 /**

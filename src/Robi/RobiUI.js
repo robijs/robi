@@ -86,7 +86,6 @@ import { TasksList } from './Components/TasksList.js'
 import { Timer } from './Components/Timer.js'
 import { Title } from './Components/Title.js'
 import { Toast } from './Components/Toast.js'
-import { Toolbar } from './Components/Toolbar.js'
 import { Unauthorized } from './Components/Unauthorized.js'
 import { UpgradeAppButton } from './Components/UpgradeAppButton.js'
 import { UploadButton } from './Components/UploadButton.js'
@@ -183,7 +182,6 @@ export {
     Timer,
     Title,
     Toast,
-    Toolbar,
     Unauthorized,
     UpgradeAppButton,
     UploadButton,

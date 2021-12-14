@@ -3,7 +3,8 @@ import { Container } from './Container.js'
 import { Files } from './Files.js'
 import { Heading } from './Heading.js'
 import { LoadingSpinner } from './LoadingSpinner.js'
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 
 /**
  *

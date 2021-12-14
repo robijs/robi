@@ -1,5 +1,6 @@
 import { Component } from '../Actions/Component.js'
-import { App, Store } from '../Core.js';
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js';
 
 /**
  *

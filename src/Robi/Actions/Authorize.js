@@ -1,4 +1,4 @@
-import { Store } from '../Core.js'
+import { Store } from '../Core/Store.js'
 import { Route } from './Route.js'
 
 // @START-File

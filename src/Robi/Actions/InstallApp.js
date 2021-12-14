@@ -9,7 +9,8 @@ import { UpdateItem } from './UpdateItem.js'
 import { CreateItem } from './CreateItem.js'
 import { CreateList } from './CreateList.js'
 import { LaunchApp } from './LaunchApp.js'
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 import lists from '../../lists.js'
 
 // TODO: Remove mode and install check from InstallApp

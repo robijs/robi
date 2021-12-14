@@ -1,7 +1,7 @@
 import { Card } from './Card.js'
 import { Container } from './Container.js'
 import { Button } from './Button.js'
-import { App } from '../Core.js'
+import { App } from '../Core/App.js'
 import lists from '../../lists.js'
 
 /**

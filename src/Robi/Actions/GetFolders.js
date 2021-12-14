@@ -1,5 +1,5 @@
 import { GetRequestDigest  } from './GetRequestDigest.js'
-import { App } from '../Core.js'
+import { App } from '../Core/App.js'
 
 // @START-File
 /**

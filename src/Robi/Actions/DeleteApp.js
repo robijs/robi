@@ -5,7 +5,8 @@ import { InstallConsole } from '../Components/InstallConsole.js'
 import { Container } from '../Components/Container.js'
 import { Lists } from '../Models/Lists.js'
 import lists from '../../lists.js'
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 import { DeleteList } from './DeleteList.js'
 
 // @START-File

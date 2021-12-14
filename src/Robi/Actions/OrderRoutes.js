@@ -1,4 +1,4 @@
-import { App } from '../Core.js'
+import { App } from '../Core/App.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { Wait } from './Wait.js'
 

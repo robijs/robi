@@ -10,7 +10,8 @@ import { NumberField } from './NumberField.js'
 import { SingleLineTextField } from './SingleLineTextField.js'
 import { TaggleField } from './TaggleField.js'
 import { AttachmentsContainer } from './AttachmentsContainer.js'
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 
 /**
  *

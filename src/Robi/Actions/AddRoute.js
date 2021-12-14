@@ -6,7 +6,8 @@ import { Alert } from '../Components/Alert.js'
 import { SingleLineTextField } from '../Components/SingleLineTextField.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { CreateFolder } from '../Actions/CreateFolder.js'
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 import { Wait } from './Wait.js'
 
 // @START-File

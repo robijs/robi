@@ -10,7 +10,8 @@ import { MainContainer } from '../Components/MainContainer.js'
 import { FixedToast } from '../Components/FixedToast.js'
 import { Modal } from '../Components/Modal.js'
 import { ReleaseNotesContainer } from '../Components/ReleaseNotesContainer.js'
-import { Store, Routes } from '../Core.js'
+import { Routes } from '../Core/Routes.js'
+import { Store } from '../Core/Store.js'
 
 // @START-File
 /**

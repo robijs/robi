@@ -2,7 +2,7 @@ import { Get } from '../Actions/Get.js'
 import { Title } from './Title.js'
 import { Container } from './Container.js'
 import { QuestionType } from './QuestionType.js'
-import { App } from '../Core.js'
+import { App } from '../Core/App.js'
 import { LoadingSpinner } from './LoadingSpinner.js'
 
 /**

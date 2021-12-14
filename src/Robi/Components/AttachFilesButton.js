@@ -1,6 +1,6 @@
 import { Component } from '../Actions/Component.js'
 import { AttachFiles } from '../Actions/AttachFiles.js'
-import { App } from '../Core.js';
+import { App } from '../Core/App.js';
 
 /**
  *

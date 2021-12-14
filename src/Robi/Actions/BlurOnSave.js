@@ -1,6 +1,6 @@
 import { Modal } from '../Components/Modal.js'
 import { LoadingSpinner } from '../Components/LoadingSpinner.js'
-import { App } from '../Core.js'
+import { App } from '../Core/App.js'
 import { Wait } from './Wait.js';
 
 // @START-File

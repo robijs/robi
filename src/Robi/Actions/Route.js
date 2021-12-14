@@ -1,5 +1,6 @@
 import { ViewContainer } from '../Components/ViewContainer.js'
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 import { History } from './History.js'
 import { Log } from './Log.js'
 

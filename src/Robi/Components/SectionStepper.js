@@ -1,6 +1,6 @@
 import { Component } from '../Actions/Component.js'
 import { Route } from '../Actions/Route.js'
-import { App } from '../Core.js'
+import { App } from '../Core/App.js'
 
 // TODO: If selected group is hidden, scroll container
 /**

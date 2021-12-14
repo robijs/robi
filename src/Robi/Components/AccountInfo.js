@@ -1,6 +1,7 @@
 import { Card } from './Card.js'
 import { SingleLineTextField } from './SingleLineTextField.js'
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 
 /**
  *

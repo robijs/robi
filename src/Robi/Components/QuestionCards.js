@@ -1,7 +1,7 @@
 import { Alert } from './Alert.js'
 import { Container } from './Container.js'
 import { QuestionCard } from './QuestionCard.js'
-import { Store } from '../Core.js'
+import { Store } from '../Core/Store.js'
 
 /**
  *

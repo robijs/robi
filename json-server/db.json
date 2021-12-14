@@ -1,6 +1,211 @@
 {
   "Comments": [],
-  "Errors": [],
+  "Errors": [
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'testInstall')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'testInstall')\n    at InitializeApp (http://127.0.0.1:8080/src/Robi/Actions/InitializeApp.js:58:27)\n    at Start.window.onload (http://127.0.0.1:8080/src/Robi/Actions/Start.js:92:9)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:44:19 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:44:19 GMT",
+      "Id": 1
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'testInstall')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'testInstall')\n    at InitializeApp (http://127.0.0.1:8080/src/Robi/Actions/InitializeApp.js:58:27)\n    at Start.window.onload (http://127.0.0.1:8080/src/Robi/Actions/Start.js:92:9)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:46:17 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:46:17 GMT",
+      "Id": 2
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'testInstall')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'testInstall')\n    at InitializeApp (http://127.0.0.1:8080/src/Robi/Actions/InitializeApp.js:58:27)\n    at Start.window.onload (http://127.0.0.1:8080/src/Robi/Actions/Start.js:92:9)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:46:56 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:46:56 GMT",
+      "Id": 3
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'testInstall')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'testInstall')\n    at InitializeApp (http://127.0.0.1:8080/src/Robi/Actions/InitializeApp.js:60:27)\n    at Start.window.onload (http://127.0.0.1:8080/src/Robi/Actions/Start.js:92:9)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:47:14 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:47:14 GMT",
+      "Id": 4
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'testInstall')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'testInstall')\n    at InitializeApp (http://127.0.0.1:8080/src/Robi/Actions/InitializeApp.js:60:27)\n    at Start.window.onload (http://127.0.0.1:8080/src/Robi/Actions/Start.js:92:9)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:47:19 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:47:19 GMT",
+      "Id": 5
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'testInstall')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'testInstall')\n    at InitializeApp (http://127.0.0.1:8080/src/Robi/Actions/InitializeApp.js:58:27)\n    at Start.window.onload (http://127.0.0.1:8080/src/Robi/Actions/Start.js:92:9)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:47:21 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:47:21 GMT",
+      "Id": 6
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'testInstall')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'testInstall')\n    at InitializeApp (http://127.0.0.1:8080/src/Robi/Actions/InitializeApp.js:58:27)\n    at Start.window.onload (http://127.0.0.1:8080/src/Robi/Actions/Start.js:92:9)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:48:46 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:48:46 GMT",
+      "Id": 7
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'length')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'length')\n    at Sidebar (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:285:62)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:95:64)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:50:53 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:50:53 GMT",
+      "Id": 8
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'get')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'get')\n    at Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:42:39)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:146:5)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:51:20 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:51:20 GMT",
+      "Id": 9
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'show')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'show')\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:123:18)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:52:47 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:52:47 GMT",
+      "Id": 10
+    },
+    {
+      "SessionId": null,
+      "Message": "Uncaught ReferenceError: Developer is not defined",
+      "Error": "{\"stack\":\"ReferenceError: Developer is not defined\\n    at Object.go (http://127.0.0.1:8080/src/Robi/Core/Routes.js:27:13)\\n    at Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:132:11)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1031:9)\",\"message\":\"Developer is not defined\"}",
+      "Source": "http://127.0.0.1:8080/src/Robi/Core/Routes.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:55:11 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:55:11 GMT",
+      "Id": 11
+    },
+    {
+      "SessionId": null,
+      "Message": "Uncaught ReferenceError: Developer is not defined",
+      "Error": "{\"stack\":\"ReferenceError: Developer is not defined\\n    at Object.go (http://127.0.0.1:8080/src/Robi/Core/Routes.js:27:13)\\n    at Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:132:11)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1031:9)\",\"message\":\"Developer is not defined\"}",
+      "Source": "http://127.0.0.1:8080/src/Robi/Core/Routes.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 02:00:46 GMT",
+      "Modified": "Tue, 14 Dec 2021 02:00:46 GMT",
+      "Id": 12
+    }
+  ],
   "Log": [
     {
       "Title": "First Last logged in",
@@ -1327,6 +1532,312 @@
       "Created": "Tue, 14 Dec 2021 00:22:17 GMT",
       "Modified": "Tue, 14 Dec 2021 00:22:17 GMT",
       "Id": 78
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:138:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:40:25 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:40:25 GMT",
+      "Id": 79
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:138:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:41:13 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:41:13 GMT",
+      "Id": 80
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:138:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:41:54 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:41:54 GMT",
+      "Id": 81
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:138:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:51:20 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:51:20 GMT",
+      "Id": 82
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:54:33 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:54:33 GMT",
+      "Id": 83
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:54:59 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:54:59 GMT",
+      "Id": 84
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:55:07 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:55:07 GMT",
+      "Id": 85
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1031:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:55:10 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:55:10 GMT",
+      "Id": 86
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1031:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:55:11 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:55:11 GMT",
+      "Id": 87
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:55:56 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:55:56 GMT",
+      "Id": 88
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:58:11 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:58:11 GMT",
+      "Id": 89
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:58:16 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:58:16 GMT",
+      "Id": 90
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 01:58:46 GMT",
+      "Modified": "Tue, 14 Dec 2021 01:58:46 GMT",
+      "Id": 91
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 02:00:41 GMT",
+      "Modified": "Tue, 14 Dec 2021 02:00:41 GMT",
+      "Id": 92
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1031:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 02:00:45 GMT",
+      "Modified": "Tue, 14 Dec 2021 02:00:45 GMT",
+      "Id": 93
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1031:9)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 02:00:46 GMT",
+      "Modified": "Tue, 14 Dec 2021 02:00:46 GMT",
+      "Id": 94
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 02:03:21 GMT",
+      "Modified": "Tue, 14 Dec 2021 02:03:21 GMT",
+      "Id": 95
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 02:04:15 GMT",
+      "Modified": "Tue, 14 Dec 2021 02:04:15 GMT",
+      "Id": 96
     }
   ],
   "Users": [

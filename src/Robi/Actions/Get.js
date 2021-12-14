@@ -1,6 +1,6 @@
-import { App } from '../Core.js'
+import { App } from '../Core/App.js'
 import { GetItemCount } from './GetItemCount.js'
-import { Store } from '../Core.js';
+import { Store } from '../Core/Store.js';
 
 // @START-File
 /**

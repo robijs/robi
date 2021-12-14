@@ -2,7 +2,8 @@ import { Card } from './Card.js'
 import { DashboardBanner } from './DashboardBanner.js' 
 import { LoadingSpinner } from './LoadingSpinner.js' 
 import { SiteUsage } from './SiteUsage.js' 
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 import { StartAndEndOfWeek } from '../Models/StartAndEndOfWeek.js'
 
 /**

@@ -1,3 +1,6 @@
+import { HexToHSL, HexToRGB, NameToHex } from '../Actions/Colors.js'
+import { Themes } from '../Models/Themes.js'
+
 // @START-File
 let appSettings = {};
 let appLists;
@@ -11,7 +14,7 @@ const App = {
         const { library, defaultRoute, theme } = settings;
 
         // Set lists
-        settings.lists = lists;
+        appLists = lists;
 
         // Set mode
         if (location.href.includes('localhost') || location.href.includes('127.0.0.1')) {

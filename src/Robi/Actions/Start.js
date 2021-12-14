@@ -1,6 +1,6 @@
 import { AppContainer } from '../Components/AppContainer.js'
-import { App } from '../Core.js'
-import { Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 import { AddLinks } from './AddLinks.js'
 import { InitializeApp } from './InitializeApp.js'
 import { LogError } from './LogError.js'

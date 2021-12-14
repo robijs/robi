@@ -5,7 +5,7 @@ import { BuildInfo } from './BuildInfo.js'
 import { DeveloperLinks } from './DeveloperLinks.js'
 import { ReleaseNotesContainer } from './ReleaseNotesContainer.js'
 import { SiteUsageContainer } from './SiteUsageContainer.js'
-import { Store } from '../Core.js'
+import { Store } from '../Core/Store.js'
 
 /**
  * 

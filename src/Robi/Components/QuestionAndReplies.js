@@ -5,7 +5,8 @@ import { Container } from './Container.js'
 import { LoadingSpinner } from './LoadingSpinner.js'
 import { QuestionContainer } from './QuestionContainer.js'
 import { QuestionsModel } from '../Models/QuestionsModel.js'
-import { App, Store } from '../Core.js'
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 
 /**
  *

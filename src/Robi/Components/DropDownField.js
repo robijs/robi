@@ -1,5 +1,5 @@
 import { Component } from '../Actions/Component.js'
-import { App } from '../Core.js';
+import { App } from '../Core/App.js';
 import { DropDownMenu } from './DropDownMenu.js'
 
 /**

@@ -1,4 +1,4 @@
-import { Store } from '../Core.js'
+import { Store } from '../Core/Store.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 
 // @START-File

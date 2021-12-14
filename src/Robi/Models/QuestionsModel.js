@@ -1,4 +1,4 @@
-import { Store } from '../Core.js'
+import { Store } from '../Core/Store.js'
 import { Get } from '../Actions/Get.js'
 import { QuestionModel } from './QuestionModel.js'
 

@@ -1,6 +1,6 @@
 import { Get } from '../Actions/Get.js'
 import { Comments } from './Comments.js'
-import { App } from '../Core.js'
+import { App } from '../Core/App.js'
 
 /**
  *
