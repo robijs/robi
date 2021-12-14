@@ -9,6 +9,7 @@ import { Modal } from './Modal.js'
 import { EditForm } from './EditForm.js'
 import { NewForm } from './NewForm.js'
 import { TableToolbar } from './TableToolbar.js'
+import { App } from '../Core/App.js'
 import { Lists } from '../Models/Lists.js'
 
 // @START-File
@@ -482,12 +483,12 @@ export async function Table(param) {
     // Toolbar
     // Test
     if (toolbar) {
-        // const toolbar = TableToolbar({
-        //     options: toolbar,
-        //     parent
-        // });
+        const toolbar = TableToolbar({
+            options: toolbar,
+            parent
+        });
     
-        // toolbar.add();
+        toolbar.add();
     }
 
     /** Selected form */
