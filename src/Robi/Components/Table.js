@@ -9,7 +9,6 @@ import { Modal } from './Modal.js'
 import { EditForm } from './EditForm.js'
 import { NewForm } from './NewForm.js'
 import { Lists } from '../Models/Lists.js'
-import lists from '../../lists.js'
 
 // @START-File
 /**
@@ -25,6 +24,8 @@ export async function Table(param) {
     let {
         buttons, fields, items
     } = param;
+
+    const lists = App.lists();
 
     const tableContainer = Container({
         display: 'block',

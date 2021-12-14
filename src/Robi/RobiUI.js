@@ -53,14 +53,18 @@ import {
     GetRootRequestDigest,
     GetSiteUsers,
     GetWebLists,
+    HexToHSL,
+    HexToRGB,
     HideRoutes,
     History,
+    HSLDarker,
     InitializeApp,
     InstallApp,
     LaunchApp,
     Log,
     LogError,
     ModifyFile,
+    NameToHex,
     OrderRoutes,
     Post,
     ReinstallApp,
@@ -15313,6 +15317,8 @@ export async function Table(param) {
     let {
         buttons, fields, items
     } = param;
+
+    const lists = App.lists();
 
     const tableContainer = Container({
         display: 'block',

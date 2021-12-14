@@ -1,5 +1,5 @@
 import { HexToHSL } from '../Actions/HexToHSL.js'
-import { HexToRGB } from '../Actions/HexToHSL.js'
+import { HexToRGB } from '../Actions/HexToRGB.js'
 import { NameToHex } from '../Actions/NameToHex.js'
 import { Themes } from '../Models/Themes.js'
 

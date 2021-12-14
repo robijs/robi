@@ -1,5 +1,5 @@
-import { Component } from '../../Robi/Actions/Component.js'
-import { App } from '../../Robi/Core/App.js'
+import { Component } from '../../Robi/Robi.js'
+import { App } from '../../Robi/Robi.js'
 
 /**
  *
