@@ -1,6 +1,6 @@
-import { HSLDarker } from '../Actions/Colors.js';
+import { HSLDarker } from '../Actions/HSLDarker.js'
 import { Component } from '../Actions/Component.js'
-import { App } from '../Core/App.js';
+import { App } from '../Core/App.js'
 
 // @START-File
 /**

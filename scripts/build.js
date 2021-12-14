@@ -1,6 +1,6 @@
 import { mkdir, readdir, readFile, writeFile } from 'fs/promises';
 
-let output = [
+let license = [
     `// Copyright ${new Date().getFullYear()} Stephen Matheis`,
     '',
     '// Permission to use, copy, modify, and/or distribute this software for any',
@@ -15,21 +15,36 @@ let output = [
     '// CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN',
     '// CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.',
     ''
-].join('\n');
+];
 
 try {
-    const paths = [
-        '../src/Robi/Actions',
-        '../src/Robi/Core',
-        '../src/Robi/Models'
-    ];
+    // Robi
+    await buildFile({
+        paths: [
+            '../src/Robi/Actions',
+            '../src/Robi/Core',
+            '../src/Robi/Models'
+        ],
+        imports: [
+            '../src/Robi/Components'
+        ],
+        importFile: 'RobiUI.js',
+        file:'Robi.js'
+    });
 
-    for (const path of paths) {
-        output += await getFiles(path);
-    }
-
-    const dir = mkdir('../src/Robi/dist', { recursive: true });
-    const build = await writeFile('../src/Robi/dist/Robi.js', output);
+    // RobiUI
+    await buildFile({
+        paths: [
+            '../src/Robi/Components',
+        ],
+        imports: [
+            '../src/Robi/Actions',
+            '../src/Robi/Core',
+            '../src/Robi/Models'
+        ],
+        importFile: 'Robi.js',
+        file: 'RobiUI.js'
+    });
 } catch (err) {
     console.error(err);
 }
@@ -47,4 +62,29 @@ async function getFiles(path) {
     }
 
     return output;
+}
+
+async function buildFile({ paths, imports, importFile, file }) {
+    let output = license.join('\n');
+    let importNames = [];
+
+    // Imports
+    for (const path of imports) {
+        importNames = importNames.concat(await readdir(path)); 
+    }
+
+    output += [
+        '',
+        'import {',
+        importNames.map(name => `    ${name.replace('.js', '')}`).join(',\n'),
+        `} from './${importFile}'`,
+        ''
+    ].join('\n');
+
+    for (const path of paths) {
+        output += await getFiles(path);
+    }
+
+    await mkdir('../src/Robi/dist', { recursive: true });
+    await writeFile(`../src/Robi/dist/${file}`, output);
 }

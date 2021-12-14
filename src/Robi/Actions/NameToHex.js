@@ -27,5 +27,14 @@ const Colors = {
     "yellow": "#ffff00", "yellowgreen": "#9acd32"
 };
 
-export { Colors }
+/**
+ * 
+ * @param {*} color 
+ * @returns 
+ */
+function NameToHex(color) {
+    return Colors[color.toLowerCase()] || color;
+}
+
+export { NameToHex }
 // @END-File

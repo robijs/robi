@@ -1,4 +1,6 @@
-import { NameToHex, HexToRGB, HexToHSL } from './Actions/Colors.js'
+import { NameToHex } from './Actions/NameToHex.js'
+import { HexToRGB } from './Actions/HexToRGB.js'
+import { HexToHSL } from './Actions/HexToHSL.js'
 import { Help } from './Components/Help.js'
 import { Missing } from './Components/Missing.js'
 import { Unauthorized } from './Components/Unauthorized.js'

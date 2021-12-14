@@ -1,4 +1,6 @@
-import { HexToHSL, HexToRGB, NameToHex } from '../Actions/Colors.js'
+import { HexToHSL } from '../Actions/HexToHSL.js'
+import { HexToRGB } from '../Actions/HexToHSL.js'
+import { NameToHex } from '../Actions/NameToHex.js'
 import { Themes } from '../Models/Themes.js'
 
 // @START-File
