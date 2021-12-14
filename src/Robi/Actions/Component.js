@@ -1,6 +1,6 @@
 import { Store } from '../Core.js'
 
-// @START
+// @START-File
 /**
  * 
  * @param {*} param 
@@ -223,4 +223,4 @@ export function Component(param) {
         }
     };
 }
-// @END
+// @END-File

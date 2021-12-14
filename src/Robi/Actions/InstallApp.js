@@ -14,7 +14,7 @@ import lists from '../../lists.js'
 
 // TODO: Remove mode and install check from InstallApp
 // TODO: Move to InitializeApp or Start
-// @START
+// @START-File
 /**
  *
  * @param {*} param
@@ -627,4 +627,4 @@ export function InstallApp(param) {
 
     modal.add();
 }
-// @END
+// @END-File

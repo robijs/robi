@@ -1,4 +1,4 @@
-// @START
+// @START-File
 /**
  *
  * @param {*} param
@@ -17,4 +17,4 @@ export function History(param) {
 
     document.title = title;
 }
-// @END
+// @END-File

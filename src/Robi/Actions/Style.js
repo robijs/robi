@@ -1,4 +1,4 @@
-// @START
+// @START-File
 /**
  * 
  * @param {*} param 
@@ -25,4 +25,4 @@ export function Style(param) {
 
     head.insertAdjacentHTML('beforeend', css);
 }
-// @END
+// @END-File

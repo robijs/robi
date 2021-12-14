@@ -3,7 +3,7 @@ import { LoadingSpinner } from '../Components/LoadingSpinner.js'
 import { App } from '../Core.js'
 import { Wait } from './Wait.js';
 
-// @START
+// @START-File
 /**
  * 
  * @param {*} param0 
@@ -50,4 +50,4 @@ export function BlurOnSave({ message }) {
         }
     }
 }
-// @END
+// @END-File

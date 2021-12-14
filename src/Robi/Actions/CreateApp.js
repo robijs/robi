@@ -13,7 +13,7 @@ import { CopyRecurse } from './CopyRecurse.js'
 import { SetHomePage } from './SetHomePage.js'
 import { App, Store } from '../Core.js'
 
-// @START
+// @START-File
 /**
  *
  * @param {*} param
@@ -373,4 +373,4 @@ export async function CreateApp() {
 
     modal.add();
 }
-// @END
+// @END-File

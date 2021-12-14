@@ -11,7 +11,7 @@ import { CreateList } from './CreateList.js'
 import { CreateItem } from './CreateItem.js'
 import lists from '../../lists.js'
 
-// @START
+// @START-File
 /**
  *
  * @param {*} event
@@ -695,4 +695,4 @@ export function ReinstallApp() {
 
     modal.add();
 }
-// @END
+// @END-File

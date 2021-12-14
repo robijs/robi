@@ -14,7 +14,7 @@ import { DeleteList } from './DeleteList.js'
 import { DeleteColumn } from './DeleteColumn.js'
 import { App, Store } from '../Core.js'
 
-// @START
+// @START-File
 /**
  *
  * @param {*} param
@@ -686,4 +686,4 @@ export function UpdateApp() {
 
     modal.add();
 }
-// @END
+// @END-File

@@ -1,7 +1,7 @@
 import { GetRequestDigest  } from './GetRequestDigest.js'
 import { App } from '../Core.js'
 
-// @START
+// @START-File
 /**
  * 
  * @param {*} param 
@@ -26,4 +26,4 @@ export async function GetFolders(param) {
 
     return response?.d?.results;
 }
-// @END
+// @END-File

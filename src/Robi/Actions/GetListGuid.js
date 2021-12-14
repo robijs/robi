@@ -1,6 +1,6 @@
 import { App } from '../Core.js'
 
-// @START
+// @START-File
 /**
  *
  * @param {*} param
@@ -29,4 +29,4 @@ export async function GetListGuid(param) {
         }
     }
 }
-// @END
+// @END-File

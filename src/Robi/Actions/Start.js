@@ -5,7 +5,7 @@ import { AddLinks } from './AddLinks.js'
 import { InitializeApp } from './InitializeApp.js'
 import { LogError } from './LogError.js'
 
-// @START
+// @START-File
 /**
  *
  * @param {*} param
@@ -92,4 +92,4 @@ export function Start(param) {
         InitializeApp(param);
     };
 }
-// @END
+// @END-File

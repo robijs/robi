@@ -8,7 +8,7 @@ import lists from '../../lists.js'
 import { App, Store } from '../Core.js'
 import { DeleteList } from './DeleteList.js'
 
-// @START
+// @START-File
 /**
  * 
  * @param {*} event 
@@ -319,4 +319,4 @@ export function DeleteApp() {
 
     modal.add();
 }
-// @END
+// @END-File

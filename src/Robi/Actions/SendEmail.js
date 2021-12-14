@@ -1,7 +1,7 @@
 import { App } from '../Core.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 
-// @START
+// @START-File
 /**
  * @example
  *  await SendEmail({
@@ -59,4 +59,4 @@ export async function SendEmail(param) {
 
     return response;
 }
-// @END
+// @END-File

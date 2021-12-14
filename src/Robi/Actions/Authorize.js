@@ -1,7 +1,7 @@
 import { Store } from '../Core.js'
 import { Route } from './Route.js'
 
-// @START
+// @START-File
 /**
  * Determines if role (defaults to current user's role from store.user().Role)
  * is authorized to access passed in view as string or objection property param.view
@@ -52,4 +52,4 @@ export function Authorize(param) {
         return undefined;
     }
 }
-// @END
+// @END-File

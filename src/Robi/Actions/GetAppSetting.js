@@ -1,6 +1,6 @@
 import { Get } from './Get.js'
 
-// @START
+// @START-File
 /**
  * 
  * @param {*} prop 
@@ -14,4 +14,4 @@ export async function GetAppSetting(prop) {
 
     return getItem ? getItem[0] : undefined;
 }
-// @END
+// @END-File

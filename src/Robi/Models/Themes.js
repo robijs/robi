@@ -1,3 +1,4 @@
+// @START-File
 const Themes = [
     { name: 'Blue', primary: '#167EFB', secondary: 'white', background: '#F8F8FC', color: '#24292f'},
     { name: 'Brown', primary: '#A52A2A', secondary: 'white', background: '#F8F8FC', color: '#24292f'},
@@ -14,3 +15,4 @@ const Themes = [
 ]
 
 export { Themes };
+// @END-File

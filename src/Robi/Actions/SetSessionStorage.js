@@ -1,4 +1,4 @@
-// @START
+// @START-File
 /**
  * Set session storage key value pairs.
  * @param {Object}   param          Interface to module.
@@ -20,4 +20,4 @@ export async function SetSessionStorage(param) {
         sessionStorage.setItem(key, value);
     });
 }
-// @END
+// @END-File

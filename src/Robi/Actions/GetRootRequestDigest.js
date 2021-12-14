@@ -1,6 +1,6 @@
 import { Post } from './Post.js'
 
-// @START
+// @START-File
 /**
  *
  * @returns
@@ -15,4 +15,4 @@ export async function GetRootRequestDigest() {
 
     return getRequestDigest.d.GetContextWebInformation.FormDigestValue;
 }
-// @END
+// @END-File

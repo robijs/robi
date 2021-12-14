@@ -12,38 +12,6 @@
 // CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
 // CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-import {
-    Alert,
-    AppContainer,
-    BootstrapButton,
-    BootstrapDropdown,
-    BootstrapTextarea,
-    Container,
-    Developer,
-    Files,
-    FixedToast,
-    Help,
-    InstallConsole,
-    LoadingBar,
-    LoadingSpinner,
-    MainContainer,
-    Missing,
-    Modal,
-    ProgressBar,
-    QuestionAndReplies,
-    QuestionBoard,
-    QuestionTypes,
-    ReleaseNotesContainer,
-    Settings,
-    Sidebar,
-    SingleLineTextField,
-    SvgDefs,
-    Toast,
-    Unauthorized,
-    Users,
-    ViewContainer
-} from './RobiUI.js'
-
 /**
  * Create SharePoint list item.
  * @param {Object}   param          Interface to UpdateItem() module.   

@@ -2,7 +2,7 @@ import { App, Store } from '../Core.js'
 import { Post } from './Post.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 
-// @START
+// @START-File
 /**
  * Update SharePoint list field.
  * @param {Object}   param          Interface to UpdateItem() module.
@@ -110,4 +110,4 @@ export async function UpdateColumn(param) {
         console.log(error);
     }
 }
-// @END
+// @END-File

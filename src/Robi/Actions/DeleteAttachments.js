@@ -1,6 +1,6 @@
 import { App } from '../Core.js'
 
-// @START
+// @START-File
 /**
  * 
  * @param {*} param 
@@ -35,4 +35,4 @@ export async function DeleteAttachments(param) {
 
     await Promise.all(responses);
 }
-// @END
+// @END-File

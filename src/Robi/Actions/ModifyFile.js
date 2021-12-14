@@ -5,7 +5,7 @@ import { GetRequestDigest } from './GetRequestDigest.js'
 import { App, Store } from '../Core.js'
 import { Wait } from './Wait.js'
 
-// @START
+// @START-File
 /**
  *
  * @param {*} param
@@ -408,4 +408,4 @@ export async function ModifyFile(param) {
 
     modal.add();
 }
-// @END
+// @END-File

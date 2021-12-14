@@ -1,3 +1,4 @@
+// @START-File
 /**
  * @link https://stackoverflow.com/a/12793705
  *
@@ -41,3 +42,4 @@ export function StartAndEndOfWeek(date) {
         saturday
     };
 }
+// @END-File

@@ -1,6 +1,6 @@
 import { App } from '../Core.js'
 
-// @START
+// @START-File
 /**
  * 
  * @param {*} param 
@@ -43,4 +43,4 @@ export function AddLinks(param) {
         return linkElement;
     }
 }
-// @END
+// @END-File

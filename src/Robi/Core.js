@@ -10,6 +10,7 @@ import { QuestionBoard } from './Components/QuestionBoard.js'
 import { QuestionAndReplies } from './Components/QuestionAndReplies.js'
 import { Themes }from './Models/Themes.js'
 
+// App
 let appSettings = {};
 
 const App = {
@@ -71,7 +72,7 @@ const App = {
 
 Object.freeze(App);
 
-/** Routes */
+// Routes
 const Routes = [
     {
         path: '403',
@@ -168,6 +169,7 @@ const Routes = [
     }
 ];
 
+// Store
 const store = {
     elementIdCounter: 0,
     viewScrollTop: 0,
@@ -309,6 +311,5 @@ const Store = {
 }
 
 Object.freeze(Store);
-
 
 export { App, Routes, Store };

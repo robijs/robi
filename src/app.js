@@ -5,12 +5,14 @@
 
 // @START-IMPORTS
 import { Start } from './Robi/Robi.js'
+import lists from './lists.js';
 import Measures from './Routes/Measures/Measures.js'
 import Test from './Routes/Test/Test.js'
 // @END-IMPORTS
 
 // @START
 Start({
+    lists,
     // Must include at least one route with the same path value as settings.defaultRoute.
     // Routes can be linked to directly with hash fragment. Ex: https://site#path.
     routes: [

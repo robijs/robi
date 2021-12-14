@@ -4,7 +4,7 @@ import { CopyFile } from './CopyFile.js'
 import { GetFolders } from './GetFolders.js'
 import { CreateFolder } from './CreateFolder.js'
 
-//@START
+// @START-File
 /**
  * 
  * @param {*} param 
@@ -88,4 +88,4 @@ export async function CopyRecurse(param) {
 
     return true;
 }
-// @END
+// @END-File

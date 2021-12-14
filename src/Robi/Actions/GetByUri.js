@@ -1,4 +1,4 @@
-// @START
+// @START-File
 /**
  * 
  * @param {*} param 
@@ -35,4 +35,4 @@ export async function GetByUri(param) {
         return data.d;
     }
 }
-// @END
+// @END-File

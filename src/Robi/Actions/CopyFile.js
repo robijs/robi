@@ -1,7 +1,7 @@
 import { Store } from '../Core.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 
-// @START
+// @START-File
 /**
  * 
  * @param {*} param 
@@ -89,4 +89,4 @@ export async function CopyFile(param) {
 
     return newFile;
 }
-// @END
+// @END-File

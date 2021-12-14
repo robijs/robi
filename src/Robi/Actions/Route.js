@@ -3,7 +3,7 @@ import { App, Store } from '../Core.js'
 import { History } from './History.js'
 import { Log } from './Log.js'
 
-// @START
+// @START-File
 /**
  *
  * @param {*} path
@@ -165,4 +165,4 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         });
     }
 }
-// @END
+// @END-File

@@ -1,4 +1,4 @@
-// @START
+// @START-File
 /** {@link https://css-tricks.com/converting-color-spaces-in-javascript/} */
 const Colors = {
     "aliceblue": "#f0f8ff", "antiquewhite": "#faebd7", "aqua": "#00ffff", "aquamarine": "#7fffd4", "azure": "#f0ffff",
@@ -122,4 +122,4 @@ export {
     HexToRGB,
     HSLDarker
 }
-// @END
+// @END-File
