@@ -15,6 +15,7 @@ import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { LoadingSpinner } from './LoadingSpinner.js'
 
+// @START-File
 /**
  *
  * @param {*} param

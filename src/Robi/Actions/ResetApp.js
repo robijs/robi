@@ -31,8 +31,9 @@ export function ResetApp() {
             console.log(coreLists);
 
             // App lists
-            const appLists = lists;
-            console.log(coreLists);
+            // const appLists = lists;
+            const appLists = App.lists();
+            console.log(lists);
 
             // All Lists
             const allLists = Lists().concat(appLists);

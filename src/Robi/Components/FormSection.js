@@ -13,6 +13,7 @@ import { AttachmentsContainer } from './AttachmentsContainer.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 
+// @START-File
 /**
  *
  * @param {*} param

@@ -620,7 +620,8 @@ export function BlurOnSave({ message }) {
 export async function CheckLists() {
     const listsToIgnore = ['App', 'Composed Looks', 'Documents', 'Master Page Gallery', 'MicroFeed', 'Site Assets', 'Site Pages'];
     const coreLists = Lists();
-    const appLists = lists;
+    // const appLists = lists;
+    const appLists = App.lists();
     const allLists = coreLists.concat(appLists);
     const filesLists = allLists.filter(item => item.options?.files).map(item => { return { list: `${item.list}Files` } }); // Don't include ListNameFiles if options.files is true
     const webLists = await GetWebLists();
@@ -2011,6 +2012,7 @@ export async function CreateItem(param) {
         // SharePoint returns them by default, but lists created with json-server don't
         // have schemas.
         // Append fields from lists.js with value null.
+        const lists = App.lists();
         const { fields } = Lists().concat(lists).find(item => item.list === list);
 
         for (let field in fields) {
@@ -2459,7 +2461,8 @@ export function DeleteApp() {
             console.log(coreLists);
 
             // App lists
-            const appLists = lists;
+            // const appLists = lists;
+            const appLists = App.lists();
             console.log(coreLists);
 
             // All Lists
@@ -3927,6 +3930,7 @@ export function InstallApp(param) {
     const { settings, loadingBar, isInstalled } = param;
     const { questionTypes } = settings;
     const coreLists = Lists();
+    const lists = App.lists();
 
     console.log('Installing app...');
 
@@ -5377,7 +5381,8 @@ export function ReinstallApp() {
             console.log(coreLists);
 
             // App lists
-            const appLists = lists;
+            // const appLists = lists;
+            const appLists = App.lists();
             console.log(coreLists);
 
             // All Lists
@@ -6061,8 +6066,9 @@ export function ResetApp() {
             console.log(coreLists);
 
             // App lists
-            const appLists = lists;
-            console.log(coreLists);
+            // const appLists = lists;
+            const appLists = App.lists();
+            console.log(lists);
 
             // All Lists
             const allLists = Lists().concat(appLists);
@@ -6952,6 +6958,8 @@ export function TestInstall(param) {
                 disableBackdropClose: true,
                 scrollable: true,
                 async addContent(modalBody) {
+                    const coreLists = Lists();
+                    const lists = App.lists();
                     modalBody.classList.add('install-modal');
 
                     modalBody.insertAdjacentHTML('beforeend', /*html*/ `
@@ -8184,11 +8192,18 @@ export function Wait(ms) {
 }
 
 let appSettings = {};
+let appLists;
 
 const App = {
+    lists() {
+        return appLists;
+    },
     set(param) {
-        const { routes, settings } = param;
-        const { library, primaryColor, defaultRoute, theme } = settings;
+        const { lists, routes, settings } = param;
+        const { library, defaultRoute, theme } = settings;
+
+        // Set lists
+        appLists = lists;
 
         // Set mode
         if (location.href.includes('localhost') || location.href.includes('127.0.0.1')) {

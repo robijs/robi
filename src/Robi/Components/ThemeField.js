@@ -2,6 +2,7 @@ import { Component } from '../Actions/Component.js'
 import { Themes } from '../Models/Themes.js'
 import { App } from '../Core/App.js'
 
+// @START-File
 /**
  *
  * @param {*} param

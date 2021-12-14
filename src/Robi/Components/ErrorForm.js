@@ -7,6 +7,7 @@ import { Store } from '../Core/Store.js'
 import { CommentsContainer } from './CommentsContainer.js'
 import { Logs } from "./Logs.js"
 
+// @START-File
 /**
  * EditUser
  * @description

@@ -27,7 +27,8 @@ export function DeleteApp() {
             console.log(coreLists);
 
             // App lists
-            const appLists = lists;
+            // const appLists = lists;
+            const appLists = App.lists();
             console.log(coreLists);
 
             // All Lists

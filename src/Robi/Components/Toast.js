@@ -1,6 +1,7 @@
 import { Component } from '../Actions/Component.js'
 import { Store } from '../Core/Store.js'
 
+// @START-File
 /**
  *
  * @param {*} param

@@ -1,6 +1,7 @@
 import { Component } from '../Actions/Component.js'
 
 // TODO: increment install-console line number
+// @START-File
 /**
  *
  * @param {*} param

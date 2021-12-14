@@ -1,6 +1,7 @@
 import { Component } from '../Actions/Component.js'
 import { App } from '../Core/App.js';
 
+// @START-File
 /**
  * {@link https://getbootstrap.com/docs/4.5/components/buttons/}
  *

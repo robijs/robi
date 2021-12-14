@@ -6,6 +6,7 @@ import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { StartAndEndOfWeek } from '../Models/StartAndEndOfWeek.js'
 
+// @START-File
 /**
  *
  * @param {*} param

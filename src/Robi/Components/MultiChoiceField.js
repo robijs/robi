@@ -2,6 +2,7 @@ import { Component } from '../Actions/Component.js'
 import { GenerateUUID } from '../Actions/GenerateUUID.js'
 import { App } from '../Core/App.js'
 
+// @START-File
 /**
  *
  * @param {*} param

@@ -5,7 +5,7 @@ import { Post } from './Post.js'
 import { Wait } from './Wait.js'
 import { Lists } from '../Models/Lists.js'
 import { App } from '../Core/App.js'
-import lists from '../../lists.js'
+// import lists from '../../lists.js'
 
 // @START-File
 /**
@@ -75,6 +75,7 @@ export async function CreateItem(param) {
         // SharePoint returns them by default, but lists created with json-server don't
         // have schemas.
         // Append fields from lists.js with value null.
+        const lists = App.lists();
         const { fields } = Lists().concat(lists).find(item => item.list === list);
 
         for (let field in fields) {

@@ -6,7 +6,8 @@ import { InstallConsole } from '../Components/InstallConsole.js'
 import { Container } from '../Components/Container.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
-import lists from '../../lists.js'
+import { Lists } from '../Models/Lists.js'
+// import lists from '../../lists.js'
 import { LaunchApp } from './LaunchApp.js'
 
 // @START-File
@@ -27,6 +28,8 @@ export function TestInstall(param) {
                 disableBackdropClose: true,
                 scrollable: true,
                 async addContent(modalBody) {
+                    const coreLists = Lists();
+                    const lists = App.lists();
                     modalBody.classList.add('install-modal');
 
                     modalBody.insertAdjacentHTML('beforeend', /*html*/ `
