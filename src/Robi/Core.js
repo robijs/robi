@@ -10,7 +10,7 @@ import { Developer } from './Components/Developer.js'
 import { QuestionTypes } from './Components/QuestionTypes.js'
 import { QuestionBoard } from './Components/QuestionBoard.js'
 import { QuestionAndReplies } from './Components/QuestionAndReplies.js'
-import { Themes }from './Models/Themes.js'
+import { Themes } from './Models/Themes.js'
 
 // App
 let appSettings = {};
