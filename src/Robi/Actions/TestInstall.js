@@ -7,7 +7,6 @@ import { Container } from '../Components/Container.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { Lists } from '../Models/Lists.js'
-// import lists from '../../lists.js'
 import { LaunchApp } from './LaunchApp.js'
 
 // @START-File

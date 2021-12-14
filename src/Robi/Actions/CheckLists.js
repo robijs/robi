@@ -1,7 +1,6 @@
 import { Lists } from '../Models/Lists.js'
 import { GetWebLists } from './GetWebLists.js'
 import { App } from '../Core/App.js'
-import lists from '../../lists.js'
 
 // @START-File
 /**
@@ -12,7 +11,6 @@ import lists from '../../lists.js'
 export async function CheckLists() {
     const listsToIgnore = ['App', 'Composed Looks', 'Documents', 'Master Page Gallery', 'MicroFeed', 'Site Assets', 'Site Pages'];
     const coreLists = Lists();
-    // const appLists = lists;
     const appLists = App.lists();
     const allLists = coreLists.concat(appLists);
     const filesLists = allLists.filter(item => item.options?.files).map(item => { return { list: `${item.list}Files` } }); // Don't include ListNameFiles if options.files is true

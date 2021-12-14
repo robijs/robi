@@ -4,7 +4,6 @@ import { ProgressBar } from '../Components/ProgressBar.js'
 import { InstallConsole } from '../Components/InstallConsole.js'
 import { Container } from '../Components/Container.js'
 import { Lists } from '../Models/Lists.js'
-import lists from '../../lists.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { DeleteList } from './DeleteList.js'
@@ -32,6 +31,7 @@ export function DeleteApp() {
             console.log(coreLists);
 
             // All Lists
+            const lists = App.lists();
             const allLists = Lists().concat(lists);
             console.log(allLists);
 

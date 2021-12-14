@@ -10,7 +10,6 @@ import { UpdateItem } from './UpdateItem.js'
 import { DeleteList } from './DeleteList.js'
 import { CreateList } from './CreateList.js'
 import { CreateItem } from './CreateItem.js'
-import lists from '../../lists.js'
 
 // @START-File
 /**
@@ -30,12 +29,12 @@ export function ReinstallApp() {
             console.log(coreLists);
 
             // App lists
-            // const appLists = lists;
             const appLists = App.lists();
-            console.log(coreLists);
+            console.log(appLists);
 
             // All Lists
-            const allLists = Lists().concat(lists);
+            const lists 
+            const allLists = Lists().concat(appLists);
             console.log(allLists);
 
             modalBody.insertAdjacentHTML('beforeend', /*html*/ `

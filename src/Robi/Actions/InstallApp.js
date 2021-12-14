@@ -11,7 +11,6 @@ import { CreateList } from './CreateList.js'
 import { LaunchApp } from './LaunchApp.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
-// import lists from '../../lists.js'
 
 // TODO: Remove mode and install check from InstallApp
 // TODO: Move to InitializeApp or Start
