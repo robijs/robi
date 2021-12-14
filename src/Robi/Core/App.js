@@ -3,6 +3,9 @@ let appSettings = {};
 let appLists;
 
 const App = {
+    lists() {
+        return appLists;
+    },
     set(param) {
         const { lists, routes, settings } = param;
         const { library, defaultRoute, theme } = settings;
