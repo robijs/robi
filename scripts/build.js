@@ -101,9 +101,14 @@ async function buildFile({ paths, imports, importFile, file }) {
         importNames
         .filter(file => {
             const name = file.replace('.js', '')
-            const found = body.includes(`${name}(`);
-            
-            if (found) {
+            const asFunc = body.search(RegExp(`\\b${name}\\b\\(`, 'g'));
+            const asObj = body.search(RegExp(`\\b${name}\\b\\.`, 'g'));
+
+            // console.log(name);
+            // console.log(RegExp(`\\b${name}\\b\\(`, 'g'), asFunc);
+            // console.log(RegExp(`\\b${name}\\b\\.`, 'g'), asObj);
+
+            if (asFunc !== -1 || asObj !== -1) {
                 return file;
             }
         })

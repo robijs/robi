@@ -239,24 +239,28 @@ export function DevConsole(param) {
                 </div>
             `);
 
-            const {
-                diffToDelete,
-                toCreate,
-                toDelete,
-                schemaAdd,
-                schemaDelete
-            } = await CheckLists();
-
-            if (
-                diffToDelete.length ||
-                toCreate.length ||
-                toDelete.length ||
-                schemaAdd.length ||
-                schemaDelete.length
-            ) {
-                addAlert('robi-primary', 'Changes pending');
+            if (App.get('mode') === 'prod') {
+                const {
+                    diffToDelete,
+                    toCreate,
+                    toDelete,
+                    schemaAdd,
+                    schemaDelete
+                } = await CheckLists();
+    
+                if (
+                    diffToDelete.length ||
+                    toCreate.length ||
+                    toDelete.length ||
+                    schemaAdd.length ||
+                    schemaDelete.length
+                ) {
+                    addAlert('robi-primary', 'Changes pending');
+                } else {
+                    addAlert('success', 'Up to date');
+                }
             } else {
-                addAlert('success', 'Up to date');
+                addAlert('warning', 'Dev Mode');
             }
         }
     });

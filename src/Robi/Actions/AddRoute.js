@@ -233,6 +233,7 @@ export async function AddRoute(param) {
                     }
 
                     async function createRoute() {
+                        // TODO: Move to template file
                         let contents = [
                             `import { Title } from '../../Robi/RobiUI.js'`,
                             ``,
