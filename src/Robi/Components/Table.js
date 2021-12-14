@@ -8,9 +8,10 @@ import { LoadingSpinner } from './LoadingSpinner.js'
 import { Modal } from './Modal.js'
 import { EditForm } from './EditForm.js'
 import { NewForm } from './NewForm.js'
+import { TableToolbar } from './TableToolbar.js'
 import { Lists } from '../Models/Lists.js'
+import lists from '../../lists.js'
 
-// @START-File
 /**
  *
  * @param {*} param
@@ -18,14 +19,47 @@ import { Lists } from '../Models/Lists.js'
  */
 export async function Table(param) {
     const {
-        addButton, addButtonValue, border, buttonColor, checkboxes, createdRow, defaultButtons, displayForm, editForm, editFormTitle, exportButtons, filter, formFooter, formTitleField, headerFilter, heading, headingColor, headingMargin, headingSize, list, margin, newForm, newFormTitle, newFormData, onDelete, onUpdate, openInModal, order, padding, parent, showId, striped, titleDisplayName, toolbar, view, width
+        addButton,
+        addButtonValue,
+        border,
+        buttonColor,
+        checkboxes,
+        createdRow,
+        defaultButtons,
+        displayForm,
+        editForm,
+        editFormTitle,
+        exportButtons,
+        filter,
+        formFooter,
+        formTitleField,
+        headerFilter,
+        heading,
+        headingColor,
+        headingMargin,
+        headingSize,
+        list,
+        margin,
+        newForm,
+        newFormTitle,
+        newFormData,
+        onDelete,
+        onUpdate,
+        openInModal,
+        order,
+        padding,
+        parent,
+        showId,
+        striped,
+        titleDisplayName,
+        toolbar,
+        view,
+        width
     } = param;
 
     let {
         buttons, fields, items
     } = param;
-
-    const lists = App.lists();
 
     const tableContainer = Container({
         display: 'block',
@@ -45,16 +79,17 @@ export async function Table(param) {
             text: heading || (heading === '' ? '' : list.split(/(?=[A-Z])/).join(' ')),
             size: headingSize,
             color: headingColor,
-            margin: headingMargin || (toolbar ? '20px 0px 30px 0px' : '20px 0px 15px 0px'),
+            // margin: headingMargin || (toolbar ? '20px 0px 30px 0px' : '20px 0px 15px 0px'),
+            margin: headingMargin || '20px 0px 15px 0px',
             parent: tableContainer
         });
 
         legendHeading.add();
     }
 
-    if (toolbar) {
-        toolbar({ parent: legendHeading || parent });
-    }
+    // if (toolbar) {
+    //     toolbar({ parent: legendHeading || parent });
+    // }
 
     /** Columns */
     const headers = [];
@@ -86,7 +121,7 @@ export async function Table(param) {
             list,
             select: '*,Author/Name,Author/Title,Editor/Name,Editor/Title',
             expand: `Author/Id,Editor/Id`,
-            filter
+            // filter
         });
 
         // Get fields in view
@@ -441,6 +476,16 @@ export async function Table(param) {
         });
     }
 
+    // Toolbar
+    if (toolbar) {
+        const toolbar = TableToolbar({
+            options: toolbar,
+            parent
+        });
+    
+        toolbar.add();
+    }
+
     /** Selected form */
     let selectedItem;
     let selectedRow;
@@ -652,4 +697,3 @@ export async function Table(param) {
 
     return table;
 }
-// @END-File
