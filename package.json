@@ -13,20 +13,32 @@
     "url": "https://github.com/stephenmatheis/robi"
   },
   "type": "module",
+  "watch": {
+    "build": {
+      "patterns": [
+        "./src/Robi/Actions",
+        "./src/Robi/Components",
+        "./src/Robi/Core",
+        "./src/Robi/Models"
+      ],
+      "quiet": true,
+      "silent": true,
+      "runOnChangeOnly": true
+    }
+  },
   "scripts": {
     "start": "concurrently \"npx json-server --watch ./json-server/db.json --id Id\" \"npx live-server --cors --watch=./src --ignore=./src/lists.js,./src/app.js --open=./dev/app.html --quiet\" \"node ./servers/post.js\"",
     "reset": "node ./scripts/reset.js",
     "depgraph": "depcruise --exclude \"^node_modules\" --output-type dot src | dot -T svg > dependencygraph.svg",
     "bundle": "webpack --config=./webpack.config.js",
-    "build": "node ./scripts/build.js"
+    "build": "node ./scripts/build.js",
+    "watch-robi": "npm-watch build"
   },
   "devDependencies": {
     "concurrently": "^6.2.1",
     "json-server": "^0.16.3",
     "live-server": "^1.1.0",
+    "npm-watch": "^0.11.0",
     "webpack-cli": "^4.8.0"
-  },
-  "dependencies": {
-    "esbuild": "^0.14.0"
   }
 }
