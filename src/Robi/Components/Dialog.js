@@ -56,3 +56,4 @@ export function Dialog(param) {
 
     return component;
 }
+// @END-File

@@ -66,3 +66,4 @@ export function ProgressBar(param) {
 
     return component;
 }
+// @END-File

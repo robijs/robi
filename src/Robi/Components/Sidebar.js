@@ -1046,3 +1046,4 @@ export function Sidebar({ parent, path }) {
 
     return component;
 }
+// @END-File

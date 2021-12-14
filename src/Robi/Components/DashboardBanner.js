@@ -151,3 +151,4 @@ export function DashboardBanner(param) {
 
     return component;
 }
+// @END-File

@@ -77,3 +77,4 @@ export function InstallConsole(param) {
 
     return component;
 }
+// @END-File

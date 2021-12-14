@@ -67,3 +67,4 @@ export function ReleaseNotes(param) {
 
     return component;
 }
+// @END-File

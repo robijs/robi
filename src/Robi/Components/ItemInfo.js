@@ -114,3 +114,4 @@ export function ItemInfo(param) {
 
     return component;
 }
+// @END-File

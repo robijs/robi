@@ -191,3 +191,4 @@ export function LoadingBar(param) {
 
     return component;
 }
+// @END-File

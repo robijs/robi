@@ -102,3 +102,4 @@ export function Alert(param) {
 
     return component;
 }
+// @END-File

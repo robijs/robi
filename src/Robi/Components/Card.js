@@ -67,3 +67,4 @@ export function Card(param) {
 
     return component;
 }
+// @END-File

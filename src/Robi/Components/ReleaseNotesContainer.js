@@ -87,3 +87,4 @@ export async function ReleaseNotesContainer(param) {
     /** Remove loading indicator */
     loadingIndicator.remove();
 }
+// @END-File

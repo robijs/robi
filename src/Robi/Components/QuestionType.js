@@ -77,3 +77,4 @@ export function QuestionType(param) {
 
     return component;
 }
+// @END-File

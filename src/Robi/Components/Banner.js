@@ -57,3 +57,4 @@ export function Banner(param) {
 
     return component;
 }
+// @END-File

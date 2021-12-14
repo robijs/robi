@@ -44,3 +44,4 @@ export function BootstrapTextarea(param) {
 
     return component;
 }
+// @END-File
