@@ -480,13 +480,14 @@ export async function Table(param) {
     }
 
     // Toolbar
+    // Test
     if (toolbar) {
-        const toolbar = TableToolbar({
-            options: toolbar,
-            parent
-        });
+        // const toolbar = TableToolbar({
+        //     options: toolbar,
+        //     parent
+        // });
     
-        toolbar.add();
+        // toolbar.add();
     }
 
     /** Selected form */

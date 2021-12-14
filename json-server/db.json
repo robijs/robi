@@ -340,6 +340,91 @@
       "Created": "Tue, 14 Dec 2021 17:12:12 GMT",
       "Modified": "Tue, 14 Dec 2021 17:12:12 GMT",
       "Id": 20
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot access 'toolbar' before initialization",
+      "Error": "ReferenceError: Cannot access 'toolbar' before initialization\n    at Table (http://127.0.0.1:8080/src/Robi/RobiUI.js:15738:22)\n    at async AllMeasures (http://127.0.0.1:8080/src/Routes/Measures/AllMeasures.js:14:5)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:29:46 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:29:46 GMT",
+      "Id": 21
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot access 'toolbar' before initialization",
+      "Error": "ReferenceError: Cannot access 'toolbar' before initialization\n    at Table (http://127.0.0.1:8080/src/Robi/RobiUI.js:15738:22)\n    at async AllMeasures (http://127.0.0.1:8080/src/Routes/Measures/AllMeasures.js:14:5)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:30:19 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:30:19 GMT",
+      "Id": 22
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot access 'toolbar' before initialization",
+      "Error": "ReferenceError: Cannot access 'toolbar' before initialization\n    at Table (http://127.0.0.1:8080/src/Robi/RobiUI.js:15739:22)\n    at async AllMeasures (http://127.0.0.1:8080/src/Routes/Measures/AllMeasures.js:14:5)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:30:20 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:30:20 GMT",
+      "Id": 23
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot access 'toolbar' before initialization",
+      "Error": "ReferenceError: Cannot access 'toolbar' before initialization\n    at Table (http://127.0.0.1:8080/src/Robi/RobiUI.js:15739:22)\n    at async AllMeasures (http://127.0.0.1:8080/src/Routes/Measures/AllMeasures.js:14:5)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:30:46 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:30:46 GMT",
+      "Id": 24
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot access 'toolbar' before initialization",
+      "Error": "ReferenceError: Cannot access 'toolbar' before initialization\n    at Table (http://127.0.0.1:8080/src/Robi/RobiUI.js:15739:22)\n    at async AllMeasures (http://127.0.0.1:8080/src/Routes/Measures/AllMeasures.js:14:5)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "UserAgent": null,
+      "Status": null,
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:32:50 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:32:50 GMT",
+      "Id": 25
     }
   ],
   "Log": [
@@ -869,6 +954,142 @@
       "Created": "Tue, 14 Dec 2021 17:12:12 GMT",
       "Modified": "Tue, 14 Dec 2021 17:12:12 GMT",
       "Id": 31
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4687:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:29:46 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:29:46 GMT",
+      "Id": 32
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4687:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:30:19 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:30:19 GMT",
+      "Id": 33
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4687:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:30:20 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:30:20 GMT",
+      "Id": 34
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4687:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:30:46 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:30:46 GMT",
+      "Id": 35
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4687:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:30:47 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:30:47 GMT",
+      "Id": 36
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4687:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:32:40 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:32:40 GMT",
+      "Id": 37
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4687:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:32:50 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:32:50 GMT",
+      "Id": 38
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4687:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "Author": {
+        "Title": "First Last"
+      },
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Tue, 14 Dec 2021 17:32:54 GMT",
+      "Modified": "Tue, 14 Dec 2021 17:32:54 GMT",
+      "Id": 39
     }
   ],
   "Users": [
