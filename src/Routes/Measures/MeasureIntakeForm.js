@@ -1,7 +1,6 @@
 import { Title, Container, Modal, BootstrapButton, SectionStepper, LoadingSpinner, FormSection } from '../../Robi/RobiUI.js'
 import { App, Store, Get, CreateItem, UpdateItem, Route, UploadFile, Style } from '../../Robi/Robi.js'
 import lists from '../../lists.js'
-import { OnHold } from './OnHold.js'
 import { Publish } from './Publish.js'
 import { DataFiles } from './DataFiles.js'
 import { Checklist } from './Checklist.js'
@@ -219,6 +218,8 @@ export async function MeasureIntakeForm(param) {
                     data
                 });
 
+                console.log(updatedItem);
+
                 // Add Files prop and value to updated item returned from SP
                 updatedItem.Files = item.Files;
 
@@ -363,7 +364,14 @@ export async function MeasureIntakeForm(param) {
         classes: ['w-100'],
         parent: buttonContainer,
         type: '',
-        value: 'Back'
+        value: /*html*/ `
+            <!-- <div class="d-flex justify-content-center align-items-center back-btn" style="" title="Back"> -->
+            <div class="d-flex back-btn" style="" title="Back">
+                <svg class="icon" style="fill: #e63e44; font-size: 26px;">
+                    <use href="#icon-bs-arrow-left-cirlce-fill"></use>
+                </svg>
+            </div>
+        `
     });
 
     cancelButton.add();
@@ -471,24 +479,16 @@ export async function MeasureIntakeForm(param) {
             buttonParent: buttonContainer
         });
 
-        // Add place measure on hold / remove hold button and modal
-        OnHold({
-            item,
-            path,
-            bannerParent: viewTitle,
-            buttonParent: buttonContainer
-        });
-
         // TODO: Wrap in component
         // Add Data and checklist info panels
         if (item.Status !== 'Under Development') {
             leftContainer.append(/*html*/ `
                 <div class='w-100 mt-2' style='height: 100%; display: flex; flex-direction: column; justify-content: end;'>
-                    <div class='mb-2 data-files' style='background: #e9ecef; border-radius: 10px; padding: 15px 30px; cursor: pointer;'>
+                    <div class='mb-2 data-files' style='background: ${App.get('backgroundColor')}; border-radius: 10px; padding: 15px 30px; cursor: pointer;'>
                         <div style='font-weight: 500; color: ${App.get('primaryColor')};'>Data Files</div>
                         <div style=''>${dataFiles.length} ${dataFiles.length === 1 ? 'file' : 'files'}</div>
                     </div>
-                    <div class='checklist' style='background: #e9ecef; border-radius: 10px; padding: 15px 30px; cursor: pointer;'>
+                    <div class='checklist' style='background: ${App.get('backgroundColor')}; border-radius: 10px; padding: 15px 30px; cursor: pointer;'>
                         <div style='font-weight: 500; color: ${App.get('primaryColor')};'>Checklist</div>
                         <div style=''>${checklist.length} ${checklist.length === 1 ? 'step' : 'steps'}</div>
                     </div>
@@ -539,47 +539,6 @@ export async function MeasureIntakeForm(param) {
             console.log('New measure data not set. Fields:', Store.getData('new measure'));
         }
     }
-
-    // // If path is #Measures/[Item Id]/DataFiles show table and exit
-    // if (path === 'DataFiles') {
-    //     await Table({
-    //         list: 'DataFiles',
-    //         items: dataFiles,
-    //         addButton: item.Status === 'On Hold' ? false : true,
-    //         heading: '',
-    //         view: 'DataFiles',
-    //         buttons: [],
-    //         exportButtons: false,
-    //         defaultButtons: item.Status === 'On Hold' ? false : undefined,
-    //         addButtonValue: 'Upload data file',
-    //         width: '100%',
-    //         parent: planContainer,
-    //         newForm: NewDataFile,
-    //         newFormTitle: 'New data file',
-    //         editForm: EditDataFile,
-    //         editFormTitle: 'Edit data file'
-    //     });
-
-    //     return;
-    // }
-
-    // // If path is #Measures/[Item Id]/Checklist show table and exit
-    // if (path === 'Checklist') {
-    //     await Table({
-    //         list: 'MeasuresChecklist',
-    //         items: checklist,
-    //         heading: '',
-    //         view: 'Checklist',
-    //         buttons: [],
-    //         defaultButtons: false,
-    //         width: '100%',
-    //         parent: planContainer,
-    //         newForm: NewStep,
-    //         newFormTitle: 'New step',
-    //     });
-
-    //     return;
-    // }
 
     // If path is #Measures/[Item Id] with no section render all sections
     if (section.name === 'All Sections') {

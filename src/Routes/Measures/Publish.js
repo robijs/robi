@@ -18,7 +18,7 @@ export function Publish({ item, bannerParent, buttonParent, path }) {
         const banner = Alert({
             type: 'robi-primary',
             classes: ['w-100'],
-            text: `This measure is still <strong>Under Development</strong>. Publish it to enable data upload.`,
+            text: `This measure is still <strong>Under Development</strong>. Publish it to upload data files.`,
             parent: bannerContainer,
         });
         

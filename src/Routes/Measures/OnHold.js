@@ -13,9 +13,7 @@ export function OnHold({ item, bannerParent, buttonParent, path }) {
     if (Status === 'On Hold') {
         const bannerContainer = Container({
             width: '100%',
-            padding: '0px 30px 10px 30px',
-            parent: bannerParent,
-            position: 'afterend'
+            parent: bannerParent
         });
 
         bannerContainer.add();
@@ -27,7 +25,7 @@ export function OnHold({ item, bannerParent, buttonParent, path }) {
         const banner = Alert({
             type: 'robi-primary',
             classes: ['w-100'],
-            text: `This measure was placed on hold <strong>${new Date(OnHoldStart).toLocaleDateString()}</strong> by <strong>${userLink}</strong>. Remove it to make changes or upload data files.`,
+            text: `Data file upload was placed on hold <strong>${new Date(OnHoldStart).toLocaleDateString()}</strong> by <strong>${userLink}</strong>`,
             parent: bannerContainer,
         });
         
@@ -35,7 +33,6 @@ export function OnHold({ item, bannerParent, buttonParent, path }) {
 
         const removeHold = BootstrapButton({
             type: 'robi',
-            classes: ['ml-2'],
             value: 'Remove hold',
             parent: buttonParent,
             action() {

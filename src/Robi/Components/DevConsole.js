@@ -260,7 +260,7 @@ export function DevConsole(param) {
                     addAlert('success', 'Up to date');
                 }
             } else {
-                addAlert('warning', 'Dev Mode');
+                addAlert('robi-primary', 'Dev Mode');
             }
         }
     });

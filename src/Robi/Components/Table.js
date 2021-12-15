@@ -27,13 +27,11 @@ export async function Table(param) {
         checkboxes,
         createdRow,
         defaultButtons,
-        displayForm,
         editForm,
         editFormTitle,
         exportButtons,
         filter,
         formFooter,
-        formTitleField,
         headerFilter,
         heading,
         headingColor,
@@ -43,15 +41,12 @@ export async function Table(param) {
         margin,
         newForm,
         newFormTitle,
-        newFormData,
         onDelete,
-        onUpdate,
         openInModal,
         order,
         padding,
         parent,
         showId,
-        striped,
         titleDisplayName,
         toolbar,
         view,
@@ -72,7 +67,7 @@ export async function Table(param) {
 
     tableContainer.add();
 
-    /** Heading */
+    // Heading
     let legendHeading;
 
     if (heading || list) {
@@ -88,11 +83,7 @@ export async function Table(param) {
         legendHeading.add();
     }
 
-    // if (toolbar) {
-    //     toolbar({ parent: legendHeading || parent });
-    // }
-
-    /** Columns */
+    // Columns
     const headers = [];
     const columns = [];
 
@@ -106,7 +97,7 @@ export async function Table(param) {
     // App Lists
     const lists = App.lists();
 
-    /** Item Id */
+    // Item Id
     const idProperty = 'Id';
     let formFields = [];
 
@@ -125,7 +116,7 @@ export async function Table(param) {
             list,
             select: '*,Author/Name,Author/Title,Editor/Name,Editor/Title',
             expand: `Author/Id,Editor/Id`,
-            // filter
+            filter
         });
 
         // Get fields in view
@@ -427,7 +418,7 @@ export async function Table(param) {
                             footer: [
                                 {
                                     value: 'Cancel',
-                                    classes: 'btn-secondary',
+                                    classes: '',
                                     data: [
                                         {
                                             name: 'dismiss',
@@ -483,39 +474,44 @@ export async function Table(param) {
     // Toolbar
     // Test
     if (toolbar) {
-        const toolbar = TableToolbar({
+        const tableToolbar = TableToolbar({
             options: toolbar,
-            parent
+            parent: tableContainer,
+            action(label) {
+                const { filter } = toolbar.find(option => option.label === label);
+
+                // Clear
+                table.DataTable().clear().draw();
+                
+                // Filter
+                table.DataTable().rows.add(filter(items)).draw();
+                
+                // Adjust
+                table.DataTable().columns.adjust().draw();
+            }
         });
     
-        toolbar.add();
+        tableToolbar.add();
     }
 
-    /** Selected form */
+    // Selected item, row, and form
     let selectedItem;
     let selectedRow;
     let selectedForm;
 
-    // console.log('Table headers', headers);
-    // console.log('Table columns', columns);
     /** Table */
     const table = DataTable({
         headers,
         headerFilter,
         buttonColor,
         checkboxes: checkboxes !== false ? true : false,
-        // striped: striped || false,
         striped: true,
         border: border || false,
         width: '100%',
         columns,
         data: items,
         rowId: idProperty,
-        /**
-         * Sort by Status then Last Name
-         * {@link https://datatables.net/reference/api/order()}
-         */
-        order: order || [[1, 'asc']],
+        order: order || [[1, 'asc']], /** Sort by 1st column (hidden Id field at [0]) {@link https://datatables.net/reference/api/order()} */
         buttons,
         createdRow,
         onRowClick(param) {
@@ -547,7 +543,7 @@ export async function Table(param) {
                         footer: [
                             {
                                 value: 'Cancel',
-                                classes: 'btn-secondary',
+                                classes: '',
                                 data: [
                                     {
                                         name: 'dismiss',
@@ -657,9 +653,8 @@ export async function Table(param) {
 
     table.add();
 
-
-    // FIXME: This only works if selected are grouped together
-    // TODO: Handle multiple groups and spaced our selection
+    // FIXME: This only works if selected rows are grouped together
+    // TODO: Handle one or more groups of selected rows (ex: rows [1, 2, 3] and [4,5] and [8,9])
     function setSelectedRadius() {
         // Find all rows
         const rows = table.findAll('tbody tr.selected');

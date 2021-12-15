@@ -2,6 +2,7 @@ import { App } from '../Core/App.js'
 import { Post } from './Post.js'
 import { Get } from './Get.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
+import { Wait } from './Wait.js';
 
 // @START-File
 /**
@@ -13,7 +14,7 @@ import { GetRequestDigest } from './GetRequestDigest.js'
  */
 export async function UpdateItem(param) {
     const {
-        list, itemId, select, expand, data
+        list, itemId, select, expand, data, wait
     } = param;
 
     // Exit if no data passed in
@@ -68,9 +69,8 @@ export async function UpdateItem(param) {
     } else {
         const body = data;
 
-        body.Editor = {
-            Title: App.get('dev').user.Title
-        };
+        body.EditorId = body.EditorId || App.get('dev').user.SiteId;
+        body.Editor = body.Editor || { Title: App.get('dev').user.Title };
 
         const date = new Date().toUTCString();
         body.Modified = date;
@@ -85,6 +85,9 @@ export async function UpdateItem(param) {
         };
 
         const response = await fetch(`http://localhost:3000/${list}/${itemId}`, options);
+        if (wait !== false) {
+            await Wait(500);
+        }
 
         if (response) {
             // Get updated item

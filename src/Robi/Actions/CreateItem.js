@@ -24,7 +24,8 @@ export async function CreateItem(param) {
         expand,
         data,
         notify,
-        message
+        message,
+        wait
     } = param;
 
     if (App.get('mode') === 'prod') {
@@ -85,13 +86,10 @@ export async function CreateItem(param) {
             }
         }
 
-        body.Author = {
-            Title: App.get('dev').user.Title
-        };
-
-        body.Editor = {
-            Title: App.get('dev').user.Title
-        };
+        body.AuthorId = body.AuthorId || App.get('dev').user.SiteId;
+        body.Author = body.Author || { Title: App.get('dev').user.Title };
+        body.EditorId = body.EditorId || App.get('dev').user.SiteId;
+        body.Editor = body.Editor || { Title: App.get('dev').user.Title };
 
         const date = new Date().toUTCString();
         body.Created = date;
@@ -110,8 +108,9 @@ export async function CreateItem(param) {
         const newItem = await response.json();
         
         if (list !== 'Log' && list !== 'Errors') {
-            console.log('Adding 1s delay to CreateItem');
-            await Wait(1000);
+            if (wait !== false) {
+                await Wait(500);
+            }
         }
 
         return newItem;

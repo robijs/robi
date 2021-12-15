@@ -13,7 +13,6 @@ export async function GetCurrentUser(param) {
         list
     } = param;
 
-    const url = App.get('mode') === 'prod' ? `${App.get('site')}/_api/web/CurrentUser` : `http://localhost:3000/users?LoginName=${App.get('dev').user.LoginName}`;
     const fetchOptions = {
         headers: {
             'Content-Type': 'application/json; charset=UTF-8',
@@ -74,14 +73,15 @@ export async function GetCurrentUser(param) {
             return newUser;
         }
     } else if (App.get('mode') === 'dev') {
-        const currentUser = await fetch(url, fetchOptions);
+        const currentUser = await fetch(`http://localhost:3000/users?LoginName=${App.get('dev').user.LoginName}`, fetchOptions);
         const response = await currentUser.json();
 
         const {
             Title,
             Email,
             LoginName,
-            Role
+            Role,
+            SiteId
         } = App.get('dev').user;
 
         if (response[0]) {
@@ -99,6 +99,7 @@ export async function GetCurrentUser(param) {
                     Email,
                     LoginName,
                     Role,
+                    SiteId,
                     Settings: App.get('userSettings')
                 }
             });

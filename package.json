@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "concurrently \"npx json-server --watch ./json-server/db.json --id Id\" \"npx live-server --cors --watch=./src --ignore=./src/lists.js,./src/app.js,./src/Robi/Actions,./src/Robi/Components,./src/Robi/Core,./src/Robi/Models --open=./dev/app.html --quiet\" \"node ./servers/post.js\" \"npm run watch-robi\"",
-    "dev": "concurrently \"npx json-server --watch ./json-server/db.json --id Id\" \"npx live-server --cors --watch=./src --ignore=./src/lists.js,./src/app.js,./src/Robi/Actions,./src/Robi/Components,./src/Robi/Core,./src/Robi/Models --open=./dev/app.html --quiet\" \"node ./servers/post.js\" \"npm run watch-robi-dev\"",
+    "dev": "concurrently \"npx json-server --watch ./json-server/db.json --id Id\" \"npx live-server --cors --watch=./src --ignore=./src/lists.js --open=./dev/app.html --quiet\" \"node ./servers/post.js\" \"npm run build-dev\"",
     "reset": "node ./scripts/reset.js",
     "depgraph": "depcruise --exclude \"^node_modules\" --output-type dot src | dot -T svg > dependencygraph.svg",
     "bundle": "webpack --config=./webpack.config.js",

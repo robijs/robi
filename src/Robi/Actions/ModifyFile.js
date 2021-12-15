@@ -46,6 +46,7 @@ export async function ModifyFile(param) {
 
             const loading = LoadingSpinner({
                 message: `Loading <span style='font-weight: 300;'>${path}/${file}</span>`,
+                type: 'white',
                 classes: ['h-100', 'loading-file'],
                 parent: modalBody
             });
@@ -298,11 +299,11 @@ export async function ModifyFile(param) {
                                 </div>
                                 <div class='button-container' style='display: flex; justify-content: space-between;'>
                                     <div style='display: flex; justify-content: flex-start;'>
-                                        <button class='btn btn-secondary btn-sm dont-save'>Don't Save</button>
-                                        <button class='btn btn-light btn-sm ml-2 cancel'>Cancel</button>
+                                        <button class='btn btn-robi-light btn-sm dont-save'>Don't Save</button>
+                                        <button class='btn btn-sm ml-2 cancel'>Cancel</button>
                                     </div>
                                     <div style='display: flex; justify-content: flex-end;'>
-                                        <button class='btn btn-success save'>Save</button>
+                                        <button class='btn btn-robi save'>Save</button>
                                     <div>
                                 </div>
                             </div>

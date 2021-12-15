@@ -1,6 +1,7 @@
 import { App } from '../Core/App.js'
 import { GetItemCount } from './GetItemCount.js'
 import { Store } from '../Core/Store.js';
+import { Wait } from './Wait.js';
 
 // @START-File
 /**
@@ -116,7 +117,7 @@ export async function Get(param) {
         }
 
         const response = await fetch(`http://localhost:3000/${list}${queryFilterString ? `?${queryFilterString}` : ''}`, options);
-        // const response = await fetch(`http://localhost:3000/${list}`, options);
+        // await Wait(500);
 
         return await response.json();
     }

@@ -2,6 +2,7 @@ import { Title, BootstrapButton, LoadingSpinner, Table } from '../../Robi/RobiUI
 import { App, Store, Get, Route } from '../../Robi/Robi.js'
 import { EditDataFile } from './EditDataFile.js'
 import { NewDataFile } from './NewDataFile.js'
+import { OnHold } from './OnHold.js'
 
 /**
  * 
@@ -123,6 +124,14 @@ export async function DataFiles(param) {
         console.log(`Measure #${itemId} item missing. Item: `, Store.getData(`edit measure ${itemId}`));
     }
 
+    // Add place measure on hold / remove hold button and modal
+    OnHold({
+        item,
+        path,
+        bannerParent: parent,
+        buttonParent: parent
+    });
+
     // Table
     await Table({
         list: 'DataFiles',
@@ -159,28 +168,4 @@ export async function DataFiles(param) {
             Store.setData(`measure ${itemId} data files`, dataFiles);
         }
     });
-
-    const measuresBtn = BootstrapButton({
-        action() {
-            Route('Measures');
-        },
-        classes: ['w-100', 'mt-4'],
-        parent,
-        type: 'robi',
-        value: 'Measures'
-    });
-
-    measuresBtn.add();
-
-    const backBtn = BootstrapButton({
-        action() {
-            history.back();
-        },
-        classes: ['w-100'],
-        parent,
-        type: '',
-        value: 'Back'
-    });
-
-    backBtn.add();
 }

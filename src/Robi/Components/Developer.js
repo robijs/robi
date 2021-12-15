@@ -9,6 +9,7 @@ import { App } from '../Core/App.js'
 import { Table } from './Table.js' 
 import { ErrorForm } from './ErrorForm.js'
 import { LogForm } from './LogForm.js'
+import { CreateItem, UpdateItem, Wait } from '../Robi.js'
 
 // @START-File
 /**
@@ -187,7 +188,8 @@ export async function Developer(param) {
             run = true;
             console.log(`Run: ${run}`);
 
-            update();
+            create(25);
+            // update();
         },
         stop() {
             run = false;
@@ -202,12 +204,196 @@ export async function Developer(param) {
 
     const items = []; // Get({ list: 'ListName' })
 
+    async function create(limit) {
+        const options = [
+            // AO is me, Under Development by me
+            {
+                AOEmail: "first.mi.last.ctr@mail.mil",
+                AOName: "First Last",
+                MeasureName: "Test",
+                Status: "Under Development"
+            },
+            // AO is me, Under Development by another user
+            {
+                AOEmail: "first.mi.last.ctr@mail.mil",
+                AOName: "First Last",
+                MeasureName: "Test",
+                Status: "Under Development",
+                AuthorId: 2,
+                Author: {
+                    Title: 'Jane Doe'
+                },
+                EditorId: 2,
+                Editor: {
+                    Title: 'Jane Doe'
+                }
+            },
+            // AO is another user, Under Development by me
+            {
+                AOEmail: "jane.m.doe.civ@mail.mil",
+                AOName: "Jane Doe",
+                MeasureName: "Test",
+                Status: "Under Development"
+            },
+            // AO is another user, Under Development by another user
+            {
+                AOEmail: "jane.m.doe.civ@mail.mil",
+                AOName: "Jane Doe",
+                MeasureName: "Test",
+                Status: "Under Development",
+                AuthorId: 2,
+                Author: {
+                    Title: 'Jane Doe'
+                },
+                EditorId: 2,
+                Editor: {
+                    Title: 'Jane Doe'
+                }
+            },
+            // On Hold by me, and Published by me
+            {
+                AOEmail: "first.mi.last.ctr@mail.mil",
+                AOName: "First Last",
+                MeasureName: "Test",
+                Status: "On Hold",
+                OnHoldComments: "Test",
+                OnHoldEnd: "2021-12-15T22:00:00Z",
+                OnHoldName: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+                OnHoldStart: "2021-12-14T22:00:00Z",
+                Published: "2021-12-14T21:57:27.738Z",
+                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}"
+            },
+            // On Hold by me, and Published by another user
+            {
+                AOEmail: "first.mi.last.ctr@mail.mil",
+                AOName: "First Last",
+                MeasureName: "Test",
+                Status: "On Hold",
+                OnHoldComments: "Test",
+                OnHoldEnd: "2021-12-15T22:00:00Z",
+                OnHoldName: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+                OnHoldStart: "2021-12-14T22:00:00Z",
+                Published: "2021-12-14T21:57:27.738Z",
+                Publisher: "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
+                AuthorId: 2,
+                Author: {
+                    Title: 'Jane Doe'
+                },
+                EditorId: 2,
+                Editor: {
+                    Title: 'Jane Doe'
+                }
+            },
+            // On Hold by another user, but Published by me
+            {
+                AOEmail: "first.mi.last.ctr@mail.mil",
+                AOName: "First Last",
+                MeasureName: "Test",
+                Status: "On Hold",
+                OnHoldComments: "Test",
+                OnHoldEnd: "2021-12-15T22:00:00Z",
+                OnHoldName: "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
+                OnHoldStart: "2021-12-14T22:00:00Z",
+                Published: "2021-12-14T21:57:27.738Z",
+                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}"
+            },
+            // AO is me, and Published by me
+            {
+                AOEmail: "first.mi.last.ctr@mail.mil",
+                AOName: "First Last",
+                MeasureName: "Test",
+                Status: "Published",
+                Published: "2021-12-14T21:57:27.738Z",
+                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}"
+            },
+            // AO is another user, but Published by me
+            {
+                AOEmail: "jane.m.doe.civ@mail.mil",
+                AOName: "Jane Doe",
+                MeasureName: "Test",
+                Status: "Published",
+                Published: "2021-12-14T21:57:27.738Z",
+                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}"
+            },
+            // AO is me, but Published by another user
+            {
+                AOEmail: "first.mi.last.ctr@mail.mil",
+                AOName: "First Last",
+                MeasureName: "Test",
+                Status: "Published",
+                Published: "2021-12-14T21:57:27.738Z",
+                Publisher: "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
+                AuthorId: 2,
+                Author: {
+                    Title: 'Jane Doe'
+                },
+                EditorId: 2,
+                Editor: {
+                    Title: 'Jane Doe'
+                }
+            },
+            // AO is another user, and Published by another user
+            {
+                AOEmail: "jane.m.doe.civ@mail.mil",
+                AOName: "Jane Doe",
+                MeasureName: "Test",
+                Status: "Published",
+                Published: "2021-12-14T21:57:27.738Z",
+                Publisher: "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
+                AuthorId: 2,
+                Author: {
+                    Title: 'Jane Doe'
+                },
+                EditorId: 2,
+                Editor: {
+                    Title: 'Jane Doe'
+                }
+            }
+        ];
+
+        /** Set items */
+        for (let i = 0; i < limit; i++) {
+
+            if (run) {
+                const choice = Math.floor(Math.random() * options.length);
+                const data = options[choice];
+
+                // Create Item
+                const newItem = await CreateItem({
+                    list: 'Measures',
+                    data,
+                    wait: false
+                });
+
+                // Set MeasureId
+                await UpdateItem({
+                    list: 'Measures',
+                    itemId: newItem.Id,
+                    data: {
+                        MeasureId: newItem.Id
+                    },
+                    wait: false
+                });
+
+                console.log(`Id: ${newItem.Id}.`, `Option: ${choice}`);
+
+                if (i === limit - 1) {
+                    timer.stop();
+                }
+            } else {
+                console.log('stoped');
+
+                break;
+            }
+        }
+    }
+
     async function update() {
         /** Set items */
         for (let i = 0; i < items.length; i++) {
             if (run) {
 
-                // create, update, or delete item
+                // update item
                 if (i === items.length - 1) {
                     timer.stop();
                 }

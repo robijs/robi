@@ -1,7 +1,7 @@
-// This file may be edited programmatically.
-// If you know the API feel free to edit it manually.
-// Just be sure to put @START and @END declarations in the right place.
-// Otherwise, changes made by other developers may not render properly.
+// This file may be modified programmatically.
+// If you know the API, feel free to edit it manually.
+// Just be sure to put @START and @END sigils in the right places.
+// Otherwise, changes made from the frontend may not render properly.
 
 // @START-IMPORTS
 import { Start } from './Robi/Robi.js'
@@ -90,7 +90,8 @@ Start({
                 Title: "First Last",
                 Email: "first.mi.last.ctr@mail.mil",
                 LoginName: "0987654321@mil",
-                Role: "Developer"
+                Role: "Developer",
+                SiteId: 1
             },
             testInstall: false,
         },

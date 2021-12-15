@@ -9,7 +9,7 @@ import { App } from '../Core/App.js'
  */
 export function TableToolbar(param) {
     const {
-        parent, options, position
+        action, parent, options, position
     } = param;
 
     const component = Component({
@@ -23,7 +23,12 @@ export function TableToolbar(param) {
         style: /*css*/ `
             #id {
                 align-items: center;
-                font-size: 14px;
+                justify-content: end;
+                margin-bottom: 20px;
+            }
+
+            #id .btn {
+                font-size: 13px;
             }
 
             #id .btn:focus,
@@ -63,17 +68,16 @@ export function TableToolbar(param) {
                 selector: '#id .filter',
                 event: 'click',
                 listener(event) {
-                    // // Deselect all options
-                    // component.findAll('.filter').forEach(button => {
-                    //     button.classList.remove('btn-robi-primary');
-                    //     button.classList.add('btn-outline-robi-primary');
-                    // });
+                    // Deselect all options
+                    const currentSelected = component.find('.filter.btn-robi-primary');
+                    currentSelected.classList.remove('btn-robi-primary');
+                    currentSelected.classList.add('btn-outline-robi-primary');
 
-                    // // Select clicked button
-                    // this.classList.remove('btn-outline-robi-primary');
-                    // this.classList.add('btn-robi-primary');
+                    // Select clicked button
+                    this.classList.remove('btn-outline-robi-primary');
+                    this.classList.add('btn-robi-primary');
 
-                    // onFilter(event.target.innerText);
+                    action(this.innerText);
                 }
             }
         ]
@@ -81,8 +85,9 @@ export function TableToolbar(param) {
 
     function buildFilters() {
         return options.map((option, index) => {
+            const { label } = option;
             return /*html*/ `
-                <button type='button' class='btn ${index === 0 ? 'btn-robi-primary' : 'btn-outline-robi-primary'} filter'>${option}</button>
+                <button type='button' class='btn ${index === 0 ? 'btn-robi-primary' : 'btn-outline-robi-primary'} filter'>${label}</button>
             `;
         }).join('\n');
     }
