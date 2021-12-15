@@ -61,7 +61,7 @@ Start({
         // logo: 'dha-logo-no-label-180w.png',
         // logoLarge: 'dha-logo-no-label-386w.png',
         // logoSmall: 'dha-logo-no-label-80w.png',
-        name: /* @START-name */'MeasuresLibrary'/* @END-name */,
+        name: /* @START-name */'App'/* @END-name */,
         questionTypes: [
             {
                 title: 'General',
@@ -69,7 +69,7 @@ Start({
             }
         ],
         theme: /* @START-theme */'Red'/* @END-theme */,
-        title: /* @START-title */'Measures Library'/* @END-title */,
+        title: /* @START-title */'Title'/* @END-title */,
         userDefaultRole: 'User',
         userSettings: /* @START-userSettings */JSON.stringify({})/* @END-userSettings */,
         // OPTIONAL PROPERTIES
