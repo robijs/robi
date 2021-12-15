@@ -4,7 +4,7 @@ import { NewStep } from './NewStep.js'
 
 /**
  * 
- * @param {*} param ./Sections/FormSection.js
+ * @param {*} param
  */
 export async function Checklist(param) {
     const {
@@ -21,6 +21,7 @@ export async function Checklist(param) {
 
     // View Title
     const viewTitle = Title({
+        back: true,
         title: `Measure #${itemId}`,
         subTitle: 'Checklist',
         parent,
@@ -136,28 +137,4 @@ export async function Checklist(param) {
             Store.setData(`measure ${itemId} checklist`, checklist);
         }
     });
-
-    const measuresBtn = BootstrapButton({
-        action() {
-            Route('Measures');
-        },
-        classes: ['w-100', 'mt-4'],
-        parent,
-        type: 'robi',
-        value: 'Measures'
-    });
-
-    measuresBtn.add();
-
-    const backBtn = BootstrapButton({
-        action() {
-            history.back();
-        },
-        classes: ['w-100'],
-        parent,
-        type: '',
-        value: 'Back'
-    });
-
-    backBtn.add();
 }

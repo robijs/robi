@@ -31,9 +31,11 @@ export async function ModifyFile(param) {
         `,
         classes: ['scrollbar-wide'],
         titleStyle: 'width: 100%;',
-        headerStyle: 'border-bottom: solid 1px #676E95; padding-bottom: 0px;',
+        // headerStyle: 'border-bottom: solid 1px #676E95; padding-bottom: 0px;',
+        headerStyle: 'padding-bottom: 0px;',
         footerStyle: 'border-top: solid 1px #676E95;',
-        close: false,
+        closeStyle: 'padding: 16px;',
+        // close: false,
         scrollable: true,
         background: '#292D3E',
         centered: true,
@@ -188,50 +190,50 @@ export async function ModifyFile(param) {
                 // Remove .modal-body top padding
                 modalBody.style.paddingTop = '0px';
 
-                // Save and close button
-                const saveAndCloseBtn = BootstrapButton({
-                    async action(event) {
-                        // TODO: only save file if changed
-                        await saveFile(event);
+                // // Save and close button
+                // const saveAndCloseBtn = BootstrapButton({
+                //     async action(event) {
+                //         // TODO: only save file if changed
+                //         await saveFile(event);
 
-                        $(modal.get()).on('hidden.bs.modal', event => {
-                            location.reload(true);
-                        });
+                //         $(modal.get()).on('hidden.bs.modal', event => {
+                //             location.reload(true);
+                //         });
 
-                        setTimeout(() => {
-                            // Enable button
-                            $(event.target)
-                                .removeAttr('disabled')
-                                .text('Saved');
+                //         setTimeout(() => {
+                //             // Enable button
+                //             $(event.target)
+                //                 .removeAttr('disabled')
+                //                 .text('Saved');
 
-                            // Close modal (DOM node will be removed on hidden.bs.modal event)
-                            modal.close();
-                        }, 1000);
-                    },
-                    classes: ['w-100'],
-                    disabled: true,
-                    width: '100%',
-                    parent: modal.find('.modal-footer'),
-                    type: 'light',
-                    value: 'Save and close'
-                });
+                //             // Close modal (DOM node will be removed on hidden.bs.modal event)
+                //             modal.close();
+                //         }, 1000);
+                //     },
+                //     classes: ['w-100'],
+                //     disabled: true,
+                //     width: '100%',
+                //     parent: modal.find('.modal-footer'),
+                //     type: 'light',
+                //     value: 'Save and close'
+                // });
 
-                saveAndCloseBtn.add();
+                // saveAndCloseBtn.add();
 
-                const cancelBtn = BootstrapButton({
-                    action(event) {
-                        modal.close();
-                    },
-                    classes: ['w-100 mt-2'],
-                    width: '100%',
-                    parent: modal.find('.modal-footer'),
-                    style: 'color: white;',
-                    value: 'Close'
-                });
+                // const cancelBtn = BootstrapButton({
+                //     action(event) {
+                //         modal.close();
+                //     },
+                //     classes: ['w-100 mt-2'],
+                //     width: '100%',
+                //     parent: modal.find('.modal-footer'),
+                //     style: 'color: white;',
+                //     value: 'Close'
+                // });
 
-                cancelBtn.add();
+                // cancelBtn.add();
 
-                modal.showFooter();
+                // modal.showFooter();
             }
 
             $(modal.get()).on('hide.bs.modal', checkIfSaved);

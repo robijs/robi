@@ -2,6 +2,7 @@ import { Title, Container, Modal, BootstrapButton, SectionStepper, LoadingSpinne
 import { App, Store, Get, CreateItem, UpdateItem, Route, UploadFile, Style } from '../../Robi/Robi.js'
 import lists from '../../lists.js'
 import { Publish } from './Publish.js'
+import { LastEdited } from './LastEdited.js'
 import { DataFiles } from './DataFiles.js'
 import { Checklist } from './Checklist.js'
 
@@ -73,13 +74,22 @@ export async function MeasureIntakeForm(param) {
 
     rightContainer.add();
 
+    // Title Container
+    const titleContainer = Container({
+        display: 'block',
+        width: '100%',
+        parent: rightContainer
+    });
+
+    titleContainer.add();
+
     // View Title
     const viewTitle = Title({
         title: itemId ? `Measure #${itemId}` : 'New Measure',
         subTitle: section?.name || path.splitCamelCase(),
         padding: '0px 30px 10px 30px',
         width: '100%',
-        parent: rightContainer,
+        parent: titleContainer,
         type: 'across',
         action(event) {
             console.log('scroll');
@@ -350,7 +360,8 @@ export async function MeasureIntakeForm(param) {
         parent: buttonContainer,
         // type: itemId ? 'primary' : 'success',
         type: 'robi',
-        value: itemId ? 'Update measure information' : 'Create new measure'
+        // value: itemId ? 'Update measure information' : 'Create new measure'
+        value: itemId ? 'Update' : 'Create'
     });
 
     saveButton.add();
@@ -361,7 +372,7 @@ export async function MeasureIntakeForm(param) {
             // TODO: Generalize;
             Route('Measures');
         },
-        classes: ['w-100'],
+        classes: ['w-100', 'pl-0'],
         parent: buttonContainer,
         type: '',
         value: /*html*/ `
@@ -475,8 +486,14 @@ export async function MeasureIntakeForm(param) {
         Publish({
             item,
             path,
-            bannerParent: viewTitle,
+            bannerParent: titleContainer,
             buttonParent: buttonContainer
+        });
+
+        // Publish
+        LastEdited({
+            item,
+            parent: titleContainer,
         });
 
         // TODO: Wrap in component

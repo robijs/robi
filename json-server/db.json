@@ -1,316 +1,11 @@
 {
   "Comments": [],
-  "Errors": [
-    {
-      "SessionId": null,
-      "Message": "Cannot access 'item' before initialization",
-      "Error": "ReferenceError: Cannot access 'item' before initialization\n    at DataFiles (http://127.0.0.1:8080/src/Routes/Measures/DataFiles.js:48:9)\n    at MeasureIntakeForm (http://127.0.0.1:8080/src/Routes/Measures/MeasureIntakeForm.js:21:9)\n    at Object.Measures [as go] (http://127.0.0.1:8080/src/Routes/Measures/Measures.js:16:13)\n    at Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:132:11)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:147:5)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:07:31 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:07:31 GMT",
-      "Id": 1
-    },
-    {
-      "SessionId": null,
-      "Message": "Cannot read properties of undefined (reading 'abort')",
-      "Error": "TypeError: Cannot read properties of undefined (reading 'abort')\n    at http://127.0.0.1:8080/src/Robi/Components/NameField.js:280:35\n    at Array.forEach (<anonymous>)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:279:17)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:45:07 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:45:07 GMT",
-      "Id": 2
-    },
-    {
-      "SessionId": null,
-      "Message": "Cannot read properties of undefined (reading 'abort')",
-      "Error": "TypeError: Cannot read properties of undefined (reading 'abort')\n    at http://127.0.0.1:8080/src/Robi/Components/NameField.js:280:35\n    at Array.forEach (<anonymous>)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:279:17)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:45:07 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:45:07 GMT",
-      "Id": 3
-    },
-    {
-      "SessionId": null,
-      "Message": "Failed to fetch",
-      "Error": "TypeError: Failed to fetch\n    at CreateItem (http://127.0.0.1:8080/src/Robi/Actions/CreateItem.js:107:32)\n    at LogError (http://127.0.0.1:8080/src/Robi/Actions/LogError.js:69:30)\n    at http://127.0.0.1:8080/src/Robi/Actions/Start.js:66:13",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:45:29 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:45:29 GMT",
-      "Id": 4
-    },
-    {
-      "SessionId": null,
-      "Message": "Cannot access 'queryFilterString' before initialization",
-      "Error": "ReferenceError: Cannot access 'queryFilterString' before initialization\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:49:48)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Id": 5
-    },
-    {
-      "SessionId": null,
-      "Message": "Cannot access 'queryFilterString' before initialization",
-      "Error": "ReferenceError: Cannot access 'queryFilterString' before initialization\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:49:48)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Id": 6
-    },
-    {
-      "SessionId": null,
-      "Message": "Cannot access 'queryFilterString' before initialization",
-      "Error": "ReferenceError: Cannot access 'queryFilterString' before initialization\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:49:48)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Id": 7
-    },
-    {
-      "SessionId": null,
-      "Message": "Cannot access 'queryFilterString' before initialization",
-      "Error": "ReferenceError: Cannot access 'queryFilterString' before initialization\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:49:48)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Id": 8
-    },
-    {
-      "SessionId": null,
-      "Message": "Cannot access 'queryFilterString' before initialization",
-      "Error": "ReferenceError: Cannot access 'queryFilterString' before initialization\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:49:48)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Id": 9
-    },
-    {
-      "SessionId": null,
-      "Message": "Cannot access 'queryFilterString' before initialization",
-      "Error": "ReferenceError: Cannot access 'queryFilterString' before initialization\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:49:48)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:49:36 GMT",
-      "Id": 10
-    },
-    {
-      "SessionId": null,
-      "Message": "Cannot access 'queryFilterString' before initialization",
-      "Error": "ReferenceError: Cannot access 'queryFilterString' before initialization\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:49:48)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:49:37 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:49:37 GMT",
-      "Id": 11
-    },
-    {
-      "SessionId": null,
-      "Message": "Cannot access 'queryFilterString' before initialization",
-      "Error": "ReferenceError: Cannot access 'queryFilterString' before initialization\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:49:48)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:49:37 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:49:37 GMT",
-      "Id": 12
-    },
-    {
-      "SessionId": null,
-      "Message": "filter is not defined",
-      "Error": "ReferenceError: filter is not defined\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:50:26)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:50:05 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:50:05 GMT",
-      "Id": 13
-    },
-    {
-      "SessionId": null,
-      "Message": "filter is not defined",
-      "Error": "ReferenceError: filter is not defined\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:50:26)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:50:05 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:50:05 GMT",
-      "Id": 14
-    },
-    {
-      "SessionId": null,
-      "Message": "filter is not defined",
-      "Error": "ReferenceError: filter is not defined\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:50:26)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:50:05 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:50:05 GMT",
-      "Id": 15
-    },
-    {
-      "SessionId": null,
-      "Message": "filter is not defined",
-      "Error": "ReferenceError: filter is not defined\n    at GetSiteUsers (http://127.0.0.1:8080/src/Robi/Actions/GetSiteUsers.js:50:26)\n    at searchSiteUsers (http://127.0.0.1:8080/src/Robi/Components/NameField.js:297:27)\n    at HTMLInputElement.listener (http://127.0.0.1:8080/src/Robi/Components/NameField.js:178:21)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
-      "UserAgent": null,
-      "Status": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:50:05 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:50:05 GMT",
-      "Id": 16
-    }
-  ],
+  "Errors": [],
   "Log": [
     {
       "Title": "Route",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
       "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
       "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
       "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
@@ -322,8 +17,8 @@
       "Editor": {
         "Title": "First Last"
       },
-      "Created": "Tue, 14 Dec 2021 23:04:19 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:19 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:54 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:54 GMT",
       "Id": 1
     },
     {
@@ -341,8 +36,8 @@
       "Editor": {
         "Title": "First Last"
       },
-      "Created": "Tue, 14 Dec 2021 23:04:20 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:20 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:55 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:55 GMT",
       "Id": 2
     },
     {
@@ -360,15 +55,15 @@
       "Editor": {
         "Title": "First Last"
       },
-      "Created": "Tue, 14 Dec 2021 23:04:25 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:25 GMT",
+      "Created": "Wed, 15 Dec 2021 01:58:00 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:58:00 GMT",
       "Id": 3
     },
     {
       "Title": "Route",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at onRowClick (http://127.0.0.1:8080/src/Robi/Components/Table.js:527:17)\\n    at HTMLTableRowElement.<anonymous> (http://127.0.0.1:8080/src/Robi/Components/DataTable.js:661:21)\\n    at HTMLTableElement.dispatch (http://127.0.0.1:8080/src/Libraries/lib.js:3:42571)\\n    at HTMLTableElement.v.handle (http://127.0.0.1:8080/src/Libraries/lib.js:3:40572)\"",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
       "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
       "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
       "AuthorId": 1,
@@ -379,17 +74,17 @@
       "Editor": {
         "Title": "First Last"
       },
-      "Created": "Tue, 14 Dec 2021 23:05:03 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:05:03 GMT",
+      "Created": "Wed, 15 Dec 2021 02:03:14 GMT",
+      "Modified": "Wed, 15 Dec 2021 02:03:14 GMT",
       "Id": 4
     },
     {
-      "Title": "First Last logged in",
+      "Title": "Route",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/1\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at onRowClick (http://127.0.0.1:8080/src/Robi/Components/Table.js:526:17)\\n    at HTMLTableRowElement.<anonymous> (http://127.0.0.1:8080/src/Robi/Components/DataTable.js:661:21)\\n    at HTMLTableElement.dispatch (http://127.0.0.1:8080/src/Libraries/lib.js:3:42571)\\n    at HTMLTableElement.v.handle (http://127.0.0.1:8080/src/Libraries/lib.js:3:40572)\"",
       "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
       "AuthorId": 1,
       "Author": {
         "Title": "First Last"
@@ -398,15 +93,15 @@
       "Editor": {
         "Title": "First Last"
       },
-      "Created": "Tue, 14 Dec 2021 23:05:25 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:05:25 GMT",
+      "Created": "Wed, 15 Dec 2021 02:03:25 GMT",
+      "Modified": "Wed, 15 Dec 2021 02:03:25 GMT",
       "Id": 5
     },
     {
       "Title": "Route",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:8080/src/Routes/Measures/MeasureIntakeForm.js:493:80)\"",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
       "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
       "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
       "AuthorId": 1,
@@ -417,1704 +112,12 @@
       "Editor": {
         "Title": "First Last"
       },
-      "Created": "Tue, 14 Dec 2021 23:05:50 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:05:50 GMT",
+      "Created": "Wed, 15 Dec 2021 02:03:31 GMT",
+      "Modified": "Wed, 15 Dec 2021 02:03:31 GMT",
       "Id": 6
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:06:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:06:23 GMT",
-      "Id": 7
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:07:31 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:07:31 GMT",
-      "Id": 8
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:07:45 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:07:45 GMT",
-      "Id": 9
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:08:03 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:08:03 GMT",
-      "Id": 10
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:76:13\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:08:22 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:08:22 GMT",
-      "Id": 11
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:8080/src/Routes/Measures/MeasureIntakeForm.js:492:80)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:08:50 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:08:50 GMT",
-      "Id": 12
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:09:17 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:09:17 GMT",
-      "Id": 13
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:09:44 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:09:44 GMT",
-      "Id": 14
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:09:49 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:09:49 GMT",
-      "Id": 15
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:09:58 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:09:58 GMT",
-      "Id": 16
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:09:59 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:09:59 GMT",
-      "Id": 17
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:10:34 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:10:34 GMT",
-      "Id": 18
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:10:43 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:10:43 GMT",
-      "Id": 19
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:10:59 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:10:59 GMT",
-      "Id": 20
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:11:14 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:11:14 GMT",
-      "Id": 21
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:11:22 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:11:22 GMT",
-      "Id": 22
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:76:13\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:20 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:20 GMT",
-      "Id": 23
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/GeneralInfo\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:45 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:45 GMT",
-      "Id": 24
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/Ownership\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:46 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:46 GMT",
-      "Id": 25
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataSource\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:47 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:47 GMT",
-      "Id": 26
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/GeneralInfo\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:49 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:49 GMT",
-      "Id": 27
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/Ownership\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:49 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:49 GMT",
-      "Id": 28
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataSource\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:49 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:49 GMT",
-      "Id": 29
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/Dashboard\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:50 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:50 GMT",
-      "Id": 30
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/Formulas\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:50 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:50 GMT",
-      "Id": 31
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/Timing\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:50 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:50 GMT",
-      "Id": 32
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/PerformanceSection\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:51 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:51 GMT",
-      "Id": 33
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/Misc\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:51 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:51 GMT",
-      "Id": 34
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/GeneralInfo\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/SectionStepper.js:122:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:28:53 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:28:53 GMT",
-      "Id": 35
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/GeneralInfo\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:30:35 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:30:35 GMT",
-      "Id": 36
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/GeneralInfo\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:8080/src/Routes/Measures/MeasureIntakeForm.js:232:21)\\n    at HTMLDivElement.dispatch (http://127.0.0.1:8080/src/Libraries/lib.js:3:42571)\\n    at HTMLDivElement.v.handle (http://127.0.0.1:8080/src/Libraries/lib.js:3:40572)\\n    at Object.trigger (http://127.0.0.1:8080/src/Libraries/lib.js:3:70627)\\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:8080/src/Libraries/lib.js:3:71222)\\n    at Function.each (http://127.0.0.1:8080/src/Libraries/lib.js:3:2777)\\n    at k.fn.init.each (http://127.0.0.1:8080/src/Libraries/lib.js:3:1419)\\n    at k.fn.init.trigger (http://127.0.0.1:8080/src/Libraries/lib.js:3:71198)\\n    at http://127.0.0.1:8080/src/Libraries/lib.js:11:52263\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:31:26 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:31:26 GMT",
-      "Id": 37
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/GeneralInfo\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:8080/src/Routes/Measures/MeasureIntakeForm.js:232:21)\\n    at HTMLDivElement.dispatch (http://127.0.0.1:8080/src/Libraries/lib.js:3:42571)\\n    at HTMLDivElement.v.handle (http://127.0.0.1:8080/src/Libraries/lib.js:3:40572)\\n    at Object.trigger (http://127.0.0.1:8080/src/Libraries/lib.js:3:70627)\\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:8080/src/Libraries/lib.js:3:71222)\\n    at Function.each (http://127.0.0.1:8080/src/Libraries/lib.js:3:2777)\\n    at k.fn.init.each (http://127.0.0.1:8080/src/Libraries/lib.js:3:1419)\\n    at k.fn.init.trigger (http://127.0.0.1:8080/src/Libraries/lib.js:3:71198)\\n    at http://127.0.0.1:8080/src/Libraries/lib.js:11:52263\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:31:40 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:31:40 GMT",
-      "Id": 38
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:8080/src/Routes/Measures/MeasureIntakeForm.js:492:80)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:32:02 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:32:02 GMT",
-      "Id": 39
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/GeneralInfo\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:76:13\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:32:16 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:32:16 GMT",
-      "Id": 40
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/GeneralInfo\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:33:57 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:33:57 GMT",
-      "Id": 41
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/2/GeneralInfo\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:34:38 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:34:38 GMT",
-      "Id": 42
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLButtonElement.action (http://127.0.0.1:8080/src/Routes/Measures/MeasureIntakeForm.js:362:13)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:34:40 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:34:40 GMT",
-      "Id": 43
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:34:42 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:34:42 GMT",
-      "Id": 44
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/1\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at onRowClick (http://127.0.0.1:8080/src/Robi/Components/Table.js:527:17)\\n    at HTMLTableRowElement.<anonymous> (http://127.0.0.1:8080/src/Robi/Components/DataTable.js:661:21)\\n    at HTMLTableElement.dispatch (http://127.0.0.1:8080/src/Libraries/lib.js:3:42571)\\n    at HTMLTableElement.v.handle (http://127.0.0.1:8080/src/Libraries/lib.js:3:40572)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:34:43 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:34:43 GMT",
-      "Id": 45
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLButtonElement.action (http://127.0.0.1:8080/src/Routes/Measures/MeasureIntakeForm.js:362:13)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:34:48 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:34:48 GMT",
-      "Id": 46
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:41:37 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:41:37 GMT",
-      "Id": 47
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:41:45 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:41:45 GMT",
-      "Id": 48
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions/General\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/QuestionType.js:63:21)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:41:46 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:41:46 GMT",
-      "Id": 49
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:41:49 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:41:49 GMT",
-      "Id": 50
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/3\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at onRowClick (http://127.0.0.1:8080/src/Robi/Components/Table.js:527:17)\\n    at HTMLTableRowElement.<anonymous> (http://127.0.0.1:8080/src/Robi/Components/DataTable.js:661:21)\\n    at HTMLTableElement.dispatch (http://127.0.0.1:8080/src/Libraries/lib.js:3:42571)\\n    at HTMLTableElement.v.handle (http://127.0.0.1:8080/src/Libraries/lib.js:3:40572)\"",
-      "UserAgent": "Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1 Edg/96.0.4664.93",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:42:26 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:42:26 GMT",
-      "Id": 51
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/3/DataFiles\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:8080/src/Routes/Measures/MeasureIntakeForm.js:499:80)\"",
-      "UserAgent": "Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1 Edg/96.0.4664.93",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:42:29 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:42:29 GMT",
-      "Id": 52
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1 Edg/96.0.4664.93",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:42:34 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:42:34 GMT",
-      "Id": 53
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:43:41 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:43:41 GMT",
-      "Id": 54
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:45:00 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:45:00 GMT",
-      "Id": 55
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:45:32 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:45:32 GMT",
-      "Id": 56
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:47:30 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:47:30 GMT",
-      "Id": 57
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:49:05 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:49:05 GMT",
-      "Id": 58
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:49:31 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:49:31 GMT",
-      "Id": 59
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:49:34 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:49:34 GMT",
-      "Id": 60
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:50:00 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:50:00 GMT",
-      "Id": 61
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:50:33 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:50:33 GMT",
-      "Id": 62
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:50:46 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:50:46 GMT",
-      "Id": 63
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:51:31 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:51:31 GMT",
-      "Id": 64
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:52:38 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:52:38 GMT",
-      "Id": 65
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:52:46 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:52:46 GMT",
-      "Id": 66
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:54:38 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:54:38 GMT",
-      "Id": 67
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:55:18 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:55:18 GMT",
-      "Id": 68
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:56:01 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:56:01 GMT",
-      "Id": 69
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:56:31 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:56:31 GMT",
-      "Id": 70
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:56:35 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:56:35 GMT",
-      "Id": 71
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:57:17 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:57:17 GMT",
-      "Id": 72
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:57:32 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:57:32 GMT",
-      "Id": 73
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:58:22 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:58:22 GMT",
-      "Id": 74
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:58:42 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:58:42 GMT",
-      "Id": 75
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:59:34 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:59:34 GMT",
-      "Id": 76
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:59:40 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:59:40 GMT",
-      "Id": 77
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:59:49 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:59:49 GMT",
-      "Id": 78
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:59:56 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:59:56 GMT",
-      "Id": 79
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:00:56 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:00:56 GMT",
-      "Id": 80
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures/1\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at onRowClick (http://127.0.0.1:8080/src/Robi/Components/Table.js:527:17)\\n    at HTMLTableRowElement.<anonymous> (http://127.0.0.1:8080/src/Robi/Components/DataTable.js:661:21)\\n    at HTMLTableElement.dispatch (http://127.0.0.1:8080/src/Libraries/lib.js:3:42571)\\n    at HTMLTableElement.v.handle (http://127.0.0.1:8080/src/Libraries/lib.js:3:40572)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:02:00 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:02:00 GMT",
-      "Id": 81
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:02:10 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:02:10 GMT",
-      "Id": 82
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:02:22 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:02:22 GMT",
-      "Id": 83
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:02:23 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:02:23 GMT",
-      "Id": 84
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:02:27 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:02:27 GMT",
-      "Id": 85
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:02:47 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:02:47 GMT",
-      "Id": 86
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:03:18 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:03:18 GMT",
-      "Id": 87
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:03:20 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:03:20 GMT",
-      "Id": 88
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Measures\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Measures\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:03:22 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:03:22 GMT",
-      "Id": 89
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:03:28 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:03:28 GMT",
-      "Id": 90
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:03:31 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:03:31 GMT",
-      "Id": 91
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:04:05 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:04:05 GMT",
-      "Id": 92
-    },
-    {
-      "Title": "First Last logged in",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Measures Library\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
-      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:06:01 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:06:01 GMT",
-      "Id": 93
-    },
-    {
-      "Title": "Route",
-      "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
-      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:122:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1032:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36 Edg/96.0.1054.53",
-      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Wed, 15 Dec 2021 00:06:03 GMT",
-      "Modified": "Wed, 15 Dec 2021 00:06:03 GMT",
-      "Id": 94
     }
   ],
-  "Users": [
-    {
-      "Title": "First Last",
-      "Email": "first.mi.last.ctr@mail.mil",
-      "LoginName": "0987654321@mil",
-      "Role": "Developer",
-      "SiteId": 1,
-      "Settings": "{}",
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:05:24 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:05:24 GMT",
-      "Id": 1
-    }
-  ],
+  "Users": [],
   "Questions": [],
   "ReleaseNotes": [],
   "Roles": [
@@ -2152,6 +155,8 @@
       "Editor": {
         "Title": "First Last"
       },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Daily",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -2169,7 +174,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -2182,7 +186,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -2214,21 +217,27 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:22 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:22 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:57 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:57 GMT",
       "Id": 1
     },
     {
-      "AOEmail": "first.mi.last.ctr@mail.mil",
-      "AOName": "First Last",
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
       "MeasureName": "Test",
-      "Status": "On Hold",
-      "OnHoldComments": "Test",
-      "OnHoldEnd": "2021-12-15T22:00:00Z",
-      "OnHoldName": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
-      "OnHoldStart": "2021-12-14T22:00:00Z",
+      "Status": "Published",
       "Published": "2021-12-14T21:57:27.738Z",
-      "Publisher": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
+      "AuthorId": 2,
+      "Author": {
+        "Title": "Jane Doe"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Annually",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -2246,7 +255,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -2259,11 +267,10 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
-      "IsAutomated": "Yes",
+      "IsAutomated": null,
       "Limitations": null,
       "MIPNameLoc": null,
       "MeasureAbr": null,
@@ -2274,6 +281,10 @@
       "MeasureType": null,
       "NumberOfUploads": null,
       "Numerator": null,
+      "OnHoldComments": null,
+      "OnHoldEnd": null,
+      "OnHoldName": null,
+      "OnHoldStart": null,
       "PQACategory": null,
       "ProgLang": null,
       "Rationale": null,
@@ -2285,16 +296,8 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:04:22 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:31:39 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:57 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:57 GMT",
       "Id": 2
     },
     {
@@ -2303,7 +306,17 @@
       "MeasureName": "Test",
       "Status": "Published",
       "Published": "2021-12-14T21:57:27.738Z",
-      "Publisher": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
+      "AuthorId": 2,
+      "Author": {
+        "Title": "Jane Doe"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Daily",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -2321,7 +334,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -2334,7 +346,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -2364,23 +375,17 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:04:22 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:22 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:57 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:57 GMT",
       "Id": 3
     },
     {
-      "AOEmail": "first.mi.last.ctr@mail.mil",
-      "AOName": "First Last",
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
       "MeasureName": "Test",
-      "Status": "Under Development",
+      "Status": "Published",
+      "Published": "2021-12-14T21:57:27.738Z",
+      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
       "AuthorId": 2,
       "Author": {
         "Title": "Jane Doe"
@@ -2389,6 +394,8 @@
       "Editor": {
         "Title": "First Last"
       },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Annually",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -2406,7 +413,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -2419,7 +425,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -2440,8 +445,6 @@
       "OnHoldStart": null,
       "PQACategory": null,
       "ProgLang": null,
-      "Publisher": null,
-      "Published": null,
       "Rationale": null,
       "RawDataLocation": null,
       "ReviewFocusArea": null,
@@ -2451,25 +454,23 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:22 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:22 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
       "Id": 4
     },
     {
       "AOEmail": "first.mi.last.ctr@mail.mil",
       "AOName": "First Last",
       "MeasureName": "Test",
-      "Status": "Published",
+      "Status": "On Hold",
+      "OnHoldComments": "Test",
+      "OnHoldEnd": "2021-12-15T22:00:00Z",
+      "OnHoldName": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "OnHoldStart": "2021-12-14T22:00:00Z",
       "Published": "2021-12-14T21:57:27.738Z",
-      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
-      "AuthorId": 2,
-      "Author": {
-        "Title": "Jane Doe"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
+      "Publisher": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Monthly",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -2487,7 +488,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -2500,7 +500,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -2515,10 +514,6 @@
       "MeasureType": null,
       "NumberOfUploads": null,
       "Numerator": null,
-      "OnHoldComments": null,
-      "OnHoldEnd": null,
-      "OnHoldName": null,
-      "OnHoldStart": null,
       "PQACategory": null,
       "ProgLang": null,
       "Rationale": null,
@@ -2530,13 +525,21 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:22 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:22 GMT",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
       "Id": 5
     },
     {
-      "AOEmail": "first.mi.last.ctr@mail.mil",
-      "AOName": "First Last",
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
       "MeasureName": "Test",
       "Status": "Under Development",
       "AuthorId": 2,
@@ -2547,6 +550,8 @@
       "Editor": {
         "Title": "First Last"
       },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Daily",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -2564,7 +569,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -2577,7 +581,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -2609,13 +612,13 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
       "Id": 6
     },
     {
-      "AOEmail": "first.mi.last.ctr@mail.mil",
-      "AOName": "First Last",
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
       "MeasureName": "Test",
       "Status": "Under Development",
       "AuthorId": 2,
@@ -2626,6 +629,8 @@
       "Editor": {
         "Title": "First Last"
       },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Daily",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -2643,7 +648,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -2656,7 +660,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -2688,8 +691,8 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
       "Id": 7
     },
     {
@@ -2698,15 +701,9 @@
       "MeasureName": "Test",
       "Status": "Published",
       "Published": "2021-12-14T21:57:27.738Z",
-      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
-      "AuthorId": 2,
-      "Author": {
-        "Title": "Jane Doe"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
+      "Publisher": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Unknown",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -2724,7 +721,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -2737,7 +733,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -2767,15 +762,25 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
       "Id": 8
     },
     {
-      "AOEmail": "first.mi.last.ctr@mail.mil",
-      "AOName": "First Last",
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
       "MeasureName": "Test",
       "Status": "Under Development",
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Annually",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -2793,7 +798,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -2806,7 +810,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -2846,23 +849,23 @@
       "Editor": {
         "Title": "First Last"
       },
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
       "Id": 9
     },
     {
-      "AOEmail": "jane.m.doe.civ@mail.mil",
-      "AOName": "Jane Doe",
+      "AOEmail": "first.mi.last.ctr@mail.mil",
+      "AOName": "First Last",
       "MeasureName": "Test",
-      "Status": "Under Development",
-      "AuthorId": 2,
-      "Author": {
-        "Title": "Jane Doe"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
+      "Status": "On Hold",
+      "OnHoldComments": "Test",
+      "OnHoldEnd": "2021-12-15T22:00:00Z",
+      "OnHoldName": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
+      "OnHoldStart": "2021-12-14T22:00:00Z",
+      "Published": "2021-12-14T21:57:27.738Z",
+      "Publisher": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Daily",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -2880,7 +883,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -2893,7 +895,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -2908,14 +909,8 @@
       "MeasureType": null,
       "NumberOfUploads": null,
       "Numerator": null,
-      "OnHoldComments": null,
-      "OnHoldEnd": null,
-      "OnHoldName": null,
-      "OnHoldStart": null,
       "PQACategory": null,
       "ProgLang": null,
-      "Publisher": null,
-      "Published": null,
       "Rationale": null,
       "RawDataLocation": null,
       "ReviewFocusArea": null,
@@ -2925,25 +920,27 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Id": 10
-    },
-    {
-      "AOEmail": "jane.m.doe.civ@mail.mil",
-      "AOName": "Jane Doe",
-      "MeasureName": "Test",
-      "Status": "Published",
-      "Published": "2021-12-14T21:57:27.738Z",
-      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
-      "AuthorId": 2,
+      "AuthorId": 1,
       "Author": {
-        "Title": "Jane Doe"
+        "Title": "First Last"
       },
       "EditorId": 1,
       "Editor": {
         "Title": "First Last"
       },
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Id": 10
+    },
+    {
+      "AOEmail": "first.mi.last.ctr@mail.mil",
+      "AOName": "First Last",
+      "MeasureName": "Test",
+      "Status": "Published",
+      "Published": "2021-12-14T21:57:27.738Z",
+      "Publisher": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Monthly",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -2961,7 +958,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -2974,7 +970,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -3004,25 +999,25 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Id": 11
-    },
-    {
-      "AOEmail": "jane.m.doe.civ@mail.mil",
-      "AOName": "Jane Doe",
-      "MeasureName": "Test",
-      "Status": "Published",
-      "Published": "2021-12-14T21:57:27.738Z",
-      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
-      "AuthorId": 2,
+      "AuthorId": 1,
       "Author": {
-        "Title": "Jane Doe"
+        "Title": "First Last"
       },
       "EditorId": 1,
       "Editor": {
         "Title": "First Last"
       },
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Id": 11
+    },
+    {
+      "AOEmail": "first.mi.last.ctr@mail.mil",
+      "AOName": "First Last",
+      "MeasureName": "Test",
+      "Status": "Under Development",
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Hoc",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -3040,7 +1035,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -3053,7 +1047,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -3063,83 +1056,6 @@
       "MeasureAbr": null,
       "MeasureCategory": null,
       "MeasureId": 12,
-      "MeasureSet": null,
-      "MeasureStatus": null,
-      "MeasureType": null,
-      "NumberOfUploads": null,
-      "Numerator": null,
-      "OnHoldComments": null,
-      "OnHoldEnd": null,
-      "OnHoldName": null,
-      "OnHoldStart": null,
-      "PQACategory": null,
-      "ProgLang": null,
-      "Rationale": null,
-      "RawDataLocation": null,
-      "ReviewFocusArea": null,
-      "RiskAdjusted": null,
-      "SQLNameLoc": null,
-      "ScheduledRefreshDay": null,
-      "Tags": null,
-      "Target": null,
-      "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Id": 12
-    },
-    {
-      "AOEmail": "jane.m.doe.civ@mail.mil",
-      "AOName": "Jane Doe",
-      "MeasureName": "Test",
-      "Status": "Under Development",
-      "AuthorId": 2,
-      "Author": {
-        "Title": "Jane Doe"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "AOOffice": null,
-      "AltAOEmail": null,
-      "AltAOName": null,
-      "AltAOOffice": null,
-      "AltDSEmail": null,
-      "AltDSName": null,
-      "AltDSOffice": null,
-      "AnnualUpdateSchedule": null,
-      "ArchivedDataSources": null,
-      "Baseline": null,
-      "BaselineValue": null,
-      "BenchmarkSource": null,
-      "Benchmarks": null,
-      "CareAvailability": null,
-      "DSEmail": null,
-      "DSName": null,
-      "DSOffice": null,
-      "DashboardLinks": null,
-      "DataAggLevels": null,
-      "DataLagUnit": null,
-      "DataLagValue": null,
-      "DataLatency": null,
-      "DataSource": null,
-      "DataThroughDate": null,
-      "Denominator": null,
-      "Description": null,
-      "Exclusions": null,
-      "ExistingBenchmarks": null,
-      "ExistingTargets": null,
-      "FileTypes": null,
-      "Frequency": null,
-      "GenesisIncluded": null,
-      "Inclusions": null,
-      "IsAllDataMIP": null,
-      "IsAutomated": null,
-      "Limitations": null,
-      "MIPNameLoc": null,
-      "MeasureAbr": null,
-      "MeasureCategory": null,
-      "MeasureId": 13,
       "MeasureSet": null,
       "MeasureStatus": null,
       "MeasureType": null,
@@ -3162,15 +1078,35 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Id": 13
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Id": 12
     },
     {
-      "AOEmail": "first.mi.last.ctr@mail.mil",
-      "AOName": "First Last",
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
       "MeasureName": "Test",
-      "Status": "Under Development",
+      "Status": "Published",
+      "Published": "2021-12-14T21:57:27.738Z",
+      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
+      "AuthorId": 2,
+      "Author": {
+        "Title": "Jane Doe"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Annually",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -3188,7 +1124,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -3201,7 +1136,83 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
+      "GenesisIncluded": null,
+      "Inclusions": null,
+      "IsAllDataMIP": null,
+      "IsAutomated": null,
+      "Limitations": null,
+      "MIPNameLoc": null,
+      "MeasureAbr": null,
+      "MeasureCategory": null,
+      "MeasureId": 13,
+      "MeasureSet": null,
+      "MeasureStatus": null,
+      "MeasureType": null,
+      "NumberOfUploads": null,
+      "Numerator": null,
+      "OnHoldComments": null,
+      "OnHoldEnd": null,
+      "OnHoldName": null,
+      "OnHoldStart": null,
+      "PQACategory": null,
+      "ProgLang": null,
+      "Rationale": null,
+      "RawDataLocation": null,
+      "ReviewFocusArea": null,
+      "RiskAdjusted": null,
+      "SQLNameLoc": null,
+      "ScheduledRefreshDay": null,
+      "Tags": null,
+      "Target": null,
+      "Title": null,
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Id": 13
+    },
+    {
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
+      "MeasureName": "Test",
+      "Status": "Under Development",
+      "AuthorId": 2,
+      "Author": {
+        "Title": "Jane Doe"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Daily",
+      "AOOffice": null,
+      "AltAOEmail": null,
+      "AltAOName": null,
+      "AltAOOffice": null,
+      "AltDSEmail": null,
+      "AltDSName": null,
+      "AltDSOffice": null,
+      "AnnualUpdateSchedule": null,
+      "ArchivedDataSources": null,
+      "Baseline": null,
+      "BaselineValue": null,
+      "BenchmarkSource": null,
+      "Benchmarks": null,
+      "CareAvailability": null,
+      "DSEmail": null,
+      "DSName": null,
+      "DSOffice": null,
+      "DataAggLevels": null,
+      "DataLagUnit": null,
+      "DataLagValue": null,
+      "DataLatency": null,
+      "DataSource": null,
+      "DataThroughDate": null,
+      "Denominator": null,
+      "Description": null,
+      "Exclusions": null,
+      "ExistingBenchmarks": null,
+      "ExistingTargets": null,
+      "FileTypes": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -3233,23 +1244,19 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
       "Id": 14
     },
     {
       "AOEmail": "first.mi.last.ctr@mail.mil",
       "AOName": "First Last",
       "MeasureName": "Test",
-      "Status": "Under Development",
+      "Status": "Published",
+      "Published": "2021-12-14T21:57:27.738Z",
+      "Publisher": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Monthly",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -3267,7 +1274,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -3280,7 +1286,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -3301,8 +1306,6 @@
       "OnHoldStart": null,
       "PQACategory": null,
       "ProgLang": null,
-      "Publisher": null,
-      "Published": null,
       "Rationale": null,
       "RawDataLocation": null,
       "ReviewFocusArea": null,
@@ -3320,8 +1323,8 @@
       "Editor": {
         "Title": "First Last"
       },
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
       "Id": 15
     },
     {
@@ -3329,6 +1332,16 @@
       "AOName": "Jane Doe",
       "MeasureName": "Test",
       "Status": "Under Development",
+      "AuthorId": 2,
+      "Author": {
+        "Title": "Jane Doe"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Daily",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -3346,7 +1359,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -3359,7 +1371,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -3391,16 +1402,8 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:58 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:58 GMT",
       "Id": 16
     },
     {
@@ -3416,6 +1419,8 @@
       "Editor": {
         "Title": "First Last"
       },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Daily",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -3433,7 +1438,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -3446,7 +1450,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -3478,21 +1481,25 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:23 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:23 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:59 GMT",
       "Id": 17
     },
     {
-      "AOEmail": "first.mi.last.ctr@mail.mil",
-      "AOName": "First Last",
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
       "MeasureName": "Test",
-      "Status": "On Hold",
-      "OnHoldComments": "Test",
-      "OnHoldEnd": "2021-12-15T22:00:00Z",
-      "OnHoldName": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
-      "OnHoldStart": "2021-12-14T22:00:00Z",
-      "Published": "2021-12-14T21:57:27.738Z",
-      "Publisher": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "Status": "Under Development",
+      "AuthorId": 2,
+      "Author": {
+        "Title": "Jane Doe"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Daily",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -3510,7 +1517,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -3523,7 +1529,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -3538,8 +1543,14 @@
       "MeasureType": null,
       "NumberOfUploads": null,
       "Numerator": null,
+      "OnHoldComments": null,
+      "OnHoldEnd": null,
+      "OnHoldName": null,
+      "OnHoldStart": null,
       "PQACategory": null,
       "ProgLang": null,
+      "Publisher": null,
+      "Published": null,
       "Rationale": null,
       "RawDataLocation": null,
       "ReviewFocusArea": null,
@@ -3549,31 +1560,19 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:04:24 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:24 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:59 GMT",
       "Id": 18
     },
     {
       "AOEmail": "first.mi.last.ctr@mail.mil",
       "AOName": "First Last",
       "MeasureName": "Test",
-      "Status": "Under Development",
-      "AuthorId": 2,
-      "Author": {
-        "Title": "Jane Doe"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
+      "Status": "Published",
+      "Published": "2021-12-14T21:57:27.738Z",
+      "Publisher": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Monthly",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -3591,7 +1590,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -3604,7 +1602,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -3625,8 +1622,6 @@
       "OnHoldStart": null,
       "PQACategory": null,
       "ProgLang": null,
-      "Publisher": null,
-      "Published": null,
       "Rationale": null,
       "RawDataLocation": null,
       "ReviewFocusArea": null,
@@ -3636,17 +1631,33 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:24 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:24 GMT",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:59 GMT",
       "Id": 19
     },
     {
-      "AOEmail": "first.mi.last.ctr@mail.mil",
-      "AOName": "First Last",
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
       "MeasureName": "Test",
-      "Status": "Published",
-      "Published": "2021-12-14T21:57:27.738Z",
-      "Publisher": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "Status": "Under Development",
+      "AuthorId": 2,
+      "Author": {
+        "Title": "Jane Doe"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Daily",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -3664,7 +1675,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -3677,7 +1687,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -3698,6 +1707,8 @@
       "OnHoldStart": null,
       "PQACategory": null,
       "ProgLang": null,
+      "Publisher": null,
+      "Published": null,
       "Rationale": null,
       "RawDataLocation": null,
       "ReviewFocusArea": null,
@@ -3707,25 +1718,15 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:04:24 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:24 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:59 GMT",
       "Id": 20
     },
     {
-      "AOEmail": "jane.m.doe.civ@mail.mil",
-      "AOName": "Jane Doe",
+      "AOEmail": "first.mi.last.ctr@mail.mil",
+      "AOName": "First Last",
       "MeasureName": "Test",
-      "Status": "Published",
-      "Published": "2021-12-14T21:57:27.738Z",
-      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
+      "Status": "Under Development",
       "AuthorId": 2,
       "Author": {
         "Title": "Jane Doe"
@@ -3734,6 +1735,8 @@
       "Editor": {
         "Title": "First Last"
       },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Weekly",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -3751,7 +1754,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -3764,7 +1766,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -3774,154 +1775,6 @@
       "MeasureAbr": null,
       "MeasureCategory": null,
       "MeasureId": 21,
-      "MeasureSet": null,
-      "MeasureStatus": null,
-      "MeasureType": null,
-      "NumberOfUploads": null,
-      "Numerator": null,
-      "OnHoldComments": null,
-      "OnHoldEnd": null,
-      "OnHoldName": null,
-      "OnHoldStart": null,
-      "PQACategory": null,
-      "ProgLang": null,
-      "Rationale": null,
-      "RawDataLocation": null,
-      "ReviewFocusArea": null,
-      "RiskAdjusted": null,
-      "SQLNameLoc": null,
-      "ScheduledRefreshDay": null,
-      "Tags": null,
-      "Target": null,
-      "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:24 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:24 GMT",
-      "Id": 21
-    },
-    {
-      "AOEmail": "jane.m.doe.civ@mail.mil",
-      "AOName": "Jane Doe",
-      "MeasureName": "Test",
-      "Status": "Published",
-      "Published": "2021-12-14T21:57:27.738Z",
-      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
-      "AuthorId": 2,
-      "Author": {
-        "Title": "Jane Doe"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "AOOffice": null,
-      "AltAOEmail": null,
-      "AltAOName": null,
-      "AltAOOffice": null,
-      "AltDSEmail": null,
-      "AltDSName": null,
-      "AltDSOffice": null,
-      "AnnualUpdateSchedule": null,
-      "ArchivedDataSources": null,
-      "Baseline": null,
-      "BaselineValue": null,
-      "BenchmarkSource": null,
-      "Benchmarks": null,
-      "CareAvailability": null,
-      "DSEmail": null,
-      "DSName": null,
-      "DSOffice": null,
-      "DashboardLinks": null,
-      "DataAggLevels": null,
-      "DataLagUnit": null,
-      "DataLagValue": null,
-      "DataLatency": null,
-      "DataSource": null,
-      "DataThroughDate": null,
-      "Denominator": null,
-      "Description": null,
-      "Exclusions": null,
-      "ExistingBenchmarks": null,
-      "ExistingTargets": null,
-      "FileTypes": null,
-      "Frequency": null,
-      "GenesisIncluded": null,
-      "Inclusions": null,
-      "IsAllDataMIP": null,
-      "IsAutomated": null,
-      "Limitations": null,
-      "MIPNameLoc": null,
-      "MeasureAbr": null,
-      "MeasureCategory": null,
-      "MeasureId": 22,
-      "MeasureSet": null,
-      "MeasureStatus": null,
-      "MeasureType": null,
-      "NumberOfUploads": null,
-      "Numerator": null,
-      "OnHoldComments": null,
-      "OnHoldEnd": null,
-      "OnHoldName": null,
-      "OnHoldStart": null,
-      "PQACategory": null,
-      "ProgLang": null,
-      "Rationale": null,
-      "RawDataLocation": null,
-      "ReviewFocusArea": null,
-      "RiskAdjusted": null,
-      "SQLNameLoc": null,
-      "ScheduledRefreshDay": null,
-      "Tags": null,
-      "Target": null,
-      "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:24 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:24 GMT",
-      "Id": 22
-    },
-    {
-      "AOEmail": "jane.m.doe.civ@mail.mil",
-      "AOName": "Jane Doe",
-      "MeasureName": "Test",
-      "Status": "Under Development",
-      "AOOffice": null,
-      "AltAOEmail": null,
-      "AltAOName": null,
-      "AltAOOffice": null,
-      "AltDSEmail": null,
-      "AltDSName": null,
-      "AltDSOffice": null,
-      "AnnualUpdateSchedule": null,
-      "ArchivedDataSources": null,
-      "Baseline": null,
-      "BaselineValue": null,
-      "BenchmarkSource": null,
-      "Benchmarks": null,
-      "CareAvailability": null,
-      "DSEmail": null,
-      "DSName": null,
-      "DSOffice": null,
-      "DashboardLinks": null,
-      "DataAggLevels": null,
-      "DataLagUnit": null,
-      "DataLagValue": null,
-      "DataLatency": null,
-      "DataSource": null,
-      "DataThroughDate": null,
-      "Denominator": null,
-      "Description": null,
-      "Exclusions": null,
-      "ExistingBenchmarks": null,
-      "ExistingTargets": null,
-      "FileTypes": null,
-      "Frequency": null,
-      "GenesisIncluded": null,
-      "Inclusions": null,
-      "IsAllDataMIP": null,
-      "IsAutomated": null,
-      "Limitations": null,
-      "MIPNameLoc": null,
-      "MeasureAbr": null,
-      "MeasureCategory": null,
-      "MeasureId": 23,
       "MeasureSet": null,
       "MeasureStatus": null,
       "MeasureType": null,
@@ -3944,29 +1797,15 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:04:24 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:24 GMT",
-      "Id": 23
+      "Created": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Id": 21
     },
     {
       "AOEmail": "first.mi.last.ctr@mail.mil",
       "AOName": "First Last",
       "MeasureName": "Test",
-      "Status": "On Hold",
-      "OnHoldComments": "Test",
-      "OnHoldEnd": "2021-12-15T22:00:00Z",
-      "OnHoldName": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
-      "OnHoldStart": "2021-12-14T22:00:00Z",
-      "Published": "2021-12-14T21:57:27.738Z",
-      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
+      "Status": "Under Development",
       "AuthorId": 2,
       "Author": {
         "Title": "Jane Doe"
@@ -3975,6 +1814,8 @@
       "Editor": {
         "Title": "First Last"
       },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Weekly",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -3992,7 +1833,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -4005,7 +1845,166 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
+      "GenesisIncluded": null,
+      "Inclusions": null,
+      "IsAllDataMIP": null,
+      "IsAutomated": null,
+      "Limitations": null,
+      "MIPNameLoc": null,
+      "MeasureAbr": null,
+      "MeasureCategory": null,
+      "MeasureId": 22,
+      "MeasureSet": null,
+      "MeasureStatus": null,
+      "MeasureType": null,
+      "NumberOfUploads": null,
+      "Numerator": null,
+      "OnHoldComments": null,
+      "OnHoldEnd": null,
+      "OnHoldName": null,
+      "OnHoldStart": null,
+      "PQACategory": null,
+      "ProgLang": null,
+      "Publisher": null,
+      "Published": null,
+      "Rationale": null,
+      "RawDataLocation": null,
+      "ReviewFocusArea": null,
+      "RiskAdjusted": null,
+      "SQLNameLoc": null,
+      "ScheduledRefreshDay": null,
+      "Tags": null,
+      "Target": null,
+      "Title": null,
+      "Created": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Id": 22
+    },
+    {
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
+      "MeasureName": "Test",
+      "Status": "Published",
+      "Published": "2021-12-14T21:57:27.738Z",
+      "Publisher": "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Unknown",
+      "AOOffice": null,
+      "AltAOEmail": null,
+      "AltAOName": null,
+      "AltAOOffice": null,
+      "AltDSEmail": null,
+      "AltDSName": null,
+      "AltDSOffice": null,
+      "AnnualUpdateSchedule": null,
+      "ArchivedDataSources": null,
+      "Baseline": null,
+      "BaselineValue": null,
+      "BenchmarkSource": null,
+      "Benchmarks": null,
+      "CareAvailability": null,
+      "DSEmail": null,
+      "DSName": null,
+      "DSOffice": null,
+      "DataAggLevels": null,
+      "DataLagUnit": null,
+      "DataLagValue": null,
+      "DataLatency": null,
+      "DataSource": null,
+      "DataThroughDate": null,
+      "Denominator": null,
+      "Description": null,
+      "Exclusions": null,
+      "ExistingBenchmarks": null,
+      "ExistingTargets": null,
+      "FileTypes": null,
+      "GenesisIncluded": null,
+      "Inclusions": null,
+      "IsAllDataMIP": null,
+      "IsAutomated": null,
+      "Limitations": null,
+      "MIPNameLoc": null,
+      "MeasureAbr": null,
+      "MeasureCategory": null,
+      "MeasureId": 23,
+      "MeasureSet": null,
+      "MeasureStatus": null,
+      "MeasureType": null,
+      "NumberOfUploads": null,
+      "Numerator": null,
+      "OnHoldComments": null,
+      "OnHoldEnd": null,
+      "OnHoldName": null,
+      "OnHoldStart": null,
+      "PQACategory": null,
+      "ProgLang": null,
+      "Rationale": null,
+      "RawDataLocation": null,
+      "ReviewFocusArea": null,
+      "RiskAdjusted": null,
+      "SQLNameLoc": null,
+      "ScheduledRefreshDay": null,
+      "Tags": null,
+      "Target": null,
+      "Title": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Id": 23
+    },
+    {
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
+      "MeasureName": "Test",
+      "Status": "Published",
+      "Published": "2021-12-14T21:57:27.738Z",
+      "Publisher": "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
+      "AuthorId": 2,
+      "Author": {
+        "Title": "Jane Doe"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Annually",
+      "AOOffice": null,
+      "AltAOEmail": null,
+      "AltAOName": null,
+      "AltAOOffice": null,
+      "AltDSEmail": null,
+      "AltDSName": null,
+      "AltDSOffice": null,
+      "AnnualUpdateSchedule": null,
+      "ArchivedDataSources": null,
+      "Baseline": null,
+      "BaselineValue": null,
+      "BenchmarkSource": null,
+      "Benchmarks": null,
+      "CareAvailability": null,
+      "DSEmail": null,
+      "DSName": null,
+      "DSOffice": null,
+      "DataAggLevels": null,
+      "DataLagUnit": null,
+      "DataLagValue": null,
+      "DataLatency": null,
+      "DataSource": null,
+      "DataThroughDate": null,
+      "Denominator": null,
+      "Description": null,
+      "Exclusions": null,
+      "ExistingBenchmarks": null,
+      "ExistingTargets": null,
+      "FileTypes": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -4020,6 +2019,10 @@
       "MeasureType": null,
       "NumberOfUploads": null,
       "Numerator": null,
+      "OnHoldComments": null,
+      "OnHoldEnd": null,
+      "OnHoldName": null,
+      "OnHoldStart": null,
       "PQACategory": null,
       "ProgLang": null,
       "Rationale": null,
@@ -4031,15 +2034,25 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "Created": "Tue, 14 Dec 2021 23:04:24 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:24 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:59 GMT",
       "Id": 24
     },
     {
-      "AOEmail": "first.mi.last.ctr@mail.mil",
-      "AOName": "First Last",
+      "AOEmail": "jane.m.doe.civ@mail.mil",
+      "AOName": "Jane Doe",
       "MeasureName": "Test",
       "Status": "Under Development",
+      "AuthorId": 2,
+      "Author": {
+        "Title": "Jane Doe"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "DashboardLinks": "[{\"url\":\"https://google.com\",\"display\":\"Dashboard 1\"},{\"url\":\"https://wikipedia.com\",\"display\":\"Dashboard 2\"}]",
+      "Frequency": "Daily",
       "AOOffice": null,
       "AltAOEmail": null,
       "AltAOName": null,
@@ -4057,7 +2070,6 @@
       "DSEmail": null,
       "DSName": null,
       "DSOffice": null,
-      "DashboardLinks": null,
       "DataAggLevels": null,
       "DataLagUnit": null,
       "DataLagValue": null,
@@ -4070,7 +2082,6 @@
       "ExistingBenchmarks": null,
       "ExistingTargets": null,
       "FileTypes": null,
-      "Frequency": null,
       "GenesisIncluded": null,
       "Inclusions": null,
       "IsAllDataMIP": null,
@@ -4102,16 +2113,8 @@
       "Tags": null,
       "Target": null,
       "Title": null,
-      "AuthorId": 1,
-      "Author": {
-        "Title": "First Last"
-      },
-      "EditorId": 1,
-      "Editor": {
-        "Title": "First Last"
-      },
-      "Created": "Tue, 14 Dec 2021 23:04:24 GMT",
-      "Modified": "Tue, 14 Dec 2021 23:04:24 GMT",
+      "Created": "Wed, 15 Dec 2021 01:57:59 GMT",
+      "Modified": "Wed, 15 Dec 2021 01:57:59 GMT",
       "Id": 25
     }
   ],

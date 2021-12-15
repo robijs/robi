@@ -75,8 +75,7 @@ export async function Table(param) {
             text: heading || (heading === '' ? '' : list.split(/(?=[A-Z])/).join(' ')),
             size: headingSize,
             color: headingColor,
-            // margin: headingMargin || (toolbar ? '20px 0px 30px 0px' : '20px 0px 15px 0px'),
-            margin: headingMargin || '20px 0px 15px 0px',
+            margin: headingMargin || (toolbar ? '0px' : '0px 0px 35px 0px'),
             parent: tableContainer
         });
 

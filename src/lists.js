@@ -469,7 +469,7 @@ export default [
             {
                 name: 'Rationale',
                 display: 'Rationale',
-                description: `In a few sentences, describe how this measure will help DHA. Please specify which AD or DAD level Key Performance Indicator this measure supports, along with the governance body who will be monitoring performance. For assistance with this section, please contact your PMAT representative.`,
+                description: `In a few sentences, describe how this measure will help DHA. Please specify which AD or DAD level Key Performance Indicator this measure supports, along with the governance body that monitors its performance. For assistance with this section, please contact your PMAT representative.`,
                 type: 'mlot',
             },
             {

@@ -9,16 +9,16 @@ export function Publish({ item, bannerParent, buttonParent, path }) {
         const bannerContainer = Container({
             width: '100%',
             padding: '0px 30px 10px 30px',
-            parent: bannerParent,
-            position: 'afterend'
+            parent: bannerParent
         });
 
         bannerContainer.add();
 
         const banner = Alert({
             type: 'robi-primary',
+            margin: '0px',
             classes: ['w-100'],
-            text: `This measure is still <strong>Under Development</strong>. Publish it to upload data files.`,
+            text: `<strong>Under Development</strong>`,
             parent: bannerContainer,
         });
         
@@ -57,8 +57,7 @@ export function Publish({ item, bannerParent, buttonParent, path }) {
         const bannerContainer = Container({
             width: '100%',
             padding: '0px 30px 10px 30px',
-            parent: bannerParent,
-            position: 'afterend'
+            parent: bannerParent
         });
 
         bannerContainer.add();
@@ -69,8 +68,9 @@ export function Publish({ item, bannerParent, buttonParent, path }) {
 
         const banner = Alert({
             type: 'success',
+            margin: '0px',
             classes: ['w-100'],
-            text: `This measure was published on <strong>${new Date(Published).toLocaleDateString()}</strong> by <strong>${userLink}</strong>`,
+            text: `Published on <strong>${new Date(Published).toLocaleDateString()}</strong> by <strong>${userLink}</strong>`,
             parent: bannerContainer,
         });
         

@@ -6,7 +6,7 @@ import { OnHold } from './OnHold.js'
 
 /**
  * 
- * @param {*} param ./Sections/FormSection.js
+ * @param {*} param
  */
 export async function DataFiles(param) {
     const {
@@ -20,14 +20,6 @@ export async function DataFiles(param) {
 
         return;
     }
-
-    // parent.append(/*html*/ `
-    //     <div class='d-flex justify-content-center align-items-center back-btn' style='height: 62px; padding: 0px 27px; position: absolute; top: 0px; left: 0px; cursor: pointer;' title='Back'>
-    //         <svg class='icon' style='fill: ${App.get('primaryColor')}; font-size: 22px;'>
-    //             <use href='#icon-bs-arrow-left-cirlce-fill'></use>
-    //         </svg>
-    //     </div>
-    // `);
 
     // View Title
     const viewTitle = Title({
@@ -129,7 +121,7 @@ export async function DataFiles(param) {
         item,
         path,
         bannerParent: parent,
-        buttonParent: parent
+        buttonParent: viewTitle
     });
 
     // Table

@@ -16,7 +16,7 @@ export async function AllMeasures({ parent }) {
         view: 'Measures',
         addButtonValue: 'New Measure Intake Form',
         openInModal: true,
-        margin: '20px 0px',
+        // margin: '20px 0px',
         parent: tableContainer,
         heading: '',
         toolbar: [

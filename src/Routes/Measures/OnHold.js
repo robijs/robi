@@ -25,7 +25,14 @@ export function OnHold({ item, bannerParent, buttonParent, path }) {
         const banner = Alert({
             type: 'robi-primary',
             classes: ['w-100'],
-            text: `Data file upload was placed on hold <strong>${new Date(OnHoldStart).toLocaleDateString()}</strong> by <strong>${userLink}</strong>`,
+            margin: '10px 0px',
+            text: /*html*/ `
+                <p>
+                <strong>${userLink}</strong> placed data upload on hold starting <strong>${new Date(OnHoldStart).toLocaleDateString()}</strong> to approximately <strong>${new Date(OnHoldEnd).toLocaleDateString()}</strong>
+                </p>
+                <hr>
+                <p>${OnHoldComments}</p>
+            `,
             parent: bannerContainer,
         });
         
@@ -33,7 +40,7 @@ export function OnHold({ item, bannerParent, buttonParent, path }) {
 
         const removeHold = BootstrapButton({
             type: 'robi',
-            value: 'Remove hold',
+            value: 'Modify hold',
             parent: buttonParent,
             action() {
                 const removeHoldModal = Modal({
@@ -43,7 +50,7 @@ export function OnHold({ item, bannerParent, buttonParent, path }) {
                         modalBody.classList.add('install-modal');
 
                         modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                            <h3 class='mb-2 mb-2'>Remove hold on Measure #${Id}</h3>
+                            <h3 class='mb-3'>Hold on Measure #${Id}</h3>
                         `);
 
                         const start = DateField({
@@ -78,7 +85,23 @@ export function OnHold({ item, bannerParent, buttonParent, path }) {
 
                         message.add();
 
-                        const onHoldBtn = BootstrapButton({
+                        const btnContainer = Container({
+                            margin: '50px 0px 0px 0px',
+                            width: '100%',
+                            parent: modalBody
+                        });
+
+                        btnContainer.add();
+
+                        const leftContainer = Container({
+                            flex: 2,
+                            align: 'start',
+                            parent: btnContainer
+                        });
+
+                        leftContainer.add();
+
+                        const removeHoldBtn = BootstrapButton({
                             async action() {
                                 onHoldBtn.get().disabled = true;
                                 onHoldBtn.get().innerHTML = /*html*/ `
@@ -107,27 +130,69 @@ export function OnHold({ item, bannerParent, buttonParent, path }) {
                                 removeHoldModal.close();
                             },
                             // disabled: true,
-                            classes: ['w-100 mt-5'],
                             width: '100%',
-                            parent: modalBody,
-                            type: 'robi',
-                            value: 'Remove hold'
+                            parent: leftContainer,
+                            type: 'robi-light',
+                            value: 'Remove'
                         });
             
-                        onHoldBtn.add();
-            
+                        removeHoldBtn.add();
+
+                        const rightContainer = Container({
+                            parent: btnContainer
+                        });
+
+                        rightContainer.add();
+
                         const cancelBtn = BootstrapButton({
                             action(event) {
                                 removeHoldModal.close();
                             },
-                            classes: ['w-100 mt-2'],
+                            classes: [],
                             width: '100%',
-                            parent: modalBody,
-                            type: 'light',
+                            parent: rightContainer,
+                            type: '',
                             value: 'Cancel'
                         });
             
                         cancelBtn.add();
+
+                        const onHoldBtn = BootstrapButton({
+                            async action() {
+                                onHoldBtn.get().disabled = true;
+                                onHoldBtn.get().innerHTML = /*html*/ `
+                                    <span class="spinner-border" role="status" aria-hidden="true" style="width: 20px; height: 20px; border-width: 3px"></span> Removing hold
+                                `;
+
+                                await UpdateItem({
+                                    itemId: Id,
+                                    list: 'Measures',
+                                    data: {
+                                        OnHoldEnd: toSPDate(end.value()),
+                                        OnHoldStart: toSPDate(start.value()),
+                                        OnHoldComments: notes.value(),
+                                        OnHoldName: JSON.stringify(Store.user()),
+                                    }
+                                });
+
+                                // Remove stored measure
+                                Store.removeData(`edit measure ${Id}`);
+
+                                $(removeHoldModal.get()).on('hidden.bs.modal', event => {
+                                    Route(`Measures/${Id}${path ? `/${path}` : ''}`)
+                                });
+
+                                removeHoldModal.close();
+                            },
+                            // disabled: true,
+                            classes: [],
+                            width: '100%',
+                            parent: rightContainer,
+                            type: 'robi',
+                            value: 'Update'
+                        });
+            
+                        onHoldBtn.add();
                     },
                     centered: true,
                     showFooter: false,

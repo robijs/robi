@@ -8,7 +8,7 @@ import { Component } from '../Actions/Component.js'
  */
 export function Alert(param) {
     const {
-        text, classes, close, margin, width, parent, position, top, zIndex
+        text, classes, close, margin, width, parent, position, top
     } = param;
 
     let {

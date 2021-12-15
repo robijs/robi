@@ -205,13 +205,35 @@ export async function Developer(param) {
     const items = []; // Get({ list: 'ListName' })
 
     async function create(limit) {
+        const DashboardLinks = JSON.stringify([
+            {
+                url: "https://google.com",
+                display: "Dashboard 1"
+            },
+            {
+                url: "https://wikipedia.com",
+                display: "Dashboard 2"
+            }
+        ]);
+        const frequencies = [
+            'Hoc',
+            'Annually',
+            'Daily',
+            'Monthly',
+            'Quarterly',
+            'Annually',
+            'Unknown',
+            'Weekly'
+        ];
         const options = [
             // AO is me, Under Development by me
             {
                 AOEmail: "first.mi.last.ctr@mail.mil",
                 AOName: "First Last",
                 MeasureName: "Test",
-                Status: "Under Development"
+                Status: "Under Development",
+                DashboardLinks,
+                Frequency: frequencies[Math.floor(Math.random() * frequencies.length)]
             },
             // AO is me, Under Development by another user
             {
@@ -226,14 +248,18 @@ export async function Developer(param) {
                 EditorId: 2,
                 Editor: {
                     Title: 'Jane Doe'
-                }
+                },
+                DashboardLinks,
+                Frequency: frequencies[Math.floor(Math.random() * frequencies.length)]
             },
             // AO is another user, Under Development by me
             {
                 AOEmail: "jane.m.doe.civ@mail.mil",
                 AOName: "Jane Doe",
                 MeasureName: "Test",
-                Status: "Under Development"
+                Status: "Under Development",
+                DashboardLinks,
+                Frequency: frequencies[Math.floor(Math.random() * frequencies.length)]
             },
             // AO is another user, Under Development by another user
             {
@@ -248,7 +274,9 @@ export async function Developer(param) {
                 EditorId: 2,
                 Editor: {
                     Title: 'Jane Doe'
-                }
+                },
+                DashboardLinks,
+                Frequency: frequencies[Math.floor(Math.random() * frequencies.length)]
             },
             // On Hold by me, and Published by me
             {
@@ -261,7 +289,9 @@ export async function Developer(param) {
                 OnHoldName: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
                 OnHoldStart: "2021-12-14T22:00:00Z",
                 Published: "2021-12-14T21:57:27.738Z",
-                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}"
+                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+                DashboardLinks,
+                Frequency: frequencies[Math.floor(Math.random() * frequencies.length)]
             },
             // On Hold by me, and Published by another user
             {
@@ -282,7 +312,9 @@ export async function Developer(param) {
                 EditorId: 2,
                 Editor: {
                     Title: 'Jane Doe'
-                }
+                },
+                DashboardLinks,
+                Frequency: frequencies[Math.floor(Math.random() * frequencies.length)]
             },
             // On Hold by another user, but Published by me
             {
@@ -295,7 +327,9 @@ export async function Developer(param) {
                 OnHoldName: "{\"Title\":\"Jane Doe\",\"Email\":\"jane.m.doe.civ@mail.mil\",\"LoginName\":\"0000000001@mil\",\"Role\":\"User\",\"SiteId\":2,\"Settings\":\"{}\",\"AuthorId\":2,\"Author\":{\"Title\":\"Jane Doe\"},\"Editor\":{\"Title\":\"Jane Doe\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":2}",
                 OnHoldStart: "2021-12-14T22:00:00Z",
                 Published: "2021-12-14T21:57:27.738Z",
-                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}"
+                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+                DashboardLinks,
+                Frequency: frequencies[Math.floor(Math.random() * frequencies.length)]
             },
             // AO is me, and Published by me
             {
@@ -304,7 +338,9 @@ export async function Developer(param) {
                 MeasureName: "Test",
                 Status: "Published",
                 Published: "2021-12-14T21:57:27.738Z",
-                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}"
+                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+                DashboardLinks,
+                Frequency: frequencies[Math.floor(Math.random() * frequencies.length)]
             },
             // AO is another user, but Published by me
             {
@@ -313,7 +349,9 @@ export async function Developer(param) {
                 MeasureName: "Test",
                 Status: "Published",
                 Published: "2021-12-14T21:57:27.738Z",
-                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}"
+                Publisher: "{\"Title\":\"First Last\",\"Email\":\"first.mi.last.ctr@mail.mil\",\"LoginName\":\"0987654321@mil\",\"Role\":\"Developer\",\"SiteId\":1,\"Settings\":\"{}\",\"AuthorId\":1,\"Author\":{\"Title\":\"First Last\"},\"Editor\":{\"Title\":\"First Last\"},\"Created\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Modified\":\"Tue, 14 Dec 2021 21:43:57 GMT\",\"Id\":1}",
+                DashboardLinks,
+                Frequency: frequencies[Math.floor(Math.random() * frequencies.length)]
             },
             // AO is me, but Published by another user
             {
@@ -330,7 +368,9 @@ export async function Developer(param) {
                 EditorId: 2,
                 Editor: {
                     Title: 'Jane Doe'
-                }
+                },
+                DashboardLinks,
+                Frequency: frequencies[Math.floor(Math.random() * frequencies.length)]
             },
             // AO is another user, and Published by another user
             {
@@ -347,7 +387,9 @@ export async function Developer(param) {
                 EditorId: 2,
                 Editor: {
                     Title: 'Jane Doe'
-                }
+                },
+                DashboardLinks,
+                Frequency: frequencies[Math.floor(Math.random() * frequencies.length)]
             }
         ];
 

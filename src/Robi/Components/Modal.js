@@ -7,7 +7,7 @@ import { App } from '../Core/App.js';
  * @param {*} param
  * @returns
  */
-export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, close, addContent, buttons, centered, fade, background, fullSize, showFooter, scrollable, contentPadding, parent, disableBackdropClose, position, shadow }) {
+export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, closeStyle, close, addContent, buttons, centered, fade, background, fullSize, showFooter, scrollable, contentPadding, parent, disableBackdropClose, position, shadow }) {
     const component = Component({
         html: /*html*/ `
             <!-- Modal -->
@@ -19,7 +19,7 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
                         ${
                             !title ?
                             /*html*/ `
-                                <button type='button' class='close ${close ? '' : 'd-none'}' style='position: absolute; right: 0px;' data-dismiss='modal' aria-label='Close'>
+                                <button type='button' class='close ${close ? '' : 'd-none'}' style='position: absolute; right: 0px; ${closeStyle || ''}' data-dismiss='modal' aria-label='Close'>
                                     <span class='icon-container' style='right: 20px; top: 20px;'>
                                         <svg class='icon x-circle-fill'>
                                             <use href='#icon-bs-x-circle-fill'></use>
@@ -36,7 +36,7 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
                                     ${
                                         close !== false ?
                                         /*html*/ `
-                                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                            <button type='button' class='close' ${closeStyle ? `style='${closeStyle}'` : ''} data-dismiss='modal' aria-label='Close'>
                                                 <span class='icon-container'>
                                                     <svg class='icon x-circle-fill'>
                                                         <use href='#icon-bs-x-circle-fill'></use>
@@ -203,12 +203,26 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
             ''}
             
             /* Passed in classes */
-            #id.scrollbar-wide .modal-body::-webkit-scrollbar {
+            /* #id.scrollbar-wide .modal-body::-webkit-scrollbar {
                 width: 35px;
             }
 
             #id.scrollbar-wide .modal-body::-webkit-scrollbar-thumb {
                 min-height: 50px;
+            } */
+
+            #id.scrollbar-wide .modal-body::-webkit-scrollbar {
+                width: 25px;
+            }
+
+            #id.scrollbar-wide .modal-body::-webkit-scrollbar-thumb {
+                border: 8px solid transparent;
+                border-radius: 20px;
+                min-height: 75px;
+            }
+
+            #id.scrollbar-wide .modal-body::-webkit-scrollbar-button {
+                height: 10px;
             }
 
             ${
