@@ -45,7 +45,7 @@ export function Title(param) {
                     ` :
                     ''}
                 </div>
-                ${date !== undefined ? `<div class='title-date'>${date}</div>` : ''}
+                <!-- ${date !== undefined ? `<div class='title-date'>${date}</div>` : ''} -->
             </div>
         `,
         style: /*css*/ `
