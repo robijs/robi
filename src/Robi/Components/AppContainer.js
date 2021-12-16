@@ -254,6 +254,17 @@ export function AppContainer() {
                 border-color: seagreen !important;
             }
 
+            /* Forms*/
+            .form-field {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .form-field .form-field-description {
+                height: 100%;
+            }
+
             .form-control,
             .form-field-multi-line-text.editable,
             .btn.dropdown-toggle,
@@ -276,7 +287,8 @@ export function AppContainer() {
                 border-radius: 0px 10px 10px 0px !important;
             }
 
-            .form-control:not(.custom-select):focus {
+            .form-control:not(.dataTables_length .custom-select):focus,
+            .custom-select:not(.dataTables_length .custom-select):focus {
                 border-color: transparent !important;
                 box-shadow: 0 0 0 3px ${App.get('primaryColor') + '6b'} !important;
             }
@@ -365,14 +377,7 @@ export function AppContainer() {
                 background-color: #292D3E;
                 display: flex;
                 align-items: center;
-                /* justify-content: space-between; */
-                /* border-bottom: solid 1px #676E95; */
-                /* padding-top: 1rem; */
                 padding-bottom: .75rem;
-                /* margin-bottom: .75rem; */
-                /* z-index: 100; */
-                /* position: sticky; */
-                /* top: 0px; */
             }
 
             .file-title * {
@@ -405,11 +410,6 @@ export function AppContainer() {
                 fill: #F7DF1E !important;
             }
 
-            /* Add padding to all modals */
-            /* .modal-content {
-                padding: 30px;
-            } */
-
             /* Install Console */
             .console {
                 width: 100%;
@@ -423,7 +423,7 @@ export function AppContainer() {
             }
 
             .console::-webkit-scrollbar {
-                width: 35px;
+                width: 15px;
             }
 
             .console::-webkit-scrollbar-thumb {

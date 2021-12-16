@@ -405,6 +405,12 @@ export function DataTable(param) {
                 color:  ${App.get('primaryColor')};
             }
 
+            #id_wrapper tbody tr.selected a, 
+            #id_wrapper tbody th.selected a,
+            #id_wrapper tbody td.selected a {
+                color: ${App.get('primaryColor')};
+            }
+
             #id_wrapper tbody > tr.selected td:first-child {
                 border-radius: 10px 0px 0px 10px;
             }

@@ -4,11 +4,6 @@ import { App, Store, UpdateItem, Route } from '../../Robi/Robi.js'
 export function OnHold({ item, bannerParent, buttonParent, path }) {
     const { Id, OnHoldStart, OnHoldEnd, OnHoldComments, OnHoldName, Status } = item;
 
-    // If measure is still 'Under Development', do nothing
-    if (Status === 'Under Development') {
-        return;
-    }
-
     // If measure is not on hold, show 'Place on hold' button
     if (Status === 'On Hold') {
         const bannerContainer = Container({
@@ -294,11 +289,11 @@ export function OnHold({ item, bannerParent, buttonParent, path }) {
             
                         cancelBtn.add();
 
-                        function toSPDate(date) {
-                            const hours = new Date().getUTCHours()
-                            const hh = hours < 10 ? `0${hours}` : hours;
-                            return `${date}T${hh}:00:00Z`;
-                        }
+                        // function toSPDate(date) {
+                        //     const hours = new Date().getUTCHours()
+                        //     const hh = hours < 10 ? `0${hours}` : hours;
+                        //     return `${date}T${hh}:00:00Z`;
+                        // }
                     },
                     centered: true,
                     showFooter: false,
@@ -309,5 +304,11 @@ export function OnHold({ item, bannerParent, buttonParent, path }) {
         });
 
         placeOnHold.add();
+    }
+
+    function toSPDate(date) {
+        const hours = new Date().getUTCHours()
+        const hh = hours < 10 ? `0${hours}` : hours;
+        return `${date}T${hh}:00:00Z`;
     }
 }

@@ -224,6 +224,8 @@ export async function MeasureIntakeForm(param) {
                 // Set measure Id
                 const updatedItem = await UpdateItem({
                     list: 'Measures',
+                    select: `*,File/Name,File/Length,Author/Title,Editor/Title`,
+                    expand: `File,Author,Editor`,
                     itemId: itemId,
                     data
                 });
@@ -298,6 +300,8 @@ export async function MeasureIntakeForm(param) {
                 // Set measure Id
                 await UpdateItem({
                     list: 'Measures',
+                    select: `*,File/Name,File/Length,Author/Title,Editor/Title`,
+                    expand: `File,Author,Editor`,
                     itemId: newItem.Id,
                     data: {
                         MeasureId: newItem.Id
@@ -343,8 +347,6 @@ export async function MeasureIntakeForm(param) {
                         <svg class='icon undo'><use href='#icon-bs-arrow-left-circle-fill'></use></svg>
                     `;
                 }
-
-                // console.log('Done!');
 
                 // Remove stored measure
                 Store.removeData('new measure');
@@ -426,6 +428,8 @@ export async function MeasureIntakeForm(param) {
             // Get item
             item = await Get({
                 list: 'Measures',
+                select: `*,File/Name,File/Length,Author/Title,Editor/Title`,
+                expand: `File,Author,Editor`,
                 filter: `Id eq ${itemId}`
             });
 
@@ -490,7 +494,7 @@ export async function MeasureIntakeForm(param) {
             buttonParent: buttonContainer
         });
 
-        // Publish
+        // Last edited
         LastEdited({
             item,
             parent: titleContainer,
@@ -498,25 +502,23 @@ export async function MeasureIntakeForm(param) {
 
         // TODO: Wrap in component
         // Add Data and checklist info panels
-        if (item.Status !== 'Under Development') {
-            leftContainer.append(/*html*/ `
-                <div class='w-100 mt-2' style='height: 100%; display: flex; flex-direction: column; justify-content: end;'>
-                    <div class='mb-2 data-files' style='background: ${App.get('backgroundColor')}; border-radius: 10px; padding: 15px 30px; cursor: pointer;'>
-                        <div style='font-weight: 500; color: ${App.get('primaryColor')};'>Data Files</div>
-                        <div style=''>${dataFiles.length} ${dataFiles.length === 1 ? 'file' : 'files'}</div>
-                    </div>
-                    <div class='checklist' style='background: ${App.get('backgroundColor')}; border-radius: 10px; padding: 15px 30px; cursor: pointer;'>
-                        <div style='font-weight: 500; color: ${App.get('primaryColor')};'>Checklist</div>
-                        <div style=''>${checklist.length} ${checklist.length === 1 ? 'step' : 'steps'}</div>
-                    </div>
+        leftContainer.append(/*html*/ `
+            <div class='w-100 mt-2' style='height: 100%; display: flex; flex-direction: column; justify-content: end;'>
+                <div class='mb-2 data-files' style='background: ${App.get('backgroundColor')}; border-radius: 10px; padding: 15px 30px; cursor: pointer;'>
+                    <div style='font-weight: 500; color: ${App.get('primaryColor')};'>Data Files</div>
+                    <div style=''>${dataFiles.length} ${dataFiles.length === 1 ? 'file' : 'files'}</div>
                 </div>
-            `);
+                <div class='checklist' style='background: ${App.get('backgroundColor')}; border-radius: 10px; padding: 15px 30px; cursor: pointer;'>
+                    <div style='font-weight: 500; color: ${App.get('primaryColor')};'>Checklist</div>
+                    <div style=''>${checklist.length} ${checklist.length === 1 ? 'step' : 'steps'}</div>
+                </div>
+            </div>
+        `);
 
-            // TODO: generalize route
-            leftContainer.find('.data-files')?.addEventListener('click', () => Route(`Measures/${itemId}/DataFiles`));
-            leftContainer.find('.checklist')?.addEventListener('click', () => Route(`Measures/${itemId}/Checklist`));
-        }
-        
+        // TODO: generalize route
+        leftContainer.find('.data-files')?.addEventListener('click', () => Route(`Measures/${itemId}/DataFiles`));
+        leftContainer.find('.checklist')?.addEventListener('click', () => Route(`Measures/${itemId}/Checklist`));
+    
         // Print CSS
         Style({
             name: 'print-measure',

@@ -1,4 +1,4 @@
-import { readdir, readFile, writeFile } from 'fs/promises'
+import { buildFile } from './modules/build-file-dev.js'
 
 let license = [
     `// Copyright ${new Date().getFullYear()} Stephen Matheis`,
@@ -21,6 +21,7 @@ let license = [
 try {
     // Robi
     await buildFile({
+        license,
         paths: [
             './src/Robi/Actions',
             './src/Robi/Core',
@@ -31,6 +32,7 @@ try {
 
     // RobiUI
     await buildFile({
+        license,
         paths: [
             './src/Robi/Components',
         ],
@@ -38,41 +40,4 @@ try {
     });
 } catch (err) {
     console.error(err);
-}
-
-async function buildFile({ paths, file }) {
-    let output = license.join('\n');
-    let exportNames = [];
-
-    // Imports
-    for (const path of paths) {
-        const files = await readdir(path);
-        exportNames = exportNames.concat(files);
-        
-        output += files.map(file => {
-            return `import { ${file.replace('.js', '')} } from '${path.replace('./src/Robi/', './')}/${file}'`
-        }).join('\n');
-
-        output += '\n';
-    }
-
-
-    output += [
-        '',
-        'export {',
-        exportNames.map(name => `    ${name.replace('.js', '')}`).join(',\n'),
-        `}`,
-        ''
-    ].join('\n');
-
-    // importNames.forEach(file => {
-    //     const name = file.replace('.js', '')
-    //     console.log(`Function: ${name}`);
-    //     const found = body.search(`${name}\\(`);
-    //     console.log(found);
-    // });
-
-    await writeFile(`./src/Robi/${file}`, output);
-
-    console.log(`Built ${file} in src/Robi`);
 }

@@ -128,7 +128,7 @@ export default [
                         return /*html*/ `
                             <a href='${url}' target='_blank'>${display.trim()}</a>
                         `
-                    }).join(', ') : '';
+                    }).join(`<span class='text-robi ml-1 mr-1' style='font-weight: 500;'>•</span>`) : '';
                 }
             },
             {
@@ -153,6 +153,7 @@ export default [
             {
                 name: 'DataLagUnit',
                 display: 'Data Lag Unit',
+                description: 'Select data update interval.',
                 type: 'choice',
                 value: null,
                 choices: [
@@ -166,6 +167,7 @@ export default [
             {
                 name: 'DataLagValue',
                 display: 'Data Lag Value',
+                description: 'Select how many days, months, quarters, weeks, or years data may be in the rears.',
                 type: 'number'
             },
             {
@@ -250,6 +252,7 @@ export default [
             {
                 name: 'Frequency',
                 display: 'Reporting Frequency',
+                description: 'Select how often your measure is refreshed.',
                 type: 'choice',
                 value: null,
                 choices: [
@@ -459,6 +462,7 @@ export default [
             },
             {
                 name: 'Publisher',
+                display: 'Publisher',
                 type: 'mlot',
             },
             {
@@ -887,6 +891,7 @@ export default [
                     },
                     {
                         name: 'Data Lag Time (Latency)',
+                        description: 'For example, if data is two (2) months in the rears, select "month" in the previous field and enter "2" for Data Lag Value. Then recipeients would expect data uploaded in April to go through February.',
                         fields: [
                             {
                                 name: 'DataLagUnit',

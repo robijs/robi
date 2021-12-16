@@ -61,7 +61,7 @@ Start({
         // logo: 'dha-logo-no-label-180w.png',
         // logoLarge: 'dha-logo-no-label-386w.png',
         // logoSmall: 'dha-logo-no-label-80w.png',
-        name: /* @START-name */'App'/* @END-name */,
+        name: /* @START-name */'MeasuresLibrary'/* @END-name */,
         questionTypes: [
             {
                 title: 'General',
@@ -69,9 +69,9 @@ Start({
             }
         ],
         theme: /* @START-theme */'Red'/* @END-theme */,
-        title: /* @START-title */'Title'/* @END-title */,
+        title: /* @START-title */'Measures Library'/* @END-title */,
         userDefaultRole: 'User',
-        userSettings: /* @START-userSettings */JSON.stringify({})/* @END-userSettings */,
+        userSettings: /* @START-userSettings */JSON.stringify({ savedSearches: [] })/* @END-userSettings */,
         // OPTIONAL PROPERTIES
         // -------------------
         // appcontainer: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
@@ -91,7 +91,87 @@ Start({
                 Email: "first.mi.last.ctr@mail.mil",
                 LoginName: "0987654321@mil",
                 Role: "Developer",
-                SiteId: 1
+                SiteId: 1,
+                Settings: JSON.stringify({
+                    savedSearches: [
+                        {
+                            list: 'Measures',
+                            searches: [
+                                {
+                                    name:'My Daily (Published)',
+                                    filters: [
+                                        {
+                                            column: 'AOName',
+                                            type: 'slot',
+                                            condition: 'equals',
+                                            value: 'First Last',
+                                            operator: 'AND'
+                                        },
+                                        {
+                                            column: 'Frequency',
+                                            type: 'choice',
+                                            condition: 'equals',
+                                            value: 'Daily',
+                                            operator: 'AND'
+                                        },
+                                        {
+                                            column: 'Status',
+                                            type: 'choice',
+                                            condition: 'equals',
+                                            value: 'Published',
+                                            operator: null
+                                        }
+                                    ]
+                                },
+                                {
+                                    name:'My Monthly (Under Development)',
+                                    filters: [
+                                        {
+                                            column: 'AOName',
+                                            type: 'slot',
+                                            condition: 'equals',
+                                            value: 'First Last',
+                                            operator: 'AND'
+                                        },
+                                        {
+                                            column: 'Frequency',
+                                            type: 'choice',
+                                            condition: 'equals',
+                                            value: 'Monthly',
+                                            operator: 'AND'
+                                        },
+                                        {
+                                            column: 'Status',
+                                            type: 'choice',
+                                            condition: 'equals',
+                                            value: 'Under Development',
+                                            operator: null
+                                        }
+                                    ]
+                                },
+                                {
+                                    name:'Test (AO not me)',
+                                    filters: [
+                                        {
+                                            column: 'AOName',
+                                            type: 'slot',
+                                            condition: 'not equal to',
+                                            value: 'First Last',
+                                            operator: 'AND'
+                                        },
+                                        {
+                                            column: 'MeasureName',
+                                            type: 'slot',
+                                            condition: 'contains',
+                                            value: 'Test',
+                                            operator: null
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                })
             },
             testInstall: false,
         },

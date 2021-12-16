@@ -81,7 +81,8 @@ export async function GetCurrentUser(param) {
             Email,
             LoginName,
             Role,
-            SiteId
+            SiteId,
+            Settings
         } = App.get('dev').user;
 
         if (response[0]) {
@@ -100,7 +101,7 @@ export async function GetCurrentUser(param) {
                     LoginName,
                     Role,
                     SiteId,
-                    Settings: App.get('userSettings')
+                    Settings: Settings || App.get('userSettings')
                 }
             });
 

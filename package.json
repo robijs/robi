@@ -43,11 +43,15 @@
     "bundle": "webpack --config=./webpack.config.js",
     "build": "node ./scripts/build.js",
     "build-dev": "node ./scripts/build-dev.js",
+    "build-sp": "node ./scripts/build-sp.js",
+    "create-component": "node ./scripts/create-component.js",
+    "create-route": "node ./scripts/create-route.js",
     "watch-robi": "npm-watch build",
     "watch-robi-dev": "npm-watch build-dev"
   },
   "devDependencies": {
     "concurrently": "^6.2.1",
+    "fs-extra": "^10.0.0",
     "json-server": "^0.16.3",
     "live-server": "^1.1.0",
     "npm-watch": "^0.11.0",

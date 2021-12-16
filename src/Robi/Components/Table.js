@@ -22,6 +22,7 @@ export async function Table(param) {
     const {
         addButton,
         addButtonValue,
+        advancedSearch,
         border,
         buttonColor,
         checkboxes,
@@ -476,6 +477,8 @@ export async function Table(param) {
         const tableToolbar = TableToolbar({
             options: toolbar,
             parent: tableContainer,
+            advancedSearch,
+            list,
             action(label) {
                 const { filter } = toolbar.find(option => option.label === label);
 
@@ -487,6 +490,58 @@ export async function Table(param) {
                 
                 // Adjust
                 table.DataTable().columns.adjust().draw();
+            },
+            async search({ button, event, filters }) {
+                // TODO: add loading message
+                // Disable button
+                button.disabled = true;
+                button.innerHTML = /*html*/ `
+                    <span class="spinner-border" role="status" aria-hidden="true" style="width: 20px; height: 20px; border-width: 3px"></span>
+                `;
+
+                // TODO: wrap preceding fields in ( ) if operator is OR
+                const oDataQuery = filters.map(filter => {
+                    const { column, condition, value, operator, type } = filter;
+
+                    let query;
+                    
+                    switch(condition) {
+                        case 'contains':
+                            query = `(substringof('${value}', ${column})`
+                            break;
+                        case 'equals':
+                            // TODO: add support for date, lookup, and multichoice fields
+                            query = `${column} eq ${type === 'number' ? value : `'${value}'`}`;
+                            break;
+                        case 'not equal to':
+                            // TODO: add support for date, lookup, and multichoice fields
+                            query = `${column} ne ${type === 'number' ? value : `'${value}'`}`
+                    }
+
+                    return `${query}${operator ? ` ${operator.toLowerCase()} ` : ''}`;
+                }).join('');
+
+                console.log(oDataQuery);
+
+                const getItems = await Get({
+                    list,
+                    filter: oDataQuery
+                });
+
+                console.log(getItems);
+
+                // Clear
+                table.DataTable().clear().draw();
+
+                // Filter
+                table.DataTable().rows.add(getItems).draw();
+                
+                // Adjust
+                table.DataTable().columns.adjust().draw();
+
+                // Enable button
+                button.disabled = false;
+                button.innerHTML = 'Search';
             }
         });
     

@@ -27,7 +27,7 @@ export async function AddRoute(param) {
             addRouteModal.find('.modal-dialog').style.maxWidth = 'fit-content';
 
             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                <h3 class='mb-2'>Add route</h3>
+                <h3 class='mb-3'>Add route</h3>
             `);
 
             const paths = Store.routes().filter(route => route.type !== 'system').map(route => route.path.toLowerCase());

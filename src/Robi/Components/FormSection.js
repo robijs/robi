@@ -106,6 +106,7 @@ export function FormSection(param) {
 
         const fieldRow = Container({
             display: 'flex',
+            align: 'stretch',
             width: '100%',
             parent: rowContainer
         });

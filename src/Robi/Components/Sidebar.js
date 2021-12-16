@@ -924,7 +924,7 @@ export function Sidebar({ parent, path }) {
 
             // Fade out long title to the left
             component.find('.title').addEventListener('animationend', event => {
-                console.log(event.target);
+                // console.log(event.target);
                 event.target.remove();
                 // Set short title
                 component.find('.title-container').insertAdjacentHTML('beforeend', /*html*/ `
@@ -962,7 +962,7 @@ export function Sidebar({ parent, path }) {
                 <h3 class='title fade-in-right'>${App.get('title')}</h3>
             `);
             component.find('.title').addEventListener('animationend', event => {
-                console.log(event.target);
+                // console.log(event.target);
                 event.target.classList.remove('fade-in-right');
             });
 

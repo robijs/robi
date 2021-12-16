@@ -1,4 +1,4 @@
-import { readdir, readFile, writeFile } from 'fs/promises'
+import { buildFile } from './modules/build-file-prod.js'
 
 let license = [
     `// Copyright ${new Date().getFullYear()} Stephen Matheis`,
@@ -20,6 +20,7 @@ let license = [
 try {
     // Robi
     await buildFile({
+        license,
         paths: [
             './src/Robi/Actions',
             './src/Robi/Core',
@@ -34,6 +35,7 @@ try {
 
     // RobiUI
     await buildFile({
+        license,
         paths: [
             './src/Robi/Components',
         ],
@@ -47,86 +49,4 @@ try {
     });
 } catch (err) {
     console.error(err);
-}
-
-async function getFiles(path) {
-    let output = '';
-
-    const files = await readdir(path);
-
-    for (const file of files) {
-        const text = await readFile(`${path}/${file}`, 'utf8');
-        const content = text.match(/\/\/ @START-File([\s\S]*?)\/\/ @END-File/);
-
-        output += content[1];
-    }
-
-    return output;
-}
-
-async function buildFile({ paths, imports, importFile, file }) {
-    let output = license.join('\n');
-    let body = '';
-    let importNames = [];
-
-    // Imports
-    for (const path of imports) {
-        importNames = importNames.concat(await readdir(path)); 
-    }
-
-    // output += [
-    //     '',
-    //     'import {',
-    //     importNames.map(name => `    ${name.replace('.js', '')}`).join(',\n'),
-    //     `} from './${importFile}'`,
-    //     ''
-    // ].join('\n');
-
-    for (const path of paths) {
-        body += await getFiles(path);
-        // output += await getFiles(path);
-    }
-
-    // output += [
-    //     '',
-    //     'import {',
-    //     importNames.map(name => `    ${name.replace('.js', '')}`).join(',\n'),
-    //     `} from './${importFile}'`,
-    //     ''
-    // ].join('\n');
-
-    output += [
-        '',
-        'import {',
-        importNames
-        .filter(file => {
-            const name = file.replace('.js', '')
-            const asFunc = body.search(RegExp(`\\b${name}\\b\\(`, 'g'));
-            const asObj = body.search(RegExp(`\\b${name}\\b\\.`, 'g'));
-
-            // console.log(name);
-            // console.log(RegExp(`\\b${name}\\b\\(`, 'g'), asFunc);
-            // console.log(RegExp(`\\b${name}\\b\\.`, 'g'), asObj);
-
-            if (asFunc !== -1 || asObj !== -1) {
-                return file;
-            }
-        })
-        .map(name => `    ${name.replace('.js', '')}`).join(',\n'),
-        `} from './${importFile}'`,
-        ''
-    ].join('\n');
-
-    // importNames.forEach(file => {
-    //     const name = file.replace('.js', '')
-    //     console.log(`Function: ${name}`);
-    //     const found = body.search(`${name}\\(`);
-    //     console.log(found);
-    // });
-
-    output += body;
-
-    await writeFile(`./src/Robi/${file}`, output);
-
-    console.log(`Built ${file} in src/Robi`);
 }

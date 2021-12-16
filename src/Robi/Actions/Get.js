@@ -99,9 +99,10 @@ export async function Get(param) {
                 return value
                     .split(' and ')
                     .map(group => {
-                        const [field, operator, value] = group.split(' ');
+                        // const [field, operator, value] = group.split(' ');
+                        const [field, operator, value] = group.match(/(?:[^\s"']+|['"][^'"]*["'])+/g);
 
-                        return `${field}${operator === 'eq' ? '=' : ''}${value.replace(/["']/g, "")}`;
+                        return `${field}${operator === 'eq' ? '=' : operator === 'ne' ? '_ne=' : ''}${value.replace(/["']/g, "")}`;
                     })
                     .join('&');
             }
