@@ -1,4 +1,5 @@
 import { ViewContainer } from '../Components/ViewContainer.js'
+import { SourceTools } from '../Components/SourceTools.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { History } from './History.js'
@@ -90,21 +91,30 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     viewContainer.add();
 
-    /** Check route path */
+    // Add source tools
+    if (Store.user().Role === 'Developer') {
+        const srcTools = SourceTools({
+            parent: viewContainer
+        });
+
+        srcTools.add();
+    }
+
+    // Check route path
     const pathAndQuery = path.split('?');
     const pathParts = pathAndQuery[0].split('/');
 
-    /** Only select first path, remove any ? that might be passed in */
+    // Only select first path, remove any ? that might be passed in
     const route = Store.routes().find(item => item.path === pathParts[0]);
 
     if (!route) {
-        /** TODO: Reset history state? */
+        // TODO: Reset history state?
         Route('404');
 
         return;
     }
 
-    /** Set browswer history state */
+    // Set browswer history state
     History({
         url: `${location.href.split('#')[0]}${(path) ? `#${path}` : ''}`,
         title: `${App.get('title')}${(path) ? ` - ${pathAndQuery[0]}` : ''}`
@@ -113,7 +123,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     sidebar.selectNav(route.path);
 
-    /** Log route*/
+    // Log route
     if (options.log !== false) {
         try {
             Log({

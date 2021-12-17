@@ -167,6 +167,7 @@ export async function AddRoute(param) {
                             request = await fetch(`http://127.0.0.1:8080/src/app.js`);
                             await Wait(1000);
                         }
+
                         let content = await request.text();
                         let updatedContent;
 
@@ -191,6 +192,7 @@ export async function AddRoute(param) {
                             `        // @END-${routePath.value()}`,
                             ``
                         ].join('\n');
+
                         ordered.push(newRoute);
 
                         console.log('New:', ordered);
@@ -277,6 +279,7 @@ export async function AddRoute(param) {
                                 }
                             });
                         } else {
+                            console.log('create route dir and file');
                             // Create file (missing dirs will be created recursively)
                             newFile = await fetch(`http://127.0.0.1:2035/?path=src/Routes/${routePath.value()}&file=${routePath.value()}.js`, {
                                 method: 'POST',

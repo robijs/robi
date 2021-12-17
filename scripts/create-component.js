@@ -1,3 +1,13 @@
-// import { readdir, readFile, writeFile } from 'fs/promises'
+import { writeFile } from 'fs/promises'
+import { componentTemplate } from './templates/component.js'
 
-console.log(process.argv);
+const [ name ] = process.argv.slice(2);
+
+try {
+    const template = componentTemplate({ name });
+
+    // TODO: add path arg
+    await writeFile(`${process.env.INIT_CWD}/${name}.js`, template);
+} catch (err) {
+    console.error(err);
+}
