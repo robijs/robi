@@ -9,7 +9,7 @@ export function componentTemplate({ name }) {
         ` * @param {String} param.position - Options: beforebegin, afterbegin, beforeend, afterend.`,
         ` * @returns {Object} - Robi component.`,
         ` */`,
-        `export default function ${name}(param) {`,
+        `export function ${name}(param) {`,
         `    const {`,
         `        parent,`,
         `        position`,

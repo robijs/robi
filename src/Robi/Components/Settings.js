@@ -6,6 +6,7 @@ import { DeveloperLinks } from './DeveloperLinks.js'
 import { ReleaseNotesContainer } from './ReleaseNotesContainer.js'
 import { SiteUsageContainer } from './SiteUsageContainer.js'
 import { Store } from '../Core/Store.js'
+import { ChangeTheme } from './ChangeTheme.js'
 
 // @START-File
 /**
@@ -44,6 +45,10 @@ export async function Settings(param) {
     /** Authorize */
     if (Store.user().Role === 'Developer') {
         SiteUsageContainer({
+            parent
+        });
+
+        ChangeTheme({
             parent
         });
 

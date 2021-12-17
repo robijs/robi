@@ -10,20 +10,20 @@ import { App } from '../Core/App.js'
  */
 export function ThemeField(param) {
     const {
-        margin, parent, position
+        label, margin, parent, position, selected
     } = param;
 
     const component = Component({
         html: /*html*/ `
             <div>
-                <label>Theme</label>
+                ${label !== false ? /*html*/ `<label>Theme</label>` : ''}
                 <div class='themes'>
                     ${
                         Themes.map(theme => {
                             const { name, primary, secondary, background, color } = theme;
 
                             return /*html*/ `
-                                <div class='theme-app' style='color: ${color};' data-theme='${name}'>
+                                <div class='theme-app ${name === selected ? 'selected' : ''}' style='color: ${color};' data-theme='${name}'>
                                     <div class='theme-sidebar' style='background: ${background};'>
                                         <div class='theme-sidebar-title'>Title</div>
                                         <div class='theme-nav selected' style='background: ${primary}; color: white;'>Selected</div>
@@ -47,6 +47,7 @@ export function ThemeField(param) {
             #id .themes {
                 display: flex;
                 flex-wrap: wrap;
+                justify-content: space-between;
             }
 
             #id label {
@@ -63,7 +64,7 @@ export function ThemeField(param) {
             }
 
             #id .theme-app:not(:last-child) {
-                margin-right: 15px;
+                /* margin-right: 15px; */
                 margin-bottom: 15px;
             }
    

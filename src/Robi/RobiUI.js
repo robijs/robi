@@ -26,6 +26,7 @@ import { BootstrapTextarea } from './Components/BootstrapTextarea.js'
 import { BuildInfo } from './Components/BuildInfo.js'
 import { Button } from './Components/Button.js'
 import { Card } from './Components/Card.js'
+import { ChangeTheme } from './Components/ChangeTheme.js'
 import { Comments } from './Components/Comments.js'
 import { CommentsContainer } from './Components/CommentsContainer.js'
 import { Container } from './Components/Container.js'
@@ -92,6 +93,7 @@ import { SingleLineTextField } from './Components/SingleLineTextField.js'
 import { SiteUsage } from './Components/SiteUsage.js'
 import { SiteUsageContainer } from './Components/SiteUsageContainer.js'
 import { Sortable } from './Components/Sortable.js'
+import { SourceTools } from './Components/SourceTools.js'
 import { StatusField } from './Components/StatusField.js'
 import { SvgDefs } from './Components/SvgDefs.js'
 import { Table } from './Components/Table.js'
@@ -123,6 +125,7 @@ export {
     BuildInfo,
     Button,
     Card,
+    ChangeTheme,
     Comments,
     CommentsContainer,
     Container,
@@ -189,6 +192,7 @@ export {
     SiteUsage,
     SiteUsageContainer,
     Sortable,
+    SourceTools,
     StatusField,
     SvgDefs,
     Table,
