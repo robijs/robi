@@ -91,7 +91,6 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     viewContainer.add();
 
-
     // Check route path
     const pathAndQuery = path.split('?');
     const pathParts = pathAndQuery[0].split('/');
@@ -114,6 +113,17 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         });
 
         srcTools.add();
+
+        // // FIXME: experimental
+        // viewContainer.get().addEventListener('keypress', event => {
+        //     if (event.ctrlKey && event.key === 'M') {
+        //         event.preventDefault();
+        //         ModifyFile({
+        //             path: `App/src/Routes/${route.path}`,
+        //             file: `${route.path}.js`
+        //         });
+        //     }
+        // });
     }
 
     // Set browswer history state

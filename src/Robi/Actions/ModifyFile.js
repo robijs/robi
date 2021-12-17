@@ -275,7 +275,8 @@ export async function ModifyFile(param) {
 
                         loading.add();
 
-                        // Wait a second to make sure changes to list.js are committed
+                        // Wait 5 seconds to make sure changes to list.js are committed
+                        console.log('Wait 5s');
                         setTimeout(() => {
                             // Remove checkIfSaved before closing
                             $(modal.get()).off('hide.bs.modal', checkIfSaved);
@@ -292,7 +293,7 @@ export async function ModifyFile(param) {
 
                             // Close modal (DOM node will be destroyed)
                             modal.close();
-                        }, 1000);
+                        }, 5000);
                         return false;
                     } else {
                         return true;

@@ -52,6 +52,7 @@ import {
  * @param {Object}   param          Interface to UpdateItem() module.   
  * @param {string}   param.list     SharePoint list Name.
  */
+// Hello world!
 export async function AddColumnToView(param) {
     const {
         list,
@@ -5180,7 +5181,8 @@ export async function ModifyFile(param) {
 
                         loading.add();
 
-                        // Wait a second to make sure changes to list.js are committed
+                        // Wait 5 seconds to make sure changes to list.js are committed
+                        console.log('Wait 5s');
                         setTimeout(() => {
                             // Remove checkIfSaved before closing
                             $(modal.get()).off('hide.bs.modal', checkIfSaved);
@@ -5197,7 +5199,7 @@ export async function ModifyFile(param) {
 
                             // Close modal (DOM node will be destroyed)
                             modal.close();
-                        }, 1000);
+                        }, 5000);
                         return false;
                     } else {
                         return true;
@@ -6710,7 +6712,6 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     viewContainer.add();
 
-
     // Check route path
     const pathAndQuery = path.split('?');
     const pathParts = pathAndQuery[0].split('/');
@@ -6733,6 +6734,17 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         });
 
         srcTools.add();
+
+        // // FIXME: experimental
+        // viewContainer.get().addEventListener('keypress', event => {
+        //     if (event.ctrlKey && event.key === 'M') {
+        //         event.preventDefault();
+        //         ModifyFile({
+        //             path: `App/src/Routes/${route.path}`,
+        //             file: `${route.path}.js`
+        //         });
+        //     }
+        // });
     }
 
     // Set browswer history state
