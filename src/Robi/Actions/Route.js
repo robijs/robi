@@ -91,14 +91,6 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     viewContainer.add();
 
-    // Add source tools
-    if (Store.user().Role === 'Developer') {
-        const srcTools = SourceTools({
-            parent: viewContainer
-        });
-
-        srcTools.add();
-    }
 
     // Check route path
     const pathAndQuery = path.split('?');
@@ -112,6 +104,16 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         Route('404');
 
         return;
+    }
+
+    // Add source tools
+    if (route.type !== 'system' && Store.user().Role === 'Developer') {
+        const srcTools = SourceTools({
+            route,
+            parent: viewContainer
+        });
+
+        srcTools.add();
     }
 
     // Set browswer history state

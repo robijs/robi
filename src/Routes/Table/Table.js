@@ -1,4 +1,4 @@
-import { Title } from '../../Robi/RobiUI.js'
+import { Title, Table } from '../../Robi/RobiUI.js'
 
 export default async function Measures({ parent, pathParts, props }) {
     // View title

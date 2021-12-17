@@ -1,6 +1,6 @@
 export function componentTemplate({ name }) {
     return [
-        `import { Component } from '../Robi/Robi.js'`,
+        `import { Component } from '../Robi.js'`,
         ``,
         `/**`,
         ` * `,

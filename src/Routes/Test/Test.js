@@ -23,7 +23,7 @@ export default async function Test(param) {
     const copyAppBtn = BootstrapButton({
         value: 'Copy app.js',
         classes: ['mr-3', 'mt-3'],
-        type: 'robi',
+        type: 'robi-success',
         parent,
         async action(event) {
             await CopyFile({

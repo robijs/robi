@@ -63,8 +63,10 @@ export async function ModifyFile(param) {
 
             const editor = CodeMirror.fromTextArea(modal.find('.code-mirror-container'), {
                 mode: 'javascript',
+                indentUnit: 4,
                 lineNumbers: true,
                 lineWrapping: true,
+                autoCloseBrackets: true,
                 extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
                 foldGutter: true,
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
@@ -72,6 +74,14 @@ export async function ModifyFile(param) {
             editor.foldCode(CodeMirror.Pos(0, 0));
             editor.setSize(0, 0);
             editor.setOption('extraKeys', {
+                // Tab(cm) {
+                //     const spaces = Array(cm.getOption("indentUnit")).join(" ");
+                //     console.log(spaces);
+
+                //     cm.replaceSelection(spaces);
+                // },
+                'Tab': 'indentMore',
+                'Shift-Tab': 'indentLess',
                 'Ctrl-/'(cm) {
                     editor.toggleComment({
                         // this prop makes sure comments retain indented code
@@ -171,7 +181,7 @@ export async function ModifyFile(param) {
                             dot.remove();
                         }
 
-                        saveAndCloseBtn.get().disabled = true;
+                        // saveAndCloseBtn.get().disabled = true;
                     } else {
                         console.log('changed');
 
@@ -183,7 +193,7 @@ export async function ModifyFile(param) {
                             `);
                         }
 
-                        saveAndCloseBtn.get().disabled = false;
+                        // saveAndCloseBtn.get().disabled = false;
                     }
                 });
 
