@@ -719,7 +719,7 @@ export function Sidebar({ parent, path }) {
                 component.find('.edit-buttons')?.remove();
 
                 // Remove hide
-                console.log(component.find('.hide-label'));
+                // console.log(component.find('.hide-label'));
                 component.find('.hide-label')?.remove();
 
                 // Turn edit back on

@@ -6,7 +6,6 @@
 // @START-IMPORTS
 import { Start } from './Robi/Robi.js'
 import lists from './lists.js';
-import Measures from './Routes/Measures/Measures.js'
 import Test from './Routes/Test/Test.js'
 // @END-IMPORTS
 
@@ -17,18 +16,10 @@ Start({
     // Routes can be linked to directly with hash fragment. Ex: https://site#path.
     routes: [
         // @START-ROUTES
-        // @START-Measures
-        {
-            path: 'Measures',
-            icon: 'bs-journals',
-            go: Measures
-        }
-        // @END-Measures
-        , // @ROUTE
         // @START-Test
         {
             path: 'Test',
-            icon: 'bs-pause-btn',
+            icon: 'bs-tools',
             go: Test
         }
         // @END-Test
@@ -61,7 +52,7 @@ Start({
         // logo: 'dha-logo-no-label-180w.png',
         // logoLarge: 'dha-logo-no-label-386w.png',
         // logoSmall: 'dha-logo-no-label-80w.png',
-        name: /* @START-name */'MeasuresLibrary'/* @END-name */,
+        name: /* @START-name */'App'/* @END-name */,
         questionTypes: [
             {
                 title: 'General',
@@ -69,7 +60,7 @@ Start({
             }
         ],
         theme: /* @START-theme */'Red'/* @END-theme */,
-        title: /* @START-title */'Measures Library'/* @END-title */,
+        title: /* @START-title */'Title'/* @END-title */,
         userDefaultRole: 'User',
         userSettings: /* @START-userSettings */JSON.stringify({ savedSearches: {} })/* @END-userSettings */,
         // OPTIONAL PROPERTIES
