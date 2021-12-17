@@ -2,6 +2,7 @@ export function componentTemplate({ name }) {
     return [
         `import { Component } from '../Robi.js'`,
         ``,
+        `// @START-File`
         `/**`,
         ` * `,
         ` * @param {Object} param - Object passed in as only argument to a Robi component`,
@@ -44,5 +45,7 @@ export function componentTemplate({ name }) {
         ``,
         `    return component;`,
         `}`
+        `// @END-File`,
+        ``
     ].join('\n');
 }

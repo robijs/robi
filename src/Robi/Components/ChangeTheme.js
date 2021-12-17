@@ -7,6 +7,11 @@ import { Themes } from '../Models/Themes.js'
 import { ThemeField } from './ThemeField.js'
 import { Wait } from '../Actions/Wait.js'
 
+// @START-File
+/**
+ * 
+ * @param {*} param 
+ */
 export function ChangeTheme(param) {
     const { parent } = param;
 
@@ -127,3 +132,4 @@ export function ChangeTheme(param) {
 
     updateThemeBtn.add();
 }
+// @END-File
