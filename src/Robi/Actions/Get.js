@@ -87,22 +87,35 @@ export async function Get(param) {
             console.log('Fetch request aborted.');
         }
     } else if (App.get('mode') === 'dev' || mode === 'dev') {
-        const queryFilterString = [
-            formatFilter(filter),
-            formatOrder(orderby)
-        ]
+        const queries = filter ? filter.split(' or ') : [ '' ];
+
+        const fetchAll = await Promise.all(queries.map( async query => {
+            const queryFilterString = [
+                formatFilter(query),
+                formatOrder(orderby)
+            ]
             .filter(x => x)
             .join('&');
 
+    
+            return await fetch(`http://localhost:3000/${list}${queryFilterString ? `?${queryFilterString}` : ''}`, options);
+        }));
+        
         function formatFilter(value) {
             if (value) {
                 return value
+                    // .replaceAll(' or ', ' and ')
                     .split(' and ')
                     .map(group => {
-                        // const [field, operator, value] = group.split(' ');
-                        const [field, operator, value] = group.match(/(?:[^\s"']+|['"][^'"]*["'])+/g);
+                        if (group.includes('(substringof(')) {
+                            const [value, column] = group.replace(`(substringof('`, '').replace(`',`, '').replace(') eq true', '').split(' ');
 
-                        return `${field}${operator === 'eq' ? '=' : operator === 'ne' ? '_ne=' : ''}${value.replace(/["']/g, "")}`;
+                            return `${column}_like=${value}`;
+                        } else {
+                            const [field, operator, value] = group.match(/(?:[^\s"']+|['"][^'"]*["'])+/g); /** {@link https://stackoverflow.com/a/16261693} see jobrad's comment Mar 24 '17 at 17:16 */
+
+                            return `${field}${operator === 'eq' ? '=' : operator === 'ne' ? '_ne=' : ''}${value.replace(/["']/g, "")}`;
+                        }
                     })
                     .join('&');
             }
@@ -117,10 +130,8 @@ export async function Get(param) {
             }
         }
 
-        const response = await fetch(`http://localhost:3000/${list}${queryFilterString ? `?${queryFilterString}` : ''}`, options);
         // await Wait(500);
-
-        return await response.json();
+        return (await Promise.all(fetchAll.map(async response => await response.json()))).flat();
     }
 }
 // @END-File

@@ -17,6 +17,8 @@ export async function UpdateItem(param) {
         list, itemId, select, expand, data, wait
     } = param;
 
+    console.log(`List: ${list}, Item: ${itemId}, Data:`, data);
+
     // Exit if no data passed in
     if (Object.getOwnPropertyNames(data).length === 0) {
         return;

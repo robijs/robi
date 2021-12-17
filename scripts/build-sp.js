@@ -84,9 +84,17 @@ async function min() {
         await copy('./src/Pages', './dist/src/Pages');
         console.log('Copied ./src/Pages to ./dist/src/Pages');
 
+        // Copy Images
+        await copy('./src/Images', './dist/src/Images');
+        console.log('Copied ./src/Images to ./dist/src/Images');
+
         // Copy Libraries
         await copy('./src/Libraries', './dist/src/Libraries');
         console.log('Copied ./src/Libraries to ./dist/src/Libraries');
+
+        // Copy Workers
+        await copy('./src/Robi/Workers', './dist/src/Robi/Workers');
+        console.log('Copied ./src/Robi/Workers to ./dist/src/Robi/Workers');
 
         // Copy Routes
         await copy('./src/Routes', './dist/src/Routes');

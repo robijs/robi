@@ -71,7 +71,7 @@ Start({
         theme: /* @START-theme */'Red'/* @END-theme */,
         title: /* @START-title */'Measures Library'/* @END-title */,
         userDefaultRole: 'User',
-        userSettings: /* @START-userSettings */JSON.stringify({ savedSearches: [] })/* @END-userSettings */,
+        userSettings: /* @START-userSettings */JSON.stringify({ savedSearches: {} })/* @END-userSettings */,
         // OPTIONAL PROPERTIES
         // -------------------
         // appcontainer: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
@@ -91,87 +91,7 @@ Start({
                 Email: "first.mi.last.ctr@mail.mil",
                 LoginName: "0987654321@mil",
                 Role: "Developer",
-                SiteId: 1,
-                Settings: JSON.stringify({
-                    savedSearches: [
-                        {
-                            list: 'Measures',
-                            searches: [
-                                {
-                                    name:'My Daily (Published)',
-                                    filters: [
-                                        {
-                                            column: 'AOName',
-                                            type: 'slot',
-                                            condition: 'equals',
-                                            value: 'First Last',
-                                            operator: 'AND'
-                                        },
-                                        {
-                                            column: 'Frequency',
-                                            type: 'choice',
-                                            condition: 'equals',
-                                            value: 'Daily',
-                                            operator: 'AND'
-                                        },
-                                        {
-                                            column: 'Status',
-                                            type: 'choice',
-                                            condition: 'equals',
-                                            value: 'Published',
-                                            operator: null
-                                        }
-                                    ]
-                                },
-                                {
-                                    name:'My Monthly (Under Development)',
-                                    filters: [
-                                        {
-                                            column: 'AOName',
-                                            type: 'slot',
-                                            condition: 'equals',
-                                            value: 'First Last',
-                                            operator: 'AND'
-                                        },
-                                        {
-                                            column: 'Frequency',
-                                            type: 'choice',
-                                            condition: 'equals',
-                                            value: 'Monthly',
-                                            operator: 'AND'
-                                        },
-                                        {
-                                            column: 'Status',
-                                            type: 'choice',
-                                            condition: 'equals',
-                                            value: 'Under Development',
-                                            operator: null
-                                        }
-                                    ]
-                                },
-                                {
-                                    name:'Test (AO not me)',
-                                    filters: [
-                                        {
-                                            column: 'AOName',
-                                            type: 'slot',
-                                            condition: 'not equal to',
-                                            value: 'First Last',
-                                            operator: 'AND'
-                                        },
-                                        {
-                                            column: 'MeasureName',
-                                            type: 'slot',
-                                            condition: 'contains',
-                                            value: 'Test',
-                                            operator: null
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                })
+                SiteId: 1
             },
             testInstall: false,
         },

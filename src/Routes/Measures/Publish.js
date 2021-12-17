@@ -2,10 +2,10 @@ import { Container, Modal, BootstrapButton, MultiLineTextField, DateField, Alert
 import { App, Store, UpdateItem, Route } from '../../Robi/Robi.js'
 
 export function Publish({ item, bannerParent, buttonParent, path }) {
-    const { Id, Status, Published, Publisher } = item;
+    const { Id, Published, Publisher } = item;
 
-    // Under Development
-    if (Status === 'Under Development') {
+    // Not published
+    if (!Published) {
         const bannerContainer = Container({
             width: '100%',
             padding: '0px 30px 10px 30px',
@@ -53,7 +53,12 @@ export function Publish({ item, bannerParent, buttonParent, path }) {
         });
 
         publishBtn.add();
-    } else {
+        
+        return;
+    }
+    
+    // Published
+    if (Published) {
         const bannerContainer = Container({
             width: '100%',
             padding: '0px 30px 10px 30px',
@@ -105,5 +110,7 @@ export function Publish({ item, bannerParent, buttonParent, path }) {
         });
 
         unpublishBtn.add();
+
+        return;
     }
 }

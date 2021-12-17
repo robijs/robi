@@ -19,13 +19,14 @@ export function Alert(param) {
         html: /*html*/ `
             <div class='alert alert-${type} ${classes?.join(' ')}' role='alert'>
                 ${text || ''}
-                ${close ?
-            /*html*/ ` 
+                ${
+                    close ?
+                    /*html*/ ` 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    `
-                : ''}
+                    `: ''
+                }
             </div>
         `,
         style: /*css*/ `

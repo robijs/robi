@@ -1,6 +1,5 @@
-import { Title } from '../../Robi/RobiUI.js'
+import { Title, Table } from '../../Robi/RobiUI.js'
 import { MeasureIntakeForm } from './MeasureIntakeForm.js'
-import { AllMeasures } from './AllMeasures.js'
 
 export default async function Measures({ parent, pathParts, props }) {
     // TODO: Move to Table()
@@ -44,7 +43,53 @@ export default async function Measures({ parent, pathParts, props }) {
 
     viewTitle.add();
 
-    AllMeasures({ parent });
+    // Table
+    await Table({
+        list: 'Measures',
+        view: 'Measures',
+        addButtonValue: 'New Measure Intake Form',
+        openInModal: true,
+        parent,
+        heading: '',
+        advancedSearch: true,
+        toolbar: [
+            {
+                label: 'All',
+                filter(data) {
+                    return data;
+                }
+            },
+            {
+                label: 'Published',
+                filter(data) {
+                    return data.filter(item => item.Status === 'Published');
+                }
+            },
+            {
+                label: 'Under Development',
+                filter(data) {
+                    return data.filter(item => item.Status === 'Under Development');
+                }
+            },
+            {
+                label: 'Mine',
+                filter(data) {
+                    const email = Store.user().Email;
+                    const author = Store.user().SiteId;
+
+                    console.log(email, author);
+
+                    return data.filter(item => item.AOEmail === email || item.AltAOEmail === email || item.DSEmail === email || item.AltDSEmail === email || item.AuthorId === author);
+                }
+            },
+            {
+                label: 'On Hold',
+                filter(data) {
+                    return data.filter(item => item.Status === 'On Hold');
+                }
+            }
+        ]
+    });
 
     // TODO: Move to Table()
     // Open modal

@@ -33,6 +33,7 @@ export async function Table(param) {
         exportButtons,
         filter,
         formFooter,
+        formView,
         headerFilter,
         heading,
         headingColor,
@@ -120,11 +121,9 @@ export async function Table(param) {
         });
 
         // Get fields in view
+        const schema = lists.concat(Lists()).find(item => item.list === list);
+            
         if (view) {
-            const schema = lists
-                .concat(Lists())
-                .find(item => item.list === list);
-
             fields = schema?.views
                 .find(item => item.name === view)
                 ?.fields
@@ -139,7 +138,27 @@ export async function Table(param) {
                     }
                 });
 
-            formFields = fields;
+            if (formView) {
+                if (formView === 'All') {
+                    formFields = lists.concat(Lists()).find(item => item.list === list)?.fields;
+                } else {
+                    formFields = schema?.views
+                        .find(item => item.name === view)
+                        ?.fields
+                        .map(name => {
+                            // FIXME: Set default SharePoint Fields (won't be listed in schema)
+                            // TODO: Only set 'Name' as an option if schema.template === 101
+                            const spFields = ['Created', 'Modified', 'Author', 'Editor', 'Name'];
+                            if (spFields.includes(name)) {
+                                return { name };
+                            } else {
+                                return schema.fields.find(field => field.name === name);
+                            }
+                        });
+                }
+            } else {
+                formFields = fields;
+            }
         } else {
             // If no view, get all fields
             // FIXME: redundant
@@ -473,9 +492,9 @@ export async function Table(param) {
 
     // Toolbar
     // Test
-    if (toolbar) {
+    if (toolbar || advancedSearch) {
         const tableToolbar = TableToolbar({
-            options: toolbar,
+            options: toolbar || [],
             parent: tableContainer,
             advancedSearch,
             list,
@@ -491,7 +510,7 @@ export async function Table(param) {
                 // Adjust
                 table.DataTable().columns.adjust().draw();
             },
-            async search({ button, event, filters }) {
+            async search({ button, filters }) {
                 // TODO: add loading message
                 // Disable button
                 button.disabled = true;
@@ -507,7 +526,7 @@ export async function Table(param) {
                     
                     switch(condition) {
                         case 'contains':
-                            query = `(substringof('${value}', ${column})`
+                            query = `(substringof('${value}', ${column}) eq true`
                             break;
                         case 'equals':
                             // TODO: add support for date, lookup, and multichoice fields

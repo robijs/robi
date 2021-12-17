@@ -180,7 +180,7 @@ export async function MeasureIntakeForm(param) {
     // TODO: Disable update on load, enable if changed
     // TODO: Remove changed indicator and disable button if all changes reverted
     // TODO: Add a revert changes button
-    const saveButton = BootstrapButton({
+    const saveBtn = BootstrapButton({
         async action(event) {
             if (itemId) {
                 console.log(`Update Measure #${itemId}`);
@@ -366,10 +366,10 @@ export async function MeasureIntakeForm(param) {
         value: itemId ? 'Update' : 'Create'
     });
 
-    saveButton.add();
+    saveBtn.add();
 
-    // Cancel button
-    const cancelButton = BootstrapButton({
+    // Back button
+    const backBtn = BootstrapButton({
         action(event) {
             // TODO: Generalize;
             Route('Measures');
@@ -380,14 +380,14 @@ export async function MeasureIntakeForm(param) {
         value: /*html*/ `
             <!-- <div class="d-flex justify-content-center align-items-center back-btn" style="" title="Back"> -->
             <div class="d-flex back-btn" style="" title="Back">
-                <svg class="icon" style="fill: #e63e44; font-size: 26px;">
+                <svg class="icon" style="fill: ${App.get('primaryColor')}; font-size: 26px;">
                     <use href="#icon-bs-arrow-left-cirlce-fill"></use>
                 </svg>
             </div>
         `
     });
 
-    cancelButton.add();
+    backBtn.add();
 
     // Loading
     let loading;

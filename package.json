@@ -47,7 +47,8 @@
     "create-component": "node ./scripts/create-component.js",
     "create-route": "node ./scripts/create-route.js",
     "watch-robi": "npm-watch build",
-    "watch-robi-dev": "npm-watch build-dev"
+    "watch-robi-dev": "npm-watch build-dev",
+    "rm-sp": "node ./scripts/rm-dist.js"
   },
   "devDependencies": {
     "concurrently": "^6.2.1",

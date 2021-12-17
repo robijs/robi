@@ -34,6 +34,7 @@ export async function Users(param) {
         list: 'Users',
         heading: '',
         view: 'Users',
+        formView: 'All',
         newForm: NewUser,
         parent
     });

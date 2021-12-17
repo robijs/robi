@@ -1,5 +1,4 @@
-import { Get } from '../Actions/Get.js'
-import { SiteUsageModel } from '../Models/SiteUsageModel.js'
+import { Get, SiteUsageModel } from '../Robi.js'
 
 (async () => {
     onmessage = async event => {
