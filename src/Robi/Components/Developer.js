@@ -30,11 +30,7 @@ export async function Developer(param) {
     /** View Title */
     const viewTitle = Title({
         title: 'Developer',
-        parent,
-        date: new Date().toLocaleString('default', {
-            dateStyle: 'full'
-        }),
-        type: 'across'
+        parent
     });
 
     viewTitle.add();

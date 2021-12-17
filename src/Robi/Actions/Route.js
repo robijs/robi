@@ -1,3 +1,4 @@
+import { ModifyFile } from '../Actions/ModifyFile.js'
 import { ViewContainer } from '../Components/ViewContainer.js'
 import { SourceTools } from '../Components/SourceTools.js'
 import { App } from '../Core/App.js'
@@ -113,17 +114,6 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         });
 
         srcTools.add();
-
-        // // FIXME: experimental
-        // viewContainer.get().addEventListener('keypress', event => {
-        //     if (event.ctrlKey && event.key === 'M') {
-        //         event.preventDefault();
-        //         ModifyFile({
-        //             path: `App/src/Routes/${route.path}`,
-        //             file: `${route.path}.js`
-        //         });
-        //     }
-        // });
     }
 
     // Set browswer history state
