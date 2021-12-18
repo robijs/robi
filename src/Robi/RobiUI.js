@@ -109,6 +109,7 @@ import { UpgradeAppButton } from './Components/UpgradeAppButton.js'
 import { UploadButton } from './Components/UploadButton.js'
 import { Users } from './Components/Users.js'
 import { ViewContainer } from './Components/ViewContainer.js'
+import { ViewTools } from './Components/ViewTools.js'
 
 export {
     AccountInfo,
@@ -207,5 +208,6 @@ export {
     UpgradeAppButton,
     UploadButton,
     Users,
-    ViewContainer
+    ViewContainer,
+    ViewTools
 }

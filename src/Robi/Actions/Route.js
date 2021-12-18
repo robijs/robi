@@ -1,6 +1,6 @@
-import { ModifyFile } from '../Actions/ModifyFile.js'
 import { ViewContainer } from '../Components/ViewContainer.js'
 import { SourceTools } from '../Components/SourceTools.js'
+import { ViewTools } from '../Components/ViewTools.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { History } from './History.js'
@@ -114,6 +114,13 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         });
 
         srcTools.add();
+
+        const viewTools = ViewTools({
+            route,
+            parent: viewContainer
+        });
+
+        viewTools.add();
     }
 
     // Set browswer history state
