@@ -173,14 +173,18 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         // → { "foo": "bar", "baz": "buzz" }
     }
 
-    /** Set Scroll Top */
-    /** @todo this needs to run only after all async calls have completed */
-    /** @note maybe Views should always return a promise? */
-    /** @note or could just use a callback passed to the view */
+    // TODO: scroll viewContainer, not mainContainer
+    // TODO: this needs to run only after all async calls have completed
+    // Set Scroll Top
+    // - maybe Views should always return a promise?
+    // - or could just use a callback passed to the view
+    
+    console.log(scrollTop);
+    
     if (scrollTop) {
         console.log(scrollTop);
 
-        Store.get('maincontainer').get().scrollTo({
+        viewContainer.get().scrollTo({
             top: scrollTop
         });
     }
