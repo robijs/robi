@@ -9,7 +9,7 @@ import { App } from '../Core/App.js'
 import { Table } from './Table.js' 
 import { ErrorForm } from './ErrorForm.js'
 import { LogForm } from './LogForm.js'
-import { CreateItem, UpdateItem, Wait } from '../Robi.js'
+import { CreateItem, Store, UpdateItem, Wait } from '../Robi.js'
 
 // @START-File
 /**
@@ -510,5 +510,11 @@ export async function Developer(param) {
             row.show().draw(false).node()?.click();
         }
     }
+
+    // Wait for all async events to finsih then scroll
+    parent.get().scrollTo({
+        top: param.scrollTop,
+        behavior: 'smooth'
+    });
 }
 // @END-File

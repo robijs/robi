@@ -78,10 +78,9 @@ export function ViewTools(param) {
             }
 
             .grown-in-center {
-                /* background: #e9ecef; */
+                background: #e9ecef;
                 animation: 150ms ease-in-out forwards grown-in-center;
-                background: white;
-                border-radius: 10px;
+                border-radius: 20px;
                 box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
                 padding: .5rem;
             }

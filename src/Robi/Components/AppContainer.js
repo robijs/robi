@@ -365,7 +365,7 @@ export function AppContainer() {
             }
 
             .robi-code-background {
-                background: #292D3E;
+                background: #1e1e1e;
             }
 
             .loading-file {
@@ -374,7 +374,7 @@ export function AppContainer() {
 
             .file-title {
                 width: 100%;
-                background-color: #292D3E;
+                background-color: #1e1e1e;
                 display: flex;
                 align-items: center;
                 padding-bottom: .75rem;

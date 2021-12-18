@@ -29,6 +29,7 @@ export function SourceTools(param) {
         `,
         style: /*css*/ `
             #id {
+                z-index: 1000;
                 display: flex;
                 align-items: center;
                 justify-content: center;

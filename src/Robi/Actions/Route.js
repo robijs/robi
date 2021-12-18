@@ -18,43 +18,42 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         scrollTop
     } = options;
 
-    /** Remove styles in head */
+    // Get references to core app components
+    const appContainer = Store.get('appcontainer');
+    const svgDefs = Store.get('svgdefs');
+    const sidebar = Store.get('sidebar');
+    const mainContainer = Store.get('maincontainer');
+
+    // Store viewcontainer scrollTop
+    Store.viewScrollTop(mainContainer.find('.viewcontainer')?.scrollTop || 0);
+
+    // Remove all events attached to the maincontainer
+    mainContainer.removeEvents();
+
+    // Remove all child elements from maincontainer
+    mainContainer.empty();
+
+    // Remove all style elements added to head that aren't locked
     document.querySelectorAll(`head style[data-locked='no']`).forEach(node => node.remove());
 
-    /** Remove modal overlay */
+    // Remove modal overlay
     const overlay = document.querySelector('.modal-backdrop');
 
     if (overlay) {
         overlay.remove();
     }
 
-    /** Abort all pending fetch requests */
+    // Abort all pending fetch requests
     Store.abortAll();
 
-    /** Terminate all running workers */
+    // Terminate all running workers
     Store.terminateWorkers();
 
-    /** Get references to core app components */
-    const appContainer = Store.get('appcontainer');
-    const svgDefs = Store.get('svgdefs');
-    const sidebar = Store.get('sidebar');
-    const mainContainer = Store.get('maincontainer');
-
-    /** Set scroll top */
-    Store.viewScrollTop(mainContainer.get().scrollTop);
-
-    // Turn padding back on
-    // mainContainer.paddingOn();
-    /** Remove all events attached to the maincontainer */
-    mainContainer.removeEvents();
-
-    /** Empty mainconatainer DOM element */
-    mainContainer.empty();
-
-    /** Empty store */
+    // Empty store
     Store.empty();
 
-    /** Re-add core app component references to store */
+    // TODO: store core components in props (Ex: Store.maincontainer), no need to re-add
+    // Re-add core app component references to store
     Store.add({
         name: 'appcontainer',
         component: appContainer
@@ -147,16 +146,15 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         }
     }
 
-    /** Call .go() method */
+    // Render selected route's go method
     route.go({
         parent: viewContainer,
         pathParts,
-        props: queryStringToObject(path.split('?')[1])
+        props: queryStringToObject(path.split('?')[1]),
+        scrollTop
     });
 
-    /**
-     * Modified from {@link https://stackoverflow.com/a/61948784}
-     */
+    /** Modified from {@link https://stackoverflow.com/a/61948784} */
     function queryStringToObject(queryString) {
         if (!queryString) {
             return {};
@@ -173,14 +171,9 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         // → { "foo": "bar", "baz": "buzz" }
     }
 
-    // TODO: scroll viewContainer, not mainContainer
-    // TODO: this needs to run only after all async calls have completed
-    // Set Scroll Top
+    // Set viewContainer Scroll Top
     // - maybe Views should always return a promise?
     // - or could just use a callback passed to the view
-    
-    console.log(scrollTop);
-    
     if (scrollTop) {
         console.log(scrollTop);
 
