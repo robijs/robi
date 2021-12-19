@@ -166,6 +166,12 @@ export function AppContainer() {
                 font-weight: 500;
             }
 
+            .btn-outline-robi {
+                color: ${App.get('primaryColor')};
+                background-color: initial;
+                border-color: ${App.get('primaryColor')};
+            }
+
             .btn-light:hover {
                 color: #212529 !important;
                 background-color: #f8f9fa !important;

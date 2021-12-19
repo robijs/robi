@@ -7,6 +7,7 @@
 import { Start } from './Robi/Robi.js'
 import lists from './lists.js';
 import Test from './Routes/Test/Test.js'
+import Table from './Routes/Table/Table.js'
 // @END-IMPORTS
 
 // @START
@@ -23,6 +24,14 @@ Start({
             go: Test
         }
         // @END-Test
+        , // @ROUTE
+        // @START-Table
+        {
+            path: 'Table',
+            icon: 'bs-list-ul',
+            go: Table
+        }
+        // @END-Table
         // @END-ROUTES
     ]
     ,
