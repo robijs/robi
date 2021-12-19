@@ -580,6 +580,38 @@ export function AppContainer() {
                 text-decoration: none;
                 background-color: ${App.get('primaryColor') + '20'};
             }
+
+            /* Sortable */
+            .ui-sortable-handle {
+                cursor: grab;
+            }
+
+            .ui-sortable-helper {
+                cursor: grabbing;
+              
+            }
+
+            /* FIXME: Should these styles live here, in Table.js or DataTable.js? */
+            .table-container {
+                transition: background-color 250ms ease, padding 250ms ease, transform 250ms ease, box-shadow 350ms ease;
+            }
+
+            .table-container.ui-sortable-handle {
+                padding: 20px !important;
+                /* box-shadow: 0px 0px 0px 3px ${App.get('primaryColor') + ''} !important; */
+                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px !important;
+                border-radius: 20px !important;
+                background: white !important;
+            }
+
+            .table-container.ui-sortable-handle {
+                margin: 20px !important;
+            }
+
+            .table-container.ui-sortable-helper {
+                box-shadow: rgb(0 0 0 / 10%) 0px 0px 32px 0px !important;
+                transform: scale(1.05);
+            }
         `,
         position: 'afterbegin',
         events: []

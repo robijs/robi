@@ -1,4 +1,4 @@
-import { Table, Title } from '../../Robi/RobiUI.js'
+import { Table, Title, Sortable, BootstrapButton, Container } from '../../Robi/RobiUI.js'
 
 export default async function Measures({ parent, pathParts, props }) {
     // View title
@@ -12,7 +12,42 @@ export default async function Measures({ parent, pathParts, props }) {
     });
 
     viewTitle.add();
-    
+
+    // Enable sort
+    const sortCtr = Container({
+        justify: 'end',
+        parent
+    });
+
+    sortCtr.add();
+
+    let sortable = false;
+
+    const sortBtn = BootstrapButton({
+        type: 'robi',
+        value: 'Sort',
+        classes: ['mt-3', 'mb-3'],
+        parent: sortCtr,
+        action(event) {
+            if (!sortable) {
+                event.target.innerText = 'Cancel';
+
+                $(`#${parent.get().id}`).sortable({ items: '.table-container' });
+                $(`#${parent.get().id} .table-container > *`).css({"pointer-events": "none", "user-select": "none"});
+
+                sortable = true;
+            } else {
+                event.target.innerText = 'Sort';
+                $(`#${parent.get().id}`).sortable('destroy');
+                $(`#${parent.get().id} .table-container > *`).css({"pointer-events": "auto", "user-select": "auto"});
+
+                sortable = false;
+            }
+        }
+    });
+
+    sortBtn.add();
+
     // @START-Table:Test
     await Table({
         list: 'Test',
@@ -40,4 +75,60 @@ export default async function Measures({ parent, pathParts, props }) {
         ]
     });
     // @END-Table:Test
+    
+    // @START-Table:Test-2
+    await Table({
+        list: 'Test',
+        parent,
+        advancedSearch: true,
+        toolbar: [
+               {
+                label: 'All',
+                filter(data) {
+
+                }
+            },
+            {
+                label: 'One',
+                filter(data) {
+
+                }
+            },
+            {
+                label: 'two',
+                filter(data) {
+
+                }
+            }
+        ]
+    });
+    // @END-Table:Test-2
+
+    // @START-Table:Test-3
+    await Table({
+        list: 'Test',
+        parent,
+        advancedSearch: true,
+        toolbar: [
+                {
+                label: 'All',
+                filter(data) {
+
+                }
+            },
+            {
+                label: 'One',
+                filter(data) {
+
+                }
+            },
+            {
+                label: 'two',
+                filter(data) {
+
+                }
+            }
+        ]
+    });
+    // @END-Table:Test-3
 }

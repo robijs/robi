@@ -97,7 +97,7 @@ export function ViewTools(param) {
             }
 
             #id .dropdown-menu {
-                left: -225.31px !important;
+                left: -225.31px !important; /* (width of menu / 2) - (width of tools button / 2) */
                 top: -45px !important;
                 background: transparent;
                 border-radius: 10px;
@@ -227,7 +227,14 @@ export function ViewTools(param) {
                 listener(event) {
                     event.target.classList.add('scale-up');
                 }
-            }
+            },
+            // {
+            //     selector: '#id .tools',
+            //     event: 'click',
+            //     listener(event) {
+            //         event.target.classList.add('scale-up');
+            //     }
+            // }
         ],
         onAdd() {
             $(`#${component.get().id}`).on('hidden.bs.dropdown', function () {
