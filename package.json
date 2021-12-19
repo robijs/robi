@@ -48,14 +48,20 @@
     "create-route": "node ./scripts/create-route.js",
     "watch-robi": "npm-watch build",
     "watch-robi-dev": "npm-watch build-dev",
-    "rm-sp": "node ./scripts/rm-dist.js"
+    "rm-sp": "node ./scripts/rm-dist.js",
+    "preinstall": "npx npm-force-resolutions"
   },
   "devDependencies": {
+    "chokidar": "^3.5.2",
     "concurrently": "^6.2.1",
     "fs-extra": "^10.0.0",
+    "glob-parent": "^6.0.2",
     "json-server": "^0.16.3",
     "live-server": "^1.1.0",
-    "npm-watch": "^0.11.0",
-    "webpack-cli": "^4.8.0"
+    "npm-watch": "^0.11.0"
+  },
+  "resolutions": {
+    "chokidar": "^3.5.2",
+    "glob-parent": "^6.0.2"
   }
 }
