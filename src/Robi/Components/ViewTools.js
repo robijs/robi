@@ -27,47 +27,49 @@ export function ViewTools(param) {
                 <div class="dropdown-menu" aria-labelledby="${id}">
                     <div class="grown-in-center">
                         <button class="dropdown-item" type="button">
-                        <div class='add-table'>
-                            <div class='filter d-flex justify-content-end'>
-                                <div style='color: ${App.get('primaryColor')}; height: 8px; line-height: .5; font-weight: 900;'>&plus;</div>
-                                <div class="btn-group ml-1" role="group">
-                                    <div type="button" class="btn btn-robi-reverse"></div>
-                                    <div type="button" class="btn btn-outline-robi"></div>
-                                    <div type="button" class="btn btn-outline-robi"></div>
+                            <div class='add-table'>
+                                <div class='filter d-flex justify-content-end'>
+                                    <div style='color: ${App.get('primaryColor')}; height: 8px; line-height: .5; font-weight: 900;'>&plus;</div>
+                                    <div class="btn-group ml-1" role="group">
+                                        <div type="button" class="btn btn-robi-reverse"></div>
+                                        <div type="button" class="btn btn-outline-robi"></div>
+                                        <div type="button" class="btn btn-outline-robi"></div>
+                                    </div>
+                                </div>
+                                <div class='columns d-flex'>
+                                    <div class='column'></div>
+                                    <div class='column'></div>
+                                    <div class='column'></div>
+                                </div>
+                                <div class='rows'>
+                                    <div class='add-table-row'></div>
+                                    <div class='add-table-row'></div>
+                                    <div class='add-table-row'></div>
                                 </div>
                             </div>
-                            <div class='columns d-flex'>
-                                <div class='column'></div>
-                                <div class='column'></div>
-                                <div class='column'></div>
-                            </div>
-                            <div class='rows'>
-                                <div class='add-table-row'></div>
-                                <div class='add-table-row'></div>
-                                <div class='add-table-row'></div>
-                            </div>
-                        </div>
+                            <div style="font-weight: 700; margin-top: 10px;">Table</div>
                         </button>
                         <button class="dropdown-item" type="button">
                             <div class='add-text-block'>
-                                </div>
+                                <span style="font-size: 28; font-weight: 600; color: ${App.get('primaryColor')};">Aa</span>
                             </div>
+                            <div style="font-weight: 700; margin-top: 10px;">Text block</div>
+                        </button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" type="button">
+                            <div class='add-button'>
+                                <div class='btn btn-robi'>Button</div>
+                            </div>
+                            <div style="font-weight: 700; margin-top: 10px;">Light</div>
                         </button>
                         <button class="dropdown-item" type="button">
-                            <span>
-                                <svg class="icon" style="font-size: 20;">
-                                    <use href="#icon-bs-list-ul"></use>
-                                </svg>
-                            </span>
-                            <!-- <span>
-                                Table
-                            </span> -->
+                            <div class='add-button'>
+                                <div class='btn btn-robi-reverse'>Button</div>
+                            </div>
+                            <div style="font-weight: 700; margin-top: 10px;">Dark</div>
                         </button>
                     </div>
                 </div>
-
-                <!-- Test -->
-
             </div>
         `,
         style: /*css*/ `
@@ -95,7 +97,7 @@ export function ViewTools(param) {
             }
 
             #id .dropdown-menu {
-                left: -54.81px !important;
+                left: -225.31px !important;
                 top: -45px !important;
                 background: transparent;
                 border-radius: 10px;
@@ -104,33 +106,23 @@ export function ViewTools(param) {
                 min-width: 0px;
             }
 
+            #id .dropdown-divider {
+                height: unset;
+                margin: .5rem 0;
+                overflow: hidden;
+                border-left: 1px solid #e9ecef;
+            }
+
             #id .dropdown-item {
                 position: relative;
                 display: flex;
+                flex-direction: column;
                 color: ${App.get('primaryColor')};
                 align-items: center;
                 justify-content: center;
                 padding: 10px;
                 border-radius: 20px;
                 transition: filter 300ms ease;
-            }
-
-            #id .dropdown-item:hover .add-table {
-                filter: blur(1px);
-            }
-
-            #id .dropdown-item:hover:after {
-                top: 0px;
-                left: 0px;
-                width: 100%;
-                height: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                position: absolute;
-                content: "Add table";
-                font-size: 20px;
-                font-weight: 700;
             }
 
             #id .dropdown-menu .dropdown-item .icon {
@@ -198,6 +190,32 @@ export function ViewTools(param) {
 
             #id .columns .column:not(:last-child) {
                 margin-right: 5px;
+            }
+
+            /* Add Text Block */
+            #id .add-text-block {
+                border-radius: 20px;
+                padding: 10px;
+                border: solid 2px ${App.get('primaryColor')};
+                width: 100px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Add Button */
+            #id .add-button {
+                border-radius: 20px;
+                padding: 10px;
+                border: solid 2px ${App.get('primaryColor')};
+                width: 100px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
         `,
         parent,
