@@ -52,11 +52,11 @@ import { GetRequestDigest } from './Actions/GetRequestDigest.js'
 import { GetRootRequestDigest } from './Actions/GetRootRequestDigest.js'
 import { GetSiteUsers } from './Actions/GetSiteUsers.js'
 import { GetWebLists } from './Actions/GetWebLists.js'
-import { HSLDarker } from './Actions/HSLDarker.js'
 import { HexToHSL } from './Actions/HexToHSL.js'
 import { HexToRGB } from './Actions/HexToRGB.js'
 import { HideRoutes } from './Actions/HideRoutes.js'
 import { History } from './Actions/History.js'
+import { HSLDarker } from './Actions/HSLDarker.js'
 import { InitializeApp } from './Actions/InitializeApp.js'
 import { InstallApp } from './Actions/InstallApp.js'
 import { LaunchApp } from './Actions/LaunchApp.js'
@@ -132,11 +132,11 @@ export {
     GetRootRequestDigest,
     GetSiteUsers,
     GetWebLists,
-    HSLDarker,
     HexToHSL,
     HexToRGB,
     HideRoutes,
     History,
+    HSLDarker,
     InitializeApp,
     InstallApp,
     LaunchApp,

@@ -3,8 +3,6 @@ var fs = require('fs');
 var assign = require('object-assign');
 var liveServer = require("./index.cjs");
 
-console.log(liveServer);
-
 var opts = {
 	host: process.env.IP,
 	port: process.env.PORT,
