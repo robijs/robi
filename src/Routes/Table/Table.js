@@ -1,4 +1,4 @@
-import { Table, Title, Sortable, BootstrapButton, Container } from '../../Robi/RobiUI.js'
+import { Table, Title, BootstrapButton, Container } from '../../Robi/RobiUI.js'
 
 export default async function Measures({ parent, pathParts, props }) {
     // View title
@@ -26,7 +26,7 @@ export default async function Measures({ parent, pathParts, props }) {
     const sortBtn = BootstrapButton({
         type: 'robi',
         value: 'Sort',
-        classes: ['mt-3', 'mb-3'],
+        classes: ['mt-3'],
         parent: sortCtr,
         action(event) {
             if (!sortable) {
@@ -48,9 +48,9 @@ export default async function Measures({ parent, pathParts, props }) {
 
     sortBtn.add();
 
-    // @START-Table:Test
+    // @START-Table:SLOT
     await Table({
-        list: 'Test',
+        list: 'SLOT',
         parent,
         advancedSearch: true,
         toolbar: [
@@ -59,32 +59,14 @@ export default async function Measures({ parent, pathParts, props }) {
                 filter(data) {
                     return data;
                 }
-            },
-            {
-                label: 'One',
-                filter(data) {
-                    return data.filter(item => item.Choice === 'One');
-                }
-            },
-            {
-                label: 'Two',
-                filter(data) {
-                    return data.filter(item => item.Choice === 'Two');
-                }
-            },
-            {
-                label: 'Three',
-                filter(data) {
-                    return data.filter(item => item.Choice === 'Three');
-                }
             }
         ]
     });
-    // @END-Table:Test
+    // @END-Table:SLOT
     
-    // @START-Table:Test-2
+    // @START-Table:MLOT
     await Table({
-        list: 'Test',
+        list: 'MLOT',
         parent,
         advancedSearch: true,
         toolbar: [
@@ -93,32 +75,14 @@ export default async function Measures({ parent, pathParts, props }) {
                 filter(data) {
                     return data;
                 }
-            },
-            {
-                label: 'One',
-                filter(data) {
-                    return data.filter(item => item.Choice === 'One');
-                }
-            },
-            {
-                label: 'Two',
-                filter(data) {
-                    return data.filter(item => item.Choice === 'Two');
-                }
-            },
-            {
-                label: 'Three',
-                filter(data) {
-                    return data.filter(item => item.Choice === 'Three');
-                }
             }
         ]
     });
-    // @END-Table:Test-2
+    // @END-Table:MLOT
 
-    // @START-Table:Test-3
+    // @START-Table:Number
     await Table({
-        list: 'Test',
+        list: 'Number',
         parent,
         advancedSearch: true,
         toolbar: [
@@ -127,26 +91,24 @@ export default async function Measures({ parent, pathParts, props }) {
                 filter(data) {
                     return data;
                 }
-            },
+            }
+        ]
+    });
+    // @END-Table:Number
+
+    // @START-Table:Choice
+    await Table({
+        list: 'Choice',
+        parent,
+        advancedSearch: true,
+        toolbar: [
             {
-                label: 'One',
+                label: 'All',
                 filter(data) {
-                    return data.filter(item => item.Choice === 'One');
-                }
-            },
-            {
-                label: 'Two',
-                filter(data) {
-                    return data.filter(item => item.Choice === 'Two');
-                }
-            },
-            {
-                label: 'Three',
-                filter(data) {
-                    return data.filter(item => item.Choice === 'Three');
+                    return data;
                 }
             }
         ]
     });
-    // @END-Table:Test-3
+    // @END-Table:Choice
 }

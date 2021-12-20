@@ -59,6 +59,9 @@ export async function Table(param) {
         buttons, fields, items
     } = param;
 
+    // App Lists
+    const lists = App.lists();
+
     const tableContainer = Container({
         display: 'block',
         classes: ['table-container'],
@@ -74,11 +77,15 @@ export async function Table(param) {
     let legendHeading;
 
     if (heading || list) {
+        // const text = heading || (heading === '' ? '' : list.split(/(?=[A-Z])/).join(' '));
+        // if list passed in look first for list.heading, or list.split(...)
+        const text = heading || ( heading === '' ? '' : list ? (lists.find(item => item.list === list).heading || list.split(/(?=[A-Z])/).join(' '))  : '' );
+
         legendHeading = Heading({
-            text: heading || (heading === '' ? '' : list.split(/(?=[A-Z])/).join(' ')),
+            text,
             size: headingSize,
             color: headingColor,
-            margin: headingMargin || (toolbar ? '0px' : '0px 0px 35px 0px'),
+            margin: headingMargin || (toolbar ? '35px 0px 0px 0px' : '0px 0px 35px 0px'),
             parent: tableContainer
         });
 
@@ -95,9 +102,6 @@ export async function Table(param) {
             data: null,
         });
     }
-
-    // App Lists
-    const lists = App.lists();
 
     // Item Id
     const idProperty = 'Id';
