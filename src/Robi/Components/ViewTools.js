@@ -55,7 +55,7 @@ export function ViewTools(param) {
                             </div>
                             <div style="font-weight: 700; margin-top: 10px;">Text block</div>
                         </button>
-                        <div class="dropdown-divider"></div>
+                        <!-- <div class="dropdown-divider"></div> -->
                         <button class="dropdown-item" type="button">
                             <div class='add-button'>
                                 <div class='btn btn-robi'>Button</div>
