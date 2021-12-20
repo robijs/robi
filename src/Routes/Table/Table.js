@@ -54,22 +54,28 @@ export default async function Measures({ parent, pathParts, props }) {
         parent,
         advancedSearch: true,
         toolbar: [
-               {
+            {
                 label: 'All',
                 filter(data) {
-
+                    return data;
                 }
             },
             {
                 label: 'One',
                 filter(data) {
-
+                    return data.filter(item => item.Choice === 'One');
                 }
             },
             {
-                label: 'two',
+                label: 'Two',
                 filter(data) {
-
+                    return data.filter(item => item.Choice === 'Two');
+                }
+            },
+            {
+                label: 'Three',
+                filter(data) {
+                    return data.filter(item => item.Choice === 'Three');
                 }
             }
         ]
@@ -82,22 +88,28 @@ export default async function Measures({ parent, pathParts, props }) {
         parent,
         advancedSearch: true,
         toolbar: [
-               {
+            {
                 label: 'All',
                 filter(data) {
-
+                    return data;
                 }
             },
             {
                 label: 'One',
                 filter(data) {
-
+                    return data.filter(item => item.Choice === 'One');
                 }
             },
             {
-                label: 'two',
+                label: 'Two',
                 filter(data) {
-
+                    return data.filter(item => item.Choice === 'Two');
+                }
+            },
+            {
+                label: 'Three',
+                filter(data) {
+                    return data.filter(item => item.Choice === 'Three');
                 }
             }
         ]
@@ -110,22 +122,28 @@ export default async function Measures({ parent, pathParts, props }) {
         parent,
         advancedSearch: true,
         toolbar: [
-                {
+            {
                 label: 'All',
                 filter(data) {
-
+                    return data;
                 }
             },
             {
                 label: 'One',
                 filter(data) {
-
+                    return data.filter(item => item.Choice === 'One');
                 }
             },
             {
-                label: 'two',
+                label: 'Two',
                 filter(data) {
-
+                    return data.filter(item => item.Choice === 'Two');
+                }
+            },
+            {
+                label: 'Three',
+                filter(data) {
+                    return data.filter(item => item.Choice === 'Three');
                 }
             }
         ]
