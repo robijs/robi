@@ -1,12 +1,12 @@
-import { readdir, readFile } from 'fs/promises'
+import { readFile } from 'fs/promises'
+import { readfiles } from './readfiles.js'
 
-export async function getFiles(path) {
+export async function getfiles(path) {
     let output = '';
 
-    const files = await readdir(path);
-    const ignore = ['.DS_Store'];
+    const files = await readfiles(path);
 
-    for (const file of files.filter(file => !ignore.includes(file))) {
+    for (const file of files) {
         const text = await readFile(`${path}/${file}`, 'utf8');
         const content = text.match(/\/\/ @START-File([\s\S]*?)\/\/ @END-File/);
 

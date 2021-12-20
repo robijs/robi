@@ -1,6 +1,6 @@
 import { readdir } from 'fs/promises'
 
-export async function getFiles(path) {
+export async function readfiles(path) {
     const files = await readdir(path);
     const ignore = ['.DS_Store'];
     
