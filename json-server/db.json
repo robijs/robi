@@ -95,6 +95,82 @@
       "Created": "Sun, 19 Dec 2021 05:53:53 GMT",
       "Modified": "Sun, 19 Dec 2021 05:53:53 GMT",
       "Id": 5
+    },
+    {
+      "SessionId": null,
+      "Message": "Failed to fetch",
+      "Error": "TypeError: Failed to fetch\n    at CreateItem (http://127.0.0.1:8080/src/Robi/Actions/CreateItem.js:107:32)\n    at LogError (http://127.0.0.1:8080/src/Robi/Actions/LogError.js:69:30)\n    at http://127.0.0.1:8080/src/Robi/Actions/Start.js:66:13",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 20 Dec 2021 01:49:58 GMT",
+      "Modified": "Mon, 20 Dec 2021 01:49:58 GMT",
+      "Id": 6
+    },
+    {
+      "SessionId": null,
+      "Message": "Failed to fetch",
+      "Error": "TypeError: Failed to fetch\n    at CreateItem (http://127.0.0.1:8080/src/Robi/Actions/CreateItem.js:107:32)\n    at LogError (http://127.0.0.1:8080/src/Robi/Actions/LogError.js:69:30)\n    at http://127.0.0.1:8080/src/Robi/Actions/Start.js:66:13",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 20 Dec 2021 01:54:03 GMT",
+      "Modified": "Mon, 20 Dec 2021 01:54:03 GMT",
+      "Id": 7
+    },
+    {
+      "SessionId": null,
+      "Message": "Failed to fetch",
+      "Error": "TypeError: Failed to fetch\n    at CreateItem (http://127.0.0.1:8080/src/Robi/Actions/CreateItem.js:107:32)\n    at LogError (http://127.0.0.1:8080/src/Robi/Actions/LogError.js:69:30)\n    at http://127.0.0.1:8080/src/Robi/Actions/Start.js:66:13",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 20 Dec 2021 01:59:29 GMT",
+      "Modified": "Mon, 20 Dec 2021 01:59:29 GMT",
+      "Id": 8
+    },
+    {
+      "SessionId": null,
+      "Message": "Failed to fetch",
+      "Error": "TypeError: Failed to fetch\n    at CreateItem (http://127.0.0.1:8080/src/Robi/Robi.js:1991:32)\n    at LogError (http://127.0.0.1:8080/src/Robi/Robi.js:4901:30)\n    at http://127.0.0.1:8080/src/Robi/Robi.js:6926:13",
+      "Source": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 20 Dec 2021 02:02:31 GMT",
+      "Modified": "Mon, 20 Dec 2021 02:02:31 GMT",
+      "Id": 9
     }
   ],
   "Log": [
@@ -6652,6 +6728,44 @@
       "Created": "Sun, 19 Dec 2021 20:09:31 GMT",
       "Modified": "Sun, 19 Dec 2021 20:09:31 GMT",
       "Id": 345
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4712:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 20 Dec 2021 01:59:29 GMT",
+      "Modified": "Mon, 20 Dec 2021 01:59:29 GMT",
+      "Id": 346
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Robi.js:4712:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Robi.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last"
+      },
+      "Created": "Mon, 20 Dec 2021 02:02:32 GMT",
+      "Modified": "Mon, 20 Dec 2021 02:02:32 GMT",
+      "Id": 347
     }
   ],
   "Users": [
