@@ -50,6 +50,14 @@ export function ViewTools(param) {
                             <div style="font-weight: 700; margin-top: 10px;">Table</div>
                         </button>
                         <button class="dropdown-item" type="button">
+                            <div class='add-chart'>
+                                <svg class="icon" style='font-size: 48px;'>
+                                    <use href="#icon-bs-bar-chart"></use>
+                                </svg>
+                            </div>
+                            <div style="font-weight: 700; margin-top: 10px;">Chart</div>
+                        </button>
+                        <button class="dropdown-item" type="button">
                             <div class='add-text-block'>
                                 <span style="font-size: 28; font-weight: 600; color: ${App.get('primaryColor')};">Aa</span>
                             </div>
@@ -194,6 +202,18 @@ export function ViewTools(param) {
 
             #id .columns .column:not(:last-child) {
                 margin-right: 5px;
+            }
+
+            /* Add Button */
+            #id .add-chart {
+                border-radius: 20px;
+                padding: 10px;
+                width: 100px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
 
             /* Add Text Block */

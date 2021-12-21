@@ -46,21 +46,30 @@ export function DevConsole(param) {
                         </div>
                         <div class='dev-console-row'>
                             <div class='dev-console-text'>
-                                <div class='dev-console-label'>Reset installed lists</div>
-                                <div class='dev-console-description'>Reset select lists. All items from selected lists will be deleted.</div>
+                                <div class='dev-console-label'>Refresh installed lists</div>
+                                <div class='dev-console-description'>Delete and recreate select lists. All items from selected lists will be deleted.</div>
                             </div>
                             <div class='d-flex align-items-center ml-5'>
-                                <button class='btn btn-robi dev-console-button reset'>Choose lists to reset</button>
+                                <button class='btn btn-robi dev-console-button reset'>Choose lists</button>
                             </div>
                         </div>
                         <div class='dev-console-row'>
                             <div class='dev-console-text'>
-                                <div class='dev-console-label'>Reinstall app</div>
-                                <div class='dev-console-description'>Delete and recreate all lists. Resets app settings. All items will be deleted.</div>
+                                <div class='dev-console-label'>Reset</div>
+                                <div class='dev-console-description'>Reset all lists and settings. All items will be deleted.</div>
                             </div>
                             <div class='d-flex align-items-center ml-5'>
-                                <button class='btn btn-robi dev-console-button reinstall'>Remove data and reinstall</button>
+                                <button class='btn btn-robi dev-console-button reinstall'>Reset all lists and settings</button>
                             </div>
+                        </div>
+                    </div>
+                    <div class='dev-console-row alert-robi-secondary'>
+                        <div class='dev-console-text'>
+                            <div class='dev-console-label'>Backup</div>
+                            <div class='dev-console-description'>Download a backup of all lists, settings, and source code. You can use it to reinstall the app up to this point or port it to another site with data intact.</div>
+                        </div>
+                        <div class='d-flex align-items-center ml-5'>
+                            <button class='btn btn-robi-success dev-console-button delete'>Backup lists, data, and code</button>
                         </div>
                     </div>
                     <div class='dev-console-row alert-robi-primary'>

@@ -9,7 +9,6 @@ import lists from './lists.js';
 import Test from './Routes/Test/Test.js'
 import Table from './Routes/Table/Table.js'
 import Sort from './Routes/Sort/Sort.js'
-import MultiWordTitle from './Routes/MultiWordTitle/MultiWordTitle.js'
 // @END-IMPORTS
 
 // @START
@@ -41,14 +40,6 @@ Start({
             go: Sort
         }
         // @END-Sort
-        , // @ROUTE
-        // @START-MultiWordTitle
-        {
-            path: 'MultiWordTitle',
-            icon: 'book',
-            go: MultiWordTitle
-        }
-        // @END-MultiWordTitle
         // @END-ROUTES
     ],
     settings: {
