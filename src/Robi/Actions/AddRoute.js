@@ -9,6 +9,7 @@ import { CreateFolder } from '../Actions/CreateFolder.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { Wait } from './Wait.js'
+import { RouteTemplate } from '../Templates/RouteTemplate.js'
 
 // @START-File
 /**
@@ -235,25 +236,28 @@ export async function AddRoute(event) {
                     }
 
                     async function createRoute() {
-                        // TODO: Move to template file
-                        let contents = [
-                            `import { Title } from '../../Robi/RobiUI.js'`,
-                            ``,
-                            `export default async function Measures({ parent, pathParts, props }) {`,
-                            `    // View title`,
-                            `    const viewTitle = Title({`,
-                            `        title: /* @START-Title */'${routeTitle.value()}'/* @END-Title */,`,
-                            `        parent,`,
-                            `        date: new Date().toLocaleString('en-US', {`,
-                            `            dateStyle: 'full'`,
-                            `        }),`,
-                            `        type: 'across'`,
-                            `    });`,
-                            ``,
-                            `    viewTitle.add();`,
-                            `}`
-                        ].join('\n');
-
+                        // let contents = [
+                        //     `import { Title } from '../../Robi/RobiUI.js'`,
+                        //     ``,
+                        //     `export default async function ${routePath.value()}({ parent, pathParts, props }) {`,
+                        //     `    // View title`,
+                        //     `    const viewTitle = Title({`,
+                        //     `        title: /* @START-Title */'${routeTitle.value()}'/* @END-Title */,`,
+                        //     `        parent,`,
+                        //     `        date: new Date().toLocaleString('en-US', {`,
+                        //     `            dateStyle: 'full'`,
+                        //     `        }),`,
+                        //     `        type: 'across'`,
+                        //     `    });`,
+                        //     ``,
+                        //     `    viewTitle.add();`,
+                        //     `}`
+                        // ].join('\n');
+                        const contents = RouteTemplate({
+                            name: routePath.value(),
+                            title: routeTitle.value()
+                        });
+                    
                         let newFile;
 
                         if (App.get('mode') === 'prod') {
