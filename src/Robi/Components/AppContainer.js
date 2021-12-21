@@ -594,7 +594,7 @@ export function AppContainer() {
             /* FIXME: Should these styles live here, in Table.js or DataTable.js? */
             .table-container {
                 /* transition: background-color 250ms ease, padding 250ms ease, transform 250ms ease, box-shadow 100ms ease 150ms; */
-                transition: background-color 250ms ease, padding 250ms ease, transform 250ms ease, box-shadow 250ms ease;
+                transition: background-color 250ms ease, padding 250ms ease, margin 250ms ease, transform 250ms ease, box-shadow 250ms ease;
                 border-radius: 20px !important;
             }
 

@@ -36,6 +36,7 @@ import { DeleteAttachments } from './Actions/DeleteAttachments.js'
 import { DeleteColumn } from './Actions/DeleteColumn.js'
 import { DeleteItem } from './Actions/DeleteItem.js'
 import { DeleteList } from './Actions/DeleteList.js'
+import { DeleteRoutes } from './Actions/DeleteRoutes.js'
 import { GenerateUUID } from './Actions/GenerateUUID.js'
 import { Get } from './Actions/Get.js'
 import { GetADUsers } from './Actions/GetADUsers.js'
@@ -116,6 +117,7 @@ export {
     DeleteColumn,
     DeleteItem,
     DeleteList,
+    DeleteRoutes,
     GenerateUUID,
     Get,
     GetADUsers,

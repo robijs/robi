@@ -1,16 +1,13 @@
 import { Component } from '../Actions/Component.js'
 import { GenerateUUID } from '../Actions/GenerateUUID.js'
 import { Route } from '../Actions/Route.js'
-import { BootstrapButton } from './BootstrapButton.js'
-import { BootstrapTextarea } from './BootstrapTextarea.js'
-import { Modal } from './Modal.js'
-import { SingleLineTextField } from './SingleLineTextField.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { AddRoute } from '../Actions/AddRoute.js'
 import { OrderRoutes } from '../Actions/OrderRoutes.js'
-import { BlurOnSave } from '../Actions/BlurOnSave.js'
 import { HideRoutes } from '../Actions/HideRoutes.js'
+import { DeleteRoutes } from '../Actions/DeleteRoutes.js'
+import { BlurOnSave } from '../Actions/BlurOnSave.js'
 import { Wait } from '../Actions/Wait.js'
 
 // @START-File
@@ -498,7 +495,7 @@ export function Sidebar({ parent, path }) {
             {
                 selector: '#id .delete-routes',
                 event: 'click',
-                listener: removeRoutes
+                listener: deleteRoutes
             }
         ],
         onAdd() {
@@ -816,90 +813,151 @@ export function Sidebar({ parent, path }) {
     }
 
     // TODO: blur maincontainer (add transition) and remove pointer events
-    function removeRoutes(event) {
+    function deleteRoutes(event) {
         // Show modal
-        console.log('remove route');
+        console.log('Delete routes');
 
-        const modal = Modal({
-            title: false,
-            disableBackdropClose: true,
-            scrollable: true,
-            async addContent(modalBody) {
-                modalBody.classList.add('install-modal');
-
-                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                    <h3 class='mb-2'>Remove route</h3>
-                `);
-
-                // Site title
-                const siteTitle = SingleLineTextField({
-                    label: 'Site title',
-                    parent: modalBody,
-                    onFocusout(event) {
-                        siteUrl.value(siteTitle.value().toLowerCase().split(' ').join('-'));
-                        appName.value(siteTitle.value().toTitleCase().split(' ').join(''));
-                    }
-                });
-
-                siteTitle.add();
-
-                const siteDesc = BootstrapTextarea({
-                    label: 'Site description',
-                    parent: modalBody
-                });
-
-                siteDesc.add();
-
-                // Site Url
-                const siteUrl = SingleLineTextField({
-                    label: 'Site url',
-                    addon: App.get('site') + '/',
-                    parent: modalBody
-                });
-
-                siteUrl.add();
-
-                // App name
-                const appName = SingleLineTextField({
-                    label: 'App name',
-                    parent: modalBody
-                });
-
-                appName.add();
-
-                const installBtn = BootstrapButton({
-                    action() {
-                        console.log('Create route');
-                    },
-                    classes: ['w-100 mt-5'],
-                    width: '100%',
-                    parent: modalBody,
-                    type: 'danger',
-                    value: 'Remove routes'
-                });
-
-                installBtn.add();
-
-                const cancelBtn = BootstrapButton({
-                    action(event) {
-                        console.log('Cancel remove route');
-
-                        modal.close();
-                    },
-                    classes: ['w-100 mt-2'],
-                    width: '100%',
-                    parent: modalBody,
-                    type: 'light',
-                    value: 'Cancel'
-                });
-
-                cancelBtn.add();
-            },
-            centered: true,
-            showFooter: false,
+        // Disable all routes
+        component.findAll('.nav-container .nav').forEach(node => {
+            node.classList.remove('nav-selected');
+            node.dataset.shouldroute = 'no';
+            node.style.cursor = 'initial';
         });
 
-        modal.add();
+        // disable edit
+        component.find('.open-dev-menu').disabled = true;
+        component.find('.open-dev-menu').style.opacity = '0';
+
+        // Show cancel
+        component.find('.dev-buttons-container').insertAdjacentHTML('beforeend', /*html*/ `
+            <div class='d-flex edit-buttons'>
+                <div class='save-edit'>
+                    <span>Save</span>
+                </div>
+                <div class='cancel-edit'>
+                    <span>Cancel</span>
+                </div>
+            </div>
+        `);
+
+        // Make visible
+        component.find('.edit-buttons').style.opacity = '1';
+
+        // Add cancel behavior
+        component.find('.cancel-edit').addEventListener('click', event => {
+        // Enable route
+        component.findAll('.nav-container .nav').forEach(node => {
+            node.dataset.shouldroute = 'yes';
+            node.style.cursor = 'pointer';
+        });
+
+        // Animate cancel fade out
+        component.find('.cancel-edit').addEventListener('animationend', event => {
+            console.log('end cancel');
+
+            // Select node
+            const selected = location.href.split('#')[1].split('/')[0];
+            component.find(`.nav[data-path='${selected}']`).style.transition = 'background-color 200ms ease';
+            component.find(`.nav[data-path='${selected}']`)?.classList.add('nav-selected');
+            setTimeout(() => {
+                component.find(`.nav[data-path='${selected}']`).style.transition = 'auto';
+            }, 200);
+
+            // Remove cancel edit button
+            component.find('.edit-buttons')?.remove();
+
+            // Remove hide
+            // console.log(component.find('.hide-label'));
+            component.find('.hide-label')?.remove();
+
+            // Turn edit back on
+            component.find('.open-dev-menu').disabled = false;
+            component.find('.open-dev-menu').style.opacity = '1';
+        });
+        component.find('.cancel-edit').classList.add('fade-out');
+
+        // Remove grab handles
+        component.findAll('.nav-container .nav .grab').forEach(node => {
+            node.addEventListener('animationend', () => node.remove());
+                node.classList.add('grab-show-reverse');
+            });
+        });
+
+        // Add save behavior
+        component.find('.save-edit').addEventListener('click', async event => {
+            const blur = BlurOnSave({
+                message: 'Deleting routes'
+            });
+
+            //TODO: remove nav from DOM
+            const routes = toDelete();
+
+            component.findAll('.nav-container .nav:not([data-type="system"])').forEach(node => {
+                if (routes.includes(node.dataset.path)) {
+                    node.remove();
+                }
+            })
+
+            await DeleteRoutes({
+                routes
+            });
+
+            // Wait an additional 3 seconds
+            console.log('Waiting...')
+            await Wait(3000);
+
+            await blur.off((event) => {
+                console.log(event);
+                location.reload();
+            });
+        });
+
+        // Add hide label
+        // TODO: add absolutely positioned hide label
+        component.find('.title-container').insertAdjacentHTML('beforeend', /*html*/ `
+            <div class='d-flex justify-content-end position-absolute hide-label' style='bottom: -5px; right: 25px; font-size: 14px; font-weight: 500;'>
+                <div>Delete</div>
+            </div>
+        `);
+
+        // Show hide switch
+        const nav = component.findAll('.nav-container .nav:not([data-type="system"])');
+
+        nav.forEach(node => {
+            const id = GenerateUUID();
+
+            node.insertAdjacentHTML('beforeend', /*html*/ `
+                <div class="custom-control custom-switch grab switch">
+                    <input type="checkbox" class="custom-control-input" id='${id}'>
+                    <!-- <label class="custom-control-label" for="${id}">Hide</label> -->
+                    <label class="custom-control-label" for="${id}"></label>
+                </div>
+            `);
+
+            // Switch change
+            node.querySelector('.custom-control-input').addEventListener('change', event => {
+                const checked = toDelete();
+                console.log(checked);
+
+                if (checked.length) {
+                    component.find('.save-edit').style.opacity = '1';
+                    component.find('.save-edit').style.pointerEvents = 'auto';
+                } else {
+                    component.find('.save-edit').style.opacity = '0';
+                    component.find('.save-edit').style.pointerEvents = 'none';
+                }
+            });
+
+            // Remove animation
+            node.querySelector('.grab').addEventListener('animationend', event => {
+                node.querySelector('.grab').classList.remove('grab-show');
+            });
+            node.querySelector('.grab').classList.add('grab-show');
+        });
+
+        function toDelete() {
+            return [...component.findAll('.nav .custom-control-input:checked')].map(node => node.closest('.nav').dataset.path);
+        }
     }
 
     function toggleSidebarMode(event) {

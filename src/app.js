@@ -1,19 +1,19 @@
-// This file may be modified programmatically.
-// If you know the API, feel free to edit it manually.
+// This file may be edited programmatically.
+// If you know the API, feel free to make changes by hand.
 // Just be sure to put @START and @END sigils in the right places.
-// Otherwise, changes made from the frontend may not render properly.
+// Otherwise, changes made from the front end may not render properly.
 
 // @START-IMPORTS
 import { Start } from './Robi/Robi.js'
 import lists from './lists.js';
 import Test from './Routes/Test/Test.js'
 import Table from './Routes/Table/Table.js'
+import Same from './Routes/Same/Same.js'
 // @END-IMPORTS
 
 // @START
 Start({
     lists,
-    // Must include at least one route with the same path value as settings.defaultRoute.
     // Routes can be linked to directly with hash fragment. Ex: https://site#path.
     routes: [
         // @START-ROUTES
@@ -32,6 +32,14 @@ Start({
             go: Table
         }
         // @END-Table
+        , // @ROUTE
+        // @START-Same
+        {
+            path: 'Same',
+            icon: 'bs-circle-fill',
+            go: Same
+        }
+        // @END-Same
         // @END-ROUTES
     ]
     ,
