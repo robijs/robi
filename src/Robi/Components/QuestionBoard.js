@@ -246,7 +246,7 @@ export async function QuestionBoard(param) {
                     footer: [
                         {
                             value: 'Cancel',
-                            classes: 'btn-secondary',
+                            classes: '',
                             data: [
                                 {
                                     name: 'dismiss',
@@ -256,7 +256,7 @@ export async function QuestionBoard(param) {
                         },
                         {
                             value: 'Submit',
-                            classes: 'btn-success',
+                            classes: 'btn-robi',
                             disabled: true,
                             async onClick(event) {
                                 /** Disable button */

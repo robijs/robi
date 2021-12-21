@@ -37,8 +37,8 @@ export function DevConsole(param) {
                         </div>
                         <div class='dev-console-row update-row'>
                             <div class='dev-console-text'>
-                                <div class='dev-console-label'>Sync installed lists</div>
-                                <div class='dev-console-description'>Sync app lists with schemas in <code>App/src/lists.js</code>.</div>
+                                <div class='dev-console-label'>Sync lists</div>
+                                <div class='dev-console-description'>Sync app with schemas in <code>App/src/lists.js</code>.</div>
                             </div>
                             <div class='d-flex align-items-center ml-5'>
                                 <button class='btn btn-robi dev-console-button update'>Sync lists</button>
@@ -69,7 +69,7 @@ export function DevConsole(param) {
                             <div class='dev-console-description'>Download a backup of all lists, settings, and source code. You can use it to reinstall the app up to this point or port it to another site with data intact.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
-                            <button class='btn btn-robi-success dev-console-button delete'>Backup lists, data, and code</button>
+                            <button class='btn btn-robi dev-console-button delete'>Backup lists, data, and code</button>
                         </div>
                     </div>
                     <div class='dev-console-row alert-robi-primary'>

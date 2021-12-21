@@ -43,7 +43,8 @@ export function Question(param) {
                     ${buildFooter(lastReply)}
                 </div>
                     ${
-                        Author.Name.split('|').at(-1) === Store.user().LoginName ?
+                        // Author.Name on LaunchPad, Author.LoginName on CarePoint
+                        ( Author.Name ? Author.Name.split('|').at(-1) : Author.LoginName.split('|').at(-1) ) === Store.user().LoginName ?
                         /*html*/ `
                             <div class='edit-button-container'>
                                 <button type='button' class='btn btn-robi edit'>Edit question</button>
