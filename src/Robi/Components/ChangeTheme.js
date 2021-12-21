@@ -18,6 +18,7 @@ export function ChangeTheme(param) {
     const card = Card({
         title: 'Theme',
         width: '100%',
+        maxWidth: '995px',
         margin: '20px 0px 0px 0px',
         parent
     });

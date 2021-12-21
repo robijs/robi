@@ -9,7 +9,7 @@ import { App } from '../Core/App.js';
  */
 export function Card(param) {
     const {
-        title, fontSize, description, titleColor, titleWeight, titleBorder, titleBackground, background, padding, margin, minWidth, minHeight, parent, width, position, radius, action
+        title, fontSize, description, titleColor, titleWeight, titleBorder, titleBackground, background, padding, margin, minWidth, minHeight, maxWidth, maxHeight, parent, width, position, radius, action
     } = param;
 
     const component = Component({
@@ -28,6 +28,8 @@ export function Card(param) {
                 margin: ${margin || '0px'};
                 min-width: ${minWidth || 'initial'};
                 min-height: ${minHeight || 'initial'};
+                max-width: ${maxWidth || 'initial'};
+                max-height: ${maxHeight || 'initial'};
                 width: ${width || 'initial'};
                 border-radius: ${radius || '10px'};
                 /* border: ${App.get('defaultBorder')}; */
