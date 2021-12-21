@@ -8,6 +8,7 @@ import { Start } from './Robi/Robi.js'
 import lists from './lists.js';
 import Test from './Routes/Test/Test.js'
 import Table from './Routes/Table/Table.js'
+import Sort from './Routes/Sort/Sort.js'
 // @END-IMPORTS
 
 // @START
@@ -31,9 +32,16 @@ Start({
             go: Table
         }
         // @END-Table
+        , // @ROUTE
+        // @START-Sort
+        {
+            path: 'Sort',
+            icon: 'bs-arrow-left-circle-fill',
+            go: Sort
+        }
+        // @END-Sort
         // @END-ROUTES
-    ]
-    ,
+    ],
     settings: {
         // @START-SETTINGS
         // REQUIRED PROPERTIES

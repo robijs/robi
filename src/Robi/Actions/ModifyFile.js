@@ -72,9 +72,9 @@ export async function ModifyFile(param) {
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
                 keyword: {
                     "import": "special",
-                    "export": "export",
-                    "async": "export",
-                    "await": "export",
+                    "export": "special",
+                    "default": "special",
+                    "await": "special",
                 }
             });
             editor.foldCode(CodeMirror.Pos(0, 0));

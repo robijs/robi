@@ -1,4 +1,10 @@
-export function componentTemplate({ name }) {
+// @START-File
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
+export function RouteTemplate({ name, title }) {
     return [
         `// This file may be edited programmatically.`,
         `// If you know the API, feel free to make changes by hand.`,
@@ -8,7 +14,7 @@ export function componentTemplate({ name }) {
         `import { Title } from '../../Robi/Robi.js'`,
         ``,
         `// @START-File`,
-        `export function ${name}(param) {`,
+        `export default function ${name}(param) {`,
         `    const {`,
         `        parent,`,
         `    } = param;`,
@@ -24,3 +30,4 @@ export function componentTemplate({ name }) {
         ``
     ].join('\n');
 }
+// @END-File

@@ -64,6 +64,7 @@ import { LaunchApp } from './Actions/LaunchApp.js'
 import { Log } from './Actions/Log.js'
 import { LogError } from './Actions/LogError.js'
 import { ModifyFile } from './Actions/ModifyFile.js'
+import { ModifyRoutes } from './Actions/ModifyRoutes.js'
 import { NameToHex } from './Actions/NameToHex.js'
 import { OrderRoutes } from './Actions/OrderRoutes.js'
 import { Post } from './Actions/Post.js'
@@ -91,6 +92,10 @@ import { QuestionsModel } from './Models/QuestionsModel.js'
 import { SiteUsageModel } from './Models/SiteUsageModel.js'
 import { StartAndEndOfWeek } from './Models/StartAndEndOfWeek.js'
 import { Themes } from './Models/Themes.js'
+import { ActionTemplate } from './Templates/ActionTemplate.js'
+import { ComponentTemplate } from './Templates/ComponentTemplate.js'
+import { ModelTemplate } from './Templates/ModelTemplate.js'
+import { RouteTemplate } from './Templates/RouteTemplate.js'
 
 export {
     AddColumnToView,
@@ -145,6 +150,7 @@ export {
     Log,
     LogError,
     ModifyFile,
+    ModifyRoutes,
     NameToHex,
     OrderRoutes,
     Post,
@@ -171,5 +177,9 @@ export {
     QuestionsModel,
     SiteUsageModel,
     StartAndEndOfWeek,
-    Themes
+    Themes,
+    ActionTemplate,
+    ComponentTemplate,
+    ModelTemplate,
+    RouteTemplate
 }
