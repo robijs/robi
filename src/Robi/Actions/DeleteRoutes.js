@@ -33,8 +33,6 @@ export async function DeleteRoutes({ routes }) {
     // Remove Imports
     const imports = content.match(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/);
     const importObjects = imports[1].split('\n');
-
-    // Remove routes
     const remainingImports= importObjects.filter(route => {
         const name = route.split(' ')[1];
 
@@ -82,11 +80,22 @@ export async function DeleteRoutes({ routes }) {
                 'X-RequestDigest': digest
             }
         });
+
+        // TODO: Add _ARCHIVED to Route dir name in App/src/Routes
     } else {
         setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
             method: 'POST',
             body: updated
         });
+
+        console.log('Archive route');
+        
+        for (let route of routes) {
+            await fetch(`http://127.0.0.1:2035/?path=src/Routes/${route}`, {
+                method: 'DELETE'
+            });
+        }
+
         await Wait(1000);
     }
 

@@ -15,7 +15,7 @@ import { Wait } from './Wait.js'
  *
  * @param {*} param
  */
-export async function AddRoute(param) {
+export async function AddRoute(event) {
     // Show modal
     console.log('add route');
 

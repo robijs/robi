@@ -9,12 +9,12 @@ import { App } from '../Core/App.js'
  */
 export function BootstrapDropdown(param) {
     const {
-        action, label, description, parent, position, options, value, fieldMargin, padding, setWidthDelay, maxHeight, maxWidth, valueType, buttonStyle
+        action, classes, label, description, parent, position, options, value, fieldMargin, padding, setWidthDelay, maxHeight, maxWidth, valueType, buttonStyle
     } = param;
 
     const component = Component({
         html: /*html*/ `
-            <div class='form-field'>
+            <div class='form-field${classes ? ` ${classes.join(' ')}` : ''}'>
                 <label>${label}</label>
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
                 <div class='dropdown'>

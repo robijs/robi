@@ -8,7 +8,6 @@ import { Start } from './Robi/Robi.js'
 import lists from './lists.js';
 import Test from './Routes/Test/Test.js'
 import Table from './Routes/Table/Table.js'
-import Same from './Routes/Same/Same.js'
 // @END-IMPORTS
 
 // @START
@@ -32,14 +31,6 @@ Start({
             go: Table
         }
         // @END-Table
-        , // @ROUTE
-        // @START-Same
-        {
-            path: 'Same',
-            icon: 'bs-circle-fill',
-            go: Same
-        }
-        // @END-Same
         // @END-ROUTES
     ]
     ,

@@ -9,7 +9,7 @@ import { App } from '../Core/App.js';
  */
 export function SingleLineTextField(param) {
     const {
-        addon, label, description, value, readOnly, parent, position, width, margin, padding, placeholder, background, borderRadius, flex, maxWidth, fieldMargin, optional, onKeydown, onKeyup, onKeypress, fontSize, onFocusout,
+        addon, classes, label, description, value, readOnly, parent, position, width, margin, padding, placeholder, background, borderRadius, flex, maxWidth, fieldMargin, optional, onKeydown, onKeyup, onKeypress, fontSize, onFocusout,
     } = param;
 
     let events = [];
@@ -49,7 +49,7 @@ export function SingleLineTextField(param) {
     const component = Component({
         html: /*html*/ `
             
-            <div class='form-field'>
+            <div class='form-field${classes ? ` ${classes.join(' ')}` : ''}'>
                 <!-- ${label ? /*html*/ `<label>${label}${optional ? /*html*/ `<span class='optional'><i>Optional</i></span>` : ''}</label>` : ''} -->
                 <!-- ${readOnly ? /*html*/ `<div class='form-field-single-line-text readonly'>${value || ''}</div>` : /*html*/ `<div class='form-field-single-line-text editable' contenteditable='true'>${value || ''}</div>`} -->
                 <label class='form-label'>${label}</label>

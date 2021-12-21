@@ -4,6 +4,7 @@ import { Route } from '../Actions/Route.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { AddRoute } from '../Actions/AddRoute.js'
+import { ModifyRoutes } from '../Actions/ModifyRoutes.js'
 import { OrderRoutes } from '../Actions/OrderRoutes.js'
 import { HideRoutes } from '../Actions/HideRoutes.js'
 import { DeleteRoutes } from '../Actions/DeleteRoutes.js'
@@ -261,7 +262,7 @@ export function Sidebar({ parent, path }) {
             }
 
             #id .dev-buttons-container .delete-routes {
-                color: firebrick;
+                color: ${App.get('primaryColor')};
             }
 
             #id .square {
@@ -473,14 +474,12 @@ export function Sidebar({ parent, path }) {
             {
                 selector: '#id .add-route',
                 event: 'click',
-                listener(event) {
-                    AddRoute();
-                }
+                listener: AddRoute
             },
             {
                 selector: '#id .modify-routes',
                 event: 'click',
-                listener: modifyRoutes
+                listener: ModifyRoutes
             },
             {
                 selector: '#id .reorder-routes',
@@ -754,8 +753,8 @@ export function Sidebar({ parent, path }) {
             console.log('Waiting...')
             await Wait(2000);
 
-            await blur.off((event) => {
-                console.log(event);
+            await blur.off(() => {
+                Route('');
                 location.reload();
             });
         });
@@ -805,11 +804,6 @@ export function Sidebar({ parent, path }) {
         function toHide() {
             return [...component.findAll('.nav .custom-control-input:checked')].map(node => node.closest('.nav').dataset.path);
         }
-    }
-
-    // TODO: blur maincontainer (add transition) and remove pointer events
-    function modifyRoutes(event) {
-        console.log('modify routes');
     }
 
     // TODO: blur maincontainer (add transition) and remove pointer events
@@ -1044,23 +1038,23 @@ export function Sidebar({ parent, path }) {
             .filter(route => route.path !== 'Settings' && !route.hide)
             .map(route => {
                 const {
-                    path, icon, roles, type
+                    path, label, icon, roles, type
                 } = route;
 
                 if (roles) {
                     if (roles.includes(Store.user().Role)) {
-                        return navTemplate(path, icon, type);
+                        return navTemplate(path, icon, type, label);
                     } else {
                         return '';
                     }
                 } else {
-                    return navTemplate(path, icon, type);
+                    return navTemplate(path, icon, type, label);
                 }
 
             }).join('\n');
     }
 
-    function navTemplate(routeName, icon, type) {
+    function navTemplate(routeName, icon, type, label) {
         const firstPath = path ? path.split('/')[0] : undefined;
 
         return /*html*/ `
@@ -1068,7 +1062,7 @@ export function Sidebar({ parent, path }) {
                 <span class='icon-container'>
                     <svg class='icon'><use href='#icon-${icon}'></use></svg>
                 </span>
-                <span class='text'>${routeName.split(/(?=[A-Z])/).join(' ')}</span>
+                <span class='text'>${label || routeName.split(/(?=[A-Z])/).join(' ')}</span>
             </span>
         `;
     }

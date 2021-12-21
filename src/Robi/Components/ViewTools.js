@@ -151,11 +151,15 @@ export function ViewTools(param) {
                 }
             }
 
+            /* Border */
+            #id .border {
+                border: solid 2px ${App.get('primaryColor')};
+            }
+
             /* Add table */
             #id .add-table {
                 border-radius: 20px;
                 padding: 10px;
-                border: solid 2px ${App.get('primaryColor')};
                 width: 100px;
             }
 
@@ -196,7 +200,6 @@ export function ViewTools(param) {
             #id .add-text-block {
                 border-radius: 20px;
                 padding: 10px;
-                border: solid 2px ${App.get('primaryColor')};
                 width: 100px;
                 flex: 1;
                 display: flex;
@@ -209,7 +212,6 @@ export function ViewTools(param) {
             #id .add-button {
                 border-radius: 20px;
                 padding: 10px;
-                border: solid 2px ${App.get('primaryColor')};
                 width: 100px;
                 flex: 1;
                 display: flex;
