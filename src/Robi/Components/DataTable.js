@@ -9,8 +9,36 @@ import { App } from '../Core/App.js';
  */
 export function DataTable(param) {
     const {
-        buttonColor, headers, headerFilter, columns, buttons, cursor, checkboxes, striped, border, paging, search, info, ordering, order, rowId, addCSS, data, onRowClick, onSearch, onDraw, toolbar, fontSize, nowrap, onSelect, // How do you turn select on?  i see the event but no option to enable it;
-        onDeselect, rowCallback, createdRow, width, parent, position
+        buttonColor,
+        headers,
+        headerFilter,
+        columns,
+        buttons,
+        cursor,
+        checkboxes,
+        striped,
+        border,
+        paging,
+        search,
+        info,
+        ordering,
+        order,
+        rowId,
+        addCSS,
+        data,
+        onRowClick,
+        onSearch,
+        onDraw,
+        toolbar,
+        fontSize,
+        nowrap,
+        onSelect, // How do you turn select on?  i see the event but no option to enable it;
+        onDeselect,
+        rowCallback,
+        createdRow,
+        width,
+        parent,
+        position
     } = param;
 
     const component = Component({
@@ -78,7 +106,7 @@ export function DataTable(param) {
                 display: flex;
                 justify-content: space-between;
                 flex-wrap: nowrap;
-                overflow: auto;
+                /* overflow: auto; */ /* Turned OFF to test buttons collection */
             }
 
             #id_wrapper .datatable-toolbar .cell {
@@ -130,7 +158,7 @@ export function DataTable(param) {
 
             #id_wrapper .datatable-toolbar .btn-secondary {
                 border-color: transparent;
-                margin-right: 10px;
+                /* margin-right: 10px; */
                 border-radius: 8px;
             }
 
@@ -138,13 +166,10 @@ export function DataTable(param) {
                 box-shadow: none;
             }
 
-            #id_wrapper .datatable-toolbar .btn-secondary span {
-                color: white;
-            }
-
             /** Add Item Button */
             #id_wrapper .datatable-toolbar .add-item {
                 background: #e9ecef;
+                margin-right: 10px;
             }
 
             #id_wrapper .datatable-toolbar .add-item span {
@@ -201,13 +226,73 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-html5 {
-                background: ${buttonColor || '#e9ecef'} !important;
+                /* background: ${buttonColor || '#e9ecef'} !important; */
                 color: #444;
                 font-weight: 500;
+
+                padding: 0px;
+                flex: 1;
+                display: flex;
+            }
+
+            #id_wrapper .buttons-html5:hover {
+                background: none !important;
             }
 
             #id_wrapper .buttons-html5 span{
                 color: ${App.get('defaultColor')} !important;
+
+                display: inline-block;
+                margin: 0px 10px;
+                padding: 4px;
+                flex: 1;
+                text-align: center;
+                border-radius: 10px;
+            }
+
+            #id_wrapper .buttons-html5 span:hover {
+                background-color: ${App.get('primaryColor') + '20'};
+            }
+
+            #id_wrapper .buttons-html5:first-child span {
+                margin-top: 10px;
+            }
+
+            #id_wrapper .buttons-html5:last-child span {
+                margin-bottom: 10px;
+            }
+
+            /* Buttons Collection */
+            #id_wrapper .dt-button-collection {
+                width: calc(100% - 12px);
+            }
+
+            #id_wrapper .dt-button-collection .dropdown-menu {
+                top: 4px;
+                padding: 0px;
+                display: flex;
+                flex-direction: column;
+                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
+                border: none;
+            }
+
+            #id_wrapper .buttons-collection {
+                background: none;
+                border: none;
+            }
+
+            #id_wrapper .buttons-collection:hover {
+                background: #e9ecef;
+            }
+
+            #id_wrapper .buttons-collection span {
+                color: #444;
+                font-weight: 500;
+            }
+
+            #id_wrapper .buttons-collection span .icon {
+                font-size: 20px;
+                fill: ${App.get('primaryColor')};
             }
 
             /** Select and Search */

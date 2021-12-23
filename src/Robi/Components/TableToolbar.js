@@ -27,11 +27,9 @@ export function TableToolbar(param) {
     } = param;
 
     const listInfo = App.lists().find(item => item.list === list);
+    
     let userSettings = JSON.parse(Store.user().Settings);
     let savedSearches = userSettings.savedSearches[list] || [];
-
-    console.log(savedSearches);
-    
     let open = false;
     let loaded;
 

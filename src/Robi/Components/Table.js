@@ -311,97 +311,13 @@ export async function Table(param) {
             });
     }
 
-    /** Table Buttons */
-    if (defaultButtons !== false) {
-        if (!Array.isArray(buttons)) {
-            buttons = [];
-        }
-
-        if (checkboxes !== false) {
-            buttons = buttons.concat([
-                {
-                    text: /*html*/ `
-                        <svg class='icon'>
-                            <use href='#icon-bs-trash'></use>
-                        </svg>
-                    `,
-                    className: 'delete-item',
-                    name: 'delete',
-                    enabled: false,
-                    action: async function (e, dt, node, config) {
-                        const selected = table.selected();
-                        const button = tableContainer.find('.delete-item');
-                        button.disabled = true;
-                        button.innerHTML = /*html*/ `<span class="spinner-border" role="status" aria-hidden="true" style="width: 20px; height: 20px; border-width: 3px"></span>`;
-
-                        // Delete items
-                        for (let row in selected) {
-                            console.log(selected[row]);
-
-                            // Delete item
-                            await DeleteItem({
-                                list,
-                                itemId: selected[row].Id
-                            });
-
-                            // Delete Row
-                            table.removeRow(selected[row].Id);
-                        }
-
-                        if (onDelete) {
-                            await onDelete(table);
-                        }
-
-                        button.innerHTML = /*html*/ `
-                            <span>
-                                <svg class="icon">
-                                    <use href="#icon-bs-trash"></use>
-                                </svg>
-                            </span>
-                        `;
-                    }
-                }
-            ]);
-        }
-
-        if (exportButtons !== false) {
-            buttons = buttons.concat([
-                {
-                    extend: 'excelHtml5',
-                    // className: 'ml-50',
-                    exportOptions: {
-                        header: false,
-                        footer: false,
-                        columns: ':not(.do-not-export):not(.select-checkbox)'
-                    }
-                },
-                {
-                    extend: 'csvHtml5',
-                    exportOptions: {
-                        header: false,
-                        footer: false,
-                        columns: ':not(.do-not-export):not(.select-checkbox)'
-                    }
-                },
-                {
-                    extend: 'pdfHtml5',
-                    orientation: 'landscape',
-                    exportOptions: {
-                        columns: ':not(.do-not-export):not(.select-checkbox)'
-                    }
-                }
-                // {
-                //     extend: 'copyHtml5',
-                //     exportOptions: {
-                //         columns: [3,4,5,6,7,8,9,10,11]
-                //     }
-                // },
-            ]);
-        }
+    // Buttons
+    if (!Array.isArray(buttons)) {
+        buttons = [];
     }
 
     if (addButton !== false) {
-        buttons.unshift({
+        buttons.push({
             text: /*html*/ `
                 <svg class='icon'>
                     <use href='#icon-bs-plus'></use>
@@ -499,6 +415,97 @@ export async function Table(param) {
         });
     }
 
+    if (defaultButtons !== false) {
+        if (checkboxes !== false) {
+            buttons.push({
+                text: /*html*/ `
+                    <svg class='icon'>
+                        <use href='#icon-bs-trash'></use>
+                    </svg>
+                `,
+                className: 'delete-item',
+                name: 'delete',
+                enabled: false,
+                action: async function (e, dt, node, config) {
+                    const selected = table.selected();
+                    const button = tableContainer.find('.delete-item');
+                    button.disabled = true;
+                    button.innerHTML = /*html*/ `<span class="spinner-border" role="status" aria-hidden="true" style="width: 20px; height: 20px; border-width: 3px"></span>`;
+
+                    // Delete items
+                    for (let row in selected) {
+                        console.log(selected[row]);
+
+                        // Delete item
+                        await DeleteItem({
+                            list,
+                            itemId: selected[row].Id
+                        });
+
+                        // Delete Row
+                        table.removeRow(selected[row].Id);
+                    }
+
+                    if (onDelete) {
+                        await onDelete(table);
+                    }
+
+                    button.innerHTML = /*html*/ `
+                        <span>
+                            <svg class="icon">
+                                <use href="#icon-bs-trash"></use>
+                            </svg>
+                        </span>
+                    `;
+                }
+            });
+        }
+
+        if (exportButtons !== false) {
+            buttons.push({
+                extend: 'collection',
+                text: 'Export',
+                text: /*html*/ `
+                    <svg class="icon">
+                        <use href="#icon-bs-download"></use>
+                    </svg>
+                `,
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        // className: 'ml-50',
+                        exportOptions: {
+                            header: false,
+                            footer: false,
+                            columns: ':not(.do-not-export):not(.select-checkbox)'
+                        }
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        exportOptions: {
+                            header: false,
+                            footer: false,
+                            columns: ':not(.do-not-export):not(.select-checkbox)'
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        orientation: 'landscape',
+                        exportOptions: {
+                            columns: ':not(.do-not-export):not(.select-checkbox)'
+                        }
+                    }
+                    // {
+                    //     extend: 'copyHtml5',
+                    //     exportOptions: {
+                    //         columns: [3,4,5,6,7,8,9,10,11]
+                    //     }
+                    // },
+                ]
+            });
+        }
+    }
+
     // Toolbar
     if (toolbar || advancedSearch) {
         const tableToolbar = TableToolbar({
@@ -575,12 +582,12 @@ export async function Table(param) {
         tableToolbar.add();
     }
 
-    // Selected item, row, and form
+    // Currently selected item, row, and form
     let selectedItem;
     let selectedRow;
     let selectedForm;
 
-    /** Table */
+    // DataTable component
     const table = DataTable({
         headers,
         headerFilter,
