@@ -105,7 +105,8 @@ export function ViewTools(param) {
             }
 
             #id .dropdown-menu {
-                left: -225.31px !important; /* (width of menu / 2) - (width of tools button / 2) */
+                /* left: -225.31px !important; */
+                left: -283.83px !important; /* (width of menu / 2) - (width of tools button / 2) */
                 top: -45px !important;
                 background: transparent;
                 border-radius: 10px;

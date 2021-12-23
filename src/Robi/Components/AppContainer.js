@@ -599,7 +599,7 @@ export function AppContainer() {
             }
 
             .table-container.ui-sortable-handle {
-                margin: 20px !important;
+                margin: 20px 0px !important;
                 padding: 20px !important;
                 background: white !important;
                 /* box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px !important; */

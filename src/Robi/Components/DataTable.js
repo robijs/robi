@@ -244,7 +244,7 @@ export function DataTable(param) {
 
                 display: inline-block;
                 margin: 0px 10px;
-                padding: 4px;
+                padding: 4px 24px;
                 flex: 1;
                 text-align: center;
                 border-radius: 10px;

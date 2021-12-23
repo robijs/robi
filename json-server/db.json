@@ -10123,6 +10123,615 @@
       "Created": "Thu, 23 Dec 2021 00:37:09 GMT",
       "Modified": "Thu, 23 Dec 2021 00:37:09 GMT",
       "Id": 509
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Table\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:06:43 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:06:43 GMT",
+      "Id": 510
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:12:13 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:12:13 GMT",
+      "Id": 511
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:12:15 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:12:15 GMT",
+      "Id": 512
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Sort\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Sort\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:12:20 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:12:20 GMT",
+      "Id": 513
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Table\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Table\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:12:21 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:12:21 GMT",
+      "Id": 514
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:12:22 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:12:22 GMT",
+      "Id": 515
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Table\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Table\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:16:37 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:16:37 GMT",
+      "Id": 516
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Table\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:19:15 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:19:15 GMT",
+      "Id": 517
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Table\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:19:25 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:19:25 GMT",
+      "Id": 518
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:24:06 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:24:06 GMT",
+      "Id": 519
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:27:58 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:27:58 GMT",
+      "Id": 520
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:32:22 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:32:22 GMT",
+      "Id": 521
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:42:55 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:42:55 GMT",
+      "Id": 522
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Table\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Table\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:50:14 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:50:14 GMT",
+      "Id": 523
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Sort\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Sort\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:50:15 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:50:15 GMT",
+      "Id": 524
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Developer\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Developer\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:50:16 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:50:16 GMT",
+      "Id": 525
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Help\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Help\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:50:16 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:50:16 GMT",
+      "Id": 526
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:50:17 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:50:17 GMT",
+      "Id": 527
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Users\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Users\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:50:17 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:50:17 GMT",
+      "Id": 528
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:50:18 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:50:18 GMT",
+      "Id": 529
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:58:01 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:58:01 GMT",
+      "Id": 530
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Questions\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Questions/General\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLDivElement.listener (http://127.0.0.1:8080/src/Robi/Components/QuestionType.js:63:21)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:58:02 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:58:02 GMT",
+      "Id": 531
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:58:05 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:58:05 GMT",
+      "Id": 532
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Table\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Table\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:58:06 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:58:06 GMT",
+      "Id": 533
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Sort\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Sort\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:58:46 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:58:46 GMT",
+      "Id": 534
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Test\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:58:47 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:58:47 GMT",
+      "Id": 535
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Table\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Table\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:58:48 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:58:48 GMT",
+      "Id": 536
+    },
+    {
+      "Title": "Route",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil routed to Table\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Table\",\"role\":\"Developer\"}",
+      "StackTrace": "\"Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:140:29)\\n    at HTMLSpanElement.routeToView (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:1083:9)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/Route.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:59:55 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:59:55 GMT",
+      "Id": 537
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Table\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:139:25)\"",
+      "UserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 02:00:36 GMT",
+      "Modified": "Thu, 23 Dec 2021 02:00:36 GMT",
+      "Id": 538
     }
   ],
   "Users": [
@@ -10234,7 +10843,24 @@
     }
   ],
   "SLOT": [],
-  "MLOT": [],
+  "MLOT": [
+    {
+      "MLOT": "This is a test.",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Thu, 23 Dec 2021 01:59:49 GMT",
+      "Modified": "Thu, 23 Dec 2021 01:59:49 GMT",
+      "Id": 1
+    }
+  ],
   "Number": [],
   "Choice": []
 }
