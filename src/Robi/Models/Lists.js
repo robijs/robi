@@ -1,4 +1,5 @@
 // @START-File
+// TODO: Export array instead of function?
 /**
  * @param {*} param
  * @returns
