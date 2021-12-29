@@ -22,7 +22,7 @@ export function DashboardBanner(param) {
             #id {
                 margin: ${margin || '10px'};
                 padding: ${padding || '8px'};
-                background: ${background || 'white'};
+                background: ${background || App.get('secondary')};
                 border-radius: 8px;
                 border: ${border || App.get('defaultBorder')};
                 display: flex;
@@ -43,7 +43,7 @@ export function DashboardBanner(param) {
             }
 
             #id .dashboard-banner-group.selected {
-                background: #e9ecef !important;
+                background: ${App.get('buttonBackgroundColor')} !important;
             }
 
             #id .dashboard-banner-group:not(:last-child) {

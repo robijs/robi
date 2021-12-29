@@ -37,7 +37,7 @@ export function ChangeTheme(param) {
 
     // Button
     const updateThemeBtn = BootstrapButton({
-        type: 'robi-reverse',
+        type: 'robi',
         value: 'Change theme',
         parent: card,
         async action() {

@@ -140,7 +140,7 @@ export function SingleLineTextField(param) {
             #id .form-field-single-line-text.readonly {
                 font-size: 14px;
                 font-weight: 400;
-                color: #495057; /* Bootstrap@4.5.2 input color */
+                color: ${App.get('defaultColor')}; 
                 background: transparent;
                 border: solid 1px transparent;
                 margin: 0px;

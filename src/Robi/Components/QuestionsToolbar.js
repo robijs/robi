@@ -36,13 +36,13 @@ export function QuestionsToolbar(param) {
             }
 
             #id .ask-a-question {
-                background: #e9ecef;
+                background: ${App.get('buttonBackgroundColor')};
                 color: ${App.get('primaryColor')};
                 font-weight: 500;
             }
             
             #id .search-questions {
-                background: #e9ecef !important;
+                background: ${App.get('buttonBackgroundColor')} !important;
                 border-color: transparent;
                 border-radius: 8px;
                 min-width: 250px;

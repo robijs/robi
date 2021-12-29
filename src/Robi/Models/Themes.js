@@ -1,17 +1,264 @@
 // @START-File
+/*
+Other dark options considered:
+    secondary: '#1e1e1e'
+    background: '#2d2d2d'
+    background: '#151515'
+    background: '#242424'
+*/
 const Themes = [
-    { name: 'Blue', primary: '#167EFB', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 10},
-    { name: 'Brown', primary: '#A52A2A', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 10},
-    { name: 'Gray', primary: '#708090', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 10},
-    { name: 'Green', primary: '#2E8B57', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 10},
-    { name: 'Gold', primary: '#B8860B', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 10},
-    { name: 'Magenta', primary: '#8B008B', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 10},
-    { name: 'Orange', primary: '#FF8C00', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 10},
-    { name: 'Pink', primary: '#C71585', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 10},
-    { name: 'Purple', primary: '#6A5ACD', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 20},
-    { name: 'Red', primary: '#e63e44', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 10},
-    { name: 'Slate', primary: '#2F4F4F', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 10},
-    { name: 'Teal', primary: '#008080', secondary: 'white', background: '#F8F8FC', color: '#24292f', selectedRowOpacity: 10}
+    { 
+        name: 'Blue',
+        light: {
+            primary: '#167EFB',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#167EFB',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
+    { 
+        name: 'Brown',
+        light: {
+            primary: '#A52A2A',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#A52A2A',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
+    { 
+        name: 'Gray',
+        light: {
+            primary: '#708090',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#708090',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
+    { 
+        name: 'Green',
+        light: {
+            primary: '#2E8B57',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#2E8B57',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
+    { 
+        name: 'Gold',
+        light: {
+            primary: '#B8860B',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#B8860B',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
+    { 
+        name: 'Magenta',
+        light: {
+            primary: '#8B008B',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#8B008B',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
+    { 
+        name: 'Orange',
+        light: {
+            primary: '#FF8C00',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#FF8C00',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
+    { 
+        name: 'Pink',
+        light: {
+            primary: '#C71585',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#C71585',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
+    { 
+        name: 'Purple',
+        light: {
+            primary: '#6A5ACD',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 20,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#9370DB',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#d4d4d4',
+            selectedRowOpacity: 20,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
+    { 
+        name: 'Red',
+        light: {
+            primary: '#e63e44',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#343a4080'
+        },
+        dark: {
+            primary: '#e63e44',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
+    { 
+        name: 'Slate',
+        light: {
+            primary: '#2F4F4F',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#2F4F4F',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
+    { 
+        name: 'Teal',
+        light: {
+            primary: '#008080',
+            secondary: 'white',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 1,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#008080',
+            secondary: '#151515',
+            background: '#1e1e1e',
+            color: '#24292f',
+            selectedRowOpacity: 1,
+            buttonBackgroundColor: '#343a40',
+            borderColor: '#343a4080'
+        }
+    },
 ]
 
 export { Themes };

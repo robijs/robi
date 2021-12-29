@@ -1,3 +1,4 @@
+import { App } from '../Core/App.js'
 import { Component } from '../Actions/Component.js'
 
 // @START-File
@@ -35,14 +36,14 @@ export function MultiLineTextField(param) {
             }
 
             #id .form-field-multi-line-text {
-                color: #495057; /* Bootstrap@4.5.2 input color */
+                color: ${App.get('defaultColor')}; /* Bootstrap@4.5.2 input color */
                 margin-top: 2px;
                 margin-bottom: 4px;
                 padding: 0.375rem 0.75rem;
             }
 
             #id .form-field-multi-line-text > * {
-                color: #495057; /* Bootstrap@4.5.2 input color */
+                color: ${App.get('defaultColor')}; /* Bootstrap@4.5.2 input color */
             }
 
             #id .form-field-multi-line-text.editable {

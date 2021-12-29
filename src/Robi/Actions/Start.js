@@ -4,6 +4,7 @@ import { Store } from '../Core/Store.js'
 import { AddLinks } from './AddLinks.js'
 import { InitializeApp } from './InitializeApp.js'
 import { LogError } from './LogError.js'
+import { Wait } from './Wait.js'
 
 // @START-File
 /**

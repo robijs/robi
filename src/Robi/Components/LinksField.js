@@ -99,7 +99,7 @@ export function LinksField(param) {
                 display: inline-flex;
                 border-radius: 10px;
                 padding: 5px 5px 5px 20px;
-                background: #e9ecef;
+                background: ${App.get('buttonBackgroundColor')};
                 color: #007bff;
                 font-weight: 500;
                 font-size: 13px;

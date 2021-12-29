@@ -148,14 +148,14 @@ export function AppContainer() {
             .btn-robi,
             .btn-robi:hover {
                 color: ${App.get('primaryColor')};
-                background: #e9ecef;
+                background: ${App.get('buttonBackgroundColor')};
                 font-weight: 500;
             }
 
             .btn-robi-success,
             .btn-robi-success:hover {
                 color: seagreen;
-                background: #e9ecef;
+                background: ${App.get('buttonBackgroundColor')};
                 font-weight: 500;
             }
 
@@ -303,6 +303,13 @@ export function AppContainer() {
             .btn.dropdown-toggle:focus {
                 border-color: transparent !important;
                 box-shadow: 0 0 0 4px ${App.get('primaryColor') + '6b'} !important;
+            }
+
+            .custom-select,
+            .cusomt-select:focus,
+            .form-control,
+            .form-control:focus {
+                color: ${App.get('defaultColor')};
             }
 
             /* Alert */

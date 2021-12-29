@@ -41,6 +41,9 @@ export function DataTable(param) {
         position
     } = param;
 
+    // const cancelButton = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' style='fill: ${App.get('defaultColor')};'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>`
+    const cancelButton = `background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' style='fill: ${App.get('prefersColorScheme') === 'light' ? 'darkgray' : 'lightgray' };'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");`
+
     const component = Component({
         html: /*html*/ `
             <table class=
@@ -77,6 +80,10 @@ export function DataTable(param) {
             #id_wrapper {
                 width: ${width || 'initial'};
                 /* overflow-x: overlay; */
+            }
+
+            #id_wrapper .table {
+                color: ${App.get('defaultColor')};
             }
 
             #id tr {
@@ -168,7 +175,7 @@ export function DataTable(param) {
 
             /** Add Item Button */
             #id_wrapper .datatable-toolbar .add-item {
-                background: #e9ecef;
+                background: ${App.get('buttonBackgroundColor')};
                 margin-right: 10px;
             }
 
@@ -202,7 +209,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .datatable-toolbar .delete-item:hover {
-                background: #e9ecef;
+                background: ${App.get('buttonBackgroundColor')};
             }
 
             #id_wrapper .datatable-toolbar .delete-item span {
@@ -226,7 +233,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-html5 {
-                /* background: ${buttonColor || '#e9ecef'} !important; */
+                /* background: ${buttonColor || App.get('buttonBackgroundColor')} !important; */
                 color: #444;
                 font-weight: 500;
 
@@ -282,7 +289,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-collection:hover {
-                background: #e9ecef;
+                background: ${App.get('buttonBackgroundColor')};
             }
 
             #id_wrapper .buttons-collection span {
@@ -297,13 +304,13 @@ export function DataTable(param) {
 
             /** Select and Search */
             #id_wrapper .custom-select {
-                background: ${buttonColor || '#e9ecef'} !important;
+                background: ${buttonColor || App.get('buttonBackgroundColor')} !important;
                 border-color: transparent;
                 font-weight: 500;
             }
 
             #id_wrapper input[type='search'] {
-                background: ${buttonColor || '#e9ecef'} !important;
+                background: ${buttonColor || App.get('buttonBackgroundColor')} !important;
                 border-color: transparent;
                 border-radius: 8px;
             }
@@ -325,7 +332,7 @@ export function DataTable(param) {
                 cursor: pointer;
                 height: 16px;
                 width: 16px;
-                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill=''><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+                ${cancelButton};
             }
 
             /** Footer */

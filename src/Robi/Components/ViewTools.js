@@ -119,7 +119,7 @@ export function ViewTools(param) {
                 height: unset;
                 margin: .5rem 0;
                 overflow: hidden;
-                border-left: 1px solid #e9ecef;
+                border-left: 1px solid ${App.get('buttonBackgroundColor')};
             }
 
             #id .dropdown-item {

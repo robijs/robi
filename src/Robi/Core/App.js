@@ -46,7 +46,21 @@ const App = {
         }
 
         // Set colors
-        const { primary, secondary, background, color, selectedRowOpacity } = Themes.find(item => item.name === theme);
+        let colors;
+
+        if (window.matchMedia) {
+            if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+                colors = Themes.find(item => item.name === theme).light;
+                settings.prefersColorScheme = 'light';
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                colors = Themes.find(item => item.name === theme).dark;
+                settings.prefersColorScheme = 'dark';
+            }
+        } else {
+            colors = Themes.find(item => item.name === theme).light;
+        }
+
+        const { primary, secondary, background, color, selectedRowOpacity, buttonBackgroundColor, borderColor } = colors;
 
         // Primary
         settings.primaryColor = NameToHex(primary);
@@ -56,8 +70,12 @@ const App = {
         // Secondary
         settings.secondaryColor = secondary;
 
-        // Background
+        // Backgrounds
         settings.backgroundColor = background;
+        settings.buttonBackgroundColor = buttonBackgroundColor;
+
+        // Border
+        settings.borderColor = borderColor;
 
         // Default color
         settings.defaultColor = color;

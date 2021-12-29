@@ -47,22 +47,6 @@ export default async function Measures({ parent, pathParts, props }) {
     });
 
     sortBtn.add();
-
-    // @START-Table:SLOT
-    await Table({
-        list: 'SLOT',
-        parent,
-        advancedSearch: true,
-        toolbar: [
-            {
-                label: 'All',
-                filter(data) {
-                    return data;
-                }
-            }
-        ]
-    });
-    // @END-Table:SLOT
     
     // @START-Table:MLOT
     await Table({
@@ -79,6 +63,22 @@ export default async function Measures({ parent, pathParts, props }) {
         ]
     });
     // @END-Table:MLOT
+
+    // @START-Table:SLOT
+    await Table({
+        list: 'SLOT',
+        parent,
+        advancedSearch: true,
+        toolbar: [
+            {
+                label: 'All',
+                filter(data) {
+                    return data;
+                }
+            }
+        ]
+    });
+    // @END-Table:SLOT
 
     // @START-Table:Number
     await Table({

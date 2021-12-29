@@ -23,7 +23,7 @@ export function Card(param) {
             #id.round-card {
                 display: inline-flex;
                 flex-direction: column;
-                background: ${background || 'white'};
+                background: ${background || App.get('secondary')};
                 padding: ${padding || '20px'};
                 margin: ${margin || '0px'};
                 min-width: ${minWidth || 'initial'};
@@ -43,9 +43,9 @@ export function Card(param) {
                 padding: 10px 20px; /** FIXME: will break with passed in padding  */
                 font-weight: ${titleWeight || '700'};
                 background: ${titleBackground || 'inherit'}; /** FIXME: Experimental */ /* alternate color: #d0d0d04d */
-                border-radius: 10px 10px 0px 0px;
+                border-radius: 20px 20px 0px 0px;
                 color: ${titleColor || App.get('defaultColor')};
-                border-bottom: ${titleBorder || App.get('defaultBorder')};
+                border-bottom: ${titleBorder || `solid 1px ${App.get('borderColor')}`};
             }
 
             #id .round-card-description {

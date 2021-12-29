@@ -52,7 +52,7 @@ export function SectionStepper(param) {
                 font-size: 1em;
                 font-weight: 700;
                 text-align: center;
-                background: #e9ecef;
+                background: ${App.get('buttonBackgroundColor')};
                 color: ${App.get('primaryColor')};
                 border-radius: 10px;
                 margin-bottom: 15px;

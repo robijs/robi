@@ -42,7 +42,7 @@ export function SourceTools(param) {
             }
 
             #id .btn:hover {
-                background-color: #e9ecef;
+                background-color: ${App.get('buttonBackgroundColor')};
             }
         `,
         parent,

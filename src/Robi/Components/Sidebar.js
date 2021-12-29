@@ -68,7 +68,7 @@ export function Sidebar({ parent, path }) {
                         <span class='nav add-route'>
                             <span class='icon-container' style='padding: 0px;'>
                                 <span class='square d-flex' style='padding: 0px; margin: 7px'>
-                                    <svg class='icon' style='font-size: 28;'><use href='#icon-bs-plus'></use></svg>
+                                    <svg class='icon' style='font-size: 28px;'><use href='#icon-bs-plus'></use></svg>
                                 </span>
                             </span>
                             <span class='text' data-width='200px' style='white-space: nowrap; color: ${App.get('primaryColor')}'>New Route</span>
@@ -95,7 +95,7 @@ export function Sidebar({ parent, path }) {
                 flex-direction: column;
                 justify-content: flex-start;
                 background: ${App.gradientColor ? `linear-gradient(${App.get('gradientColor')})` : App.get('backgroundColor')};
-                border-right: solid 1px #d6d8db80;
+                border-right: solid 1px ${App.get('borderColor')};
                 height: 100vh;
                 transition: width 300ms, min-width 300ms
             }
@@ -266,7 +266,7 @@ export function Sidebar({ parent, path }) {
             }
 
             #id .square {
-                background: #e9ecef;
+                background: ${App.get('buttonBackgroundColor')};
                 border-radius: 6px;
             }
 

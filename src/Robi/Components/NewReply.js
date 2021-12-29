@@ -92,7 +92,7 @@ export function NewReply(param) {
                 text-align: center;
                 border-radius: 50%;
                 color: white;
-                background: #e9ecef;
+                background: ${App.get('buttonBackgroundColor')};
             }
 
             #id .new-comment-button .icon {

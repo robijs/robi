@@ -160,7 +160,7 @@ export function ModalSlideUp(param) {
             #id .close .x-circle-fill {
                 width: 1.2em;
                 height: 1.2em;
-                fill: #e9ecef;
+                fill: ${App.get('buttonBackgroundColor')};
                 z-index: 10;
             }
 

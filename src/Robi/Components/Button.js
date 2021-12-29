@@ -37,7 +37,7 @@ export function Button(param) {
 
             #id.normal-button {
                 color: ${App.get('primaryColor')};
-                background: #e9ecef;
+                background: ${App.get('buttonBackgroundColor')};
                 border: solid 1px transparent;
             }
 

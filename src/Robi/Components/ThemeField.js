@@ -20,7 +20,9 @@ export function ThemeField(param) {
                 <div class='themes'>
                     ${
                         Themes.map(theme => {
-                            const { name, primary, secondary, background, color } = theme;
+                            // TODO: UI and Logic for choosing / switching themes
+                            const { name, light, dark } = theme;
+                            const { primary, secondary, background, color } = theme.light; // FIXME: remove hard coded choice - light
 
                             return /*html*/ `
                                 <div class='theme-app ${name === selected ? 'selected' : ''}' style='color: ${color};' data-theme='${name}'>
@@ -61,7 +63,7 @@ export function ThemeField(param) {
                 height: 150px;
                 width: 200px;
                 border-radius: 10px;
-                border: solid 1px #d6d8db80;
+                border: solid 1px ${App.get('borderColor')};
             }
 
             #id .theme-app:not(:last-child) {
@@ -78,7 +80,7 @@ export function ThemeField(param) {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
-                border-right: solid 1px #d6d8db80;
+                border-right: solid 1px ${App.get('borderColor')};
                 border-radius: 10px 0px 0px 10px;
                 flex: 1;
             }
