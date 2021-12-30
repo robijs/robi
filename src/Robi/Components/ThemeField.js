@@ -73,7 +73,7 @@ export function ThemeField(param) {
    
             #id .theme-app.selected {
                 /* background: ${App.get('primaryColor') + '20'}; */
-                box-shadow: 0px 0px 0px 4px ${App.get('primaryColor')};
+                box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')};
             }
 
             #id .theme-sidebar {

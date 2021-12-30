@@ -16,21 +16,18 @@ export function SiteUsage(param) {
         visits,
     } = data;
 
-    const screenWidth = window.screen.width;
-    const chartWidth = screenWidth > 1500 ? 740 : 500;
-
     const component = Component({
         html: /*html*/ `
             <div class='dashboard-long-card'>
                 <!-- Chart -->
-                <div class='dashboard-long-card-container'>
+                <div class='dashboard-long-card-container' style='flex: 4;'>
                     <div class='dashboard-long-card-chart-title'></div>
                     <div class='dashboard-long-card-chart-container'>
-                        <canvas class="myChart" width="${chartWidth}" height="275"></canvas>
+                        <canvas class="myChart" height='300'></canvas>
                     </div>
                 </div>
                 <!-- Text -->
-                <div class='dashboard-long-card-container'>
+                <div class='dashboard-long-card-container' style='flex: 1'>
                     <div class='visits-label'>Visits</div>
                     ${createInfoGroup('Today', 'today')}
                     ${createInfoGroup('This Week', 'week')}
@@ -47,7 +44,6 @@ export function SiteUsage(param) {
                 border-radius: 4px;
                 border: ${border || App.get('defaultBorder')};
                 display: flex;
-                /* flex: 1; */
                 overflow: auto;
             }
 
@@ -84,11 +80,12 @@ export function SiteUsage(param) {
 
             #id .dashboard-long-card-info-label {
                 font-weight: 500;
-                margin-right: 30px;             
+                margin-right: 30px;
             }
 
             /** Chart */
             #id .dashboard-long-card-chart-container {
+                position: relative;
                 margin-right: 15px;
                 margin-bottom: 15px;
             }
@@ -101,7 +98,7 @@ export function SiteUsage(param) {
                 text-align: center;
             }
 
-            /** Label - mimic bootstrap input */
+            /** Label */
             #id .info-group {
                 display: flex;
                 justify-content: space-between;
@@ -157,9 +154,7 @@ export function SiteUsage(param) {
     component.clearChart = () => {
         const chartContainer = component.find('.dashboard-long-card-chart-container');
 
-        console.log('clear chart:', chartWidth);
-
-        chartContainer.innerHTML = /*html*/ `<canvas class="myChart" width="${chartWidth}" height="275"></canvas>`;
+        chartContainer.innerHTML = /*html*/ `<canvas class="myChart" height='300'></canvas>`;
     };
 
     component.getChart = () => {

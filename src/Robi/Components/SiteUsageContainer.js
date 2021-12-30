@@ -20,7 +20,6 @@ export async function SiteUsageContainer(param) {
     const dashboardCard = Card({
         title: 'Site Usage',
         width: '100%',
-        minHeight: '600px',
         margin: '20px 0px 0px 0px',
         parent
     });
@@ -224,6 +223,7 @@ export async function SiteUsageContainer(param) {
                 })
             },
             options: {
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         display: false
