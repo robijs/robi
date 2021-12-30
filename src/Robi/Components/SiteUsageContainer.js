@@ -232,19 +232,29 @@ export async function SiteUsageContainer(param) {
                 scales: {
                     x: {
                         grid: {
+                            borderColor: App.get('primaryColor'),
                             display: false
                         },
                         stacked: true,
                         ticks: {
+                            font: {
+                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+                            },
+                            color: App.get('defaultColor'),
                             beginAtZero: true
                         }
                     },
                     y: {
                         grid: {
+                            borderColor: App.get('primaryColor'),
                             display: false
                         },
                         stacked: true,
                         ticks: {
+                            font: {
+                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+                            },
+                            color: App.get('defaultColor'),
                             min: 0,
                             stepSize
                         }

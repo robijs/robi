@@ -29,7 +29,7 @@ export function AppContainer() {
                 box-sizing: border-box;
                 background: ${App.get('secondaryColor')};
                 overflow: hidden;
-                font-family: ${App.fontFamily || ` -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`};
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
                 color: ${App.get('defaultColor')};
             }
             
