@@ -81,10 +81,6 @@ export function Question(param) {
                 font-weight: 400;
             }
 
-            /* #id .card-footer .card-text {
-                font-size: 13px;
-            } */
-
             #id .question-card-body {
                 padding: 1.75rem;
             }

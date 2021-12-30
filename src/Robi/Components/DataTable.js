@@ -573,6 +573,12 @@ export function DataTable(param) {
                 margin: 0px 10px;
             }
 
+            /** Dropdown menu */
+            #id_wrapper .dropdown-menu {
+                background: ${App.get('prefersColorScheme') === 'dark' ? App.get('backgroundColor') : App.get('secondaryColor')};
+                box-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? '40%' : '10%'}) 0px 0px 16px -2px;
+            }
+
             ${addCSS || ''}
         `,
         parent,

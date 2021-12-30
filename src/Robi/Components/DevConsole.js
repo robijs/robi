@@ -38,7 +38,7 @@ export function DevConsole(param) {
                         <div class='dev-console-row update-row'>
                             <div class='dev-console-text'>
                                 <div class='dev-console-label'>Sync lists</div>
-                                <div class='dev-console-description'>Sync app with schemas in <code>App/src/lists.js</code>.</div>
+                                <div class='dev-console-description'>Sync app with list schemas defined in <code>App/src/lists.js</code>.</div>
                             </div>
                             <div class='d-flex align-items-center ml-5'>
                                 <button class='btn btn-robi dev-console-button update'>Sync lists</button>
@@ -160,18 +160,24 @@ export function DevConsole(param) {
                 box-shadow: none;
             }
 
-            /* Changed dot */
+            /* Changed */
             #id .changed {
-                border-radius: 20px;
+                /* border-radius: 20px;
                 position: absolute;
                 width: 100%;
                 left: 0px;
-                top: 45px;
-            }
+                top: 45px;*/
+                border-radius: 20px;
+                position: absolute;
+                width: 300px;
+                right: 30px;
+                top: 70px;
+                text-align: center;
             }
 
             #id .changed-text {
-                font-size: 12px;
+                font-size: 13px;
+                font-weight: 500;
                 transition: opacity 400ms;
                 opacity: 0;
             }
@@ -241,7 +247,7 @@ export function DevConsole(param) {
             }
         ],
         async onAdd() {
-            component.find('.update-row .dev-console-button').insertAdjacentHTML('beforeend', /*html*/ `
+            component.find('.update-row .dev-console-button').parentNode.insertAdjacentHTML('beforeend', /*html*/ `
                 <div class='changed'>
                     <div class="spinner-grow text-robi" style='width: 16px; height: 16px;'>
                         <span class="sr-only">Checking on list changes...</span>

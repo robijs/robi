@@ -104,6 +104,7 @@ export function AppContainer() {
 
             /* Code */
             code {
+                font-size: 1em;
                 color: ${App.get('primaryColor')};
             }
 
@@ -263,6 +264,11 @@ export function AppContainer() {
             .btn-outline-success:hover {
                 color: seagreen !important;
                 border-color: seagreen !important;
+            }
+
+            /* Cards */
+            .card-footer {
+                border-top: solid 1px ${App.get('borderColor')};
             }
 
             /* Form Controls */

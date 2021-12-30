@@ -15,7 +15,7 @@ export function RequestAssitanceInfo(param) {
         html: /*html*/ `
             <div class="request-assitance-info">
                 ${buildInfo()}
-                <div class="alert alert-light" role="alert">
+                <div class="alert alert-robi-primary" role="alert">
                     <p class="mb-3">For general CarePoint issues, please contact:</p>
                     <div>
                         <h6 class="mb-2">DHA Global Service Center (GSC)</h6>
