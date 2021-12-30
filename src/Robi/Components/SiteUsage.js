@@ -31,6 +31,7 @@ export function SiteUsage(param) {
                 </div>
                 <!-- Text -->
                 <div class='dashboard-long-card-container'>
+                    <div class='visits-label'>Visits</div>
                     ${createInfoGroup('Today', 'today')}
                     ${createInfoGroup('This Week', 'week')}
                     ${createInfoGroup('This Month', 'month')}
@@ -42,7 +43,7 @@ export function SiteUsage(param) {
             #id {
                 margin: ${margin || '20px'};
                 padding: ${padding || '10px'};
-                background: white;
+                background: ${App.get('secondary')};
                 border-radius: 4px;
                 border: ${border || App.get('defaultBorder')};
                 display: flex;
@@ -59,6 +60,13 @@ export function SiteUsage(param) {
             }
 
             /** Text */
+            #id .visits-label {
+                text-align: center;
+                font-weight: 700;
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
             #id .info-group {
                 cursor: pointer;
                 margin: 5px 0px;
@@ -89,7 +97,7 @@ export function SiteUsage(param) {
                 margin-top: 15px;
                 color: ${App.get('defaultColor')};
                 font-size: 1.1em;
-                font-weight: 500;
+                font-weight: 700;
                 text-align: center;
             }
 

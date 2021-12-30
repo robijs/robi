@@ -11,7 +11,7 @@ const Themes = [
         name: 'Blue',
         light: {
             primary: '#167EFB',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 10,
@@ -32,7 +32,7 @@ const Themes = [
         name: 'Brown',
         light: {
             primary: '#A52A2A',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 10,
@@ -53,7 +53,7 @@ const Themes = [
         name: 'Gray',
         light: {
             primary: '#708090',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 10,
@@ -74,7 +74,7 @@ const Themes = [
         name: 'Green',
         light: {
             primary: '#2E8B57',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 10,
@@ -95,7 +95,7 @@ const Themes = [
         name: 'Gold',
         light: {
             primary: '#B8860B',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 10,
@@ -116,7 +116,7 @@ const Themes = [
         name: 'Magenta',
         light: {
             primary: '#8B008B',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 10,
@@ -137,7 +137,7 @@ const Themes = [
         name: 'Orange',
         light: {
             primary: '#FF8C00',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 10,
@@ -158,7 +158,7 @@ const Themes = [
         name: 'Pink',
         light: {
             primary: '#C71585',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 10,
@@ -179,7 +179,7 @@ const Themes = [
         name: 'Purple',
         light: {
             primary: '#6A5ACD',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 20,
@@ -200,7 +200,7 @@ const Themes = [
         name: 'Red',
         light: {
             primary: '#e63e44',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 10,
@@ -221,7 +221,7 @@ const Themes = [
         name: 'Slate',
         light: {
             primary: '#2F4F4F',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 10,
@@ -242,7 +242,7 @@ const Themes = [
         name: 'Teal',
         light: {
             primary: '#008080',
-            secondary: 'white',
+            secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 1,
