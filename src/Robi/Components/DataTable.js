@@ -29,10 +29,9 @@ export function DataTable(param) {
         onRowClick,
         onSearch,
         onDraw,
-        toolbar,
         fontSize,
         nowrap,
-        onSelect, // How do you turn select on?  i see the event but no option to enable it;
+        onSelect,
         onDeselect,
         rowCallback,
         createdRow,
@@ -41,8 +40,8 @@ export function DataTable(param) {
         position
     } = param;
 
-    // const cancelButton = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' style='fill: ${App.get('defaultColor')};'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>`
-    const cancelButton = `background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' style='fill: ${App.get('prefersColorScheme') === 'light' ? 'darkgray' : 'lightgray' };'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");`
+    // FIXME: Does the search field cancel button color need to be different?
+    const cancelButton = `background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' style='fill: ${App.get('prefersColorScheme') === 'dark' ? 'darkgray' : 'darkgray' };'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");`
 
     const component = Component({
         html: /*html*/ `
@@ -468,7 +467,7 @@ export function DataTable(param) {
             #id_wrapper tbody th.select-checkbox:before {
                 content: ' ';
                 margin: 0 auto;
-                border: solid 2px lightgray;
+                border: solid 2px ${App.get('prefersColorScheme') === 'dark' ? '#444' : 'lightgray' };
                 border-radius: 4px;
                 position: initial;
                 display: block;

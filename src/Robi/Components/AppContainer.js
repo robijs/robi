@@ -47,7 +47,7 @@ export function AppContainer() {
             }
             
             ::-webkit-scrollbar-thumb {
-                background: lightgray;
+                background: ${App.get('prefersColorScheme') === 'dark' ? App.get('buttonBackgroundColor'): 'lightgray'};
                 width: 8px;
                 height: 8px;
                 border: 3px solid transparent;
@@ -115,6 +115,11 @@ export function AppContainer() {
             .btn {
                 font-size: 14px;
                 border-radius: 10px;
+                color: ${App.get('defaultColor')};
+            }
+
+            .btn:hover {
+                color: ${App.get('defaultColor')};
             }
 
             .btn:focus,
@@ -141,7 +146,7 @@ export function AppContainer() {
             .btn-robi-reverse,
             .btn-robi-reverse:hover {
                 background: ${App.get('primaryColor')};
-                color: white !important;
+                color: ${App.get('secondaryColor')} !important;
                 font-weight: 500;
             }
 
@@ -260,7 +265,7 @@ export function AppContainer() {
                 border-color: seagreen !important;
             }
 
-            /* Forms*/
+            /* Form Controls */
             .form-field {
                 display: flex;
                 flex-direction: column;
@@ -275,7 +280,19 @@ export function AppContainer() {
             .form-field-multi-line-text.editable,
             .btn.dropdown-toggle,
             .input-group-text {
+                background: ${App.get('prefersColorScheme') === 'dark' ? App.get('backgroundColor'): App.get('secondaryColor')};
                 font-size: 13px !important;
+            }
+
+            .form-control,
+            .form-field-multi-line-text.editable,
+            .input-group-text {
+                border: 1px solid ${App.get('borderColor')};
+            }
+
+            .form-control:focus,
+            .form-field-multi-line-text.editable:focus {
+                border: 1px solid ${App.get('borderColor')};
             }
 
             .form-control,
@@ -571,6 +588,7 @@ export function AppContainer() {
             }
 
             .dropdown-item {
+                color: ${App.get('defaultColor')};
                 cursor: pointer;
                 font-size: 13px;
                 border-radius: 8px;
@@ -620,6 +638,52 @@ export function AppContainer() {
             .table-container.ui-sortable-helper {
                 box-shadow: rgb(0 0 0 / 10%) 0px 0px 32px 0px !important;
                 transform: scale(1.05);
+            }
+
+            /* Menu */
+            .grown-in-top-left,
+            .grown-in-center {
+                background: ${App.get('prefersColorScheme') === 'dark' ? App.get('backgroundColor') : App.get('secondaryColor')};
+                box-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? '40%' : '10%'}) 0px 0px 16px -2px;
+            }
+
+            @keyframes grown-in-top-left {
+                from {
+                    transform: scale(0);
+                    transform-origin: top left;
+                    opacity: 0;
+                }
+                to {
+                    transform: scale(1);
+                    transform-origin: top left;
+                    opacity: 1;
+                }
+            }
+
+            .grown-in-top-left {
+                animation: 150ms ease-in-out forwards grown-in-top-left;
+                border-radius: 10px;
+                padding: .5rem;
+            }
+
+            @keyframes grown-in-center {
+                from {
+                    transform: scale(0);
+                    transform-origin: center;
+                    opacity: 0;
+                }
+                to {
+                    transform: scale(1);
+                    transform-origin: center;
+                    opacity: 1;
+                }
+            }
+
+            .grown-in-center {
+                animation: 150ms ease-in-out forwards grown-in-center;
+                border-radius: 20px;
+                padding: 10px;
+                display: flex;
             }
         `,
         position: 'afterbegin',

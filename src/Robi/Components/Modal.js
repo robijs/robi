@@ -79,7 +79,7 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
             #id .modal-content {
                 border-radius: 20px;
                 border: none;
-                background: ${background || ''};
+                background: ${background || App.get('secondaryColor')};
                 padding: ${contentPadding || '0px'};
             }
 

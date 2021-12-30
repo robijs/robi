@@ -50,9 +50,7 @@ export function SingleLineTextField(param) {
         html: /*html*/ `
             
             <div class='form-field${classes ? ` ${classes.join(' ')}` : ''}'>
-                <!-- ${label ? /*html*/ `<label>${label}${optional ? /*html*/ `<span class='optional'><i>Optional</i></span>` : ''}</label>` : ''} -->
-                <!-- ${readOnly ? /*html*/ `<div class='form-field-single-line-text readonly'>${value || ''}</div>` : /*html*/ `<div class='form-field-single-line-text editable' contenteditable='true'>${value || ''}</div>`} -->
-                <label class='form-label'>${label}</label>
+                ${label ? /*html*/ `<label class='form-label'>${label}</label>` : ''}
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
                 ${
                     addon ?
@@ -61,29 +59,11 @@ export function SingleLineTextField(param) {
                             <div class='input-group-prepend'>
                                 <div class='input-group-text'>${addon}</div>
                             </div>
-                            ${
-                                readOnly ?
-                                /*html*/ `
-                                    <div type='text' class='form-field-single-line-text readonly'>${value || ''}</div>
-                                ` :
-                                /*html*/ `
-                                    <!-- Edge won't respect autocomplete='off', but autocomplete='new-password' seems to work -->
-                                    <input type='text' class='form-control' value='${value || ''}' list='autocompleteOff' autocomplete='new-password' placeholder='${placeholder || ''}'>
-                                `
-                            }
+                            ${Field()}
                         </div>    
                     ` :
                     /*html*/ `
-                        ${
-                            readOnly ?
-                            /*html*/ `
-                                <div type='text' class='form-field-single-line-text readonly'>${value || ''}</div>
-                            ` :
-                            /*html*/ `
-                                <!-- Edge won't respect autocomplete='off', but autocomplete='new-password' seems to work -->
-                                <input type='text' class='form-control' value='${value || ''}' list='autocompleteOff' autocomplete='new-password' placeholder='${placeholder || ''}'>
-                            `   
-                        }
+                        ${Field()}
                     `
                 }
             </div>
@@ -99,7 +79,8 @@ export function SingleLineTextField(param) {
                 ${background ? `background: ${background};` : ''}
             }
 
-            ${readOnly ?
+            ${
+                readOnly ?
                 /*css*/ `
                     #id label {
                         margin-bottom: 0px;
@@ -110,14 +91,8 @@ export function SingleLineTextField(param) {
                     #id label {
                         font-weight: 500;
                     }
-                `}
-
-            /* #id label,
-            #id .form-label {
-                font-size: .95em;
-                font-weight: bold;
-                padding: 3px 0px;
-            } */
+                `
+            }
 
             #id .form-field-description {
                 font-size: 14px;
@@ -132,41 +107,35 @@ export function SingleLineTextField(param) {
                 margin: ${margin || '2px 0px 4px 0px'};
                 padding: 5px 10px;
                 border-radius: 4px;
-                background: white;
                 border: ${App.get('defaultBorder')};
                 transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
             }
 
             #id .form-field-single-line-text.readonly {
-                font-size: 14px;
+                font-size: 13px;
                 font-weight: 400;
                 color: ${App.get('defaultColor')}; 
                 background: transparent;
                 border: solid 1px transparent;
                 margin: 0px;
-                /* padding: 0px; */
                 padding: 0px;
-            }
-
-            #id .form-field-single-line-text.editable:active,
-            #id .form-field-single-line-text.editable:focus {
-                outline: none;
-                border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')};
-            }
-
-            /* Optional */
-            #id .optional {
-                margin: 0px 5px;
-                font-size: .8em;
-                color: gray;
-                font-weight: 400;
             }
         `,
         parent: parent,
         position,
         events
     });
+
+    function Field() {
+        return readOnly ?
+        /*html*/ `
+            <div type='text' class='form-field-single-line-text readonly'>${value || ''}</div>
+        ` :
+        /*html*/ `
+            <!-- Edge won't respect autocomplete='off', but autocomplete='new-password' seems to work -->
+            <input type='text' class='form-control' value='${value || ''}' list='autocompleteOff' autocomplete='new-password' placeholder='${placeholder || ''}'>
+        `;
+    }
 
     component.focus = () => {
         const field = component.find('.form-control');

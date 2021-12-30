@@ -49,7 +49,7 @@ export function BootstrapDropdown(param) {
                 min-width: 160px;
                 font-size: 13px;
                 border-radius: 0.125rem 0px;
-                border: 1px solid #ced4da;
+                border: 1px solid ${App.get('borderColor')};
                 display: flex;
                 justify-content: space-between;
                 align-items: center;

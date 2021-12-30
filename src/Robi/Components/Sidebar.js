@@ -187,12 +187,12 @@ export function Sidebar({ parent, path }) {
             }
 
             .sidebar .nav.nav-selected  .icon {
-                fill: white;
-                stroke: white;
+                fill: ${App.get('backgroundColor')};
             }
 
             .sidebar .nav.nav-selected .text {
-                color: white;
+                /* color: ${App.get('prefersColorScheme') === 'dark' ? '#151515' : App.get('backgroundColor')}; */
+                color: ${App.get('backgroundColor')};
             }
 
             @media (max-width: 1300px) {
@@ -318,19 +318,6 @@ export function Sidebar({ parent, path }) {
                 }
             }
 
-            @keyframes grown-in-top-left {
-                from {
-                    transform: scale(0);
-                    transform-origin: top left;
-                    opacity: 0;
-                }
-                to {
-                    transform: scale(1);
-                    transform-origin: top left;
-                    opacity: 1;
-                }
-            }
-
             @keyframes grab-show {
                 from {
                     width: 0px;
@@ -367,14 +354,6 @@ export function Sidebar({ parent, path }) {
 
             .fade-in-right {
                 animation: 300ms ease-in-out fade-in-right;
-            }
-
-            .grown-in-top-left {
-                animation: 150ms ease-in-out forwards grown-in-top-left;
-                background: white;
-                border-radius: 10px;
-                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
-                padding: .5rem;
             }
 
             .grab:not(.switch) {

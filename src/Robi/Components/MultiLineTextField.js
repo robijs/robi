@@ -49,9 +49,8 @@ export function MultiLineTextField(param) {
             #id .form-field-multi-line-text.editable {
                 min-height: ${minHeight || `200px`};
                 width: ${width || 'unset'};
-                background: white;
                 border-radius: 4px;
-                border: 1px solid #ced4da;
+                border: 1px solid ${App.get('borderColor')};
             }
 
             #id .form-field-multi-line-text.editable:active,

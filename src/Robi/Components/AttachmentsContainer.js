@@ -70,7 +70,7 @@ export function AttachmentsContainer(param) {
             filesList.find(`.remove-container[data-filename='${file.name}'] .status`).innerText = 'Queued';
             filesList.find(`.remove-container[data-filename='${file.name}'] .tip`).innerText = 'up next';
             filesList.find(`.remove-container[data-filename='${file.name}'] .remove-icon`).innerHTML = /*html*/ `
-                <div style='width: 22px; height: 22px; background: #ced4da; border-radius: 50%;'></div>
+                <div style='width: 22px; height: 22px; background: ${App.get('borderColor')}; border-radius: 50%;'></div>
             `;
 
             // /** TODO: @todo remove 'remove' event listener -> add 'cancel' event listener   */

@@ -118,11 +118,6 @@ export function TableToolbar(param) {
                 min-height: 35px;
             }
 
-            #id .btn-robi-primary {
-                color: white;
-                background: ${App.get('primaryColor')};
-            }
-
             #id .btn-outline-robi-primary {
                 color: ${App.get('primaryColor')};
                 background-color: initial;
@@ -164,27 +159,6 @@ export function TableToolbar(param) {
                 border: none;
                 padding: none;
             }
-
-            @keyframes grown-in-top-left {
-                from {
-                    transform: scale(0);
-                    transform-origin: top left;
-                    opacity: 0;
-                }
-                to {
-                    transform: scale(1);
-                    transform-origin: top left;
-                    opacity: 1;
-                }
-            }
-
-            .grown-in-top-left {
-                animation: 150ms ease-in-out forwards grown-in-top-left;
-                background: white;
-                border-radius: 10px;
-                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
-                padding: .5rem;
-            }
         `,
         parent,
         position,
@@ -194,13 +168,13 @@ export function TableToolbar(param) {
                 event: 'click',
                 listener(event) {
                     // Deselect all options
-                    const currentSelected = component.find('.filter.btn-robi-primary');
-                    currentSelected.classList.remove('btn-robi-primary');
+                    const currentSelected = component.find('.filter.btn-robi-reverse');
+                    currentSelected.classList.remove('btn-robi-reverse');
                     currentSelected.classList.add('btn-outline-robi-primary');
 
                     // Select clicked button
                     this.classList.remove('btn-outline-robi-primary');
-                    this.classList.add('btn-robi-primary');
+                    this.classList.add('btn-robi-reverse');
 
                     action(this.innerText);
                 }
@@ -801,7 +775,7 @@ export function TableToolbar(param) {
         return options.map((option, index) => {
             const { label } = option;
             return /*html*/ `
-                <button type='button' class='btn ${index === 0 ? 'btn-robi-primary' : 'btn-outline-robi-primary'} filter'>${label}</button>
+                <button type='button' class='btn ${index === 0 ? 'btn-robi-reverse' : 'btn-outline-robi-primary'} filter'>${label}</button>
             `;
         }).join('\n');
     }

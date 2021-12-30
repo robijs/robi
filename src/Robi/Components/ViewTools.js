@@ -138,28 +138,6 @@ export function ViewTools(param) {
                 fill: ${App.get('primaryColor')};
             }
 
-            .grown-in-center {
-                background: white;
-                animation: 150ms ease-in-out forwards grown-in-center;
-                border-radius: 20px;
-                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
-                padding: 10px;
-                display: flex;
-            }
-
-            @keyframes grown-in-center {
-                from {
-                    transform: scale(0);
-                    transform-origin: center;
-                    opacity: 0;
-                }
-                to {
-                    transform: scale(1);
-                    transform-origin: center;
-                    opacity: 1;
-                }
-            }
-
             /* Border */
             #id .border {
                 border: solid 2px ${App.get('primaryColor')};

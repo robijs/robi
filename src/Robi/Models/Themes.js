@@ -1,11 +1,4 @@
 // @START-File
-/*
-Other dark options considered:
-    secondary: '#1e1e1e'
-    background: '#2d2d2d'
-    background: '#151515'
-    background: '#242424'
-*/
 const Themes = [
     { 
         name: 'Blue',
@@ -22,9 +15,9 @@ const Themes = [
             primary: '#167EFB',
             secondary: '#151515',
             background: '#1e1e1e',
-            color: '#24292f',
+            color: '#d4d4d4',
             selectedRowOpacity: 10,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
@@ -43,9 +36,9 @@ const Themes = [
             primary: '#A52A2A',
             secondary: '#151515',
             background: '#1e1e1e',
-            color: '#24292f',
+            color: '#d4d4d4',
             selectedRowOpacity: 10,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
@@ -64,9 +57,9 @@ const Themes = [
             primary: '#708090',
             secondary: '#151515',
             background: '#1e1e1e',
-            color: '#24292f',
+            color: '#d4d4d4',
             selectedRowOpacity: 10,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
@@ -85,9 +78,9 @@ const Themes = [
             primary: '#2E8B57',
             secondary: '#151515',
             background: '#1e1e1e',
-            color: '#24292f',
+            color: '#d4d4d4',
             selectedRowOpacity: 10,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
@@ -106,9 +99,9 @@ const Themes = [
             primary: '#B8860B',
             secondary: '#151515',
             background: '#1e1e1e',
-            color: '#24292f',
+            color: '#d4d4d4',
             selectedRowOpacity: 10,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
@@ -127,9 +120,9 @@ const Themes = [
             primary: '#8B008B',
             secondary: '#151515',
             background: '#1e1e1e',
-            color: '#24292f',
+            color: '#d4d4d4',
             selectedRowOpacity: 10,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
@@ -148,9 +141,9 @@ const Themes = [
             primary: '#FF8C00',
             secondary: '#151515',
             background: '#1e1e1e',
-            color: '#24292f',
+            color: '#d4d4d4',
             selectedRowOpacity: 10,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
@@ -169,9 +162,9 @@ const Themes = [
             primary: '#C71585',
             secondary: '#151515',
             background: '#1e1e1e',
-            color: '#24292f',
+            color: '#d4d4d4',
             selectedRowOpacity: 10,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
@@ -187,12 +180,12 @@ const Themes = [
             borderColor: '#d6d8db80'
         },
         dark: {
-            primary: '#9370DB',
+            primary: '#a580f5',
             secondary: '#151515',
             background: '#1e1e1e',
             color: '#d4d4d4',
             selectedRowOpacity: 20,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
@@ -211,9 +204,9 @@ const Themes = [
             primary: '#e63e44',
             secondary: '#151515',
             background: '#1e1e1e',
-            color: '#24292f',
+            color: '#d4d4d4',
             selectedRowOpacity: 10,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
@@ -232,9 +225,9 @@ const Themes = [
             primary: '#2F4F4F',
             secondary: '#151515',
             background: '#1e1e1e',
-            color: '#24292f',
+            color: '#d4d4d4',
             selectedRowOpacity: 10,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
@@ -246,16 +239,16 @@ const Themes = [
             background: '#F8F8FC',
             color: '#24292f',
             selectedRowOpacity: 1,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#e9ecef',
             borderColor: '#d6d8db80'
         },
         dark: {
             primary: '#008080',
             secondary: '#151515',
             background: '#1e1e1e',
-            color: '#24292f',
+            color: '#d4d4d4',
             selectedRowOpacity: 1,
-            buttonBackgroundColor: '#343a40',
+            buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }
     },
