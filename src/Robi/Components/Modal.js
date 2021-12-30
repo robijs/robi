@@ -149,6 +149,8 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
             }
 
             #id .close .circle-fill {
+                width: 20px;
+                height: 20px;
                 position: absolute;
                 fill: darkgray;
                 top: 2px;
@@ -156,13 +158,9 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
                 transition: all 300ms ease;
             }
 
-            #id .close .icon-container:hover > .circle-fill {
-                fill: ${App.get('primaryColor')};
-            }
-
             #id .close .x-circle-fill {
-                width: 1.2em;
-                height: 1.2em;
+                width: 24px;
+                height: 24px;
                 fill: ${App.get('buttonBackgroundColor')};
                 z-index: 10;
             }

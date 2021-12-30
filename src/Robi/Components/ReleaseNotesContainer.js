@@ -43,7 +43,7 @@ export async function ReleaseNotesContainer(param) {
 
     if (releaseNotes?.length === 0) {
         const alertInfo = Alert({
-            text: 'Release notes haven\'t been published for any version yet.',
+            text: 'None',
             type: 'robi-secondary',
             margin: '20px 0px 0px 0px',
             parent: releaseNotesCard
