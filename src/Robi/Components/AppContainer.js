@@ -47,7 +47,7 @@ export function AppContainer() {
             }
             
             ::-webkit-scrollbar-thumb {
-                background: ${App.get('prefersColorScheme') === 'dark' ? App.get('buttonBackgroundColor'): 'lightgray'};
+                background: ${App.get('prefersColorScheme') === 'dark' ? 'dimgray' : 'lightgray'};
                 width: 8px;
                 height: 8px;
                 border: 3px solid transparent;
