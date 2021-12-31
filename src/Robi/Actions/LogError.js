@@ -15,7 +15,7 @@ import { Post } from './Post.js'
  */
 export async function LogError(param) {
     const {
-        Message, Error, Source, Line, ColumnNumber
+        Message, Error, Source
     } = param;
 
     if (App.get('mode') === 'prod') {
@@ -26,9 +26,9 @@ export async function LogError(param) {
          *
          * @author Stephen Matheis
          * @to Wilfredo Pacheo, John Westhuis
-         * Catching the request digest promise was a great idea. Jealous I didn't think of it >_<;
+         * Catching the request digest promise was a great idea. Jealous I didn't think of it >_<!
          */
-        const requestDigest = await GetRequestDigest().catch(e => {
+        const requestDigest = await GetRequestDigest().catch(() => {
             alert('Your session has expired, your page will now reload.');
             location.reload();
         });

@@ -83,20 +83,30 @@ export async function DeleteRoutes({ routes }) {
 
         // TODO: Add _ARCHIVED to Route dir name in App/src/Routes
     } else {
-        setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
-            method: 'POST',
-            body: updated
-        });
-
-        console.log('Archive route');
-        
-        for (let route of routes) {
-            await fetch(`http://127.0.0.1:2035/?path=src/Routes/${route}`, {
-                method: 'DELETE'
+        try {
+            setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
+                method: 'POST',
+                body: updated
             });
+    
+            console.log('Archive route');
+            
+            for (let route of routes) {
+                await fetch(`http://127.0.0.1:2035/?path=src/Routes/${route}`, {
+                    method: 'DELETE'
+                });
+            }
+    
+            await Wait(1000);
+        } catch(err) {
+            LogError({
+                Message: 'Problem archiving route',
+                Source: import.meta.url,
+                Error: err
+            });
+            
+            console.log(err);
         }
-
-        await Wait(1000);
     }
 
     console.log('Saved:', setFile);
