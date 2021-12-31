@@ -22,17 +22,27 @@ export function ThemeField(param) {
                         Themes.map(theme => {
                             // TODO: UI and Logic for choosing / switching themes
                             const { name, light, dark } = theme;
-                            const { primary, secondary, background, color } = theme.light; // FIXME: remove hard coded choice - light
+                            const { primary, secondary, background, color } = theme[App.get('prefersColorScheme')];
 
                             return /*html*/ `
-                                <div class='theme-app ${name === selected ? 'selected' : ''}' style='color: ${color};' data-theme='${name}'>
-                                    <div class='theme-sidebar' style='background: ${background};'>
-                                        <div class='theme-sidebar-title'>Title</div>
-                                        <div class='theme-nav selected' style='background: ${primary}; color: white;'>Selected</div>
-                                        <div class='theme-nav'>Route</div>
+                                <div class='d-flex flex-column justify-content-center align-items-center mb-4'>
+                                    <div class='theme-app ${name === selected ? 'selected' : ''}' style='color: ${color};' data-theme='${name}'>
+                                        <div class='theme-sidebar' style='background: ${background};'>
+                                            <div class='theme-sidebar-title'>Title</div>
+                                            <div class='theme-nav selected' style='background: ${primary}; color: white;'>Selected</div>
+                                            <div class='theme-nav'>Route</div>
+                                        </div>
+                                        <div class='theme-maincontainer' style='background: ${secondary};'>
+                                            <div class='theme-title'>${name}</div>
+                                        </div>
                                     </div>
-                                    <div class='theme-maincontainer' style='background: ${secondary};'>
-                                        <div class='theme-title'>${name}</div>
+                                    <!-- Toggle Light/Dark Mode -->
+                                    <div class='d-flex justify-content-center align-items-center'>
+                                        <div class="mode mt-2 mr-2">
+                                            <label style='display: none;' title='Hidden checkbox to toggle dark/light mode' for="toggle-${name}"></label>
+                                            <input id="toggle-${name}" class="toggle" type="checkbox" style='color: ${primary}' checked>
+                                        </div>
+                                        <div class='mode-text' data-toggleid="toggle-${name}">Light</div>
                                     </div>
                                 </div>
                             `
@@ -66,14 +76,8 @@ export function ThemeField(param) {
                 border: solid 1px ${App.get('borderColor')};
             }
 
-            #id .theme-app:not(:last-child) {
-                /* margin-right: 15px; */
-                margin-bottom: 15px;
-            }
-   
             #id .theme-app.selected {
-                /* background: ${App.get('primaryColor') + '20'}; */
-                box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')};
+                box-shadow: 0px 0px 0px 3px mediumseagreen;
             }
 
             #id .theme-sidebar {
@@ -114,6 +118,36 @@ export function ThemeField(param) {
                 font-weight: 700;
                 font-size: 13px;
             }
+
+            /* Toggle - https://codepen.io/mrozilla/pen/OJJNjRb */
+            .toggle {
+                --size: 20px;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                outline: none;
+                border: none;
+                cursor: pointer;
+                width: var(--size);
+                height: var(--size);
+                box-shadow: inset calc(var(--size) * 0.33) calc(var(--size) * -0.25) 0;
+                border-radius: 999px;
+                transition: all 200ms;
+                z-index: 1;
+            }
+
+            .toggle:checked {
+                --ray-size: calc(var(--size) * -0.4);
+                --offset-orthogonal: calc(var(--size) * 0.65);
+                --offset-diagonal: calc(var(--size) * 0.45);
+                transform: scale(0.75);
+                box-shadow: inset 0 0 0 var(--size), calc(var(--offset-orthogonal) * -1) 0 0 var(--ray-size), var(--offset-orthogonal) 0 0 var(--ray-size), 0 calc(var(--offset-orthogonal) * -1) 0 var(--ray-size), 0 var(--offset-orthogonal) 0 var(--ray-size), calc(var(--offset-diagonal) * -1) calc(var(--offset-diagonal) * -1) 0 var(--ray-size), var(--offset-diagonal) var(--offset-diagonal) 0 var(--ray-size), calc(var(--offset-diagonal) * -1) var(--offset-diagonal) 0 var(--ray-size), var(--offset-diagonal) calc(var(--offset-diagonal) * -1) 0 var(--ray-size);
+            }
+
+            .mode-text {
+                font-size: 14px;
+                font-weight: 500;
+            }
         `,
         parent,
         position,
@@ -129,6 +163,16 @@ export function ThemeField(param) {
                     
                     // Select
                     this.classList.add('selected');
+                }
+            },
+            {
+                selector: '#id .toggle',
+                event: 'change',
+                listener(event) {
+                    const toggleid = event.target.toggleid;
+                    const mode = event.checked ? 'light' : 'dark';
+
+                    component.find(`.mode-text[data-toggleid='${toggleid}']`).innerText = mode;
                 }
             }
         ]

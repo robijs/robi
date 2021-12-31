@@ -241,7 +241,7 @@ export async function AddRoute(event) {
                         //     ``,
                         //     `export default async function ${routePath.value()}({ parent, pathParts, props }) {`,
                         //     `    // View title`,
-                        //     `    const viewTitle = Title({`,
+                        //     `    const routeTitle = Title({`,
                         //     `        title: /* @START-Title */'${routeTitle.value()}'/* @END-Title */,`,
                         //     `        parent,`,
                         //     `        date: new Date().toLocaleString('en-US', {`,
@@ -250,7 +250,7 @@ export async function AddRoute(event) {
                         //     `        type: 'across'`,
                         //     `    });`,
                         //     ``,
-                        //     `    viewTitle.add();`,
+                        //     `    routeTitle.add();`,
                         //     `}`
                         // ].join('\n');
                         const contents = RouteTemplate({

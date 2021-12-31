@@ -5,19 +5,19 @@
 
 import { Title } from '../../Robi/RobiUI.js'
 
-// @START-File
-export default function MultiWordTitle(param) {
+// @START-ChangeTheme
+export default function ChangeTheme(param) {
     const {
         parent,
     } = param;
 
-    // @START-ViewTitle
+    // @START-routeTitle
     const routeTitle = Title({
-        title: /* @START-Title */'Multi Word Title'/* @END-Title */,
+        title: /* @START-Title */'Change Theme'/* @END-Title */,
         parent
     });
-    // @END-ViewTitle
+    // @END-routeTitle
     
     routeTitle.add();
 }
-// @END-File
+// @END-ChangeTheme

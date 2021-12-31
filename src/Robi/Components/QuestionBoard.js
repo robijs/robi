@@ -56,7 +56,7 @@ export async function QuestionBoard(param) {
             parent
         });
 
-        viewTitle.add();
+        routeTitle.add();
 
         const questionTypesResponse = await Get({
             list: 'Settings',
@@ -115,7 +115,7 @@ export async function QuestionBoard(param) {
             position: 'afterbegin'
         });
 
-        viewTitle.add();
+        routeTitle.add();
     }
 
     /** View Container */

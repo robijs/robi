@@ -1,20 +1,19 @@
-// This file may be edited programmatically.
+// This file can be edited programmatically.
 // If you know the API, feel free to make changes by hand.
 // Just be sure to put @START and @END sigils in the right places.
-// Otherwise, changes made from the front end may not render properly.
+// Otherwise, changes made with GUI tools will not render properly.
 
 // @START-IMPORTS
 import { Start } from './Robi/Robi.js'
 import lists from './lists.js';
 import Test from './Routes/Test/Test.js'
 import Table from './Routes/Table/Table.js'
-import Sort from './Routes/Sort/Sort.js'
 // @END-IMPORTS
 
 // @START
 Start({
     lists,
-    // Routes can be linked to directly with hash fragment. Ex: https://site#path.
+    // Routes create directly addressable links with hash fragment. Ex: https://site#path.
     routes: [
         // @START-ROUTES
         // @START-Test
@@ -32,14 +31,6 @@ Start({
             go: Table
         }
         // @END-Table
-        , // @ROUTE
-        // @START-Sort
-        {
-            path: 'Sort',
-            icon: 'bs-arrow-left-circle-fill',
-            go: Sort
-        }
-        // @END-Sort
         // @END-ROUTES
     ],
     settings: {

@@ -9,7 +9,7 @@ export default async function Test(param) {
     const { parent } = param;
 
     // View title
-    const viewTitle = Title({
+    const routeTitle = Title({
         title: /* @START-Title */'Test'/* @END-Title */,
         parent,
         date: new Date().toLocaleString('en-US', {
@@ -18,7 +18,7 @@ export default async function Test(param) {
         type: 'across'
     });
 
-    viewTitle.add();
+    routeTitle.add();
 
     const copyAppBtn = BootstrapButton({
         value: 'Copy app.js',

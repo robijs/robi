@@ -2,7 +2,7 @@ import { Title } from '../../Robi/RobiUI.js'
 
 export default async function Measures({ parent, pathParts, props }) {
     // View title
-    const viewTitle = Title({
+    const routeTitle = Title({
         title: /* @START-Title */'Different'/* @END-Title */,
         parent,
         date: new Date().toLocaleString('en-US', {
@@ -11,5 +11,5 @@ export default async function Measures({ parent, pathParts, props }) {
         type: 'across'
     });
 
-    viewTitle.add();
+    routeTitle.add();
 }

@@ -42,7 +42,7 @@ export async function DeleteRoutes({ routes }) {
 
     }).join('\n');
 
-    updated = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS\n${remainingImports || '\n'}\n// @END-IMPORTS`);
+    updated = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS${remainingImports || '\n'}\n// @END-IMPORTS`);
 
     const allRoutes = content.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
     const routeObjects = allRoutes[1].split(', // @ROUTE');

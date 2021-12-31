@@ -6,14 +6,14 @@
  */
 export function ComponentTemplate({ name }) {
     return [
-        `// This file may be edited programmatically.`,
+        `// This file can be edited programmatically.`,
         `// If you know the API, feel free to make changes by hand.`,
         `// Just be sure to put @START and @END sigils in the right places.`,
-        `// Otherwise, changes made from the front end may not render properly.`,
+        `// Otherwise, changes made with GUI tools will not render properly.`,
         ``,
         `import { Component } from '../Robi.js'`,
         ``,
-        `// @START-File`,
+        `// @START-${name}`,
         `/**`,
         ` * `,
         ` * @param {Object} param - Object passed in as only argument to a Robi component`,
@@ -56,7 +56,7 @@ export function ComponentTemplate({ name }) {
         ``,
         `    return component;`,
         `}`,
-        `// @END-File`,
+        `// @END-${name}`,
         ``
     ].join('\n');
 }

@@ -28,12 +28,12 @@ export async function Developer(param) {
     }
 
     /** View Title */
-    const viewTitle = Title({
+    const routeTitle = Title({
         title: 'Developer',
         parent
     });
 
-    viewTitle.add();
+    routeTitle.add();
 
     const devConsole = DevConsole({
         parent

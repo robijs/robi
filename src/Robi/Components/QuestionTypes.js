@@ -14,12 +14,12 @@ export async function QuestionTypes(param) {
     const { parent } = param;
 
     // View Title
-    const viewTitle = Title({
+    const routeTitle = Title({
         title: `Questions`,
         parent
     });
 
-    viewTitle.add();
+    routeTitle.add();
 
     // View Container
     const container = Container({

@@ -16,12 +16,12 @@ import { ChangeTheme } from './ChangeTheme.js'
 export async function Settings(param) {
     const { parent } = param;
 
-    const viewTitle = Title({
+    const routeTitle = Title({
         title: `Settings`,
         parent
     });
 
-    viewTitle.add();
+    routeTitle.add();
 
     AccountInfo({
         parent

@@ -9,12 +9,12 @@ import { Alert } from './Alert.js'
 export async function Unauthorized(param) {
     const { parent } = param;
 
-    const viewTitle = Title({
+    const routeTitle = Title({
         title: `403`,
         parent
     });
 
-    viewTitle.add();
+    routeTitle.add();
 
     const alertBanner = Alert({
         type: 'warning',

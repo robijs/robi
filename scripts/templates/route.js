@@ -14,12 +14,12 @@ export function componentTemplate({ name }) {
         `    } = param;`,
         ``,
         `// View title`,
-        `const viewTitle = Title({`,
+        `const routeTitle = Title({`,
         `    title: /* @START-Title */'${title || name}'/* @END-Title */,`,
         `    parent,`,
         `});`,
         ``,
-        `viewTitle.add();`,
+        `routeTitle.add();`,
         `// @END-File`,
         ``
     ].join('\n');
