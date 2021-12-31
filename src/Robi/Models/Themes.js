@@ -198,7 +198,7 @@ const Themes = [
             color: '#24292f',
             selectedRowOpacity: 10,
             buttonBackgroundColor: '#e9ecef',
-            borderColor: '#343a4080'
+            borderColor: '#d6d8db80'
         },
         dark: {
             primary: '#e63e44',
