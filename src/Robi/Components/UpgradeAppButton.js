@@ -117,14 +117,14 @@ export function UpgradeAppButton(param) {
                     const modal = Modal({
                         title: false,
                         disableBackdropClose: true,
+                        close: true,
                         async addContent(modalBody) {
                             modalBody.classList.add('install-modal');
 
                             // Show loading
                             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                                <div class='loading-spinner w-100 d-flex flex-column justify-content-center align-items-center'>
-                                    <div class="mb-2" style='font-weight: 600; color: darkgray'>Upgrade Robi</div>
-                                    <div class="spinner-grow" style='color: darkgray' role="status"></div>
+                                <div class='alert alert-robi-primary mb-0'>
+                                    Comming soon. Stay tuned!
                                 </div>
                             `);
                         },

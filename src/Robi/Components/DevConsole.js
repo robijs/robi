@@ -85,10 +85,6 @@ export function DevConsole(param) {
             </div>
         `,
         style: /*css*/ `
-            #id {
-                padding: 20px 0px;
-            }
-            
             #id .alert {
                 border: none;
                 border-radius: 20px;
@@ -171,7 +167,7 @@ export function DevConsole(param) {
                 position: absolute;
                 width: 300px;
                 right: 30px;
-                top: 70px;
+                top: 80%;
                 text-align: center;
             }
 

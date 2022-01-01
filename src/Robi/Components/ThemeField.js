@@ -2,6 +2,7 @@ import { Component } from '../Actions/Component.js'
 import { Themes } from '../Models/Themes.js'
 import { App } from '../Core/App.js'
 
+// TODO: add transition animation to theme change
 // @START-File
 /**
  *
@@ -122,14 +123,14 @@ export function ThemeField(param) {
                 border-radius: 999px;
                 transition: all 200ms;
                 z-index: 1;
-                color: #17202A;
+                color: #54595f;
             }
 
             .toggle:checked {
                 --ray-size: calc(var(--size) * -0.4);
                 --offset-orthogonal: calc(var(--size) * 0.65);
                 --offset-diagonal: calc(var(--size) * 0.45);
-                color: #F39C12;
+                color: #ced4da;
                 transform: scale(0.75);
                 box-shadow: inset 0 0 0 var(--size), calc(var(--offset-orthogonal) * -1) 0 0 var(--ray-size), var(--offset-orthogonal) 0 0 var(--ray-size), 0 calc(var(--offset-orthogonal) * -1) 0 var(--ray-size), 0 var(--offset-orthogonal) 0 var(--ray-size), calc(var(--offset-diagonal) * -1) calc(var(--offset-diagonal) * -1) 0 var(--ray-size), var(--offset-diagonal) var(--offset-diagonal) 0 var(--ray-size), calc(var(--offset-diagonal) * -1) var(--offset-diagonal) 0 var(--ray-size), var(--offset-diagonal) calc(var(--offset-diagonal) * -1) 0 var(--ray-size);
             }
@@ -183,9 +184,9 @@ export function ThemeField(param) {
                 <div class='d-flex justify-content-center align-items-center'>
                     <div class="mode mt-2 mr-2">
                         <label style='display: none;' title='Hidden checkbox to toggle dark/light mode' for="toggle-${name}"></label>
-                        <input id="toggle-${name}" class="toggle" type="checkbox" checked>
+                        <input id="toggle-${name}" class="toggle" type="checkbox" ${mode === 'light' ? 'checked' : ''}>
                     </div>
-                    <div class='mode-text' data-toggleid="toggle-${name}">Light</div>
+                    <div class='mode-text' data-toggleid="toggle-${name}">${mode === 'light' ? 'Light' : 'Dark'}</div>
                 </div>
             </div>
         `

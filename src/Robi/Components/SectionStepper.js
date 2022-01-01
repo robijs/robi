@@ -32,6 +32,8 @@ export function SectionStepper(param) {
                 flex-direction: column;
                 padding: ${padding || '0px'};
                 border-radius: 10px;
+                min-width: ${window.innerWidth > 1366 ? '200px' : '125px'};
+                transition: width 300ms, min-width 300ms;
             }
 
             #id .section-title-group {
@@ -116,7 +118,17 @@ export function SectionStepper(param) {
                     }
                 }
             }
-        ]
+        ],
+        onAdd() {
+            // Window resize event
+            window.addEventListener('resize', event => {
+                if (window.innerWidth > 1366) {
+                    component.get().style.minWidth = '200px';
+                } else {
+                    component.get().style.minWidth = '125px';
+                }
+            });
+        }
     });
 
     function createHTML() {

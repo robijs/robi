@@ -1,7 +1,10 @@
+import { App } from '../Core/App.js'
 import { Title } from './Title.js'
+import { Table } from './Table.js'
+import { Card } from './Card.js'
 import { Container } from './Container.js'
 import { SectionStepper } from './SectionStepper.js'
-
+import { DevConsole } from './DevConsole.js'
 import { UpgradeAppButton } from './UpgradeAppButton.js'
 import { AccountInfo } from './AccountInfo.js'
 import { BuildInfo } from './BuildInfo.js'
@@ -10,7 +13,11 @@ import { ReleaseNotesContainer } from './ReleaseNotesContainer.js'
 import { SiteUsageContainer } from './SiteUsageContainer.js'
 import { Store } from '../Core/Store.js'
 import { ChangeTheme } from './ChangeTheme.js'
-import { Route } from '../Robi.js'
+import { Get } from '../Actions/Get.js'
+import { Route } from '../Actions/Route.js'
+import { LoadingSpinner } from './LoadingSpinner.js'
+import { ErrorForm } from './ErrorForm.js'
+import { LogForm } from './LogForm.js'
 
 // @START-File
 /**
@@ -22,10 +29,10 @@ export async function Settings({ parent, pathParts }) {
     const path = pathParts[1] || 'Account';
 
     const devPaths = [
-        'Developer',
+        'Build',
+        'Logs',
         'SiteUsage',
-        'Theme',
-        'Build'
+        'Theme'
     ];
 
     if (devPaths.includes(path) && Store.user().Role !== 'Developer') {
@@ -37,31 +44,28 @@ export async function Settings({ parent, pathParts }) {
         {
             name: 'Account',
             path: 'Account'
-        },
-        {
-            name: 'Release Notes',
-            path: 'ReleaseNotes'
         }
     ];
 
     // Developers can see additional options
     if (Store.user().Role === 'Developer') {
+        sections.splice(1, 0, { name: 'App',path: 'App'});
         sections = sections.concat([
             {
-                name: 'Developer',
-                path: 'Developer'
+                name: 'Build',
+                path: 'Build'
             },
             {
-                name: 'Site Usage',
-                path: 'SiteUsage'
+                name: 'Logs',
+                path: 'Logs'
             },
             {
                 name: 'Theme',
                 path: 'Theme'
             },
             {
-                name: 'Build',
-                path: 'Build'
+                name: 'Usage',
+                path: 'Usage'
             }
         ]);
     }
@@ -86,7 +90,7 @@ export async function Settings({ parent, pathParts }) {
         minWidth: 'fit-content',
         direction: 'column',
         padding: '20px',
-        borderRight: 'solid 1px #d6d8db80',
+        borderRight: `solid 1px ${App.get('borderColor')}`,
         parent: formContainer
     });
 
@@ -194,18 +198,26 @@ export async function Settings({ parent, pathParts }) {
             });
             break;
         case 'Release Notes':
+
+            break;
+        case 'App':
+            if (Store.user().Role === 'Developer') {
+                const devConsole = DevConsole({
+                    parent: planContainer
+                });
+            
+                devConsole.add();
+    
+                DeveloperLinks({
+                    parent: planContainer
+                });
+            }
+
             ReleaseNotesContainer({
-                title: '',
-                padding: '0px',
                 parent: planContainer
             });
             break;
-        case 'Developer':
-            DeveloperLinks({
-                parent: planContainer
-            });
-            break;
-        case 'Site Usage':
+        case 'Usage':
             SiteUsageContainer({
                 parent: planContainer
             });
@@ -214,6 +226,137 @@ export async function Settings({ parent, pathParts }) {
             ChangeTheme({
                 parent: planContainer
             });
+            break;
+        case 'Logs':
+            const logLoadingIndicator = LoadingSpinner({
+                message: 'Loading logs',
+                type: 'robi',
+                parent: planContainer
+            });
+        
+            logLoadingIndicator.add();
+        
+            const log = await Get({
+                list: 'Log',
+                select: 'Id,Title,Message,Module,StackTrace,SessionId,Created,Author/Title',
+                expand: 'Author/Id',
+                orderby: 'Id desc',
+                top: '25',
+            });
+        
+            const logCard = Card({
+                background: App.get('backgroundColor'),
+                width: '100%',
+                radius: '20px',
+                padding: '20px 30px',
+                margin: '0px 0px 40px 0px',
+                parent: planContainer
+            });
+        
+            logCard.add();
+        
+            await Table({
+                heading: 'Logs',
+                headingMargin: '0px 0px 20px 0px',
+                fields: [
+                    {
+                        internalFieldName: 'Id',
+                        displayName: 'Id'
+                    },
+                    {
+                        internalFieldName: 'SessionId',
+                        displayName: 'SessionId'
+                    },
+                    {
+                        internalFieldName: 'Title',
+                        displayName: 'Type'
+                    },
+                    {
+                        internalFieldName: 'Created',
+                        displayName: 'Created'
+                    },
+                    {
+                        internalFieldName: 'Author',
+                        displayName: 'Author'
+                    }
+                ],
+                buttons: [],
+                buttonColor: App.get('prefersColorScheme') === 'dark' ? '#303336' : '#dee2e6',
+                showId: true,
+                addButton: false,
+                checkboxes: false,
+                formTitleField: 'Id',
+                order: [[0, 'desc']],
+                items: log,
+                editForm: LogForm,
+                editFormTitle: 'Log',
+                parent: logCard
+            });
+        
+            logLoadingIndicator.remove();
+        
+            const errorsLoadingIndicator = LoadingSpinner({
+                message: 'Loading errors',
+                type: 'robi',
+                parent: planContainer
+            });
+        
+            errorsLoadingIndicator.add();
+        
+            const errors = await Get({
+                list: 'Errors',
+                select: 'Id,Message,Error,Source,SessionId,Status,Created,Author/Title',
+                expand: 'Author/Id',
+                orderby: 'Id desc',
+                top: '25'
+            });
+        
+            const errorsCard = Card({
+                background: App.get('backgroundColor'),
+                width: '100%',
+                radius: '20px',
+                padding: '20px 30px',
+                margin: '0px 0px 40px 0px',
+                parent: planContainer
+            });
+        
+            errorsCard.add();
+        
+            await Table({
+                heading: 'Errors',
+                headingMargin: '0px 0px 20px 0px',
+                fields: [
+                    {
+                        internalFieldName: 'Id',
+                        displayName: 'Id'
+                    },
+                    {
+                        internalFieldName: 'SessionId',
+                        displayName: 'SessionId'
+                    },
+                    {
+                        internalFieldName: 'Created',
+                        displayName: 'Created'
+                    },
+                    {
+                        internalFieldName: 'Author',
+                        displayName: 'Author'
+                    }
+                ],
+                buttonColor: '#dee2e6',
+                showId: true,
+                addButton: false,
+                checkboxes: false,
+                formFooter: false,
+                formTitleField: 'Id',
+                order: [[0, 'desc']],
+                items: errors,
+                editForm: ErrorForm,
+                editFormTitle: 'Error',
+                parent: errorsCard
+            });
+        
+            errorsLoadingIndicator.remove();
             break;
         case 'Build':
             BuildInfo({
