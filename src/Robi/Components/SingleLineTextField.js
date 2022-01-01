@@ -101,7 +101,6 @@ export function SingleLineTextField(param) {
 
             #id .form-field-single-line-text {
                 width: ${width || 'unset'};
-                min-height: 36px;
                 font-size: ${fontSize || '13px'};
                 font-weight: 500;
                 margin: ${margin || '2px 0px 4px 0px'};

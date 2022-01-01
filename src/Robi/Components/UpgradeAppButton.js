@@ -32,6 +32,7 @@ export function UpgradeAppButton(param) {
         style: /*css*/ `
             #id {
                 padding: 0px;
+                width: 100%;
             }
             
             #id .alert {

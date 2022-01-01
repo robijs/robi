@@ -11,7 +11,7 @@ import { App } from '../Core/App.js'
  */
 export function SectionStepper(param) {
     const {
-        title, sections, selected, route, padding, parent, position
+        title, sections, selected, route, padding, parent, position, numbers
     } = param;
 
     const component = Component({
@@ -32,12 +32,10 @@ export function SectionStepper(param) {
                 flex-direction: column;
                 padding: ${padding || '0px'};
                 border-radius: 10px;
-                /* overflow: auto; */
             }
 
             #id .section-title-group {
                 overflow: overlay;
-                /* border-radius: 10px; */
             }
 
             /* Buttons */
@@ -46,19 +44,6 @@ export function SectionStepper(param) {
                 color: #444;
                 border-color: transparent;
             }
-
-            /* Title */
-            /* #id .section-title {
-                font-size: 1em;
-                font-weight: 700;
-                text-align: center;
-                background: ${App.get('buttonBackgroundColor')};
-                color: ${App.get('primaryColor')};
-                border-radius: 10px;
-                margin-bottom: 15px;
-                padding: 10px;
-                cursor: pointer;
-            } */
 
             #id .section-title {
                 font-size: 18px;
@@ -97,6 +82,7 @@ export function SectionStepper(param) {
             /* Number */
             #id .section-circle {
                 color: ${App.get('primaryColor')};
+                margin-right: 10px;
             }
 
             /* Name */
@@ -108,7 +94,6 @@ export function SectionStepper(param) {
 
             #id .section-name-text {
                 font-size: 15px;
-                margin-left: 10px;
             }
         `,
         parent,
@@ -144,7 +129,7 @@ export function SectionStepper(param) {
 
             html += /*html*/ `
                 <div class='section-group${name === selected ? ' selected' : ''}' data-path='${path}'>
-                    <div class='section-circle' data-name='${name}'>${index + 1}</div>
+                    ${numbers !== false ? /*html*/ `<div class='section-circle' data-name='${name}'>${index + 1}</div>` : ''}
             `;
 
             html += /*html*/ `

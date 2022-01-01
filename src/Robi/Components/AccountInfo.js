@@ -14,9 +14,7 @@ export async function AccountInfo(param) {
     } = param;
 
     const accountInfoCard = Card({
-        title: 'Account',
         width: '100%',
-        margin: '20px 0px 0px 0px',
         background: App.get('backgroundColor'),
         titleBorder: 'none',
         radius: '20px',
@@ -34,7 +32,7 @@ export async function AccountInfo(param) {
         label: 'Name',
         value: Title,
         readOnly: true,
-        fieldMargin: '10px 0px 0px 0px',
+        fieldMargin: '0px 0px 20px 0px',
         parent: accountInfoCard
     });
 
@@ -45,7 +43,7 @@ export async function AccountInfo(param) {
         label: 'Account',
         value: LoginName,
         readOnly: true,
-        fieldMargin: '0px 0px 0px 0px',
+        fieldMargin: '0px 0px 20px 0px',
         parent: accountInfoCard
     });
 
@@ -56,7 +54,7 @@ export async function AccountInfo(param) {
         label: 'Email',
         value: Email,
         readOnly: true,
-        fieldMargin: '0px 0px 1px 0px',
+        fieldMargin: '0px 0px 20px 0px',
         parent: accountInfoCard
     });
 

@@ -18,9 +18,8 @@ export async function SiteUsageContainer(param) {
 
     /** Dashboard */
     const dashboardCard = Card({
-        title: 'Site Usage',
         width: '100%',
-        margin: '20px 0px 0px 0px',
+        padding: '0px',
         parent
     });
 

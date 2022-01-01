@@ -82,7 +82,7 @@ export function Sidebar({ parent, path }) {
                         <span class='icon-container-wide'>
                             <svg class='icon'><use href='#icon-bs-gear'></use></svg>
                         </span>
-                        <!-- <span class='text'>Settings</span> -->
+                        <span class='text'>Settings</span>
                     </span>
                 </div>
             </div>

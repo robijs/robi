@@ -1,5 +1,5 @@
 import { Get } from '../Actions/Get.js'
-import { Card } from './Card.js'
+import { Container } from './Container.js';
 import { LoadingSpinner } from './LoadingSpinner.js' 
 import { SingleLineTextField } from './SingleLineTextField.js'
 
@@ -13,20 +13,21 @@ export async function BuildInfo(param) {
         parent,
     } = param;
 
-    const accountInfoCard = Card({
-        title: 'Build',
+    const card = Container({
         width: '100%',
-        margin: '20px 0px 0px 0px',
+        direction: 'column',
+        padding: '0px 20px',
+        height: '100px',
         parent
     });
 
-    accountInfoCard.add();
+    card.add();
+
     // Show loading
     const loadingIndicator = LoadingSpinner({
         message: 'Loading robi build',
         type: 'robi',
-        margin: '40px 0px',
-        parent
+        parent: card
     });
 
     loadingIndicator.add();
@@ -45,8 +46,7 @@ export async function BuildInfo(param) {
         label: 'Version',
         value: appSettings.find(item => item.Key === 'Version')?.Value,
         readOnly: true,
-        fieldMargin: '10px 0px 0px 0px',
-        parent: accountInfoCard
+        parent: card
     });
 
     nameField.add();
@@ -56,8 +56,8 @@ export async function BuildInfo(param) {
         label: 'Build',
         value: appSettings.find(item => item.Key === 'Build')?.Value,
         readOnly: true,
-        fieldMargin: '0px 0px 0px 0px',
-        parent: accountInfoCard
+        fieldMargin: '0px 0px 20px 0px',
+        parent: card
     });
 
     accountField.add();
