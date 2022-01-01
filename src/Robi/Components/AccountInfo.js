@@ -38,9 +38,9 @@ export async function AccountInfo(param) {
 
     nameField.add();
 
-    /** Account */
+    /** Login Name */
     const accountField = SingleLineTextField({
-        label: 'Account',
+        label: 'Login Name',
         value: LoginName,
         readOnly: true,
         fieldMargin: '0px 0px 20px 0px',

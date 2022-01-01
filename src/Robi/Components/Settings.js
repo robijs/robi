@@ -18,6 +18,7 @@ import { Route } from '../Actions/Route.js'
 import { LoadingSpinner } from './LoadingSpinner.js'
 import { ErrorForm } from './ErrorForm.js'
 import { LogForm } from './LogForm.js'
+import { MyTheme } from './MyTheme.js'
 
 // @START-File
 /**
@@ -196,6 +197,22 @@ export async function Settings({ parent, pathParts }) {
             AccountInfo({
                 parent: planContainer
             });
+
+            const preferences = Card({
+                width: '100%',
+                title: 'Preferences',
+                titleBorder: 'none',
+                radius: '20px',
+                parent: planContainer
+            });
+
+            preferences.add();
+
+            const themePreference = MyTheme({
+                parent: planContainer
+            });
+
+            themePreference.add();
             break;
         case 'Release Notes':
 

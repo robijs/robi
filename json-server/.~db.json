@@ -914,6 +914,27 @@
       "Created": "Sat, 01 Jan 2022 02:21:19 GMT",
       "Modified": "Sat, 01 Jan 2022 02:21:19 GMT",
       "Id": 45
+    },
+    {
+      "SessionId": null,
+      "Message": "theme is not defined",
+      "Error": "ReferenceError: theme is not defined\n    at MyTheme (http://127.0.0.1:8080/src/Robi/Components/MyTheme.js:20:38)\n    at Settings (http://127.0.0.1:8080/src/Robi/Components/Settings.js:211:37)\n    at Object.go (http://127.0.0.1:8080/src/Robi/Core/Routes.js:83:13)\n    at Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:150:11)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:147:5)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Sat, 01 Jan 2022 04:34:32 GMT",
+      "Modified": "Sat, 01 Jan 2022 04:34:32 GMT",
+      "Id": 46
     }
   ],
   "Log": [
