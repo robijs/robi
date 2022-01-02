@@ -20,6 +20,7 @@ export function ChangeTheme(param) {
         display: 'block',
         width: '100%',
         maxWidth: '995px',
+        margin: '0px 0px 30px 0px',
         parent
     });
 

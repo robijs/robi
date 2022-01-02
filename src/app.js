@@ -75,7 +75,7 @@ Start({
                 path: 'General'
             }
         ],
-        theme: /* @START-theme */'Teal'/* @END-theme */,
+        theme: /* @START-theme */'Purple'/* @END-theme */,
         title: /* @START-title */'Title'/* @END-title */,
         userDefaultRole: 'User',
         userSettings: /* @START-userSettings */JSON.stringify({ savedSearches: {} })/* @END-userSettings */,
