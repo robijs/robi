@@ -1,6 +1,15 @@
-import { Component } from '../Actions/Component.js'
-import { Themes } from '../Models/Themes.js'
 import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
+import { Component } from '../Actions/Component.js'
+import { SetLocal } from '../Actions/SetLocal.js'
+import { HexToHSL } from '../Actions/HexToHSL.js'
+import { HexToRGB } from '../Actions/HexToRGB.js'
+import { NameToHex } from '../Actions/NameToHex.js'
+import { Themes } from '../Models/Themes.js'
+import { AppContainer } from './AppContainer.js'
+import { Sidebar } from './Sidebar.js'
+import { MainContainer } from './MainContainer.js'
+import { Route } from '../Robi.js'
 
 // TODO: add transition animation to theme change
 // @START-File
@@ -11,13 +20,16 @@ import { App } from '../Core/App.js'
  */
 export function MyTheme(param) {
     const {
-        parent, position
+        parent, position, margin
     } = param;
+
+    const theme = Themes.find(item => item.name === App.get('theme'));
 
     const component = Component({
         html: /*html*/ `
             <div class='themes'>
-                ${containerTemplate({theme, mode: App.get('prefersColorScheme')})}
+                ${containerTemplate({ theme, mode: 'light' })}
+                ${containerTemplate({ theme, mode: 'dark' })}
             </div>
         `,
         style: /*css*/ `
@@ -25,15 +37,17 @@ export function MyTheme(param) {
                 margin: ${margin || '0px 0px 20px 0px'};
             }
 
-            #id .themes {
+            #id.themes {
                 display: flex;
-                flex-wrap: wrap;
                 justify-content: space-between;
-                max-width: 995px;
             }
 
             #id label {
                 font-weight: 500;
+            }
+
+            #id .theme-app-container:not(:last-child) {
+                margin-right: 30px;
             }
 
             #id .theme-app {
@@ -42,10 +56,6 @@ export function MyTheme(param) {
                 height: 150px;
                 width: 200px;
                 border-radius: 10px;
-            }
-
-            #id .theme-app.selected {
-                box-shadow: 0px 0px 0px 3px mediumseagreen;
             }
 
             #id .theme-sidebar {
@@ -92,6 +102,7 @@ export function MyTheme(param) {
 
             #id .theme-maincontainer .btn {
                 font-size: 10.25px;
+                padding: 6px 9px;
             }
 
             #id .theme-maincontainer .background {
@@ -105,67 +116,89 @@ export function MyTheme(param) {
                 font-weight: 500;                
             }
 
-            /* Toggle - https://codepen.io/mrozilla/pen/OJJNjRb */
-            .toggle {
-                --size: 20px;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                appearance: none;
-                outline: none;
-                border: none;
-                cursor: pointer;
-                width: var(--size);
-                height: var(--size);
-                box-shadow: inset calc(var(--size) * 0.33) calc(var(--size) * -0.25) 0;
-                border-radius: 999px;
-                transition: all 200ms;
-                z-index: 1;
-                color: #54595f;
-            }
-
-            .toggle:checked {
-                --ray-size: calc(var(--size) * -0.4);
-                --offset-orthogonal: calc(var(--size) * 0.65);
-                --offset-diagonal: calc(var(--size) * 0.45);
-                color: #ced4da;
-                transform: scale(0.75);
-                box-shadow: inset 0 0 0 var(--size), calc(var(--offset-orthogonal) * -1) 0 0 var(--ray-size), var(--offset-orthogonal) 0 0 var(--ray-size), 0 calc(var(--offset-orthogonal) * -1) 0 var(--ray-size), 0 var(--offset-orthogonal) 0 var(--ray-size), calc(var(--offset-diagonal) * -1) calc(var(--offset-diagonal) * -1) 0 var(--ray-size), var(--offset-diagonal) var(--offset-diagonal) 0 var(--ray-size), calc(var(--offset-diagonal) * -1) var(--offset-diagonal) 0 var(--ray-size), var(--offset-diagonal) calc(var(--offset-diagonal) * -1) 0 var(--ray-size);
-            }
-
-            .mode-text {
-                font-size: 14px;
-                font-weight: 500;
-                width: 33px;
+            /* Switch */
+            #id .custom-control-input:checked
+            #id .custom-control-input:checked ~ label {
+                pointer-events: none;
             }
         `,
         parent,
         position,
         events: [
             {
-                selector: '#id .theme-app',
-                event: 'click',
-                listener(event) {
-                    // Deselect all
-                    component.findAll('.theme-app').forEach(node => {
-                        node.classList.remove('selected');
-                    });
-                    
-                    // Select
-                    this.classList.add('selected');
-                }
-            },
-            {
-                selector: '#id .toggle',
+                selector: '#id .custom-control-input',
                 event: 'change',
                 listener(event) {
-                    const toggleid = event.target.id;
-                    const mode = event.target.checked ? 'light' : 'dark';
-                    const name = toggleid.split('-')[1];
-                    const theme = Themes.find(item => item.name === name);
+                    setTimeout(() => {
+                        // Set new theme colors
+                        const mode = event.target.dataset.mode;
+                        const { primary, secondary, background, color, selectedRowOpacity, buttonBackgroundColor, borderColor } = theme[mode];
 
-                    component.find(`.mode-text[data-toggleid='${toggleid}']`).innerText = mode.toTitleCase();
-                    component.find(`.theme-app[data-theme='${name}']`).remove();
-                    component.find(`.theme-app-container[data-theme='${name}']`).insertAdjacentHTML('afterbegin', themeTemplate({ theme, mode }));
+                        App.set('prefersColorScheme', mode);
+                        App.set('primaryColor', NameToHex(primary));
+                        App.set('primaryColorRGB', HexToRGB(primary));
+                        App.set('primaryColorHSL', HexToHSL(primary));
+                        App.set('secondaryColor', secondary);
+                        App.set('backgroundColor', background);
+                        App.set('buttonBackgroundColor', buttonBackgroundColor);
+                        App.set('borderColor', borderColor);
+                        App.set('defaultColor', color);
+                        App.set('selectedRowOpacity', selectedRowOpacity);
+
+                        // Set localStorage
+                        SetLocal('prefersColorScheme', mode);
+
+                        // Relaunch app
+                        document.querySelectorAll('head style').forEach(node => node.remove());
+                        Store.get('appcontainer').remove();
+
+                        // Add appcontainer
+                        const appContainer = AppContainer();
+
+                        Store.add({
+                            name: 'appcontainer',
+                            component: appContainer
+                        });
+
+                        appContainer.add();
+
+                        // Current route
+                        const path = location.href.split('#')[1];
+
+                        // Sidebar
+                        const sidebarParam = {
+                            parent: appContainer,
+                            path
+                        };
+
+                        const sidebarComponent = App.get('sidebar') ? App.get('sidebar')(sidebarParam) : Sidebar(sidebarParam);
+
+                        Store.add({
+                            name: 'sidebar',
+                            component: sidebarComponent
+                        });
+
+                        sidebarComponent.add();
+
+                        // Main Container
+                        const mainContainerParam = {
+                            parent: appContainer
+                        };
+
+                        const mainContainer = App.get('maincontainer') ? App.get('maincontainer')(mainContainerParam) : MainContainer(mainContainerParam);
+
+                        Store.add({
+                            name: 'maincontainer',
+                            component: mainContainer
+                        });
+
+                        mainContainer.add();
+
+                        // Show App Container
+                        appContainer.show('flex');
+
+                        Route(path);
+                    }, 200);
                 }
             }
         ]
@@ -179,9 +212,11 @@ export function MyTheme(param) {
                 ${themeTemplate({theme, mode})}
                 <!-- Toggle Light/Dark Mode -->
                 <div class='d-flex justify-content-center align-items-center'>
-                    <div class="mode mt-2 mr-2">
-                        <label style='display: none;' title='Hidden checkbox to toggle dark/light mode' for="toggle-${name}"></label>
-                        <input id="toggle-${name}" class="toggle" type="checkbox" ${mode === 'light' ? 'checked' : ''}>
+                    <div class="mode mr-2">
+                        <div class="custom-control custom-switch grab switch">
+                            <input type="checkbox" class="custom-control-input" id='${mode}-switch' data-mode='${mode}' ${App.get('prefersColorScheme') === mode ? 'checked' : ''}>
+                            <label class="custom-control-label" for="${mode}-switch"></label>
+                        </div>
                     </div>
                     <div class='mode-text' data-toggleid="toggle-${name}">${mode === 'light' ? 'Light' : 'Dark'}</div>
                 </div>
@@ -194,7 +229,7 @@ export function MyTheme(param) {
         const { primary, secondary, background, color, borderColor, buttonBackgroundColor } = theme[mode];
 
         return /*html*/ `
-            <div class='theme-app ${name === selected ? 'selected' : ''}' style='color: ${color}; border: solid 1px ${borderColor}' data-theme='${name}'>
+            <div class='theme-app' style='color: ${color}; border: solid 1px ${borderColor}' data-theme='${name}'>
                 <div class='theme-sidebar' style='background: ${background}; border-right: solid 1px ${borderColor};'>
                     <div class='theme-sidebar-title'>Title</div>
                     <div class='theme-nav selected' style='background: ${primary}; color: white;'>Route 1</div>

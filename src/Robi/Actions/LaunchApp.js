@@ -20,11 +20,11 @@ import { Store } from '../Core/Store.js'
  */
 export async function LaunchApp(param) {
     const {
-        routes, sidebar, settings
+        routes, settings
     } = param;
 
     const {
-        title, logo, usersList, beforeLoad, preLoadLists, svgSymbols, sessionStorageData, sidebarDropdown
+        title, usersList, beforeLoad, preLoadLists, svgSymbols, sessionStorageData, sidebar, maincontainer
     } = settings;
 
     /** Set sessions storage */
@@ -85,12 +85,10 @@ export async function LaunchApp(param) {
     // Get app container
     const appContainer = Store.get('appcontainer');
 
-    /** Sidebar Component */
+    /** Sidebar */
     const sidebarParam = {
-        logo,
         parent: appContainer,
-        path,
-        sidebarDropdown
+        path
     };
 
     const sidebarComponent = sidebar ? sidebar(sidebarParam) : Sidebar(sidebarParam);
@@ -103,9 +101,11 @@ export async function LaunchApp(param) {
     sidebarComponent.add();
 
     /** Main Container */
-    const mainContainer = MainContainer({
+    const mainContainerParam = {
         parent: appContainer
-    });
+    };
+
+    const mainContainer = maincontainer ? maincontainer(mainContainerParam) : MainContainer(mainContainerParam);
 
     Store.add({
         name: 'maincontainer',
@@ -125,6 +125,7 @@ export async function LaunchApp(param) {
     /** Generate Session Id */
     const sessionId = GenerateUUID();
 
+    // TODO: Use GetLocal();
     /** Format Title for Sessin/Local Storage keys */
     const storageKeyPrefix = settings.title.split(' ').join('-');
 

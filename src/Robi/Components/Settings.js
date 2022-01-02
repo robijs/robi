@@ -45,6 +45,10 @@ export async function Settings({ parent, pathParts }) {
         {
             name: 'Account',
             path: 'Account'
+        },
+        {
+            name: 'Preferences',
+            path: 'Preferences'
         }
     ];
 
@@ -184,7 +188,7 @@ export async function Settings({ parent, pathParts }) {
     const sectionStepper = SectionStepper({
         numbers: false,
         route: 'Settings',
-        sections,
+        sections: sections.sort((a, b) => a.name.localeCompare(b.name)),
         selected: section,
         parent: sectionStepperContainer
     });
@@ -207,12 +211,6 @@ export async function Settings({ parent, pathParts }) {
             });
 
             preferences.add();
-
-            const themePreference = MyTheme({
-                parent: planContainer
-            });
-
-            themePreference.add();
             break;
         case 'Release Notes':
 
@@ -385,6 +383,13 @@ export async function Settings({ parent, pathParts }) {
             });
 
             upgrade.add();
+            break;
+        case 'Preferences':
+            const themePreference = MyTheme({
+                parent: planContainer
+            });
+
+            themePreference.add();
             break;
         default:
             Route('404');

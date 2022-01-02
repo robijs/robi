@@ -1,4 +1,4 @@
-// Copyright 2021 Stephen Matheis
+// Copyright 2022 Stephen Matheis
 
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -49,15 +49,16 @@ import { GetItemCount } from './Actions/GetItemCount.js'
 import { GetLib } from './Actions/GetLib.js'
 import { GetList } from './Actions/GetList.js'
 import { GetListGuid } from './Actions/GetListGuid.js'
+import { GetLocal } from './Actions/GetLocal.js'
 import { GetRequestDigest } from './Actions/GetRequestDigest.js'
 import { GetRootRequestDigest } from './Actions/GetRootRequestDigest.js'
 import { GetSiteUsers } from './Actions/GetSiteUsers.js'
 import { GetWebLists } from './Actions/GetWebLists.js'
+import { HSLDarker } from './Actions/HSLDarker.js'
 import { HexToHSL } from './Actions/HexToHSL.js'
 import { HexToRGB } from './Actions/HexToRGB.js'
 import { HideRoutes } from './Actions/HideRoutes.js'
 import { History } from './Actions/History.js'
-import { HSLDarker } from './Actions/HSLDarker.js'
 import { InitializeApp } from './Actions/InitializeApp.js'
 import { InstallApp } from './Actions/InstallApp.js'
 import { LaunchApp } from './Actions/LaunchApp.js'
@@ -73,6 +74,7 @@ import { ResetApp } from './Actions/ResetApp.js'
 import { Route } from './Actions/Route.js'
 import { SendEmail } from './Actions/SendEmail.js'
 import { SetHomePage } from './Actions/SetHomePage.js'
+import { SetLocal } from './Actions/SetLocal.js'
 import { SetSessionStorage } from './Actions/SetSessionStorage.js'
 import { Start } from './Actions/Start.js'
 import { Style } from './Actions/Style.js'
@@ -135,15 +137,16 @@ export {
     GetLib,
     GetList,
     GetListGuid,
+    GetLocal,
     GetRequestDigest,
     GetRootRequestDigest,
     GetSiteUsers,
     GetWebLists,
+    HSLDarker,
     HexToHSL,
     HexToRGB,
     HideRoutes,
     History,
-    HSLDarker,
     InitializeApp,
     InstallApp,
     LaunchApp,
@@ -159,6 +162,7 @@ export {
     Route,
     SendEmail,
     SetHomePage,
+    SetLocal,
     SetSessionStorage,
     Start,
     Style,

@@ -1,7 +1,9 @@
 import { HexToHSL } from '../Actions/HexToHSL.js'
 import { HexToRGB } from '../Actions/HexToRGB.js'
 import { NameToHex } from '../Actions/NameToHex.js'
+import { GetLocal } from '../Actions/GetLocal.js'
 import { Themes } from '../Models/Themes.js'
+import { Get } from '../Robi.js'
 
 // @START-File
 let appSettings = {};
@@ -11,7 +13,7 @@ const App = {
     lists() {
         return appLists;
     },
-    set(param) {
+    settings(param) {
         const { lists, routes, settings } = param;
         const { library, defaultRoute, theme } = settings;
 
@@ -46,20 +48,35 @@ const App = {
         }
 
         // Set colors
+        const userPreference = GetLocal(`${settings.name}-prefersColorScheme`);
+
+        console.log(userPreference);
+
         let colors;
-
-        if (window.matchMedia) {
-            if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-                colors = Themes.find(item => item.name === theme).light;
-                settings.prefersColorScheme = 'light';
-            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                colors = Themes.find(item => item.name === theme).dark;
-                settings.prefersColorScheme = 'dark';
-            }
-        } else {
+    
+        // 1. Set user preference
+        if (userPreference) {
+            colors = Themes.find(item => item.name === theme)[userPreference];
+            settings.prefersColorScheme = userPreference;
+        } 
+        
+        // 2. If user hasn't set a preference, set to OS preference
+        else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
             colors = Themes.find(item => item.name === theme).light;
+            settings.prefersColorScheme = 'light';
+        } 
+        
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            colors = Themes.find(item => item.name === theme).dark;
+            settings.prefersColorScheme = 'dark';
+        } 
+        
+        // 3. Default to light
+        else {
+            colors = Themes.find(item => item.name === theme).light;
+            settings.prefersColorScheme = 'light';
         }
-
+        
         const { primary, secondary, background, color, selectedRowOpacity, buttonBackgroundColor, borderColor } = colors;
 
         // Primary
@@ -87,6 +104,10 @@ const App = {
         appSettings = settings;
     },
     get(prop) {
+        return appSettings[prop];
+    },
+    set(prop, value) {
+        appSettings[prop] = value;
         return appSettings[prop];
     }
 }

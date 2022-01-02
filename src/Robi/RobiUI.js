@@ -1,4 +1,4 @@
-// Copyright 2021 Stephen Matheis
+// Copyright 2022 Stephen Matheis
 
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -63,6 +63,7 @@ import { Modal } from './Components/Modal.js'
 import { ModalSlideUp } from './Components/ModalSlideUp.js'
 import { MultiChoiceField } from './Components/MultiChoiceField.js'
 import { MultiLineTextField } from './Components/MultiLineTextField.js'
+import { MyTheme } from './Components/MyTheme.js'
 import { NameField } from './Components/NameField.js'
 import { NewForm } from './Components/NewForm.js'
 import { NewQuestion } from './Components/NewQuestion.js'
@@ -78,9 +79,9 @@ import { QuestionBoard } from './Components/QuestionBoard.js'
 import { QuestionCard } from './Components/QuestionCard.js'
 import { QuestionCards } from './Components/QuestionCards.js'
 import { QuestionContainer } from './Components/QuestionContainer.js'
-import { QuestionsToolbar } from './Components/QuestionsToolbar.js'
 import { QuestionType } from './Components/QuestionType.js'
 import { QuestionTypes } from './Components/QuestionTypes.js'
+import { QuestionsToolbar } from './Components/QuestionsToolbar.js'
 import { ReleaseNotes } from './Components/ReleaseNotes.js'
 import { ReleaseNotesContainer } from './Components/ReleaseNotesContainer.js'
 import { Reply } from './Components/Reply.js'
@@ -163,6 +164,7 @@ export {
     ModalSlideUp,
     MultiChoiceField,
     MultiLineTextField,
+    MyTheme,
     NameField,
     NewForm,
     NewQuestion,
@@ -178,9 +180,9 @@ export {
     QuestionCard,
     QuestionCards,
     QuestionContainer,
-    QuestionsToolbar,
     QuestionType,
     QuestionTypes,
+    QuestionsToolbar,
     ReleaseNotes,
     ReleaseNotesContainer,
     Reply,

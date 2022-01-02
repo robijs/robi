@@ -28,7 +28,7 @@ export function ChangeTheme(param) {
     // Theme
     const themeField = ThemeField({
         selected: App.get('theme'),
-        margin: '10px 0px 30px 0px',
+        margin: '0px 0px 30px 0px',
         label: false,
         parent: card
     });

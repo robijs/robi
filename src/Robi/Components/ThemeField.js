@@ -95,6 +95,7 @@ export function ThemeField(param) {
 
             #id .theme-maincontainer .btn {
                 font-size: 10.25px;
+                padding: 6px 9px;
             }
 
             #id .theme-maincontainer .background {

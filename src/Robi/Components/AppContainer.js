@@ -13,6 +13,8 @@ export function AppContainer() {
         html: /*html*/ `
             <div class='appcontainer'></div>
         `,
+        // TODO: Set CSS variables instead
+        // TODO: Replace all references to App.get('[color]') with var(--css-varibale)
         style: /*css*/ `
             .appcontainer {
                 display: none;

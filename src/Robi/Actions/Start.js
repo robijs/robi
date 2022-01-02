@@ -5,7 +5,6 @@ import { AddLinks } from './AddLinks.js'
 import { InitializeApp } from './InitializeApp.js'
 import { LogError } from './LogError.js'
 import { Wait } from './Wait.js'
-
 // @START-File
 /**
  *
@@ -21,7 +20,7 @@ export function Start(param) {
     } = settings;
 
     // Set app settings
-    App.set(param);
+    App.settings(param);
 
     // toTitleCase string method polyfil
     String.prototype.toTitleCase = function () {
