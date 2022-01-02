@@ -186,7 +186,7 @@ export function ResetApp() {
                         width: '100%',
                         height: '100%',
                         radius: '10px',
-                        background: App.get('backgroundColor')
+                        background: 'var(--background)'
                     });
 
                     deleteContainer.add();
@@ -495,15 +495,15 @@ export function ResetApp() {
                     reinstallConsole.append(/*html*/ `
                         <div class='console-line'>
                             <!-- <code class='line-number'>0</code> -->
-                            <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
+                            <code style='color: var(--primary) !important;'>${spacers}</code>
                         </div>
                         <div class='console-line'>
                             <!-- <code class='line-number'>0</code> -->
-                            <code style='color: ${App.get('primaryColor')} !important;'>| Lists reset |</code>
+                            <code style='color: var(--primary) !important;'>| Lists reset |</code>
                         </div>
                         <div class='console-line'>
                             <!-- <code class='line-number'>0</code> -->
-                            <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
+                            <code style='color: var(--primary) !important;'>${spacers}</code>
                         </div>
                     `);
 

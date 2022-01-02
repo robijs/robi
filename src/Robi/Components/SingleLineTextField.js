@@ -113,7 +113,7 @@ export function SingleLineTextField(param) {
             #id .form-field-single-line-text.readonly {
                 font-size: 13px;
                 font-weight: 400;
-                color: ${App.get('defaultColor')}; 
+                color: var(--color); 
                 background: transparent;
                 border: solid 1px transparent;
                 margin: 0px;

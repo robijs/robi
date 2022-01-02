@@ -51,6 +51,10 @@ export function ThemeField(param) {
                 box-shadow: 0px 0px 0px 3px mediumseagreen;
             }
 
+            #id .theme-app.current {
+                box-shadow: 0px 0px 0px 3px var(--primary);
+            }
+
             #id .theme-sidebar {
                 display: flex;
                 flex-direction: column;
@@ -148,15 +152,7 @@ export function ThemeField(param) {
             {
                 selector: '#id .theme-app',
                 event: 'click',
-                listener(event) {
-                    // Deselect all
-                    component.findAll('.theme-app').forEach(node => {
-                        node.classList.remove('selected');
-                    });
-                    
-                    // Select
-                    this.classList.add('selected');
-                }
+                listener: selectTheme
             },
             {
                 selector: '#id .toggle',
@@ -166,14 +162,30 @@ export function ThemeField(param) {
                     const mode = event.target.checked ? 'light' : 'dark';
                     const name = toggleid.split('-')[1];
                     const theme = Themes.find(item => item.name === name);
+                    const isSelected = component.find(`.theme-app[data-theme='${name}']`).classList.contains('selected');
 
                     component.find(`.mode-text[data-toggleid='${toggleid}']`).innerText = mode.toTitleCase();
                     component.find(`.theme-app[data-theme='${name}']`).remove();
                     component.find(`.theme-app-container[data-theme='${name}']`).insertAdjacentHTML('afterbegin', themeTemplate({ theme, mode }));
+                    component.find(`.theme-app[data-theme='${name}']`).addEventListener('click', selectTheme);
+                    
+                    if (isSelected) {
+                        component.find(`.theme-app[data-theme='${name}']`).classList.add('selected');
+                    }
                 }
             }
         ]
     });
+
+    function selectTheme() {
+        // Deselect all
+        component.findAll('.theme-app').forEach(node => {
+            node.classList.remove('selected');
+        });
+        
+        // Select
+        this.classList.add('selected');
+    }
 
     function containerTemplate({theme, mode}) {
         const { name } = theme;
@@ -198,7 +210,7 @@ export function ThemeField(param) {
         const { primary, secondary, background, color, borderColor, buttonBackgroundColor } = theme[mode];
 
         return /*html*/ `
-            <div class='theme-app ${name === selected ? 'selected' : ''}' style='color: ${color}; border: solid 1px ${borderColor}' data-theme='${name}'>
+            <div class='theme-app ${name === selected ? 'current' : ''}' style='color: ${color}; border: solid 1px ${borderColor}' data-theme='${name}'>
                 <div class='theme-sidebar' style='background: ${background}; border-right: solid 1px ${borderColor};'>
                     <div class='theme-sidebar-title'>Title</div>
                     <div class='theme-nav selected' style='background: ${primary}; color: white;'>Route 1</div>

@@ -238,7 +238,7 @@ const Themes = [
             secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
-            selectedRowOpacity: 1,
+            selectedRowOpacity: 10,
             buttonBackgroundColor: '#e9ecef',
             borderColor: '#d6d8db80'
         },
@@ -247,7 +247,7 @@ const Themes = [
             secondary: '#151515',
             background: '#1e1e1e',
             color: '#d4d4d4',
-            selectedRowOpacity: 1,
+            selectedRowOpacity: 10,
             buttonBackgroundColor: '#242628',
             borderColor: '#343a4080'
         }

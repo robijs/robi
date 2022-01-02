@@ -19,7 +19,7 @@ export function SourceTools(param) {
         html: /*html*/ `
             <div class=''>
                 <button type='button' class='btn'>
-                    <span style="color: ${App.get('primaryColor')}; font-size: 15px; font-weight: 500;">Code</span>
+                    <span style="color: var(--primary); font-size: 15px; font-weight: 500;">Code</span>
                 </button>
             </div>
         `,
@@ -42,7 +42,7 @@ export function SourceTools(param) {
             }
 
             #id .btn:hover {
-                background-color: ${App.get('buttonBackgroundColor')};
+                background-color: var(--buttonBackground);
             }
         `,
         parent,

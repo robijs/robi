@@ -72,14 +72,14 @@ export function LoadingBar(param) {
             .loading-bar-container {
                 width: 90%; /** original value 15% */
                 margin-top: 15px;
-                background: ${App.get('backgroundColor')};
+                background: var(--background);
                 border-radius: 10px;
             }
             
             .loading-bar-status {
                 width: 0%;
                 height: 15px;
-                background: ${App.get('primaryColor')};
+                background: var(--primary);
                 border-radius: 10px;
                 transition: width 100ms ease-in-out;
             }

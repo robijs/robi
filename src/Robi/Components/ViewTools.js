@@ -29,7 +29,7 @@ export function ViewTools(param) {
                         <button class="dropdown-item" type="button">
                             <div class='add-table'>
                                 <div class='filter d-flex justify-content-end'>
-                                    <div style='color: ${App.get('primaryColor')}; height: 8px; line-height: .5; font-weight: 900;'>&plus;</div>
+                                    <div style='color: var(--primary); height: 8px; line-height: .5; font-weight: 900;'>&plus;</div>
                                     <div class="btn-group ml-1" role="group">
                                         <div type="button" class="btn btn-robi-reverse"></div>
                                         <div type="button" class="btn btn-outline-robi"></div>
@@ -59,7 +59,7 @@ export function ViewTools(param) {
                         </button>
                         <button class="dropdown-item" type="button">
                             <div class='add-text-block'>
-                                <span style="font-size: 28; font-weight: 600; color: ${App.get('primaryColor')};">Aa</span>
+                                <span style="font-size: 28; font-weight: 600; color: var(--primary);">Aa</span>
                             </div>
                             <div style="font-weight: 700; margin-top: 10px;">Text block</div>
                         </button>
@@ -90,12 +90,12 @@ export function ViewTools(param) {
                 right: 0px;
                 height: 62px;
                 width: 100%;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             #id .tools {
                 cursor: pointer;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 font-size: 20px;
                 transition: transform 300ms ease;
             }
@@ -119,14 +119,14 @@ export function ViewTools(param) {
                 height: unset;
                 margin: .5rem 0;
                 overflow: hidden;
-                border-left: 1px solid ${App.get('buttonBackgroundColor')};
+                border-left: 1px solid var(--buttonBackground);
             }
 
             #id .dropdown-item {
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 align-items: center;
                 justify-content: center;
                 padding: 10px;
@@ -135,12 +135,12 @@ export function ViewTools(param) {
             }
 
             #id .dropdown-menu .dropdown-item .icon {
-                fill: ${App.get('primaryColor')};
+                fill: var(--primary);
             }
 
             /* Border */
             #id .border {
-                border: solid 2px ${App.get('primaryColor')};
+                border: solid 2px var(--primary);
             }
 
             /* Add table */
@@ -164,7 +164,7 @@ export function ViewTools(param) {
                 height: 10px;
                 border-radius: 10px;
                 margin-top: 2px;
-                border: solid 2px ${App.get('primaryColor')};
+                border: solid 2px var(--primary);
             }
 
             #id .columns {
@@ -176,7 +176,7 @@ export function ViewTools(param) {
                 height: 2px;
                 border-radius: 2px;
                 margin: 2px 0px;
-                background: ${App.get('primaryColor')};
+                background: var(--primary);
             }
 
             #id .columns .column:not(:last-child) {

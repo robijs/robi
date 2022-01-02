@@ -26,7 +26,7 @@ export function Timer(param) {
             #id {
                 padding: 20px;
                 border-radius: 20px;
-                background: ${App.get('backgroundColor')}
+                background: var(--background)
             }
             
             .stopwatch {

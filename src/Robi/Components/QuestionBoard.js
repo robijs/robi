@@ -24,7 +24,7 @@ export async function QuestionBoard(param) {
     const { parent, path } = param;
 
     /** View Title */
-    let viewTitle;
+    let routeTitle;
     let currentType;
 
     /** Check local storage for questionTypes */
@@ -38,7 +38,7 @@ export async function QuestionBoard(param) {
         console.log('questionTypes not in local storage. Adding...');
 
         /** Set temporary title  */
-        viewTitle = Title({
+        routeTitle = Title({
             title: 'Questions',
             breadcrumb: [
                 {
@@ -72,8 +72,8 @@ export async function QuestionBoard(param) {
 
     function setTitle(items) {
         /** If View Tile exists, remove from DOM */
-        if (viewTitle) {
-            viewTitle.remove();
+        if (routeTitle) {
+            routeTitle.remove();
         }
 
         /** Parse types */
@@ -83,7 +83,7 @@ export async function QuestionBoard(param) {
         currentType = types.find(item => item.path === path);
 
         /** Set new title with drop down options */
-        viewTitle = Title({
+        routeTitle = Title({
             title: 'Questions',
             breadcrumb: [
                 {
@@ -235,7 +235,7 @@ export async function QuestionBoard(param) {
                 title: 'Ask a question',
                 contentPadding: '30px',
                 showFooter: true,
-                background: App.get('secondaryColor'),
+                background: 'var(--secondary)',
                 addContent(modalBody) {
                     newQuestionForm = NewQuestion({
                         parent: modalBody,

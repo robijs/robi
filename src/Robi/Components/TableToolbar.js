@@ -105,13 +105,13 @@ export function TableToolbar(param) {
             }
 
             #id .ask-a-question {
-                background: ${App.get('buttonBackgroundColor')};
-                color: ${App.get('primaryColor')};
+                background: var(--buttonBackground);
+                color: var(--primary);
                 font-weight: 500;
             }
             
             #id .search-questions {
-                background: ${App.get('buttonBackgroundColor')} !important;
+                background: var(--buttonBackground) !important;
                 border-color: transparent;
                 border-radius: 8px;
                 min-width: 250px;
@@ -119,9 +119,9 @@ export function TableToolbar(param) {
             }
 
             #id .btn-outline-robi-primary {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 background-color: initial;
-                border-color: ${App.get('primaryColor')};
+                border-color: var(--primary);
             }
 
             /* Search */
@@ -134,7 +134,7 @@ export function TableToolbar(param) {
                 border-radius: 20px;
                 width: 100%;
                 padding: 20px;
-                background: ${App.get('backgroundColor')};
+                background: var(--background);
                 transition: opacity 300ms ease, padding 300ms ease, height 300ms ease;
                 height: 123px;
                 overflow: hidden;
@@ -553,7 +553,7 @@ export function TableToolbar(param) {
         // Add removeRow button
         button.insertAdjacentHTML('beforebegin', /*html*/ `
             <button type="button" class="btn btn-robi p-1 ml-2 remove-row">
-                <svg class="icon" style="font-size: 22px; fill: ${App.get('primaryColor')}"><use href="#icon-bs-dash-circle-fill"></use></svg>
+                <svg class="icon" style="font-size: 22px; fill: var(--primary)"><use href="#icon-bs-dash-circle-fill"></use></svg>
             </button>
         `);
         component.find(`.search-row[data-rowid='${id}'] .remove-row`).addEventListener('click', () => removeRow(id, newId));
@@ -581,7 +581,7 @@ export function TableToolbar(param) {
         const button = component.find(`.search-row[data-rowid='${btnRowId}'] .remove-row`);
         button.insertAdjacentHTML('beforebegin', /*html*/ `
             <button type="button" class="btn btn-robi p-1 ml-2 add-row">
-                <svg class="icon" style="font-size: 22px; fill: ${App.get('primaryColor')}"><use href="#icon-bs-plus"></use></svg>
+                <svg class="icon" style="font-size: 22px; fill: var(--primary)"><use href="#icon-bs-plus"></use></svg>
             </button>
         `);
         component.find(`.search-row[data-rowid='${btnRowId}'] .add-row`).addEventListener('click', addRow);
@@ -625,7 +625,7 @@ export function TableToolbar(param) {
                 <input type="text" class="form-control w-auto" style='flex: 2;' placeholder="value" data-field='value'>
                 <!-- Add row -->
                 <button type='button' class='btn btn-robi p-1 ml-2 add-row'>
-                    <svg class="icon" style="font-size: 22px; fill: ${App.get('primaryColor')};"><use href="#icon-bs-plus"></use></svg>
+                    <svg class="icon" style="font-size: 22px; fill: var(--primary);"><use href="#icon-bs-plus"></use></svg>
                 </button>
             </div>
         `;
@@ -716,7 +716,7 @@ export function TableToolbar(param) {
                     }
                     <!-- Add row -->
                     <button type='button' class='btn btn-robi p-1 ml-2 ${operator ? 'remove-row' : 'add-row'}'>
-                        <svg class="icon" style="font-size: 22px; fill: ${App.get('primaryColor')};"><use href="#icon-${operator ? 'bs-dash-circle-fill' : 'bs-plus'}"></use></svg>
+                        <svg class="icon" style="font-size: 22px; fill: var(--primary);"><use href="#icon-${operator ? 'bs-dash-circle-fill' : 'bs-plus'}"></use></svg>
                     </button>
                 </div>
             `

@@ -50,7 +50,7 @@ export function SectionStepper(param) {
             #id .section-title {
                 font-size: 18px;
                 font-weight: 700;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 border-radius: 10px;
                 padding: 8px 20px 10px 20px; /* -2px on top to align baseline with view title */
                 cursor: pointer;
@@ -73,7 +73,7 @@ export function SectionStepper(param) {
             }
             
             #id .section-group.selected {
-                background: ${App.get('primaryColor')};
+                background: var(--primary);
                 color: white;
             }
 
@@ -83,7 +83,7 @@ export function SectionStepper(param) {
 
             /* Number */
             #id .section-circle {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 margin-right: 10px;
             }
 

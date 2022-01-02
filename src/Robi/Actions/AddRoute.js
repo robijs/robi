@@ -81,7 +81,7 @@ export async function AddRoute(event) {
                 valueType: 'html',
                 value: /*html*/ `
                     <div class='d-flex justify-content-center w-100' data-target='true'>
-                        <svg class='icon' style='font-size: 18px; fill: ${App.get('primaryColor')};'>
+                        <svg class='icon' style='font-size: 18px; fill: var(--primary);'>
                             <use href='#icon-bs-circle-fill'></use>
                         </svg>
                     </div>
@@ -90,7 +90,7 @@ export async function AddRoute(event) {
                     return {
                         label: /*html*/ `
                             <div class='d-flex justify-content-center w-100' data-target='true'>
-                                <svg class='icon' style='font-size: 18px; fill: ${App.get('primaryColor')};'>
+                                <svg class='icon' style='font-size: 18px; fill: var(--primary);'>
                                     <use href='#${icon}'></use>
                                 </svg>
                             </div>
@@ -118,7 +118,7 @@ export async function AddRoute(event) {
                             modal.find('.modal-content').style.width = 'unset';
 
                             const loading = LoadingSpinner({
-                                message: `<span style='color: ${App.get('primaryColor')};'>Adding Route<span>`,
+                                message: `<span style='color: var(--primary);'>Adding Route<span>`,
                                 type: 'robi',
                                 classes: ['p-4'],
                                 parent: modalBody

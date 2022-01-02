@@ -15,7 +15,7 @@ export async function AccountInfo(param) {
 
     const accountInfoCard = Card({
         width: '100%',
-        background: App.get('backgroundColor'),
+        background: 'var(--background)',
         titleBorder: 'none',
         radius: '20px',
         parent

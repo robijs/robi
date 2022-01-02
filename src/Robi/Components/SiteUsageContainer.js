@@ -45,7 +45,7 @@ export async function SiteUsageContainer(param) {
     worker.postMessage({
         envMode: App.get('mode'),
         site: App.get('site'),
-        bannerColor: App.get('backgroundColor')
+        bannerColor: 'var(--background)'
     });
 
     Store.addWorker(worker);

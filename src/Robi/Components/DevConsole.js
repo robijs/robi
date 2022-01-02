@@ -20,7 +20,7 @@ export function DevConsole(param) {
         html: /*html*/ `
             <div>
                 <div class='dev-console'>
-                    <div style='margin-bottom: 20px; background: ${App.get('backgroundColor')}; border-radius: 20px;'>
+                    <div style='margin-bottom: 20px; background: var(--background); border-radius: 20px;'>
                         <div class='dev-console-row'>
                             <div class='dev-console-text'>
                                 <div class='dev-console-label'>Edit lists and settings</div>

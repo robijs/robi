@@ -49,7 +49,7 @@ export function BootstrapDropdown(param) {
                 min-width: 160px;
                 font-size: 13px;
                 border-radius: 0.125rem 0px;
-                border: 1px solid ${App.get('borderColor')};
+                border: 1px solid var(--borderColor);
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -72,7 +72,7 @@ export function BootstrapDropdown(param) {
             }
 
             #id .dropdown-item:hover {
-                background: ${App.get('primaryColor') + '20'};
+                background: var(--primary20);
             }
 
             #id .scroll-container {

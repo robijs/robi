@@ -92,7 +92,7 @@ export function SiteUsage(param) {
 
             #id .dashboard-long-card-chart-title {
                 margin-top: 15px;
-                color: ${App.get('defaultColor')};
+                color: var(--color);
                 font-size: 1.1em;
                 font-weight: 700;
                 text-align: center;

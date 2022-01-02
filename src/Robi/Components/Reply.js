@@ -49,7 +49,7 @@ export function Reply(param) {
                 width: 100%;
                 margin: ${margin || '0px'};
                 position: relative;
-                background: ${App.get('backgroundColor')};
+                background: var(--background);
                 border: none;
                 border-radius: 20px;
             }
@@ -100,7 +100,7 @@ export function Reply(param) {
             }
 
             #id .btn-robi-primaryColor {
-                background: ${App.get('primaryColor')};
+                background: var(--primary);
                 color: white;
             }
 

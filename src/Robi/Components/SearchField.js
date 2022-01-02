@@ -36,7 +36,7 @@ export function SearchField(param) {
                 border-radius: .25rem;
                 font-size: 13px;
                 border: none;
-                background: ${App.get('buttonBackgroundColor')};
+                background: var(--buttonBackground);
             }
 
             #id input[type='search']::-webkit-search-cancel-button {
@@ -57,7 +57,7 @@ export function SearchField(param) {
 
             /** Dropdown */
             #id .dropdown-header {
-                color: ${App.get('primaryColor')}
+                color: var(--primary)
             }
 
             #id .dropdown-menu {

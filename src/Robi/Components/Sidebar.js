@@ -71,7 +71,7 @@ export function Sidebar({ parent, path }) {
                                     <svg class='icon' style='font-size: 28px;'><use href='#icon-bs-plus'></use></svg>
                                 </span>
                             </span>
-                            <span class='text' data-width='200px' style='white-space: nowrap; color: ${App.get('primaryColor')}'>New Route</span>
+                            <span class='text' data-width='200px' style='white-space: nowrap; color: var(--primary)'>New Route</span>
                         </span>
                     `: ''
                 }
@@ -94,8 +94,8 @@ export function Sidebar({ parent, path }) {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
-                background: ${App.gradientColor ? `linear-gradient(${App.get('gradientColor')})` : App.get('backgroundColor')};
-                border-right: solid 1px ${App.get('borderColor')};
+                background: var(--background);
+                border-right: solid 1px var(--borderColor);
                 height: 100vh;
                 transition: width 300ms, min-width 300ms
             }
@@ -147,7 +147,7 @@ export function Sidebar({ parent, path }) {
             }
 
             /* .sidebar .nav:not(.nav-selected):hover {
-                background-color: ${App.get('primaryColor') + '20'};
+                background-color: var(--primary20);
             } */
 
             .sidebar .icon-container {
@@ -161,7 +161,7 @@ export function Sidebar({ parent, path }) {
             }
 
             .sidebar .nav .icon {
-                fill: ${App.get('primaryColor')};
+                fill: var(--primary);
                 font-size: 22px;
             }
 
@@ -183,16 +183,15 @@ export function Sidebar({ parent, path }) {
 
             /* Selected */
             .sidebar .nav-selected {
-                background: ${App.get('primaryColor')};
+                background: var(--primary);
             }
 
             .sidebar .nav.nav-selected  .icon {
-                fill: ${App.get('backgroundColor')};
+                fill: var(--background);
             }
 
             .sidebar .nav.nav-selected .text {
-                /* color: ${App.get('prefersColorScheme') === 'dark' ? '#151515' : App.get('backgroundColor')}; */
-                color: ${App.get('backgroundColor')};
+                color: var(--background);
             }
 
             @media (max-width: 1300px) {
@@ -216,12 +215,12 @@ export function Sidebar({ parent, path }) {
             }
 
             #id .collapse-container .btn {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 font-weight: 500;
             }
 
             #id .collapse-container .icon {
-                fill: ${App.get('primaryColor')};
+                fill: var(--primary);
                 font-size: 22px;
             }
             
@@ -262,11 +261,11 @@ export function Sidebar({ parent, path }) {
             }
 
             #id .dev-buttons-container .delete-routes {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             #id .square {
-                background: ${App.get('buttonBackgroundColor')};
+                background: var(--buttonBackground);
                 border-radius: 6px;
             }
 
@@ -391,12 +390,12 @@ export function Sidebar({ parent, path }) {
 
             #id .nav.ui-sortable-handle {
                 width: auto;
-                background: ${App.get('backgroundColor')};
+                background: var(--background);
             }
 
             #id .nav.ui-sortable-helper {
                 width: auto;
-                background: ${App.get('backgroundColor')};
+                background: var(--background);
                 box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
             }
 
@@ -426,7 +425,7 @@ export function Sidebar({ parent, path }) {
             }
 
             #id .save-edit * {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
         `,
         parent: parent,

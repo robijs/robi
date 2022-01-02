@@ -43,7 +43,7 @@ export function AttachmentsContainer(param) {
         margin: '0px 0px .5rem 0px',
         weight: '500',
         size: '16px',
-        color: App.get('defaultColor'),
+        color: 'var(--color)',
         parent: card
     });
 
@@ -70,7 +70,7 @@ export function AttachmentsContainer(param) {
             filesList.find(`.remove-container[data-filename='${file.name}'] .status`).innerText = 'Queued';
             filesList.find(`.remove-container[data-filename='${file.name}'] .tip`).innerText = 'up next';
             filesList.find(`.remove-container[data-filename='${file.name}'] .remove-icon`).innerHTML = /*html*/ `
-                <div style='width: 22px; height: 22px; background: ${App.get('borderColor')}; border-radius: 50%;'></div>
+                <div style='width: 22px; height: 22px; background: var(--borderColor); border-radius: 50%;'></div>
             `;
 
             // /** TODO: @todo remove 'remove' event listener -> add 'cancel' event listener   */

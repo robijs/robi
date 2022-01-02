@@ -44,8 +44,8 @@ export function Card(param) {
                 font-weight: ${titleWeight || '700'};
                 background: ${titleBackground || 'inherit'}; /** FIXME: Experimental */ /* alternate color: #d0d0d04d */
                 border-radius: 20px 20px 0px 0px;
-                color: ${titleColor || App.get('defaultColor')};
-                border-bottom: ${titleBorder || `solid 1px ${App.get('borderColor')}`};
+                color: ${titleColor || 'var(--color)'};
+                border-bottom: ${titleBorder || `solid 1px var(--borderColor)`};
             }
 
             #id .round-card-description {

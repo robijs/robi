@@ -1,4 +1,7 @@
 import { HSLDarker } from '../Actions/HSLDarker.js'
+import { HexToHSL } from '../Actions/HexToHSL.js'
+import { HexToRGB } from '../Actions/HexToRGB.js'
+import { NameToHex } from '../Actions/NameToHex.js'
 import { Component } from '../Actions/Component.js'
 import { App } from '../Core/App.js'
 
@@ -8,6 +11,13 @@ import { App } from '../Core/App.js'
  * @returns
  */
 export function AppContainer() {
+    const { primary, secondary, background, color, borderColor, buttonBackgroundColor, selectedRowOpacity } = App.get('colors')[App.get('prefersColorScheme')];
+    const hex = NameToHex(primary);
+    const hsl = HexToHSL(primary);
+    const hsl5 = HSLDarker(hsl, 5);
+    const hsl10 = HSLDarker(hsl, 10);
+    const cancelButton = `background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' style='fill: ${App.get('prefersColorScheme') === 'dark' ? 'darkgray' : 'darkgray' };'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");`
+
     const component = Component({
         name: 'appcontainer',
         html: /*html*/ `
@@ -16,9 +26,31 @@ export function AppContainer() {
         // TODO: Set CSS variables instead
         // TODO: Replace all references to App.get('[color]') with var(--css-varibale)
         style: /*css*/ `
+            /* Theme Colors */
+            :root {
+                --background: ${background};
+                --borderColor: ${borderColor};
+                --box-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? '40%' : '10%'}) 0px 0px 16px -2px;
+                --buttonBackground: ${buttonBackgroundColor};
+                --color: ${color};
+                --inputBackground: ${App.get('prefersColorScheme') === 'dark' ? background : secondary};
+                --primary: ${primary};
+                --primaryHex: ${hex};
+                --primaryHSL: hsl(${HexToHSL(primary)});
+                --primaryHSL-5: hsl(${hsl5});
+                --primaryHSL-10: hsl(${hsl10});
+                --primaryRGB: ${HexToRGB(primary)};
+                --primary6b: ${primary + '6b'};
+                --primary19: ${primary + '19'}; 
+                --primary20: ${primary + '20'};
+                --scrollbar: ${App.get('prefersColorScheme') === 'dark' ? 'dimgray' : 'lightgray'};
+                --secondary: ${secondary};
+                --selectedRow: ${primary + (selectedRowOpacity || '10')}
+            }
+
             .appcontainer {
                 display: none;
-                background: ${App.get('secondaryColor')};
+                background: var(--secondary);
             }
             
             *, ::after, ::before {
@@ -29,10 +61,10 @@ export function AppContainer() {
                 padding: 0px;
                 margin: 0px;
                 box-sizing: border-box;
-                background: ${App.get('secondaryColor')};
+                background: var(--secondary);
                 overflow: hidden;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-                color: ${App.get('defaultColor')};
+                color: var(--color);
             }
             
             body::-webkit-scrollbar { 
@@ -49,7 +81,7 @@ export function AppContainer() {
             }
             
             ::-webkit-scrollbar-thumb {
-                background: ${App.get('prefersColorScheme') === 'dark' ? 'dimgray' : 'lightgray'};
+                background: var(--scrollbar);
                 width: 8px;
                 height: 8px;
                 border: 3px solid transparent;
@@ -94,12 +126,12 @@ export function AppContainer() {
 
             /* Links */
             a:hover {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 text-decoration: underline;
             }
             
             a {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 text-decoration: none;
                 background-color: transparent;
             }
@@ -107,7 +139,7 @@ export function AppContainer() {
             /* Code */
             code {
                 font-size: 1em;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             /* Button */
@@ -118,11 +150,11 @@ export function AppContainer() {
             .btn {
                 font-size: 14px;
                 border-radius: 10px;
-                color: ${App.get('defaultColor')};
+                color: var(--color);
             }
 
             .btn:hover {
-                color: ${App.get('defaultColor')};
+                color: var(--color);
             }
 
             .btn:focus,
@@ -148,36 +180,36 @@ export function AppContainer() {
 
             .btn-robi-reverse,
             .btn-robi-reverse:hover {
-                background: ${App.get('primaryColor')};
-                color: ${App.get('secondaryColor')} !important;
+                background: var(--primary);
+                color: var(--secondary) !important;
                 font-weight: 500;
             }
 
             .btn-robi,
             .btn-robi:hover {
-                color: ${App.get('primaryColor')};
-                background: ${App.get('buttonBackgroundColor')};
+                color: var(--primary);
+                background: var(--buttonBackground);
                 font-weight: 500;
             }
 
             .btn-robi-success,
             .btn-robi-success:hover {
                 color: seagreen;
-                background: ${App.get('buttonBackgroundColor')};
+                background: var(--buttonBackground);
                 font-weight: 500;
             }
 
             .btn-robi-light,
             .btn-robi-light:hover {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 background: inherit;
                 font-weight: 500;
             }
 
             .btn-outline-robi {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 background-color: initial;
-                border-color: ${App.get('primaryColor')};
+                border-color: var(--primary);
             }
 
             .btn-light:hover {
@@ -206,14 +238,14 @@ export function AppContainer() {
 
             .btn-subtle-primary {
                 color: royalblue !important;
-                border-color: ${App.get('backgroundColor')} !important;
-                background-color: ${App.get('backgroundColor')} !important;
+                border-color: var(--background) !important;
+                background-color: var(--background) !important;
             }
 
             .btn-subtle-primary:hover {
                 color: royalblue !important;
-                border-color: ${App.get('backgroundColor')} !important;
-                background-color: ${App.get('backgroundColor')} !important;
+                border-color: var(--background) !important;
+                background-color: var(--background) !important;
             }
 
             .btn-success {
@@ -270,7 +302,7 @@ export function AppContainer() {
 
             /* Cards */
             .card-footer {
-                border-top: solid 1px ${App.get('borderColor')};
+                border-top: solid 1px var(--borderColor);
             }
 
             /* Form Controls */
@@ -288,19 +320,19 @@ export function AppContainer() {
             .form-field-multi-line-text.editable,
             .btn.dropdown-toggle,
             .input-group-text {
-                background: ${App.get('prefersColorScheme') === 'dark' ? App.get('backgroundColor'): App.get('secondaryColor')};
+                background: var(--inputBackground);
                 font-size: 13px !important;
             }
 
             .form-control,
             .form-field-multi-line-text.editable,
             .input-group-text {
-                border: 1px solid ${App.get('borderColor')};
+                border: 1px solid var(--borderColor);
             }
 
             .form-control:focus,
             .form-field-multi-line-text.editable:focus {
-                border: 1px solid ${App.get('borderColor')};
+                border: 1px solid var(--borderColor);
             }
 
             .form-control,
@@ -321,20 +353,52 @@ export function AppContainer() {
             .form-control:not(.dataTables_length .custom-select):focus,
             .custom-select:not(.dataTables_length .custom-select):focus {
                 border-color: transparent !important;
-                box-shadow: 0 0 0 3px ${App.get('primaryColor') + '6b'} !important;
+                box-shadow: 0 0 0 3px var(--primary6b) !important;
             }
 
             .form-field-multi-line-text.editable:focus,
             .btn.dropdown-toggle:focus {
                 border-color: transparent !important;
-                box-shadow: 0 0 0 4px ${App.get('primaryColor') + '6b'} !important;
+                box-shadow: 0 0 0 4px var(--primary6b) !important;
             }
 
             .custom-select,
             .cusomt-select:focus,
             .form-control,
             .form-control:focus {
-                color: ${App.get('defaultColor')};
+                color: var(--color);
+            }
+
+            /** Select and Search */
+            .custom-select {
+                background: var(--buttonBackground) !important;
+                border-color: transparent;
+                font-weight: 500;
+            }
+
+            input[type='search'] {
+                background: var(--buttonBackground) !important;
+                border-color: transparent;
+            }
+
+            input[type='search']:active,
+            input[type='search']:focus,
+            select:focus,
+            select:focus {
+                outline: none;
+            }
+
+            input[type='search']:active,
+            input[type='search']:focus {
+                box-shadow: none !important;
+            }
+
+            input[type='search']::-webkit-search-cancel-button {
+                -webkit-appearance: none;
+                cursor: pointer;
+                height: 16px;
+                width: 16px;
+                ${cancelButton};
             }
 
             /* Alert */
@@ -359,30 +423,30 @@ export function AppContainer() {
             }
 
             .alert-robi-primary {
-                background: ${App.get('primaryColor') + '20'} !important;
-                color: hsl(${HSLDarker(App.get('primaryColorHSL'), 5)}) !important;
+                background: var(--primary20) !important;
+                color: var(--primaryHSL-5) !important;
             }
 
             .alert-robi-primary *:not(.btn) {
-                color: hsl(${HSLDarker(App.get('primaryColorHSL'), 5)}) !important;
+                color: var(--primaryHSL-5) !important;
             }
 
             .alert-robi-primary-high-contrast {
-                background: ${App.get('primaryColor') + '19'} !important;
-                color: hsl(${HSLDarker(App.get('primaryColorHSL'), 10)}) !important;
+                background: var(--primary19) !important;
+                color: var(--primaryHSL-10) !important;
             }
 
             .alert-robi-primary-high-contrast *:not(.btn) {
-                color: hsl(${HSLDarker(App.get('primaryColorHSL'), 10)}) !important;
+                color: var(--primaryHSL-10) !important;
             }
 
             .alert-robi-secondary {
-                background: ${App.get('backgroundColor')} !important;
-                color: ${App.get('defaultColor')} !important;
+                background: var(--background) !important;
+                color: var(--color) !important;
             }
 
             .alert-robi-secondary *:not(.btn) {
-                color: ${App.get('defaultColor')} !important;
+                color: var(--color) !important;
             }
             
             /** Badge */
@@ -392,7 +456,7 @@ export function AppContainer() {
 
             /* Text */
             .text-robi {
-                color: ${App.get('primaryColor')} !important;
+                color: var(--primary) !important;
             }
 
             /** Code mirror */
@@ -453,11 +517,11 @@ export function AppContainer() {
                 width: 100%;
                 height: 100%;
                 overflow: overlay;
-                background: ${App.get('backgroundColor')};
+                background: var(--background);
             }
 
             .console * {
-                color: ${App.get('defaultColor')} !important;
+                color: var(--color) !important;
             }
 
             .console::-webkit-scrollbar {
@@ -486,7 +550,7 @@ export function AppContainer() {
                 border-radius: 10px;
                 padding: 10px 15px;
                 border: none;
-                background: ${App.get('backgroundColor')};
+                background: var(--background);
                 color: white !important;
                 animation: fade-in-bottom 200ms ease-in-out forwards;
             };
@@ -569,20 +633,20 @@ export function AppContainer() {
             /* Switches */
             .custom-control-input:checked ~ .custom-control-label::before {
                 color: #fff;
-                border-color: ${App.get('primaryColor')};
-                background-color: ${App.get('primaryColor')};
+                border-color: var(--primary);
+                background-color: var(--primary);
             }
 
             .custom-control-input:focus ~ .custom-control-label::before {
-                box-shadow: 0 0 0 4px ${App.get('primaryColor') + '6b'} !important;
+                box-shadow: 0 0 0 4px var(--primary6b) !important;
             }
 
             .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
-                border-color: ${App.get('primaryColor') + '6b'};
+                border-color: var(--primary6b);
             }
             
             .custom-control-input:active {
-                background: ${App.get('primaryColor')};
+                background: var(--primary);
             }
 
             /* Dropdown */
@@ -596,7 +660,7 @@ export function AppContainer() {
             }
 
             .dropdown-item {
-                color: ${App.get('defaultColor')};
+                color: var(--color);
                 cursor: pointer;
                 font-size: 13px;
                 border-radius: 8px;
@@ -609,9 +673,9 @@ export function AppContainer() {
 
             .dropdown-item:focus,
             .dropdown-item:hover {
-                color: ${App.get('defaultColor')};
+                color: var(--color);
                 text-decoration: none;
-                background-color: ${App.get('primaryColor') + '20'};
+                background-color: var(--primary20);
             }
 
             /* Sortable */
@@ -635,8 +699,7 @@ export function AppContainer() {
                 margin: 20px 0px !important;
                 padding: 20px !important;
                 background: white !important;
-                /* box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px !important; */
-                box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')} !important;
+                box-shadow: 0px 0px 0px 2px var(--primary) !important;
             }
 
             .table-container.ui-sortable-handle > div {
@@ -651,8 +714,8 @@ export function AppContainer() {
             /* Menu */
             .grown-in-top-left,
             .grown-in-center {
-                background: ${App.get('prefersColorScheme') === 'dark' ? App.get('backgroundColor') : App.get('secondaryColor')};
-                box-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? '40%' : '10%'}) 0px 0px 16px -2px;
+                background: var(--inputBackground);
+                box-shadow: var(--box-shadow);
             }
 
             @keyframes grown-in-top-left {

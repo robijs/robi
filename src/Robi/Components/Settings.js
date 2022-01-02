@@ -1,6 +1,7 @@
 import { App } from '../Core/App.js'
 import { Title } from './Title.js'
 import { Table } from './Table.js'
+import { Timer } from './Timer.js'
 import { Card } from './Card.js'
 import { Container } from './Container.js'
 import { SectionStepper } from './SectionStepper.js'
@@ -13,12 +14,13 @@ import { ReleaseNotesContainer } from './ReleaseNotesContainer.js'
 import { SiteUsageContainer } from './SiteUsageContainer.js'
 import { Store } from '../Core/Store.js'
 import { ChangeTheme } from './ChangeTheme.js'
-import { Get } from '../Actions/Get.js'
-import { Route } from '../Actions/Route.js'
 import { LoadingSpinner } from './LoadingSpinner.js'
 import { ErrorForm } from './ErrorForm.js'
 import { LogForm } from './LogForm.js'
 import { MyTheme } from './MyTheme.js'
+import { CreateItem } from '../Actions/CreateItem.js'
+import { Get } from '../Actions/Get.js'
+import { Route } from '../Actions/Route.js'
 
 // @START-File
 /**
@@ -56,6 +58,10 @@ export async function Settings({ parent, pathParts }) {
     if (Store.user().Role === 'Developer') {
         sections.splice(1, 0, { name: 'App',path: 'App'});
         sections = sections.concat([
+            {
+                name: 'Actions',
+                path: 'Actions'
+            },
             {
                 name: 'Build',
                 path: 'Build'
@@ -95,7 +101,7 @@ export async function Settings({ parent, pathParts }) {
         minWidth: 'fit-content',
         direction: 'column',
         padding: '20px',
-        borderRight: `solid 1px ${App.get('borderColor')}`,
+        borderRight: `solid 1px var(--borderColor)`,
         parent: formContainer
     });
 
@@ -201,19 +207,6 @@ export async function Settings({ parent, pathParts }) {
             AccountInfo({
                 parent: planContainer
             });
-
-            const preferences = Card({
-                width: '100%',
-                title: 'Preferences',
-                titleBorder: 'none',
-                radius: '20px',
-                parent: planContainer
-            });
-
-            preferences.add();
-            break;
-        case 'Release Notes':
-
             break;
         case 'App':
             if (Store.user().Role === 'Developer') {
@@ -231,6 +224,124 @@ export async function Settings({ parent, pathParts }) {
             ReleaseNotesContainer({
                 parent: planContainer
             });
+            break;
+        case 'Actions':
+            // Toggle update
+            let run = false;
+
+            // Update clock and buttons
+            const timer = Timer({
+                parent: planContainer,
+                classes: ['w-100'],
+                start() {
+                    run = true;
+                    console.log(`Run: ${run}`);
+
+                    // create(25);
+                    // update();
+                },
+                stop() {
+                    run = false;
+                    console.log(`Run: ${run}`);
+                },
+                reset() {
+                    console.log('reset');
+                }
+            });
+
+            timer.add();
+
+            const items = []; // Get({ list: 'ListName' })
+
+            async function create(limit) {
+                /** Set items */
+                for (let i = 0; i < limit; i++) {
+
+                    if (run) {
+                        // Create Item
+                        const newItem = await CreateItem({
+                            list: '',
+                            data,
+                            wait: false
+                        });
+
+                        console.log(`Id: ${newItem.Id}.`);
+
+                        if (i === limit - 1) {
+                            timer.stop();
+                        }
+                    } else {
+                        console.log('stoped');
+
+                        break;
+                    }
+                }
+            }
+
+            async function update() {
+                /** Set items */
+                for (let i = 0; i < items.length; i++) {
+                    if (run) {
+
+                        // update item
+                        if (i === items.length - 1) {
+                            timer.stop();
+                        }
+                    } else {
+                        console.log('stoped');
+
+                        break;
+                    }
+                }
+            }
+
+            // /** Test Attach Files Button */
+            // const attachFilesButton = UploadButton({
+            //     async action(files) {
+            //         console.log(files);
+            //         const uploadedFiles = await AttachFiles({
+            //             list: 'View_Home',
+            //             id: 1,
+            //             files
+            //         });
+            //         console.log(uploadedFiles);
+            //     },
+            //     parent: planContainer,
+            //     type: 'btn-outline-success',
+            //     value: 'Attach file',
+            //     margin: '20px 0px 20px 0px'
+            // });
+            // attachFilesButton.add();
+
+            // /** Test Send Email */
+            // const sendEmailButton = BootstrapButton({
+            //     async action(event) {
+            //         await SendEmail({
+            //             From: 'stephen.a.matheis.ctr@mail.mil',
+            //             To: 'stephen.a.matheis.ctr@mail.mil',
+            //             CC: [
+            //                 'stephen.a.matheis.ctr@mail.mil'
+            //             ],
+            //             Subject: `Test Subject`,
+            //             Body: /*html*/ `
+            //                 <div style="font-family: 'Calibri', sans-serif; font-size: 11pt;">
+            //                     <p>
+            //                         Test body. <strong>Bold</strong>. <em>Emphasized</em>.
+            //                     </p>
+            //                     <p>
+            //                         <a href='https://google.com'>Google</a>
+            //                     </p>
+            //                 </div>
+            //             `
+            //         });
+            //     },
+            //     parent: planContainer,
+            //     classes: ['mt-5'],
+            //     type: 'outline-success',
+            //     value: 'Send Email',
+            //     margin: '0px 0px 0px 20px'
+            // });
+            // sendEmailButton.add();
             break;
         case 'Usage':
             SiteUsageContainer({
@@ -260,7 +371,7 @@ export async function Settings({ parent, pathParts }) {
             });
         
             const logCard = Card({
-                background: App.get('backgroundColor'),
+                background: 'var(--background)',
                 width: '100%',
                 radius: '20px',
                 padding: '20px 30px',
@@ -327,7 +438,7 @@ export async function Settings({ parent, pathParts }) {
             });
         
             const errorsCard = Card({
-                background: App.get('backgroundColor'),
+                background: 'var(--background)',
                 width: '100%',
                 radius: '20px',
                 padding: '20px 30px',

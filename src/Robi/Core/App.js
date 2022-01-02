@@ -49,35 +49,31 @@ const App = {
 
         // Set colors
         const userPreference = GetLocal(`${settings.name}-prefersColorScheme`);
+        const colors = Themes.find(item => item.name === theme);
 
-        console.log(userPreference);
-
-        let colors;
-    
         // 1. Set user preference
         if (userPreference) {
-            colors = Themes.find(item => item.name === theme)[userPreference];
             settings.prefersColorScheme = userPreference;
         } 
         
         // 2. If user hasn't set a preference, set to OS preference
         else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-            colors = Themes.find(item => item.name === theme).light;
             settings.prefersColorScheme = 'light';
         } 
         
         else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            colors = Themes.find(item => item.name === theme).dark;
             settings.prefersColorScheme = 'dark';
         } 
         
         // 3. Default to light
         else {
-            colors = Themes.find(item => item.name === theme).light;
             settings.prefersColorScheme = 'light';
         }
         
-        const { primary, secondary, background, color, selectedRowOpacity, buttonBackgroundColor, borderColor } = colors;
+        const { primary, secondary, background, color, selectedRowOpacity, buttonBackgroundColor, borderColor } = colors[settings.prefersColorScheme];
+
+        // All Colors
+        settings.colors = colors;
 
         // Primary
         settings.primaryColor = NameToHex(primary);

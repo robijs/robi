@@ -64,11 +64,11 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
         style: /*css*/ `
             /** Title */
             #id .modal-title {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             #id.modal {
-                overflow-y: overlay;
+                overflow-y: overlay; 
             }
 
             #id.modal.show {
@@ -79,7 +79,7 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
             #id .modal-content {
                 border-radius: 20px;
                 border: none;
-                background: ${background || App.get('secondaryColor')};
+                background: ${background || 'var(--secondary)'};
                 padding: ${contentPadding || '0px'};
             }
 
@@ -122,7 +122,7 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
             #id .btn-secondary {
                 background: none;
                 border: solid 1px transparent;
-                color: ${App.get('defaultColor')};
+                color: var(--color);
                 font-weight: 500;
             }
 
@@ -161,7 +161,7 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
             #id .close .x-circle-fill {
                 width: 24px;
                 height: 24px;
-                fill: ${App.get('buttonBackgroundColor')};
+                fill: var(--buttonBackground);
                 z-index: 10;
             }
 

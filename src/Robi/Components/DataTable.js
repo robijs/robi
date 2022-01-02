@@ -40,9 +40,6 @@ export function DataTable(param) {
         position
     } = param;
 
-    // FIXME: Does the search field cancel button color need to be different?
-    const cancelButton = `background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' style='fill: ${App.get('prefersColorScheme') === 'dark' ? 'darkgray' : 'darkgray' };'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");`
-
     const component = Component({
         html: /*html*/ `
             <table class=
@@ -82,7 +79,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .table {
-                color: ${App.get('defaultColor')};
+                color: var(--color);
             }
 
             #id tr {
@@ -127,7 +124,7 @@ export function DataTable(param) {
 
             /* Striped */
             #id_wrapper .table-striped tbody tr:nth-of-type(odd) {
-                background-color: ${App.get('backgroundColor')};
+                background-color: var(--background);
             }
 
             #id_wrapper .table-striped tbody tr:nth-of-type(even) td {
@@ -174,7 +171,7 @@ export function DataTable(param) {
 
             /** Add Item Button */
             #id_wrapper .datatable-toolbar .add-item {
-                background: ${App.get('buttonBackgroundColor')};
+                background: var(--buttonBackground);
                 margin-right: 10px;
             }
 
@@ -184,14 +181,14 @@ export function DataTable(param) {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             #id_wrapper .datatable-toolbar .add-item .icon {
                 font-size: 16pt;
                 margin-right: 5px;
                 margin-left: -5px;
-                fill: ${App.get('primaryColor')};;
+                fill: var(--primary);;
             }
 
             /** Disabled Button */
@@ -208,7 +205,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .datatable-toolbar .delete-item:hover {
-                background: ${App.get('buttonBackgroundColor')};
+                background: var(--buttonBackground);
             }
 
             #id_wrapper .datatable-toolbar .delete-item span {
@@ -219,7 +216,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .datatable-toolbar .delete-item .icon {
-                fill: ${App.get('primaryColor')};
+                fill: var(--primary);
             }
 
             /** HTML5 Buttons */
@@ -232,10 +229,8 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-html5 {
-                /* background: ${buttonColor || App.get('buttonBackgroundColor')} !important; */
                 color: #444;
                 font-weight: 500;
-
                 padding: 0px;
                 flex: 1;
                 display: flex;
@@ -246,7 +241,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-html5 span{
-                color: ${App.get('defaultColor')} !important;
+                color: var(--color) !important;
 
                 display: inline-block;
                 margin: 0px 10px;
@@ -257,7 +252,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-html5 span:hover {
-                background-color: ${App.get('primaryColor') + '20'};
+                background-color: var(--primary20);
             }
 
             #id_wrapper .buttons-html5:first-child span {
@@ -288,7 +283,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-collection:hover {
-                background: ${App.get('buttonBackgroundColor')};
+                background: var(--buttonBackground);
             }
 
             #id_wrapper .buttons-collection span {
@@ -298,40 +293,13 @@ export function DataTable(param) {
 
             #id_wrapper .buttons-collection span .icon {
                 font-size: 20px;
-                fill: ${App.get('primaryColor')};
+                fill: var(--primary);
             }
 
             /** Select and Search */
-            #id_wrapper .custom-select {
-                background: ${buttonColor || App.get('buttonBackgroundColor')} !important;
-                border-color: transparent;
-                font-weight: 500;
-            }
-
+            #id_wrapper .custom-select,
             #id_wrapper input[type='search'] {
-                background: ${buttonColor || App.get('buttonBackgroundColor')} !important;
-                border-color: transparent;
-                border-radius: 8px;
-            }
-
-            #id_wrapper input[type='search']:active,
-            #id_wrapper input[type='search']:focus,
-            #id_wrapper select:focus,
-            #id_wrapper select:focus {
-                outline: none;
-            }
-
-            #id_wrapper input[type='search']:active,
-            #id_wrapper input[type='search']:focus {
-                box-shadow: none !important;
-            }
-
-            #id_wrapper input[type='search']::-webkit-search-cancel-button {
-                -webkit-appearance: none;
-                cursor: pointer;
-                height: 16px;
-                width: 16px;
-                ${cancelButton};
+                background: ${buttonColor || 'var(--buttonBackground)'} !important;
             }
 
             /** Footer */
@@ -369,8 +337,8 @@ export function DataTable(param) {
 
             #id_wrapper .page-item.active .page-link {
                 color: white;
-                background: ${App.get('primaryColor')};;
-                border: solid 1px ${App.get('primaryColor')};
+                background: var(--primary);;
+                border: solid 1px var(--primary);
             }
 
             #id_wrapper .page-link:hover {
@@ -403,7 +371,7 @@ export function DataTable(param) {
             #id_wrapper .table-border thead th {
                 border-bottom: solid 1px rgb(${App.get('primaryColorRGB')}, .3);
                 background: rgb(${App.get('primaryColorRGB')}, .2);
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             #id_wrapper :not(.table-border) thead th {
@@ -435,7 +403,7 @@ export function DataTable(param) {
             #id_wrapper .sorting_asc::after,
             #id_wrapper .sorting_desc::before,
             #id_wrapper .sorting_desc::after {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             /* #id_wrapper .sorting::before,
@@ -481,7 +449,7 @@ export function DataTable(param) {
                 margin-top: -18px;
                 top: auto;
                 text-shadow: none;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 font-weight: bolder;
                 font-size: 10pt;
             }
@@ -492,14 +460,14 @@ export function DataTable(param) {
             }
 
             #id_wrapper tbody > tr.selected td {
-                background-color: ${App.get('primaryColor') + ( App.get('selectedRowOpacity') || 10 )} !important;
-                color:  ${App.get('primaryColor')};
+                background-color: var(--selectedRow) !important;
+                color:  var(--primary);
             }
 
             #id_wrapper tbody tr.selected a, 
             #id_wrapper tbody th.selected a,
             #id_wrapper tbody td.selected a {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             #id_wrapper tbody > tr.selected td:first-child {
@@ -575,8 +543,8 @@ export function DataTable(param) {
 
             /** Dropdown menu */
             #id_wrapper .dropdown-menu {
-                background: ${App.get('prefersColorScheme') === 'dark' ? App.get('backgroundColor') : App.get('secondaryColor')};
-                box-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? '40%' : '10%'}) 0px 0px 16px -2px;
+                background: var(--inputBackground);
+                box-shadow: var(--box-shadow);
             }
 
             ${addCSS || ''}

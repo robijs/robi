@@ -4,6 +4,7 @@ import { Component } from '../Actions/Component.js'
 import { SetLocal } from '../Actions/SetLocal.js'
 import { HexToHSL } from '../Actions/HexToHSL.js'
 import { HexToRGB } from '../Actions/HexToRGB.js'
+import { HSLDarker } from '../Actions/HSLDarker.js'
 import { NameToHex } from '../Actions/NameToHex.js'
 import { Themes } from '../Models/Themes.js'
 import { AppContainer } from './AppContainer.js'
@@ -129,76 +130,149 @@ export function MyTheme(param) {
                 selector: '#id .custom-control-input',
                 event: 'change',
                 listener(event) {
-                    setTimeout(() => {
-                        // Set new theme colors
-                        const mode = event.target.dataset.mode;
-                        const { primary, secondary, background, color, selectedRowOpacity, buttonBackgroundColor, borderColor } = theme[mode];
+                    // Deselect both switches
+                    component.findAll('.custom-control-input').forEach(node => node.checked = false);
 
-                        App.set('prefersColorScheme', mode);
-                        App.set('primaryColor', NameToHex(primary));
-                        App.set('primaryColorRGB', HexToRGB(primary));
-                        App.set('primaryColorHSL', HexToHSL(primary));
-                        App.set('secondaryColor', secondary);
-                        App.set('backgroundColor', background);
-                        App.set('buttonBackgroundColor', buttonBackgroundColor);
-                        App.set('borderColor', borderColor);
-                        App.set('defaultColor', color);
-                        App.set('selectedRowOpacity', selectedRowOpacity);
+                    // Always select current switch
+                    event.target.checked = true;
 
-                        // Set localStorage
-                        SetLocal('prefersColorScheme', mode);
+                    // Set new theme colors
+                    const mode = event.target.dataset.mode;
+                    const { primary, secondary, background, color, selectedRowOpacity, buttonBackgroundColor, borderColor } = theme[mode];
+                    const hex = NameToHex(primary);
+                    const rgb = HexToRGB(hex);
+                    const hsl = HexToHSL(primary);
+                    const hsl5 = HSLDarker(hsl, 5);
+                    const hsl10 = HSLDarker(hsl, 10);
 
-                        // Relaunch app
-                        document.querySelectorAll('head style').forEach(node => node.remove());
-                        Store.get('appcontainer').remove();
+                    App.set('prefersColorScheme', mode);
+                    App.set('primaryColor', NameToHex(primary));
+                    App.set('primaryColorRGB', rgb);
+                    App.set('primaryColorHSL', hsl);
+                    App.set('secondaryColor', secondary);
+                    App.set('backgroundColor', background);
+                    App.set('buttonBackgroundColor', buttonBackgroundColor);
+                    App.set('borderColor', borderColor);
+                    App.set('defaultColor', color);
+                    App.set('selectedRowOpacity', selectedRowOpacity);
 
-                        // Add appcontainer
-                        const appContainer = AppContainer();
+                    const root = document.documentElement;
 
-                        Store.add({
-                            name: 'appcontainer',
-                            component: appContainer
-                        });
+                    root.style.setProperty('--background', background);
+                    root.style.setProperty('--borderColor', borderColor);
+                    root.style.setProperty('--box-shadow', `rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? '40%' : '10%'}) 0px 0px 16px -2px`);
+                    root.style.setProperty('--buttonBackground', buttonBackgroundColor);
+                    root.style.setProperty('--color', color);
+                    root.style.setProperty('--inputBackground', App.get('prefersColorScheme') === 'dark' ? background : secondary);
+                    root.style.setProperty('--primary', primary);
+                    root.style.setProperty('--primaryHex', hex);
+                    root.style.setProperty('--primaryHSL', `hsl(${HexToHSL(primary)})`);
+                    root.style.setProperty('--primaryHSL-5', `hsl(${hsl5})`);
+                    root.style.setProperty('--primaryHSL-10', `hsl(${hsl10})`);
+                    root.style.setProperty('--primaryRGB', rgb);
+                    root.style.setProperty('--primary6b', primary + '6b');
+                    root.style.setProperty('--primary19', primary + '19');
+                    root.style.setProperty('--primary20', primary + '20');
+                    root.style.setProperty('--scrollbar', App.get('prefersColorScheme') === 'dark' ? 'dimgray' : 'lightgray');
+                    root.style.setProperty('--secondary', secondary);
+                    root.style.setProperty('--selectedRow', primary + (selectedRowOpacity || '10'));
 
-                        appContainer.add();
+                    SetLocal('prefersColorScheme', mode);
+                    
+                    // setTimeout(() => {
+                    //     // Set new theme colors
+                    //     const mode = event.target.dataset.mode;
+                    //     const { primary, secondary, background, color, selectedRowOpacity, buttonBackgroundColor, borderColor } = theme[mode];
+                    //     const hex = NameToHex(primary);
+                    //     const rgb = HexToRGB(hex);
+                    //     const hsl = HexToHSL(primary);
+                    //     const hsl5 = HSLDarker(hsl, 5);
+                    //     const hsl10 = HSLDarker(hsl, 10);
 
-                        // Current route
-                        const path = location.href.split('#')[1];
+                    //     App.set('prefersColorScheme', mode);
+                    //     App.set('primaryColor', NameToHex(primary));
+                    //     App.set('primaryColorRGB', rgb);
+                    //     App.set('primaryColorHSL', hsl);
+                    //     App.set('secondaryColor', secondary);
+                    //     App.set('backgroundColor', background);
+                    //     App.set('buttonBackgroundColor', buttonBackgroundColor);
+                    //     App.set('borderColor', borderColor);
+                    //     App.set('defaultColor', color);
+                    //     App.set('selectedRowOpacity', selectedRowOpacity);
 
-                        // Sidebar
-                        const sidebarParam = {
-                            parent: appContainer,
-                            path
-                        };
+                    //     root.style.setProperty('--background:', background);
+                    //     root.style.setProperty('--borderColor', borderColor);
+                    //     root.style.setProperty('--box-shadow', `rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? '40%' : '10%'}) 0px 0px 16px -2px`);
+                    //     root.style.setProperty('--buttonBackground', buttonBackgroundColor);
+                    //     root.style.setProperty('--color', color);
+                    //     root.style.setProperty('--inputBackground', App.get('prefersColorScheme') === 'dark' ? background : secondary);
+                    //     root.style.setProperty('--primary', primary);
+                    //     root.style.setProperty('--primaryHex', hex);
+                    //     root.style.setProperty('--primaryHSL', `hsl(${HexToHSL(primary)})`);
+                    //     root.style.setProperty('--primaryHSL-5', `hsl(${hsl5})`);
+                    //     root.style.setProperty('--primaryHSL-10', `hsl(${hsl10})`);
+                    //     root.style.setProperty('--primaryRGB', rgb);
+                    //     root.style.setProperty('--primary6b', primary + '6b');
+                    //     root.style.setProperty('--primary19', primary + '19');
+                    //     root.style.setProperty('--primary20', primary + '20');
+                    //     root.style.setProperty('--scrollbar', App.get('prefersColorScheme') === 'dark' ? 'dimgray' : 'lightgray');
+                    //     root.style.setProperty('--secondary', secondary);
+                    //     root.style.setProperty('--selectedRow', primary + (selectedRowOpacity || '10'));
 
-                        const sidebarComponent = App.get('sidebar') ? App.get('sidebar')(sidebarParam) : Sidebar(sidebarParam);
+                    //     // Set localStorage
+                    //     SetLocal('prefersColorScheme', mode);
 
-                        Store.add({
-                            name: 'sidebar',
-                            component: sidebarComponent
-                        });
+                    //     // // Relaunch app
+                    //     // document.querySelectorAll('head style').forEach(node => node.remove());
+                    //     // Store.get('appcontainer').remove();
 
-                        sidebarComponent.add();
+                    //     // // Add appcontainer
+                    //     // const appContainer = AppContainer();
 
-                        // Main Container
-                        const mainContainerParam = {
-                            parent: appContainer
-                        };
+                    //     // Store.add({
+                    //     //     name: 'appcontainer',
+                    //     //     component: appContainer
+                    //     // });
 
-                        const mainContainer = App.get('maincontainer') ? App.get('maincontainer')(mainContainerParam) : MainContainer(mainContainerParam);
+                    //     // appContainer.add();
 
-                        Store.add({
-                            name: 'maincontainer',
-                            component: mainContainer
-                        });
+                    //     // // Current route
+                    //     // const path = location.href.split('#')[1];
 
-                        mainContainer.add();
+                    //     // // Sidebar
+                    //     // const sidebarParam = {
+                    //     //     parent: appContainer,
+                    //     //     path
+                    //     // };
 
-                        // Show App Container
-                        appContainer.show('flex');
+                    //     // const sidebarComponent = App.get('sidebar') ? App.get('sidebar')(sidebarParam) : Sidebar(sidebarParam);
 
-                        Route(path);
-                    }, 200);
+                    //     // Store.add({
+                    //     //     name: 'sidebar',
+                    //     //     component: sidebarComponent
+                    //     // });
+
+                    //     // sidebarComponent.add();
+
+                    //     // // Main Container
+                    //     // const mainContainerParam = {
+                    //     //     parent: appContainer
+                    //     // };
+
+                    //     // const mainContainer = App.get('maincontainer') ? App.get('maincontainer')(mainContainerParam) : MainContainer(mainContainerParam);
+
+                    //     // Store.add({
+                    //     //     name: 'maincontainer',
+                    //     //     component: mainContainer
+                    //     // });
+
+                    //     // mainContainer.add();
+
+                    //     // // Show App Container
+                    //     // appContainer.show('flex');
+
+                    //     // Route(path);
+                    // }, 200);
                 }
             }
         ]

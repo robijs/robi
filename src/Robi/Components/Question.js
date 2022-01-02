@@ -66,7 +66,7 @@ export function Question(param) {
             }
 
             #id .card {
-                background: ${App.get('backgroundColor')};
+                background: var(--background);
                 border: none;
                 border-radius: 20px;
             }
@@ -119,7 +119,7 @@ export function Question(param) {
                 text-align: center;
                 border-radius: 50%;
                 color: white;
-                background: ${App.get('primaryColor')};
+                background: var(--primary);
             }
 
             #id .reply-count-value * {

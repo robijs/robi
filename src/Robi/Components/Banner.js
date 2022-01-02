@@ -36,7 +36,7 @@ export function Banner(param) {
             #id.normal {
                 display: inline-block;
                 background: white;
-                border-left: solid 10px ${App.get('primaryColor')};
+                border-left: solid 10px var(--primary);
                 margin: 20px 0px;
                 padding: 10px;
             }

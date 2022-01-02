@@ -50,7 +50,7 @@ export function UpgradeAppButton(param) {
             #id .dev-console {
                 width: 100%;
                 /* padding: 40px; */
-                /* border: solid 2px ${App.get('primaryColor')}; */
+                /* border: solid 2px var(--primary); */
                 border-radius: 20px;
                 display: flex;
                 flex-direction: column;
@@ -62,7 +62,7 @@ export function UpgradeAppButton(param) {
                 justify-content: space-between;
                 padding: 20px 30px;
                 border-radius: 20px;
-                background: ${App.get('backgroundColor')};
+                background: var(--background);
             }
 
             #id .dev-console-text {

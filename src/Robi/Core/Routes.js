@@ -1,4 +1,3 @@
-import { Developer } from '../Components/Developer.js'
 import { Help } from '../Components/Help.js'
 import { Missing } from '../Components/Missing.js'
 import { QuestionAndReplies } from '../Components/QuestionAndReplies.js'
@@ -28,17 +27,6 @@ const Routes = [
         hide: true,
         go(param) {
             Missing(param);
-        }
-    },
-    {
-        path: 'Developer',
-        type: 'system',
-        roles: [
-            'Developer'
-        ],
-        icon: 'code-slash',
-        go(param) {
-            Developer(param);
         }
     },
     {

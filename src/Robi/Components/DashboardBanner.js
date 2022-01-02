@@ -43,7 +43,7 @@ export function DashboardBanner(param) {
             }
 
             #id .dashboard-banner-group.selected {
-                background: ${App.get('buttonBackgroundColor')} !important;
+                background: var(--buttonBackground) !important;
             }
 
             #id .dashboard-banner-group:not(:last-child) {
@@ -92,9 +92,9 @@ export function DashboardBanner(param) {
 
             html += /*html*/ `
                 <div class='dashboard-banner-group' style='background: ${background || 'transparent'}' data-label='${label}' data-action='${action ? 'true' : 'false'}'>
-                    <div class='dashboard-banner-label' style='color: ${color || App.get('defaultColor')}'>${label}</div>
-                    <div class='dashboard-banner-value' style='color: ${color || App.get('defaultColor')}'>${value}</div>
-                    <div class='dashboard-banner-description' style='color: ${color || App.get('defaultColor')}'>${description || ''}</div>
+                    <div class='dashboard-banner-label' style='color: ${color || 'var(--color)'}'>${label}</div>
+                    <div class='dashboard-banner-value' style='color: ${color || 'var(--color)'}'>${value}</div>
+                    <div class='dashboard-banner-description' style='color: ${color || 'var(--color)'}'>${description || ''}</div>
                 </div>
             `;
         });

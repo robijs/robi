@@ -34,7 +34,6 @@ import { DashboardBanner } from './Components/DashboardBanner.js'
 import { DataTable } from './Components/DataTable.js'
 import { DateField } from './Components/DateField.js'
 import { DevConsole } from './Components/DevConsole.js'
-import { Developer } from './Components/Developer.js'
 import { DeveloperLinks } from './Components/DeveloperLinks.js'
 import { Dialog } from './Components/Dialog.js'
 import { DropDownField } from './Components/DropDownField.js'
@@ -135,7 +134,6 @@ export {
     DataTable,
     DateField,
     DevConsole,
-    Developer,
     DeveloperLinks,
     Dialog,
     DropDownField,
