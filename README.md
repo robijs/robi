@@ -31,4 +31,4 @@ EPERM: operation not permitted, rename './src/Routes/OldRouteName' -> './src/Rou
 
 Check if there's another program using the named directory. Sometimes antivirus and file sync apps (OneDrive, iCloud Drive, Dropbox, etc.) will lock directories to changes. Pause them and try again.
 
-If that doesn't work, stop the server (ctrl+c), close your text editor and console, and relaunch. You'll probably need to fix broken paths since the server was in the middle of renaming files and directories.
+If that doesn't work, stop the server (<kbd>ctrl</kbd>) + <kbd>c</kbd>), close your text editor and console, and relaunch. You'll probably need to fix broken paths since the server was in the middle of renaming files and directories.
