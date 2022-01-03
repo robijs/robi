@@ -18,7 +18,7 @@ npm run build-sp min
 6. Click Install.
 
 ## Troubleshooting
-You might see error messages in the terminal session that's running the local development server. 
+If you see error messages in the terminal session that's running the local development server, try these steps. 
 
 ### Trigger: Edit > Modify Routes
 
