@@ -43,13 +43,13 @@ npm run dev
 
 #### Error
 ```console
-[0] Some error occurred Error: listen EADDRINUSE: address already in use 127.0.0.1:3000
-[0]     at Server.setupListenHandle [as _listen2] (node:net:1334:16)
-[0]     at listenInCluster (node:net:1382:12)
-[0]     at GetAddrInfoReqWrap.doListen [as callback] (node:net:1520:7)
-[0]     at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:73:8) {
-[0]   code: 'EADDRINUSE',
-[0]   errno: -4091,
+Some error occurred Error: listen EADDRINUSE: address already in use 127.0.0.1:3000
+    at Server.setupListenHandle [as _listen2] (node:net:1334:16)
+    at listenInCluster (node:net:1382:12)
+    at GetAddrInfoReqWrap.doListen [as callback] (node:net:1520:7)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:73:8) {
+  code: 'EADDRINUSE',
+  errno: -4091,
 ```
 
 #### Fix
