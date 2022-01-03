@@ -427,7 +427,7 @@ table.dataTable tbody>tr.selected,table.dataTable tbody>tr>.selected{background-
 .cm-s-vscode-dark .CodeMirror-activeline-gutter .CodeMirror-linenumber {color: #c6c6c6;}
 .cm-s-vscode-dark div.CodeMirror-selected {background: #1e496c}
 .cm-s-vscode-dark .CodeMirror-gutters {background: #1e1e1e; border-right: none;}
-.cm-s-vscode-dark .CodeMirror-linenumber {color: #606366;}
+.cm-s-vscode-dark .CodeMirror-linenumber {color: #858585;}
 .cm-s-vscode-dark span.cm-builtin {color: #A9B7C6;}
 .cm-s-vscode-dark {font-family: Consolas, 'Courier New', monospace, serif;}
 /* .cm-s-vscode-dark .CodeMirror-matchingbracket {background-color: #3b514d; color: yellow !important;} */

@@ -21,6 +21,8 @@ import { MyTheme } from './MyTheme.js'
 import { CreateItem } from '../Actions/CreateItem.js'
 import { Get } from '../Actions/Get.js'
 import { Route } from '../Actions/Route.js'
+import { Wait } from '../Actions/Wait.js'
+import { Style } from '../Robi.js'
 
 // @START-File
 /**
@@ -227,122 +229,8 @@ export async function Settings({ parent, pathParts }) {
             });
             break;
         case 'Actions':
-            // Toggle update
-            let run = false;
-
-            // Update clock and buttons
-            const timer = Timer({
-                parent: planContainer,
-                classes: ['w-100'],
-                start() {
-                    run = true;
-                    console.log(`Run: ${run}`);
-
-                    // create(25);
-                    // update();
-                },
-                stop() {
-                    run = false;
-                    console.log(`Run: ${run}`);
-                },
-                reset() {
-                    console.log('reset');
-                }
-            });
-
-            timer.add();
-
-            const items = []; // Get({ list: 'ListName' })
-
-            async function create(limit) {
-                /** Set items */
-                for (let i = 0; i < limit; i++) {
-
-                    if (run) {
-                        // Create Item
-                        const newItem = await CreateItem({
-                            list: '',
-                            data,
-                            wait: false
-                        });
-
-                        console.log(`Id: ${newItem.Id}.`);
-
-                        if (i === limit - 1) {
-                            timer.stop();
-                        }
-                    } else {
-                        console.log('stoped');
-
-                        break;
-                    }
-                }
-            }
-
-            async function update() {
-                /** Set items */
-                for (let i = 0; i < items.length; i++) {
-                    if (run) {
-
-                        // update item
-                        if (i === items.length - 1) {
-                            timer.stop();
-                        }
-                    } else {
-                        console.log('stoped');
-
-                        break;
-                    }
-                }
-            }
-
-            // /** Test Attach Files Button */
-            // const attachFilesButton = UploadButton({
-            //     async action(files) {
-            //         console.log(files);
-            //         const uploadedFiles = await AttachFiles({
-            //             list: 'View_Home',
-            //             id: 1,
-            //             files
-            //         });
-            //         console.log(uploadedFiles);
-            //     },
-            //     parent: planContainer,
-            //     type: 'btn-outline-success',
-            //     value: 'Attach file',
-            //     margin: '20px 0px 20px 0px'
-            // });
-            // attachFilesButton.add();
-
-            // /** Test Send Email */
-            // const sendEmailButton = BootstrapButton({
-            //     async action(event) {
-            //         await SendEmail({
-            //             From: 'stephen.a.matheis.ctr@mail.mil',
-            //             To: 'stephen.a.matheis.ctr@mail.mil',
-            //             CC: [
-            //                 'stephen.a.matheis.ctr@mail.mil'
-            //             ],
-            //             Subject: `Test Subject`,
-            //             Body: /*html*/ `
-            //                 <div style="font-family: 'Calibri', sans-serif; font-size: 11pt;">
-            //                     <p>
-            //                         Test body. <strong>Bold</strong>. <em>Emphasized</em>.
-            //                     </p>
-            //                     <p>
-            //                         <a href='https://google.com'>Google</a>
-            //                     </p>
-            //                 </div>
-            //             `
-            //         });
-            //     },
-            //     parent: planContainer,
-            //     classes: ['mt-5'],
-            //     type: 'outline-success',
-            //     value: 'Send Email',
-            //     margin: '0px 0px 0px 20px'
-            // });
-            // sendEmailButton.add();
+            // actions();
+            actionsISE();
             break;
         case 'Usage':
             SiteUsageContainer({
@@ -513,6 +401,301 @@ export async function Settings({ parent, pathParts }) {
         default:
             Route('404');
             break;
+    }
+
+    // Actions
+    function actions() {
+        // Toggle update
+        let run = false;
+
+        // Update clock and buttons
+        const timer = Timer({
+            parent: planContainer,
+            classes: ['w-100'],
+            start() {
+                run = true;
+                console.log(`Run: ${run}`);
+
+                // create(25);
+                // update();
+            },
+            stop() {
+                run = false;
+                console.log(`Run: ${run}`);
+            },
+            reset() {
+                console.log('reset');
+            }
+        });
+
+        timer.add();
+
+        const items = []; // Get({ list: 'ListName' })
+
+        async function create(limit) {
+            /** Set items */
+            for (let i = 0; i < limit; i++) {
+
+                if (run) {
+                    // Create Item
+                    const newItem = await CreateItem({
+                        list: '',
+                        data,
+                        wait: false
+                    });
+
+                    console.log(`Id: ${newItem.Id}.`);
+
+                    if (i === limit - 1) {
+                        timer.stop();
+                    }
+                } else {
+                    console.log('stoped');
+
+                    break;
+                }
+            }
+        }
+
+        async function update() {
+            /** Set items */
+            for (let i = 0; i < items.length; i++) {
+                if (run) {
+
+                    // update item
+                    if (i === items.length - 1) {
+                        timer.stop();
+                    }
+                } else {
+                    console.log('stoped');
+
+                    break;
+                }
+            }
+        }
+
+        // /** Test Attach Files Button */
+        // const attachFilesButton = UploadButton({
+        //     async action(files) {
+        //         console.log(files);
+        //         const uploadedFiles = await AttachFiles({
+        //             list: 'View_Home',
+        //             id: 1,
+        //             files
+        //         });
+        //         console.log(uploadedFiles);
+        //     },
+        //     parent: planContainer,
+        //     type: 'btn-outline-success',
+        //     value: 'Attach file',
+        //     margin: '20px 0px 20px 0px'
+        // });
+        // attachFilesButton.add();
+
+        // /** Test Send Email */
+        // const sendEmailButton = BootstrapButton({
+        //     async action(event) {
+        //         await SendEmail({
+        //             From: 'stephen.a.matheis.ctr@mail.mil',
+        //             To: 'stephen.a.matheis.ctr@mail.mil',
+        //             CC: [
+        //                 'stephen.a.matheis.ctr@mail.mil'
+        //             ],
+        //             Subject: `Test Subject`,
+        //             Body: /*html*/ `
+        //                 <div style="font-family: 'Calibri', sans-serif; font-size: 11pt;">
+        //                     <p>
+        //                         Test body. <strong>Bold</strong>. <em>Emphasized</em>.
+        //                     </p>
+        //                     <p>
+        //                         <a href='https://google.com'>Google</a>
+        //                     </p>
+        //                 </div>
+        //             `
+        //         });
+        //     },
+        //     parent: planContainer,
+        //     classes: ['mt-5'],
+        //     type: 'outline-success',
+        //     value: 'Send Email',
+        //     margin: '0px 0px 0px 20px'
+        // });
+        // sendEmailButton.add();
+    }
+
+    // Actions Integrated Scripting Environment
+    async function actionsISE() {
+        Style({
+            name: 'action-ise',
+            style: /*css*/ `
+                .code-box::-webkit-scrollbar-thumb {
+                    min-height: 40px;
+                } 
+            `
+        });
+        
+        planContainer.get().style.height = '100%';
+        planContainer.append(/*html*/ `
+            <div class='d-flex flex-column w-100' style='height: 100%; padding-bottom: 30px;'>
+                <div class='rs-box alert w-100 mb-0' style='height: 40%; padding: 10px 10px 0px 10px; background: #1e1e1e; color: #d4d4d4;'>
+                    <div class='code-box alert w-100 mb-0' style='height: 100%; padding: 0px; background: #1e1e1e; color: #d4d4d4; overflow: overlay;'></div>
+                </div>
+                <!-- <div class='rs-handle w-100' style='height: 10px; background: var(--primary); cursor: ns-resize;'></div> -->
+                <div class='output-box alert alert-robi-secondary w-100 mb-0' style='flex: 1;'></div>
+            </div>
+        `);
+
+        $('.rs-box').resizable({
+            handles: 's'
+        });
+
+        // CodeMirror
+        const path = 'App/src/Robi/Components';
+        const file = 'Settings.js';
+
+        const loading = LoadingSpinner({
+            message: `Loading <span style='font-weight: 300;'>${path}/${file}</span>`,
+            type: 'white',
+            classes: ['h-100', 'loading-file'],
+            parent:  planContainer.find('.code-box')
+        });
+
+        loading.add();
+
+        document.querySelector('.code-box').insertAdjacentHTML('beforeend', /*html*/ `
+            <textarea class='code-mirror-container robi-code-background h-100'></textarea>
+        `);
+
+        let shouldReload = false;
+
+        const editor = CodeMirror.fromTextArea(planContainer.find('.code-mirror-container'), {
+            mode: 'javascript',
+            indentUnit: 4,
+            lineNumbers: true,
+            lineWrapping: true,
+            autoCloseBrackets: true,
+            // styleActiveLine: true,
+            styleActiveLine: false,
+            foldGutter: true,
+            matchBrackets: true,
+            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+            keyword: {
+                "import": "special",
+                "export": "special",
+                "default": "special",
+                "await": "special",
+            },
+            // extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
+        });
+        editor.foldCode(CodeMirror.Pos(0, 0));
+        editor.setSize(0, 0);
+        editor.setOption('extraKeys', {
+            'Tab': 'indentMore',
+            'Shift-Tab': 'indentLess',
+            'Ctrl-/'(cm) {
+                editor.toggleComment({
+                    // this prop makes sure comments retain indented code
+                    // https://github.com/codemirror/CodeMirror/issues/3765#issuecomment-171819763
+                    indent: true
+                });
+            },
+            async 'Ctrl-S'(cm) {
+                // TODO: only save file if changed
+                console.log('save file');
+
+                // Save file
+                await saveFile();
+
+                // Add changed message
+                const changedMessaage = planContainer.find('.changed-message');
+
+                if (!changedMessaage) {
+                    planContainer.find('.file-title-text').insertAdjacentHTML('beforeend', /*html*/ `
+                        <div class='changed-message' style='margin-left: 10px; color: seagreen'>CHANGED (will reload on close)</div>
+                    `);
+                }
+
+                // Set reload flag
+                shouldReload = true;
+
+            }
+        });
+
+        let fileValueRequest;
+        let requestDigest;
+
+        if (App.get('mode') === 'prod') {
+            const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
+
+            requestDigest = await GetRequestDigest();
+
+            fileValueRequest = await fetch(sourceSiteUrl, {
+                method: 'GET',
+                headers: {
+                    'binaryStringRequestBody': 'true',
+                    'Accept': 'application/json;odata=verbose;charset=utf-8',
+                    'X-RequestDigest': requestDigest
+                }
+            });
+
+        } else {
+            const devPath = path.replace('App/', '');
+            fileValueRequest = await fetch(`http://127.0.0.1:8080/${devPath}/${file}`);
+            await Wait(1000);
+        }
+
+        // Overriden on save
+        // FIXME: Doesn't work with app.js.
+        let value = await fileValueRequest.text();
+
+        // Always wait an extra 100ms for CodeMirror to settle.
+        // For some reason, gutter width's won't apply 
+        // correctly if the editor is modified too quickly.
+        setTimeout(() => {
+            // Remove loading message
+            loading.remove();
+
+            // Set codemirror
+            setEditor();
+        }, 100);
+
+        // FIXME: Remember initial codemirorr doc value
+        // compare this with current doc value
+        let docValue;
+
+        function setEditor() {
+            editor.setSize('auto', 'auto');
+            editor.setOption('viewportMargin', Infinity);
+            // editor.setOption('theme', 'material-palenight');
+            editor.setOption('theme', 'vscode-dark');
+            editor.getDoc().setValue(value);
+            editor.focus();
+
+            docValue = editor.doc.getValue();
+
+            // Watch for changes
+            editor.on('change', event => {
+                if (docValue === editor.doc.getValue()) {
+                    console.log('unchanged');
+
+                    const dot = planContainer.find('.changed-dot');
+
+                    if (dot) {
+                        dot.remove();
+                    }
+                } else {
+                    console.log('changed');
+
+                    const dot = planContainer.find('.changed-dot');
+
+                    if (!dot) {
+                        // planContainer.find('.file-title').insertAdjacentHTML('beforeend', /*html*/ `
+                        //     <div class='changed-dot' style='margin-left: 15px; width: 8px; height: 8px; background: white; border-radius: 50%;'></div>
+                        // `);
+                    }
+                }
+            });
+        }
     }
 }
 // @END-File

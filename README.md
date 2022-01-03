@@ -60,3 +60,8 @@ npm run dev
 ```
 
 If that doesn't work, open Task Manager and end all Node.js processes.
+
+### Trigger: CodeMirror scroll/resize is slow
+
+#### Fix
+Close dev tools! Oddly enough, it works.

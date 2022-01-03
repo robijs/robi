@@ -122,11 +122,10 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         viewTools.add();
     }
 
-    // Set browswer history state
+    // Set browswer history state and window title
     History({
         url: `${location.href.split('#')[0]}${(path) ? `#${path}` : ''}`,
-        title: `${App.get('title')}${(path) ? ` - ${pathAndQuery[0]}` : ''}`
-        // title: `${App.title}${(path) ? ` - ${path}` : ''}`
+        title: `${App.get('title')}${(path) ? ` > ${route.title || pathParts.join(' > ')}` : ''}`
     });
 
     sidebar.selectNav(route.path);
