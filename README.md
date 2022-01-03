@@ -7,7 +7,7 @@ npm run dev
 ```
 
 ## Deploy to SharePoint
-1. Create SharePoint build.
+1. Create a build of your app.
 ```console
 npm run build-sp min
 ```
