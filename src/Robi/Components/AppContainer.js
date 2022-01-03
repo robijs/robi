@@ -330,6 +330,7 @@ export function AppContainer() {
             }
 
             .input-group .input-group-text {
+                color: var(--color);
                 border-radius: 10px 0px 0px 10px !important;
             }
 
@@ -356,11 +357,9 @@ export function AppContainer() {
                 color: var(--color);
             }
 
-            /** Select and Search */
             .custom-select {
-                background: var(--buttonBackground) !important;
-                border-color: transparent;
-                font-weight: 500;
+                background: var(--inputBackground) !important;
+                border-color: var(--borderColor);
             }
 
             input[type='search'] {

@@ -152,6 +152,10 @@ export function TableToolbar(param) {
                 height: 0px !important;
             }
 
+            #id .custom-select {
+                background: var(--inputBackground);
+            }
+
             /* Load menu */
             #id .dropdown-menu {
                 background: transparent;

@@ -601,7 +601,7 @@ export function DataTable(param) {
                 <'row'
                     <'datatable-toolbar'
                         <'cell left'
-                            Bl
+                            B
                         >
                         <'cell right'
                             ${search !== false ? 'f' : ''}
