@@ -1,22 +1,41 @@
 # Robi
 
 ## Local Development
-```console
+```terminal
 npm install
-npm start
+npm run dev
 ```
 
 ## Deploy to SharePoint
-Instructions coming soon.
+1. Create SharePoint build.
+```terminal
+npm run build-sp min
+```
+2. Create a new SharePoint site (if one doesn't already exist). We recommend not deploying two Robi apps to the same site.
+3. Create a new document library named App.
+4. Copy single /src directory from /dist to App, including the /src directory.
+5. Launch App/src/Pages/app.aspx
+6. Click Install.
 
 ## Troubleshooting
-If you see this message in the terminal
+You might see error messages in the terminal session that's running either
 
-```sh
-EPERM: operation not permitted, watch at FSEvent.FSWatcher._handle.onchange
+```terminal
+npm run dev
 ```
 or
-```sh
+```terminal
+npm start
+```
+
+### Error Messages
+
+If you see either of these
+
+```terminal
+EPERM: operation not permitted, watch at FSEvent.FSWatcher._handle.onchange
+``` 
+```terminal
 EPERM: operation not permitted, rename './src/Routes/OldRouteName' -> './src/Routes/NewRouteName'
 ```
 
