@@ -8,6 +8,7 @@ import lists from './lists.js'
 // @START-IMPORTS
 import Test from './Routes/Test/Test.js'
 import SortTables from './Routes/SortTables/SortTables.js'
+import LookupField from './Routes/LookupField/LookupField.js'
 // @END-IMPORTS
 
 // @START
@@ -33,6 +34,15 @@ Start({
             go: SortTables
         }
         // @END-SortTables
+        , // @ROUTE
+        // @START-LookupField
+        {
+            path: 'LookupField',
+            title: 'Lookup Field',
+            icon: 'bs-file-earmarked-ruled',
+            go: LookupField
+        }
+        // @END-LookupField
         // @END-ROUTES
     ],
     settings: {

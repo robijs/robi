@@ -14,7 +14,7 @@ export function RouteTemplate({ name, title }) {
         `import { Title } from '../../Robi/RobiUI.js'`,
         ``,
         `// @START-${name}`,
-        `export default function ${name}(param) {`,
+        `export default async function ${name}(param) {`,
         `    const {`,
         `        parent,`,
         `    } = param;`,

@@ -48,9 +48,11 @@ export async function Table(param) {
         order,
         padding,
         parent,
+        path,
         showId,
         titleDisplayName,
         toolbar,
+        top,
         view,
         width
     } = param;
@@ -79,7 +81,7 @@ export async function Table(param) {
     if (heading || list) {
         // const text = heading || (heading === '' ? '' : list.split(/(?=[A-Z])/).join(' '));
         // if list passed in look first for list.heading, or list.split(...)
-        const text = heading || ( heading === '' ? '' : list ? (lists.find(item => item.list === list).heading || list.split(/(?=[A-Z])/).join(' '))  : '' );
+        const text = heading || ( heading === '' ? '' : list ? (lists.find(item => item.list === list)?.heading || list.split(/(?=[A-Z])/).join(' '))  : '' );
 
         legendHeading = Heading({
             text,
@@ -119,6 +121,8 @@ export async function Table(param) {
 
         // TODO: Only select fields from view
         items = items || await Get({
+            path,
+            top,
             list,
             select: '*,Author/Name,Author/Title,Editor/Name,Editor/Title',
             expand: `Author/Id,Editor/Id`,
@@ -129,7 +133,7 @@ export async function Table(param) {
         const schema = lists.concat(Lists()).find(item => item.list === list);
             
         if (view) {
-            fields = schema?.views
+            fields = fields || schema?.views
                 .find(item => item.name === view)
                 ?.fields
                 .map(name => {
@@ -167,8 +171,8 @@ export async function Table(param) {
         } else {
             // If no view, get all fields
             // FIXME: redundant
-            fields = lists.concat(Lists()).find(item => item.list === list)?.fields;
-            formFields = lists.concat(Lists()).find(item => item.list === list)?.fields;
+            fields = fields || lists.concat(Lists()).find(item => item.list === list)?.fields;
+            formFields = fields;
         }
 
         if (!fields) {
