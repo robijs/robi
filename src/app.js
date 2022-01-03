@@ -3,11 +3,11 @@
 // Just be sure to put @START and @END sigils in the right places.
 // Otherwise, changes made with GUI tools will not render properly.
 
-// @START-IMPORTS
 import { Start } from './Robi/Robi.js'
 import lists from './lists.js'
+// @START-IMPORTS
 import Test from './Routes/Test/Test.js'
-import Tables from './Routes/Tables/Tables.js'
+import Sort3 from './Routes/Sort3/Sort3.js'
 // @END-IMPORTS
 
 // @START
@@ -15,7 +15,7 @@ Start({
     lists,
     // Routes are directly addressable. Ex: https://site#path.
     routes: [
-        // @START-ROUTES
+        // @START-ROUTES        
         // @START-Test
         {
             path: 'Test',
@@ -24,15 +24,15 @@ Start({
             go: Test
         }
         // @END-Test
-        , // @ROUTE
-        // @START-Table
+        , // @ROUTE        
+        // @START-Sort3
         {
-            path: 'Tables',
+            path: 'Sort3',
             title: 'Sort Tables',
             icon: 'bs-list-ul',
-            go: Tables
+            go: Sort3
         }
-        // @END-Table
+        // @END-Sort3
         // @END-ROUTES
     ],
     settings: {

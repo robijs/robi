@@ -17,8 +17,15 @@ import { Container } from '../Components/Container.js'
  * @param {*} param
  */
 export async function ModifyRoutes(event) {
-    console.log('Modify routes');
+    // // If current route changed, updated URL
+    // let route = location.href.split('#')[1].split('/');
 
+    // if (route[0] === 'Sort2'); {
+    //     route[0] = 'Sort3';
+    //     location.href = location.href.split('#')[0] + '#' + route.join('/');
+    // }
+
+    // return;
     const routes = Store.routes().filter(item => item.type !== 'system');
 
     const addRouteModal = Modal({
@@ -195,7 +202,16 @@ export async function ModifyRoutes(event) {
                         console.log(path, title, icon);
 
                         if (path || title || icon) {
+                            // Set app.js flag
                             changed = true;
+
+                            // If current route changed, updated URL
+                            let route = location.href.split('#')[1].split('/');
+
+                            if (route[0] === name); {
+                                route[0] = path;
+                                location.href = location.href.split('#')[0] + '#' + route.join('/');
+                            }
                             
                             if (App.get('mode') === 'prod') {
                                 await updateRoute({ name, path, title, icon });
@@ -211,6 +227,7 @@ export async function ModifyRoutes(event) {
                     }
 
                     if (App.get('mode') === 'prod') {
+                        
                         await Wait(3000);
                         location.reload();
                     } else {
@@ -256,7 +273,7 @@ export async function ModifyRoutes(event) {
                             const { name, path } = field.values();
                             const route = path || name;
 
-                            return `Import ${route} from './Routes/${route}/${route}'`;
+                            return `import ${route} from './Routes/${route}/${route}.js'`;
                         }).join('\n');
                     
                         updated = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS\n${newImports || '\n'}\n// @END-IMPORTS`);
@@ -267,7 +284,7 @@ export async function ModifyRoutes(event) {
                             const route = path || name;
 
                             return [
-                                ``,
+                                `        `,
                                 `        // @START-${route}`,
                                 `        {`,
                                 `            path: '${route}',`,
@@ -276,7 +293,7 @@ export async function ModifyRoutes(event) {
                                 `            go: ${route}`,
                                 `        }`,
                                 `        // @END-${route}`,
-                                ``
+                                `        `
                             ].join('\n');
                         }).join(', // @ROUTE');
                     
