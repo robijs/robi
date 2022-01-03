@@ -6,7 +6,7 @@ npm install
 npm start
 ```
 
-## Deploy to SharePont
+## Deploy to SharePoint
 Instructions coming soon.
 
 ## Troubleshooting
