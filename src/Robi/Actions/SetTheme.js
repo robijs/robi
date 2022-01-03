@@ -76,7 +76,7 @@ export function SetTheme() {
             :root {
                 --background: ${background};
                 --borderColor: ${borderColor};
-                --box-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? '40%' : '10%'}) 0px 0px 16px -2px;
+                --box-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? 40 : 10}%) 0px 0px 16px -2px;
                 --buttonBackground: ${buttonBackgroundColor};
                 --color: ${color};
                 --inputBackground: ${App.get('prefersColorScheme') === 'dark' ? background : secondary};
@@ -91,7 +91,8 @@ export function SetTheme() {
                 --primary20: ${primary + '20'};
                 --scrollbar: ${App.get('prefersColorScheme') === 'dark' ? 'dimgray' : 'lightgray'};
                 --secondary: ${secondary};
-                --selectedRow: ${primary + (selectedRowOpacity || '10')}
+                --selectedRow: ${primary + (selectedRowOpacity || '10')};
+                --sortShadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? 40 : 10}%) 0px 0px 32px 0px;
             }
         `
     });

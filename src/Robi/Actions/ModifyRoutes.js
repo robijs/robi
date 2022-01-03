@@ -102,7 +102,6 @@ export async function ModifyRoutes(event) {
                     label: '',
                     parent: row, 
                     maxHeight: '150px',
-                    maxWidth: '100px',
                     valueType: 'html',
                     value: /*html*/ `
                         <div class='d-flex justify-content-center w-100' data-target='true'>

@@ -319,7 +319,7 @@ export function AppContainer() {
             .form-field-multi-line-text.editable:focus,
             .btn.dropdown-toggle:focus {
                 border: 1px solid var(--borderColor);
-                background: var(--inputBackground)
+                background: var(--inputBackground);
             }
 
             .form-control,
@@ -641,6 +641,8 @@ export function AppContainer() {
                 background: var(--inputBackground);
                 margin: .125rem;
                 padding: .125rem;
+                border: solid 1px var(--borderColor);
+                background: var(--inputBackground);
             }
             
             .scroll-container {
@@ -686,7 +688,7 @@ export function AppContainer() {
             .table-container.ui-sortable-handle {
                 margin: 20px 0px !important;
                 padding: 20px !important;
-                background: white !important;
+                background: var(--background) !important;
                 box-shadow: 0px 0px 0px 2px var(--primary) !important;
             }
 
@@ -695,7 +697,7 @@ export function AppContainer() {
             }
 
             .table-container.ui-sortable-helper {
-                box-shadow: rgb(0 0 0 / 10%) 0px 0px 32px 0px !important;
+                box-shadow: var(--sortShadow) !important;
                 transform: scale(1.05);
             }
 
