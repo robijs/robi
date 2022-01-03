@@ -28,6 +28,7 @@ Start({
         // @START-SortTables
         {
             path: 'SortTables',
+            hide: true,
             title: 'Sort Tables',
             icon: 'bs-card-checklist',
             go: SortTables

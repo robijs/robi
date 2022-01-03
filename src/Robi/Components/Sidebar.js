@@ -642,6 +642,27 @@ export function Sidebar({ parent, path }) {
     function hideRoutes(event) {
         console.log('hide routes');
 
+        // TESTING 
+        component.find('.nav-container').innerHTML =  Store.routes()
+        .filter(route => route.path !== 'Settings' && route.path !== '403' && route.path )
+        .map(route => {
+            const {
+                path, title, icon, roles, type
+            } = route;
+
+            if (roles) {
+                if (roles.includes(Store.user().Role)) {
+                    return navTemplate(path, icon, type, title);
+                } else {
+                    return '';
+                }
+            } else {
+                return navTemplate(path, icon, type, title);
+            }
+        }).join('\n');
+
+        // END TESTING
+
         // Disable all routes
         component.findAll('.nav-container .nav').forEach(node => {
                 node.classList.remove('nav-selected');

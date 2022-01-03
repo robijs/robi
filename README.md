@@ -20,8 +20,9 @@ npm run build-sp min
 ## Troubleshooting
 You might see error messages in the terminal session that's running the local development server. 
 
-If you encounter either of these:
+### Trigger: Edit > Modify Routes
 
+#### Error
 ```console
 EPERM: operation not permitted, watch at FSEvent.FSWatcher._handle.onchange
 ``` 
@@ -29,13 +30,42 @@ EPERM: operation not permitted, watch at FSEvent.FSWatcher._handle.onchange
 EPERM: operation not permitted, rename './src/Routes/OldRouteName' -> './src/Routes/NewRouteName'
 ```
 
+#### Fix
 Check if there's another program using the named directory. Sometimes antivirus and file sync apps (OneDrive, iCloud Drive, Dropbox, etc.) will lock directories to changes. Pause them and try again.
 
-If that doesn't work, stop the server (<kbd>ctrl</kbd>) + <kbd>c</kbd>), and close your text editor and terminal.
+If that doesn't work, stop the server with
+
+<kbd>ctrl</kbd> + <kbd>c</kbd>
+
+and close your text editor and terminal.
 
 You'll probably need to fix broken paths since the server was in the middle of renaming files and directories.
 
 Then restart the development server:
+```console
+npm run dev
+```
+
+### Trigger: Unknown
+
+#### Error
+```console
+[0] Some error occurred Error: listen EADDRINUSE: address already in use 127.0.0.1:3000
+[0]     at Server.setupListenHandle [as _listen2] (node:net:1334:16)
+[0]     at listenInCluster (node:net:1382:12)
+[0]     at GetAddrInfoReqWrap.doListen [as callback] (node:net:1520:7)
+[0]     at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:73:8) {
+[0]   code: 'EADDRINUSE',
+[0]   errno: -4091,
+```
+
+#### Fix
+Stop the server with
+
+<kbd>ctrl</kbd> + <kbd>c</kbd>
+
+and restart
+
 ```console
 npm run dev
 ```

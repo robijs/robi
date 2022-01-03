@@ -17,6 +17,7 @@ const Routes = [
         path: '403',
         type: 'system',
         hide: true,
+        ignore: true,
         go(param) {
             Unauthorized(param);
         }
@@ -25,6 +26,7 @@ const Routes = [
         path: '404',
         type: 'system',
         hide: true,
+        ignore: true,
         go(param) {
             Missing(param);
         }
@@ -67,6 +69,7 @@ const Routes = [
         path: 'Settings',
         type: 'system',
         icon: 'bs-gear',
+        ignore: true,
         go(param) {
             Settings(param);
         }
