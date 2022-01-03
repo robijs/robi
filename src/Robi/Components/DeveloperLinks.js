@@ -34,32 +34,17 @@ export async function DeveloperLinks(param) {
     });
 
     addSection({
-        title: `App Lists`,
-        buttons: lists
-        .filter(item => item.template !== 101)
-        .map(item => {
-            const { list, options } = item;
-
-            return {
-                value: list,
-                url: `${App.get('site')}/Lists/${list}`,
-                files: options?.files
-            };
-        })
-    });
-
-    addSection({
-        title: `App Libraries`,
-        buttons: lists
-        .filter(item => item.template === 101)
-        .map(item => {
-            const { list } = item;
-
-            return {
-                value: list,
-                url: `${App.get('site')}/${list}`
-            };
-        })
+        title: `Core Libraries`,
+        buttons: [
+            {
+                value: `App`,
+                url: `${App.get('site')}/App`
+            },
+            {
+                value: `Documents`,
+                url: `${App.get('site')}/Shared%20Documents`
+            }
+        ]
     });
 
     addSection({
@@ -93,17 +78,32 @@ export async function DeveloperLinks(param) {
     });
 
     addSection({
-        title: `Core Libraries`,
-        buttons: [
-            {
-                value: `App`,
-                url: `${App.get('site')}/App`
-            },
-            {
-                value: `Documents`,
-                url: `${App.get('site')}/Shared%20Documents`
-            }
-        ]
+        title: `App Libraries`,
+        buttons: lists
+        .filter(item => item.template === 101)
+        .map(item => {
+            const { list } = item;
+
+            return {
+                value: list,
+                url: `${App.get('site')}/${list}`
+            };
+        })
+    });
+
+    addSection({
+        title: `App Lists`,
+        buttons: lists
+        .filter(item => item.template !== 101)
+        .map(item => {
+            const { list, options } = item;
+
+            return {
+                value: list,
+                url: `${App.get('site')}/Lists/${list}`,
+                files: options?.files
+            };
+        })
     });
 
     function addSection(param) {

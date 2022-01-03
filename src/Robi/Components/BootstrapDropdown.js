@@ -61,7 +61,7 @@ export function BootstrapDropdown(param) {
             }
 
             #id .dropdown-menu {
-                margin: .125rem;
+                margin: 5px 0px 0px 0px;
                 padding: .125rem;
                 ${maxWidth ? `max-width: ${maxWidth};` : ''}
                 ${maxWidth ? `min-width: ${maxWidth};` : ''}

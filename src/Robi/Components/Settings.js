@@ -35,6 +35,7 @@ export async function Settings({ parent, pathParts }) {
         'Build',
         'Logs',
         'SiteUsage',
+        'SharePoint',
         'Theme'
     ];
 
@@ -69,6 +70,10 @@ export async function Settings({ parent, pathParts }) {
             {
                 name: 'Logs',
                 path: 'Logs'
+            },
+            {
+                name: 'SharePoint',
+                path: 'SharePoint'
             },
             {
                 name: 'Theme',
@@ -166,7 +171,7 @@ export async function Settings({ parent, pathParts }) {
     // Scroll listener
     projectContainer.get().addEventListener('scroll', event => {
         if (event.target.scrollTop > 0) {
-            projectContainer.get().style.borderTop = `solid 1px #d6d8db80`;
+            projectContainer.get().style.borderTop = `solid 1px var(--borderColor)`;
         } else {
             projectContainer.get().style.borderTop = `none`;
         }
@@ -215,10 +220,6 @@ export async function Settings({ parent, pathParts }) {
                 });
             
                 devConsole.add();
-    
-                DeveloperLinks({
-                    parent: planContainer
-                });
             }
 
             ReleaseNotesContainer({
@@ -501,6 +502,13 @@ export async function Settings({ parent, pathParts }) {
             });
 
             themePreference.add();
+            break;
+        case 'SharePoint':
+            if (Store.user().Role === 'Developer') {
+                DeveloperLinks({
+                    parent: planContainer
+                });
+            }
             break;
         default:
             Route('404');

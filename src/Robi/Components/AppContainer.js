@@ -312,8 +312,10 @@ export function AppContainer() {
             }
 
             .form-control:focus,
-            .form-field-multi-line-text.editable:focus {
+            .form-field-multi-line-text.editable:focus,
+            .btn.dropdown-toggle:focus {
                 border: 1px solid var(--borderColor);
+                background: var(--inputBackground)
             }
 
             .form-control,
@@ -632,6 +634,7 @@ export function AppContainer() {
 
             /* Dropdown */
             .dropdown-menu {
+                background: var(--inputBackground);
                 margin: .125rem;
                 padding: .125rem;
             }
