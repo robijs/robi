@@ -11,7 +11,7 @@ npm run dev
 ```console
 npm run build-sp min
 ```
-2. Create a new SharePoint site (if one doesn't already exist). We recommend not deploying two Robi apps to the same site.
+2. Create a new SharePoint site (if one doesn't already exist). We recommend not deploying two apps to the same site.
 3. Create a new document library named App.
 4. Copy single /src directory from /dist to App, including the /src directory.
 5. Launch App/src/Pages/app.aspx
