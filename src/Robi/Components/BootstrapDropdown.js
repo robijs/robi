@@ -15,7 +15,7 @@ export function BootstrapDropdown(param) {
     const component = Component({
         html: /*html*/ `
             <div class='form-field${classes ? ` ${classes.join(' ')}` : ''}'>
-                <label>${label}</label>
+                ${label ? /*html*/ `<label>${label}</label>` : ''}
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
                 <div class='dropdown'>
                     <button class='btn dropdown-toggle' ${buttonStyle ? `style='${buttonStyle}'` : ''} type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
