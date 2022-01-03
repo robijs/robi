@@ -8,7 +8,6 @@ import { Start } from './Robi/Robi.js'
 import lists from './lists.js';
 import Test from './Routes/Test/Test.js'
 import Table from './Routes/Table/Table.js'
-import ChangeTheme from './Routes/ChangeTheme/ChangeTheme.js'
 // @END-IMPORTS
 
 // @START
@@ -32,14 +31,6 @@ Start({
             go: Table
         }
         // @END-Table
-        , // @ROUTE
-        // @START-ChangeTheme
-        {
-            path: 'ChangeTheme',
-            icon: 'images',
-            go: ChangeTheme
-        }
-        // @END-ChangeTheme
         // @END-ROUTES
     ],
     settings: {
