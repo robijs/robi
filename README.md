@@ -31,15 +31,15 @@ EPERM: operation not permitted, rename './src/Routes/OldRouteName' -> './src/Rou
 ```
 
 #### Fix
-Check if there's another program using the named directory. Sometimes antivirus and file sync apps (OneDrive, iCloud Drive, Dropbox, etc.) will lock directories to changes. Pause them and try again.
+Stop the server with <kbd>ctrl</kbd> + <kbd>c</kbd> and close your text editor and terminal. You'll probably need to fix broken paths since the server was in the middle of renaming files and directories. Then restart the development server.
 
-If that doesn't work, stop the server with <kbd>ctrl</kbd> + <kbd>c</kbd> and close your text editor and terminal. You'll probably need to fix broken paths since the server was in the middle of renaming files and directories. Then restart the development server.
+If that doesn't work, check if there's another program using the named directory. Sometimes antivirus and file sync apps (OneDrive, iCloud Drive, Dropbox, etc.) will lock directories to changes. Pause them and try again.
 
 ```console
 npm run dev
 ```
 
-### Trigger: Unknown
+### Trigger: Another process is using Port 3000
 
 #### Error
 ```console
