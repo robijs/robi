@@ -627,12 +627,7 @@ export function DataTable(param) {
             rowId,
             processing: true,
             // responsive: true,
-            /**
-             * Testing
-             *
-             * https://datatables.net/reference/option/deferRender
-             */
-            deferRender: true,
+            deferRender: true, // https://datatables.net/reference/option/deferRender
             order: order || [[1, 'asc']],
             columns,
             buttons: buttons || []
@@ -641,7 +636,7 @@ export function DataTable(param) {
         if (paging === false) {
             options.paging = false;
         } else {
-            options.pageLength = 25;
+            options.pageLength = 20;
         }
 
         if (ordering === false) {
