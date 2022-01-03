@@ -29,7 +29,7 @@ export function ViewTools(param) {
                         <button class="dropdown-item" type="button">
                             <div class='add-table'>
                                 <div class='filter d-flex justify-content-end'>
-                                    <div style='color: ${App.get('primaryColor')}; height: 8px; line-height: .5; font-weight: 900;'>&plus;</div>
+                                    <div style='color: var(--primary); height: 8px; line-height: .5; font-weight: 900;'>&plus;</div>
                                     <div class="btn-group ml-1" role="group">
                                         <div type="button" class="btn btn-robi-reverse"></div>
                                         <div type="button" class="btn btn-outline-robi"></div>
@@ -50,12 +50,20 @@ export function ViewTools(param) {
                             <div style="font-weight: 700; margin-top: 10px;">Table</div>
                         </button>
                         <button class="dropdown-item" type="button">
+                            <div class='add-chart'>
+                                <svg class="icon" style='font-size: 48px;'>
+                                    <use href="#icon-bs-bar-chart"></use>
+                                </svg>
+                            </div>
+                            <div style="font-weight: 700; margin-top: 10px;">Chart</div>
+                        </button>
+                        <button class="dropdown-item" type="button">
                             <div class='add-text-block'>
-                                <span style="font-size: 28; font-weight: 600; color: ${App.get('primaryColor')};">Aa</span>
+                                <span style="font-size: 28; font-weight: 600; color: var(--primary);">Aa</span>
                             </div>
                             <div style="font-weight: 700; margin-top: 10px;">Text block</div>
                         </button>
-                        <div class="dropdown-divider"></div>
+                        <!-- <div class="dropdown-divider"></div> -->
                         <button class="dropdown-item" type="button">
                             <div class='add-button'>
                                 <div class='btn btn-robi'>Button</div>
@@ -82,12 +90,12 @@ export function ViewTools(param) {
                 right: 0px;
                 height: 62px;
                 width: 100%;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             #id .tools {
                 cursor: pointer;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 font-size: 20px;
                 transition: transform 300ms ease;
             }
@@ -97,7 +105,8 @@ export function ViewTools(param) {
             }
 
             #id .dropdown-menu {
-                left: -225.31px !important; /* (width of menu / 2) - (width of tools button / 2) */
+                /* left: -225.31px !important; */
+                left: -283.83px !important; /* (width of menu / 2) - (width of tools button / 2) */
                 top: -45px !important;
                 background: transparent;
                 border-radius: 10px;
@@ -110,14 +119,14 @@ export function ViewTools(param) {
                 height: unset;
                 margin: .5rem 0;
                 overflow: hidden;
-                border-left: 1px solid #e9ecef;
+                border-left: 1px solid var(--buttonBackground);
             }
 
             #id .dropdown-item {
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 align-items: center;
                 justify-content: center;
                 padding: 10px;
@@ -126,36 +135,18 @@ export function ViewTools(param) {
             }
 
             #id .dropdown-menu .dropdown-item .icon {
-                fill: ${App.get('primaryColor')};
+                fill: var(--primary);
             }
 
-            .grown-in-center {
-                background: white;
-                animation: 150ms ease-in-out forwards grown-in-center;
-                border-radius: 20px;
-                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
-                padding: 10px;
-                display: flex;
-            }
-
-            @keyframes grown-in-center {
-                from {
-                    transform: scale(0);
-                    transform-origin: center;
-                    opacity: 0;
-                }
-                to {
-                    transform: scale(1);
-                    transform-origin: center;
-                    opacity: 1;
-                }
+            /* Border */
+            #id .border {
+                border: solid 2px var(--primary);
             }
 
             /* Add table */
             #id .add-table {
                 border-radius: 20px;
                 padding: 10px;
-                border: solid 2px ${App.get('primaryColor')};
                 width: 100px;
             }
 
@@ -173,7 +164,7 @@ export function ViewTools(param) {
                 height: 10px;
                 border-radius: 10px;
                 margin-top: 2px;
-                border: solid 2px ${App.get('primaryColor')};
+                border: solid 2px var(--primary);
             }
 
             #id .columns {
@@ -185,18 +176,29 @@ export function ViewTools(param) {
                 height: 2px;
                 border-radius: 2px;
                 margin: 2px 0px;
-                background: ${App.get('primaryColor')};
+                background: var(--primary);
             }
 
             #id .columns .column:not(:last-child) {
                 margin-right: 5px;
             }
 
+            /* Add Button */
+            #id .add-chart {
+                border-radius: 20px;
+                padding: 10px;
+                width: 100px;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
             /* Add Text Block */
             #id .add-text-block {
                 border-radius: 20px;
                 padding: 10px;
-                border: solid 2px ${App.get('primaryColor')};
                 width: 100px;
                 flex: 1;
                 display: flex;
@@ -209,7 +211,6 @@ export function ViewTools(param) {
             #id .add-button {
                 border-radius: 20px;
                 padding: 10px;
-                border: solid 2px ${App.get('primaryColor')};
                 width: 100px;
                 flex: 1;
                 display: flex;

@@ -1,4 +1,4 @@
-// Copyright 2021 Stephen Matheis
+// Copyright 2022 Stephen Matheis
 
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -36,6 +36,7 @@ import { DeleteAttachments } from './Actions/DeleteAttachments.js'
 import { DeleteColumn } from './Actions/DeleteColumn.js'
 import { DeleteItem } from './Actions/DeleteItem.js'
 import { DeleteList } from './Actions/DeleteList.js'
+import { DeleteRoutes } from './Actions/DeleteRoutes.js'
 import { GenerateUUID } from './Actions/GenerateUUID.js'
 import { Get } from './Actions/Get.js'
 import { GetADUsers } from './Actions/GetADUsers.js'
@@ -48,6 +49,7 @@ import { GetItemCount } from './Actions/GetItemCount.js'
 import { GetLib } from './Actions/GetLib.js'
 import { GetList } from './Actions/GetList.js'
 import { GetListGuid } from './Actions/GetListGuid.js'
+import { GetLocal } from './Actions/GetLocal.js'
 import { GetRequestDigest } from './Actions/GetRequestDigest.js'
 import { GetRootRequestDigest } from './Actions/GetRootRequestDigest.js'
 import { GetSiteUsers } from './Actions/GetSiteUsers.js'
@@ -63,6 +65,7 @@ import { LaunchApp } from './Actions/LaunchApp.js'
 import { Log } from './Actions/Log.js'
 import { LogError } from './Actions/LogError.js'
 import { ModifyFile } from './Actions/ModifyFile.js'
+import { ModifyRoutes } from './Actions/ModifyRoutes.js'
 import { NameToHex } from './Actions/NameToHex.js'
 import { OrderRoutes } from './Actions/OrderRoutes.js'
 import { Post } from './Actions/Post.js'
@@ -71,7 +74,9 @@ import { ResetApp } from './Actions/ResetApp.js'
 import { Route } from './Actions/Route.js'
 import { SendEmail } from './Actions/SendEmail.js'
 import { SetHomePage } from './Actions/SetHomePage.js'
+import { SetLocal } from './Actions/SetLocal.js'
 import { SetSessionStorage } from './Actions/SetSessionStorage.js'
+import { SetTheme } from './Actions/SetTheme.js'
 import { Start } from './Actions/Start.js'
 import { Style } from './Actions/Style.js'
 import { TestInstall } from './Actions/TestInstall.js'
@@ -90,6 +95,10 @@ import { QuestionsModel } from './Models/QuestionsModel.js'
 import { SiteUsageModel } from './Models/SiteUsageModel.js'
 import { StartAndEndOfWeek } from './Models/StartAndEndOfWeek.js'
 import { Themes } from './Models/Themes.js'
+import { ActionTemplate } from './Templates/ActionTemplate.js'
+import { ComponentTemplate } from './Templates/ComponentTemplate.js'
+import { ModelTemplate } from './Templates/ModelTemplate.js'
+import { RouteTemplate } from './Templates/RouteTemplate.js'
 
 export {
     AddColumnToView,
@@ -116,6 +125,7 @@ export {
     DeleteColumn,
     DeleteItem,
     DeleteList,
+    DeleteRoutes,
     GenerateUUID,
     Get,
     GetADUsers,
@@ -128,6 +138,7 @@ export {
     GetLib,
     GetList,
     GetListGuid,
+    GetLocal,
     GetRequestDigest,
     GetRootRequestDigest,
     GetSiteUsers,
@@ -143,6 +154,7 @@ export {
     Log,
     LogError,
     ModifyFile,
+    ModifyRoutes,
     NameToHex,
     OrderRoutes,
     Post,
@@ -151,7 +163,9 @@ export {
     Route,
     SendEmail,
     SetHomePage,
+    SetLocal,
     SetSessionStorage,
+    SetTheme,
     Start,
     Style,
     TestInstall,
@@ -169,5 +183,9 @@ export {
     QuestionsModel,
     SiteUsageModel,
     StartAndEndOfWeek,
-    Themes
+    Themes,
+    ActionTemplate,
+    ComponentTemplate,
+    ModelTemplate,
+    RouteTemplate
 }

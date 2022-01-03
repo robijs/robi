@@ -1,4 +1,4 @@
-// Copyright 2021 Stephen Matheis
+// Copyright 2022 Stephen Matheis
 
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -34,7 +34,6 @@ import { DashboardBanner } from './Components/DashboardBanner.js'
 import { DataTable } from './Components/DataTable.js'
 import { DateField } from './Components/DateField.js'
 import { DevConsole } from './Components/DevConsole.js'
-import { Developer } from './Components/Developer.js'
 import { DeveloperLinks } from './Components/DeveloperLinks.js'
 import { Dialog } from './Components/Dialog.js'
 import { DropDownField } from './Components/DropDownField.js'
@@ -63,6 +62,7 @@ import { Modal } from './Components/Modal.js'
 import { ModalSlideUp } from './Components/ModalSlideUp.js'
 import { MultiChoiceField } from './Components/MultiChoiceField.js'
 import { MultiLineTextField } from './Components/MultiLineTextField.js'
+import { MyTheme } from './Components/MyTheme.js'
 import { NameField } from './Components/NameField.js'
 import { NewForm } from './Components/NewForm.js'
 import { NewQuestion } from './Components/NewQuestion.js'
@@ -134,7 +134,6 @@ export {
     DataTable,
     DateField,
     DevConsole,
-    Developer,
     DeveloperLinks,
     Dialog,
     DropDownField,
@@ -163,6 +162,7 @@ export {
     ModalSlideUp,
     MultiChoiceField,
     MultiLineTextField,
+    MyTheme,
     NameField,
     NewForm,
     NewQuestion,

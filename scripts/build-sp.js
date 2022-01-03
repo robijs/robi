@@ -51,7 +51,8 @@ async function min() {
             paths: [
                 './src/Robi/Actions',
                 './src/Robi/Core',
-                './src/Robi/Models'
+                './src/Robi/Models',
+                './src/Robi/Templates'
             ],
             imports: [
                 './src/Robi/Components'
@@ -70,7 +71,8 @@ async function min() {
             imports: [
                 './src/Robi/Actions',
                 './src/Robi/Core',
-                './src/Robi/Models'
+                './src/Robi/Models',
+                './src/Robi/Templates'
             ],
             importFile: 'Robi.js',
             dir: './dist/src/Robi',

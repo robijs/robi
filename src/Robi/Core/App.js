@@ -1,8 +1,3 @@
-import { HexToHSL } from '../Actions/HexToHSL.js'
-import { HexToRGB } from '../Actions/HexToRGB.js'
-import { NameToHex } from '../Actions/NameToHex.js'
-import { Themes } from '../Models/Themes.js'
-
 // @START-File
 let appSettings = {};
 let appLists;
@@ -11,9 +6,9 @@ const App = {
     lists() {
         return appLists;
     },
-    set(param) {
+    settings(param) {
         const { lists, routes, settings } = param;
-        const { library, defaultRoute, theme } = settings;
+        const { library, defaultRoute } = settings;
 
         // Set lists
         appLists = lists;
@@ -37,7 +32,7 @@ const App = {
 
             settings.site = location.href.split(library || '/App/')[0];
         } else {
-            settings.site = 'http://localhost';
+            settings.site = 'http://localhost:8080/dev/app.html';
         }
 
         // Set default route
@@ -45,30 +40,63 @@ const App = {
             settings.defaultRoute = routes.map(route => route.path)[0];
         }
 
-        // Set colors
-        const { primary, secondary, background, color, selectedRowOpacity } = Themes.find(item => item.name === theme);
+        // // Set colors
+        // const userPreference = GetLocal(`${settings.name}-prefersColorScheme`);
+        // const colors = Themes.find(item => item.name === theme);
 
-        // Primary
-        settings.primaryColor = NameToHex(primary);
-        settings.primaryColorRGB = HexToRGB(settings.primaryColor);
-        settings.primaryColorHSL = HexToHSL(settings.primaryColor);
+        // // 1. Set user preference
+        // if (userPreference) {
+        //     settings.prefersColorScheme = userPreference;
+        // } 
+        
+        // // 2. If user hasn't set a preference, set to OS preference
+        // else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        //     settings.prefersColorScheme = 'light';
+        // } 
+        
+        // else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        //     settings.prefersColorScheme = 'dark';
+        // } 
+        
+        // // 3. Default to light
+        // else {
+        //     settings.prefersColorScheme = 'light';
+        // }
+        
+        // const { primary, secondary, background, color, selectedRowOpacity, buttonBackgroundColor, borderColor } = colors[settings.prefersColorScheme];
 
-        // Secondary
-        settings.secondaryColor = secondary;
+        // // All Colors
+        // settings.colors = colors;
 
-        // Background
-        settings.backgroundColor = background;
+        // // Primary
+        // settings.primaryColor = NameToHex(primary);
+        // settings.primaryColorRGB = HexToRGB(settings.primaryColor);
+        // settings.primaryColorHSL = HexToHSL(settings.primaryColor);
 
-        // Default color
-        settings.defaultColor = color;
+        // // Secondary
+        // settings.secondaryColor = secondary;
 
-        // Selected row opacity
-        settings.selectedRowOpacity = selectedRowOpacity;
+        // // Backgrounds
+        // settings.backgroundColor = background;
+        // settings.buttonBackgroundColor = buttonBackgroundColor;
+
+        // // Border
+        // settings.borderColor = borderColor;
+
+        // // Default color
+        // settings.defaultColor = color;
+
+        // // Selected row opacity
+        // settings.selectedRowOpacity = selectedRowOpacity;
 
         // Set all
         appSettings = settings;
     },
     get(prop) {
+        return appSettings[prop];
+    },
+    set(prop, value) {
+        appSettings[prop] = value;
         return appSettings[prop];
     }
 }

@@ -19,11 +19,7 @@ export function SourceTools(param) {
         html: /*html*/ `
             <div class=''>
                 <button type='button' class='btn'>
-                    <!-- <svg class="icon" style="font-size: 18px; fill: ${App.get('primaryColor')};">
-                        <use href="#icon-code-slash"></use>
-                    </svg>-->
-                    <!-- <span style="font-family: 'Inconsolata', monospace; color: ${App.get('primaryColor')}; font-size: 15px; font-weight: 600;">&lt;Edit/&gt;</span> -->
-                    <span style="color: ${App.get('primaryColor')}; font-size: 15px; font-weight: 500;">Edit Source</span>
+                    <span style="color: var(--primary); font-size: 15px; font-weight: 500;">Code</span>
                 </button>
             </div>
         `,
@@ -46,7 +42,7 @@ export function SourceTools(param) {
             }
 
             #id .btn:hover {
-                background-color: #e9ecef;
+                background-color: var(--buttonBackground);
             }
         `,
         parent,

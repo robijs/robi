@@ -1,3 +1,4 @@
+import { App } from '../Core/App.js'
 import { Component } from '../Actions/Component.js'
 
 // @START-File
@@ -35,22 +36,21 @@ export function MultiLineTextField(param) {
             }
 
             #id .form-field-multi-line-text {
-                color: #495057; /* Bootstrap@4.5.2 input color */
+                color: var(--color); /* Bootstrap@4.5.2 input color */
                 margin-top: 2px;
                 margin-bottom: 4px;
                 padding: 0.375rem 0.75rem;
             }
 
             #id .form-field-multi-line-text > * {
-                color: #495057; /* Bootstrap@4.5.2 input color */
+                color: var(--color); /* Bootstrap@4.5.2 input color */
             }
 
             #id .form-field-multi-line-text.editable {
                 min-height: ${minHeight || `200px`};
                 width: ${width || 'unset'};
-                background: white;
                 border-radius: 4px;
-                border: 1px solid #ced4da;
+                border: 1px solid var(--borderColor);
             }
 
             #id .form-field-multi-line-text.editable:active,

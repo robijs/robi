@@ -54,7 +54,7 @@ export function Files(param) {
             #id .files-list {
                 width: ${width || '100%'};
                 border-radius: 20px;
-                background: ${App.get('backgroundColor')};
+                background: var(--background);
                 transition: all 300ms ease-in-out;
             }
 
@@ -122,7 +122,7 @@ export function Files(param) {
                 cursor: pointer;
                 display: inline-block;
                 padding: 5px 10px;
-                background: ${App.get('primaryColor')};
+                background: var(--primary);
                 color: white;
                 font-weight: bold;
                 text-align: center;
@@ -250,7 +250,7 @@ export function Files(param) {
 
             #id .file-icon .type {
                 font-size: 1.5em;
-                fill: ${App.get('defaultColor')};
+                fill: var(--color);
             }
 
             #id .file-icon .bs-file-earmark-word {
@@ -270,7 +270,7 @@ export function Files(param) {
             }
 
             #id .file-icon .bs-file-earmark {
-                fill: ${App.get('defaultColor')};
+                fill: var(--color);
             }
 
             #id .remove-label {

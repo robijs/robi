@@ -18,10 +18,8 @@ export async function SiteUsageContainer(param) {
 
     /** Dashboard */
     const dashboardCard = Card({
-        title: 'Site Usage',
         width: '100%',
-        minHeight: '600px',
-        margin: '20px 0px 0px 0px',
+        padding: '0px',
         parent
     });
 
@@ -47,7 +45,7 @@ export async function SiteUsageContainer(param) {
     worker.postMessage({
         envMode: App.get('mode'),
         site: App.get('site'),
-        bannerColor: App.get('backgroundColor')
+        bannerColor: 'var(--background)'
     });
 
     Store.addWorker(worker);
@@ -134,15 +132,10 @@ export async function SiteUsageContainer(param) {
         } = param;
 
         const chart = card.getChart();
-        const max0 = Math.max(...data[0].data.map(set => set.length)); /** Largest number from Breaches */
+        const max0 = Math.max(...data[0].data.map(set => set.length)); /** Largest number from dataset */
         const max1 = 0;
-        // const max1 = Math.max(...data[1].data.map(set => set.length)); /** Largest number from Complaints */
         const max = (Math.ceil((max0 + max1) / 10) || 1) * 10; /** Round sum of max numbers to the nearest multiple of 10 */
 
-
-
-        // const max = (Math.round((max0 + max1) / 10) || 1 ) * 10; /** Round sum of max numbers to the nearest multiple of 10*/
-        // const max = (Math.ceil((Math.max(...data.map(item => Math.max(...item.data)))) / 10) || 1 ) * 10;
         let stepSize;
         let labels;
         let text;
@@ -218,35 +211,53 @@ export async function SiteUsageContainer(param) {
             data: {
                 labels,
                 datasets: data.map((set, index) => {
-                    /** [0] set is purple, [1] set is blue */
                     return {
                         data: set.data.map(item => item.length),
                         label: set.label,
-                        backgroundColor: index === 0 ? `rgb(${App.get('primaryColorRGB')}, 0.2)` : 'rgb(67, 203, 255, 0.2)',
-                        borderColor: index === 0 ? `rgb(${App.get('primaryColorRGB')}, 1)` : 'rgb(67, 203, 255, 1)',
-                        // backgroundColor: index === 0 ? 'rgb(147, 112, 219, 0.2)' : 'rgb(67, 203, 255, 0.2)',
-                        // borderColor: index === 0 ? 'rgb(147, 112, 219, 1)' : 'rgb(67, 203, 255, 1)',
-                        borderWidth: 1
+                        backgroundColor: App.get('primaryColor'),
+                        hoverBackgroundColor: App.get('primaryColor'),
+                        borderWidth: 0,
+                        borderRadius: 4
                     };
                 })
             },
             options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
                 scales: {
-                    yAxes: [{
+                    x: {
+                        grid: {
+                            borderColor: App.get('primaryColor'),
+                            display: false
+                        },
                         stacked: true,
                         ticks: {
-                            /** Set to max value in dataset */
-                            // max,
+                            font: {
+                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+                            },
+                            color: App.get('defaultColor'),
+                            beginAtZero: true
+                        }
+                    },
+                    y: {
+                        grid: {
+                            borderColor: App.get('primaryColor'),
+                            display: false
+                        },
+                        stacked: true,
+                        ticks: {
+                            font: {
+                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+                            },
+                            color: App.get('defaultColor'),
                             min: 0,
                             stepSize
                         }
-                    }],
-                    xAxes: [{
-                        stacked: true,
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
+                    }
                 }
             }
         });

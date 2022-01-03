@@ -93,7 +93,7 @@ export function FormSection(param) {
         if (rowName) {
             rowContainer.append(/*html*/ `
                 <div class='mb-1'>
-                    <h6 style='color: ${App.get('defaultColor')}; font-weight: 700'>${rowName}</h6>
+                    <h6 style='color: var(--color); font-weight: 700'>${rowName}</h6>
                 </div>
             `);
         }
@@ -210,8 +210,8 @@ export function FormSection(param) {
                                 //         component.find('.form-control').insertAdjacentHTML('afterend', /*html*/ `
                                 //             <div class='dropdown-menu show' style='font-size: 13px; position: absolute; width: ${width}px; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, ${height + 5}px);'>
                                 //                 <div class='d-flex justify-content-between align-items-center mt-2 mb-2 ml-3 mr-3'>
-                                //                     <div style='color: ${App.get('primaryColor')};'>Searching for measures with similar names...</div>
-                                //                     <div class='spinner-grow spinner-grow-sm' style='color: ${App.get('primaryColor')};' role='status'></div>
+                                //                     <div style='color: var(--primary);'>Searching for measures with similar names...</div>
+                                //                     <div class='spinner-grow spinner-grow-sm' style='color: var(--primary);' role='status'></div>
                                 //                 </div> 
                                 //             </div>
                                 //         `);

@@ -111,6 +111,10 @@ export async function DeveloperLinks(param) {
             title, buttons
         } = param;
 
+        if (!buttons.length) {
+            return;
+        }
+
         /** Pages */
         const card = Card({
             title,

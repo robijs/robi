@@ -19,7 +19,7 @@ export async function Users(param) {
         return;
     }
 
-    const viewTitle = Title({
+    const routeTitle = Title({
         title: 'Users',
         date: `${new Date().toLocaleString('default', {
             dateStyle: 'full'
@@ -28,7 +28,7 @@ export async function Users(param) {
         parent
     });
 
-    viewTitle.add();
+    routeTitle.add();
 
     const usersTable = await Table({
         list: 'Users',

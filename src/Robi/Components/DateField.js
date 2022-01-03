@@ -53,7 +53,7 @@ export function DateField(param) {
             #id .form-field-date:focus {
                 outline: none;
                 border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 2px ${App.get('primaryColor')};
+                box-shadow: 0px 0px 0px 2px var(--primary);
             } */
         `,
         parent: parent,

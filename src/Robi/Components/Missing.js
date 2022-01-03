@@ -9,12 +9,12 @@ import { Alert } from './Alert.js'
 export async function Missing(param) {
     const { parent } = param;
 
-    const viewTitle = Title({
+    const routeTitle = Title({
         title: '404',
         parent
     });
 
-    viewTitle.add();
+    routeTitle.add();
 
     const alertBanner = Alert({
         type: 'info',

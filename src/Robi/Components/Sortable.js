@@ -45,7 +45,7 @@ export function Sortable({ parent, position }) {
         style: /*css*/ `
             #id .nav {
                 display: flex;
-                background: ${App.get('primaryColor')};
+                background: var(--primary);
                 border-radius: 10px;
                 margin: 10px 0px;
                 padding: 10px;

@@ -9,7 +9,7 @@ import { App } from '../Core/App.js';
  */
 export function Card(param) {
     const {
-        title, fontSize, description, titleColor, titleWeight, titleBorder, titleBackground, background, padding, margin, minWidth, minHeight, parent, width, position, radius, action
+        title, fontSize, description, titleColor, titleWeight, titleBorder, titleBackground, background, padding, margin, minWidth, minHeight, maxWidth, maxHeight, parent, width, position, radius, action
     } = param;
 
     const component = Component({
@@ -23,11 +23,13 @@ export function Card(param) {
             #id.round-card {
                 display: inline-flex;
                 flex-direction: column;
-                background: ${background || 'white'};
+                background: ${background || App.get('secondary')};
                 padding: ${padding || '20px'};
                 margin: ${margin || '0px'};
                 min-width: ${minWidth || 'initial'};
                 min-height: ${minHeight || 'initial'};
+                max-width: ${maxWidth || 'initial'};
+                max-height: ${maxHeight || 'initial'};
                 width: ${width || 'initial'};
                 border-radius: ${radius || '10px'};
                 /* border: ${App.get('defaultBorder')}; */
@@ -41,9 +43,9 @@ export function Card(param) {
                 padding: 10px 20px; /** FIXME: will break with passed in padding  */
                 font-weight: ${titleWeight || '700'};
                 background: ${titleBackground || 'inherit'}; /** FIXME: Experimental */ /* alternate color: #d0d0d04d */
-                border-radius: 10px 10px 0px 0px;
-                color: ${titleColor || App.get('defaultColor')};
-                border-bottom: ${titleBorder || App.get('defaultBorder')};
+                border-radius: 20px 20px 0px 0px;
+                color: ${titleColor || 'var(--color)'};
+                border-bottom: ${titleBorder || `solid 1px var(--borderColor)`};
             }
 
             #id .round-card-description {

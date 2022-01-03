@@ -1,40 +1,40 @@
-// This file may be modified programmatically.
-// If you know the API, feel free to edit it manually.
+// This file can be edited programmatically.
+// If you know the API, feel free to make changes by hand.
 // Just be sure to put @START and @END sigils in the right places.
-// Otherwise, changes made from the frontend may not render properly.
+// Otherwise, changes made with GUI tools will not render properly.
 
-// @START-IMPORTS
 import { Start } from './Robi/Robi.js'
-import lists from './lists.js';
+import lists from './lists.js'
+// @START-IMPORTS
 import Test from './Routes/Test/Test.js'
-import Table from './Routes/Table/Table.js'
+import SortTables from './Routes/SortTables/SortTables.js'
 // @END-IMPORTS
 
 // @START
 Start({
     lists,
-    // Must include at least one route with the same path value as settings.defaultRoute.
-    // Routes can be linked to directly with hash fragment. Ex: https://site#path.
+    // Routes are directly addressable. Ex: https://site#path.
     routes: [
-        // @START-ROUTES
+        // @START-ROUTES        
         // @START-Test
         {
             path: 'Test',
+            title: 'Test',
             icon: 'bs-tools',
             go: Test
         }
         // @END-Test
-        , // @ROUTE
-        // @START-Table
+        , // @ROUTE        
+        // @START-SortTables
         {
-            path: 'Table',
-            icon: 'bs-list-ul',
-            go: Table
+            path: 'SortTables',
+            title: 'Sort Tables',
+            icon: 'bs-card-checklist',
+            go: SortTables
         }
-        // @END-Table
+        // @END-SortTables
         // @END-ROUTES
-    ]
-    ,
+    ],
     settings: {
         // @START-SETTINGS
         // REQUIRED PROPERTIES
@@ -101,17 +101,7 @@ Start({
             // {
             //     rel: 'preload',
             //     as: 'image',
-            //     href: '/Images/dha-logo-no-label-80w.png'
-            // },
-            // {
-            //     rel: 'preload',
-            //     as: 'image',
-            //     href: '/Images/dha-logo-no-label-180w.png'
-            // },
-            // {
-            //     rel: 'preload',
-            //     as: 'image',
-            //     href: '/Images/dha-logo-no-label-386w.png'
+            //     href: '/Images/name.png'
             // }
         ],
         maincontainer: null,

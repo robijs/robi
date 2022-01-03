@@ -9,8 +9,35 @@ import { App } from '../Core/App.js';
  */
 export function DataTable(param) {
     const {
-        buttonColor, headers, headerFilter, columns, buttons, cursor, checkboxes, striped, border, paging, search, info, ordering, order, rowId, addCSS, data, onRowClick, onSearch, onDraw, toolbar, fontSize, nowrap, onSelect, // How do you turn select on?  i see the event but no option to enable it;
-        onDeselect, rowCallback, createdRow, width, parent, position
+        buttonColor,
+        headers,
+        headerFilter,
+        columns,
+        buttons,
+        cursor,
+        checkboxes,
+        striped,
+        border,
+        paging,
+        search,
+        info,
+        ordering,
+        order,
+        rowId,
+        addCSS,
+        data,
+        onRowClick,
+        onSearch,
+        onDraw,
+        fontSize,
+        nowrap,
+        onSelect,
+        onDeselect,
+        rowCallback,
+        createdRow,
+        width,
+        parent,
+        position
     } = param;
 
     const component = Component({
@@ -51,6 +78,10 @@ export function DataTable(param) {
                 /* overflow-x: overlay; */
             }
 
+            #id_wrapper .table {
+                color: var(--color);
+            }
+
             #id tr {
                 cursor: ${cursor || 'pointer'};
             }
@@ -78,7 +109,7 @@ export function DataTable(param) {
                 display: flex;
                 justify-content: space-between;
                 flex-wrap: nowrap;
-                overflow: auto;
+                /* overflow: auto; */ /* Turned OFF to test buttons collection */
             }
 
             #id_wrapper .datatable-toolbar .cell {
@@ -93,7 +124,7 @@ export function DataTable(param) {
 
             /* Striped */
             #id_wrapper .table-striped tbody tr:nth-of-type(odd) {
-                background-color: ${App.get('backgroundColor')};
+                background-color: var(--background);
             }
 
             #id_wrapper .table-striped tbody tr:nth-of-type(even) td {
@@ -130,7 +161,7 @@ export function DataTable(param) {
 
             #id_wrapper .datatable-toolbar .btn-secondary {
                 border-color: transparent;
-                margin-right: 10px;
+                /* margin-right: 10px; */
                 border-radius: 8px;
             }
 
@@ -138,13 +169,10 @@ export function DataTable(param) {
                 box-shadow: none;
             }
 
-            #id_wrapper .datatable-toolbar .btn-secondary span {
-                color: white;
-            }
-
             /** Add Item Button */
             #id_wrapper .datatable-toolbar .add-item {
-                background: #e9ecef;
+                background: var(--buttonBackground);
+                margin-right: 10px;
             }
 
             #id_wrapper .datatable-toolbar .add-item span {
@@ -153,14 +181,14 @@ export function DataTable(param) {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             #id_wrapper .datatable-toolbar .add-item .icon {
                 font-size: 16pt;
                 margin-right: 5px;
                 margin-left: -5px;
-                fill: ${App.get('primaryColor')};;
+                fill: var(--primary);;
             }
 
             /** Disabled Button */
@@ -177,7 +205,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .datatable-toolbar .delete-item:hover {
-                background: #e9ecef;
+                background: var(--buttonBackground);
             }
 
             #id_wrapper .datatable-toolbar .delete-item span {
@@ -188,7 +216,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .datatable-toolbar .delete-item .icon {
-                fill: ${App.get('primaryColor')};
+                fill: var(--primary);
             }
 
             /** HTML5 Buttons */
@@ -201,46 +229,77 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-html5 {
-                background: ${buttonColor || '#e9ecef'} !important;
+                color: #444;
+                font-weight: 500;
+                padding: 0px;
+                flex: 1;
+                display: flex;
+            }
+
+            #id_wrapper .buttons-html5:hover {
+                background: none !important;
+            }
+
+            #id_wrapper .buttons-html5 span{
+                color: var(--color) !important;
+
+                display: inline-block;
+                margin: 0px 10px;
+                padding: 4px 24px;
+                flex: 1;
+                text-align: center;
+                border-radius: 10px;
+            }
+
+            #id_wrapper .buttons-html5 span:hover {
+                background-color: var(--primary20);
+            }
+
+            #id_wrapper .buttons-html5:first-child span {
+                margin-top: 10px;
+            }
+
+            #id_wrapper .buttons-html5:last-child span {
+                margin-bottom: 10px;
+            }
+
+            /* Buttons Collection */
+            #id_wrapper .dt-button-collection {
+                width: calc(100% - 12px);
+            }
+
+            #id_wrapper .dt-button-collection .dropdown-menu {
+                top: 4px;
+                padding: 0px;
+                display: flex;
+                flex-direction: column;
+                box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
+                border: none;
+            }
+
+            #id_wrapper .buttons-collection {
+                background: none;
+                border: none;
+            }
+
+            #id_wrapper .buttons-collection:hover {
+                background: var(--buttonBackground);
+            }
+
+            #id_wrapper .buttons-collection span {
                 color: #444;
                 font-weight: 500;
             }
 
-            #id_wrapper .buttons-html5 span{
-                color: ${App.get('defaultColor')} !important;
+            #id_wrapper .buttons-collection span .icon {
+                font-size: 20px;
+                fill: var(--primary);
             }
 
             /** Select and Search */
-            #id_wrapper .custom-select {
-                background: ${buttonColor || '#e9ecef'} !important;
-                border-color: transparent;
-                font-weight: 500;
-            }
-
+            #id_wrapper .custom-select,
             #id_wrapper input[type='search'] {
-                background: ${buttonColor || '#e9ecef'} !important;
-                border-color: transparent;
-                border-radius: 8px;
-            }
-
-            #id_wrapper input[type='search']:active,
-            #id_wrapper input[type='search']:focus,
-            #id_wrapper select:focus,
-            #id_wrapper select:focus {
-                outline: none;
-            }
-
-            #id_wrapper input[type='search']:active,
-            #id_wrapper input[type='search']:focus {
-                box-shadow: none !important;
-            }
-
-            #id_wrapper input[type='search']::-webkit-search-cancel-button {
-                -webkit-appearance: none;
-                cursor: pointer;
-                height: 16px;
-                width: 16px;
-                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill=''><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+                background: ${buttonColor || 'var(--buttonBackground)'} !important;
             }
 
             /** Footer */
@@ -278,8 +337,8 @@ export function DataTable(param) {
 
             #id_wrapper .page-item.active .page-link {
                 color: white;
-                background: ${App.get('primaryColor')};;
-                border: solid 1px ${App.get('primaryColor')};
+                background: var(--primary);;
+                border: solid 1px var(--primary);
             }
 
             #id_wrapper .page-link:hover {
@@ -312,7 +371,7 @@ export function DataTable(param) {
             #id_wrapper .table-border thead th {
                 border-bottom: solid 1px rgb(${App.get('primaryColorRGB')}, .3);
                 background: rgb(${App.get('primaryColorRGB')}, .2);
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             #id_wrapper :not(.table-border) thead th {
@@ -344,7 +403,7 @@ export function DataTable(param) {
             #id_wrapper .sorting_asc::after,
             #id_wrapper .sorting_desc::before,
             #id_wrapper .sorting_desc::after {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             /* #id_wrapper .sorting::before,
@@ -376,7 +435,7 @@ export function DataTable(param) {
             #id_wrapper tbody th.select-checkbox:before {
                 content: ' ';
                 margin: 0 auto;
-                border: solid 2px lightgray;
+                border: solid 2px ${App.get('prefersColorScheme') === 'dark' ? '#444' : 'lightgray' };
                 border-radius: 4px;
                 position: initial;
                 display: block;
@@ -390,7 +449,7 @@ export function DataTable(param) {
                 margin-top: -18px;
                 top: auto;
                 text-shadow: none;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 font-weight: bolder;
                 font-size: 10pt;
             }
@@ -401,14 +460,14 @@ export function DataTable(param) {
             }
 
             #id_wrapper tbody > tr.selected td {
-                background-color: ${App.get('primaryColor') + ( App.get('selectedRowOpacity') || 10 )} !important;
-                color:  ${App.get('primaryColor')};
+                background-color: var(--selectedRow) !important;
+                color:  var(--primary);
             }
 
             #id_wrapper tbody tr.selected a, 
             #id_wrapper tbody th.selected a,
             #id_wrapper tbody td.selected a {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             #id_wrapper tbody > tr.selected td:first-child {
@@ -480,6 +539,12 @@ export function DataTable(param) {
             #id_wrapper .dataTables_length label select {
                 border-radius: 8px;
                 margin: 0px 10px;
+            }
+
+            /** Dropdown menu */
+            #id_wrapper .dropdown-menu {
+                background: var(--inputBackground);
+                box-shadow: var(--box-shadow);
             }
 
             ${addCSS || ''}

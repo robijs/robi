@@ -48,7 +48,7 @@ export async function QuestionAndReplies(param) {
             parent
         });
 
-        viewTitle.add();
+        routeTitle.add();
 
         const questionTypesResponse = await Get({
             list: 'Settings',
@@ -112,7 +112,7 @@ export async function QuestionAndReplies(param) {
             position: 'afterbegin'
         });
 
-        viewTitle.add();
+        routeTitle.add();
     }
 
     /** View Container */

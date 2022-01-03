@@ -64,11 +64,11 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
         style: /*css*/ `
             /** Title */
             #id .modal-title {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
             }
 
             #id.modal {
-                overflow-y: overlay;
+                overflow-y: overlay; 
             }
 
             #id.modal.show {
@@ -79,7 +79,7 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
             #id .modal-content {
                 border-radius: 20px;
                 border: none;
-                background: ${background || ''};
+                background: ${background || 'var(--secondary)'};
                 padding: ${contentPadding || '0px'};
             }
 
@@ -122,7 +122,7 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
             #id .btn-secondary {
                 background: none;
                 border: solid 1px transparent;
-                color: ${App.get('defaultColor')};
+                color: var(--color);
                 font-weight: 500;
             }
 
@@ -149,6 +149,8 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
             }
 
             #id .close .circle-fill {
+                width: 20px;
+                height: 20px;
                 position: absolute;
                 fill: darkgray;
                 top: 2px;
@@ -156,14 +158,10 @@ export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, cl
                 transition: all 300ms ease;
             }
 
-            #id .close .icon-container:hover > .circle-fill {
-                fill: ${App.get('primaryColor')};
-            }
-
             #id .close .x-circle-fill {
-                width: 1.2em;
-                height: 1.2em;
-                fill: #e9ecef;
+                width: 24px;
+                height: 24px;
+                fill: var(--buttonBackground);
                 z-index: 10;
             }
 

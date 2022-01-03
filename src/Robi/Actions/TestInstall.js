@@ -117,7 +117,7 @@ export function TestInstall(param) {
                                 width: '100%',
                                 height: '100%',
                                 radius: '10px',
-                                background: App.get('backgroundColor')
+                                background: 'var(--background)'
                             });
 
                             installContainer.add();

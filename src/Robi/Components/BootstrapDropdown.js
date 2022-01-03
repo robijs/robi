@@ -9,13 +9,13 @@ import { App } from '../Core/App.js'
  */
 export function BootstrapDropdown(param) {
     const {
-        action, label, description, parent, position, options, value, fieldMargin, padding, setWidthDelay, maxHeight, maxWidth, valueType, buttonStyle
+        action, classes, label, description, parent, position, options, value, fieldMargin, padding, setWidthDelay, maxHeight, maxWidth, valueType, buttonStyle
     } = param;
 
     const component = Component({
         html: /*html*/ `
-            <div class='form-field'>
-                <label>${label}</label>
+            <div class='form-field${classes ? ` ${classes.join(' ')}` : ''}'>
+                ${label ? /*html*/ `<label>${label}</label>` : ''}
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
                 <div class='dropdown'>
                     <button class='btn dropdown-toggle' ${buttonStyle ? `style='${buttonStyle}'` : ''} type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
@@ -49,7 +49,7 @@ export function BootstrapDropdown(param) {
                 min-width: 160px;
                 font-size: 13px;
                 border-radius: 0.125rem 0px;
-                border: 1px solid #ced4da;
+                border: 1px solid var(--borderColor);
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -72,7 +72,7 @@ export function BootstrapDropdown(param) {
             }
 
             #id .dropdown-item:hover {
-                background: ${App.get('primaryColor') + '20'};
+                background: var(--primary20);
             }
 
             #id .scroll-container {

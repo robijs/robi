@@ -169,7 +169,7 @@ export async function CreateApp() {
                     width: '100%',
                     height: '100%',
                     radius: '20px',
-                    background: App.get('backgroundColor')
+                    background: 'var(--background)'
                 });
 
                 installContainer.add();
@@ -273,15 +273,15 @@ export async function CreateApp() {
                 installConsole.append(/*html*/ `
                     <div class='console-line'>
                         <!-- <code class='line-number'>0</code> -->
-                        <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
+                        <code style='color: var(--primary) !important;'>${spacers}</code>
                     </div>
                     <div class='console-line'>
                         <!-- <code class='line-number'>0</code> -->
-                        <code style='color: ${App.get('primaryColor')} !important;'>| '${title}' created |</code>
+                        <code style='color: var(--primary) !important;'>| '${title}' created |</code>
                     </div>
                     <div class='console-line'>
                         <!-- <code class='line-number'>0</code> -->
-                        <code style='color: ${App.get('primaryColor')} !important;'>${spacers}</code>
+                        <code style='color: var(--primary) !important;'>${spacers}</code>
                     </div>
                 `);
 

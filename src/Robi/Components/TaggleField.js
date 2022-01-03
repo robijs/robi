@@ -43,7 +43,7 @@ export function TaggleField(param) {
                 position: relative;
                 width: 100%;
                 border-radius: 10px;
-                border: 1px solid #ced4da;
+                border: 1px solid var(--borderColor);
                 padding: 10px;
             }
 

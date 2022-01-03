@@ -87,9 +87,9 @@ export async function CreateItem(param) {
         }
 
         body.AuthorId = body.AuthorId || App.get('dev').user.SiteId;
-        body.Author = body.Author || { Title: App.get('dev').user.Title };
+        body.Author = body.Author || { Title: App.get('dev').user.Title, LoginName: App.get('dev').user.LoginName };
         body.EditorId = body.EditorId || App.get('dev').user.SiteId;
-        body.Editor = body.Editor || { Title: App.get('dev').user.Title };
+        body.Editor = body.Editor || { Title: App.get('dev').user.Title, LoginName: App.get('dev').user.LoginName };
 
         const date = new Date().toUTCString();
         body.Created = date;

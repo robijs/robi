@@ -1,39 +1,3 @@
-import { AccountInfo } from '../Components/AccountInfo.js'
-import { Alert } from '../Components/Alert.js'
-import { AppContainer } from '../Components/AppContainer.js'
-import { AttachFilesButton } from '../Components/AttachFilesButton.js'
-import { AttachFilesField } from '../Components/AttachFilesField.js'
-import { AttachmentsContainer } from '../Components/AttachmentsContainer.js'
-import { Attachments } from '../Components/Attachments.js'
-import { Banner } from '../Components/Banner.js'
-import { BootstrapButton } from '../Components/BootstrapButton.js'
-import { BootstrapDropdown } from '../Components/BootstrapDropdown.js'
-import { BootstrapTextarea } from '../Components/BootstrapTextarea.js'
-import { BuildInfo } from '../Components/BuildInfo.js'
-import { Button } from '../Components/Button.js'
-import { Card } from '../Components/Card.js'
-import { Comments } from '../Components/Comments.js'
-import { CommentsContainer } from '../Components/CommentsContainer.js'
-import { Container } from '../Components/Container.js'
-import { DashboardBanner } from '../Components/DashboardBanner.js'
-import { DataTable } from '../Components/DataTable.js'
-import { DateField } from '../Components/DateField.js'
-import { DevConsole } from '../Components/DevConsole.js'
-import { Developer } from '../Components/Developer.js'
-import { DeveloperLinks } from '../Components/DeveloperLinks.js'
-import { Dialog } from '../Components/Dialog.js'
-import { DropDownField } from '../Components/DropDownField.js'
-import { DropDownMenu } from '../Components/DropDownMenu.js'
-import { EditForm } from '../Components/EditForm.js'
-import { EditQuestion } from '../Components/EditQuestion.js'
-import { ErrorForm } from '../Components/ErrorForm.js'
-import { Errors } from '../Components/Errors.js'
-import { Files } from '../Components/Files.js'
-import { FilesTable } from '../Components/FilesTable.js'
-import { FixedToast } from '../Components/FixedToast.js'
-import { FoldingCube } from '../Components/FoldingCube.js'
-import { FormSection } from '../Components/FormSection.js'
-import { Heading } from '../Components/Heading.js'
 import { Help } from '../Components/Help.js'
 import { Missing } from '../Components/Missing.js'
 import { QuestionAndReplies } from '../Components/QuestionAndReplies.js'
@@ -44,11 +8,16 @@ import { Unauthorized } from '../Components/Unauthorized.js'
 import { Users } from '../Components/Users.js'
 
 // @START-File
+/**
+ * 
+ */
+// TODO: Export function instead of array?
 const Routes = [
     {
         path: '403',
         type: 'system',
         hide: true,
+        ignore: true,
         go(param) {
             Unauthorized(param);
         }
@@ -57,19 +26,9 @@ const Routes = [
         path: '404',
         type: 'system',
         hide: true,
+        ignore: true,
         go(param) {
             Missing(param);
-        }
-    },
-    {
-        path: 'Developer',
-        type: 'system',
-        roles: [
-            'Developer'
-        ],
-        icon: 'code-slash',
-        go(param) {
-            Developer(param);
         }
     },
     {
@@ -110,6 +69,7 @@ const Routes = [
         path: 'Settings',
         type: 'system',
         icon: 'bs-gear',
+        ignore: true,
         go(param) {
             Settings(param);
         }

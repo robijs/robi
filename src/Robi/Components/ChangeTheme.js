@@ -6,6 +6,7 @@ import { Modal } from './Modal.js'
 import { Themes } from '../Models/Themes.js'
 import { ThemeField } from './ThemeField.js'
 import { Wait } from '../Actions/Wait.js'
+import { Container } from './Container.js'
 
 // @START-File
 /**
@@ -15,10 +16,11 @@ import { Wait } from '../Actions/Wait.js'
 export function ChangeTheme(param) {
     const { parent } = param;
 
-    const card = Card({
-        title: 'Theme',
+    const card = Container({
+        display: 'block',
         width: '100%',
-        margin: '20px 0px 0px 0px',
+        maxWidth: '995px',
+        margin: '0px 0px 30px 0px',
         parent
     });
 
@@ -27,7 +29,7 @@ export function ChangeTheme(param) {
     // Theme
     const themeField = ThemeField({
         selected: App.get('theme'),
-        margin: '10px 0px 30px 0px',
+        margin: '0px 0px 30px 0px',
         label: false,
         parent: card
     });
@@ -36,8 +38,9 @@ export function ChangeTheme(param) {
 
     // Button
     const updateThemeBtn = BootstrapButton({
-        type: 'robi-reverse',
+        type: 'robi',
         value: 'Change theme',
+        classes: ['w-100'],
         parent: card,
         async action() {
             const { primary } = Themes.find(theme => theme.name === themeField.value());

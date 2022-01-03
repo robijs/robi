@@ -67,15 +67,16 @@ export async function ModifyFile(param) {
                 lineWrapping: true,
                 autoCloseBrackets: true,
                 styleActiveLine: true,
-                extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
                 foldGutter: true,
+                matchBrackets: true,
                 gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
                 keyword: {
                     "import": "special",
-                    "export": "export",
-                    "async": "export",
-                    "await": "export",
-                }
+                    "export": "special",
+                    "default": "special",
+                    "await": "special",
+                },
+                // extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
             });
             editor.foldCode(CodeMirror.Pos(0, 0));
             editor.setSize(0, 0);

@@ -11,7 +11,7 @@ import { App } from '../Core/App.js'
  */
 export function SectionStepper(param) {
     const {
-        title, sections, selected, route, padding, parent, position
+        title, sections, selected, route, padding, parent, position, numbers
     } = param;
 
     const component = Component({
@@ -32,12 +32,12 @@ export function SectionStepper(param) {
                 flex-direction: column;
                 padding: ${padding || '0px'};
                 border-radius: 10px;
-                /* overflow: auto; */
+                min-width: ${window.innerWidth > 1366 ? '200px' : '125px'};
+                transition: width 300ms, min-width 300ms;
             }
 
             #id .section-title-group {
                 overflow: overlay;
-                /* border-radius: 10px; */
             }
 
             /* Buttons */
@@ -47,23 +47,10 @@ export function SectionStepper(param) {
                 border-color: transparent;
             }
 
-            /* Title */
-            /* #id .section-title {
-                font-size: 1em;
-                font-weight: 700;
-                text-align: center;
-                background: #e9ecef;
-                color: ${App.get('primaryColor')};
-                border-radius: 10px;
-                margin-bottom: 15px;
-                padding: 10px;
-                cursor: pointer;
-            } */
-
             #id .section-title {
                 font-size: 18px;
                 font-weight: 700;
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
                 border-radius: 10px;
                 padding: 8px 20px 10px 20px; /* -2px on top to align baseline with view title */
                 cursor: pointer;
@@ -86,7 +73,7 @@ export function SectionStepper(param) {
             }
             
             #id .section-group.selected {
-                background: ${App.get('primaryColor')};
+                background: var(--primary);
                 color: white;
             }
 
@@ -96,7 +83,8 @@ export function SectionStepper(param) {
 
             /* Number */
             #id .section-circle {
-                color: ${App.get('primaryColor')};
+                color: var(--primary);
+                margin-right: 10px;
             }
 
             /* Name */
@@ -108,7 +96,6 @@ export function SectionStepper(param) {
 
             #id .section-name-text {
                 font-size: 15px;
-                margin-left: 10px;
             }
         `,
         parent,
@@ -131,7 +118,17 @@ export function SectionStepper(param) {
                     }
                 }
             }
-        ]
+        ],
+        onAdd() {
+            // Window resize event
+            window.addEventListener('resize', event => {
+                if (window.innerWidth > 1366) {
+                    component.get().style.minWidth = '200px';
+                } else {
+                    component.get().style.minWidth = '125px';
+                }
+            });
+        }
     });
 
     function createHTML() {
@@ -144,7 +141,7 @@ export function SectionStepper(param) {
 
             html += /*html*/ `
                 <div class='section-group${name === selected ? ' selected' : ''}' data-path='${path}'>
-                    <div class='section-circle' data-name='${name}'>${index + 1}</div>
+                    ${numbers !== false ? /*html*/ `<div class='section-circle' data-name='${name}'>${index + 1}</div>` : ''}
             `;
 
             html += /*html*/ `

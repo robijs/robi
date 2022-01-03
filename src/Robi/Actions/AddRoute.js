@@ -9,13 +9,14 @@ import { CreateFolder } from '../Actions/CreateFolder.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { Wait } from './Wait.js'
+import { RouteTemplate } from '../Templates/RouteTemplate.js'
 
 // @START-File
 /**
  *
  * @param {*} param
  */
-export async function AddRoute(param) {
+export async function AddRoute(event) {
     // Show modal
     console.log('add route');
 
@@ -80,7 +81,7 @@ export async function AddRoute(param) {
                 valueType: 'html',
                 value: /*html*/ `
                     <div class='d-flex justify-content-center w-100' data-target='true'>
-                        <svg class='icon' style='font-size: 18px; fill: ${App.get('primaryColor')};'>
+                        <svg class='icon' style='font-size: 18px; fill: var(--primary);'>
                             <use href='#icon-bs-circle-fill'></use>
                         </svg>
                     </div>
@@ -89,7 +90,7 @@ export async function AddRoute(param) {
                     return {
                         label: /*html*/ `
                             <div class='d-flex justify-content-center w-100' data-target='true'>
-                                <svg class='icon' style='font-size: 18px; fill: ${App.get('primaryColor')};'>
+                                <svg class='icon' style='font-size: 18px; fill: var(--primary);'>
                                     <use href='#${icon}'></use>
                                 </svg>
                             </div>
@@ -117,7 +118,7 @@ export async function AddRoute(param) {
                             modal.find('.modal-content').style.width = 'unset';
 
                             const loading = LoadingSpinner({
-                                message: `<span style='color: ${App.get('primaryColor')};'>Adding Route<span>`,
+                                message: `<span style='color: var(--primary);'>Adding Route<span>`,
                                 type: 'robi',
                                 classes: ['p-4'],
                                 parent: modalBody
@@ -181,11 +182,13 @@ export async function AddRoute(param) {
                         const ordered = routes[1].split(', // @ROUTE');
                         const icon = routeIcon.value().querySelector('use').href.baseVal.replace('#icon-', '');
                         // FIXME: replace hard coded spaces (4 === 1 tab) with variable that includes 4 space characters
+                        // TODO: Extract to template
                         const newRoute = [
                             ``,
                             `        // @START-${routePath.value()}`,
                             `        {`,
                             `            path: '${routePath.value()}',`,
+                            `            title: '${routeTitle.value()}',`,
                             `            icon: '${icon}',`,
                             `            go: ${routePath.value()}`,
                             `        }`,
@@ -235,25 +238,11 @@ export async function AddRoute(param) {
                     }
 
                     async function createRoute() {
-                        // TODO: Move to template file
-                        let contents = [
-                            `import { Title } from '../../Robi/RobiUI.js'`,
-                            ``,
-                            `export default async function Measures({ parent, pathParts, props }) {`,
-                            `    // View title`,
-                            `    const viewTitle = Title({`,
-                            `        title: /* @START-Title */'${routeTitle.value()}'/* @END-Title */,`,
-                            `        parent,`,
-                            `        date: new Date().toLocaleString('en-US', {`,
-                            `            dateStyle: 'full'`,
-                            `        }),`,
-                            `        type: 'across'`,
-                            `    });`,
-                            ``,
-                            `    viewTitle.add();`,
-                            `}`
-                        ].join('\n');
-
+                        const contents = RouteTemplate({
+                            name: routePath.value(),
+                            title: routeTitle.value()
+                        });
+                    
                         let newFile;
 
                         if (App.get('mode') === 'prod') {
