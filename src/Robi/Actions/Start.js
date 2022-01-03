@@ -5,7 +5,7 @@ import { AddLinks } from './AddLinks.js'
 import { InitializeApp } from './InitializeApp.js'
 import { LogError } from './LogError.js'
 import { SetTheme } from './SetTheme.js'
-import { Wait } from './Wait.js'
+
 // @START-File
 /**
  *
@@ -42,40 +42,38 @@ export function Start(param) {
         return this.split(/(?=[A-Z])/).join(' ');
     }
 
-    if (App.get('errorLogging') === 'on') {
-        /** Format error objects for JSON.stringify() to work properly */
-        function replaceErrors(key, value) {
-            if (value instanceof Error) {
-                var error = {};
+    /** Format error objects for JSON.stringify() to work properly */
+    function replaceErrors(key, value) {
+        if (value instanceof Error) {
+            var error = {};
 
-                Object.getOwnPropertyNames(value).forEach(function (key) {
-                    error[key] = value[key];
-                });
+            Object.getOwnPropertyNames(value).forEach(function (key) {
+                error[key] = value[key];
+            });
 
-                return error;
-            }
-
-            return value;
+            return error;
         }
 
-        /** Log errors to SharePoint list */
-        window.onerror = async (message, source, lineno, colno, error) => {
-            LogError({
-                Message: message,
-                Source: source,
-                Error: JSON.stringify(error, replaceErrors)
-            });
-        };
-
-        /** Log errors from Promises to SharePoint list */
-        window.addEventListener("unhandledrejection", event => {
-            LogError({
-                Message: event.reason.message,
-                Source: import.meta.url,
-                Error: event.reason.stack
-            });
-        });
+        return value;
     }
+
+    /** Log errors to SharePoint list */
+    window.onerror = async (message, source, lineno, colno, error) => {
+        LogError({
+            Message: message,
+            Source: source,
+            Error: JSON.stringify(error, replaceErrors)
+        });
+    };
+
+    /** Log errors from Promises to SharePoint list */
+    window.addEventListener("unhandledrejection", event => {
+        LogError({
+            Message: event.reason.message,
+            Source: import.meta.url,
+            Error: event.reason.stack
+        });
+    });
 
     /** Start app on page load */
     window.onload = async () => {

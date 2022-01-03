@@ -52,9 +52,6 @@ Start({
         // defaultBorder: border style for core comoponents
         // defaultColor: text color
         // defaultRoute: route navigated to if no #path is present in URL, defaults to first path in routes array
-        // logo: open sidebar logo
-        // logoLarge: launch logo
-        // logoSmall: logo when sidebar is collapsed
         // name: app name (AUTOPOPULATED if created by Robi)
         // primaryColor: set theme color, used by core components
         // primaryColorRGB: same as above, but in rgb format, used by core components
@@ -68,9 +65,6 @@ Start({
         // userSettings: new user account 'Settings' field default JSON value
         defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
         defaultRoute: '',
-        // logo: 'dha-logo-no-label-180w.png',
-        // logoLarge: 'dha-logo-no-label-386w.png',
-        // logoSmall: 'dha-logo-no-label-80w.png',
         name: /* @START-name */'App'/* @END-name */,
         questionTypes: [
             {
@@ -90,7 +84,6 @@ Start({
         // dev.testInstall: (true | false) - if true, will bring up install console and simulate app installation process 
         // errorLogging: ('on' | 'off') - if on, sends errors to SharePoint list 'Errors' (list is created by default)
         // library: document library where src directory lives, defaults is 'App'
-        // links: adds preload links in head for stylesheets and images
         // maincontainer: replace default maincontainer with your component (type function, typically imported from /Components/myComponent.js)
         // sidebar: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
         // usersLists: override default name for 'Users' lists
@@ -105,15 +98,7 @@ Start({
             },
             testInstall: false,
         },
-        errorLogging: 'on',
         library: '',
-        links: [
-            // {
-            //     rel: 'preload',
-            //     as: 'image',
-            //     href: '/Images/name.png'
-            // }
-        ],
         maincontainer: null,
         sidebar: null,
         usersList: 'Users'

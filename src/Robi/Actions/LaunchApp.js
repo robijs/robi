@@ -1,4 +1,3 @@
-import { Data } from './Data.js'
 import { GetCurrentUser } from './GetCurrentUser.js'
 import { GenerateUUID } from './GenerateUUID.js'
 import { SetSessionStorage } from './SetSessionStorage.js'
@@ -24,31 +23,13 @@ export async function LaunchApp(param) {
     } = param;
 
     const {
-        title, usersList, beforeLoad, preLoadLists, svgSymbols, sessionStorageData, sidebar, maincontainer
+        title, usersList, svgSymbols, sessionStorageData, sidebar, maincontainer
     } = settings;
 
     /** Set sessions storage */
     SetSessionStorage({
         sessionStorageData
     });
-
-    /** Get list items */
-    const data = await Data(preLoadLists);
-
-    if (data) {
-        /** Add list items to store */
-        preLoadLists.forEach((param, index) => {
-            const {
-                list
-            } = param;
-
-            Store.add({
-                type: 'list',
-                list,
-                items: data[index]
-            });
-        });
-    }
 
     /** Load svg definitions */
     const svgDefs = SvgDefs({
@@ -113,11 +94,6 @@ export async function LaunchApp(param) {
     });
 
     mainContainer.add();
-
-    /** Run callback defined in settings Before first view loads */
-    if (beforeLoad) {
-        await beforeLoad();
-    }
 
     /** Show App Container */
     appContainer.show('flex');

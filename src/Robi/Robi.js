@@ -30,7 +30,6 @@ import { CreateItem } from './Actions/CreateItem.js'
 import { CreateLibrary } from './Actions/CreateLibrary.js'
 import { CreateList } from './Actions/CreateList.js'
 import { CreateSite } from './Actions/CreateSite.js'
-import { Data } from './Actions/Data.js'
 import { DeleteApp } from './Actions/DeleteApp.js'
 import { DeleteAttachments } from './Actions/DeleteAttachments.js'
 import { DeleteColumn } from './Actions/DeleteColumn.js'
@@ -79,7 +78,6 @@ import { SetSessionStorage } from './Actions/SetSessionStorage.js'
 import { SetTheme } from './Actions/SetTheme.js'
 import { Start } from './Actions/Start.js'
 import { Style } from './Actions/Style.js'
-import { TestInstall } from './Actions/TestInstall.js'
 import { UpdateApp } from './Actions/UpdateApp.js'
 import { UpdateColumn } from './Actions/UpdateColumn.js'
 import { UpdateItem } from './Actions/UpdateItem.js'
@@ -119,7 +117,6 @@ export {
     CreateLibrary,
     CreateList,
     CreateSite,
-    Data,
     DeleteApp,
     DeleteAttachments,
     DeleteColumn,
@@ -168,7 +165,6 @@ export {
     SetTheme,
     Start,
     Style,
-    TestInstall,
     UpdateApp,
     UpdateColumn,
     UpdateItem,
