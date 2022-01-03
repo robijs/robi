@@ -123,9 +123,11 @@ export function SectionStepper(param) {
             // Window resize event
             window.addEventListener('resize', event => {
                 if (window.innerWidth > 1366) {
-                    component.get().style.minWidth = '200px';
+                    console.log(component.get());
+                    // component.get().style.minWidth = '200px';
                 } else {
-                    component.get().style.minWidth = '125px';
+                    console.log(component.get());
+                    // component.get().style.minWidth = '125px';
                 }
             });
         }

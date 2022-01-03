@@ -662,7 +662,7 @@ export function UpdateApp() {
                         const returnBtn = BootstrapButton({
                             type: 'robi',
                             value: 'Close',
-                            classes: ['w-100'],
+                            classes: ['w-100', 'mt-2'],
                             action(event) {
                                 // Bootstrap uses jQuery .trigger, won't work with .addEventListener
                                 $(modal.get()).on('hidden.bs.modal', event => {
