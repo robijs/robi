@@ -642,9 +642,10 @@ export function Sidebar({ parent, path }) {
     function hideRoutes(event) {
         console.log('hide routes');
 
-        // TESTING 
+        // NOTE: Testing showing hidden routes
+        // FIXME: Maybe hide curren nav and add this on on top of it?
         component.find('.nav-container').innerHTML =  Store.routes()
-        .filter(route => route.path !== 'Settings' && route.path !== '403' && route.path )
+        .filter(route => !route.ignore)
         .map(route => {
             const {
                 path, title, icon, roles, type
@@ -660,14 +661,13 @@ export function Sidebar({ parent, path }) {
                 return navTemplate(path, icon, type, title);
             }
         }).join('\n');
-
-        // END TESTING
+        // NOTE: END TESTING
 
         // Disable all routes
         component.findAll('.nav-container .nav').forEach(node => {
-                node.classList.remove('nav-selected');
-                node.dataset.shouldroute = 'no';
-                node.style.cursor = 'initial';
+            node.classList.remove('nav-selected');
+            node.dataset.shouldroute = 'no';
+            node.style.cursor = 'initial';
         });
 
         // disable edit
@@ -771,9 +771,12 @@ export function Sidebar({ parent, path }) {
         nav.forEach(node => {
             const id = GenerateUUID();
 
+            const path = node.dataset.path;
+            const { hide } = Store.routes().find(item => item.path === path);
+
             node.insertAdjacentHTML('beforeend', /*html*/ `
                 <div class="custom-control custom-switch grab switch">
-                    <input type="checkbox" class="custom-control-input" id='${id}'>
+                    <input type="checkbox" class="custom-control-input" id='${id}'${hide ? ' checked' : ''}>
                     <!-- <label class="custom-control-label" for="${id}">Hide</label> -->
                     <label class="custom-control-label" for="${id}"></label>
                 </div>
