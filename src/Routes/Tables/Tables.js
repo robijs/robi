@@ -1,9 +1,9 @@
 import { Table, Title, BootstrapButton, Container } from '../../Robi/RobiUI.js'
 
-export default async function Measures({ parent, pathParts, props }) {
+export default async function Tables({ parent, pathParts, props }) {
     // View title
     const routeTitle = Title({
-        title: /* @START-Title */'Table'/* @END-Title */,
+        title: /* @START-Title */'Sort'/* @END-Title */,
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'

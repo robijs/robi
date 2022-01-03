@@ -4,11 +4,9 @@ import { createWriteStream, mkdirSync, renameSync } from 'fs';
 createServer((req, res) => {
     const headers = {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
+        "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS, PUT",
         "Access-Control-Max-Age": 2592000, // 30 days
     };
-
-    console.log(req.method);
 
     if (req.method === "POST") {
         let body;
@@ -42,16 +40,34 @@ createServer((req, res) => {
         return;
     }
 
+    if (req.method === "PUT") {
+        // TODO: Handle malformed requests
+        const url = decodeURI(req.url);
+        const query = url.split('?')[1];
+        const [ oldName, newName ] = query.split('&');
+
+        // Rename file
+        renameSync(`./src/Routes/${oldName}/${oldName}.js`, `./src/Routes/${oldName}/${newName}.js`);
+
+        // Rename dir
+        renameSync(`./src/Routes/${oldName}`, `./src/Routes/${newName}`);
+
+        console.log(`\nSuccessfully renamed route: ${oldName} -> ${newName}\n`);
+
+        req.on("end", () => {
+            res.writeHead(200, headers);
+        });
+
+        return;
+    }
+
     if (req.method === "OPTIONS") {
-        console.log('reached options');
         res.writeHead(200, headers);
         res.end();
         return;
     }
 
     if (req.method === "DELETE") {
-        console.log(`DELETE`);
-
         // TODO: Handle malformed requests
         const url = decodeURI(req.url);
         const query = url.split('?')[1];

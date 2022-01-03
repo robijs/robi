@@ -182,11 +182,13 @@ export async function AddRoute(event) {
                         const ordered = routes[1].split(', // @ROUTE');
                         const icon = routeIcon.value().querySelector('use').href.baseVal.replace('#icon-', '');
                         // FIXME: replace hard coded spaces (4 === 1 tab) with variable that includes 4 space characters
+                        // TODO: Extract to template
                         const newRoute = [
                             ``,
                             `        // @START-${routePath.value()}`,
                             `        {`,
                             `            path: '${routePath.value()}',`,
+                            `            title: '${routeTitle.value()}',`,
                             `            icon: '${icon}',`,
                             `            go: ${routePath.value()}`,
                             `        }`,
@@ -236,23 +238,6 @@ export async function AddRoute(event) {
                     }
 
                     async function createRoute() {
-                        // let contents = [
-                        //     `import { Title } from '../../Robi/RobiUI.js'`,
-                        //     ``,
-                        //     `export default async function ${routePath.value()}({ parent, pathParts, props }) {`,
-                        //     `    // View title`,
-                        //     `    const routeTitle = Title({`,
-                        //     `        title: /* @START-Title */'${routeTitle.value()}'/* @END-Title */,`,
-                        //     `        parent,`,
-                        //     `        date: new Date().toLocaleString('en-US', {`,
-                        //     `            dateStyle: 'full'`,
-                        //     `        }),`,
-                        //     `        type: 'across'`,
-                        //     `    });`,
-                        //     ``,
-                        //     `    routeTitle.add();`,
-                        //     `}`
-                        // ].join('\n');
                         const contents = RouteTemplate({
                             name: routePath.value(),
                             title: routeTitle.value()

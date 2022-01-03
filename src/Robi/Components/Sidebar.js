@@ -1016,23 +1016,23 @@ export function Sidebar({ parent, path }) {
             .filter(route => route.path !== 'Settings' && !route.hide)
             .map(route => {
                 const {
-                    path, label, icon, roles, type
+                    path, title, icon, roles, type
                 } = route;
 
                 if (roles) {
                     if (roles.includes(Store.user().Role)) {
-                        return navTemplate(path, icon, type, label);
+                        return navTemplate(path, icon, type, title);
                     } else {
                         return '';
                     }
                 } else {
-                    return navTemplate(path, icon, type, label);
+                    return navTemplate(path, icon, type, title);
                 }
 
             }).join('\n');
     }
 
-    function navTemplate(routeName, icon, type, label) {
+    function navTemplate(routeName, icon, type, title) {
         const firstPath = path ? path.split('/')[0] : undefined;
 
         return /*html*/ `
@@ -1040,7 +1040,7 @@ export function Sidebar({ parent, path }) {
                 <span class='icon-container'>
                     <svg class='icon'><use href='#icon-${icon}'></use></svg>
                 </span>
-                <span class='text'>${label || routeName.split(/(?=[A-Z])/).join(' ')}</span>
+                <span class='text'>${title || routeName.split(/(?=[A-Z])/).join(' ')}</span>
             </span>
         `;
     }

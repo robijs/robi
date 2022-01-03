@@ -33,55 +33,74 @@ export async function ModifyRoutes(event) {
 
             console.log(routes);
 
-            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                <div class='w-100 d-flex'>
-                    <div class='font-weight-bold w-100 flex-grow-1 mr-3'>Title</div>
-                    <div class='font-weight-bold w-100 flex-grow-1 mr-3 ml-3'>Path</div>
-                    <div class='font-weight-bold w-100 flex-grow-1 ml-3'>Icon</div>
-                </div>
-            `);
-
-            routes.forEach(route => {
-                const { path, label, icon } = route;
+            const fields = routes.map(route => {
+                const { path, title, icon } = route;
 
                 const row = Container({
-                    classes: ['w-100', path],
+                    classes: ['w-100', 'position-relative', path],
+                    padding: '10px',
+                    radius: '10px',
                     parent: modalBody
                 });
 
                 row.add();
+                row.get().style.transition = 'background-color 300ms';
+                row.append(/*html*/ `
+                    <div style='position: absolute; top: 0px; left: -42px; height: 100%; padding: 10px; transition: opacity 300ms; opacity: 0;' class='d-flex justify-content-center align-items-center modified'>
+                        <svg class="icon" style='fill: var(--primary); font-size: 22px;'>
+                            <use href="#icon-bs-check-circle"></use>
+                        </svg>
+                    </div>
+                `);
 
                 const routeTitle = SingleLineTextField({
-                    classes: ['mb-1', 'mr-3', 'flex-grow-1'],
+                    addon: 'Title',
+                    classes: ['mb-0', 'mr-3', 'flex-grow-1'],
                     label: '',
-                    value: label || path,
-                    parent: row
+                    value: title,
+                    parent: row,
+                    onKeyup(event) {
+                        if (routeTitle.value() !== title) {
+                            row.get().style.background = 'var(--primary20)';
+                            row.find('.modified').style.opacity = '1';
+                            // Use current path as key
+                            
+                        } else {
+                            row.get().style.background = 'inherit';
+                            row.find('.modified').style.opacity = '0';
+                        }
+                    }
                 });
 
                 routeTitle.add();
 
                 const routePath = SingleLineTextField({
-                    classes: ['mb-1', 'mr-3', 'flex-grow-1'],
+                    addon: `${App.get('site')}#`,
+                    classes: ['mb-0', 'mr-3', 'flex-grow-1'],
                     label: '',
                     value: path,
                     parent: row,
-                    // onKeydown(event) {
-                    //     if (event.code === 'Space' || event.code === 'Tab') {
-                    //         return false;
-                    //     }
-                    // },
-                    // onKeyup(event) {
-                    //     canEnable();
-    
-                    //     showMessage(routePath.value());
-                    // }
+                    onKeydown(event) {
+                        if (event.code === 'Space' || event.code === 'Tab') {
+                            return false;
+                        }
+                    },
+                    onKeyup(event) {
+                        if (routeTitle.value() !== title) {
+                            row.get().style.background = 'var(--primary20)';
+                            row.find('.modified').style.opacity = '1';
+                        } else {
+                            row.get().style.background = 'inherit';
+                            row.find('.modified').style.opacity = '0';
+                        }
+                    }
                 });
 
                 routePath.add();
 
                 // Route icon
                 const routeIcon = BootstrapDropdown({
-                    classes: ['mb-1', 'flex-grow-1'],
+                    classes: ['mb-0', 'mr-0'],
                     label: '',
                     parent: row, 
                     maxHeight: '150px',
@@ -111,6 +130,26 @@ export async function ModifyRoutes(event) {
                 });
 
                 routeIcon.add();
+
+                return {
+                    values() {
+                        const pathValue = routePath.value();
+                        const titleValue = routeTitle.value()
+                        const iconValue = routeIcon.value().querySelector('use').href.baseVal.replace('#icon-', '');
+
+                        // TODO: split into old. and new.
+                        return {
+                            name: path,
+                            current: {
+                                title,
+                                icon
+                            },
+                            path: pathValue !== path ? pathValue : null,
+                            title: titleValue !== title ? titleValue : null,
+                            icon: iconValue !== icon ? iconValue : null
+                        }   
+                    }
+                }
             });
 
             const addRouteBtn = BootstrapButton({
@@ -146,13 +185,45 @@ export async function ModifyRoutes(event) {
                     document.querySelector('#app').style.transition = 'filter 150ms';
                     document.querySelector('#app').style.filter = 'blur(5px)';
 
-                    await updateApp();
+                    // Flag. True if any path, title, or icon has changed.
+                    let changed = false;
+
+                    // 1. Update Route files first.
+                    for (let field of fields) {
+                        const { name, path, title, icon } = field.values();
+
+                        console.log(path, title, icon);
+
+                        if (path || title || icon) {
+                            changed = true;
+                            
+                            if (App.get('mode') === 'prod') {
+                                await updateRoute({ name, path, title, icon });
+                            }
+                        } else {
+                            console.log(`${name} not changed`);
+                        }
+                    }
+
+                    // 2. If title, path, or icon has changed, update app.js.
+                    if (changed) {
+                        await updateApp();
+                    }
 
                     if (App.get('mode') === 'prod') {
-                        // Wait additional 2s
-                        console.log('Waiting...');
                         await Wait(3000);
                         location.reload();
+                    } else {
+                        // FIXME: Can't update files in /src first, will trigger hot reload
+                        for (let field of fields) {
+                            const { name, path, title, icon } = field.values();
+    
+                            if (path || title || icon) {
+                                await updateRoute({ name, path, title, icon });
+                            } else {
+                                console.log(`${name} not changed`);
+                            }
+                        }
                     }
 
                     modal.close();
@@ -180,36 +251,36 @@ export async function ModifyRoutes(event) {
                         let content = await request.text();
                         let updated = '';
 
-                        // Modify Imports
-                        const imports = content.match(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/);
-                        const importObjects = imports[1].split('\n');
-                        const remainingImports= importObjects.filter(route => {
-                            const name = route.split(' ')[1];
-                    
-                            if (!routes.includes(name)) {
-                                return route;
-                            }
-                    
+                        // Set Imports
+                        const newImports = fields.map(field => {
+                            const { name, path } = field.values();
+                            const route = path || name;
+
+                            return `Import ${route} from './Routes/${route}/${route}'`;
                         }).join('\n');
                     
-                        updated = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS\n${remainingImports || '\n'}\n// @END-IMPORTS`);
+                        updated = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS\n${newImports || '\n'}\n// @END-IMPORTS`);
                     
-                        const allRoutes = content.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
-                        const routeObjects = allRoutes[1].split(', // @ROUTE');
-                    
-                        // Modify routes
-                        const remainingRoutes = routeObjects.filter(route => {
-                            const [ query, path ] = route.match(/path: '([\s\S]*?)',/);
-                    
-                            console.log(routes, path);
-                    
-                            if (!routes.includes(path)) {
-                                return route;
-                            }
-                    
+                        // Set routes
+                        const newRoutes = fields.map(field => {
+                            const { name, path, title, icon, current } = field.values();
+                            const route = path || name;
+
+                            return [
+                                ``,
+                                `        // @START-${route}`,
+                                `        {`,
+                                `            path: '${route}',`,
+                                `            title: '${title || current.title}',`,
+                                `            icon: '${icon || current.icon}',`,
+                                `            go: ${route}`,
+                                `        }`,
+                                `        // @END-${route}`,
+                                ``
+                            ].join('\n');
                         }).join(', // @ROUTE');
                     
-                        updated = updated.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${remainingRoutes || '\n        '}// @END-ROUTES`);
+                        updated = updated.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes || '\n        '}// @END-ROUTES`);
                     
                         console.log('OLD\n----------------------------------------\n', content);
                         console.log('\n****************************************');
@@ -233,12 +304,123 @@ export async function ModifyRoutes(event) {
                         } else {
                             setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
                                 method: 'POST',
-                                body: updatedContent
+                                body: updated
                             });
                             await Wait(1000);
                         }
 
                         console.log('Saved:', setFile);
+                    }
+
+                    async function updateRoute({ name, title, path }) {
+                        let digest;
+                        let request;
+            
+                        // 1. If title has changed, update file.
+                        if (title) {
+                            if (App.get('mode') === 'prod') {
+                                digest = await GetRequestDigest();
+                                request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/Files('${name}.js')/$value`, {
+                                    method: 'GET',
+                                    headers: {
+                                        'binaryStringRequestBody': 'true',
+                                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                        'X-RequestDigest': digest
+                                    }
+                                });
+                            } else {
+                                request = await fetch(`http://127.0.0.1:8080/src/Routes/${name}/${name}.js`);
+                                await Wait(1000);
+                            }
+                
+                            const value = await request.text();
+                            const updated = value.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */'${title}'/* @END-Title */`);
+                
+                            console.log('OLD\n----------------------------------------\n', value);
+                            console.log('\n****************************************');
+                            console.log('NEW\n----------------------------------------\n', updated);
+                            console.log('\n****************************************');
+                
+                            if (App.get('mode') === 'prod') {
+                                // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
+                                await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/Files/Add(url='${name}.js',overwrite=true)`, {
+                                    method: 'POST',
+                                    body: updated, 
+                                    headers: {
+                                        'binaryStringRequestBody': 'true',
+                                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                        'X-RequestDigest': digest
+                                    }
+                                });
+                            } else {
+                                await fetch(`http://127.0.0.1:2035/?path=src/Routes/${name}&file=${name}.js`, {
+                                    method: 'POST',
+                                    body: updated
+                                });
+                                await Wait(1000);
+                            }
+                        } else {
+                            console.log('Title not changed');
+                        }
+
+                        // 2. If path has changed, change file and dir name
+                        if (path) {
+                            if (App.get('mode') === 'prod') {
+                                // TODO: Extract to new Action
+                                // b. Rename file
+                                await fetch(`${App.get('site')}/_api/web/GetFileByServerRelativeUrl('App/src/Routes/${name}/${name}.js')/moveto(newurl='App/src/Routes/${name}/${path}.js',flags=1)`, {
+                                    method: 'MERGE',
+                                    body: {
+                                        "__metadata": {
+                                          "type": getType.__metadata.type
+                                        },
+                                        "Title": "New name",
+                                        "FileLeafRef": "New name"
+                                    }, 
+                                    headers: {
+                                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                        'X-RequestDigest': digest
+                                    }
+                                });
+
+                                // TODO: Extract to new Action
+                                // a. Rename dir
+                                const getType = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/ListItemAllFields`, {
+                                    method: 'GET',
+                                    headers: {
+                                        'Accept': 'application/json;odata=verbose;charset=utf-8'
+                                    }
+                                });
+
+                                console.log(getType);
+
+                                return;
+
+                                await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/ListItemAllFields`, {
+                                    method: 'MERGE',
+                                    body: {
+                                        "__metadata": {
+                                          "type": getType.__metadata.type
+                                        },
+                                        "Title": path,
+                                        "FileLeafRef": path
+                                    }, 
+                                    headers: {
+                                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                        'X-RequestDigest': digest
+                                    }
+                                });
+                            } else {
+                                // Rename dir
+                                await fetch(`http://127.0.0.1:2035/?${name}&${path}`, {
+                                    method: 'PUT'
+                                });
+
+                                await Wait(1000);
+                            }
+                        } else {
+                            console.log('Path not changed');
+                        }
                     }
                 },
                 // disabled: true,

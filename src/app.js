@@ -5,20 +5,21 @@
 
 // @START-IMPORTS
 import { Start } from './Robi/Robi.js'
-import lists from './lists.js';
+import lists from './lists.js'
 import Test from './Routes/Test/Test.js'
-import Table from './Routes/Table/Table.js'
+import Tables from './Routes/Tables/Tables.js'
 // @END-IMPORTS
 
 // @START
 Start({
     lists,
-    // Routes create directly addressable links with hash fragment. Ex: https://site#path.
+    // Routes are directly addressable. Ex: https://site#path.
     routes: [
         // @START-ROUTES
         // @START-Test
         {
             path: 'Test',
+            title: 'Test',
             icon: 'bs-tools',
             go: Test
         }
@@ -26,9 +27,10 @@ Start({
         , // @ROUTE
         // @START-Table
         {
-            path: 'Table',
+            path: 'Tables',
+            title: 'Sort Tables',
             icon: 'bs-list-ul',
-            go: Table
+            go: Tables
         }
         // @END-Table
         // @END-ROUTES

@@ -295,9 +295,13 @@ export function AppContainer() {
 
             .form-control,
             .form-field-multi-line-text.editable,
-            .btn.dropdown-toggle,
-            .input-group-text {
+            .btn.dropdown-toggle {
+                font-size: 13px !important;
                 background: var(--inputBackground);
+            }
+
+            .input-group-text {
+                background: var(--background);
                 font-size: 13px !important;
             }
 
