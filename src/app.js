@@ -7,7 +7,7 @@ import { Start } from './Robi/Robi.js'
 import lists from './lists.js'
 // @START-IMPORTS
 import Test from './Routes/Test/Test.js'
-import Sort from './Routes/Sort/Sort.js'
+import SortTables from './Routes/SortTables/SortTables.js'
 // @END-IMPORTS
 
 // @START
@@ -25,14 +25,14 @@ Start({
         }
         // @END-Test
         , // @ROUTE        
-        // @START-Sort
+        // @START-SortTables
         {
-            path: 'Sort',
-            title: 'Sort',
+            path: 'SortTables',
+            title: 'Sort Tables',
             icon: 'bs-card-checklist',
-            go: Sort
+            go: SortTables
         }
-        // @END-Sort
+        // @END-SortTables
         // @END-ROUTES
     ],
     settings: {

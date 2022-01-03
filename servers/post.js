@@ -64,7 +64,7 @@ createServer((req, res) => {
             const writableStream = createWriteStream(`./src/Routes/${newName}/${newName}.js`);
             writableStream.write(data);
 
-            console.log(`\nSuccessfully updated route: ${oldName} -> ${newName} \n`);
+            console.log(`Successfully updated route: ${oldName} -> ${newName} \n`);
         });
 
         req.on("end", () => {
