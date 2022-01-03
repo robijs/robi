@@ -122,12 +122,16 @@ export function SectionStepper(param) {
         onAdd() {
             // Window resize event
             window.addEventListener('resize', event => {
+                const node = component.get();
+
                 if (window.innerWidth > 1366) {
-                    console.log(component.get());
-                    // component.get().style.minWidth = '200px';
+                    if (node && node.style) {
+                        node.style.minWidth = '200px';
+                    }
                 } else {
-                    console.log(component.get());
-                    // component.get().style.minWidth = '125px';
+                    if (node && node.style) {
+                        node.style.minWidth = '125px';
+                    }
                 }
             });
         }
