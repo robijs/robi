@@ -235,9 +235,13 @@ export function AppContainer() {
         html: /*html*/ `
             <div class='appcontainer'></div>
         `,
-        // TODO: Set CSS variables instead
-        // TODO: Replace all references to App.get('[color]') with var(--css-varibale)
         style: /*css*/ `
+            /* Override html prefers-color-scheme media query in app.aspx */
+            /* TODO: Move to style or css file that loads sooner */
+            html {
+                background: var(--secondary);
+            }
+
             .appcontainer {
                 display: none;
                 background: var(--secondary);
