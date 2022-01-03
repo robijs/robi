@@ -39,7 +39,7 @@ If that doesn't work, check if there's another program using the named directory
 npm run dev
 ```
 
-### Trigger: A previous server session didn't close properly or another process is using https://localhost:3000
+### Trigger: A previous server session didn't close properly or another process is using port 3000
 
 #### Error
 ```console
