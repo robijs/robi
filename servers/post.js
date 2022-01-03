@@ -57,8 +57,6 @@ createServer((req, res) => {
             // Rename dir
             renameSync(`./src/Routes/${oldName}`, `./src/Routes/${newName}`);
 
-            console.log(`\nSuccessfully renamed route: ${oldName} -> ${newName}\n`);
-
             req.on("end", () => {
                 res.writeHead(200, headers);
             });

@@ -425,18 +425,17 @@ export async function ModifyRoutes(event) {
                             await Wait(1000);
                 
                             const value = await request.text();
+                            // Set new title
                             let updated = value.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */'${title}'/* @END-Title */`);
-                            // function Tables
+
+                            // Rename function
                             updated = updated.replace(`function ${name}`, `function ${path || name}`);
 
-                
-                            console.log('OLD\n----------------------------------------\n', value);
-                            console.log('\n****************************************');
-                            console.log('NEW\n----------------------------------------\n', updated);
-                            console.log('\n****************************************');
+                            // console.log('OLD\n----------------------------------------\n', value);
+                            // console.log('\n****************************************');
+                            // console.log('NEW\n----------------------------------------\n', updated);
+                            // console.log('\n****************************************');
 
-                            return;
-                
                             if (App.get('mode') === 'prod') {
                                 // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
                                 await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/Files/Add(url='${name}.js',overwrite=true)`, {
@@ -456,25 +455,7 @@ export async function ModifyRoutes(event) {
                                 });
 
                                 await Wait(1000);
-
-                                // await fetch(`http://127.0.0.1:2035/?path=src/Routes/${name}&file=${name}.js`, {
-                                //     method: 'POST',
-                                //     body: updated
-                                // });
-                                // await Wait(1000);
                             }
-    
-                            // // 2. If path has changed, change file and dir name
-                            // if (path) {
-                            //     // Rename dir
-                            //     await fetch(`http://127.0.0.1:2035/?${name}&${path}`, {
-                            //         method: 'PUT'
-                            //     });
-
-                            //     await Wait(1000);
-                            // } else {
-                            //     console.log('Path not changed');
-                            // }
                         }
                     }
                 },
