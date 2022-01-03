@@ -1,6 +1,6 @@
 import { Table, Title, BootstrapButton, Container } from '../../Robi/RobiUI.js'
 
-export default async function Tables({ parent, pathParts, props }) {
+export default async function Sort({ parent }) {
     // View title
     const routeTitle = Title({
         title: /* @START-Title */'Sort'/* @END-Title */,

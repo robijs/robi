@@ -5,7 +5,6 @@ import { LoadingSpinner } from '../Components/LoadingSpinner.js'
 import { Alert } from '../Components/Alert.js'
 import { SingleLineTextField } from '../Components/SingleLineTextField.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
-import { CreateFolder } from './CreateFolder.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { Wait } from './Wait.js'
@@ -17,14 +16,6 @@ import { Container } from '../Components/Container.js'
  * @param {*} param
  */
 export async function ModifyRoutes(event) {
-    // // If current route changed, updated URL
-    // let route = location.href.split('#')[1].split('/');
-
-    // if (route[0] === 'Sort2'); {
-    //     route[0] = 'Sort3';
-    //     location.href = location.href.split('#')[0] + '#' + route.join('/');
-    // }
-
     // return;
     const routes = Store.routes().filter(item => item.type !== 'system');
 
@@ -231,7 +222,7 @@ export async function ModifyRoutes(event) {
                         await Wait(3000);
                         location.reload();
                     } else {
-                        // FIXME: Can't update files in /src first, will trigger hot reload
+                        // NOTE: Can't update files in /src first, will trigger hot reload
                         for (let field of fields) {
                             const { name, path, title, icon } = field.values();
     
@@ -330,12 +321,12 @@ export async function ModifyRoutes(event) {
                     }
 
                     async function updateRoute({ name, title, path }) {
-                        let digest;
-                        let request;
-            
-                        // 1. If title has changed, update file.
-                        if (title) {
-                            if (App.get('mode') === 'prod') {
+                        if (App.get('mode') === 'prod') {
+                            let digest;
+                            let request;
+                
+                            // 1. If title has changed, update file.
+                            if (title) {
                                 digest = await GetRequestDigest();
                                 request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/Files('${name}.js')/$value`, {
                                     method: 'GET',
@@ -345,51 +336,46 @@ export async function ModifyRoutes(event) {
                                         'X-RequestDigest': digest
                                     }
                                 });
+                    
+                                const value = await request.text();
+                                const updated = value.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */'${title}'/* @END-Title */`);
+                    
+                                console.log('OLD\n----------------------------------------\n', value);
+                                console.log('\n****************************************');
+                                console.log('NEW\n----------------------------------------\n', updated);
+                                console.log('\n****************************************');
+                    
+                                if (App.get('mode') === 'prod') {
+                                    // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
+                                    await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/Files/Add(url='${name}.js',overwrite=true)`, {
+                                        method: 'POST',
+                                        body: updated, 
+                                        headers: {
+                                            'binaryStringRequestBody': 'true',
+                                            'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                            'X-RequestDigest': digest
+                                        }
+                                    });
+                                } else {
+                                    await fetch(`http://127.0.0.1:2035/?path=src/Routes/${name}&file=${name}.js`, {
+                                        method: 'POST',
+                                        body: updated
+                                    });
+                                    await Wait(1000);
+                                }
                             } else {
-                                request = await fetch(`http://127.0.0.1:8080/src/Routes/${name}/${name}.js`);
-                                await Wait(1000);
+                                console.log('Title not changed');
                             }
-                
-                            const value = await request.text();
-                            const updated = value.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */'${title}'/* @END-Title */`);
-                
-                            console.log('OLD\n----------------------------------------\n', value);
-                            console.log('\n****************************************');
-                            console.log('NEW\n----------------------------------------\n', updated);
-                            console.log('\n****************************************');
-                
-                            if (App.get('mode') === 'prod') {
-                                // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
-                                await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/Files/Add(url='${name}.js',overwrite=true)`, {
-                                    method: 'POST',
-                                    body: updated, 
-                                    headers: {
-                                        'binaryStringRequestBody': 'true',
-                                        'Accept': 'application/json;odata=verbose;charset=utf-8',
-                                        'X-RequestDigest': digest
-                                    }
-                                });
-                            } else {
-                                await fetch(`http://127.0.0.1:2035/?path=src/Routes/${name}&file=${name}.js`, {
-                                    method: 'POST',
-                                    body: updated
-                                });
-                                await Wait(1000);
-                            }
-                        } else {
-                            console.log('Title not changed');
-                        }
-
-                        // 2. If path has changed, change file and dir name
-                        if (path) {
-                            if (App.get('mode') === 'prod') {
+    
+                            // 2. If path has changed, change file and dir name
+                            if (path) {
                                 // TODO: Extract to new Action
                                 // b. Rename file
                                 await fetch(`${App.get('site')}/_api/web/GetFileByServerRelativeUrl('App/src/Routes/${name}/${name}.js')/moveto(newurl='App/src/Routes/${name}/${path}.js',flags=1)`, {
                                     method: 'MERGE',
                                     body: {
                                         "__metadata": {
-                                          "type": getType.__metadata.type
+                                            "type": getType.__metadata.type
                                         },
                                         "Title": "New name",
                                         "FileLeafRef": "New name"
@@ -417,7 +403,7 @@ export async function ModifyRoutes(event) {
                                     method: 'MERGE',
                                     body: {
                                         "__metadata": {
-                                          "type": getType.__metadata.type
+                                            "type": getType.__metadata.type
                                         },
                                         "Title": path,
                                         "FileLeafRef": path
@@ -428,15 +414,67 @@ export async function ModifyRoutes(event) {
                                     }
                                 });
                             } else {
+                                console.log('Path not changed');
+                            }
+                        } 
+                        
+                        // NOTE: Can't update files in /src more than once, hot reload kills script on first change
+                        else {
+                            // 1. If title has changed, update file.
+                            const request = await fetch(`http://127.0.0.1:8080/src/Routes/${name}/${name}.js`);
+                            await Wait(1000);
+                
+                            const value = await request.text();
+                            let updated = value.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */'${title}'/* @END-Title */`);
+                            // function Tables
+                            updated = updated.replace(`function ${name}`, `function ${path || name}`);
+
+                
+                            console.log('OLD\n----------------------------------------\n', value);
+                            console.log('\n****************************************');
+                            console.log('NEW\n----------------------------------------\n', updated);
+                            console.log('\n****************************************');
+
+                            return;
+                
+                            if (App.get('mode') === 'prod') {
+                                // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
+                                await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/Files/Add(url='${name}.js',overwrite=true)`, {
+                                    method: 'POST',
+                                    body: updated, 
+                                    headers: {
+                                        'binaryStringRequestBody': 'true',
+                                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                        'X-RequestDigest': digest
+                                    }
+                                });
+                            } else {
                                 // Rename dir
-                                await fetch(`http://127.0.0.1:2035/?${name}&${path}`, {
-                                    method: 'PUT'
+                                await fetch(`http://127.0.0.1:2035/?${name || path}&${path || name}`, {
+                                    method: 'PUT',
+                                    body: updated
                                 });
 
                                 await Wait(1000);
+
+                                // await fetch(`http://127.0.0.1:2035/?path=src/Routes/${name}&file=${name}.js`, {
+                                //     method: 'POST',
+                                //     body: updated
+                                // });
+                                // await Wait(1000);
                             }
-                        } else {
-                            console.log('Path not changed');
+    
+                            // // 2. If path has changed, change file and dir name
+                            // if (path) {
+                            //     // Rename dir
+                            //     await fetch(`http://127.0.0.1:2035/?${name}&${path}`, {
+                            //         method: 'PUT'
+                            //     });
+
+                            //     await Wait(1000);
+                            // } else {
+                            //     console.log('Path not changed');
+                            // }
                         }
                     }
                 },

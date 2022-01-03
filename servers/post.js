@@ -41,21 +41,37 @@ createServer((req, res) => {
     }
 
     if (req.method === "PUT") {
-        // TODO: Handle malformed requests
-        const url = decodeURI(req.url);
-        const query = url.split('?')[1];
-        const [ oldName, newName ] = query.split('&');
+        let body;
 
-        // Rename file
-        renameSync(`./src/Routes/${oldName}/${oldName}.js`, `./src/Routes/${oldName}/${newName}.js`);
+        req.on("data", data => {
+            body = data;
 
-        // Rename dir
-        renameSync(`./src/Routes/${oldName}`, `./src/Routes/${newName}`);
+            // TODO: Handle malformed requests
+            const url = decodeURI(req.url);
+            const query = url.split('?')[1];
+            const [ oldName, newName ] = query.split('&');
 
-        console.log(`\nSuccessfully renamed route: ${oldName} -> ${newName}\n`);
+            // Rename file
+            renameSync(`./src/Routes/${oldName}/${oldName}.js`, `./src/Routes/${oldName}/${newName}.js`);
+
+            // Rename dir
+            renameSync(`./src/Routes/${oldName}`, `./src/Routes/${newName}`);
+
+            console.log(`\nSuccessfully renamed route: ${oldName} -> ${newName}\n`);
+
+            req.on("end", () => {
+                res.writeHead(200, headers);
+            });
+
+            const writableStream = createWriteStream(`./src/Routes/${newName}/${newName}.js`);
+            writableStream.write(data);
+
+            console.log(`\nSuccessfully updated route: ${oldName} -> ${newName} \n`);
+        });
 
         req.on("end", () => {
             res.writeHead(200, headers);
+            res.end(body);
         });
 
         return;
