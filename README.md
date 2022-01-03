@@ -39,7 +39,7 @@ If that doesn't work, check if there's another program using the named directory
 npm run dev
 ```
 
-### Trigger: Another process is using Port 3000
+### Trigger: A previous server session didn't close properly or another process is using https://localhost:3000
 
 #### Error
 ```console
@@ -58,3 +58,5 @@ Stop the server with <kbd>ctrl</kbd> + <kbd>c</kbd> and restart.
 ```console
 npm run dev
 ```
+
+If that doesn't work, open Task Manager and end all Node.js processes.
