@@ -1,12 +1,12 @@
 # Robi
 
-## Local Dev
+## Local Development
 ```console
 npm install
 npm start
 ```
 
-## Deploy to SharePont Site
+## Deploy to SharePont
 Instructions coming soon.
 
 ## Troubleshooting
