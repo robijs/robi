@@ -97,7 +97,7 @@ export function Sidebar({ parent, path }) {
                 background: var(--background);
                 border-right: solid 1px var(--borderColor);
                 height: 100vh;
-                transition: width 300ms, min-width 300ms
+                transition: width 300ms, min-width 300ms, background-color 300ms;
             }
 
             #id.sidebar.closed {

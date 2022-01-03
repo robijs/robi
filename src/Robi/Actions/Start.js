@@ -4,6 +4,7 @@ import { Store } from '../Core/Store.js'
 import { AddLinks } from './AddLinks.js'
 import { InitializeApp } from './InitializeApp.js'
 import { LogError } from './LogError.js'
+import { SetTheme } from './SetTheme.js'
 import { Wait } from './Wait.js'
 // @START-File
 /**
@@ -17,10 +18,15 @@ export function Start(param) {
 
     const {
         links,
+        name,
+        theme,
     } = settings;
 
     // Set app settings
     App.settings(param);
+
+    // Set theme
+    SetTheme({ name, theme });
 
     // toTitleCase string method polyfil
     String.prototype.toTitleCase = function () {

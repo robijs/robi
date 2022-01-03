@@ -11,11 +11,6 @@ import { App } from '../Core/App.js'
  * @returns
  */
 export function AppContainer() {
-    const { primary, secondary, background, color, borderColor, buttonBackgroundColor, selectedRowOpacity } = App.get('colors')[App.get('prefersColorScheme')];
-    const hex = NameToHex(primary);
-    const hsl = HexToHSL(primary);
-    const hsl5 = HSLDarker(hsl, 5);
-    const hsl10 = HSLDarker(hsl, 10);
     const cancelButton = `background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' style='fill: ${App.get('prefersColorScheme') === 'dark' ? 'darkgray' : 'darkgray' };'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");`
 
     const component = Component({
@@ -26,28 +21,6 @@ export function AppContainer() {
         // TODO: Set CSS variables instead
         // TODO: Replace all references to App.get('[color]') with var(--css-varibale)
         style: /*css*/ `
-            /* Theme Colors */
-            :root {
-                --background: ${background};
-                --borderColor: ${borderColor};
-                --box-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? '40%' : '10%'}) 0px 0px 16px -2px;
-                --buttonBackground: ${buttonBackgroundColor};
-                --color: ${color};
-                --inputBackground: ${App.get('prefersColorScheme') === 'dark' ? background : secondary};
-                --primary: ${primary};
-                --primaryHex: ${hex};
-                --primaryHSL: hsl(${HexToHSL(primary)});
-                --primaryHSL-5: hsl(${hsl5});
-                --primaryHSL-10: hsl(${hsl10});
-                --primaryRGB: ${HexToRGB(primary)};
-                --primary6b: ${primary + '6b'};
-                --primary19: ${primary + '19'}; 
-                --primary20: ${primary + '20'};
-                --scrollbar: ${App.get('prefersColorScheme') === 'dark' ? 'dimgray' : 'lightgray'};
-                --secondary: ${secondary};
-                --selectedRow: ${primary + (selectedRowOpacity || '10')}
-            }
-
             .appcontainer {
                 display: none;
                 background: var(--secondary);
@@ -56,12 +29,16 @@ export function AppContainer() {
             *, ::after, ::before {
                 box-sizing: border-box;
             }
+
+            .appcontainer,
+            .appcontainer {
+                transition: background-color 300ms;
+            }
             
             body {
                 padding: 0px;
                 margin: 0px;
                 box-sizing: border-box;
-                background: var(--secondary);
                 overflow: hidden;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
                 color: var(--color);
