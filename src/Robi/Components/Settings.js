@@ -530,7 +530,15 @@ export async function Settings({ parent, pathParts }) {
             style: /*css*/ `
                 .code-box::-webkit-scrollbar-thumb {
                     min-height: 40px;
-                } 
+                }
+
+                .CodeMirror-vscrollbar::-webkit-scrollbar-thumb {
+                    min-height: 30px;
+                }
+
+                .CodeMirror-scrollbar-filler {
+                    background: #1e1e1e;
+                }
             `
         });
         
@@ -572,9 +580,9 @@ export async function Settings({ parent, pathParts }) {
             mode: 'javascript',
             indentUnit: 4,
             lineNumbers: true,
-            lineWrapping: true,
+            // lineWrapping: true,
             autoCloseBrackets: true,
-            // styleActiveLine: true,
+            styleActiveLine: true,
             styleActiveLine: false,
             foldGutter: true,
             matchBrackets: true,
@@ -664,7 +672,7 @@ export async function Settings({ parent, pathParts }) {
         let docValue;
 
         function setEditor() {
-            editor.setSize('auto', 'auto');
+            editor.setSize('100%', '100%');
             editor.setOption('viewportMargin', Infinity);
             // editor.setOption('theme', 'material-palenight');
             editor.setOption('theme', 'vscode-dark');
