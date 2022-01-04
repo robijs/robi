@@ -29,7 +29,7 @@ export function TableToolbar(param) {
     const listInfo = App.lists().find(item => item.list === list);
     
     let userSettings = JSON.parse(Store.user().Settings);
-    let savedSearches = userSettings.savedSearches[list] || [];
+    let searches = userSettings.searches[list] || [];
     let open = false;
     let loaded;
 
@@ -61,7 +61,7 @@ export function TableToolbar(param) {
                                         <div class="dropdown-menu" aria-labelledby="${id}">
                                             <div class="grown-in-top-left saved-search-menu">
                                                 ${
-                                                    savedSearches.length ? savedSearches.map(search => {
+                                                    searches.length ? searches.map(search => {
                                                         const { name } = search;
 
                                                         return /*html*/ `<button class="dropdown-item load-search" type="button">${name}</button>`;
@@ -313,7 +313,7 @@ export function TableToolbar(param) {
                         return;
                     }
 
-                    console.log('Update Store.user().Settings.savedSearches');
+                    console.log('Update Store.user().Settings.searches');
 
                     // Disable button
                     saveSearchBtn.get().disabled = true;
@@ -343,25 +343,25 @@ export function TableToolbar(param) {
                         }
                     });
 
-                    if (savedSearches.map(search => search.name).includes(searchName.value())) {
+                    if (searches.map(search => search.name).includes(searchName.value())) {
                         console.log('update existing search')
                         // Update existing search
-                        savedSearches.find(item => item.name === searchName.value()).filters = filters;
+                        searches.find(item => item.name === searchName.value()).filters = filters;
 
-                        console.log(savedSearches);
+                        console.log(searches);
                     } else {
                         console.log('add new search')
                         // Add search
-                        savedSearches.push({
+                        searches.push({
                             name: searchName.value(),
                             filters: rows
                         });
 
-                        console.log(savedSearches);
+                        console.log(searches);
                     }
 
-                    // Replace user Settings[list].savedSearches
-                    userSettings.savedSearches[list] = savedSearches;
+                    // Replace user Settings[list].searches
+                    userSettings.searches[list] = searches;
                     const Settings = JSON.stringify(userSettings);
                     Store.user().Settings = Settings;
 
@@ -374,7 +374,7 @@ export function TableToolbar(param) {
                     });
 
                     // Update saved search menu
-                    component.find('.saved-search-menu').innerHTML = savedSearches.map(search => {
+                    component.find('.saved-search-menu').innerHTML = searches.map(search => {
                         const { name } = search;
 
                         return /*html*/ `<button class="dropdown-item load-search" type="button">${name}</button>`;
@@ -390,7 +390,7 @@ export function TableToolbar(param) {
 
                 // Show message if path already exists
                 function showMessage(value) {
-                    if (savedSearches.map(search => search.name).includes(value)) {
+                    if (searches.map(search => search.name).includes(value)) {
                         // Show message
                         if (!pathExists) {
                             pathExists = Alert({
@@ -414,7 +414,7 @@ export function TableToolbar(param) {
 
                 // Check if all fields are filled out and path doesn't already exist
                 function canEnable() {
-                    if ( searchName.value() !== '' && !savedSearches.map(search => search.name).includes(searchName.value()) ) {
+                    if ( searchName.value() !== '' && !searches.map(search => search.name).includes(searchName.value()) ) {
                         saveSearchBtn.enable();
                     } else {
                         saveSearchBtn.disable();
@@ -446,7 +446,7 @@ export function TableToolbar(param) {
 
                 const deleteSearchBtn = BootstrapButton({
                     async action() {
-                        console.log('Update Store.user().Settings.savedSearches');
+                        console.log('Update Store.user().Settings.searches');
     
                         // Disable button
                         deleteSearchBtn.get().disabled = true;
@@ -454,12 +454,12 @@ export function TableToolbar(param) {
                             <span class="spinner-border" role="status" aria-hidden="true" style="width: 20px; height: 20px; border-width: 3px"></span> Deleting search
                         `;
     
-                        // Find loaaded search by name and remove from savedSearches
-                        const searchToDelete = savedSearches.find(search => search.name === loaded);
-                        savedSearches.splice(savedSearches.indexOf(searchToDelete), 1);
+                        // Find loaaded search by name and remove from searches
+                        const searchToDelete = searches.find(search => search.name === loaded);
+                        searches.splice(searches.indexOf(searchToDelete), 1);
 
-                        // Replace user Settings[list].savedSearches
-                        userSettings.savedSearches[list] = savedSearches;
+                        // Replace user Settings[list].searches
+                        userSettings.searches[list] = searches;
                         const Settings = JSON.stringify(userSettings);
                         Store.user().Settings = Settings
     
@@ -472,7 +472,7 @@ export function TableToolbar(param) {
                         });
     
                         // Update saved search menu
-                        component.find('.saved-search-menu').innerHTML = savedSearches.map(search => {
+                        component.find('.saved-search-menu').innerHTML = searches.map(search => {
                             const { name } = search;
     
                             return /*html*/ `<button class="dropdown-item load-search" type="button">${name}</button>`;
@@ -637,7 +637,7 @@ export function TableToolbar(param) {
 
     function loadSearch(event) {
         const searchName = event.target.innerText;
-        const filters = savedSearches.find(search => search.name == searchName)?.filters;
+        const filters = searches.find(search => search.name == searchName)?.filters;
 
         // Set loaded
         loaded = searchName;

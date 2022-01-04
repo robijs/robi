@@ -75,7 +75,7 @@ Start({
         theme: /* @START-theme */'Purple'/* @END-theme */,
         title: /* @START-title */'Title'/* @END-title */,
         userDefaultRole: 'User',
-        userSettings: /* @START-userSettings */JSON.stringify({ savedSearches: {} })/* @END-userSettings */,
+        userSettings: /* @START-userSettings */JSON.stringify({ searches: {} })/* @END-userSettings */,
         // OPTIONAL PROPERTIES
         // -------------------
         // appcontainer: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
