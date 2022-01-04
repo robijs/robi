@@ -9,6 +9,7 @@ import lists from './lists.js'
 import Test from './Routes/Test/Test.js'
 import SortTables from './Routes/SortTables/SortTables.js'
 import LookupField from './Routes/LookupField/LookupField.js'
+import SelectIcon from './Routes/SelectIcon/SelectIcon.js'
 // @END-IMPORTS
 
 // @START
@@ -43,6 +44,15 @@ Start({
             go: LookupField
         }
         // @END-LookupField
+        , // @ROUTE
+        // @START-SelectIcon
+        {
+            path: 'SelectIcon',
+            title: 'Select Icon',
+            icon: 'bs-circle-fill',
+            go: SelectIcon
+        }
+        // @END-SelectIcon
         // @END-ROUTES
     ],
     settings: {
@@ -72,10 +82,10 @@ Start({
                 path: 'General'
             }
         ],
-        theme: /* @START-theme */'Purple'/* @END-theme */,
+        theme: /* @START-theme */'Teal'/* @END-theme */,
         title: /* @START-title */'Title'/* @END-title */,
         userDefaultRole: 'User',
-        userSettings: /* @START-userSettings */JSON.stringify({ searches: {} })/* @END-userSettings */,
+        userSettings: /* @START-userSettings */JSON.stringify({ searches: {}, actions: {} })/* @END-userSettings */,
         // OPTIONAL PROPERTIES
         // -------------------
         // appcontainer: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)

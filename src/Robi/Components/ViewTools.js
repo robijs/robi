@@ -129,7 +129,7 @@ export function ViewTools(param) {
                 justify-content: center;
                 padding: 10px;
                 border-radius: 20px;
-                transition: filter 300ms ease;
+                transition: filter 300ms ease, background-color 150ms ease;
             }
 
             #id .dropdown-menu .dropdown-item .icon {

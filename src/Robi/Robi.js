@@ -30,6 +30,7 @@ import { CreateItem } from './Actions/CreateItem.js'
 import { CreateLibrary } from './Actions/CreateLibrary.js'
 import { CreateList } from './Actions/CreateList.js'
 import { CreateSite } from './Actions/CreateSite.js'
+import { Data } from './Actions/Data.js'
 import { DeleteApp } from './Actions/DeleteApp.js'
 import { DeleteAttachments } from './Actions/DeleteAttachments.js'
 import { DeleteColumn } from './Actions/DeleteColumn.js'
@@ -58,6 +59,7 @@ import { HexToRGB } from './Actions/HexToRGB.js'
 import { HideRoutes } from './Actions/HideRoutes.js'
 import { History } from './Actions/History.js'
 import { HSLDarker } from './Actions/HSLDarker.js'
+import { HTML } from './Actions/HTML.js'
 import { InitializeApp } from './Actions/InitializeApp.js'
 import { InstallApp } from './Actions/InstallApp.js'
 import { LaunchApp } from './Actions/LaunchApp.js'
@@ -117,6 +119,7 @@ export {
     CreateLibrary,
     CreateList,
     CreateSite,
+    Data,
     DeleteApp,
     DeleteAttachments,
     DeleteColumn,
@@ -145,6 +148,7 @@ export {
     HideRoutes,
     History,
     HSLDarker,
+    HTML,
     InitializeApp,
     InstallApp,
     LaunchApp,

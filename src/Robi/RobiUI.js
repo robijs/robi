@@ -13,6 +13,8 @@
 // CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import { AccountInfo } from './Components/AccountInfo.js'
+import { ActionsCards } from './Components/ActionsCards.js'
+import { ActionsEditor } from './Components/ActionsEditor.js'
 import { Alert } from './Components/Alert.js'
 import { AppContainer } from './Components/AppContainer.js'
 import { AttachFilesButton } from './Components/AttachFilesButton.js'
@@ -49,6 +51,7 @@ import { FoldingCube } from './Components/FoldingCube.js'
 import { FormSection } from './Components/FormSection.js'
 import { Heading } from './Components/Heading.js'
 import { Help } from './Components/Help.js'
+import { IconField } from './Components/IconField.js'
 import { InstallConsole } from './Components/InstallConsole.js'
 import { ItemInfo } from './Components/ItemInfo.js'
 import { LinksField } from './Components/LinksField.js'
@@ -56,6 +59,7 @@ import { LoadingBar } from './Components/LoadingBar.js'
 import { LoadingSpinner } from './Components/LoadingSpinner.js'
 import { LogForm } from './Components/LogForm.js'
 import { Logs } from './Components/Logs.js'
+import { LogsContainer } from './Components/LogsContainer.js'
 import { MainContainer } from './Components/MainContainer.js'
 import { Missing } from './Components/Missing.js'
 import { Modal } from './Components/Modal.js'
@@ -71,6 +75,7 @@ import { NewUser } from './Components/NewUser.js'
 import { NumberField } from './Components/NumberField.js'
 import { PercentField } from './Components/PercentField.js'
 import { PhoneField } from './Components/PhoneField.js'
+import { Preferences } from './Components/Preferences.js'
 import { ProgressBar } from './Components/ProgressBar.js'
 import { Question } from './Components/Question.js'
 import { QuestionAndReplies } from './Components/QuestionAndReplies.js'
@@ -113,6 +118,8 @@ import { ViewTools } from './Components/ViewTools.js'
 
 export {
     AccountInfo,
+    ActionsCards,
+    ActionsEditor,
     Alert,
     AppContainer,
     AttachFilesButton,
@@ -149,6 +156,7 @@ export {
     FormSection,
     Heading,
     Help,
+    IconField,
     InstallConsole,
     ItemInfo,
     LinksField,
@@ -156,6 +164,7 @@ export {
     LoadingSpinner,
     LogForm,
     Logs,
+    LogsContainer,
     MainContainer,
     Missing,
     Modal,
@@ -171,6 +180,7 @@ export {
     NumberField,
     PercentField,
     PhoneField,
+    Preferences,
     ProgressBar,
     Question,
     QuestionAndReplies,

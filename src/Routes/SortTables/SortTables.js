@@ -47,22 +47,6 @@ export default async function SortTables3({ parent }) {
     });
 
     sortBtn.add();
-    
-    // @START-Table:MLOT
-    await Table({
-        list: 'MLOT',
-        parent,
-        advancedSearch: true,
-        toolbar: [
-            {
-                label: 'All',
-                filter(data) {
-                    return data;
-                }
-            }
-        ]
-    });
-    // @END-Table:MLOT
 
     // @START-Table:SLOT
     await Table({
@@ -79,6 +63,22 @@ export default async function SortTables3({ parent }) {
         ]
     });
     // @END-Table:SLOT
+    
+    // @START-Table:MLOT
+    await Table({
+        list: 'MLOT',
+        parent,
+        advancedSearch: true,
+        toolbar: [
+            {
+                label: 'All',
+                filter(data) {
+                    return data;
+                }
+            }
+        ]
+    });
+    // @END-Table:MLOT
 
     // @START-Table:Number
     await Table({

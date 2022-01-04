@@ -20,6 +20,32 @@ export function Lists() {
             ]
         },
         {
+            list: 'Searches',
+            fields: [
+                {
+                    name: "List",
+                    type: 'slot'
+                },
+                {
+                    name: "Searches",
+                    type: 'mlot'
+                }
+            ]
+        },
+        {
+            list: 'Actions',
+            fields: [
+                {
+                    name: "Name",
+                    type: 'slot'
+                },
+                {
+                    name: "Files",
+                    type: 'mlot'
+                }
+            ]
+        },
+        {
             list: 'Comments',
             fields: [
                 {

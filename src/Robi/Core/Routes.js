@@ -34,7 +34,7 @@ const Routes = [
     {
         path: 'Help',
         type: 'system',
-        icon: 'info-circle',
+        icon: 'bs-info-circle',
         go(param) {
             Help(param);
         }
@@ -42,7 +42,7 @@ const Routes = [
     {
         path: 'Questions',
         type: 'system',
-        icon: 'chat-right-text',
+        icon: 'bs-chat-right-text',
         go(param) {
             const {
                 parent,
@@ -81,7 +81,7 @@ const Routes = [
             'Developer',
             'Administrator'
         ],
-        icon: 'people',
+        icon: 'bs-people',
         go(param) {
             const {
                 parent,

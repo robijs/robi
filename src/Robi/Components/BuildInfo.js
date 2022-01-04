@@ -1,5 +1,5 @@
 import { Get } from '../Actions/Get.js'
-import { Container } from './Container.js';
+import { Container } from './Container.js'
 import { LoadingSpinner } from './LoadingSpinner.js' 
 import { SingleLineTextField } from './SingleLineTextField.js'
 
@@ -8,11 +8,7 @@ import { SingleLineTextField } from './SingleLineTextField.js'
  *
  * @param {*} param
  */
-export async function BuildInfo(param) {
-    const {
-        parent,
-    } = param;
-
+export async function BuildInfo({ parent }) {
     const card = Container({
         width: '100%',
         direction: 'column',
@@ -61,5 +57,11 @@ export async function BuildInfo(param) {
     });
 
     accountField.add();
+
+    const upgrade = UpgradeAppButton({
+        parent
+    });
+
+    upgrade.add();
 }
 // @END-File

@@ -1,12 +1,8 @@
-import { App } from '../Core/App.js'
 import { Title } from './Title.js'
-import { Table } from './Table.js'
 import { Timer } from './Timer.js'
-import { Card } from './Card.js'
 import { Container } from './Container.js'
 import { SectionStepper } from './SectionStepper.js'
 import { DevConsole } from './DevConsole.js'
-import { UpgradeAppButton } from './UpgradeAppButton.js'
 import { AccountInfo } from './AccountInfo.js'
 import { BuildInfo } from './BuildInfo.js'
 import { DeveloperLinks } from './DeveloperLinks.js'
@@ -14,15 +10,11 @@ import { ReleaseNotesContainer } from './ReleaseNotesContainer.js'
 import { SiteUsageContainer } from './SiteUsageContainer.js'
 import { Store } from '../Core/Store.js'
 import { ChangeTheme } from './ChangeTheme.js'
-import { LoadingSpinner } from './LoadingSpinner.js'
-import { ErrorForm } from './ErrorForm.js'
-import { LogForm } from './LogForm.js'
-import { MyTheme } from './MyTheme.js'
 import { CreateItem } from '../Actions/CreateItem.js'
-import { Get } from '../Actions/Get.js'
 import { Route } from '../Actions/Route.js'
-import { Wait } from '../Actions/Wait.js'
-import { Style } from '../Robi.js'
+import { ActionsCards } from './ActionsCards.js'
+import { LogsContainer } from './LogsContainer.js'
+import { Preferences } from './Preferences.js'
 
 // @START-File
 /**
@@ -35,6 +27,7 @@ export async function Settings({ parent, pathParts }) {
 
     const devPaths = [
         'Build',
+        'Developer',
         'Logs',
         'SiteUsage',
         'SharePoint',
@@ -54,12 +47,15 @@ export async function Settings({ parent, pathParts }) {
         {
             name: 'Preferences',
             path: 'Preferences'
+        },
+        {
+            name: 'Release Notes',
+            path: 'ReleaseNotes'
         }
     ];
 
     // Developers can see additional options
     if (Store.user().Role === 'Developer') {
-        sections.splice(1, 0, { name: 'App',path: 'App'});
         sections = sections.concat([
             {
                 name: 'Actions',
@@ -68,6 +64,10 @@ export async function Settings({ parent, pathParts }) {
             {
                 name: 'Build',
                 path: 'Build'
+            },
+            {
+                name: 'Developer',
+                path: 'Developer'
             },
             {
                 name: 'Logs',
@@ -215,25 +215,28 @@ export async function Settings({ parent, pathParts }) {
                 parent: planContainer
             });
             break;
-        case 'App':
-            if (Store.user().Role === 'Developer') {
-                const devConsole = DevConsole({
-                    parent: planContainer
-                });
-            
-                devConsole.add();
-            }
-
-            ReleaseNotesContainer({
+        case 'Actions':
+            ActionsCards({ 
                 parent: planContainer
             });
             break;
-        case 'Actions':
-            // actions();
-            actionsISE();
+        case 'Developer':
+            const devConsole = DevConsole({
+                parent: planContainer
+            });
+        
+            devConsole.add();
             break;
         case 'Usage':
             SiteUsageContainer({
+                parent: planContainer
+            });
+            break;
+        case 'Release Notes':
+            ReleaseNotesContainer({
+                title: '',
+                padding: '0px',
+                maring: '0px',
                 parent: planContainer
             });
             break;
@@ -243,160 +246,24 @@ export async function Settings({ parent, pathParts }) {
             });
             break;
         case 'Logs':
-            const logLoadingIndicator = LoadingSpinner({
-                message: 'Loading logs',
-                type: 'robi',
+            LogsContainer({
                 parent: planContainer
             });
-        
-            logLoadingIndicator.add();
-        
-            const log = await Get({
-                list: 'Log',
-                select: 'Id,Title,Message,Module,StackTrace,SessionId,Created,Author/Title',
-                expand: 'Author/Id',
-                orderby: 'Id desc',
-                top: '25',
-            });
-        
-            const logCard = Card({
-                background: 'var(--background)',
-                width: '100%',
-                radius: '20px',
-                padding: '20px 30px',
-                margin: '0px 0px 40px 0px',
-                parent: planContainer
-            });
-        
-            logCard.add();
-        
-            await Table({
-                heading: 'Logs',
-                headingMargin: '0px 0px 20px 0px',
-                fields: [
-                    {
-                        internalFieldName: 'Id',
-                        displayName: 'Id'
-                    },
-                    {
-                        internalFieldName: 'SessionId',
-                        displayName: 'SessionId'
-                    },
-                    {
-                        internalFieldName: 'Title',
-                        displayName: 'Type'
-                    },
-                    {
-                        internalFieldName: 'Created',
-                        displayName: 'Created'
-                    },
-                    {
-                        internalFieldName: 'Author',
-                        displayName: 'Author'
-                    }
-                ],
-                buttons: [],
-                buttonColor: App.get('prefersColorScheme') === 'dark' ? '#303336' : '#dee2e6',
-                showId: true,
-                addButton: false,
-                checkboxes: false,
-                formTitleField: 'Id',
-                order: [[0, 'desc']],
-                items: log,
-                editForm: LogForm,
-                editFormTitle: 'Log',
-                parent: logCard
-            });
-        
-            logLoadingIndicator.remove();
-        
-            const errorsLoadingIndicator = LoadingSpinner({
-                message: 'Loading errors',
-                type: 'robi',
-                parent: planContainer
-            });
-        
-            errorsLoadingIndicator.add();
-        
-            const errors = await Get({
-                list: 'Errors',
-                select: 'Id,Message,Error,Source,SessionId,Status,Created,Author/Title',
-                expand: 'Author/Id',
-                orderby: 'Id desc',
-                top: '25'
-            });
-        
-            const errorsCard = Card({
-                background: 'var(--background)',
-                width: '100%',
-                radius: '20px',
-                padding: '20px 30px',
-                margin: '0px 0px 40px 0px',
-                parent: planContainer
-            });
-        
-            errorsCard.add();
-        
-            await Table({
-                heading: 'Errors',
-                headingMargin: '0px 0px 20px 0px',
-                fields: [
-                    {
-                        internalFieldName: 'Id',
-                        displayName: 'Id'
-                    },
-                    {
-                        internalFieldName: 'SessionId',
-                        displayName: 'SessionId'
-                    },
-                    {
-                        internalFieldName: 'Created',
-                        displayName: 'Created'
-                    },
-                    {
-                        internalFieldName: 'Author',
-                        displayName: 'Author'
-                    }
-                ],
-                buttonColor: '#dee2e6',
-                showId: true,
-                addButton: false,
-                checkboxes: false,
-                formFooter: false,
-                formTitleField: 'Id',
-                order: [[0, 'desc']],
-                items: errors,
-                editForm: ErrorForm,
-                editFormTitle: 'Error',
-                parent: errorsCard
-            });
-        
-            errorsLoadingIndicator.remove();
             break;
         case 'Build':
             BuildInfo({
                 parent: planContainer
             });
-
-            const upgrade = UpgradeAppButton({
-                parent: planContainer
-            });
-
-            upgrade.add();
             break;
         case 'Preferences':
-            const themePreference = MyTheme({
+            Preferences({
                 parent: planContainer
             });
-
-            themePreference.add();
             break;
         case 'SharePoint':
-            if (Store.user().Role === 'Developer') {
-                DeveloperLinks({
-                    parent: planContainer
-                });
-            }
+            DeveloperLinks({
+                parent: planContainer
+            });
             break;
         default:
             Route('404');
@@ -521,167 +388,6 @@ export async function Settings({ parent, pathParts }) {
         //     margin: '0px 0px 0px 20px'
         // });
         // sendEmailButton.add();
-    }
-
-    // Actions Integrated Scripting Environment
-    async function actionsISE() {
-        planContainer.get().style.height = '100%';
-        planContainer.append(/*html*/ `
-            <div class='d-flex flex-column w-100' style='height: 100%; padding-bottom: 30px;'>
-                <div class='rs-box code-box alert w-100 mb-0 p-0' style='height: 40%; background: #1e1e1e; color: #d4d4d4;'>
-                <!-- CodeMirror injected here -->
-                </div>
-                <div class='output-box alert alert-robi-secondary w-100 mb-0' style='flex: 1;'></div>
-            </div>
-        `);
-
-        $('.rs-box').resizable({
-            handles: 's'
-        });
-
-        // CodeMirror
-        const path = 'App/src/Robi/Components';
-        const file = 'Settings.js';
-
-        const loading = LoadingSpinner({
-            message: `Loading <span style='font-weight: 300;'>${path}/${file}</span>`,
-            type: 'white',
-            classes: ['h-100', 'loading-file'],
-            parent:  planContainer.find('.code-box')
-        });
-
-        loading.add();
-
-        document.querySelector('.code-box').insertAdjacentHTML('beforeend', /*html*/ `
-            <textarea class='code-mirror-container robi-code-background h-100'></textarea>
-        `);
-
-        let shouldReload = false;
-
-        const editor = CodeMirror.fromTextArea(planContainer.find('.code-mirror-container'), {
-            mode: 'javascript',
-            indentUnit: 4,
-            lineNumbers: true,
-            autoCloseBrackets: true,
-            styleActiveLine: true,
-            styleActiveLine: false,
-            foldGutter: true,
-            matchBrackets: true,
-            gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-            keyword: {
-                "import": "special",
-                "export": "special",
-                "default": "special",
-                "await": "special",
-            }
-        });
-        editor.setSize(0, 0);
-        editor.setOption('extraKeys', {
-            'Tab': 'indentMore',
-            'Shift-Tab': 'indentLess',
-            'Ctrl-/'(cm) {
-                editor.toggleComment({
-                    // this prop makes sure comments retain indented code
-                    // https://github.com/codemirror/CodeMirror/issues/3765#issuecomment-171819763
-                    indent: true
-                });
-            },
-            async 'Ctrl-S'(cm) {
-                // TODO: only save file if changed
-                console.log('save file');
-
-                // Save file
-                await saveFile();
-
-                // Add changed message
-                const changedMessaage = planContainer.find('.changed-message');
-
-                if (!changedMessaage) {
-                    planContainer.find('.file-title-text').insertAdjacentHTML('beforeend', /*html*/ `
-                        <div class='changed-message' style='margin-left: 10px; color: seagreen'>CHANGED (will reload on close)</div>
-                    `);
-                }
-
-                // Set reload flag
-                shouldReload = true;
-
-            }
-        });
-
-        let fileValueRequest;
-        let requestDigest;
-
-        if (App.get('mode') === 'prod') {
-            const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
-
-            requestDigest = await GetRequestDigest();
-
-            fileValueRequest = await fetch(sourceSiteUrl, {
-                method: 'GET',
-                headers: {
-                    'binaryStringRequestBody': 'true',
-                    'Accept': 'application/json;odata=verbose;charset=utf-8',
-                    'X-RequestDigest': requestDigest
-                }
-            });
-
-        } else {
-            const devPath = path.replace('App/', '');
-            fileValueRequest = await fetch(`http://127.0.0.1:8080/${devPath}/${file}`);
-            await Wait(1000);
-        }
-
-        // Overriden on save
-        // FIXME: Doesn't work with app.js.
-        let value = await fileValueRequest.text();
-
-        // Always wait an extra 100ms for CodeMirror to settle.
-        // For some reason, gutter width's won't apply 
-        // correctly if the editor is modified too quickly.
-        setTimeout(() => {
-            // Remove loading message
-            loading.remove();
-
-            // Set codemirror
-            setEditor();
-        }, 100);
-
-        // FIXME: Remember initial codemirorr doc value
-        // compare this with current doc value
-        let docValue;
-
-        function setEditor() {
-            editor.setSize('100%', '100%');
-            editor.setOption('viewportMargin', Infinity);
-            editor.setOption('theme', 'vscode-dark');
-            editor.getDoc().setValue(value);
-            editor.focus();
-
-            docValue = editor.doc.getValue();
-
-            // Watch for changes
-            editor.on('change', event => {
-                if (docValue === editor.doc.getValue()) {
-                    console.log('unchanged');
-
-                    const dot = planContainer.find('.changed-dot');
-
-                    if (dot) {
-                        dot.remove();
-                    }
-                } else {
-                    console.log('changed');
-
-                    const dot = planContainer.find('.changed-dot');
-
-                    if (!dot) {
-                        // planContainer.find('.file-title').insertAdjacentHTML('beforeend', /*html*/ `
-                        //     <div class='changed-dot' style='margin-left: 15px; width: 8px; height: 8px; background: white; border-radius: 50%;'></div>
-                        // `);
-                    }
-                }
-            });
-        }
     }
 }
 // @END-File

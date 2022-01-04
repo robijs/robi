@@ -16,19 +16,23 @@ export async function DeveloperLinks(param) {
     const lists = App.lists();
 
     addSection({
-        title: 'SharePoint',
+        title: '',
         buttons: [
             {
-                value: 'Site Settings',
-                url: `${App.get('site')}/_layouts/15/settings.aspx`
+                value: `Add list`,
+                url: `${App.get('site')}/_layouts/15/addanapp.aspx`
             },
             {
-                value: `Site Contents`,
+                value: `Contents`,
                 url: `${App.get('site')}/_layouts/15/viewlsts.aspx`
             },
             {
-                value: `Add an app`,
-                url: `${App.get('site')}/_layouts/15/addanapp.aspx`
+                value: 'Permissions',
+                url: `${App.get('site')}/_layouts/15/user.aspx`
+            },
+            {
+                value: 'Settings',
+                url: `${App.get('site')}/_layouts/15/settings.aspx`
             }
         ]
     });
@@ -119,7 +123,7 @@ export async function DeveloperLinks(param) {
         const card = Card({
             title,
             width: '100%',
-            margin: '20px 0px 0px 0px',
+            margin: '0px 0px 20px 0px',
             parent
         });
 
