@@ -1,6 +1,5 @@
 import { Component } from '../Actions/Component.js'
 import { GenerateUUID } from '../Actions/GenerateUUID.js'
-import { App } from '../Core/App.js'
 
 // @START-File
 /**
@@ -21,7 +20,7 @@ export function ViewTools(param) {
     const component = Component({
         html: /*html*/ `
             <div class=''>
-                <button class="btn tools" type="button" id="${id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn tools" type="button" id="${id}" data-toggle="dropdown" data-offset="0,0" aria-haspopup="true" aria-expanded="false">
                     •••
                 </button>
                 <div class="dropdown-menu" aria-labelledby="${id}">
@@ -98,6 +97,7 @@ export function ViewTools(param) {
                 color: var(--primary);
                 font-size: 20px;
                 transition: transform 300ms ease;
+                width: 620px;
             }
 
             #id .scale-up {
@@ -105,7 +105,6 @@ export function ViewTools(param) {
             }
 
             #id .dropdown-menu {
-                left: -231.5px !important; /* (463: translate x value / 2) */
                 top: -45px !important;
                 background: transparent;
                 border-radius: 10px;
@@ -227,14 +226,7 @@ export function ViewTools(param) {
                 listener(event) {
                     event.target.classList.add('scale-up');
                 }
-            },
-            // {
-            //     selector: '#id .tools',
-            //     event: 'click',
-            //     listener(event) {
-            //         event.target.classList.add('scale-up');
-            //     }
-            // }
+            }
         ],
         onAdd() {
             $(`#${component.get().id}`).on('hidden.bs.dropdown', function () {

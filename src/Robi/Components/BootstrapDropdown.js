@@ -1,5 +1,6 @@
 import { Component } from '../Actions/Component.js'
 import { App } from '../Core/App.js'
+import { GenerateUUID } from '../Robi.js';
 
 // @START-File
 /**
@@ -12,16 +13,18 @@ export function BootstrapDropdown(param) {
         action, classes, label, description, parent, position, options, value, fieldMargin, padding, setWidthDelay, maxHeight, maxWidth, valueType, buttonStyle
     } = param;
 
+    const id = GenerateUUID();
+
     const component = Component({
         html: /*html*/ `
             <div class='form-field${classes ? ` ${classes.join(' ')}` : ''}'>
                 ${label ? /*html*/ `<label>${label}</label>` : ''}
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
                 <div class='dropdown'>
-                    <button class='btn dropdown-toggle' ${buttonStyle ? `style='${buttonStyle}'` : ''} type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                    <button class='btn dropdown-toggle' ${buttonStyle ? `style='${buttonStyle}'` : ''} type='button' id='${id}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                         ${value || `<span style='opacity: 0;'>Choose</span>`}
                     </button>
-                    <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                    <div class='dropdown-menu' aria-labelledby='${id}'>
                         <div class='scroll-container'>
                             ${buildDropdown(options)}
                         </div>
@@ -128,7 +131,7 @@ export function BootstrapDropdown(param) {
         } = dropdown;
 
         return /*html*/ `
-            <div class='dropdown-item' data-path='${path || ''}'>${label}</div>
+            <button type='button' class='dropdown-item' data-path='${path || ''}'>${label}</button>
         `;
     }
 
