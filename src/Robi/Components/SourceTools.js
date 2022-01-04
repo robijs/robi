@@ -36,14 +36,6 @@ export function SourceTools(param) {
                 padding: 0px 15px;
                 border-radius: 10px;
             }
-
-            #id .btn {
-                transition: background-color 250ms ease;
-            }
-
-            #id .btn:hover {
-                background-color: var(--buttonBackground);
-            }
         `,
         parent,
         position,

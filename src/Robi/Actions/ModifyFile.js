@@ -64,7 +64,6 @@ export async function ModifyFile(param) {
                 mode: 'javascript',
                 indentUnit: 4,
                 lineNumbers: true,
-                lineWrapping: true,
                 autoCloseBrackets: true,
                 styleActiveLine: true,
                 foldGutter: true,
@@ -75,8 +74,7 @@ export async function ModifyFile(param) {
                     "export": "special",
                     "default": "special",
                     "await": "special",
-                },
-                // extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
+                }
             });
             editor.foldCode(CodeMirror.Pos(0, 0));
             editor.setSize(0, 0);
@@ -113,9 +111,6 @@ export async function ModifyFile(param) {
                 'Alt-W'(cm) {
                     console.log('close');
                     modal.close();
-                },
-                'Ctrl-Q'(cm) {
-                    console.log('close file, check if saved');
                 }
             });
 
@@ -162,9 +157,8 @@ export async function ModifyFile(param) {
             let docValue;
 
             function setEditor() {
-                editor.setSize('auto', 'auto');
+                editor.setSize('100%', '100%');
                 editor.setOption('viewportMargin', Infinity);
-                // editor.setOption('theme', 'material-palenight');
                 editor.setOption('theme', 'vscode-dark');
                 editor.getDoc().setValue(value);
                 editor.focus();

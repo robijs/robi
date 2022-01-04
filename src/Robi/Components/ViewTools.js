@@ -20,7 +20,8 @@ export function ViewTools(param) {
     const component = Component({
         html: /*html*/ `
             <div class=''>
-                <button class="btn tools" type="button" id="${id}" data-toggle="dropdown" data-offset="0,0" aria-haspopup="true" aria-expanded="false">
+                <!-- data-offset = -620px (dropdown-menu width / 2) + 25px (button width / 2) -->
+                <button class="btn tools" type="button" id="${id}" data-toggle="dropdown" data-offset="-310px + 25px, -1px" aria-haspopup="true" aria-expanded="false">
                     •••
                 </button>
                 <div class="dropdown-menu" aria-labelledby="${id}">
@@ -96,8 +97,8 @@ export function ViewTools(param) {
                 cursor: pointer;
                 color: var(--primary);
                 font-size: 20px;
-                transition: transform 300ms ease;
-                width: 620px;
+                transition: transform 300ms ease, background-color 250ms ease;
+                padding: 6px 11.82px; /* sets button width to an even 50px */
             }
 
             #id .scale-up {
@@ -105,7 +106,6 @@ export function ViewTools(param) {
             }
 
             #id .dropdown-menu {
-                top: -45px !important;
                 background: transparent;
                 border-radius: 10px;
                 border: none;

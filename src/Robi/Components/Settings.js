@@ -525,30 +525,12 @@ export async function Settings({ parent, pathParts }) {
 
     // Actions Integrated Scripting Environment
     async function actionsISE() {
-        Style({
-            name: 'action-ise',
-            style: /*css*/ `
-                .code-box::-webkit-scrollbar-thumb {
-                    min-height: 40px;
-                }
-
-                .CodeMirror-vscrollbar::-webkit-scrollbar-thumb {
-                    min-height: 30px;
-                }
-
-                .CodeMirror-scrollbar-filler {
-                    background: #1e1e1e;
-                }
-            `
-        });
-        
         planContainer.get().style.height = '100%';
         planContainer.append(/*html*/ `
             <div class='d-flex flex-column w-100' style='height: 100%; padding-bottom: 30px;'>
-                <div class='rs-box alert w-100 mb-0' style='height: 40%; padding: 10px 10px 0px 10px; background: #1e1e1e; color: #d4d4d4;'>
-                    <div class='code-box alert w-100 mb-0' style='height: 100%; padding: 0px; background: #1e1e1e; color: #d4d4d4; overflow: overlay;'></div>
+                <div class='rs-box code-box alert w-100 mb-0 p-0' style='height: 40%; background: #1e1e1e; color: #d4d4d4;'>
+                <!-- CodeMirror injected here -->
                 </div>
-                <!-- <div class='rs-handle w-100' style='height: 10px; background: var(--primary); cursor: ns-resize;'></div> -->
                 <div class='output-box alert alert-robi-secondary w-100 mb-0' style='flex: 1;'></div>
             </div>
         `);
@@ -580,7 +562,6 @@ export async function Settings({ parent, pathParts }) {
             mode: 'javascript',
             indentUnit: 4,
             lineNumbers: true,
-            // lineWrapping: true,
             autoCloseBrackets: true,
             styleActiveLine: true,
             styleActiveLine: false,
@@ -592,10 +573,8 @@ export async function Settings({ parent, pathParts }) {
                 "export": "special",
                 "default": "special",
                 "await": "special",
-            },
-            // extraKeys: { "Ctrl-Q": function (cm) { cm.foldCode(cm.getCursor()); } },
+            }
         });
-        editor.foldCode(CodeMirror.Pos(0, 0));
         editor.setSize(0, 0);
         editor.setOption('extraKeys', {
             'Tab': 'indentMore',
@@ -674,7 +653,6 @@ export async function Settings({ parent, pathParts }) {
         function setEditor() {
             editor.setSize('100%', '100%');
             editor.setOption('viewportMargin', Infinity);
-            // editor.setOption('theme', 'material-palenight');
             editor.setOption('theme', 'vscode-dark');
             editor.getDoc().setValue(value);
             editor.focus();
