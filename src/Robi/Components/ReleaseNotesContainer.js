@@ -44,7 +44,7 @@ export async function ReleaseNotesContainer(param) {
         const alertInfo = Alert({
             text: 'None',
             type: 'robi-primary',
-            margin: '10px 0px 0px 0px',
+            // margin: '10px 0px 0px 0px',
             parent: releaseNotesCard
         });
 

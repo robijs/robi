@@ -42,6 +42,10 @@ export function SetTheme() {
     const hsl = HexToHSL(hex);
     const hsl5 = HSLDarker(hsl, 5);
     const hsl10 = HSLDarker(hsl, 10);
+    const background_HSL = HexToHSL(background);
+    const background_HSL_3 = HSLDarker(background_HSL, 3);
+    const background_HSL_5 = HSLDarker(background_HSL, 5);
+    const background_HSL_10 = HSLDarker(background_HSL, 10);
 
     // All Colors
     App.set('colors', colors);
@@ -75,6 +79,10 @@ export function SetTheme() {
             /* Theme Colors */
             :root {
                 --background: ${background};
+                --background-HSL: hsl(${background_HSL});
+                --background-HSL-3: hsl(${background_HSL_3});
+                --background-HSL-5: hsl(${background_HSL_5});
+                --background-HSL-10: hsl(${background_HSL_10});
                 --borderColor: ${borderColor};
                 --box-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? 40 : 10}%) 0px 0px 16px -2px;
                 --buttonBackground: ${buttonBackgroundColor};
@@ -82,10 +90,10 @@ export function SetTheme() {
                 --inputBackground: ${App.get('prefersColorScheme') === 'dark' ? background : secondary};
                 --primary: ${primary};
                 --primaryHex: ${hex};
-                --primaryHSL: hsl(${HexToHSL(primary)});
+                --primaryHSL: hsl(${hsl});
                 --primaryHSL-5: hsl(${hsl5});
                 --primaryHSL-10: hsl(${hsl10});
-                --primaryRGB: ${HexToRGB(primary)};
+                --primaryRGB: ${rgb};
                 --primary6b: ${primary + '6b'};
                 --primary19: ${primary + '19'}; 
                 --primary20: ${primary + '20'};

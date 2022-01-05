@@ -194,7 +194,7 @@ export async function ModifyFile(param) {
 
             $(modal.get()).on('hide.bs.modal', checkIfSaved);
 
-            function checkIfSaved(event) {
+            async function checkIfSaved(event) {
                 console.log('check if saved');
                 console.log('param:', param);
                 console.log('value:', value);
@@ -220,25 +220,26 @@ export async function ModifyFile(param) {
 
                         loading.add();
 
-                        // Wait 5 seconds to make sure changes to list.js are committed
-                        console.log('Wait 5s');
-                        setTimeout(() => {
-                            // Remove checkIfSaved before closing
-                            $(modal.get()).off('hide.bs.modal', checkIfSaved);
+                        // Wait 5 seconds to make sure changes are committed
+                        if (App.get('mode') === 'prod') {
+                            await Wait(5000);
+                        }
 
-                            // Remove dialog box
-                            $(modal.get()).on('hide.bs.modal', event => {
-                                Store.get('appcontainer').find('.dialog-container').remove();
-                            });
+                        // Remove checkIfSaved before closing
+                        $(modal.get()).off('hide.bs.modal', checkIfSaved);
 
-                            // Reload
-                            $(modal.get()).on('hidden.bs.modal', event => {
-                                location.reload(true);
-                            });
+                        // Remove dialog box
+                        $(modal.get()).on('hide.bs.modal', event => {
+                            Store.get('appcontainer').find('.dialog-container').remove();
+                        });
 
-                            // Close modal (DOM node will be destroyed)
-                            modal.close();
-                        }, 5000);
+                        // Reload
+                        $(modal.get()).on('hidden.bs.modal', event => {
+                            location.reload(true);
+                        });
+
+                        // Close modal (DOM node will be destroyed)
+                        modal.close();
                         return false;
                     } else {
                         return true;

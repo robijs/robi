@@ -9,12 +9,30 @@ import { App } from '../Core/App.js';
  */
 export function Card(param) {
     const {
-        title, fontSize, description, titleColor, titleWeight, titleBorder, titleBackground, background, padding, margin, minWidth, minHeight, maxWidth, maxHeight, parent, width, position, radius, action
+        action,
+        background,
+        classes,
+        description,
+        margin,
+        maxHeight,
+        maxWidth,
+        minHeight,
+        minWidth,
+        padding,
+        parent,
+        position,
+        radius,
+        title,
+        titleBackground,
+        titleBorder,
+        titleColor,
+        titleWeight,
+        width
     } = param;
 
     const component = Component({
         html: /*html*/ `
-            <div class='round-card'>
+            <div class='round-card ${classes ? classes.join(' ') : ''}'>
                 ${title ? /*html*/ `<div class='round-card-title'>${title}</div>` : ''}
                 ${description ? /*html*/ `<div class='mt-2 round-card-description'>${description}</div>` : ''}
             </div>
@@ -23,7 +41,7 @@ export function Card(param) {
             #id.round-card {
                 display: inline-flex;
                 flex-direction: column;
-                background: ${background || App.get('secondary')};
+                background: ${background ||'var(--secondary)'};
                 padding: ${padding || '20px'};
                 margin: ${margin || '0px'};
                 min-width: ${minWidth || 'initial'};
@@ -32,7 +50,6 @@ export function Card(param) {
                 max-height: ${maxHeight || 'initial'};
                 width: ${width || 'initial'};
                 border-radius: ${radius || '10px'};
-                /* border: ${App.get('defaultBorder')}; */
                 border: none;
                 cursor: ${action ? 'pointer' : 'initial'};
             }

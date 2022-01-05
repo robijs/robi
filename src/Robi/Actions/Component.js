@@ -90,6 +90,9 @@ export function Component(param) {
     }
 
     return {
+        addClass(name) {
+            this.get().classList.add(name);
+        },
         addEvent(param) {
             /** Register event */
             events.push(param);
@@ -194,6 +197,9 @@ export function Component(param) {
                     node.remove();
                 }
             }
+        },
+        removeClass(name) {
+            this.get().classList.remove(name);
         },
         empty() {
             this.get().innerHTML = '';

@@ -29,6 +29,8 @@ import { BuildInfo } from './Components/BuildInfo.js'
 import { Button } from './Components/Button.js'
 import { Card } from './Components/Card.js'
 import { ChangeTheme } from './Components/ChangeTheme.js'
+import { ChartButtons } from './Components/ChartButtons.js'
+import { ChartJs } from './Components/ChartJs.js'
 import { Comments } from './Components/Comments.js'
 import { CommentsContainer } from './Components/CommentsContainer.js'
 import { Container } from './Components/Container.js'
@@ -95,7 +97,6 @@ import { SectionStepper } from './Components/SectionStepper.js'
 import { Settings } from './Components/Settings.js'
 import { Sidebar } from './Components/Sidebar.js'
 import { SingleLineTextField } from './Components/SingleLineTextField.js'
-import { SiteUsage } from './Components/SiteUsage.js'
 import { SiteUsageContainer } from './Components/SiteUsageContainer.js'
 import { Sortable } from './Components/Sortable.js'
 import { SourceTools } from './Components/SourceTools.js'
@@ -134,6 +135,8 @@ export {
     Button,
     Card,
     ChangeTheme,
+    ChartButtons,
+    ChartJs,
     Comments,
     CommentsContainer,
     Container,
@@ -200,7 +203,6 @@ export {
     Settings,
     Sidebar,
     SingleLineTextField,
-    SiteUsage,
     SiteUsageContainer,
     Sortable,
     SourceTools,

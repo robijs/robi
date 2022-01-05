@@ -745,6 +745,36 @@ export function AppContainer() {
                 padding: 10px;
                 display: flex;
             }
+
+            /* TODO: Set custom css variables for each element's width, reset on window resize */
+            /* Placeholder shimmer */
+            .shimmer {
+                position: relative;
+            }
+
+            .shimmer::after {
+                border-radius: 0px;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                content: ' ';
+                top: 0px;
+                left: 0px;
+                background: linear-gradient(to right, transparent 0%, var(--secondary) 25%, transparent 40%);
+                background-repeat: no-repeat;
+                background-size: 1024px 100%;
+                animation: shimmer 2s infinite linear;
+            }
+                
+            @-webkit-keyframes shimmer {
+                0% {
+                    background-position: -1024px 0;
+                }
+            
+                100% {
+                    background-position: 1024px 0; 
+                }
+            }
         `,
         position: 'afterbegin',
         events: []

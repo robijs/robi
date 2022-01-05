@@ -2,7 +2,7 @@ import { Get, SiteUsageModel } from '../Robi.js'
 
 (async () => {
     onmessage = async event => {
-        const {envMode, site, bannerColor} = event.data;
+        const { envMode, site, bannerColor, type, date } = event.data;
 
         const items = await Get({
             list: 'Log',
@@ -75,41 +75,33 @@ import { Get, SiteUsageModel } from '../Robi.js'
         }
     
         /** Model Site Usage */
-        const model = SiteUsageModel({
-            visits: items
+        const chartData = SiteUsageModel({
+            type,
+            date,
+            items
         });
 
-        const background = bannerColor;
-
         postMessage({
-            stats_1: [
+            topBannerData: [
                 {
                     label: 'Total Page Views',
-                    value: items.length,
-                    background
+                    value: items.length
                 },
                 {
                     label: 'Unique Page Views',
-                    value: pages.length,
-                    background
+                    value: pages.length
                 },
                 {
-                    label: 'Unique Visitors',
-                    value: visitors.length,
-                    background
+                    label: 'Unique Users', // NOTE: Same as Active users, making it redundant
+                    value: visitors.length
                 },
                 {
                     label: 'Unique Roles',
-                    value: roles.length,
-                    background
-                },
-                {
-                    label: 'Monthly Active Users',
-                    value: visitors.length,
-                    background
+                    value: roles.length
                 }
             ],
-            stats_2: [
+            bottomBannerData: [
+                // FIXME: how to calculate?
                 // {
                 //     label: 'Average Visit Length',
                 //     value: '00:00:00',
@@ -117,28 +109,24 @@ import { Get, SiteUsageModel } from '../Robi.js'
                 // },
                 {
                     label: 'Most Popular Page',
-                    value: mostPopularPage,
-                    background
+                    value: mostPopularPage
                 },
                 {
                     label: 'Most Active Role',
-                    value: mostPopularRole,
-                    background
+                    value: mostPopularRole
                 },
                 {
                     label: 'Most Active Visitor',
                     value: formatName(visitors[0]),
-                    description: 'Developer',
-                    background
+                    description: '' // TODO: Display user's role
                 },
                 {
-                    label: 'Last Visit',
+                    label: 'Last used',
                     value: new Date(items[0].Created).toLocaleDateString() + ' ' + new Date(items[0].Created).toLocaleTimeString('default', { timeStyle: 'short', hour12: false }),
-                    description: formatName(items[0].Author.Title),
-                    background
+                    description: formatName(items[0].Author.Title)
                 }
             ],
-            model
+            chartData
         });
     }
 
