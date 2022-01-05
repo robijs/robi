@@ -10,6 +10,7 @@ import Test from './Routes/Test/Test.js'
 import SortTables from './Routes/SortTables/SortTables.js'
 import LookupField from './Routes/LookupField/LookupField.js'
 import SelectIcon from './Routes/SelectIcon/SelectIcon.js'
+import DataTable from './Routes/DataTable/DataTable.js'
 // @END-IMPORTS
 
 // @START
@@ -31,11 +32,11 @@ Start({
         {
             path: 'SortTables',
             title: 'Sort Tables',
-            icon: 'bs-card-checklist',
+            icon: 'bs-activity',
             go: SortTables
         }
         // @END-SortTables
-        , // @ROUTE
+        , // @ROUTE        
         // @START-LookupField
         {
             path: 'LookupField',
@@ -44,7 +45,7 @@ Start({
             go: LookupField
         }
         // @END-LookupField
-        , // @ROUTE
+        , // @ROUTE        
         // @START-SelectIcon
         {
             path: 'SelectIcon',
@@ -53,6 +54,15 @@ Start({
             go: SelectIcon
         }
         // @END-SelectIcon
+        , // @ROUTE
+        // @START-DataTable
+        {
+            path: 'DataTable',
+            title: 'Data Table',
+            icon: 'bs-table',
+            go: DataTable
+        }
+        // @END-DataTable
         // @END-ROUTES
     ],
     settings: {

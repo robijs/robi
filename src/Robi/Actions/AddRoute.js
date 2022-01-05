@@ -1,6 +1,7 @@
 import { Modal } from '../Components/Modal.js'
 import { BootstrapButton } from '../Components/BootstrapButton.js'
 import { BootstrapDropdown } from '../Components/BootstrapDropdown.js'
+import { IconField } from '../Components/IconField.js'
 import { LoadingSpinner } from '../Components/LoadingSpinner.js'
 import { Alert } from '../Components/Alert.js'
 import { SingleLineTextField } from '../Components/SingleLineTextField.js'
@@ -73,33 +74,9 @@ export async function AddRoute(event) {
             routePath.add();
 
             // Route icon
-            const routeIcon = BootstrapDropdown({
-                label: 'Icon',
-                parent: modalBody, 
-                maxHeight: '150px',
-                // maxWidth: '100px',
-                valueType: 'html',
-                value: /*html*/ `
-                    <div class='d-flex justify-content-center w-100' data-target='true'>
-                        <svg class='icon' style='font-size: 18px; fill: var(--primary);'>
-                            <use href='#icon-bs-circle-fill'></use>
-                        </svg>
-                    </div>
-                `,
-                options: Store.get('svgdefs').getIcons().map(icon => {
-                    return {
-                        label: /*html*/ `
-                            <div class='d-flex justify-content-center w-100' data-target='true'>
-                                <svg class='icon' style='font-size: 18px; fill: var(--primary);'>
-                                    <use href='#${icon}'></use>
-                                </svg>
-                            </div>
-                        `
-                    }
-                }),
-                action(event) {
-                    canEnable();
-                }
+            const routeIcon = IconField({
+                parent: modalBody,
+                icons: Store.get('svgdefs').getIcons()
             });
 
             routeIcon.add();
@@ -180,7 +157,6 @@ export async function AddRoute(event) {
                         // Set routes
                         const routes = content.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
                         const ordered = routes[1].split(', // @ROUTE');
-                        const icon = routeIcon.value().querySelector('use').href.baseVal.replace('#icon-', '');
                         // FIXME: replace hard coded spaces (4 === 1 tab) with variable that includes 4 space characters
                         // TODO: Extract to template
                         const newRoute = [
@@ -189,7 +165,7 @@ export async function AddRoute(event) {
                             `        {`,
                             `            path: '${routePath.value()}',`,
                             `            title: '${routeTitle.value()}',`,
-                            `            icon: '${icon}',`,
+                            `            icon: '${routeIcon.value()}',`,
                             `            go: ${routePath.value()}`,
                             `        }`,
                             `        // @END-${routePath.value()}`,

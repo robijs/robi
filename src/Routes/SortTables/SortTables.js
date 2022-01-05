@@ -3,7 +3,7 @@ import { Table, Title, BootstrapButton, Container } from '../../Robi/RobiUI.js'
 export default async function SortTables3({ parent }) {
     // View title
     const routeTitle = Title({
-        title: /* @START-Title */'Sort Tables'/* @END-Title */,
+        title: /* @START-Title */'null'/* @END-Title */,
         parent,
         date: new Date().toLocaleString('en-US', {
             dateStyle: 'full'

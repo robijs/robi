@@ -111,11 +111,13 @@ export async function ModifyRoutes(event) {
                         </div>
                     `,
                     options: Store.get('svgdefs').getIcons().map(icon => {
+                        const { id } = icon;
+
                         return {
                             label: /*html*/ `
                                 <div class='d-flex justify-content-center w-100' data-target='true'>
                                     <svg class='icon' style='font-size: 18px; fill: var(--primary);'>
-                                        <use href='#${icon}'></use>
+                                        <use href='#${id}'></use>
                                     </svg>
                                 </div>
                             `

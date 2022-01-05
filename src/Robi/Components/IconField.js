@@ -16,54 +16,88 @@ import { HTML } from '../Actions/HTML.js'
  */
 export function IconField(param) {
     const {
+        classes,
+        label,
+        description,
         parent,
         position,
+        size, // must be in px
+        value,
         icons
     } = param;
 
     const component = Component({
         html: /*html*/ `
-            <div class='icon-field'>
-                <div class='d-flex flex-wrap'>
-                    ${
-                        HTML({
-                            items: icons,
-                            each(icon) {
-                                return /*html*/ `
-                                    <div class='icon-container d-flex justify-content-center' data-target='true'>
-                                        <svg class='icon' style='font-size: 32px; fill: var(--primary);'>
-                                            <use href='#${icon}'></use>
-                                        </svg>
-                                    </div>
-                                `
-                            }
-                        })
-                    }
-                </div>
+            <!-- <div class='icon-field d-flex flex-wrap ${classes ? classes.join(' ') : ''}'> -->
+            <div class='icon-field ${classes ? classes.join(' ') : ''}'>
+                ${label ? /*html*/ `<label class='form-label'>${label}</label>` : ''}
+                ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
+                ${
+                    HTML({
+                        items: icons,
+                        each(icon) {
+                            const { id, fill} = icon;
+
+                            return /*html*/ `
+                                <div class='icon-container d-flex justify-content-center ${`icon-${value}` === id ? 'selected' : ''}' data-icon='${id.replace('icon-', '')}'>
+                                    <svg class='icon' style='font-size: ${size || '32'}px; fill: ${fill || 'var(--primary)'};'>
+                                        <use href='#${id}'></use>
+                                    </svg>
+                                </div>
+                            `
+                        }
+                    })
+                }
             </div>
         `,
         style: /*css*/ `
+            #id {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 72px); /* passed in size or 22 plus (15 * 2 for padding) */
+                justify-content: space-around;
+            }
+
+            #id label {
+                font-weight: 500;
+            }
+
+            #id .form-field-description {
+                font-size: 14px;
+                margin-bottom:  0.5rem;
+            }
+
             #id .icon-container {
+                transform: scale(.7);
                 cursor: pointer;
                 padding: 20px;
-                margin: 10px;
+                /* margin: 0px 20px 20px 0px; */
                 background-color: var(--background);
                 border-radius: 15px;
-                transition: background-color 150ms ease;
+                transition: background-color 150ms ease, transform 150ms ease;
+            }
+
+            #id .icon-container.selected {
+                box-shadow: 0px 0px 0px 3px var(--primary);
+                background-color: var(--primary20); 
             }
 
             #id .icon-container:hover {
-                background: var(--primary20);
+                background-color: var(--primary20);
+                transform: scale(1);
             }
         `,
         parent,
         position,
         events: [
             {
-                selector: '#id',
+                selector: '#id .icon-container',
                 event: 'click',
                 listener(event) {
-                    console.log(`${component.get().id} clicked`);
+                    // Deselect all 
+                    component.findAll('.icon-container').forEach(node => node.classList.remove('selected'));
+
+                    // Select clicked
+                    this.classList.add('selected');
                 }
             }
         ],
@@ -71,6 +105,14 @@ export function IconField(param) {
 
         }
     });
+
+    component.value = (value) => {
+        if (value !== undefined) {
+
+        } else {
+            return component.find('.icon-container.selected').dataset.icon;
+        }
+    }
 
     return component;
 }

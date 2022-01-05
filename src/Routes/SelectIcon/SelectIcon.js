@@ -4,7 +4,7 @@
 // Otherwise, changes made with GUI tools will not render properly.
 
 import { Store } from '../../Robi/Robi.js'
-import { IconField, Title } from '../../Robi/RobiUI.js'
+import { BootstrapButton, IconField, Title } from '../../Robi/RobiUI.js'
 
 // @START-SelectIcon
 export default async function SelectIcon(param) {
@@ -21,8 +21,21 @@ export default async function SelectIcon(param) {
     routeTitle.add();
     // @END-routeTitle
 
+    const btn = BootstrapButton({
+        type: 'robi',
+        value: 'Value',
+        classes: ['mb-4', 'w-100'],
+        parent,
+        action() {
+            console.log(iconField.value());
+        }
+    });
+
+    btn.add();
+
     const iconField = IconField({
         parent,
+        value: 'blocked',
         icons: Store.get('svgdefs').getIcons()
     });
 
