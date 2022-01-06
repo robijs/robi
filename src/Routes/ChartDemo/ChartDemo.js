@@ -22,7 +22,9 @@ export default async function ChartDemo(param) {
     // @END-routeTitle
 
     parent.append(/*html*/ `
-        <canvas class="myChart"></canvas>
+        <div class='position-relative h-75 w-100 mt-4'>
+            <canvas class="myChart"></canvas>
+        </div>
     `);
 
     const ctx = document.querySelector('.myChart').getContext('2d');

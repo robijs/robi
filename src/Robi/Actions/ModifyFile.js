@@ -16,7 +16,7 @@ export async function ModifyFile(param) {
 
     const modal = Modal({
         title: /*html*/ `
-            <div class='file-title'>
+            <div class='file-title' style='user-select: none;'>
                 <span class='file-title-text d-flex'>
                     <span class='file-icon-container'>
                         <svg class='icon file-icon file-icon-js'>

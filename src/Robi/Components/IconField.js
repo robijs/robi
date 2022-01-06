@@ -77,7 +77,7 @@ export function IconField(param) {
             }
 
             #id .icon-container.selected {
-                box-shadow: 0px 0px 0px 3px var(--primary);
+                box-shadow: 0px 0px 0px 2px var(--primary);
                 background-color: var(--primary20); 
             }
 

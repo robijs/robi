@@ -47,10 +47,10 @@ export default async function SortTables3({ parent }) {
     });
 
     sortBtn.add();
-
-    // @START-Table:SLOT
+    
+    // @START-Table:Number
     await Table({
-        list: 'SLOT',
+        list: 'Number',
         parent,
         advancedSearch: true,
         toolbar: [
@@ -62,7 +62,7 @@ export default async function SortTables3({ parent }) {
             }
         ]
     });
-    // @END-Table:SLOT
+    // @END-Table:Number
     
     // @START-Table:MLOT
     await Table({
@@ -80,9 +80,9 @@ export default async function SortTables3({ parent }) {
     });
     // @END-Table:MLOT
 
-    // @START-Table:Number
+    // @START-Table:SLOT
     await Table({
-        list: 'Number',
+        list: 'SLOT',
         parent,
         advancedSearch: true,
         toolbar: [
@@ -94,7 +94,7 @@ export default async function SortTables3({ parent }) {
             }
         ]
     });
-    // @END-Table:Number
+    // @END-Table:SLOT
 
     // @START-Table:Choice
     await Table({

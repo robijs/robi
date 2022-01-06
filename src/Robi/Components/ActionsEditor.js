@@ -60,7 +60,7 @@ export async function ActionsEditor({ parent }) {
     });
     editor.setSize(0, 0);
     editor.setOption('extraKeys', {
-        "Ctrl-Space": "autocomplete",
+        // "Ctrl-Space": "autocomplete",
         'Tab': 'indentMore',
         'Shift-Tab': 'indentLess',
         'Ctrl-/'(cm) {
@@ -146,12 +146,12 @@ export async function ActionsEditor({ parent }) {
         "222": "quote"
     }
       
-    editor.on("keyup", function (cm, event) {
-        if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
-            !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/ 
-          CodeMirror.commands.autocomplete(cm, null, {completeSingle: false});
-        }
-    });
+    // editor.on("keyup", function (cm, event) {
+    //     if (!cm.state.completionActive && /*Enables keyboard navigation in autocomplete list*/
+    //         !ExcludedIntelliSenseTriggerKeys[(event.keyCode || event.which).toString()]) {        /*Enter - do not open autocomplete list just after item has been selected in it*/ 
+    //       CodeMirror.commands.autocomplete(cm, null, {completeSingle: false});
+    //     }
+    // });
 
     // END 
 
