@@ -20,36 +20,6 @@ export function SiteUsageModel({ items, type, date }) {
             return buildYear();
     }
 
-    /** Today */
-
-
-    /** Week */
-
-
-    /** Month */
-
-    /** Year */
-    // const firstOfYear = startOfYear();
-
-    // function startOfYear(date) {
-    //     const now = date ? new Date(date) : new Date();
-
-    //     now.setHours(0, 0, 0, 0);
-    //     now.setDate(1);
-    //     now.setMonth(0);
-
-    //     return now;
-    // }
-
-    // const itemsCreatedThisYear = items.filter(item => {
-    //     const created = new Date(item.Created);
-    //     created.setHours(0, 0, 0, 0);
-
-    //     if (created >= firstOfYear) {
-    //         return item;
-    //     }
-    // });
-
     /** Chart - Today */
     function buildToday() {
         const itemsCreatedToday = items.filter(createdToday);
@@ -86,11 +56,6 @@ export function SiteUsageModel({ items, type, date }) {
             const hourEnd = new Date();
             hourEnd.setHours(this + 1, 0, 0, 0);
     
-            // console.log(this);
-            // console.log(created);
-            // console.log(hourBegin);
-            // console.log(hourEnd);
-            // console.log('---');
             if (created >= hourBegin && created < hourEnd) {
                 return item;
             }

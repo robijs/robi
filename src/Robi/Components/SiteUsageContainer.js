@@ -53,7 +53,7 @@ export async function SiteUsageContainer({ parent }) {
         background: 'var(--background)',
         radius: '10px',
         radius: '10px',
-        // minHeight: '300px',
+        transition: 'background-color 300ms ease',
         margin: '10px 0px',
         parent: chartCard
     });
@@ -109,7 +109,7 @@ export async function SiteUsageContainer({ parent }) {
     bottomBanner.add();
 
     if (App.get('mode') === 'dev') {
-        await Wait(1000);
+        await Wait(2000);
     }
 
     // EACH BUTTON PRESS WILL RUN CODE BELOW HERE
@@ -149,6 +149,7 @@ export async function SiteUsageContainer({ parent }) {
 
         // Remove shimmmer
         chartCard.removeClass('shimmer');
+        middleContainer.get().style.background = 'var(--secondary)';
     };
 
     // TODO: This should live in Chart component

@@ -40,6 +40,7 @@ export function Container(param) {
         overflowY,
         userSelect,
         layoutPosition,
+        transition,
         top,
         bottom,
         left,
@@ -81,7 +82,7 @@ export function Container(param) {
                 display: ${display || 'flex'};
                 /** @todo is this the best method? */
                 ${background ?
-                `background: ${background}` :
+                `background: ${background};` :
                 ''}
                 ${overflow ?
                 `overflow: ${overflow}` :
@@ -110,6 +111,7 @@ export function Container(param) {
                 ${right ?
                 `right: ${right};` :
                 ''}
+                ${transition ? `transition: ${transition};` : ''}
             }
         `,
         parent,
