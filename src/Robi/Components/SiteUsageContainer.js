@@ -71,9 +71,7 @@ export async function SiteUsageContainer({ parent }) {
 
     // Chart
     const chart = ChartJs({
-        parent: chartContainer,
-        margin: '10px 0px',
-        padding: '0px'
+        parent: chartContainer
     });
 
     chart.add();
@@ -111,7 +109,7 @@ export async function SiteUsageContainer({ parent }) {
     bottomBanner.add();
 
     if (App.get('mode') === 'dev') {
-        await Wait(2000);
+        await Wait(1000);
     }
 
     // EACH BUTTON PRESS WILL RUN CODE BELOW HERE
@@ -144,8 +142,7 @@ export async function SiteUsageContainer({ parent }) {
         topBanner.update(topBannerData);
         bottomBanner.update(bottomBannerData);
 
-        addChart({
-            card: chart,
+        setChart({
             type: 'today',
             data: chartData
         });
@@ -156,10 +153,9 @@ export async function SiteUsageContainer({ parent }) {
 
     // TODO: This should live in Chart component
     // Add chart
-    function addChart(param) {
-        const { card, type, data } = param;
+    function setChart(param) {
+        const { type, data } = param;
 
-        const chart = card.getChart();
         const max0 = Math.max(...data[0].data.map(set => set.length)); // Largest number from dataset
         const max1 = 0;
         const max = (Math.ceil((max0 + max1) / 10) || 1) * 10; // Round sum of max numbers to the nearest multiple of 10 
@@ -231,24 +227,9 @@ export async function SiteUsageContainer({ parent }) {
                 break;
         }
 
-        card.setTitle(text);
+        chart.setTitle(text);
 
-        console.log({
-            labels,
-            datasets: data.map((set, index) => {
-                return {
-                    data: set.data.map(item => item.length),
-                    label: set.label,
-                    backgroundColor: App.get('primaryColor'),
-                    hoverBackgroundColor: App.get('primaryColor'),
-                    borderWidth: 0,
-                    borderRadius: 4
-                };
-            })
-        });
-
-        return new Chart(chart, {
-            type: 'bar',
+        chart.setChart({
             data: {
                 labels,
                 datasets: data.map((set, index) => {
@@ -262,45 +243,7 @@ export async function SiteUsageContainer({ parent }) {
                     };
                 })
             },
-            options: {
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            borderColor: App.get('primaryColor'),
-                            display: false
-                        },
-                        stacked: true,
-                        ticks: {
-                            font: {
-                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
-                            },
-                            color: App.get('defaultColor'),
-                            beginAtZero: true
-                        }
-                    },
-                    y: {
-                        grid: {
-                            borderColor: App.get('primaryColor'),
-                            display: false
-                        },
-                        stacked: true,
-                        ticks: {
-                            font: {
-                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
-                            },
-                            color: App.get('defaultColor'),
-                            min: 0,
-                            stepSize
-                        }
-                    }
-                }
-            }
+            stepSize
         });
     }
 }

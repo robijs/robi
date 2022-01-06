@@ -1,3 +1,4 @@
+import { App } from '../Core/App.js'
 import { Component } from '../Actions/Component.js'
 
 // @START-File
@@ -40,6 +41,8 @@ export function ChartJs(param) {
                 font-size: 18px;
                 font-weight: 700;
                 text-align: center;
+                transition: opacity 500ms ease;
+                opacity: 0;
             }
         `,
         parent,
@@ -49,10 +52,62 @@ export function ChartJs(param) {
         ]
     });
 
+    // TODO: This should live in Chart component
+    // Add chart
+    component.setChart = (param) => {
+        const { data, stepSize } = param;
+
+        return new Chart(component.getChart(), {
+            type: 'bar',
+            data,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            borderColor: App.get('primaryColor'),
+                            display: false
+                        },
+                        stacked: true,
+                        ticks: {
+                            font: {
+                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+                            },
+                            color: App.get('defaultColor'),
+                            beginAtZero: true
+                        }
+                    },
+                    y: {
+                        grid: {
+                            borderColor: App.get('primaryColor'),
+                            display: false
+                        },
+                        stacked: true,
+                        ticks: {
+                            font: {
+                                family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+                            },
+                            color: App.get('defaultColor'),
+                            min: 0,
+                            stepSize
+                        }
+                    }
+                }
+            }
+        });
+    }
+
     component.setTitle = (text) => {
         const title = component.find('.chart-title');
 
+        // title.style.opacity = '0';
         title.innerText = text;
+        title.style.opacity = '1';
     };
 
     component.clearChart = () => {

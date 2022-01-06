@@ -2,7 +2,19 @@ import { Get, SiteUsageModel } from '../Robi.js'
 
 (async () => {
     onmessage = async event => {
-        const { envMode, site, bannerColor, type, date } = event.data;
+        const { envMode, site, type, date } = event.data;
+
+        let filter;
+
+        switch (type) {
+            case 'today':
+                const today = new Date().toISOString().split('T')[0];
+
+                // TODO: Translate this API to work with json-server
+                // TODO: Test on SharePoint
+                filter = `Created ge datetime'${today}T00:00:00Z' and Created lt datetime'${today}T23:59:59Z'`;
+                break;
+        }
 
         const items = await Get({
             list: 'Log',
