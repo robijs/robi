@@ -6,8 +6,9 @@
 import { Start } from './Robi/Robi.js'
 import lists from './lists.js'
 // @START-IMPORTS
-import Test from './Routes/Test/Test.js'
+import Demo from './Routes/Demo/Demo.js'
 import SortTables from './Routes/SortTables/SortTables.js'
+import Test from './Routes/Test/Test.js'
 import LookupField from './Routes/LookupField/LookupField.js'
 import SelectIcon from './Routes/SelectIcon/SelectIcon.js'
 import ChartDemo from './Routes/ChartDemo/ChartDemo.js'
@@ -19,6 +20,24 @@ Start({
     // Routes are directly addressable. Ex: https://site#path.
     routes: [
         // @START-ROUTES        
+        // @START-Demo
+        {
+            path: 'Demo',
+            title: 'Demo',
+            icon: 'bs-journals',
+            go: Demo
+        }
+        // @END-Demo
+        , // @ROUTE        
+        // @START-SortTables
+        {
+            path: 'SortTables',
+            title: 'Sort Tables',
+            icon: 'bs-card-checklist',
+            go: SortTables
+        }
+        // @END-SortTables
+        , // @ROUTE        
         // @START-Test
         {
             path: 'Test',
@@ -27,15 +46,6 @@ Start({
             go: Test
         }
         // @END-Test
-        , // @ROUTE        
-        // @START-SortTables
-        {
-            path: 'SortTables',
-            title: 'Sort Tables',
-            icon: 'bs-table',
-            go: SortTables
-        }
-        // @END-SortTables
         , // @ROUTE        
         // @START-LookupField
         {

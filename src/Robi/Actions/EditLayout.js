@@ -69,12 +69,12 @@ export async function EditLayout({ order, path, file }) {
 
         const sourceRows = content.match(/\/\/ @START-Rows([\s\S]*?)\/\/ @END-Rows/);
         const currentOrder = sourceRows[1].split('// @Row');
-        const newOrder = order.map(index => currentOrder[index]).join('// @ROUTE');
+        const newOrder = order.map(index => currentOrder[index]).join('// @Row');
 
-        // console.log(sourceRows[1]);
-        // console.log(order);
-        // console.log(newOrder);
-        
+        console.log(sourceRows[1]);
+        console.log(order);
+        console.log(newOrder);
+
         updatedContent = updatedContent.replace(/\/\/ @START-Rows([\s\S]*?)\/\/ @END-Rows/, `// @START-Rows${newOrder}// @END-Rows`);
 
         console.log('OLD\n----------------------------------------\n', content);

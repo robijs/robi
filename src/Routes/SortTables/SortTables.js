@@ -1,6 +1,6 @@
 import { Table, Title, Row } from '../../Robi/RobiUI.js'
 
-export default async function SortTables3({ parent }) {
+export default async function SortTables({ parent }) {
     // View title
     const routeTitle = Title({
         title: /* @START-Title */'Sort Tables'/* @END-Title */,
@@ -14,6 +14,27 @@ export default async function SortTables3({ parent }) {
     routeTitle.add();
 
     // @START-Rows
+    Row(async (parent) => {
+        parent.append('<h1>Hello world</h1>');
+
+        parent.find('h1').addEventListener('click', () => alert('hello'));
+        
+        await Table({
+            list: 'SLOT',
+            parent,
+            advancedSearch: true,
+            toolbar: [
+                {
+                    label: 'All',
+                    filter(data) {
+                        return data;
+                    }
+                }
+            ]
+        });
+    });
+
+    // @Row
     Row(async (parent) => {
         await Table({
             list: 'MLOT',
@@ -29,8 +50,8 @@ export default async function SortTables3({ parent }) {
             ]
         });
     });
-
-    // @ROUTE
+    
+    // @Row
     Row(async (parent) => {
         await Table({
             list: 'Number',
@@ -47,24 +68,7 @@ export default async function SortTables3({ parent }) {
         });
     });
 
-    // @ROUTE
-    Row(async (parent) => {
-        await Table({
-            list: 'SLOT',
-            parent,
-            advancedSearch: true,
-            toolbar: [
-                {
-                    label: 'All',
-                    filter(data) {
-                        return data;
-                    }
-                }
-            ]
-        });
-    });
-
-    // @ROUTE
+    // @Row
     Row(async (parent) => {
         await Table({
             list: 'Choice',
@@ -80,5 +84,5 @@ export default async function SortTables3({ parent }) {
             ]
         });
     });
-    // @ROUTE// @ROUTE// @ROUTE// @ROUTE// @ROUTE// @ROUTE// @END-Rows
+    // @END-Rows
 }
