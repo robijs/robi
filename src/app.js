@@ -10,7 +10,6 @@ import Test from './Routes/Test/Test.js'
 import SortTables from './Routes/SortTables/SortTables.js'
 import LookupField from './Routes/LookupField/LookupField.js'
 import SelectIcon from './Routes/SelectIcon/SelectIcon.js'
-import DataTable from './Routes/DataTable/DataTable.js'
 import ChartDemo from './Routes/ChartDemo/ChartDemo.js'
 // @END-IMPORTS
 
@@ -55,15 +54,6 @@ Start({
             go: SelectIcon
         }
         // @END-SelectIcon
-        , // @ROUTE        
-        // @START-DataTable
-        {
-            path: 'DataTable',
-            title: 'Data Table',
-            icon: 'bs-table',
-            go: DataTable
-        }
-        // @END-DataTable
         , // @ROUTE        
         // @START-ChartDemo
         {

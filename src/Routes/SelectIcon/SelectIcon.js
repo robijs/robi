@@ -27,7 +27,7 @@ export default async function SelectIcon(param) {
         classes: ['mb-4', 'w-100'],
         parent,
         action() {
-            console.log(iconField.value());
+            alert(iconField.value());
         }
     });
 
