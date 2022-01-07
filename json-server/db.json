@@ -1,1 +1,98 @@
-{"Comments":[],"Errors":[],"Log":[],"Users":[],"Questions":[],"ReleaseNotes":[],"Roles":[{"Id":1,"Title":"Administrator"},{"Id":2,"Title":"Developer"},{"Id":3,"Title":"User"}],"Settings":[{"Id":1,"Key":"QuestionTypes","Value":"[{\"title\":\"General\",\"path\":\"General\"}]"}],"SLOT":[],"MLOT":[],"Number":[],"Choice":[]}
+{
+  "Comments": [],
+  "Errors": [],
+  "Log": [
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Fri, 07 Jan 2022 02:12:06 GMT",
+      "Modified": "Fri, 07 Jan 2022 02:12:06 GMT",
+      "Id": 1
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#Test\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36 Edg/96.0.1054.62",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Fri, 07 Jan 2022 02:13:12 GMT",
+      "Modified": "Fri, 07 Jan 2022 02:13:12 GMT",
+      "Id": 2
+    }
+  ],
+  "Users": [
+    {
+      "Title": "First Last",
+      "Email": "first.mi.last.ctr@mail.mil",
+      "LoginName": "0987654321@mil",
+      "Role": "Developer",
+      "SiteId": 1,
+      "Settings": "{\"searches\":{},\"actions\":{}}",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Fri, 07 Jan 2022 02:12:06 GMT",
+      "Modified": "Fri, 07 Jan 2022 02:12:06 GMT",
+      "Id": 1
+    }
+  ],
+  "Questions": [],
+  "ReleaseNotes": [],
+  "Roles": [
+    {
+      "Id": 1,
+      "Title": "Administrator"
+    },
+    {
+      "Id": 2,
+      "Title": "Developer"
+    },
+    {
+      "Id": 3,
+      "Title": "User"
+    }
+  ],
+  "Settings": [
+    {
+      "Id": 1,
+      "Key": "QuestionTypes",
+      "Value": "[{\"title\":\"General\",\"path\":\"General\"}]"
+    }
+  ],
+  "SLOT": [],
+  "MLOT": [],
+  "Number": [],
+  "Choice": []
+}

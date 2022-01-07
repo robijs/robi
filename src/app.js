@@ -83,11 +83,7 @@ Start({
         // defaultColor: text color
         // defaultRoute: route navigated to if no #path is present in URL, defaults to first path in routes array
         // name: app name (AUTOPOPULATED if created by Robi)
-        // primaryColor: set theme color, used by core components
-        // primaryColorRGB: same as above, but in rgb format, used by core components
         // questionTypes: define at least one questionType with title and path props
-        // secondaryColor: main container background color
-        // backgroundColor: nav background color
         // theme: ('Blue' | 'Brown' | 'Gray' | 'Green' | 'Gold' | 'Magenta' | 'Orange' | 'Pink' | 'Purple' | 'Red' | 'Slate' | 'Teal')
         // title: site title (AUTOPOPULATED if created with CREATE APP)
         // titleColor: core Title component text color
@@ -112,7 +108,6 @@ Start({
         // dev.user: local dev user props
         // dev.user.LoginName: placeholder account props for local dev
         // dev.testInstall: (true | false) - if true, will bring up install console and simulate app installation process 
-        // errorLogging: ('on' | 'off') - if on, sends errors to SharePoint list 'Errors' (list is created by default)
         // library: document library where src directory lives, defaults is 'App'
         // maincontainer: replace default maincontainer with your component (type function, typically imported from /Components/myComponent.js)
         // sidebar: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)

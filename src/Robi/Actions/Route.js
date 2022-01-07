@@ -107,12 +107,17 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     // Add source tools
     if (route.type !== 'system' && Store.user().Role === 'Developer') {
-        const srcTools = SourceTools({
+        const viewSource = SourceTools({
             route,
             parent: viewContainer
         });
 
-        srcTools.add();
+        viewSource.add();
+
+        Store.add({
+            name: 'viewsource',
+            component: viewSource
+        });
 
         const viewTools = ViewTools({
             route,
@@ -120,6 +125,11 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         });
 
         viewTools.add();
+
+        Store.add({
+            name: 'viewtools',
+            component: viewTools
+        });
     }
 
     // Set browswer history state and window title
