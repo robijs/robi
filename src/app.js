@@ -6,7 +6,6 @@
 import { Start } from './Robi/Robi.js'
 import lists from './lists.js'
 // @START-IMPORTS
-import Demo from './Routes/Demo/Demo.js'
 import SortTables from './Routes/SortTables/SortTables.js'
 import Test from './Routes/Test/Test.js'
 import LookupField from './Routes/LookupField/LookupField.js'
@@ -20,15 +19,6 @@ Start({
     // Routes are directly addressable. Ex: https://site#path.
     routes: [
         // @START-ROUTES        
-        // @START-Demo
-        {
-            path: 'Demo',
-            title: 'Demo',
-            icon: 'bs-journals',
-            go: Demo
-        }
-        // @END-Demo
-        , // @ROUTE        
         // @START-SortTables
         {
             path: 'SortTables',

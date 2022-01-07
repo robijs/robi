@@ -15,10 +15,6 @@ export default async function SortTables({ parent }) {
 
     // @START-Rows
     Row(async (parent) => {
-        parent.append('<h1>Hello world</h1>');
-
-        parent.find('h1').addEventListener('click', () => alert('hello'));
-        
         await Table({
             list: 'SLOT',
             parent,

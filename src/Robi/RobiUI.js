@@ -100,7 +100,6 @@ import { Settings } from './Components/Settings.js'
 import { Sidebar } from './Components/Sidebar.js'
 import { SingleLineTextField } from './Components/SingleLineTextField.js'
 import { SiteUsageContainer } from './Components/SiteUsageContainer.js'
-import { Sortable } from './Components/Sortable.js'
 import { StatusField } from './Components/StatusField.js'
 import { SvgDefs } from './Components/SvgDefs.js'
 import { Table } from './Components/Table.js'
@@ -207,7 +206,6 @@ export {
     Sidebar,
     SingleLineTextField,
     SiteUsageContainer,
-    Sortable,
     StatusField,
     SvgDefs,
     Table,
