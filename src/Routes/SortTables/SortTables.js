@@ -13,41 +13,6 @@ export default async function SortTables3({ parent }) {
 
     routeTitle.add();
 
-    // Enable sort
-    const sortCtr = Container({
-        justify: 'end',
-        parent
-    });
-
-    sortCtr.add();
-
-    let sortable = false;
-
-    const sortBtn = BootstrapButton({
-        type: 'robi',
-        value: 'Sort',
-        classes: ['mt-3'],
-        parent: sortCtr,
-        action(event) {
-            if (!sortable) {
-                event.target.innerText = 'Cancel';
-
-                $(`#${parent.get().id}`).sortable({ items: '.table-container' });
-                $(`#${parent.get().id} .table-container > *`).css({"pointer-events": "none", "user-select": "none"});
-
-                sortable = true;
-            } else {
-                event.target.innerText = 'Sort';
-                $(`#${parent.get().id}`).sortable('destroy');
-                $(`#${parent.get().id} .table-container > *`).css({"pointer-events": "auto", "user-select": "auto"});
-
-                sortable = false;
-            }
-        }
-    });
-
-    sortBtn.add();
-    
     // @START-Table:Number
     await Table({
         list: 'Number',

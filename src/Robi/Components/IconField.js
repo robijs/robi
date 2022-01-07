@@ -39,7 +39,7 @@ export function IconField(param) {
                             const { id, fill} = icon;
 
                             return /*html*/ `
-                                <div class='icon-container d-flex justify-content-center ${`icon-${value}` === id ? 'selected' : ''}' data-icon='${id.replace('icon-', '')}'>
+                                <div class='icon-container d-flex justify-content-center ${`icon-${value}` === id ? 'selected' : ''}' data-icon='${id.replace('icon-', '')}' title='${id.replace('icon-', '')}'>
                                     <svg class='icon' style='font-size: ${size || '32'}px; fill: ${fill || 'var(--primary)'};'>
                                         <use href='#${id}'></use>
                                     </svg>

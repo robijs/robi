@@ -1,5 +1,6 @@
 import { Component } from '../Actions/Component.js'
 import { GenerateUUID } from '../Actions/GenerateUUID.js'
+import { ModifyFile } from '../Actions/ModifyFile.js'
 
 // @START-File
 /**
@@ -11,6 +12,7 @@ import { GenerateUUID } from '../Actions/GenerateUUID.js'
  */
 export function ViewTools(param) {
     const {
+        route,
         parent,
         position
     } = param;
@@ -20,8 +22,8 @@ export function ViewTools(param) {
     const component = Component({
         html: /*html*/ `
             <div class=''>
-                <!-- data-offset = -620px (dropdown-menu width / 2) + 25px (button width / 2) -->
-                <button class="btn tools" type="button" id="${id}" data-toggle="dropdown" data-offset="-310px + 25px, -1px" aria-haspopup="true" aria-expanded="false">
+                <!-- data-offset = -758px (dropdown-menu width / 2) + 25px (button width / 2) -->
+                <button class="btn tools" type="button" id="${id}" data-toggle="dropdown" data-offset="-404px + 25px, -1px" aria-haspopup="true" aria-expanded="false">
                     •••
                 </button>
                 <div class="dropdown-menu" aria-labelledby="${id}">
@@ -50,7 +52,7 @@ export function ViewTools(param) {
                             <div style="font-weight: 700; margin-top: 10px;">Table</div>
                         </button>
                         <button class="dropdown-item" type="button">
-                            <div class='add-chart'>
+                            <div class='icon-container add-chart'>
                                 <svg class="icon" style='font-size: 48px;'>
                                     <use href="#icon-bs-bar-chart"></use>
                                 </svg>
@@ -58,23 +60,39 @@ export function ViewTools(param) {
                             <div style="font-weight: 700; margin-top: 10px;">Chart</div>
                         </button>
                         <button class="dropdown-item" type="button">
-                            <div class='add-text-block'>
+                            <div class='icon-container add-text-block'>
                                 <span style="font-size: 28; font-weight: 600; color: var(--primary);">Aa</span>
                             </div>
                             <div style="font-weight: 700; margin-top: 10px;">Text block</div>
                         </button>
-                        <!-- <div class="dropdown-divider"></div> -->
                         <button class="dropdown-item" type="button">
-                            <div class='add-button'>
+                            <div class='icon-container add-button'>
                                 <div class='btn btn-robi'>Button</div>
                             </div>
                             <div style="font-weight: 700; margin-top: 10px;">Light</div>
                         </button>
                         <button class="dropdown-item" type="button">
-                            <div class='add-button'>
+                            <div class='icon-container add-button'>
                                 <div class='btn btn-robi-reverse'>Button</div>
                             </div>
                             <div style="font-weight: 700; margin-top: 10px;">Dark</div>
+                        </button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" type="button">
+                            <div class='icon-container edit-layout'>
+                                <svg class="icon" style='font-size: 40px;'>
+                                    <use href="#icon-bs-grid-1x2"></use>
+                                </svg>
+                            </div>
+                            <div style="font-weight: 700; margin-top: 10px;">Edit Layout</div>
+                        </button>
+                        <button class="dropdown-item" type="button">
+                            <div class='icon-container edit-source'>
+                                <svg class="icon" style='font-size: 40px;'>
+                                    <use href="#icon-bs-code"></use>
+                                </svg>
+                            </div>
+                            <div style="font-weight: 700; margin-top: 10px;">Edit Source</div>
                         </button>
                     </div>
                 </div>
@@ -115,9 +133,9 @@ export function ViewTools(param) {
 
             #id .dropdown-divider {
                 height: unset;
-                margin: .5rem 0;
+                margin: .5rem;
                 overflow: hidden;
-                border-left: 1px solid var(--buttonBackground);
+                border-left: 2px solid var(--buttonBackground);
             }
 
             #id .dropdown-item {
@@ -145,7 +163,7 @@ export function ViewTools(param) {
             #id .add-table {
                 border-radius: 20px;
                 padding: 10px;
-                width: 100px;
+                width: 90px;
             }
 
             #id .add-table .filter .btn {
@@ -181,11 +199,10 @@ export function ViewTools(param) {
                 margin-right: 5px;
             }
 
-            /* Add Button */
-            #id .add-chart {
+            #id .icon-container {
                 border-radius: 20px;
                 padding: 10px;
-                width: 100px;
+                width: 90px;
                 flex: 1;
                 display: flex;
                 flex-direction: column;
@@ -193,28 +210,17 @@ export function ViewTools(param) {
                 justify-content: center;
             }
 
-            /* Add Text Block */
-            #id .add-text-block {
-                border-radius: 20px;
-                padding: 10px;
-                width: 100px;
-                flex: 1;
+            #${parent.get().id} .save-edit-layout {
+                z-index: 1000;
                 display: flex;
-                flex-direction: column;
                 align-items: center;
                 justify-content: center;
-            }
-
-            /* Add Button */
-            #id .add-button {
-                border-radius: 20px;
-                padding: 10px;
-                width: 100px;
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                height: 62px;
+                padding: 0px 15px;
+                border-radius: 10px;
             }
         `,
         parent,
@@ -225,6 +231,39 @@ export function ViewTools(param) {
                 event: 'click',
                 listener(event) {
                     event.target.classList.add('scale-up');
+                }
+            },
+            {
+                selector: '#id .edit-layout',
+                event: 'click',
+                listener(event) {
+                    parent.append(/*html*/ `
+                        <div class="save-edit-layout">
+                            <button type="button" class="btn">
+                                <span style="color: var(--primary); font-size: 15px; font-weight: 500;">Save</span>
+                            </button>
+                        </div>
+                    `);
+
+                    parent.find('.save-edit-layout').addEventListener('click', event => {
+                        $(`#${parent.get().id}`).sortable('destroy');
+                        $(`#${parent.get().id} .table-container > *`).css({"pointer-events": "auto", "user-select": "auto"});
+        
+                        parent.find('.save-edit-layout').remove();
+                    });
+
+                    $(`#${parent.get().id}`).sortable({ items: '.table-container' });
+                    $(`#${parent.get().id} .table-container > *`).css({"pointer-events": "none", "user-select": "none"});
+                }
+            },
+            {
+                selector: '#id .edit-source',
+                event: 'click',
+                listener(event) {
+                    ModifyFile({
+                        path: `App/src/Routes/${route.path}`,
+                        file: `${route.path}.js`
+                    });
                 }
             }
         ],

@@ -107,18 +107,6 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     // Add source tools
     if (route.type !== 'system' && Store.user().Role === 'Developer') {
-        const viewSource = SourceTools({
-            route,
-            parent: viewContainer
-        });
-
-        viewSource.add();
-
-        Store.add({
-            name: 'viewsource',
-            component: viewSource
-        });
-
         const viewTools = ViewTools({
             route,
             parent: viewContainer

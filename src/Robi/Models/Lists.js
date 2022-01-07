@@ -40,7 +40,7 @@ export function Lists() {
                     type: 'slot'
                 },
                 {
-                    name: "Files",
+                    name: "FileNames",
                     type: 'mlot'
                 }
             ]

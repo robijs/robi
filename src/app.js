@@ -51,7 +51,7 @@ Start({
         {
             path: 'SelectIcon',
             title: 'Select Icon',
-            icon: 'bs-circle-fill',
+            icon: 'bs-app',
             go: SelectIcon
         }
         // @END-SelectIcon

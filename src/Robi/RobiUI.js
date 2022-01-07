@@ -62,6 +62,7 @@ import { LoadingSpinner } from './Components/LoadingSpinner.js'
 import { LogForm } from './Components/LogForm.js'
 import { Logs } from './Components/Logs.js'
 import { LogsContainer } from './Components/LogsContainer.js'
+import { LookupField } from './Components/LookupField.js'
 import { MainContainer } from './Components/MainContainer.js'
 import { Missing } from './Components/Missing.js'
 import { Modal } from './Components/Modal.js'
@@ -168,6 +169,7 @@ export {
     LogForm,
     Logs,
     LogsContainer,
+    LookupField,
     MainContainer,
     Missing,
     Modal,

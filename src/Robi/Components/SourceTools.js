@@ -1,4 +1,5 @@
-import { App, Component, ModifyFile } from '../Robi.js'
+import { Component } from '../Actions/Component.js'
+import { ModifyFile } from '../Actions/ModifyFile.js'
 
 // @START-File
 /**
