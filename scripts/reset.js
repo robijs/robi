@@ -2,6 +2,8 @@ import { writeFile } from 'fs';
 import lists from '../src/lists.js'
 
 let db = {
+    "Actions": [],
+    "Searches": [],
     "Comments": [],
     "Errors": [],
     "Log": [],
@@ -26,13 +28,22 @@ let db = {
         {
             "Id": 1,
             "Key": "QuestionTypes",
-            // "Value": "[{\"title\":\"General\"]"
             "Value": JSON.stringify([
                 {
                     "title": "General",
                     "path": "General"
                 }
             ])
+        },
+        {
+            "Id": 2,
+            "Key": "Build",
+            "Value": "1.0.0"
+        },
+        {
+            "Id": 3,
+            "Key": "Version",
+            "Value": "1.0.0"
         }
     ]
 }

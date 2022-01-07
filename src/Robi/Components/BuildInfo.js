@@ -2,6 +2,7 @@ import { Get } from '../Actions/Get.js'
 import { Container } from './Container.js'
 import { LoadingSpinner } from './LoadingSpinner.js' 
 import { SingleLineTextField } from './SingleLineTextField.js'
+import { UpgradeAppButton } from './UpgradeAppButton.js'
 
 // @START-File
 /**
@@ -13,6 +14,7 @@ export async function BuildInfo({ parent }) {
         width: '100%',
         direction: 'column',
         padding: '0px 20px',
+        margin: '0px 0px 40px 0px',
         height: '100px',
         parent
     });

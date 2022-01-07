@@ -8,9 +8,30 @@ import { Wait } from '../Actions/Wait.js'
  * @param {*} param
  * @returns
  */
-export async function ActionsEditor({ parent }) {
+export async function ActionsEditor({ parent, files }) {
     parent.get().style.height = '100%';
     parent.append(/*html*/ `
+        <div class='mb-2 d-flex justify-content-center'>
+            
+            <div class='action-btn' onclick='alert("Save");'>
+                <svg class="icon" style='font-size: 20px;'>
+                    <use href="#icon-save"></use>
+                </svg>
+            </div>
+
+            <div class='action-btn' onclick='alert("Run");'>
+                <svg class="icon" style='font-size: 24px;'>
+                    <use href="#icon-play3"></use>
+                </svg>
+            </div>
+
+            <div class='action-btn' onclick='alert("Stop");'>
+                <svg class="icon" style='font-size: 32px;'>
+                    <use href="#icon-bs-stop-fill"></use>
+                </svg>
+            </div>
+
+        </div>
         <div class='d-flex flex-column w-100' style='height: 100%; padding-bottom: 30px;'>
             <div class='rs-box code-box alert w-100 mb-0 p-0' style='height: 50%; background: #1e1e1e; color: #d4d4d4;'>
             <!-- CodeMirror injected here -->
@@ -23,7 +44,7 @@ export async function ActionsEditor({ parent }) {
         handles: 's'
     });
 
-    // CodeMirror
+    // FIXME: Testing
     const path = 'App/src/Robi/Components';
     const file = 'Settings.js';
 
@@ -173,8 +194,7 @@ export async function ActionsEditor({ parent }) {
         });
 
     } else {
-        const devPath = path.replace('App/', '');
-        fileValueRequest = await fetch(`http://127.0.0.1:8080/${devPath}/${file}`);
+        fileValueRequest = await fetch(`http://127.0.0.1:8080/libraries/Actions/${files}`);
         await Wait(1000);
     }
 

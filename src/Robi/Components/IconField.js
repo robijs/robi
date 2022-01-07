@@ -54,7 +54,7 @@ export function IconField(param) {
             #id {
                 display: grid;
                 grid-template-columns: repeat(auto-fill, 72px); /* passed in size or 22 plus (15 * 2 for padding) */
-                justify-content: space-around;
+                justify-content: space-between;
             }
 
             #id label {

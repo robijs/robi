@@ -27,7 +27,7 @@ export async function Settings({ parent, pathParts }) {
 
     const devPaths = [
         'Build',
-        'Developer',
+        'App',
         'Logs',
         'SiteUsage',
         'SharePoint',
@@ -66,8 +66,8 @@ export async function Settings({ parent, pathParts }) {
                 path: 'Build'
             },
             {
-                name: 'Developer',
-                path: 'Developer'
+                name: 'App',
+                path: 'App'
             },
             {
                 name: 'Logs',
@@ -220,7 +220,7 @@ export async function Settings({ parent, pathParts }) {
                 parent: planContainer
             });
             break;
-        case 'Developer':
+        case 'App':
             const devConsole = DevConsole({
                 parent: planContainer
             });

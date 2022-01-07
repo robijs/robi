@@ -32,7 +32,7 @@ Start({
         {
             path: 'SortTables',
             title: 'Sort Tables',
-            icon: 'bs-activity',
+            icon: 'bs-table',
             go: SortTables
         }
         // @END-SortTables
@@ -91,7 +91,7 @@ Start({
         theme: /* @START-theme */'Purple'/* @END-theme */,
         title: /* @START-title */'Title'/* @END-title */,
         userDefaultRole: 'User',
-        userSettings: /* @START-userSettings */JSON.stringify({ searches: {}, actions: {} })/* @END-userSettings */,
+        userSettings: /* @START-userSettings */JSON.stringify({ searches: {}, actions: [ { Name: 'Create SLOTs', FileNames: 'CreateSLOTItems.js' }, { Name: 'Update MLOT', FileNames: 'UpdateMLOT.js' } ] })/* @END-userSettings */,
         // OPTIONAL PROPERTIES
         // -------------------
         // appcontainer: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
