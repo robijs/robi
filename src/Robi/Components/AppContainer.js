@@ -677,25 +677,24 @@ export function AppContainer() {
               
             }
 
-            /* FIXME: Should these styles live here, in Table.js or DataTable.js? */
-            .table-container {
-                /* transition: background-color 250ms ease, padding 250ms ease, transform 250ms ease, box-shadow 100ms ease 150ms; */
+            /* NOTE: Should these styles live here, in Table.js or DataTable.js? */
+            .robi-row {
                 transition: background-color 250ms ease, padding 250ms ease, margin 250ms ease, transform 250ms ease, box-shadow 250ms ease;
                 border-radius: 20px !important;
             }
 
-            .table-container.ui-sortable-handle {
+            .robi-row.ui-sortable-handle {
                 margin: 20px 0px !important;
                 padding: 20px !important;
                 background: var(--background) !important;
                 box-shadow: 0px 0px 0px 2px var(--primary) !important;
             }
 
-            .table-container.ui-sortable-handle > div {
+            .robi-row.ui-sortable-handle > div {
                 transform: scale(.95);
             }
 
-            .table-container.ui-sortable-helper {
+            .robi-row.ui-sortable-helper {
                 box-shadow: var(--sortShadow) !important;
                 transform: scale(1.05);
             }

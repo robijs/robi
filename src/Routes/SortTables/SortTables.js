@@ -1,4 +1,4 @@
-import { Table, Title, BootstrapButton, Container } from '../../Robi/RobiUI.js'
+import { Table, Title, Row } from '../../Robi/RobiUI.js'
 
 export default async function SortTables3({ parent }) {
     // View title
@@ -13,67 +13,72 @@ export default async function SortTables3({ parent }) {
 
     routeTitle.add();
 
-    // @START-Table:Number
-    await Table({
-        list: 'Number',
-        parent,
-        advancedSearch: true,
-        toolbar: [
-            {
-                label: 'All',
-                filter(data) {
-                    return data;
+    // @START-Rows
+    Row(async (parent) => {
+        await Table({
+            list: 'MLOT',
+            parent,
+            advancedSearch: true,
+            toolbar: [
+                {
+                    label: 'All',
+                    filter(data) {
+                        return data;
+                    }
                 }
-            }
-        ]
+            ]
+        });
     });
-    // @END-Table:Number
-    
-    // @START-Table:MLOT
-    await Table({
-        list: 'MLOT',
-        parent,
-        advancedSearch: true,
-        toolbar: [
-            {
-                label: 'All',
-                filter(data) {
-                    return data;
-                }
-            }
-        ]
-    });
-    // @END-Table:MLOT
 
-    // @START-Table:SLOT
-    await Table({
-        list: 'SLOT',
-        parent,
-        advancedSearch: true,
-        toolbar: [
-            {
-                label: 'All',
-                filter(data) {
-                    return data;
+    // @ROUTE
+    Row(async (parent) => {
+        await Table({
+            list: 'Number',
+            parent,
+            advancedSearch: true,
+            toolbar: [
+                {
+                    label: 'All',
+                    filter(data) {
+                        return data;
+                    }
                 }
-            }
-        ]
+            ]
+        });
     });
-    // @END-Table:SLOT
 
-    // @START-Table:Choice
-    await Table({
-        list: 'Choice',
-        parent,
-        advancedSearch: true,
-        toolbar: [
-            {
-                label: 'All',
-                filter(data) {
-                    return data;
+    // @ROUTE
+    Row(async (parent) => {
+        await Table({
+            list: 'SLOT',
+            parent,
+            advancedSearch: true,
+            toolbar: [
+                {
+                    label: 'All',
+                    filter(data) {
+                        return data;
+                    }
                 }
-            }
-        ]
+            ]
+        });
     });
-    // @END-Table:Choice
+
+    // @ROUTE
+    Row(async (parent) => {
+        await Table({
+            list: 'Choice',
+            parent,
+            advancedSearch: true,
+            toolbar: [
+                {
+                    label: 'All',
+                    filter(data) {
+                        return data;
+                    }
+                }
+            ]
+        });
+    });
+    // @ROUTE// @ROUTE// @ROUTE// @END-Rows
 }

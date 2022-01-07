@@ -1,6 +1,8 @@
 import { Component } from '../Actions/Component.js'
 import { GenerateUUID } from '../Actions/GenerateUUID.js'
+import { EditLayout } from '../Actions/EditLayout.js'
 import { ModifyFile } from '../Actions/ModifyFile.js'
+import { Store } from '../Robi.js';
 
 // @START-File
 /**
@@ -237,6 +239,9 @@ export function ViewTools(param) {
                 selector: '#id .edit-layout',
                 event: 'click',
                 listener(event) {
+                    // Hide tools
+                    component.find('.tools').classList.add('d-none');
+
                     parent.append(/*html*/ `
                         <div class="save-edit-layout">
                             <button type="button" class="btn">
@@ -246,14 +251,25 @@ export function ViewTools(param) {
                     `);
 
                     parent.find('.save-edit-layout').addEventListener('click', event => {
+                        // Edit file
+                        EditLayout({
+                            order: [...parent.findAll('.robi-row')].map(row => parseInt(row.dataset.row.split('-')[1])),
+                            path: `App/src/Routes/${route.path}`,
+                            file: `${route.path}.js`
+                        });
+
                         $(`#${parent.get().id}`).sortable('destroy');
-                        $(`#${parent.get().id} .table-container > *`).css({"pointer-events": "auto", "user-select": "auto"});
+                        $(`#${parent.get().id} .robi-row > *`).css({"pointer-events": "auto", "user-select": "auto"});
         
                         parent.find('.save-edit-layout').remove();
+
+                        // Show tools
+                        component.find('.tools').classList.remove('d-none');
                     });
 
-                    $(`#${parent.get().id}`).sortable({ items: '.table-container' });
-                    $(`#${parent.get().id} .table-container > *`).css({"pointer-events": "none", "user-select": "none"});
+                    // Turn on sort
+                    $(`#${parent.get().id}`).sortable({ items: '.robi-row' });
+                    $(`#${parent.get().id} .robi-row > *`).css({"pointer-events": "none", "user-select": "none"});
                 }
             },
             {

@@ -118,9 +118,7 @@ export async function AddRoute(event) {
                     await createRoute();
 
                     if (App.get('mode') === 'prod') {
-                        // Wait additional 2s
-                        console.log('Waiting...');
-                        await Wait(3000);
+                        await Wait(5000);
                         location.reload();
                     }
 

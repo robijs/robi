@@ -1,5 +1,4 @@
 import { Modal } from '../Components/Modal.js'
-import { BootstrapButton } from '../Components/BootstrapButton.js'
 import { LoadingSpinner } from '../Components/LoadingSpinner.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { App } from '../Core/App.js'

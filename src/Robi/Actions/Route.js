@@ -70,16 +70,12 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         component: sidebar
     });
 
-    // FIXME: Experimental.
-    // Trying to solve the problem where components are
-    // added to the current view after the user routes away from 
-    // the view the component is added from.
+    // NOTE:
+    // This component solves the problem where components are
+    // added to the current view after the user routes away
+    // before components instantiated within are added to the DOM.
     // 
-    // This only happens when a fetch request begins when 
-    // a view is first routed to but is aborted if the user
-    // routes away before the request can finish.
-    // Components created and added later are still 'running'
-    // in the background.
+    // Components created later are still 'running' in the background.
     // 
     // Most views use Store.get('maincontainer') as their parent.
     // This means components will still be added because they're
@@ -89,6 +85,11 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
     });
 
     viewContainer.add();
+
+    Store.add({
+        name: 'viewcontainer',
+        component: viewContainer
+    });
 
     // Check route path
     const pathAndQuery = path.split('?');

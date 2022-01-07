@@ -113,6 +113,11 @@ export function Container(param) {
                 ''}
                 ${transition ? `transition: ${transition};` : ''}
             }
+
+            #id.robi-row {
+                width: 100%;
+                display: block;
+            }
         `,
         parent,
         position,
