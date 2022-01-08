@@ -302,6 +302,25 @@ export function DataTable(param) {
                 background: ${buttonColor || 'var(--buttonBackground)'} !important;
             }
 
+            #id_wrapper .dataTables_filter label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                background: ${buttonColor || 'var(--buttonBackground)'} !important;
+                padding-left: 10px;
+            }
+
+            #id_wrapper .dataTables_filter label:focus-within {
+                border-color: transparent !important;
+                box-shadow: 0 0 0 3px var(--primary6b) !important;
+            }
+
+            #id_wrapper input[type='search'] {
+                border-color: transparent !important;
+                box-shadow: none !important;
+            }
+
             /** Footer */
             #id_wrapper .datatable-footer {
                 padding: 0px 15px;
@@ -624,6 +643,15 @@ export function DataTable(param) {
                     >
                 >
             `,
+            language: {
+                search: /*html*/ `
+                    <span class='filter-search-icon d-inline-flex justify-content-center align-items-center'>
+                        <svg class='icon' style='font-size: 16px; fill: var(--primary6b)'>
+                            <use href='#icon-bs-search'></use>
+                        </svg>
+                    </span>
+                `
+            },
             rowId,
             processing: true,
             // responsive: true,

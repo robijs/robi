@@ -26,7 +26,7 @@ export async function LogsContainer({ parent }) {
         select: 'Id,Title,Message,Module,StackTrace,SessionId,Created,Author/Title',
         expand: 'Author/Id',
         orderby: 'Id desc',
-        top: '25',
+        // top: '25',
     });
 
     const logCard = Card({
@@ -93,7 +93,7 @@ export async function LogsContainer({ parent }) {
         select: 'Id,Message,Error,Source,SessionId,Status,Created,Author/Title',
         expand: 'Author/Id',
         orderby: 'Id desc',
-        top: '25'
+        // top: '25'
     });
 
     const errorsCard = Card({
