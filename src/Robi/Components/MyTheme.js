@@ -1,10 +1,7 @@
 import { App } from '../Core/App.js'
 import { Component } from '../Actions/Component.js'
 import { SetLocal } from '../Actions/SetLocal.js'
-import { HexToHSL } from '../Actions/HexToHSL.js'
-import { HexToRGB } from '../Actions/HexToRGB.js'
-import { HSLDarker } from '../Actions/HSLDarker.js'
-import { NameToHex } from '../Actions/NameToHex.js'
+import { RemoveLocal } from '../Actions/RemoveLocal.js'
 import { Themes } from '../Models/Themes.js'
 import { SetTheme } from '../Actions/SetTheme.js'
 
@@ -24,9 +21,14 @@ export function MyTheme(param) {
 
     const component = Component({
         html: /*html*/ `
-            <div class='themes'>
-                ${containerTemplate({ theme, mode: 'light' })}
-                ${containerTemplate({ theme, mode: 'dark' })}
+            <div>
+                <div class='themes'>
+                    ${containerTemplate({ theme, mode: 'light' })}
+                    ${containerTemplate({ theme, mode: 'dark' })}
+                </div>
+                <div>
+                    <button type='buton' class='btn btn-robi'>Reset to OS preference</button>
+                </div>
             </div>
         `,
         style: /*css*/ `
@@ -34,7 +36,7 @@ export function MyTheme(param) {
                 margin: ${margin || '0px 0px 20px 0px'};
             }
 
-            #id.themes {
+            #id .themes {
                 display: flex;
                 justify-content: space-between;
             }
@@ -138,6 +140,17 @@ export function MyTheme(param) {
                     // Save user preference to local storage
                     SetLocal('prefersColorScheme', mode);
 
+                    // Reset theme
+                    SetTheme();
+                }
+            },
+            {
+                selector: '#id .btn',
+                event: 'click',
+                listener() {
+                    // Remove key from local storage
+                    RemoveLocal("prefersColorScheme");
+                    
                     // Reset theme
                     SetTheme();
                 }

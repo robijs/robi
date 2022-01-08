@@ -72,6 +72,7 @@ import { NameToHex } from './Actions/NameToHex.js'
 import { OrderRoutes } from './Actions/OrderRoutes.js'
 import { Post } from './Actions/Post.js'
 import { ReinstallApp } from './Actions/ReinstallApp.js'
+import { RemoveLocal } from './Actions/RemoveLocal.js'
 import { ResetApp } from './Actions/ResetApp.js'
 import { Route } from './Actions/Route.js'
 import { SendEmail } from './Actions/SendEmail.js'
@@ -162,6 +163,7 @@ export {
     OrderRoutes,
     Post,
     ReinstallApp,
+    RemoveLocal,
     ResetApp,
     Route,
     SendEmail,
