@@ -26,7 +26,8 @@ export async function AddRoute(event) {
         scrollable: true,
         async addContent(modalBody) {
             modalBody.classList.add('install-modal');
-            // addRouteModal.find('.modal-dialog').style.maxWidth = 'fit-content';
+            addRouteModal.find('.modal-dialog').style.maxWidth = 'fit-content';
+            addRouteModal.find('.modal-dialog').style.minWidth = '800px';
 
             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                 <h3 class='mb-3'>Add route</h3>

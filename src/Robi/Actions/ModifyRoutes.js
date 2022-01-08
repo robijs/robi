@@ -24,13 +24,12 @@ export async function ModifyRoutes(event) {
         scrollable: true,
         async addContent(modalBody) {
             modalBody.classList.add('install-modal');
-            addRouteModal.find('.modal-dialog').style.maxWidth = '80vw';
+            addRouteModal.find('.modal-dialog').style.maxWidth = 'fit-content';
+            addRouteModal.find('.modal-dialog').style.minWidth = '800px';
 
             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                 <h3 class='mb-3'>Modify routes</h3>
             `);
-
-            console.log(routes);
 
             const fields = routes.map(route => {
                 const { path, title, icon } = route;
@@ -44,6 +43,7 @@ export async function ModifyRoutes(event) {
 
                 row.add();
                 row.get().style.transition = 'background-color 300ms';
+                // TODO: Highlight hidden routes
                 row.append(/*html*/ `
                     <div style='position: absolute; top: 0px; left: -42px; height: 100%; padding: 10px; transition: opacity 300ms; opacity: 0;' class='d-flex justify-content-center align-items-center modified'>
                         <svg class="icon" style='fill: var(--primary); font-size: 22px;'>
@@ -219,6 +219,8 @@ export async function ModifyRoutes(event) {
                         await updateApp();
                     }
 
+                    return;
+
                     if (App.get('mode') === 'prod') {
                         
                         await Wait(3000);
@@ -274,10 +276,20 @@ export async function ModifyRoutes(event) {
                     
                         updated = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS\n${newImports || '\n'}\n// @END-IMPORTS`);
                     
+                        // FIXME: Doesn't retain hide: true
                         // Set routes
-                        const newRoutes = fields.map(field => {
+                        const allRoutes = updated.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
+                        const oldRoutes = allRoutes[1].split(', // @ROUTE');
+
+                        console.log(oldRoutes);
+
+                        const newRoutes = fields.map((field, index) => {
                             const { name, path, title, icon, current } = field.values();
                             const route = path || name;
+                            const old = oldRoutes[index];
+
+                            console.log(name);
+                            console.log(old);
 
                             return [
                                 `        `,
@@ -292,6 +304,8 @@ export async function ModifyRoutes(event) {
                                 `        `
                             ].join('\n');
                         }).join(', // @ROUTE');
+
+                        return;
                     
                         updated = updated.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes || '\n        '}// @END-ROUTES`);
                     
