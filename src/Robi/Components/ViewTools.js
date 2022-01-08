@@ -230,17 +230,25 @@ export function ViewTools(param) {
                 justify-content: center;
             }
 
-            #${parent.get().id} .save-edit-layout {
+            #${parent.get().id} .save-edit-layout,
+            #${parent.get().id} .cancel-edit-layout {
                 z-index: 1000;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 position: absolute;
                 top: 0px;
-                left: 0px;
                 height: 62px;
                 padding: 0px 15px;
                 border-radius: 10px;
+            }
+
+            #${parent.get().id} .save-edit-layout {
+                left: 0px;
+            }
+
+            #${parent.get().id} .cancel-edit-layout {
+                right: 0px;
             }
         `,
         parent,
@@ -263,15 +271,24 @@ export function ViewTools(param) {
                     // Hide tools
                     component.find('.tools').classList.add('d-none');
 
+                    // Add Save and Cancel buttons
                     parent.append(/*html*/ `
-                        <div class='save-edit-layout'>
-                            <button type='button' class='btn'>
-                                <span style='color: var(--primary); font-size: 15px; font-weight: 500;'>Save</span>
-                            </button>
+                        <div class='edit-layout-buttons'>
+                            <div class='save-edit-layout'>
+                                <button type='button' class='btn'>
+                                    <span style='color: var(--primary); font-size: 15px; font-weight: 500;'>Save</span>
+                                </button>
+                            </div>
+                            <div class='cancel-edit-layout'>
+                                <button type='button' class='btn'>
+                                    <span style='color: var(--primary); font-size: 15px; font-weight: 500;'>Cancel</span>
+                                </button>
+                            </div>
                         </div>
                     `);
 
-                    parent.find('.save-edit-layout').addEventListener('click', event => {
+                    // Save
+                    parent.find('.save-edit-layout').on('click', () => {
                         // Edit file
                         EditLayout({
                             order: [...parent.findAll('.robi-row')].map(row => parseInt(row.dataset.row.split('-')[1])),
@@ -279,19 +296,29 @@ export function ViewTools(param) {
                             file: `${route.path}.js`
                         });
 
+                        turnOfSortable();
+                    });
+
+                    // Cancel
+                    // parent.find('.cancel-edit-layout').addEventListener('click', turnOfSortable);
+                    parent.find('.cancel-edit-layout').on('click', turnOfSortable);
+
+                    // Turn off sortable
+                    function turnOfSortable() {
                         $(`#${parent.get().id}`).sortable('destroy');
                         $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'auto', 'user-select': 'auto'});
-        
-                        parent.find('.save-edit-layout').remove();
+
+                        // Remove buttons
+                        parent.find('.edit-layout-buttons').remove();
 
                         // Show tools
                         component.find('.tools').classList.remove('d-none');
 
                         // Enable sidebar
                         Store.get('sidebar').get().style.pointerEvents = 'all';
-                    });
+                    }
 
-                    // Turn on sort
+                    // Turn on sortable
                     $(`#${parent.get().id}`).sortable({ items: '.robi-row' });
                     $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'none', 'user-select': 'none'});
                 }

@@ -151,7 +151,15 @@ export function Component(param) {
             return document?.querySelector(`#${id}`);
         },
         find(selector) {
-            return this.get()?.querySelector(selector);
+            const node = this.get()?.querySelector(selector);
+            
+            if (node) {
+                node.on = (event, listener) => {
+                    node.addEventListener(event, listener);
+                }
+
+                return node;
+            }
         },
         findAll(selector) {
             return this.get()?.querySelectorAll(selector);
@@ -159,12 +167,6 @@ export function Component(param) {
         closest(selector) {
             return this.get()?.closest(selector);
         },
-        // element() {
-        //     const parser = new DOMParser();
-        //     const parsedHTML = parser.parseFromString(html, 'text/html');
-
-        //     return parsedHTML.body.firstElementChild;
-        // },
         hide() {
             this.get().style.display = 'none';
         },
@@ -210,6 +212,17 @@ export function Component(param) {
             } else if (typeof param === 'string') {
                 this.get()?.insertAdjacentHTML('beforeend', param);
             }
+
+            return this;
+        },
+        prepend(param) {
+            if (param instanceof Element) {
+                this.get()?.insertAdjacentElement('afterbegin', param);
+            } else if (typeof param === 'string') {
+                this.get()?.insertAdjacentHTML('afterbegin', param);
+            }
+
+            return this;
         },
         before(param) {
             if (param instanceof Element) {
@@ -217,6 +230,17 @@ export function Component(param) {
             } else if (typeof param === 'string') {
                 this.get()?.insertAdjacentHTML('beforebegin', param);
             }
+
+            return this;
+        },
+        after(param) {
+            if (param instanceof Element) {
+                this.get()?.insertAdjacentElement('afterend', param);
+            } else if (typeof param === 'string') {
+                this.get()?.insertAdjacentHTML('afterend', param);
+            }
+
+            return this;
         },
         add(localParent) {
             addStyle();
