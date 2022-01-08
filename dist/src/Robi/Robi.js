@@ -5376,6 +5376,11 @@ export async function ModifyFile(param) {
                         modal.close();
                         return false;
                     } else {
+                        // FIXME: Why doesn't reuturn false/true work?
+                        // Remove checkIfSaved before closing
+                        $(modal.get()).off('hide.bs.modal', checkIfSaved);
+                        modal.close();
+                        
                         return true;
                     }
                 } else {
