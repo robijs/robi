@@ -41,8 +41,7 @@ export async function HideRoutes({ routes }) {
             console.log(path);
             console.log('hide route');
             
-            // FIXME: will it always been 12 spaces?
-            // FIXME: can we guarentee that this search is alawys unique?
+            // FIXME: Use array.join('\n')?
             route = route.replace(`path: '${path}',`, `path: '${path}',\n            hide: true,`);
         }
 

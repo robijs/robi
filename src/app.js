@@ -31,6 +31,7 @@ Start({
         // @START-Test
         {
             path: 'Test',
+            hide: true,
             title: 'Test',
             icon: 'bs-tools',
             go: Test
@@ -40,6 +41,7 @@ Start({
         // @START-LookupField
         {
             path: 'LookupField',
+            hide: true,
             title: 'Lookup Field',
             icon: 'bs-file-earmarked-ruled',
             go: LookupField

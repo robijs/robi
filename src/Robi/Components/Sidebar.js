@@ -643,7 +643,7 @@ export function Sidebar({ parent, path }) {
         console.log('hide routes');
 
         // NOTE: Testing showing hidden routes
-        // FIXME: Maybe hide curren nav and add this on on top of it?
+        // FIXME: Maybe hide current nav and add this on on top of it?
         component.find('.nav-container').innerHTML =  Store.routes()
         .filter(route => !route.ignore)
         .map(route => {
@@ -748,9 +748,9 @@ export function Sidebar({ parent, path }) {
                 routes
             });
 
-            // Wait an additional 2 seconds
-            console.log('Waiting...')
-            await Wait(2000);
+            if (App.get('mode') === 'prod') {
+                await Wait(5000);
+            }
 
             await blur.off(() => {
                 Route('');
