@@ -194,6 +194,9 @@ export async function ModifyFile(param) {
             $(modal.get()).on('hide.bs.modal', checkIfSaved);
 
             async function checkIfSaved(event) {
+                // Don't close just yet
+                event.preventDefault();
+
                 console.log('check if saved');
                 console.log('param:', param);
                 console.log('value:', value);
