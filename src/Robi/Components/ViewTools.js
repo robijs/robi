@@ -25,76 +25,78 @@ export function ViewTools(param) {
         html: /*html*/ `
             <div class=''>
                 <!-- data-offset = -758px (dropdown-menu width / 2) + 25px (button width / 2) -->
-                <button class="btn tools" type="button" id="${id}" data-toggle="dropdown" data-offset="-404px + 25px, -1px" aria-haspopup="true" aria-expanded="false">
+                <button class='btn tools' type='button' id='${id}' data-toggle='dropdown' data-offset='-404px + 25px, -1px' aria-haspopup='true' aria-expanded='false'>
                     •••
                 </button>
-                <div class="dropdown-menu" aria-labelledby="${id}">
-                    <div class="grown-in-center">
-                        <button class="dropdown-item" type="button">
-                            <div class='add-table'>
+                <div class='dropdown-menu' aria-labelledby='${id}'>
+                    <div class='grown-in-center'>
+                        <!-- Add Table -->
+                        <button class='dropdown-item add-table' type='button'>
+                            <div class='table-icon'>
                                 <div class='filter d-flex justify-content-end'>
-                                    <div style='color: var(--primary); height: 8px; line-height: .5; font-weight: 900;'>&plus;</div>
-                                    <div class="btn-group ml-1" role="group">
-                                        <div type="button" class="btn btn-robi-reverse"></div>
-                                        <div type="button" class="btn btn-outline-robi"></div>
-                                        <div type="button" class="btn btn-outline-robi"></div>
+                                    <div class='btn-group ml-1' role='group'>
+                                        <div type='button' class='btn btn-robi-reverse'></div>
+                                        <div type='button' class='btn btn-outline-robi'></div>
+                                        <div type='button' class='btn btn-outline-robi'></div>
                                     </div>
                                 </div>
-                                <div class='columns d-flex'>
-                                    <div class='column'></div>
-                                    <div class='column'></div>
-                                    <div class='column'></div>
-                                </div>
                                 <div class='rows'>
-                                    <div class='add-table-row'></div>
-                                    <div class='add-table-row'></div>
-                                    <div class='add-table-row'></div>
+                                    <div class='table-icon-row'></div>
+                                    <div class='table-icon-row'></div>
+                                    <div class='table-icon-row'></div>
                                 </div>
                             </div>
-                            <div style="font-weight: 700; margin-top: 10px;">Table</div>
+                            <div style='font-weight: 700; margin-top: 10px;'>Table</div>
                         </button>
-                        <button class="dropdown-item" type="button">
-                            <div class='icon-container add-chart'>
-                                <svg class="icon" style='font-size: 48px;'>
-                                    <use href="#icon-bs-bar-chart"></use>
+                        <!-- Add Chart -->
+                        <button class='dropdown-item add-chart' type='button'>
+                            <div class='icon-container'>
+                                <svg class='icon' style='font-size: 48px;'>
+                                    <use href='#icon-bs-bar-chart'></use>
                                 </svg>
                             </div>
-                            <div style="font-weight: 700; margin-top: 10px;">Chart</div>
+                            <div style='font-weight: 700; margin-top: 10px;'>Chart</div>
                         </button>
-                        <button class="dropdown-item" type="button">
-                            <div class='icon-container add-text-block'>
-                                <span style="font-size: 28; font-weight: 600; color: var(--primary);">Aa</span>
+                        <!-- Add Text Block -->
+                        <button class='dropdown-item add-text-block' type='button'>
+                            <div class='icon-container'>
+                                <span style='font-size: 28; font-weight: 600; color: var(--primary);'>Aa</span>
                             </div>
-                            <div style="font-weight: 700; margin-top: 10px;">Text block</div>
+                            <div style='font-weight: 700; margin-top: 10px;'>Text block</div>
                         </button>
-                        <button class="dropdown-item" type="button">
-                            <div class='icon-container add-button'>
+                        <!-- Add Light Button -->
+                        <button class='dropdown-item add-button-light' type='button'>
+                            <div class='icon-container '>
                                 <div class='btn btn-robi'>Button</div>
                             </div>
-                            <div style="font-weight: 700; margin-top: 10px;">Light</div>
+                            <div style='font-weight: 700; margin-top: 10px;'>Light</div>
                         </button>
-                        <button class="dropdown-item" type="button">
-                            <div class='icon-container add-button'>
+                        <!-- Add Dark Button -->
+                        <button class='dropdown-item add-button-dark' type='button'>
+                            <div class='icon-container'>
                                 <div class='btn btn-robi-reverse'>Button</div>
                             </div>
-                            <div style="font-weight: 700; margin-top: 10px;">Dark</div>
+                            <div style='font-weight: 700; margin-top: 10px;'>Dark</div>
                         </button>
-                        <div class="dropdown-divider"></div>
-                        <button class="dropdown-item" type="button">
-                            <div class='icon-container edit-layout'>
-                                <svg class="icon" style='font-size: 40px;'>
-                                    <use href="#icon-bs-grid-1x2"></use>
+                        <!-- Divider -->
+                        <div class='dropdown-divider'></div>
+                        <!-- Edit Layout -->
+                        <button class='dropdown-item edit-layout' type='button'>
+                            <div class='icon-container'>
+                                <svg class='icon' style='font-size: 40px;'>
+                                    <use href='#icon-bs-grid-1x2'></use>
                                 </svg>
                             </div>
-                            <div style="font-weight: 700; margin-top: 10px;">Edit Layout</div>
+                            <div style='font-weight: 700; margin-top: 10px;'>Edit Layout</div>
                         </button>
-                        <button class="dropdown-item" type="button">
-                            <div class='icon-container edit-source'>
-                                <svg class="icon" style='font-size: 40px;'>
-                                    <use href="#icon-bs-code"></use>
+                        <!-- Edit Source -->
+                        <button class='dropdown-item edit-source' type='button'>
+                            <div class='icon-container'>
+                                <svg class='icon' style='font-size: 40px;'>
+                                    <use href='#icon-bs-code'></use>
                                 </svg>
                             </div>
-                            <div style="font-weight: 700; margin-top: 10px;">Edit Source</div>
+                            <div style='font-weight: 700; margin-top: 10px;'>Edit Source</div>
                         </button>
                     </div>
                 </div>
@@ -162,27 +164,43 @@ export function ViewTools(param) {
             }
 
             /* Add table */
-            #id .add-table {
+            #id .table-icon {
                 border-radius: 20px;
-                padding: 10px;
+                padding: 10px 15px;
                 width: 90px;
             }
 
-            #id .add-table .filter .btn {
+            #id .table-icon .filter .btn {
                 padding: 0px;
-                height: 10px;
+                height: 9px;
                 width: 15px;
             }
-
-            #id .add-table .filter .btn-outline-robi {
-                border-width: 2px;
+            
+            #id .table-icon .filter .btn:first-child {
+                border-radius: 3px 0px 0px 3px;
             }
 
-            #id .rows .add-table-row {
+            #id .table-icon .filter .btn:last-child {
+                border-radius: 0px 3px 3px 0px;
+            }
+
+            #id .table-icon .filter .btn-outline-robi {
+                border-width: 3px;
+            }
+
+            #id .rows {
+                margin-top: 3px;
+                border-radius: 4px;
+                border: solid 3px var(--primary);
+            }
+
+            #id .rows .table-icon-row:last-child {
+                height: 7px;
+            }
+
+            #id .rows .table-icon-row:not(:last-child) {
                 height: 10px;
-                border-radius: 10px;
-                margin-top: 2px;
-                border: solid 2px var(--primary);
+                border-bottom: solid 3px var(--primary);
             }
 
             #id .columns {
@@ -239,13 +257,16 @@ export function ViewTools(param) {
                 selector: '#id .edit-layout',
                 event: 'click',
                 listener(event) {
+                    // Disable sidebar
+                    Store.get('sidebar').get().style.pointerEvents = 'none';
+
                     // Hide tools
                     component.find('.tools').classList.add('d-none');
 
                     parent.append(/*html*/ `
-                        <div class="save-edit-layout">
-                            <button type="button" class="btn">
-                                <span style="color: var(--primary); font-size: 15px; font-weight: 500;">Save</span>
+                        <div class='save-edit-layout'>
+                            <button type='button' class='btn'>
+                                <span style='color: var(--primary); font-size: 15px; font-weight: 500;'>Save</span>
                             </button>
                         </div>
                     `);
@@ -259,17 +280,20 @@ export function ViewTools(param) {
                         });
 
                         $(`#${parent.get().id}`).sortable('destroy');
-                        $(`#${parent.get().id} .robi-row > *`).css({"pointer-events": "auto", "user-select": "auto"});
+                        $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'auto', 'user-select': 'auto'});
         
                         parent.find('.save-edit-layout').remove();
 
                         // Show tools
                         component.find('.tools').classList.remove('d-none');
+
+                        // Enable sidebar
+                        Store.get('sidebar').get().style.pointerEvents = 'all';
                     });
 
                     // Turn on sort
                     $(`#${parent.get().id}`).sortable({ items: '.robi-row' });
-                    $(`#${parent.get().id} .robi-row > *`).css({"pointer-events": "none", "user-select": "none"});
+                    $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'none', 'user-select': 'none'});
                 }
             },
             {
