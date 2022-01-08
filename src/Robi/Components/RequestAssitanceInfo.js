@@ -13,7 +13,7 @@ export function RequestAssitanceInfo(param) {
 
     const component = Component({
         html: /*html*/ `
-            <div class="request-assitance-info">
+            <div class="request-assitance-info w-100">
                 ${buildInfo()}
                 <div class="alert alert-robi-primary" role="alert">
                     <p class="mb-3">For general CarePoint issues, please contact:</p>
@@ -36,6 +36,10 @@ export function RequestAssitanceInfo(param) {
         style: /*css*/ `
             #id p {
                 font-size: 14px;
+            }
+
+            #id .alert {
+                border-radius: 20px;
             }
         `,
         parent: parent,

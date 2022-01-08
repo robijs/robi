@@ -12,7 +12,13 @@ export async function ActionsEditor({ parent, files }) {
     parent.get().style.height = '100%';
     parent.append(/*html*/ `
         <div class='mb-2 d-flex justify-content-center'>
-            
+
+            <div class='action-btn' onclick='alert("Save");'>
+                <svg class="icon" style='font-size: 20px;'>
+                    <use href="#icon-bs-arrow-left-cirlce-fill"></use>
+                </svg>
+            </div>
+                    
             <div class='action-btn' onclick='alert("Save");'>
                 <svg class="icon" style='font-size: 20px;'>
                     <use href="#icon-save"></use>

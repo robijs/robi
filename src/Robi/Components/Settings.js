@@ -10,6 +10,7 @@ import { BuildInfo } from './BuildInfo.js'
 import { DeveloperLinks } from './DeveloperLinks.js'
 import { ReleaseNotesContainer } from './ReleaseNotesContainer.js'
 import { SiteUsageContainer } from './SiteUsageContainer.js'
+import { RequestAssitanceInfo } from './RequestAssitanceInfo.js'
 import { Store } from '../Core/Store.js'
 import { ChangeTheme } from './ChangeTheme.js'
 import { CreateItem } from '../Actions/CreateItem.js'
@@ -45,6 +46,10 @@ export async function Settings({ parent, pathParts }) {
         {
             name: 'Account',
             path: 'Account'
+        },
+        {
+            name: 'Help',
+            path: 'Help'
         },
         {
             name: 'Preferences',
@@ -233,6 +238,55 @@ export async function Settings({ parent, pathParts }) {
         
             devConsole.add();
             break;
+        case 'Build':
+            BuildInfo({
+                parent: planContainer
+            });
+            break;
+        case 'Help':
+            const requestAssistanceInfo = RequestAssitanceInfo({
+                data: [
+                    {
+                        label: 'For help with this app, please contact:',
+                        name: 'First Last',
+                        title: 'TItle, Branch',
+                        email: 'first.last.civ@mail.mil',
+                        phone: '(555) 555-5555'
+                    }
+                ],
+                parent: planContainer
+            });
+        
+            requestAssistanceInfo.add();
+            break;
+        case 'Logs':
+            LogsContainer({
+                parent: planContainer
+            });
+            break;
+        case 'Preferences':
+            Preferences({
+                parent: planContainer
+            });
+            break;
+        case 'Release Notes':
+            ReleaseNotesContainer({
+                title: '',
+                padding: '0px',
+                maring: '0px',
+                parent: planContainer
+            });
+            break;
+        case 'SharePoint':
+            DeveloperLinks({
+                parent: planContainer
+            });
+            break;
+        case 'Theme':
+            ChangeTheme({
+                parent: planContainer
+            });
+            break;
         case 'Usage':
             SiteUsageContainer({
                 parent: planContainer
@@ -246,39 +300,6 @@ export async function Settings({ parent, pathParts }) {
                 formView: 'All',
                 width: '100%',
                 newForm: NewUser,
-                parent: planContainer
-            });
-            break;
-        case 'Release Notes':
-            ReleaseNotesContainer({
-                title: '',
-                padding: '0px',
-                maring: '0px',
-                parent: planContainer
-            });
-            break;
-        case 'Theme':
-            ChangeTheme({
-                parent: planContainer
-            });
-            break;
-        case 'Logs':
-            LogsContainer({
-                parent: planContainer
-            });
-            break;
-        case 'Build':
-            BuildInfo({
-                parent: planContainer
-            });
-            break;
-        case 'Preferences':
-            Preferences({
-                parent: planContainer
-            });
-            break;
-        case 'SharePoint':
-            DeveloperLinks({
                 parent: planContainer
             });
             break;

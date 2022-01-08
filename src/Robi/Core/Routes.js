@@ -31,14 +31,6 @@ const Routes = [
         }
     },
     {
-        path: 'Help',
-        type: 'system',
-        icon: 'bs-info-circle',
-        go(param) {
-            Help(param);
-        }
-    },
-    {
         path: 'Questions',
         type: 'system',
         icon: 'bs-chat-right-text',
