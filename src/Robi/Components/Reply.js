@@ -17,6 +17,7 @@ export function Reply(param) {
         Body, Author, Editor, Created, Modified
     } = reply;
 
+    // FIXME: Edit button doesn't show up if author of reply
     const component = Component({
         html: /*html*/ `
             <div class='card'>
@@ -30,7 +31,7 @@ export function Reply(param) {
                     ` : ''
                 }
                 <div class='card-body'>
-                    <h6 class='card-subtitle mb-2 text-muted'>
+                    <h6 class='card-subtitle text-muted'>
                         <span>${Author.Title.split(' ').slice(0, 2).join(' ')} • ${formatDate(Created)}</span>
                         ${
                             label === 'new' ?

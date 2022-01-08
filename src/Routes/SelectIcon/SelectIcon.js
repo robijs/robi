@@ -35,10 +35,21 @@ export default async function SelectIcon(param) {
 
     const iconField = IconField({
         parent,
-        value: 'blocked',
         icons: Store.get('svgdefs').getIcons()
     });
 
     iconField.add();
+
+    const resetBtn = BootstrapButton({
+        type: 'robi-light',
+        value: 'Reset',
+        classes: ['mt-4', 'w-100'],
+        parent,
+        action() {
+            iconField.value('');
+        }
+    });
+
+    resetBtn.add();
 }
 // @END-SelectIcon

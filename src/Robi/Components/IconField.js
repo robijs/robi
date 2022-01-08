@@ -107,10 +107,20 @@ export function IconField(param) {
     });
 
     component.value = (value) => {
-        if (value !== undefined) {
+        if (value === '') {
+            component.find('.icon-container.selected')?.classList.remove('selected');
+        } else if (value !== undefined) {
+            const icon = component.find(`.icon-container[data-icon='${value}']`);
 
+            if (icon) {
+                // Deselect all 
+                component.findAll('.icon-container').forEach(node => node.classList.remove('selected'));
+
+                // Select value
+                icon.classList.add('selected');
+            }
         } else {
-            return component.find('.icon-container.selected').dataset.icon;
+            return component.find('.icon-container.selected')?.dataset.icon;
         }
     }
 

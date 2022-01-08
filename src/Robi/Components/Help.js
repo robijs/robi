@@ -20,7 +20,7 @@ export async function Help(param) {
     /** View Container */
     const viewContainer = Container({
         display: 'block',
-        margin: '20px 0px 0px 0px',
+        margin: '30px 0px 0px 0px',
         parent
     });
 

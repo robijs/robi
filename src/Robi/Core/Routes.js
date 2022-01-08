@@ -5,7 +5,6 @@ import { QuestionBoard } from '../Components/QuestionBoard.js'
 import { QuestionTypes } from '../Components/QuestionTypes.js'
 import { Settings } from '../Components/Settings.js'
 import { Unauthorized } from '../Components/Unauthorized.js'
-import { Users } from '../Components/Users.js'
 
 // @START-File
 /**
@@ -72,30 +71,6 @@ const Routes = [
         ignore: true,
         go(param) {
             Settings(param);
-        }
-    },
-    {
-        path: 'Users',
-        type: 'system',
-        roles: [
-            'Developer',
-            'Administrator'
-        ],
-        icon: 'bs-people',
-        go(param) {
-            const {
-                parent,
-                pathParts
-            } = param;
-
-            if (pathParts.length === 1) {
-                Users(param);
-            } else if (pathParts.length === 2) {
-                Users({
-                    itemId: parseInt(pathParts[1]),
-                    parent
-                });
-            }
         }
     }
 ];

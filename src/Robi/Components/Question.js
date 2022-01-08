@@ -47,7 +47,7 @@ export function Question(param) {
                         ( Author.Name ? Author.Name.split('|').at(-1) : Author.LoginName.split('|').at(-1) ) === Store.user().LoginName ?
                         /*html*/ `
                             <div class='edit-button-container'>
-                                <button type='button' class='btn btn-robi edit'>Edit question</button>
+                                <button type='button' class='btn btn-robi-light edit'>Edit</button>
                             </div>
                         ` : ''
                     }
@@ -93,7 +93,11 @@ export function Question(param) {
             #id .edit-button-container {
                 display: flex;
                 justify-content: flex-end;
-                margin: 20px 0px;
+                margin-bottom: 20px;
+            }
+
+            #id .edit-button-container .btn {
+                font-size: 15px;
             }
 
             /** Replies */
@@ -112,7 +116,6 @@ export function Question(param) {
                 justify-content: center;
                 height: 30px;
                 width: 30px;
-                cursor: pointer;
                 margin: 5px;
                 padding: 5px;
                 font-weight: bold;

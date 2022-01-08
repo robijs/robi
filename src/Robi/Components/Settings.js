@@ -1,3 +1,5 @@
+import { Table } from './Table.js'
+import { NewUser } from './NewUser.js'
 import { Title } from './Title.js'
 import { Timer } from './Timer.js'
 import { Container } from './Container.js'
@@ -84,6 +86,10 @@ export async function Settings({ parent, pathParts }) {
             {
                 name: 'Usage',
                 path: 'Usage'
+            },
+            {
+                name: 'Users',
+                path: 'Users'
             }
         ]);
     }
@@ -229,6 +235,17 @@ export async function Settings({ parent, pathParts }) {
             break;
         case 'Usage':
             SiteUsageContainer({
+                parent: planContainer
+            });
+            break;
+        case 'Users':
+            await Table({
+                list: 'Users',
+                heading: '',
+                view: 'Users',
+                formView: 'All',
+                width: '100%',
+                newForm: NewUser,
                 parent: planContainer
             });
             break;
