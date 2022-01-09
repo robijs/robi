@@ -1,4 +1,5 @@
 import { Component } from '../Actions/Component.js'
+import { Shimmer } from '../Actions/Shimmer.js'
 
 // @START-File
 /**
@@ -45,8 +46,11 @@ export function Container(param) {
         bottom,
         left,
         right,
-        zIndex
+        zIndex,
+        shimmer
     } = param;
+
+    let unsubscribeShimmer;
 
     const component = Component({
         html: /*html*/ `
@@ -121,8 +125,17 @@ export function Container(param) {
         `,
         parent,
         position,
-        events: []
+        events: [],
+        onAdd() {
+            if (shimmer) {
+                unsubscribeShimmer = Shimmer(component);
+            }
+        }
     });
+
+    component.shimmerOff = () => {
+        unsubscribeShimmer.off();
+    };
 
     component.paddingOff = () => {
         component.get().style.padding = '0px';

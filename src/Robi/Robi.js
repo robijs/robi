@@ -82,6 +82,7 @@ import { SetHomePage } from './Actions/SetHomePage.js'
 import { SetLocal } from './Actions/SetLocal.js'
 import { SetSessionStorage } from './Actions/SetSessionStorage.js'
 import { SetTheme } from './Actions/SetTheme.js'
+import { Shimmer } from './Actions/Shimmer.js'
 import { Start } from './Actions/Start.js'
 import { Style } from './Actions/Style.js'
 import { UpdateApp } from './Actions/UpdateApp.js'
@@ -175,6 +176,7 @@ export {
     SetLocal,
     SetSessionStorage,
     SetTheme,
+    Shimmer,
     Start,
     Style,
     UpdateApp,

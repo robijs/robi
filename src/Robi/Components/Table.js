@@ -3,14 +3,13 @@ import { Get } from '../Actions/Get.js'
 import { Route } from '../Actions/Route.js'
 import { Container } from './Container.js'
 import { DataTable } from './DataTable.js'
-import { Heading } from './Heading.js'
-import { LoadingSpinner } from './LoadingSpinner.js'
 import { Modal } from './Modal.js'
 import { EditForm } from './EditForm.js'
 import { NewForm } from './NewForm.js'
 import { TableToolbar } from './TableToolbar.js'
 import { App } from '../Core/App.js'
 import { Lists } from '../Models/Lists.js'
+import { Wait } from '../Robi.js'
 
 // @START-File
 /**
@@ -36,9 +35,6 @@ export async function Table(param) {
         formView,
         headerFilter,
         heading,
-        headingColor,
-        headingMargin,
-        headingSize,
         list,
         margin,
         newForm,
@@ -67,6 +63,7 @@ export async function Table(param) {
     const tableContainer = Container({
         display: 'block',
         classes: ['table-container'],
+        shimmer: true,
         minHeight: '200px',
         width,
         margin,
@@ -75,8 +72,6 @@ export async function Table(param) {
     });
 
     tableContainer.add();
-
-    // return;
 
     // Columns
     const headers = [];
@@ -94,14 +89,9 @@ export async function Table(param) {
     let formFields = [];
 
     if (list) {
-        // Show loading spinner
-        const loadingSpinner = LoadingSpinner({
-            type: 'robi', 
-            message: `Loading ${list}`,
-            parent: tableContainer
-        });
-
-        loadingSpinner.add();
+        if (App.get('mode') === 'dev') {
+            await Wait(1000);
+        }
 
         // TODO: Only select fields from view
         items = items || await Get({
@@ -163,9 +153,6 @@ export async function Table(param) {
             console.log('Missing fields');
             return;
         }
-
-        // Remove loading
-        loadingSpinner.remove();
 
         [{ name: 'Id', display: 'Id', type: 'number' }]
             .concat(fields)
@@ -729,6 +716,9 @@ export async function Table(param) {
     });
 
     table.add();
+
+    // Shimmer off
+    tableContainer.shimmerOff();
 
     // FIXME: This only works if selected rows are grouped together
     // TODO: Handle one or more groups of selected rows (ex: rows [1, 2, 3] and [4,5] and [8,9])

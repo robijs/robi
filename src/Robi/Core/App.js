@@ -46,6 +46,20 @@ const App = {
     get(prop) {
         return appSettings[prop];
     },
+    isDev() {
+        if (App.get('mode') === 'dev') {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    isProd() {
+        if (App.get('mode') === 'prod') {
+            return true;
+        } else {
+            return false;
+        }
+    },
     set(prop, value) {
         appSettings[prop] = value;
         return appSettings[prop];

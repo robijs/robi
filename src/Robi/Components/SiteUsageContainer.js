@@ -1,4 +1,3 @@
-import { Card } from './Card.js' 
 import { DashboardBanner } from './DashboardBanner.js' 
 import { ChartJs } from './ChartJs.js' 
 import { App } from '../Core/App.js'
@@ -14,10 +13,10 @@ import { Wait } from '../Robi.js'
  */
 export async function SiteUsageContainer({ parent }) {
     // Card container
-    const chartCard = Card({
-        classes: ['shimmer'],
+    const chartCard = Container({
+        display: 'block',
+        shimmer: true,
         width: '100%',
-        padding: '0px',
         parent
     });
 
@@ -148,7 +147,7 @@ export async function SiteUsageContainer({ parent }) {
         });
 
         // Remove shimmmer
-        chartCard.removeClass('shimmer');
+        chartCard.shimmerOff();
         middleContainer.get().style.background = 'var(--secondary)';
     };
 
