@@ -304,8 +304,6 @@ export function ViewTools(param) {
                             path: `App/src/Routes/${route.path}`,
                             file: `${route.path}.js`
                         });
-
-                        turnOfSortable();
                     });
 
                     // Cancel
