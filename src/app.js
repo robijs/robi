@@ -22,7 +22,6 @@ Start({
         // @START-ROUTES
         // @START-SortTables
         {
-            hide: true,
             path: 'SortTables',
             title: 'Sort Tables',
             icon: 'bs-table',
@@ -32,6 +31,7 @@ Start({
         , // @ROUTE
         // @START-Test
         {
+            hide: true,
             path: 'Test',
             title: 'Test',
             icon: 'bs-tools',

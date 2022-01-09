@@ -37,57 +37,8 @@ const App = {
 
         // Set default route
         if (!defaultRoute) {
-            settings.defaultRoute = routes.map(route => route.path)[0];
+            settings.defaultRoute = routes.filter(r => !r.hide).map(route => route.path)[0];
         }
-
-        // // Set colors
-        // const userPreference = GetLocal(`${settings.name}-prefersColorScheme`);
-        // const colors = Themes.find(item => item.name === theme);
-
-        // // 1. Set user preference
-        // if (userPreference) {
-        //     settings.prefersColorScheme = userPreference;
-        // } 
-        
-        // // 2. If user hasn't set a preference, set to OS preference
-        // else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-        //     settings.prefersColorScheme = 'light';
-        // } 
-        
-        // else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        //     settings.prefersColorScheme = 'dark';
-        // } 
-        
-        // // 3. Default to light
-        // else {
-        //     settings.prefersColorScheme = 'light';
-        // }
-        
-        // const { primary, secondary, background, color, selectedRowOpacity, buttonBackgroundColor, borderColor } = colors[settings.prefersColorScheme];
-
-        // // All Colors
-        // settings.colors = colors;
-
-        // // Primary
-        // settings.primaryColor = NameToHex(primary);
-        // settings.primaryColorRGB = HexToRGB(settings.primaryColor);
-        // settings.primaryColorHSL = HexToHSL(settings.primaryColor);
-
-        // // Secondary
-        // settings.secondaryColor = secondary;
-
-        // // Backgrounds
-        // settings.backgroundColor = background;
-        // settings.buttonBackgroundColor = buttonBackgroundColor;
-
-        // // Border
-        // settings.borderColor = borderColor;
-
-        // // Default color
-        // settings.defaultColor = color;
-
-        // // Selected row opacity
-        // settings.selectedRowOpacity = selectedRowOpacity;
 
         // Set all
         appSettings = settings;
