@@ -118,7 +118,7 @@ export async function AddRoute(event) {
                     await updateApp();
                     await createRoute();
 
-                    if (App.get('mode') === 'prod') {
+                    if (App.isProd()) {
                         await Wait(5000);
                         location.reload();
                     }
@@ -130,7 +130,7 @@ export async function AddRoute(event) {
                         let digest;
                         let request;
 
-                        if (App.get('mode') === 'prod') {
+                        if (App.isProd()) {
                             digest = await GetRequestDigest();
                             request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('app.js')/$value`, {
                                 method: 'GET',
@@ -189,7 +189,7 @@ export async function AddRoute(event) {
 
                         let setFile;
 
-                        if (App.get('mode') === 'prod') {
+                        if (App.isProd()) {
                             // TODO: Make a copy of app.js first
                             // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
                             setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app.js',overwrite=true)`, {
@@ -220,7 +220,7 @@ export async function AddRoute(event) {
                     
                         let newFile;
 
-                        if (App.get('mode') === 'prod') {
+                        if (App.isProd()) {
                             // Create Route dir
                             await CreateFolder({
                                 path: `App/src/Routes/${routePath.value()}`

@@ -89,7 +89,7 @@ export async function Table(param) {
     let formFields = [];
 
     if (list) {
-        if (App.get('mode') === 'dev') {
+        if (App.isDev()) {
             await Wait(1000);
         }
 

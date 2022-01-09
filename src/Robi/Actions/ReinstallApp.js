@@ -18,7 +18,7 @@ import { CreateItem } from './CreateItem.js'
  * @param {*} event
  */
 export function ReinstallApp() {
-    if (App.get('mode') === 'dev') {
+    if (App.isDev()) {
         const modal = Modal({
             title: false,
             centered: true,

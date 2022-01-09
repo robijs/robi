@@ -41,7 +41,7 @@ export async function Get(param) {
         signal: abortController.signal
     };
 
-    if (App.get('mode') === 'prod' || mode === 'prod') {
+    if (App.isProd() || mode === 'prod') {
         const itemCount = await GetItemCount({
             apiPath: path,
             list
@@ -86,7 +86,7 @@ export async function Get(param) {
         } catch (error) {
             console.log('Fetch request aborted.');
         }
-    } else if (App.get('mode') === 'dev' || mode === 'dev') {
+    } else if (App.isDev() || mode === 'dev') {
         const queries = filter ? filter.split(' or ') : [ '' ];
 
         const fetchAll = await Promise.all(queries.map( async query => {

@@ -185,7 +185,7 @@ export async function ActionsEditor({ parent, files }) {
     let fileValueRequest;
     let requestDigest;
 
-    if (App.get('mode') === 'prod') {
+    if (App.isProd()) {
         const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
 
         requestDigest = await GetRequestDigest();

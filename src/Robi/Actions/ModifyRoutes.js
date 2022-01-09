@@ -206,7 +206,7 @@ export async function ModifyRoutes(event) {
                                 location.href = location.href.split('#')[0] + '#' + route.join('/');
                             }
                             
-                            if (App.get('mode') === 'prod') {
+                            if (App.isProd()) {
                                 await updateRoute({ name, path, title, icon });
                             }
                         } else {
@@ -219,7 +219,7 @@ export async function ModifyRoutes(event) {
                         await updateApp();
                     }
 
-                    if (App.get('mode') === 'prod') {
+                    if (App.isProd()) {
                         
                         await Wait(3000);
                         location.reload();
@@ -246,7 +246,7 @@ export async function ModifyRoutes(event) {
                         let digest;
                         let request;
 
-                        if (App.get('mode') === 'prod') {
+                        if (App.isProd()) {
                             digest = await GetRequestDigest();
                             request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('app.js')/$value`, {
                                 method: 'GET',
@@ -317,7 +317,7 @@ export async function ModifyRoutes(event) {
 
                         let setFile;
 
-                        if (App.get('mode') === 'prod') {
+                        if (App.isProd()) {
                             // TODO: Make a copy of app.js first
                             // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
                             setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app.js',overwrite=true)`, {
@@ -342,7 +342,7 @@ export async function ModifyRoutes(event) {
 
                     async function updateRoute({ name, title, path }) {
                         // Prod
-                        if (App.get('mode') === 'prod') {
+                        if (App.isProd()) {
                             let digest;
                             let request;
                 
@@ -366,7 +366,7 @@ export async function ModifyRoutes(event) {
                                 // console.log('NEW\n----------------------------------------\n', updated);
                                 // console.log('\n****************************************');
                     
-                                if (App.get('mode') === 'prod') {
+                                if (App.isProd()) {
                                     // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
                                     await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/Files/Add(url='${name}.js',overwrite=true)`, {
                                         method: 'POST',
@@ -442,7 +442,7 @@ export async function ModifyRoutes(event) {
                         } 
                         
                         // Dev
-                        if (App.get('mode') === 'dev') {
+                        if (App.isDev()) {
                             // 1. If title has changed, update file.
                             const request = await fetch(`http://127.0.0.1:8080/src/Routes/${name}/${name}.js`);
                             await Wait(1000);

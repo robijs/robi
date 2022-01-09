@@ -99,7 +99,7 @@ export default async function Test(param) {
             let digest;
             let request;
 
-            if (App.get('mode') === 'prod') {
+            if (App.isProd()) {
                 digest = await GetRequestDigest();
                 request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/Test')/Files('Test.js')/$value`, {
                     method: 'GET',
@@ -125,7 +125,7 @@ export default async function Test(param) {
 
             let setFile;
 
-            if (App.get('mode') === 'prod') {
+            if (App.isProd()) {
                 // TODO: Make a copy of app.js first
                 // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
                 setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/Test')/Files/Add(url='Test.js',overwrite=true)`, {
@@ -277,7 +277,7 @@ export default async function Test(param) {
                 let fileValueRequest;
                 let requestDigest;
     
-                if (App.get('mode') === 'prod') {
+                if (App.isProd()) {
                     const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
     
                     requestDigest = await GetRequestDigest();
@@ -551,7 +551,7 @@ export default async function Test(param) {
                     // TODO: Move to SetFile action
                     let setFile;
     
-                    if (App.get('mode') === 'prod') {
+                    if (App.isProd()) {
                         setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/Add(url='${file}',overwrite=true)`, {
                             method: 'POST',
                             body: currentValue,
@@ -611,7 +611,7 @@ export default async function Test(param) {
             let digest;
             let request;
 
-            if (App.get('mode') === 'prod') {
+            if (App.isProd()) {
                 digest = await GetRequestDigest();
                 request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('app.js')/$value`, {
                     method: 'GET',
@@ -656,7 +656,7 @@ export default async function Test(param) {
 
             let setFile;
 
-            if (App.get('mode') === 'prod') {
+            if (App.isProd()) {
                 // TODO: Make a copy of app.js first
                 // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
                 setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app.js',overwrite=true)`, {

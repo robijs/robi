@@ -76,7 +76,7 @@ export function ChangeTheme(param) {
             let digest;
             let request;
 
-            if (App.get('mode') === 'prod') {
+            if (App.isProd()) {
                 digest = await GetRequestDigest();
                 request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('app.js')/$value`, {
                     method: 'GET',
@@ -98,7 +98,7 @@ export function ChangeTheme(param) {
 
             let setFile;
 
-            if (App.get('mode') === 'prod') {
+            if (App.isProd()) {
                 // TODO: Make a copy of app.js first
                 // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
                 setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app.js',overwrite=true)`, {
@@ -120,7 +120,7 @@ export function ChangeTheme(param) {
 
             console.log('Saved:', setFile);
 
-            if (App.get('mode') === 'prod') {
+            if (App.isProd()) {
                 // Wait additional 2s
                 console.log('Waiting...');
                 await Wait(3000);

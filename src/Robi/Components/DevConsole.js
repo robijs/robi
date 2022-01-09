@@ -251,7 +251,7 @@ export function DevConsole(param) {
                 </div>
             `);
 
-            if (App.get('mode') === 'prod') {
+            if (App.isProd()) {
                 const {
                     diffToDelete,
                     toCreate,

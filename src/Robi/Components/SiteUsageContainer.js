@@ -107,7 +107,7 @@ export async function SiteUsageContainer({ parent }) {
 
     bottomBanner.add();
 
-    if (App.get('mode') === 'dev') {
+    if (App.isDev()) {
         await Wait(2000);
     }
 
@@ -115,7 +115,7 @@ export async function SiteUsageContainer({ parent }) {
     // TODO: set selectedChart and selectedData on button press like before
 
     // Set worker path based on env mode
-    const workerPath = App.get('mode') === 'prod' ? '../' : `http://127.0.0.1:8080/src/`;
+    const workerPath = App.isProd() ? '../' : `http://127.0.0.1:8080/src/`;
 
     // Initialize worker
     const worker = new Worker(`${workerPath}Robi/Workers/SiteUsage.js`, {

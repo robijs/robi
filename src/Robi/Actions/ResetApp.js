@@ -20,7 +20,7 @@ import { CreateItem } from './CreateItem.js'
  * @param {*} event
  */
 export function ResetApp() {
-    if (App.get('mode') === 'dev') {
+    if (App.isDev()) {
         const modal = Modal({
             title: false,
             centered: true,
@@ -58,7 +58,7 @@ export function ResetApp() {
         async addContent(modalBody) {
             modalBody.classList.add('install-modal');
 
-            if (App.get('mode') === 'dev') {
+            if (App.isDev()) {
                 modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                     <h4 class='mb-3'>Dev mode instructions</h4>
                 `);

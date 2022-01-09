@@ -14,7 +14,7 @@ export async function InitializeApp(param) {
     const { settings, routes } = param;
     const { preLoadLists } = settings;
 
-    if (App.get('mode') === 'prod') {
+    if (App.isProd()) {
         console.log('Mode: prod');
 
         // Check if app is already installed

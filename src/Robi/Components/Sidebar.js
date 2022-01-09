@@ -786,7 +786,7 @@ export function Sidebar({ parent, path }) {
                 paths
             });
 
-            if (App.get('mode') === 'prod') {
+            if (App.isProd()) {
                 await Wait(5000);
             }
 
@@ -1120,7 +1120,7 @@ export function Sidebar({ parent, path }) {
                 routes
             });
 
-            if (App.get('mode') === 'prod') {
+            if (App.isProd()) {
                 await Wait(5000);
             }
 

@@ -22,7 +22,7 @@ import { Store } from '../Core/Store.js'
  * @param {*} param
  */
 export function UpdateApp() {
-    if (App.get('mode') === 'dev') {
+    if (App.isDev()) {
         const modal = Modal({
             title: false,
             centered: true,

@@ -19,7 +19,7 @@ export async function Log(param) {
         Title, Message, StackTrace, Module
     } = param;
 
-    if (App.get('mode') === 'prod') {
+    if (App.isProd()) {
         /** Get new request digest */
         const requestDigest = await GetRequestDigest();
 
@@ -58,7 +58,7 @@ export async function Log(param) {
         console.log(`%cLog: ${Title}`, 'background: #1e1e1e; color: #fff');
 
         return newItem.d;
-    } else if (App.get('mode') === 'dev') {
+    } else if (App.isDev()) {
         const newLog = await CreateItem({
             list: 'Log',
             data: {

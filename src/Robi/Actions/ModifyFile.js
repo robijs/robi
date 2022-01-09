@@ -116,7 +116,7 @@ export async function ModifyFile(param) {
             let fileValueRequest;
             let requestDigest;
 
-            if (App.get('mode') === 'prod') {
+            if (App.isProd()) {
                 const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
 
                 requestDigest = await GetRequestDigest();
@@ -223,7 +223,7 @@ export async function ModifyFile(param) {
                         loading.add();
 
                         // Wait 5 seconds to make sure changes are committed
-                        if (App.get('mode') === 'prod') {
+                        if (App.isProd()) {
                             await Wait(5000);
                         }
 
@@ -339,7 +339,7 @@ export async function ModifyFile(param) {
                 // TODO: Move to SetFile action
                 let setFile;
 
-                if (App.get('mode') === 'prod') {
+                if (App.isProd()) {
                     setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files/Add(url='${file}',overwrite=true)`, {
                         method: 'POST',
                         body: currentValue,

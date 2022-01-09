@@ -14,7 +14,7 @@ export async function HideRoutes({ paths }) {
     let digest;
     let request;
 
-    if (App.get('mode') === 'prod') {
+    if (App.isProd()) {
         digest = await GetRequestDigest();
         request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${App.get('library')}/src')/Files('app.js')/$value`, {
             method: 'GET',
@@ -65,7 +65,7 @@ export async function HideRoutes({ paths }) {
 
     let setFile;
 
-    if (App.get('mode') === 'prod') {
+    if (App.isProd()) {
         // TODO: Make a copy of app.js first
         // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
         setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${App.get('library')}/src')/Files/Add(url='app.js',overwrite=true)`, {

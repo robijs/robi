@@ -44,7 +44,7 @@ export async function EditLayout({ order, path, file }) {
         let fileValueRequest;
         let requestDigest;
 
-        if (App.get('mode') === 'prod') {
+        if (App.isProd()) {
             const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
 
             requestDigest = await GetRequestDigest();
@@ -84,7 +84,7 @@ export async function EditLayout({ order, path, file }) {
 
         let setFile;
 
-        if (App.get('mode') === 'prod') {
+        if (App.isProd()) {
             // TODO: Toby's version control idea
             // TODO: Make a copy of app.js first
             // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
@@ -107,7 +107,7 @@ export async function EditLayout({ order, path, file }) {
         }
     }
 
-    if (App.get('mode') === 'prod') {
+    if (App.isProd()) {
         await Wait(5000);
         location.reload();
     }

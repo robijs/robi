@@ -24,7 +24,7 @@ export async function UpdateItem(param) {
         return;
     }
 
-    if (App.get('mode') === 'prod') {
+    if (App.isProd()) {
         // Get item by id
         const getItem = await Get({
             list,

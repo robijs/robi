@@ -15,7 +15,7 @@ import { DeleteList } from './DeleteList.js'
  * @param {*} event 
  */
 export function DeleteApp() {
-    if (App.get('mode') === 'dev') {
+    if (App.isDev()) {
         const modal = Modal({
             title: false,
             centered: true,

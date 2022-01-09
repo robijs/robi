@@ -20,7 +20,7 @@ export async function GetCurrentUser(param) {
         }
     };
 
-    if (App.get('mode') === 'prod') {
+    if (App.isProd()) {
         const url = `${App.get('site')}/../_api/web/CurrentUser`;
         const currentUser = await fetch(url, fetchOptions);
         const response = await currentUser.json();
@@ -72,7 +72,7 @@ export async function GetCurrentUser(param) {
 
             return newUser;
         }
-    } else if (App.get('mode') === 'dev') {
+    } else if (App.isDev()) {
         const currentUser = await fetch(`http://localhost:3000/users?LoginName=${App.get('dev').user.LoginName}`, fetchOptions);
         const response = await currentUser.json();
 

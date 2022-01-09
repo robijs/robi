@@ -54,7 +54,7 @@ const App = {
         }
     },
     isProd() {
-        if (App.get('mode') === 'prod') {
+        if (App.get('mode') == 'prod') {
             return true;
         } else {
             return false;

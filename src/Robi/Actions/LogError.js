@@ -18,7 +18,7 @@ export async function LogError(param) {
         Message, Error, Source
     } = param;
 
-    if (App.get('mode') === 'prod') {
+    if (App.isProd()) {
         /** Get new request digest */
         /**
          * @author Wil Pacheco & John Westhuis
@@ -65,7 +65,7 @@ export async function LogError(param) {
         console.log(`%cError: ${Message}`, 'background: crimson; color: #fff');
 
         return newItem.d;
-    } else if (App.get('mode') === 'dev') {
+    } else if (App.isDev()) {
         const newLog = await CreateItem({
             list: 'Errors',
             data: {
