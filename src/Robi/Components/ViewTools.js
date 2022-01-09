@@ -60,7 +60,12 @@ export function ViewTools(param) {
                         <!-- Add Text Block -->
                         <button class='dropdown-item add-text-block' type='button'>
                             <div class='icon-container'>
-                                <span style='font-size: 28; font-weight: 600; color: var(--primary);'>Aa</span>
+                                <span class='d-flex align-items-center justify-content center' style='font-size: 28; font-weight: 600; color: var(--primary);'>
+                                    <span>Aa</span>
+                                    <svg class='icon' style='font-size: 32px;'>
+                                        <use href='#icon-bs-cursor-text'></use>
+                                    </svg>
+                                </span>
                             </div>
                             <div style='font-weight: 700; margin-top: 10px;'>Text block</div>
                         </button>
@@ -127,7 +132,10 @@ export function ViewTools(param) {
                 transform: scale(2);
             }
 
+            /* FIXME: Should it be sticky? */
             #id .dropdown-menu {
+                position: absolute !important;
+                transform: translate3d(413px, 5px, 0px) !important;
                 background: transparent;
                 border-radius: 10px;
                 border: none;
@@ -140,6 +148,7 @@ export function ViewTools(param) {
                 margin: .5rem;
                 overflow: hidden;
                 border-left: 2px solid var(--buttonBackground);
+                border-top: none;
             }
 
             #id .dropdown-item {

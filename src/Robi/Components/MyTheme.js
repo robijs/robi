@@ -27,7 +27,7 @@ export function MyTheme(param) {
                     ${containerTemplate({ theme, mode: 'dark' })}
                 </div>
                 <div>
-                    <button type='buton' class='btn btn-robi'>Reset to OS preference</button>
+                    <button type='buton' class='btn btn-robi'>Set to Operating System preference</button>
                 </div>
             </div>
         `,
