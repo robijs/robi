@@ -106,7 +106,6 @@ export function SingleLineTextField(param) {
                 margin: ${margin || '2px 0px 4px 0px'};
                 padding: 5px 10px;
                 border-radius: 4px;
-                border: ${App.get('defaultBorder')};
                 transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
             }
 

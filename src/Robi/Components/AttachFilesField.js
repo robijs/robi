@@ -112,7 +112,7 @@ export function AttachFilesField(param) {
                 background: crimson;
                 color: white;
                 border-radius: 4px;
-                border:  ${App.get('defaultBorder')};
+                border: solid 1px var(--borderColor);
             }
 
             .file-icon {

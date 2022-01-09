@@ -19,16 +19,17 @@ Start({
     lists,
     // Routes are directly addressable. Ex: https://site#path.
     routes: [
-        // @START-ROUTES        
+        // @START-ROUTES
         // @START-SortTables
         {
+            hide: true,
             path: 'SortTables',
             title: 'Sort Tables',
             icon: 'bs-table',
             go: SortTables
         }
         // @END-SortTables
-        , // @ROUTE        
+        , // @ROUTE
         // @START-Test
         {
             path: 'Test',
@@ -37,7 +38,7 @@ Start({
             go: Test
         }
         // @END-Test
-        , // @ROUTE        
+        , // @ROUTE
         // @START-LookupField
         {
             path: 'LookupField',
@@ -46,7 +47,7 @@ Start({
             go: LookupField
         }
         // @END-LookupField
-        , // @ROUTE        
+        , // @ROUTE
         // @START-SelectIcon
         {
             path: 'SelectIcon',
@@ -55,7 +56,7 @@ Start({
             go: SelectIcon
         }
         // @END-SelectIcon
-        , // @ROUTE        
+        , // @ROUTE
         // @START-ChartDemo
         {
             path: 'ChartDemo',
@@ -64,7 +65,7 @@ Start({
             go: ChartDemo
         }
         // @END-ChartDemo
-        , // @ROUTE        
+        , // @ROUTE
         // @START-ModifyFile
         {
             path: 'ModifyFile',
@@ -73,15 +74,12 @@ Start({
             go: ModifyFile
         }
         // @END-ModifyFile
-        // @END-ROUTES
+// @END-ROUTES
     ],
     settings: {
         // @START-SETTINGS
         // REQUIRED PROPERTIES
         // -------------------
-        // defaultBorder: border style for core comoponents
-        // defaultColor: text color
-        // defaultRoute: route navigated to if no #path is present in URL, defaults to first path in routes array
         // name: app name (AUTOPOPULATED if created by Robi)
         // questionTypes: define at least one questionType with title and path props
         // theme: ('Blue' | 'Brown' | 'Gray' | 'Green' | 'Gold' | 'Magenta' | 'Orange' | 'Pink' | 'Purple' | 'Red' | 'Slate' | 'Teal')
@@ -89,8 +87,6 @@ Start({
         // titleColor: core Title component text color
         // userDefaultRole: default role for newly created use accounts
         // userSettings: new user account 'Settings' field default JSON value
-        defaultBorder: 'solid 1px rgba(0, 0, 0, .125)',
-        defaultRoute: '',
         name: /* @START-name */'App'/* @END-name */,
         questionTypes: [
             {

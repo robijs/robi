@@ -68,12 +68,10 @@ export function LookupField(param) {
                 margin-bottom: 4px;
                 margin-right: 20px;
                 min-height: 36px;
-                /* max-width: 300px; */
                 min-width: 300px;
                 padding: 5px 10px;
                 background: white;
                 border-radius: 4px;
-                border: ${App.get('defaultBorder')};
             }
 
             #id .form-field-search::-webkit-search-cancel-button {

@@ -146,11 +146,6 @@ export async function NewUser(param) {
 
     roleField.add();
 
-    // Focus name field
-    setTimeout(() => {
-        nameField.focus();
-    }, 200);
-
     return {
         async onCreate(event) {
             // Create user

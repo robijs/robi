@@ -39,22 +39,6 @@ export function DateField(param) {
                 font-size: 14px;
                 margin-bottom:  0.5rem;
             }
-
-            /* #id .form-field-date {
-                margin-top: 2px;
-                margin-bottom: 4px;
-                padding: 10px;
-                background: white;
-                border-radius: 4px;
-                border: ${App.get('defaultBorder')};
-            }
-
-            #id .form-field-date:active,
-            #id .form-field-date:focus {
-                outline: none;
-                border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 2px var(--primary);
-            } */
         `,
         parent: parent,
         position,

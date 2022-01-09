@@ -790,8 +790,15 @@ export function Sidebar({ parent, path }) {
                 await Wait(5000);
             }
 
+            // TODO: Route away from path if hidden
             await blur.off(() => {
-                Route('');
+                // If current route changed, route to home
+                let route = location.href.split('#')[1].split('/');
+
+                if (paths.find(p => p.path === route[0])); {
+                    Route('');
+                }
+                
                 location.reload();
             });
         });

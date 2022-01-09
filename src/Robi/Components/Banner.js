@@ -21,7 +21,6 @@ export function Banner(param) {
                 cursor: default;
                 font-size: 1.5em;
                 border-radius: 4px;
-                /* border: ${App.get('defaultBorder')}; */
             }
 
             #id.fixed {
