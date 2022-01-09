@@ -19,6 +19,7 @@ export function TableToolbar(param) {
     const {
         advancedSearch,
         action,
+        heading,
         list,
         options,
         parent,
@@ -35,7 +36,8 @@ export function TableToolbar(param) {
 
     const component = Component({
         html: /*html*/ `
-            <div class='btn-toolbar' role='toolbar'>
+            <div class='btn-toolbar w-100' role='toolbar'>
+                <div class='text'>${heading}</div>
                 ${
                     advancedSearch ? 
                     /*html*/ `
@@ -52,7 +54,7 @@ export function TableToolbar(param) {
                         const id = GenerateUUID();
 
                         return /*html*/ `
-                            <div class='search-container search-container-grow height-0 opacity-0 pt-0 pb-0'>
+                            <div class='search-container search-container-grow height-0 opacity-0 pt-0 pb-0 mt-2'>
                                 ${searchRow(GenerateUUID())}
                                 <!-- Buttons -->
                                 <div class='d-flex justify-content-end run-search-container pt-2'>
@@ -91,8 +93,10 @@ export function TableToolbar(param) {
                 margin-bottom: 10px;
             }
 
-            #id .btn-group {
-                margin-bottom: 10px;
+            #id .text {
+                flex: 1;
+                font-size: 20px;
+                font-weight: 700;
             }
 
             #id .btn {
@@ -127,7 +131,6 @@ export function TableToolbar(param) {
             /* Search */
             #id .advanced-search {
                 transition: 300ms opacity ease;
-                margin-bottom: 10px;
             }
 
             #id .search-container {

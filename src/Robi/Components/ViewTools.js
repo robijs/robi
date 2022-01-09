@@ -305,8 +305,15 @@ export function ViewTools(param) {
 
                     // Turn off sortable
                     function turnOfSortable() {
-                        $(`#${parent.get().id}`).sortable('destroy');
-                        $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'auto', 'user-select': 'auto'});
+                        // Reset order
+                        [...parent.findAll('.robi-row')]
+                        .sort((a, b) => parseInt(a.dataset.row.split('row-')[1]) - parseInt(b.dataset.row.split('row-')[1]))
+                        .forEach(row => parent.get().append(row));
+
+                        setTimeout(() => {
+                            $(`#${parent.get().id}`).sortable('destroy');
+                            $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'auto', 'user-select': 'auto'});
+                        }, 0);
 
                         // Remove buttons
                         parent.find('.edit-layout-buttons').remove();

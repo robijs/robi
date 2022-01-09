@@ -18,6 +18,10 @@ export function Row(render) {
                 width: 100%;
                 display: block;
             }
+
+            .robi-row:not(:last-child) {
+                margin-bottom: 20px;
+            }
         `,
         parent: Store.get('viewcontainer'),
         events: [],

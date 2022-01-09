@@ -155,7 +155,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .btn {
-                font-size: .9em;
+                font-size: 13px;
                 padding: 5px 20px;
             }
 
@@ -324,9 +324,9 @@ export function DataTable(param) {
             /** Footer */
             #id_wrapper .datatable-footer {
                 padding: 0px 15px;
-                margin: 10px 0px 0px 0px;
                 width: 100%;
-                font-size: .85em;
+                font-size: 12px;
+                font-weight: 500;
                 display: flex;
                 justify-content: space-between;
             }

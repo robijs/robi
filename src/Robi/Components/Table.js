@@ -67,6 +67,7 @@ export async function Table(param) {
     const tableContainer = Container({
         display: 'block',
         classes: ['table-container'],
+        minHeight: '200px',
         width,
         margin,
         padding,
@@ -75,24 +76,7 @@ export async function Table(param) {
 
     tableContainer.add();
 
-    // Heading
-    let legendHeading;
-
-    if (heading || list) {
-        // const text = heading || (heading === '' ? '' : list.split(/(?=[A-Z])/).join(' '));
-        // if list passed in look first for list.heading, or list.split(...)
-        const text = heading || ( heading === '' ? '' : list ? (lists.find(item => item.list === list)?.heading || list.split(/(?=[A-Z])/).join(' '))  : '' );
-
-        legendHeading = Heading({
-            text,
-            size: headingSize,
-            color: headingColor,
-            margin: headingMargin || (toolbar ? '35px 0px 0px 0px' : '0px 0px 35px 0px'),
-            parent: tableContainer
-        });
-
-        legendHeading.add();
-    }
+    // return;
 
     // Columns
     const headers = [];
@@ -513,6 +497,7 @@ export async function Table(param) {
     // Toolbar
     if (toolbar || advancedSearch) {
         const tableToolbar = TableToolbar({
+            heading: heading || ( heading === '' ? '' : list ? (lists.find(item => item.list === list)?.heading || list.split(/(?=[A-Z])/).join(' '))  : '' ),
             options: toolbar || [],
             parent: tableContainer,
             advancedSearch,

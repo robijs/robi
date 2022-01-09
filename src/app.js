@@ -41,6 +41,7 @@ Start({
         , // @ROUTE
         // @START-LookupField
         {
+            hide: true,
             path: 'LookupField',
             title: 'Lookup Field',
             icon: 'bs-file-earmarked-ruled',
