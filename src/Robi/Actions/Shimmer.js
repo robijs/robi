@@ -6,7 +6,8 @@ import { Style } from './Style.js'
  * @param {*} param
  * @returns
  */
-export function Shimmer(component) {
+export function Shimmer(component, options = {}) {
+    const { backgroundColor } = options;
     const id = component.get().id;
 
     // TODO: Set animation time on viewport width
@@ -16,8 +17,8 @@ export function Shimmer(component) {
         style: /*css*/ `
             #${id}.shimmer-${id} {
                 position: relative;
-                background: var(--background);
                 border-radius: 20px;
+                ${backgroundColor ? `background-color: ${backgroundColor};` : ''}
             }
 
             #${id}.shimmer-${id}::after {

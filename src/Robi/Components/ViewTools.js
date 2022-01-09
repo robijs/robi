@@ -83,20 +83,20 @@ export function ViewTools(param) {
                         <!-- Edit Layout -->
                         <button class='dropdown-item edit-layout' type='button'>
                             <div class='icon-container'>
-                                <svg class='icon' style='font-size: 40px;'>
+                                <svg class='icon' style='font-size: 40px; fill: var(--color);'>
                                     <use href='#icon-bs-grid-1x2'></use>
                                 </svg>
                             </div>
-                            <div style='font-weight: 700; margin-top: 10px;'>Edit Layout</div>
+                            <div style='font-weight: 700; margin-top: 10px; color: var(--color);'>Edit Layout</div>
                         </button>
                         <!-- Edit Source -->
                         <button class='dropdown-item edit-source' type='button'>
                             <div class='icon-container'>
-                                <svg class='icon' style='font-size: 40px;'>
+                                <svg class='icon' style='font-size: 40px; fill: var(--color);'>
                                     <use href='#icon-bs-code'></use>
                                 </svg>
                             </div>
-                            <div style='font-weight: 700; margin-top: 10px;'>Edit Source</div>
+                            <div style='font-weight: 700; margin-top: 10px; color: var(--color);'>Edit Source</div>
                         </button>
                     </div>
                 </div>

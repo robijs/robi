@@ -128,7 +128,7 @@ export function Container(param) {
         events: [],
         onAdd() {
             if (shimmer) {
-                unsubscribeShimmer = Shimmer(component);
+                unsubscribeShimmer = Shimmer(component, { backgroundColor: background || 'var(--background)'});
             }
         }
     });

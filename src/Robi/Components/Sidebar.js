@@ -432,6 +432,7 @@ export function Sidebar({ parent, path }) {
 
             /* Hidden nav */
             #id .nav.hidden {
+                pointer-events: none;
                 opacity: 0;
                 height: 0px;
                 transition: all 300ms ease;
@@ -442,7 +443,7 @@ export function Sidebar({ parent, path }) {
         permanent: true,
         events: [
             {
-                selector: '.nav:not(.control):not(.add-route)',
+                selector: '.nav:not(.control):not(.add-route):not(.hidden)',
                 event: 'click',
                 listener: routeToView
             },
