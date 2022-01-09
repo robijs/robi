@@ -658,26 +658,6 @@ export function Sidebar({ parent, path }) {
             node.style.opacity = '1';
         });
 
-        // const routes = Store.routes().filter(route => !route.ignore);
-
-        // console.log(routes);
-
-        // component.findAll('.nav-container .nav')[0].insertAdjacentHTML('afterend', /*html*/ `
-        //     <span class="nav" data-path="TESTING" data-type="TESTING" style='height: 0px; opacity: 0; transition: all 300ms ease;'>
-        //         <span class="icon-container">
-        //             <svg class="icon">
-        //                 <use href="#icon-blocked"></use>
-        //             </svg>
-        //         </span>
-        //         <span class="text" data-width="200px" style="width: 200px;">Testing</span>
-        //     </span>
-        // `);
-
-        // setTimeout(() => {
-        //     component.find('.nav-container .nav[data-path="TESTING"]').style.height = '42.5px';
-        //     component.find('.nav-container .nav[data-path="TESTING"]').style.opacity = '1';
-        // }, 0);
-
         // NOTE: END TESTING
 
         // Disable all routes
@@ -800,18 +780,10 @@ export function Sidebar({ parent, path }) {
                 message: 'Saving changes'
             });
 
-            const routes = getHideState();
-            
-            // //TODO: remove nav from DOM
-            // //FIXME: don't worry about removing from DOM since page will be reloaded anyways
-            // component.findAll('.nav-container .nav:not([data-type="system"])').forEach(node => {
-            //     if (routes.includes(node.dataset.path)) {
-            //         node.remove();
-            //     }
-            // })
+            const paths = getHideState();
 
             await HideRoutes({
-                routes
+                paths
             });
 
             if (App.get('mode') === 'prod') {
@@ -849,6 +821,7 @@ export function Sidebar({ parent, path }) {
 
             // Switch change
             node.querySelector('.custom-control-input').addEventListener('change', event => {
+                // FIXME: Return data structure changed. This will always trigger, only show save if a change has been made.
                 const checked = getHideState();
                 console.log(checked);
 

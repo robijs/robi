@@ -1,4 +1,5 @@
 import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { Wait } from './Wait.js'
 
@@ -7,8 +8,8 @@ import { Wait } from './Wait.js'
  *
  * @param {*} param
  */
-export async function HideRoutes({ routes }) {
-    console.log(routes);
+export async function HideRoutes({ paths }) {
+    // console.log(paths);
 
     let digest;
     let request;
@@ -27,33 +28,40 @@ export async function HideRoutes({ routes }) {
         request = await fetch(`http://127.0.0.1:8080/src/app.js`);
         await Wait(1000);
     }
-    let value = await request.text();
 
-    const allRoutes = value.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
-    const routeObjects = allRoutes[1].split(', // @ROUTE');
+    const value = await request.text();
 
-    // Add hide property
-    console.log(routeObjects);
-    const newRoutes = routeObjects.map(route => {
-        const [ query, path ] = route.match(/path: '([\s\S]*?)',/);
+    const newRoutes = paths.map(item => {
+        const { path, hide } = item;
+        const route = Store.routes().filter(r => !r.ignore).find(r => r.path === path);
 
-        if (routes.includes(path)) {
-            console.log(path);
-            console.log('hide route');
-            
-            // FIXME: Use array.join('\n')?
-            route = route.replace(`path: '${path}',`, `path: '${path}',\n            hide: true,`);
+        if (route) {
+            const { title, icon } = route;
+
+            return [
+                `        `,
+                `        // @START-${path}`,
+                `        {`,
+                ... hide ? [`            hide: true,`] : [],
+                `            path: '${path}',`,
+                `            title: '${title}',`,
+                `            icon: '${icon}',`,
+                `            go: ${path}`,
+                `        }`,
+                `        // @END-${path}`,
+                `        `
+            ].join('\n');
         }
-
-        return route;
     }).join(', // @ROUTE');
+
+    // console.log(newRoutes);
 
     const updated = value.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes}// @END-ROUTES`);
 
-    console.log('OLD\n----------------------------------------\n', value);
-    console.log('\n****************************************');
-    console.log('NEW\n----------------------------------------\n', updated);
-    console.log('\n****************************************');
+    // console.log('OLD\n----------------------------------------\n', value);
+    // console.log('\n****************************************');
+    // console.log('NEW\n----------------------------------------\n', updated);
+    // console.log('\n****************************************');
 
     let setFile;
 
@@ -77,6 +85,6 @@ export async function HideRoutes({ routes }) {
         await Wait(1000);
     }
 
-    console.log('Saved:', setFile);
+    // console.log('Saved:', setFile);
 }
 // @END-File

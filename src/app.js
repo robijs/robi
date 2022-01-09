@@ -31,7 +31,6 @@ Start({
         , // @ROUTE        
         // @START-Test
         {
-            hide: true,
             path: 'Test',
             title: 'Test',
             icon: 'bs-tools',
@@ -41,7 +40,6 @@ Start({
         , // @ROUTE        
         // @START-LookupField
         {
-            hide: true,
             path: 'LookupField',
             title: 'Lookup Field',
             icon: 'bs-file-earmarked-ruled',
