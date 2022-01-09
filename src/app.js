@@ -11,6 +11,7 @@ import Test from './Routes/Test/Test.js'
 import LookupField from './Routes/LookupField/LookupField.js'
 import SelectIcon from './Routes/SelectIcon/SelectIcon.js'
 import ChartDemo from './Routes/ChartDemo/ChartDemo.js'
+import ModifyFile from './Routes/ModifyFile/ModifyFile.js'
 // @END-IMPORTS
 
 // @START
@@ -65,6 +66,15 @@ Start({
             go: ChartDemo
         }
         // @END-ChartDemo
+        , // @ROUTE
+        // @START-ModifyFile
+        {
+            path: 'ModifyFile',
+            title: 'Modify File',
+            icon: 'bs-code-slash',
+            go: ModifyFile
+        }
+        // @END-ModifyFile
         // @END-ROUTES
     ],
     settings: {

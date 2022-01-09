@@ -145,6 +145,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     // Render selected route's go method
     route.go({
+        route,
         parent: viewContainer,
         pathParts,
         props: queryStringToObject(path.split('?')[1]),

@@ -38,6 +38,7 @@ import { DeleteItem } from './Actions/DeleteItem.js'
 import { DeleteList } from './Actions/DeleteList.js'
 import { DeleteRoutes } from './Actions/DeleteRoutes.js'
 import { EditLayout } from './Actions/EditLayout.js'
+import { Editor } from './Actions/Editor.js'
 import { GenerateUUID } from './Actions/GenerateUUID.js'
 import { Get } from './Actions/Get.js'
 import { GetADUsers } from './Actions/GetADUsers.js'
@@ -55,12 +56,12 @@ import { GetRequestDigest } from './Actions/GetRequestDigest.js'
 import { GetRootRequestDigest } from './Actions/GetRootRequestDigest.js'
 import { GetSiteUsers } from './Actions/GetSiteUsers.js'
 import { GetWebLists } from './Actions/GetWebLists.js'
+import { HSLDarker } from './Actions/HSLDarker.js'
+import { HTML } from './Actions/HTML.js'
 import { HexToHSL } from './Actions/HexToHSL.js'
 import { HexToRGB } from './Actions/HexToRGB.js'
 import { HideRoutes } from './Actions/HideRoutes.js'
 import { History } from './Actions/History.js'
-import { HSLDarker } from './Actions/HSLDarker.js'
-import { HTML } from './Actions/HTML.js'
 import { InitializeApp } from './Actions/InitializeApp.js'
 import { InstallApp } from './Actions/InstallApp.js'
 import { LaunchApp } from './Actions/LaunchApp.js'
@@ -129,6 +130,7 @@ export {
     DeleteList,
     DeleteRoutes,
     EditLayout,
+    Editor,
     GenerateUUID,
     Get,
     GetADUsers,
@@ -146,12 +148,12 @@ export {
     GetRootRequestDigest,
     GetSiteUsers,
     GetWebLists,
+    HSLDarker,
+    HTML,
     HexToHSL,
     HexToRGB,
     HideRoutes,
     History,
-    HSLDarker,
-    HTML,
     InitializeApp,
     InstallApp,
     LaunchApp,
