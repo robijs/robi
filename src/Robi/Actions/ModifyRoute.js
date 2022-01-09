@@ -15,7 +15,7 @@ import { Container } from '../Components/Container.js'
  *
  * @param {*} param
  */
-export async function ModifyRoutes(event) {
+export async function ModifyRoute({ route }) {
     // return;
     const routes = Store.routes().filter(item => item.type !== 'system');
 

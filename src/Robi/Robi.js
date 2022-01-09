@@ -68,6 +68,7 @@ import { LaunchApp } from './Actions/LaunchApp.js'
 import { Log } from './Actions/Log.js'
 import { LogError } from './Actions/LogError.js'
 import { ModifyFile } from './Actions/ModifyFile.js'
+import { ModifyRoute } from './Actions/ModifyRoute.js'
 import { ModifyRoutes } from './Actions/ModifyRoutes.js'
 import { NameToHex } from './Actions/NameToHex.js'
 import { OrderRoutes } from './Actions/OrderRoutes.js'
@@ -160,6 +161,7 @@ export {
     Log,
     LogError,
     ModifyFile,
+    ModifyRoute,
     ModifyRoutes,
     NameToHex,
     OrderRoutes,

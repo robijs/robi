@@ -7,7 +7,30 @@ import { App } from '../Core/App.js';
  * @param {*} param
  * @returns
  */
-export function Modal({ title, classes, titleStyle, headerStyle, footerStyle, closeStyle, close, addContent, buttons, centered, fade, background, fullSize, showFooter, scrollable, contentPadding, parent, disableBackdropClose, position, shadow }) {
+export function Modal(param) {
+    const { 
+        title,
+        classes,
+        titleStyle,
+        headerStyle,
+        footerStyle,
+        closeStyle,
+        close,
+        addContent,
+        buttons,
+        centered,
+        fade,
+        background,
+        fullSize,
+        showFooter,
+        scrollable,
+        contentPadding,
+        parent,
+        disableBackdropClose,
+        position,
+        shadow 
+    } = param;
+    
     const component = Component({
         html: /*html*/ `
             <!-- Modal -->
