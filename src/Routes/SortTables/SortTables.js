@@ -16,6 +16,23 @@ export default async function SortTables({ parent }) {
     // @START-Rows
     Row(async (parent) => {
         await Table({
+            list: 'Number',
+            parent,
+            advancedSearch: true,
+            toolbar: [
+                {
+                    label: 'All',
+                    filter(data) {
+                        return data;
+                    }
+                }
+            ]
+        });
+    });
+
+    // @Row
+    Row(async (parent) => {
+        await Table({
             list: 'Choice',
             parent,
             advancedSearch: true,
@@ -49,23 +66,6 @@ export default async function SortTables({ parent }) {
     // @Row
     Row(async (parent) => {
         await Table({
-            list: 'Number',
-            parent,
-            advancedSearch: true,
-            toolbar: [
-                {
-                    label: 'All',
-                    filter(data) {
-                        return data;
-                    }
-                }
-            ]
-        });
-    });
-
-    // @Row
-    Row(async (parent) => {
-        await Table({
             list: 'SLOT',
             parent,
             advancedSearch: true,
@@ -79,6 +79,5 @@ export default async function SortTables({ parent }) {
             ]
         });
     });
-
     // @END-Rows
 }
