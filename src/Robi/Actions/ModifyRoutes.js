@@ -192,7 +192,7 @@ export async function ModifyRoutes(event) {
                     for (let field of fields) {
                         const { name, path, title, icon } = field.values();
 
-                        console.log(path, title, icon);
+                        // console.log(path, title, icon);
 
                         if (path || title || icon) {
                             // Set app.js flag
@@ -218,8 +218,6 @@ export async function ModifyRoutes(event) {
                     if (changed) {
                         await updateApp();
                     }
-
-                    return;
 
                     if (App.get('mode') === 'prod') {
                         
@@ -281,20 +279,23 @@ export async function ModifyRoutes(event) {
                         const allRoutes = updated.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
                         const oldRoutes = allRoutes[1].split(', // @ROUTE');
 
-                        console.log(oldRoutes);
+                        // console.log(oldRoutes);
 
                         const newRoutes = fields.map((field, index) => {
                             const { name, path, title, icon, current } = field.values();
                             const route = path || name;
                             const old = oldRoutes[index];
+                            const hidden = old.match(/hide: true,/);
 
-                            console.log(name);
-                            console.log(old);
+                            // console.log(name);
+                            // console.log(old);
+                            // console.log(hidden);
 
                             return [
                                 `        `,
                                 `        // @START-${route}`,
                                 `        {`,
+                                ... hidden ? [`            hide: true,`] : [],
                                 `            path: '${route}',`,
                                 `            title: '${title || current.title}',`,
                                 `            icon: '${icon || current.icon}',`,
@@ -305,14 +306,14 @@ export async function ModifyRoutes(event) {
                             ].join('\n');
                         }).join(', // @ROUTE');
 
-                        return;
+                        // console.log(newRoutes);
                     
                         updated = updated.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes || '\n        '}// @END-ROUTES`);
                     
-                        console.log('OLD\n----------------------------------------\n', content);
-                        console.log('\n****************************************');
-                        console.log('NEW\n----------------------------------------\n', updated);
-                        console.log('\n****************************************');
+                        // console.log('OLD\n----------------------------------------\n', content);
+                        // console.log('\n****************************************');
+                        // console.log('NEW\n----------------------------------------\n', updated);
+                        // console.log('\n****************************************');
 
                         let setFile;
 
@@ -336,7 +337,7 @@ export async function ModifyRoutes(event) {
                             await Wait(1000);
                         }
 
-                        console.log('Saved:', setFile);
+                        // console.log('Saved:', setFile);
                     }
 
                     async function updateRoute({ name, title, path }) {
@@ -360,10 +361,10 @@ export async function ModifyRoutes(event) {
                                 const value = await request.text();
                                 const updated = value.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */'${title}'/* @END-Title */`);
                     
-                                console.log('OLD\n----------------------------------------\n', value);
-                                console.log('\n****************************************');
-                                console.log('NEW\n----------------------------------------\n', updated);
-                                console.log('\n****************************************');
+                                // console.log('OLD\n----------------------------------------\n', value);
+                                // console.log('\n****************************************');
+                                // console.log('NEW\n----------------------------------------\n', updated);
+                                // console.log('\n****************************************');
                     
                                 if (App.get('mode') === 'prod') {
                                     // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js

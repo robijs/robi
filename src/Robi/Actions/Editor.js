@@ -9,9 +9,8 @@ import { Wait } from './Wait.js'
  * @param {*} param
  */
 export async function Editor({ path, file, parent }) {
-    parent.get().style.height = '100%';
     parent.append(/*html*/ `
-        <div class='rs-box code-box alert w-100 mb-0 p-0' style='min-height: 100%; background: #1e1e1e; color: #d4d4d4;'>
+        <div class='rs-box code-box alert w-100 mb-0 p-0' style='background: #1e1e1e; color: #d4d4d4;'>
             <!-- CodeMirror injected here -->
         </div>
     `);

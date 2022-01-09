@@ -24,15 +24,15 @@ Start({
         {
             path: 'SortTables',
             title: 'Sort Tables',
-            icon: 'bs-card-checklist',
+            icon: 'bs-table',
             go: SortTables
         }
         // @END-SortTables
         , // @ROUTE        
         // @START-Test
         {
-            path: 'Test',
             hide: true,
+            path: 'Test',
             title: 'Test',
             icon: 'bs-tools',
             go: Test
@@ -41,8 +41,8 @@ Start({
         , // @ROUTE        
         // @START-LookupField
         {
-            path: 'LookupField',
             hide: true,
+            path: 'LookupField',
             title: 'Lookup Field',
             icon: 'bs-file-earmarked-ruled',
             go: LookupField
@@ -66,7 +66,7 @@ Start({
             go: ChartDemo
         }
         // @END-ChartDemo
-        , // @ROUTE
+        , // @ROUTE        
         // @START-ModifyFile
         {
             path: 'ModifyFile',
