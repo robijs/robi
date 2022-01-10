@@ -1,10 +1,10 @@
-import { Table, Title, Row } from '../../Robi/RobiUI.js'
+import { Table, Row } from '../../Robi/RobiUI.js'
 
 export default async function SortTables({ parent }) {
     // @START-Rows
     Row(async (parent) => {
         await Table({
-            list: 'Number',
+            list: 'MLOT',
             parent,
             advancedSearch: true,
             toolbar: [
@@ -17,7 +17,6 @@ export default async function SortTables({ parent }) {
             ]
         });
     });
-
     // @Row
     Row(async (parent) => {
         await Table({
@@ -34,11 +33,10 @@ export default async function SortTables({ parent }) {
             ]
         });
     });
-    
     // @Row
     Row(async (parent) => {
         await Table({
-            list: 'MLOT',
+            list: 'Number',
             parent,
             advancedSearch: true,
             toolbar: [
@@ -51,7 +49,6 @@ export default async function SortTables({ parent }) {
             ]
         });
     });
-    
     // @Row
     Row(async (parent) => {
         await Table({
