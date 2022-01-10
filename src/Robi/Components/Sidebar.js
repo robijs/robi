@@ -1211,15 +1211,18 @@ export function Sidebar({ parent, path }) {
             });
             component.find('.title').classList.add('fade-out-left');
 
-            // Fade out Edit
-            component.find('.dev-buttons-container').style.opacity = '0';
-            component.find('.dev-buttons-container').style.pointerEvents = 'none';
-            component.find('.dev-buttons-container').style.width = '0px';
+            if(Store.user().Role === "Developer")
+            {
+                // Fade out Edit
+                component.find('.dev-buttons-container').style.opacity = '0';
+                component.find('.dev-buttons-container').style.pointerEvents = 'none';
+                
+                component.find('.dev-buttons-container').style.width = '0px';
 
-            // Fade out New route
-            component.find('.add-route').style.opacity = '0';
-            component.find('.add-route').style.pointerEvents = 'none';
-
+                // Fade out New route
+                component.find('.add-route').style.opacity = '0';
+                component.find('.add-route').style.pointerEvents = 'none';
+            }
             // Set mode
             component.get().dataset.mode = 'closed';
         }
