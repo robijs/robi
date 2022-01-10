@@ -1,5 +1,6 @@
 import { App } from '../Core/App.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
+import { LogError } from './LogError.js'
 import { Wait } from './Wait.js'
 
 // @START-File
