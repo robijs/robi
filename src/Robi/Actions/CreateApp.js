@@ -82,20 +82,11 @@ export async function CreateApp() {
                 classes: ['w-100 mt-5'],
                 width: '100%',
                 parent: modalBody,
-                type: 'robi-reverse',
+                type: 'robi',
                 value: 'Create app'
             });
 
             installBtn.add();
-
-            // Trigger install on enter
-            // modal.get().addEventListener('keypress', event => {
-            //     if (event.ctrlKey && event.code === 'Enter') {
-            //         event.preventDefault();
-
-            //         createNewSite(event);
-            //     }
-            // });
 
             // Kick off new site creation
             async function createNewSite(event) {

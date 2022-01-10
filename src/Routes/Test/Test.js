@@ -4,6 +4,7 @@
 // Otherwise, changes made with GUI tools will not render properly.
 
 import { ModalSlideUp, BootstrapButton, LoadingSpinner } from '../../Robi/RobiUI.js'
+import { CreateApp  } from '../../Robi/Robi.js'
 
 /**
  * 
