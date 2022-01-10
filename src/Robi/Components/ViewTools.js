@@ -32,19 +32,10 @@ export function ViewTools(param) {
                     <div class='grown-in-center'>
                         <!-- Add Table -->
                         <button class='dropdown-item add-table' type='button'>
-                            <div class='table-icon'>
-                                <div class='filter d-flex justify-content-end'>
-                                    <div class='btn-group ml-1' role='group'>
-                                        <div type='button' class='btn btn-robi-reverse'></div>
-                                        <div type='button' class='btn btn-outline-robi'></div>
-                                        <div type='button' class='btn btn-outline-robi'></div>
-                                    </div>
-                                </div>
-                                <div class='rows'>
-                                    <div class='table-icon-row'></div>
-                                    <div class='table-icon-row'></div>
-                                    <div class='table-icon-row'></div>
-                                </div>
+                            <div class='icon-container'>
+                                <svg class='icon' style='font-size: 48px;'>
+                                    <use href='#icon-bs-table'></use>
+                                </svg>
                             </div>
                             <div style='font-weight: 700; margin-top: 10px;'>Table</div>
                         </button>
@@ -169,62 +160,6 @@ export function ViewTools(param) {
                 border: solid 2px var(--primary);
             }
 
-            /* Add table */
-            #id .table-icon {
-                border-radius: 20px;
-                padding: 10px 15px;
-                width: 90px;
-            }
-
-            #id .table-icon .filter .btn {
-                padding: 0px;
-                height: 9px;
-                width: 15px;
-            }
-            
-            #id .table-icon .filter .btn:first-child {
-                border-radius: 3px 0px 0px 3px;
-            }
-
-            #id .table-icon .filter .btn:last-child {
-                border-radius: 0px 3px 3px 0px;
-            }
-
-            #id .table-icon .filter .btn-outline-robi {
-                border-width: 3px;
-            }
-
-            #id .rows {
-                margin-top: 3px;
-                border-radius: 4px;
-                border: solid 3px var(--primary);
-            }
-
-            #id .rows .table-icon-row:last-child {
-                height: 7px;
-            }
-
-            #id .rows .table-icon-row:not(:last-child) {
-                height: 10px;
-                border-bottom: solid 3px var(--primary);
-            }
-
-            #id .columns {
-                padding: 2px 4px 0px 4px;
-            }
-
-            #id .columns .column {
-                flex: 1;
-                height: 2px;
-                border-radius: 2px;
-                margin: 2px 0px;
-                background: var(--primary);
-            }
-
-            #id .columns .column:not(:last-child) {
-                margin-right: 5px;
-            }
-
             #id .icon-container {
                 border-radius: 20px;
                 padding: 10px;
@@ -304,7 +239,6 @@ export function ViewTools(param) {
                     });
 
                     // Cancel
-                    // parent.find('.cancel-edit-layout').addEventListener('click', turnOfSortable);
                     parent.find('.cancel-edit-layout').on('click', turnOfSortable);
 
                     // Turn off sortable
