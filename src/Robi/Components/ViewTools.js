@@ -132,10 +132,7 @@ export function ViewTools(param) {
                 transform: scale(2);
             }
 
-            /* FIXME: Should it be sticky? */
             #id .dropdown-menu {
-                position: absolute !important;
-                transform: translate3d(413px, 5px, 0px) !important;
                 background: transparent;
                 border-radius: 10px;
                 border: none;

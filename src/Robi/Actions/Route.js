@@ -1,5 +1,6 @@
 import { ViewContainer } from '../Components/ViewContainer.js'
 import { ViewTools } from '../Components/ViewTools.js'
+import { Title } from '../Components/Title.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { History } from './History.js'
@@ -13,9 +14,7 @@ import { Log } from './Log.js'
  * @returns
  */
 export function Route(path = App.get('defaultRoute'), options = {}) {
-    const {
-        scrollTop
-    } = options;
+    const { scrollTop, title } = options;
 
     // Get references to core app components
     const appContainer = Store.get('appcontainer');
@@ -70,16 +69,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         component: sidebar
     });
 
-    // NOTE:
-    // This component solves the problem where components are
-    // added to the current view after the user routes away
-    // before components instantiated within are added to the DOM.
-    // 
-    // Components created later are still 'running' in the background.
-    // 
-    // Most views use Store.get('maincontainer') as their parent.
-    // This means components will still be added because they're
-    // finding the new maincontainer for that view.
+    // View container
     const viewContainer = ViewContainer({
         parent: mainContainer,
     });
@@ -103,6 +93,18 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         Route('404');
 
         return;
+    }
+
+    // Route title
+    let viewTitle;
+
+    if (title !== false) {
+        viewTitle = Title({
+            title: route.title,
+            parent: viewContainer
+        });
+
+        viewTitle.add();
     }
 
     // Add source tools
@@ -145,6 +147,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     // Render selected route's go method
     route.go({
+        title: viewTitle,
         route,
         parent: viewContainer,
         pathParts,

@@ -8,15 +8,6 @@ import { Row, Title } from '../../Robi/RobiUI.js'
 
 // @START-ModifyFile
 export default async function ModifyFile({ parent, route }) {
-    // @START-routeTitle
-    const routeTitle = Title({
-        title: /* @START-Title */'Modify File'/* @END-Title */,
-        parent
-    });
-    
-    routeTitle.add();
-    // @END-routeTitle
-
     // @START-Rows
     Row((parent) => {
         Editor({

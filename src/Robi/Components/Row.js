@@ -23,6 +23,7 @@ export function Row(render) {
                 margin-bottom: 20px;
             }
         `,
+        // FIXME: Do I like this? Does it assume too much?
         parent: Store.get('viewcontainer'),
         events: [],
         onAdd() {

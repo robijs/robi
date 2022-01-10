@@ -1,18 +1,6 @@
 import { Table, Title, Row } from '../../Robi/RobiUI.js'
 
 export default async function SortTables({ parent }) {
-    // View title
-    const routeTitle = Title({
-        title: /* @START-Title */'Sort Tables'/* @END-Title */,
-        parent,
-        date: new Date().toLocaleString('en-US', {
-            dateStyle: 'full'
-        }),
-        type: 'across'
-    });
-
-    routeTitle.add();
-
     // @START-Rows
     Row(async (parent) => {
         await Table({
@@ -46,6 +34,7 @@ export default async function SortTables({ parent }) {
             ]
         });
     });
+    
     // @Row
     Row(async (parent) => {
         await Table({

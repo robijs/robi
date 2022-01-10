@@ -4,22 +4,12 @@
 // Otherwise, changes made with GUI tools will not render properly.
 
 import { App } from '../../Robi/Robi.js'
-import { Title } from '../../Robi/RobiUI.js'
 
 // @START-Chart
 export default async function ChartDemo(param) {
     const {
         parent,
     } = param;
-
-    // @START-routeTitle
-    const routeTitle = Title({
-        title: /* @START-Title */'Chart Demo'/* @END-Title */,
-        parent
-    });
-    
-    routeTitle.add();
-    // @END-routeTitle
 
     parent.append(/*html*/ `
         <div class='position-relative h-75 w-100 mt-4'>

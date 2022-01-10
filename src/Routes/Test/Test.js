@@ -4,21 +4,7 @@ import { Title, Table, ModalSlideUp, BootstrapButton, LoadingSpinner } from '../
  * 
  * @param {*} param 
  */
-export default async function Test(param) {
-    const { parent } = param;
-
-    // View title
-    const routeTitle = Title({
-        title: /* @START-Title */'Test'/* @END-Title */,
-        parent,
-        date: new Date().toLocaleString('en-US', {
-            dateStyle: 'full'
-        }),
-        type: 'across'
-    });
-
-    routeTitle.add();
-
+export default async function Test({ parent }) {
     const copyAppBtn = BootstrapButton({
         value: 'Copy app.js',
         classes: ['mr-3', 'mt-3'],

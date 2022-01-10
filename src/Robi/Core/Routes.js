@@ -14,6 +14,7 @@ import { Unauthorized } from '../Components/Unauthorized.js'
 const Routes = [
     {
         path: '403',
+        title: '403',
         type: 'system',
         hide: true,
         ignore: true,
@@ -23,6 +24,7 @@ const Routes = [
     },
     {
         path: '404',
+        title: '404',
         type: 'system',
         hide: true,
         ignore: true,
@@ -32,12 +34,14 @@ const Routes = [
     },
     {
         path: 'Questions',
+        title: 'Questions',
         type: 'system',
         icon: 'bs-chat-right-text',
         go(param) {
             const {
                 parent,
-                pathParts
+                pathParts,
+                title,
             } = param;
 
             if (pathParts.length === 1) {
@@ -45,19 +49,22 @@ const Routes = [
             } else if (pathParts.length === 2) {
                 QuestionBoard({
                     parent,
-                    path: pathParts[1]
+                    path: pathParts[1],
+                    title
                 });
             } else if (pathParts.length === 3) {
                 QuestionAndReplies({
                     parent,
                     path: pathParts[1],
-                    itemId: parseInt(pathParts[2])
+                    itemId: parseInt(pathParts[2]),
+                    title
                 });
             }
         }
     },
     {
         path: 'Settings',
+        title: 'Settings',
         type: 'system',
         icon: 'bs-gear',
         ignore: true,

@@ -24,7 +24,9 @@ import { Preferences } from './Preferences.js'
  * 
  * @param {*} param 
  */
-export async function Settings({ parent, pathParts }) {
+export async function Settings({ parent, pathParts, title }) {
+    title.remove();
+    
     // Routed selection, default to Account if none
     const path = pathParts[1] || 'Account';
 

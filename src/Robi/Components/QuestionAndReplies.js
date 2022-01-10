@@ -13,8 +13,8 @@ import { Store } from '../Core/Store.js'
  *
  * @param {*} param
  */
-export async function QuestionAndReplies(param) {
-    const { parent, path, itemId } = param;
+export async function QuestionAndReplies({ parent, path, itemId, title }) {
+    title.remove();
 
     /** View Title */
     let routeTitle;

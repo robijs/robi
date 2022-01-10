@@ -20,8 +20,8 @@ import { LoadingSpinner } from './LoadingSpinner.js'
  *
  * @param {*} param
  */
-export async function QuestionBoard(param) {
-    const { parent, path } = param;
+export async function QuestionBoard({ parent, path, title }) {
+    title.remove();
 
     /** View Title */
     let routeTitle;
