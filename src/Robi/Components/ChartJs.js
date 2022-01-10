@@ -105,9 +105,10 @@ export function ChartJs(param) {
     component.setTitle = (text) => {
         const title = component.find('.chart-title');
 
-        // title.style.opacity = '0';
-        title.innerText = text;
-        title.style.opacity = '1';
+        if (title) {
+            title.innerText = text;
+            title.style.opacity = '1';
+        }
     };
 
     component.clearChart = () => {

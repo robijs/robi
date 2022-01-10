@@ -6,14 +6,6 @@
 import { Table, Row, Alert } from '../../Robi/RobiUI.js'
 
 export default async function SortTables({ parent }) {
-    const info = Alert({
-        type: 'robi-primary',
-        text: 'This is a test',
-        parent
-    });
-
-    info.add();
-    
     // @START-Rows
     Row(async (parent) => {
         await Table({

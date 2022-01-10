@@ -16,6 +16,7 @@ export async function SiteUsageContainer({ parent }) {
     const chartCard = Container({
         display: 'block',
         shimmer: true,
+        background: 'var(--secondary)',
         width: '100%',
         parent
     });
