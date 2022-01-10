@@ -12,6 +12,7 @@ import LookupField from './Routes/LookupField/LookupField.js'
 import SelectIcon from './Routes/SelectIcon/SelectIcon.js'
 import ChartDemo from './Routes/ChartDemo/ChartDemo.js'
 import ModifyFile from './Routes/ModifyFile/ModifyFile.js'
+import NewTitle from './Routes/NewTitle/NewTitle.js'
 // @END-IMPORTS
 
 // @START
@@ -73,7 +74,16 @@ Start({
             go: ModifyFile
         }
         // @END-ModifyFile
-// @END-ROUTES
+, // @ROUTE
+        // @START-NewTitle
+        {
+            path: 'NewTitle',
+            title: 'New Title',
+            icon: 'bs-book',
+            go: NewTitle
+        }
+        // @END-NewTitle
+        // @END-ROUTES
     ],
     settings: {
         // @START-SETTINGS
