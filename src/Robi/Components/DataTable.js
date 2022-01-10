@@ -86,6 +86,10 @@ export function DataTable(param) {
                 cursor: ${cursor || 'pointer'};
             }
 
+            #id tr td.dataTables_empty {
+                cursor: default;
+            }
+
             /* 
             Toolbar 
             paging: false,
@@ -861,6 +865,10 @@ export function DataTable(param) {
     component.getButton = (className) => {
         return component.get().closest('.dataTables_wrapper').querySelector(`button.${className}`);
     };
+
+    component.wrapper = () => {
+        return component.get().closest('.dataTables_wrapper');
+    }
 
     return component;
 }

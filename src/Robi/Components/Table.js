@@ -65,6 +65,7 @@ export async function Table(param) {
         classes: ['table-container'],
         shimmer: true,
         minHeight: '200px',
+        radius: '20px',
         width,
         margin,
         padding,
@@ -72,6 +73,8 @@ export async function Table(param) {
     });
 
     tableContainer.add();
+
+    tableContainer.get().style.transition = 'background-color 500ms ease';
 
     // Columns
     const headers = [];
@@ -481,12 +484,23 @@ export async function Table(param) {
         }
     }
 
+    // Fade container
+    const fadeContainer = Container({
+        parent: tableContainer,
+        classes: ['w-100'],
+        name: 'fade-container',
+        display: 'block'
+    });
+
+    fadeContainer.add();
+    fadeContainer.get().style.opacity = '0';
+
     // Toolbar
     if (toolbar || advancedSearch) {
         const tableToolbar = TableToolbar({
             heading: heading || ( heading === '' ? '' : list ? (lists.find(item => item.list === list)?.heading || list.split(/(?=[A-Z])/).join(' '))  : '' ),
             options: toolbar || [],
-            parent: tableContainer,
+            parent: fadeContainer,
             advancedSearch,
             list,
             action(label) {
@@ -712,10 +726,16 @@ export async function Table(param) {
             setSelectedRadius();
             removeSelectedRadius();
         },
-        parent: tableContainer
+        parent: fadeContainer
     });
 
     table.add();
+
+    // Fade in
+    setTimeout(() => {
+        fadeContainer.get().style.transition = 'opacity 300ms ease 100ms';
+        fadeContainer.get().style.opacity = '1';
+    }, 0);
 
     // Shimmer off
     tableContainer.shimmerOff();
