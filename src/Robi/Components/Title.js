@@ -9,7 +9,20 @@ import { App } from '../Core/App.js';
  */
 export function Title(param) {
     const {
-        back, title, width, subTitle, subTitleColor, breadcrumb, dropdownGroups, maxTextWidth, route, padding, margin, parent, position, action
+        back,
+        title,
+        width,
+        subTitle,
+        subTitleColor,
+        breadcrumb,
+        dropdownGroups,
+        maxTextWidth,
+        route,
+        padding,
+        margin,
+        parent,
+        position,
+        action
     } = param;
 
     const component = Component({

@@ -101,7 +101,8 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
     if (title !== false) {
         viewTitle = Title({
             title: route.title,
-            parent: viewContainer
+            parent: viewContainer,
+            margin: '0px 0px 20px 0px'
         });
 
         viewTitle.add();
