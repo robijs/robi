@@ -1247,17 +1247,19 @@ export function Sidebar({ parent, path }) {
                 event.target.classList.remove('fade-in-right');
             });
 
-            // Fade in Edit
-            component.find('.dev-buttons-container').style.opacity = '1';
-            component.find('.dev-buttons-container').style.pointerEvents = 'auto';
-            // TODO: Get actual width on load
-            // FIXME: remove hard coded width
-            component.find('.dev-buttons-container').style.width = '50.41px';
+            if (Store.user().Role === 'Developer') {
+                // Fade in Edit
+                component.find('.dev-buttons-container').style.opacity = '1';
+                component.find('.dev-buttons-container').style.pointerEvents = 'auto';
+                // TODO: Get actual width on load
+                // FIXME: remove hard coded width
+                component.find('.dev-buttons-container').style.width = '50.41px';
 
-            // Fade in New route
-            component.find('.add-route').style.opacity = '1';
-            component.find('.add-route').style.pointerEvents = 'auto';
-
+                // Fade in New route
+                component.find('.add-route').style.opacity = '1';
+                component.find('.add-route').style.pointerEvents = 'auto';
+            }
+            
             // Set mode
             component.get().dataset.mode = 'open';
         }
