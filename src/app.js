@@ -13,6 +13,7 @@ import LookupField from './Routes/LookupField/LookupField.js'
 import SelectIcon from './Routes/SelectIcon/SelectIcon.js'
 import ChartDemo from './Routes/ChartDemo/ChartDemo.js'
 import ModifyFile from './Routes/ModifyFile/ModifyFile.js'
+import Button from './Routes/Button/Button.js'
 // @END-IMPORTS
 
 // @START
@@ -74,7 +75,16 @@ Start({
             go: ModifyFile
         }
         // @END-ModifyFile
-// @END-ROUTES
+, // @ROUTE
+        // @START-Button
+        {
+            path: 'Button',
+            title: 'Button',
+            icon: 'bs-stop-fill',
+            go: Button
+        }
+        // @END-Button
+        // @END-ROUTES
     ],
     settings: {
         // @START-SETTINGS

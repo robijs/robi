@@ -673,7 +673,7 @@ export function AppContainer() {
               
             }
 
-            /* NOTE: Should these styles live here, in Table.js or DataTable.js? */
+            /* Row */
             .robi-row {
                 transition: background-color 250ms ease, padding 250ms ease, margin 250ms ease, transform 250ms ease, box-shadow 250ms ease;
                 border-radius: 20px !important;
