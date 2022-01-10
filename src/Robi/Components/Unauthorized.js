@@ -7,8 +7,8 @@ import { Alert } from './Alert.js'
  */
 export async function Unauthorized({ parent }) {
     const alertBanner = Alert({
-        type: 'warning',
-        text: `Sorry! You don't have access to this page. Please select a different option from the menu on the left.`,
+        type: 'robi-primary',
+        text: `Sorry! You don't have access to that page.`,
         parent,
         margin: '20px 0px 0px 0px'
     });
