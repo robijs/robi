@@ -20,7 +20,7 @@ export function Row(render) {
             }
 
             .robi-row:not(:last-child) {
-                margin-bottom: 20px;
+                margin-bottom: 30px;
             }
         `,
         // FIXME: Do I like this? Does it assume too much?
