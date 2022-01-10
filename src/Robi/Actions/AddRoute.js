@@ -214,8 +214,7 @@ export async function AddRoute(event) {
 
                     async function createRoute() {
                         const contents = RouteTemplate({
-                            name: routePath.value(),
-                            title: routeTitle.value()
+                            name: routePath.value()
                         });
                     
                         let newFile;

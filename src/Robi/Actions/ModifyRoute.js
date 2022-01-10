@@ -16,7 +16,6 @@ import { Container } from '../Components/Container.js'
  * @param {*} param
  */
 export async function ModifyRoute({ route }) {
-    // return;
     const routes = Store.routes().filter(item => item.type !== 'system');
 
     const addRouteModal = Modal({
@@ -207,7 +206,7 @@ export async function ModifyRoute({ route }) {
                             }
                             
                             if (App.isProd()) {
-                                await updateRoute({ name, path, title, icon });
+                                await updateRoute({ name, path });
                             }
                         } else {
                             console.log(`${name} not changed`);
@@ -229,7 +228,7 @@ export async function ModifyRoute({ route }) {
                             const { name, path, title, icon } = field.values();
     
                             if (path || title || icon) {
-                                await updateRoute({ name, path, title, icon });
+                                await updateRoute({ name, path });
                             } else {
                                 console.log(`${name} not changed`);
                             }
@@ -340,14 +339,14 @@ export async function ModifyRoute({ route }) {
                         // console.log('Saved:', setFile);
                     }
 
-                    async function updateRoute({ name, title, path }) {
+                    async function updateRoute({ name, path }) {
                         // Prod
                         if (App.isProd()) {
                             let digest;
                             let request;
-                
-                            // 1. If title has changed, update file.
-                            if (title) {
+    
+                            if (path) {
+                                // 1. Rename function
                                 digest = await GetRequestDigest();
                                 request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/Files('${name}.js')/$value`, {
                                     method: 'GET',
@@ -359,39 +358,30 @@ export async function ModifyRoute({ route }) {
                                 });
                     
                                 const value = await request.text();
-                                const updated = value.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */'${title}'/* @END-Title */`);
-                    
+                                const updated = value;
+
+                                // Rename function
+                                if (path) {
+                                    updated = updated.replace(`function ${name}`, `function ${path}`);
+                                }
                                 // console.log('OLD\n----------------------------------------\n', value);
                                 // console.log('\n****************************************');
                                 // console.log('NEW\n----------------------------------------\n', updated);
                                 // console.log('\n****************************************');
                     
-                                if (App.isProd()) {
-                                    // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
-                                    await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/Files/Add(url='${name}.js',overwrite=true)`, {
-                                        method: 'POST',
-                                        body: updated, 
-                                        headers: {
-                                            'binaryStringRequestBody': 'true',
-                                            'Accept': 'application/json;odata=verbose;charset=utf-8',
-                                            'X-RequestDigest': digest
-                                        }
-                                    });
-                                } else {
-                                    await fetch(`http://127.0.0.1:2035/?path=src/Routes/${name}&file=${name}.js`, {
-                                        method: 'POST',
-                                        body: updated
-                                    });
-                                    await Wait(1000);
-                                }
-                            } else {
-                                console.log('Title not changed');
-                            }
-    
-                            // 2. If path has changed, change file and dir name
-                            if (path) {
+                                // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
+                                await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/Files/Add(url='${name}.js',overwrite=true)`, {
+                                    method: 'POST',
+                                    body: updated, 
+                                    headers: {
+                                        'binaryStringRequestBody': 'true',
+                                        'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                        'X-RequestDigest': digest
+                                    }
+                                });
+
                                 // TODO: Extract to new Action
-                                // b. Rename file
+                                // 2. Rename file
                                 await fetch(`${App.get('site')}/_api/web/GetFileByServerRelativeUrl('App/src/Routes/${name}/${name}.js')/moveto(newurl='App/src/Routes/${name}/${path}.js',flags=1)`, {
                                     method: 'MERGE',
                                     body: {
@@ -408,7 +398,7 @@ export async function ModifyRoute({ route }) {
                                 });
 
                                 // TODO: Extract to new Action
-                                // a. Rename dir
+                                // 3. Rename dir
                                 const getType = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src/Routes/${name}')/ListItemAllFields`, {
                                     method: 'GET',
                                     headers: {
@@ -443,19 +433,13 @@ export async function ModifyRoute({ route }) {
                         
                         // Dev
                         if (App.isDev()) {
-                            // 1. If title has changed, update file.
                             const request = await fetch(`http://127.0.0.1:8080/src/Routes/${name}/${name}.js`);
                             await Wait(1000);
                 
                             const value = await request.text();
 
-                            // Hold changes;
+                            // Hold changes
                             let updated = value;
-                            
-                            // Set new title
-                            if (title) {
-                                value.replace(/\/\* @START-Title \*\/([\s\S]*?)\/\* @END-Title \*\//, `/* @START-Title */'${title}'/* @END-Title */`);
-                            }
 
                             // Rename function
                             if (path) {
@@ -478,7 +462,6 @@ export async function ModifyRoute({ route }) {
                         }
                     }
                 },
-                // disabled: true,
                 classes: ['w-100 mt-5'],
                 width: '100%',
                 parent: modalBody,
@@ -489,7 +472,7 @@ export async function ModifyRoute({ route }) {
             addRouteBtn.add();
 
             const cancelBtn = BootstrapButton({
-                action(event) {
+                action() {
                     console.log('Cancel modify routes');
 
                     addRouteModal.close();
