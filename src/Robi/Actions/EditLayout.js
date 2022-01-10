@@ -42,19 +42,19 @@ export async function EditLayout({ order, path, file }) {
 
     async function updateApp() {
         let fileValueRequest;
-        let requestDigest;
+        let digest;
 
         if (App.isProd()) {
             const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
 
-            requestDigest = await GetRequestDigest();
+            digest = await GetRequestDigest();
 
             fileValueRequest = await fetch(sourceSiteUrl, {
                 method: 'GET',
                 headers: {
                     'binaryStringRequestBody': 'true',
                     'Accept': 'application/json;odata=verbose;charset=utf-8',
-                    'X-RequestDigest': requestDigest
+                    'X-RequestDigest': digest
                 }
             });
 

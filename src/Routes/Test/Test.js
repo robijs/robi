@@ -1,4 +1,9 @@
-import { Title, Table, ModalSlideUp, BootstrapButton, LoadingSpinner } from '../../Robi/RobiUI.js'
+// This file can be edited programmatically.
+// If you know the API, feel free to make changes by hand.
+// Just be sure to put @START and @END sigils in the right places.
+// Otherwise, changes made with GUI tools will not render properly.
+
+import { ModalSlideUp, BootstrapButton, LoadingSpinner } from '../../Robi/RobiUI.js'
 
 /**
  * 

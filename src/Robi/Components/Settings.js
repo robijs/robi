@@ -120,7 +120,7 @@ export async function Settings({ parent, pathParts, title }) {
         height: '100%',
         minWidth: 'fit-content',
         direction: 'column',
-        padding: '20px',
+        padding: '62px 20px 20px 20px',
         borderRight: `solid 1px var(--borderColor)`,
         parent: formContainer
     });
@@ -133,7 +133,7 @@ export async function Settings({ parent, pathParts, title }) {
         height: '100%',
         direction: 'column',
         overflowX: 'overlay',
-        padding: '20px 0px 0px 0px',
+        padding: '62px 0px 0px 0px',
         parent: formContainer
     });
 
@@ -154,7 +154,7 @@ export async function Settings({ parent, pathParts, title }) {
     const routeTitle = Title({
         title: 'Settings',
         subTitle: section || 'Account',
-        padding: '0px 30px 10px 30px',
+        padding: '0px 30px 15px 30px',
         width: '100%',
         parent: titleContainer,
         type: 'across',
@@ -196,7 +196,7 @@ export async function Settings({ parent, pathParts, title }) {
     const planContainer = Container({
         width: '100%',
         name: 'plan',
-        padding: '10px 30px 0px 30px;',
+        padding: '15px 30px 0px 30px;',
         direction: 'column',
         parent: projectContainer
     });

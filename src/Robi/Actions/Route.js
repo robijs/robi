@@ -102,7 +102,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         viewTitle = Title({
             title: route.title,
             parent: viewContainer,
-            margin: '0px 0px 20px 0px'
+            margin: '0px 0px 30px 0px'
         });
 
         viewTitle.add();

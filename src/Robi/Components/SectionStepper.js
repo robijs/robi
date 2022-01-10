@@ -91,7 +91,7 @@ export function SectionStepper(param) {
             #id .section-name {
                 width: 100%;
                 white-space: nowrap;
-                font-weight: 400;
+                font-weight: 500;
             }
 
             #id .section-name-text {
