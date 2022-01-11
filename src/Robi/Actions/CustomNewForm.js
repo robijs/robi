@@ -62,6 +62,10 @@ export async function CustomNewForm({ list, display, fields }) {
                     document.querySelector('#app').style.transition = 'filter 150ms';
                     document.querySelector('#app').style.filter = 'blur(5px)';
 
+                    // await updateLists();
+
+                    // return;
+
                     await createForm();
 
                     return;
@@ -72,6 +76,93 @@ export async function CustomNewForm({ list, display, fields }) {
                     }
 
                     modal.close();
+
+                    async function updateLists() {
+                        // Update app.js
+                        let digest;
+                        let request;
+
+                        if (App.isProd()) {
+                            digest = await GetRequestDigest();
+                            request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('lists.js')/$value`, {
+                                method: 'GET',
+                                headers: {
+                                    'binaryStringRequestBody': 'true',
+                                    'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                    'X-RequestDigest': digest
+                                }
+                            });
+                        } else {
+                            request = await fetch(`http://127.0.0.1:8080/src/lists.js`);
+                            await Wait(1000);
+                        }
+
+                        let content = await request.text();
+                        let updatedContent;
+
+                        // Set import
+                        const imports = content.match(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/);
+                        const newImports = imports[1] + `import ${list}NewForm from './Forms/${list}/NewForm.js'\n`
+                        updatedContent = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS${newImports}// @END-IMPORTS`);
+
+                        // Set routes
+                        const routes = content.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
+                        const ordered = routes[1].split(', // @ROUTE');
+                        // FIXME: replace hard coded spaces (4 === 1 tab) with variable that includes 4 space characters
+                        // TODO: Extract to template
+                        const newRoute = [
+                            ``,
+                            `        // @START-${routePath.value()}`,
+                            `        {`,
+                            `            path: '${routePath.value()}',`,
+                            `            title: '${routeTitle.value()}',`,
+                            `            icon: '${routeIcon.value()}',`,
+                            `            go: ${routePath.value()}`,
+                            `        }`,
+                            `        // @END-${routePath.value()}`,
+                            ``
+                        ].join('\n');
+
+                        ordered.push(newRoute);
+
+                        console.log('New:', ordered);
+
+                        const newRoutes = ordered.join(', // @ROUTE');
+
+                        console.log(newRoutes);
+
+                        // TODO: Will you always need to add 8 spaces before // @END-ROUTES?
+                        updatedContent = updatedContent.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes}        // @END-ROUTES`);
+
+                        console.log('OLD\n----------------------------------------\n', content);
+                        console.log('\n****************************************');
+                        console.log('NEW\n----------------------------------------\n', updatedContent);
+                        console.log('\n****************************************');
+
+                        let setFile;
+
+                        if (App.isProd()) {
+                            // TODO: Make a copy of app.js first
+                            // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
+                            setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app.js',overwrite=true)`, {
+                                method: 'POST',
+                                body: updatedContent, 
+                                headers: {
+                                    'binaryStringRequestBody': 'true',
+                                    'Accept': 'application/json;odata=verbose;charset=utf-8',
+                                    'X-RequestDigest': digest
+                                }
+                            });
+                        } else {
+                            setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
+                                method: 'POST',
+                                body: updatedContent
+                            });
+                            await Wait(1000);
+                        }
+
+                        console.log('Saved:', setFile);
+                    }
 
                     async function createForm() {
                         const contents = FormTemplate({

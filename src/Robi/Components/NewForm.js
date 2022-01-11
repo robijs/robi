@@ -7,13 +7,11 @@ import { SingleLineTextField } from './SingleLineTextField.js'
 
 // @START-File
 /**
- *
+ * 
  * @param {*} param
- * @returns
+ * @returns 
  */
-export async function NewForm(param) {
-    const { event, fields, list, modal, parent, table } = param;
-
+export async function NewForm({ event, fields, list, modal, parent, table }) {
     const fieldsToCreate = fields?.filter(field => field.name !== 'Id');
     const components = fieldsToCreate?.map((field, index) => {
         const { name, display, type, choices, action } = field;

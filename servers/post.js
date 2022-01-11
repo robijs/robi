@@ -29,23 +29,26 @@ createServer((req, res) => {
                 return [ key, value ];
             }));
 
+            // METHOD: newform
             if (path === 'newform') {
                 // Make dirs if they don't exist
-                mkdirSync(`./src/Forms`, { recursive: true });
+                mkdirSync(`./src/Forms/${file}`, { recursive: true });
 
-                const writableStream = createWriteStream(`./src/Forms/${file}.js`);
+                const writableStream = createWriteStream(`./src/Forms/${file}/NewForm.js`);
                 writableStream.write(data);
 
-                console.log(`\nSuccessfully created form -> ${file}\n`);
-            } else {
-                // Make dirs if they don't exist
-                mkdirSync(`./${path}`, { recursive: true });
+                console.log(`\nCreated '${file}' new form\n`);
 
-                const writableStream = createWriteStream(`./${path}/${file}`);
-                writableStream.write(data);
-
-                console.log(`\nSuccessfully wrote to -> ${path}/${file}\n`);
+                return;
             }
+ 
+            // Make dirs if they don't exist
+            mkdirSync(`./${path}`, { recursive: true });
+
+            const writableStream = createWriteStream(`./${path}/${file}`);
+            writableStream.write(data);
+
+            console.log(`\nSuccessfully wrote to -> ${path}/${file}\n`);
         });
 
         req.on("end", () => {
