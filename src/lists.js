@@ -1,10 +1,13 @@
 // @START-IMPORTS
 import CustomFormNewForm from './Forms/CustomForm/NewForm.js'
+import CustomFormEditForm from './Forms/CustomForm/EditForm.js'
 // @END-IMPORTS
 
 export default [
     {
         list: 'CustomForm',
+        editForm: CustomFormEditForm,
+        editForm: CustomFormEditForm,
         newForm: CustomFormNewForm,
         display: 'Custom Form',
         fields: [

@@ -3,13 +3,13 @@
 // Just be sure to put @START and @END sigils in the right places.
 // Otherwise, changes made with CLI and GUI tools will not render properly.
 
-import { CreateItem } from '../../Robi/Robi.js'
+import { UpdateItem } from '../../Robi/Robi.js'
 import { BootstrapDropdown, DateField, MultiLineTextField, NumberField, SingleLineTextField } from '../../Robi/RobiUI.js'
 
 // @START-CustomForm
-export default async function NewForm({ event, fields, list, modal, parent, table }) {
-    console.log(list, 'new form');
-    
+export default async function EditForm({ event, fields, item, list, modal, parent, table }) {
+    console.log(list, 'edit form');
+
     const fieldsToCreate = fields?.filter(field => field.name !== 'Id');
     const components = fieldsToCreate?.map((field, index) => {
         const { name, display, type, choices, action } = field;
@@ -65,16 +65,16 @@ export default async function NewForm({ event, fields, list, modal, parent, tabl
     });
     
     return {
-        async onCreate(event) {
+        async onUpdate(event) {
             const data = {};
-    
+
             components
                 .forEach(item => {
                     const { component, field } = item;
                     const { name, type } = field;
-    
+
                     const value = component.value();
-    
+
                     switch (type) {
                         case 'slot':
                         case 'mlot':
@@ -90,15 +90,24 @@ export default async function NewForm({ event, fields, list, modal, parent, tabl
                             break;
                     }
                 });
-    
+
             console.log(data);
-    
-            const newItem = await CreateItem({
+
+            const updatedItem = await UpdateItem({
                 list,
+                itemId: item.Id,
                 data
             });
-    
-            return newItem;
+
+            return updatedItem;
+        },
+        async onDelete(event) {
+            const deletedItem = await DeleteItem({
+                list,
+                itemId: item.Id
+            });
+
+            return deletedItem;
         }
     };
 }
