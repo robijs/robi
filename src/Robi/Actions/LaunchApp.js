@@ -110,8 +110,9 @@ export async function LaunchApp(param) {
 
     /** Log in*/
     try {
+        // TODO: Standarize LOG and ERROR format
         Log({
-            Title: `${Store.user().Title || 'User'} logged in`,
+            Title: `Log in`,
             Message: `${Store.user().Email || 'User'} successfully loaded ${title}`,
             StackTrace: new Error().stack,
             Module: import.meta.url

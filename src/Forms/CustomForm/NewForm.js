@@ -3,12 +3,12 @@
 // Just be sure to put @START and @END sigils in the right places.
 // Otherwise, changes made with CLI and GUI tools will not render properly.
 
-import { UpdateItem, DeleteItem } from '../../Robi/Robi.js'
+import { CreateItem } from '../../Robi/Robi.js'
 import { BootstrapDropdown, MultiChoiceField, MultiLineTextField, NumberField, Row, SingleLineTextField } from '../../Robi/RobiUI.js'
 
 // @START-CustomForm
-export default async function EditForm({ event, fields, item, list, modal, parent, table }) {
-    console.log(list, 'custom edit form');
+export default async function NewForm({ event, fields, list, modal, parent, table }) {
+    console.log(list, 'custom new form');
 
    const [
         SLOT_props,
@@ -30,7 +30,6 @@ export default async function EditForm({ event, fields, item, list, modal, paren
 
         SLOT_field = SingleLineTextField({
             label: display || name,
-            value: item[name],
             parent
         });
 
@@ -42,7 +41,6 @@ export default async function EditForm({ event, fields, item, list, modal, paren
 
         MLOT_field = MultiLineTextField({
             label: display || name,
-            value: item[name],
             parent
         });
 
@@ -54,7 +52,6 @@ export default async function EditForm({ event, fields, item, list, modal, paren
 
         Number_field = NumberField({
             label: display || name,
-            value: item[name],
             parent
         });
 
@@ -66,7 +63,7 @@ export default async function EditForm({ event, fields, item, list, modal, paren
 
         Choice_field = BootstrapDropdown({
             label: display || name,
-            value: item[name],
+            value: value || '',
             options: choices.map(choice => {
                 return {
                     label: choice
@@ -85,7 +82,6 @@ export default async function EditForm({ event, fields, item, list, modal, paren
             label: display || name,
             choices,
             fillIn,
-            value: item[name],
             parent
         });
 
@@ -94,7 +90,7 @@ export default async function EditForm({ event, fields, item, list, modal, paren
     // @END-Rows
 
     return {
-        async onUpdate(event) {
+        async onCreate(event) {
             const data = {};
 
             if (SLOT_field.value()) {
@@ -119,21 +115,12 @@ export default async function EditForm({ event, fields, item, list, modal, paren
 
             console.log(data);
 
-            const updatedItem = await UpdateItem({
+            const newItem = await CreateItem({
                 list,
-                itemId: item.Id,
                 data
             });
 
-            return updatedItem;
-        },
-        async onDelete(event) {
-            const deletedItem = await DeleteItem({
-                list,
-                itemId: item.Id
-            });
-
-            return deletedItem;
+            return newItem;
         }
     };
 }

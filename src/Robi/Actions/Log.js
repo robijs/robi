@@ -55,7 +55,7 @@ export async function Log(param) {
 
         const newItem = await Post(postOptions);
 
-        console.log(`%cLog: ${Title}`, 'background: #1e1e1e; color: #fff');
+        console.log(`Log: ${Title}`);
 
         return newItem.d;
     } else if (App.isDev()) {
@@ -75,7 +75,7 @@ export async function Log(param) {
             }
         });
 
-        console.log(`%cLog: ${Title}`, 'background: #1e1e1e; color: #fff');
+        console.log(`Log: ${Title}`);
 
         return newLog;
     }

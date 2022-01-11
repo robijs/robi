@@ -107,16 +107,7 @@ export function BootstrapDropdown(param) {
                     }
                 }
             }
-            // TODO: Add scroll through this with up and down arrow keys
-        ],
-        onAdd() {
-            // // FIXME: Why does adding a timeout work?
-            // setTimeout(() => {
-            //     // FIXME: assumes maxWidth is px
-            //     component.find('.dropdown-toggle').style.width = `${component.find('.dropdown-menu').offsetWidth || (parseInt(maxWidth?.replace('px')) || 160)}px`;
-            //     component.find('.dropdown-menu').classList.remove('hidden');
-            // }, setWidthDelay || 100);
-        }
+        ]
     });
 
     function buildDropdown(items) {

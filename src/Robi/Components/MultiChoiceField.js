@@ -10,7 +10,7 @@ import { App } from '../Core/App.js'
  */
 export function MultiChoiceField(param) {
     const {
-        label, description, choices, value, fillIn, parent, position, width, fieldMargin, onChange
+        label, description, choices, value, fillIn, parent, position, fieldMargin, onChange
     } = param;
 
     const component = Component({
@@ -19,10 +19,11 @@ export function MultiChoiceField(param) {
                 ${label ? /*html*/ `<label>${label}</label>` : ''}
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
                 <div>
-                    ${choices.map(choice => {
-            const id = GenerateUUID();
+                    ${
+                        choices.map(choice => {
+                            const id = GenerateUUID();
 
-            return /*html*/ `
+                            return /*html*/ `
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="${id}" data-label='${choice}' ${value?.includes(choice) ? 'checked' : ''}>
                                     <label class="custom-control-label" for="${id}">${choice}</label>
@@ -32,22 +33,24 @@ export function MultiChoiceField(param) {
                                     <label class="custom-control-label" for="${id}">${choice}</label>
                                 </div> -->
                             `;
-        }).join('\n')}
-                    ${fillIn ?
-                (() => {
-                    const id = GenerateUUID();
-                    // FIXME: this wil probably break if fill in choice is the same as one of the choices
-                    const otherValue = value?.find(item => !choices.includes(item));
+                        }).join('\n')
+                    }
+                    ${
+                        fillIn ?
+                        (() => {
+                            const id = GenerateUUID();
+                            // FIXME: this wil probably break if fill in choice is the same as one of the choices
+                            const otherValue = value ? value.find(item => !choices.includes(item)) : '';
 
-                    return /*html*/ `
+                            return /*html*/ `
                                 <div class="custom-control custom-checkbox d-flex align-items-center">
                                     <input type="checkbox" class="custom-control-input other-checkbox" id="${id}" data-label='Other' ${otherValue ? 'checked' : ''}>
                                     <label class="custom-control-label d-flex align-items-center other-label" for="${id}">Other</label>
                                     <input type='text' class='form-control ml-2 Other' value='${otherValue || ''}' list='autocompleteOff' autocomplete='new-password'>
                                 </div>
                             `;
-                })() :
-                ''}
+                        })() : ''
+                    }
                 </div>
             </div>
         `,
@@ -119,7 +122,7 @@ export function MultiChoiceField(param) {
                 selector: '#id .Other',
                 event: 'keyup',
                 listener(event) {
-                    if (event.target.value) {
+                    if (event.target.value && onchange) {
                         onChange(event);
                     }
                 }
@@ -129,11 +132,10 @@ export function MultiChoiceField(param) {
 
     component.value = (param, options = {}) => {
         const checked = component.findAll('.custom-control-input:not(.other-checkbox):checked');
-
         const results = [...checked].map(node => node.dataset.label);
+        const other = component.find('.custom-control-input.other-checkbox:checked');
 
-        if (fillIn) {
-            // console.log(component.find('.Other').value);
+        if (fillIn && other) {
             results.push(component.find('.Other').value);
         }
 

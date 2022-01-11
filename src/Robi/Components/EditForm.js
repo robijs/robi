@@ -17,7 +17,7 @@ export async function EditForm({ event, fields, item, list, modal, parent, table
     const components = fields
         ?.filter(field => field.name !== 'Id')
         ?.map(field => {
-            const { name, display, type, choices, action } = field;
+            const { name, display, type, choices, action, fillIn } = field;
 
             let component = {};
 
@@ -46,7 +46,7 @@ export async function EditForm({ event, fields, item, list, modal, parent, table
                 case 'choice':
                     component = BootstrapDropdown({
                         label: display || name,
-                        value: item[name] || choices[0],
+                        value: item[name],
                         setWidthDelay: 200,
                         options: choices.map(choice => {
                             return {
@@ -57,11 +57,11 @@ export async function EditForm({ event, fields, item, list, modal, parent, table
                     });
                     break;
                 case 'multichoice':
-                    console.log(name);
                     component = MultiChoiceField({
                         label: display || name,
+                        fillIn,
                         choices,
-                        // value: item[name] || choices[0],
+                        value: item[name],
                         parent
                     });
                     break;
@@ -97,6 +97,7 @@ export async function EditForm({ event, fields, item, list, modal, parent, table
                         case 'slot':
                         case 'mlot':
                         case 'choice':
+                        case 'multichoice':
                             if (value) {
                                 data[name] = value;
                             }

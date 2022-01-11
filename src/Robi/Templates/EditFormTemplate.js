@@ -19,15 +19,50 @@ export function EditFormTemplate({ list, display, fields }) {
         `// Just be sure to put @START and @END sigils in the right places.`,
         `// Otherwise, changes made with CLI and GUI tools will not render properly.`,
         ``,
-        `import { CreateItem } from '../../Robi/Robi.js'`,
-        `import { BootstrapDropdown, DateField, MultiLineTextField, NumberField, Row, SingleLineTextField } from '../../Robi/RobiUI.js'`,
+        `import { UpdateItem, DeleteItem } from '../../Robi/Robi.js'`,
+        `import { ${modules()} } from '../../Robi/RobiUI.js'`,
         ``,
         `// @START-${list}`,
-        `export default async function NewForm({ event, fields, list, modal, parent, table }) {`,
-        `    console.log(list, 'new form');`,
+        `export default async function EditForm({ event, fields, item, list, modal, parent, table }) {`,
+        `    console.log(list, 'custom edit form');`,
+        ``,
+        `   const [`
+    ];
+
+    function modules() {
+        return [ 'Row' ].concat(fieldsToCreate.map(field => {
+            const {type } = field;
+
+            switch (type) {
+                case 'slot':
+                    return 'SingleLineTextField';
+                case 'mlot':
+                    return 'MultiLineTextField';
+                case 'number':
+                    return 'NumberField';
+                case 'choice':
+                    return 'BootstrapDropdown';
+                case 'multichoice':
+                    return 'MultiChoiceField';
+                case 'date':
+                    return 'DateField';
+            }
+        })).sort().join(', ');
+    }
+
+    template = template.concat(fieldsToCreate.map(field => `        ${field.name}_props,`));
+
+    template = template.concat([
+        `    ] = fields;`,
+        ``,
+    ]);
+
+    template = template.concat(fieldsToCreate.map(field => `    let ${field.name}_field;`));
+
+    template = template.concat([
         ``,
         `    // @START-Rows`
-    ];
+    ]);
 
     fieldsToCreate?.forEach((field, index) => {
         const { name, display, type, choices, action, value } = field;
@@ -40,44 +75,50 @@ export function EditFormTemplate({ list, display, fields }) {
         switch (type) {
             case 'slot':
                 component = [
-                    `        const { name, display } = field;`,
+                    `        const { name, display } = ${name}_props`,
                     ``,
-                    `        const field_${name} = SingleLineTextField({`,
+                    `        ${name}_field = SingleLineTextField({`,
                     `            label: display || name,`,
-                    `            value: item[name] || ''`,
+                    `            value: item[name],`,
                     `            parent`,
-                    `        })`
+                    `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ];
                 break;
             case 'mlot':
                 component = [
-                    `        const { name, display } = field;`,
+                    `        const { name, display } = ${name}_props`,
                     ``,
-                    `        const field_${name} = MultiLineTextField({`,
+                    `        ${name}_field = MultiLineTextField({`,
                     `            label: display || name,`,
-                    `            value: item[name] || ''`,
+                    `            value: item[name],`,
                     `            parent`,
-                    `        })`
+                    `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ];
                 break;
             case 'number':
                 component = [
-                    `        const { name, display } = field;`,
+                    `        const { name, display } = ${name}_props`,
                     ``,
-                    `        const field_${name} = NumberField({`,
+                    `        ${name}_field = NumberField({`,
                     `            label: display || name,`,
-                    `            value: item[name] || ''`,
+                    `            value: item[name],`,
                     `            parent`,
-                    `        })`
+                    `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ];
                 break;
             case 'choice':
                 component = [
-                    `        const { name, display, value, choices } = field;`,
+                    `        const { name, display, value, choices } = ${name}_props`,
                     ``,
-                    `        const field_${name} = BootstrapDropdown({`,
+                    `        ${name}_field = BootstrapDropdown({`,
                     `            label: display || name,`,
-                    `            value: item[name] || (value || choices[0])`,
+                    `            value: item[name],`,
                     `            options: choices.map(choice => {`,
                     `                return {`,
                     `                    label: choice`,
@@ -85,35 +126,36 @@ export function EditFormTemplate({ list, display, fields }) {
                     `            }),`,
                     `            parent`,
                     `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ];
                 break;
             case 'multichoice':
                 component = [
-                    `        const { name, display, choices, fillIn } = field;`,
+                    `        const { name, display, choices, fillIn } = ${name}_props`,
                     ``,
-                    `        const field_${name} = MultiChoiceField({`,
+                    `        ${name}_field = MultiChoiceField({`,
                     `            label: display || name,`,
                     `            choices,`,
                     `            fillIn,`,
-                    `            value: item[name]`,
-                    `            parent,`,
-                    `            fieldMargin,`,
-                    `            onChange(event) {`,
-                    `                formData[name] = {`,
-                    `                    results: component.value()`,
-                    `                };`,
-                    `            }`,
-                    `        });`
+                    `            value: item[name],`,
+                    `            parent`,
+                    `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ]
                 break;
             case 'date':
                 component = [
-                    `        const { name, display } = field;`,
+                    `        const { name, display } = ${name}_props`,
                     ``,
-                    `        const field_${name} = DateField({`,
+                    `        ${name}_field = DateField({`,
                     `            label: display || name,`,
+                    `            value: item[name]`,
                     `            parent`,
-                    `        })`
+                    `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ];
                 break;
         }
@@ -136,14 +178,14 @@ export function EditFormTemplate({ list, display, fields }) {
         `    return {`,
         `        async onUpdate(event) {`,
         `            const data = {};`,
+        ``
     ]);
 
     fieldsToCreate?.forEach(field => {
         const { name } = field;
         template = template.concat([
-            ``,
-            `            if (field_${name}.value()) {`,
-            `                data[name] = field_${name}.value();`,
+            `            if (${name}_field.value()) {`,
+            `                data.${name} = ${name}_field.value();`,
             `            }`,
             ``,
         ])
@@ -152,13 +194,21 @@ export function EditFormTemplate({ list, display, fields }) {
     template = template.concat([
         `            console.log(data);`,
         ``,
-        `            const newItem = await UpdateItem({`,
+        `            const updatedItem = await UpdateItem({`,
         `                list,`,
-        `                itemId: item.Id`,
+        `                itemId: item.Id,`,
         `                data`,
         `            });`,
         ``,
-        `            return newItem;`,
+        `            return updatedItem;`,
+        `        },`,
+        `        async onDelete(event) {`,
+        `            const deletedItem = await DeleteItem({`,
+        `                list,`,
+        `                itemId: item.Id`,
+        `            });`,
+        ``,
+        `            return deletedItem;`,
         `        }`,
         `    };`,
         `}`,

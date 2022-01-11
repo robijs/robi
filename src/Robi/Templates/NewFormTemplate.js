@@ -20,16 +20,51 @@ export function NewFormTemplate({ list, display, fields }) {
         `// Otherwise, changes made with CLI and GUI tools will not render properly.`,
         ``,
         `import { CreateItem } from '../../Robi/Robi.js'`,
-        `import { BootstrapDropdown, DateField, MultiLineTextField, NumberField, Row, SingleLineTextField } from '../../Robi/RobiUI.js'`,
+        `import { ${modules()} } from '../../Robi/RobiUI.js'`,
         ``,
         `// @START-${list}`,
         `export default async function NewForm({ event, fields, list, modal, parent, table }) {`,
-        `    console.log(list, 'new form');`,
+        `    console.log(list, 'custom new form');`,
         ``,
-        `    // @START-Rows`
+        `   const [`
     ];
 
-    fieldsToCreate?.forEach((field, index) => {
+    function modules() {
+        return [ 'Row' ].concat(fieldsToCreate.map(field => {
+            const {type } = field;
+
+            switch (type) {
+                case 'slot':
+                    return 'SingleLineTextField';
+                case 'mlot':
+                    return 'MultiLineTextField';
+                case 'number':
+                    return 'NumberField';
+                case 'choice':
+                    return 'BootstrapDropdown';
+                case 'multichoice':
+                    return 'MultiChoiceField';
+                case 'date':
+                    return 'DateField';
+            }
+        })).sort().join(', ');
+    }
+
+    template = template.concat(fieldsToCreate.map(field => `        ${field.name}_props,`));
+
+    template = template.concat([
+        `    ] = fields;`,
+        ``,
+    ]);
+
+    template = template.concat(fieldsToCreate.map(field => `    let ${field.name}_field;`));
+
+    template = template.concat([
+        ``,
+        `    // @START-Rows`
+    ]);
+
+    fieldsToCreate.forEach((field, index) => {
         const { name, display, type, choices, action, value } = field;
 
         let row = [
@@ -40,76 +75,82 @@ export function NewFormTemplate({ list, display, fields }) {
         switch (type) {
             case 'slot':
                 component = [
-                    `        const { name, display } = field;`,
+                    `        const { name, display } = ${name}_props`,
                     ``,
-                    `        const field_${name} = SingleLineTextField({`,
+                    `        ${name}_field = SingleLineTextField({`,
                     `            label: display || name,`,
                     `            parent`,
-                    `        })`
+                    `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ];
                 break;
             case 'mlot':
                 component = [
-                    `        const { name, display } = field;`,
+                    `        const { name, display } = ${name}_props`,
                     ``,
-                    `        const field_${name} = MultiLineTextField({`,
+                    `        ${name}_field = MultiLineTextField({`,
                     `            label: display || name,`,
                     `            parent`,
-                    `        })`
+                    `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ];
                 break;
             case 'number':
                 component = [
-                    `        const { name, display } = field;`,
+                    `        const { name, display } = ${name}_props`,
                     ``,
-                    `        const field_${name} = NumberField({`,
+                    `        ${name}_field = NumberField({`,
                     `            label: display || name,`,
                     `            parent`,
-                    `        })`
+                    `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ];
                 break;
             case 'choice':
                 component = [
-                    `        const { name, display, value, choices } = field;`,
+                    `        const { name, display, value, choices } = ${name}_props`,
                     ``,
-                    `        const field_${name} = BootstrapDropdown({`,
+                    `        ${name}_field = BootstrapDropdown({`,
                     `            label: display || name,`,
-                    `            value: value || choices[0],`,
+                    `            value: value || '',`,
                     `            options: choices.map(choice => {`,
                     `                return {`,
                     `                    label: choice`,
                     `                };`,
                     `            }),`,
                     `            parent`,
-                    `        });`
+                    `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ];
                 break;
             case 'multichoice':
                 component = [
-                    `        const { name, display, choices, fillIn } = field;`,
+                    `        const { name, display, choices, fillIn } = ${name}_props`,
                     ``,
-                    `        const field_${name} = MultiChoiceField({`,
+                    `        ${name}_field = MultiChoiceField({`,
                     `            label: display || name,`,
                     `            choices,`,
                     `            fillIn,`,
-                    `            parent,`,
-                    `            fieldMargin,`,
-                    `            onChange(event) {`,
-                    `                formData[name] = {`,
-                    `                    results: component.value()`,
-                    `                };`,
-                    `            }`,
-                    `        });`
+                    `            parent`,
+                    `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ]
                 break;
             case 'date':
                 component = [
-                    `        const { name, display } = field;`,
+                    `        const { name, display } = ${name}_props`,
                     ``,
-                    `        const field_${name} = DateField({`,
+                    `        ${name}_field = DateField({`,
                     `            label: display || name,`,
                     `            parent`,
-                    `        })`
+                    `        });`,
+                    ``,
+                    `        ${name}_field.add();`
                 ];
                 break;
         }
@@ -132,14 +173,14 @@ export function NewFormTemplate({ list, display, fields }) {
         `    return {`,
         `        async onCreate(event) {`,
         `            const data = {};`,
+        ``
     ]);
 
     fieldsToCreate?.forEach(field => {
         const { name } = field;
         template = template.concat([
-            ``,
-            `            if (field_${name}.value()) {`,
-            `                data[name] = field_${name}.value();`,
+            `            if (${name}_field.value()) {`,
+            `                data.${name} = ${name}_field.value();`,
             `            }`,
             ``,
         ])
