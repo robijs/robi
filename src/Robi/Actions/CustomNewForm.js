@@ -24,7 +24,7 @@ export async function CustomNewForm({ list, display, fields }) {
             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                 <h3 class='mb-4'>Custom new form</h3>
                 <div>
-                    <strong>${display}</strong> doesn't have a custom new form yet. Would you like to create one?
+                    <strong>${display || list }</strong> doesn't have a custom new form yet. Would you like to create one?
                 </div>
             `);
 

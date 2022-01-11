@@ -16,6 +16,8 @@ export function NewFormTemplate({ list, display, fields }) {
         ``,
         `// @START-${list}`,
         `export default async function NewForm({ event, fields, list, modal, parent, table }) {`,
+        `    console.log(list:, 'new form');`,
+        ``,
         `    const fieldsToCreate = fields?.filter(field => field.name !== 'Id');`,
         `    const components = fieldsToCreate?.map((field, index) => {`,
         `        const { name, display, type, choices, action } = field;`,

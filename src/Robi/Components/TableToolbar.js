@@ -295,7 +295,7 @@ export function TableToolbar(param) {
                 listener(event) {
                     const { editForm, display, fields } = App.list(list);
 
-                    if (newForm) {
+                    if (editForm) {
                         console.log('show edit form');
                     } else {
                         CustomEditForm({ list, display, fields });

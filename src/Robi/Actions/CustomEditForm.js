@@ -24,7 +24,7 @@ export async function CustomEditForm({ list, display, fields }) {
             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
                 <h3 class='mb-4'>Custom edit form</h3>
                 <div>
-                    <strong>${display}</strong> doesn't have a custom edit form yet. Would you like to create one?
+                    <strong>${display || list}</strong> doesn't have a custom edit form yet. Would you like to create one?
                 </div>
             `);
 
