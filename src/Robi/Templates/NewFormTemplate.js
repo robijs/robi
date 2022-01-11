@@ -33,14 +33,15 @@ export function NewFormTemplate({ list, display, fields }) {
         const { name, display, type, choices, action, value } = field;
 
         let row = [
-            `    Row(async (parent) => {`,
-            `        const { name, display, type, choices, action } = field;`
+            `    Row(async (parent) => {`
         ];
         let component = [];
 
         switch (type) {
             case 'slot':
                 component = [
+                    `        const { name, display } = field;`,
+                    ``,
                     `        const field_${name} = SingleLineTextField({`,
                     `            label: display || name,`,
                     `            parent`,
@@ -49,6 +50,8 @@ export function NewFormTemplate({ list, display, fields }) {
                 break;
             case 'mlot':
                 component = [
+                    `        const { name, display } = field;`,
+                    ``,
                     `        const field_${name} = MultiLineTextField({`,
                     `            label: display || name,`,
                     `            parent`,
@@ -57,6 +60,8 @@ export function NewFormTemplate({ list, display, fields }) {
                 break;
             case 'number':
                 component = [
+                    `        const { name, display } = field;`,
+                    ``,
                     `        const field_${name} = NumberField({`,
                     `            label: display || name,`,
                     `            parent`,
@@ -65,6 +70,8 @@ export function NewFormTemplate({ list, display, fields }) {
                 break;
             case 'choice':
                 component = [
+                    `        const { name, display, value, choices } = field;`,
+                    ``,
                     `        const field_${name} = BootstrapDropdown({`,
                     `            label: display || name,`,
                     `            value: value || choices[0],`,
@@ -74,11 +81,31 @@ export function NewFormTemplate({ list, display, fields }) {
                     `                };`,
                     `            }),`,
                     `            parent`,
-                    `        });`,
+                    `        });`
                 ];
+                break;
+            case 'multichoice':
+                component = [
+                    `        const { name, display, choices, fillIn } = field;`,
+                    ``,
+                    `        const field_${name} = MultiChoiceField({`,
+                    `            label: display || name,`,
+                    `            choices,`,
+                    `            fillIn,`,
+                    `            parent,`,
+                    `            fieldMargin,`,
+                    `            onChange(event) {`,
+                    `                formData[name] = {`,
+                    `                    results: component.value()`,
+                    `                };`,
+                    `            }`,
+                    `        });`
+                ]
                 break;
             case 'date':
                 component = [
+                    `        const { name, display } = field;`,
+                    ``,
                     `        const field_${name} = DateField({`,
                     `            label: display || name,`,
                     `            parent`,

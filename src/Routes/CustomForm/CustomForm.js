@@ -11,10 +11,13 @@ export default async function CustomForm({ parent }) {
     // @START-Rows
     Row(async (parent) => {
         const { list, display, fields } = App.list('CustomForm');
-        console.log(fields);
-        const newForm = NewFormTemplate({ list, display, fields });
+        // const newForm = NewFormTemplate({ list, display, fields });
 
-        console.log(newForm);
+        // console.log(newForm);
+
+        const editForm = EditFormTemplate({ list, display, fields });
+
+        console.log(editForm);
     });
     // @Row
     Row(async (parent) => {

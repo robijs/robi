@@ -37,9 +37,8 @@ export default [
             {
                 name: 'MultiChoice',
                 display: 'Multi Choice',
-                type: 'choice',
+                type: 'multichoice',
                 fillIn: true,
-                value: null,
                 choices: [
                     'One',
                     'Two',
