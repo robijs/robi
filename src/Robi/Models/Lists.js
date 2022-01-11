@@ -36,7 +36,7 @@ export function Lists() {
             list: 'Actions',
             fields: [
                 {
-                    name: "Name",
+                    name: "Action",
                     type: 'slot'
                 },
                 {

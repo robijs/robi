@@ -500,7 +500,10 @@ export async function Table(param) {
     });
 
     fadeContainer.add();
-    fadeContainer.get().style.opacity = '0';
+   
+    if (fadeContainer.get()) {
+        fadeContainer.get().style.opacity = '0';
+    }
 
     // Toolbar
     if (toolbar || advancedSearch) {
@@ -746,11 +749,19 @@ export async function Table(param) {
 
     // Fade in
     setTimeout(() => {
-        fadeContainer.get().style.transition = 'opacity 300ms ease 100ms';
-        fadeContainer.get().style.opacity = '1';
+        const exists = fadeContainer.get();
+
+        if (exists) {
+            exists.style.transition = 'opacity 300ms ease 100ms';
+            exists.style.opacity = '1';
+        }
         // FIXME: How to safely move this to Shimmer without overriding transition?
         setTimeout(() => {
-            tableContainer.get().style.transition = 'none';
+            const exists = tableContainer.get(); 
+
+            if (exists) {
+                exists.style.transition = 'none';
+            }
         }, 500);
     }, 0);
 
