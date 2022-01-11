@@ -4,15 +4,15 @@
  * @param {*} param0 
  * @returns 
  */
-export function FormTemplate({ list, display, fields }) {
+export function NewFormTemplate({ list, display, fields }) {
     return [
         `// This file can be edited programmatically.`,
         `// If you know the API, feel free to make changes by hand.`,
         `// Just be sure to put @START and @END sigils in the right places.`,
         `// Otherwise, changes made with CLI and GUI tools will not render properly.`,
         ``,
-        `import { } from '../../Robi/Robi.js'`,
-        `import { } from '../../Robi/RobiUI.js'`,
+        `import { CreateItem } from '../../Robi/Robi.js'`,
+        `import { BootstrapDropdown, DateField, MultiLineTextField, NumberField, SingleLineTextField } from '../../Robi/RobiUI.js'`,
         ``,
         `// @START-${list}`,
         `export default async function NewForm({ event, fields, list, modal, parent, table }) {`,

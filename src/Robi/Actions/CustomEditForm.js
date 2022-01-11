@@ -4,14 +4,14 @@ import { LoadingSpinner } from '../Components/LoadingSpinner.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { App } from '../Core/App.js'
 import { Wait } from './Wait.js'
-import { NewFormTemplate } from '../Templates/NewFormTemplate.js'
+import { EditFormTemplate } from '../Templates/EditFormTemplate.js'
 
 // @START-File
 /**
  *
  * @param {*} param
  */
-export async function CustomNewForm({ list, display, fields }) {
+export async function CustomEditForm({ list, display, fields }) {
     const addRouteModal = Modal({
         title: false,
         scrollable: true,
@@ -22,9 +22,9 @@ export async function CustomNewForm({ list, display, fields }) {
             addRouteModal.find('.modal-dialog').style.minWidth = '800px';
 
             modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                <h3 class='mb-4'>Custom new form</h3>
+                <h3 class='mb-4'>Custom edit form</h3>
                 <div>
-                    <strong>${display}</strong> doesn't have a custom new form yet. Would you like to create one?
+                    <strong>${display}</strong> doesn't have a custom edit form yet. Would you like to create one?
                 </div>
             `);
 
@@ -42,7 +42,7 @@ export async function CustomNewForm({ list, display, fields }) {
                             modal.find('.modal-content').style.width = 'unset';
 
                             const loading = LoadingSpinner({
-                                message: `<span style='color: var(--primary);'>Creating custom New Form<span>`,
+                                message: `<span style='color: var(--primary);'>Creating custom Edit Form<span>`,
                                 type: 'robi',
                                 classes: ['p-4'],
                                 parent: modalBody
@@ -96,12 +96,12 @@ export async function CustomNewForm({ list, display, fields }) {
 
                         // Set import
                         const imports = content.match(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/);
-                        const newImports = imports[1] + `import ${list}NewForm from './Forms/${list}/NewForm.js'\n`;
+                        const newImports = imports[1] + `import ${list}EditForm from './Forms/${list}/EditForm.js'\n`;
                         updatedContent = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS${newImports}// @END-IMPORTS`);
 
                         // Set form
                         // NOTE: This won't work if there's a space between list and name of type string
-                        updatedContent = updatedContent.replace(`list: '${list}',`, `list: '${list}',\n        newForm: ${list}NewForm,`);
+                        updatedContent = updatedContent.replace(`list: '${list}',`, `list: '${list}',\n        editForm: ${list}EditForm,`);
 
                         // console.log(updatedContent);
 
@@ -129,7 +129,7 @@ export async function CustomNewForm({ list, display, fields }) {
                     }
 
                     async function createForm() {
-                        const contents = NewFormTemplate({
+                        const contents = EditFormTemplate({
                             list,
                             display,
                             fields: JSON.stringify(fields)
@@ -163,7 +163,7 @@ export async function CustomNewForm({ list, display, fields }) {
                         } else {
                             console.log('create route dir and file');
                             // Create file (missing dirs will be created recursively)
-                            newFile = await fetch(`http://127.0.0.1:2035/?path=newform&file=${list}`, {
+                            newFile = await fetch(`http://127.0.0.1:2035/?path=editform&file=${list}`, {
                                 method: 'POST',
                                 body: contents
                             });

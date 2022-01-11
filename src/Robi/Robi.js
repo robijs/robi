@@ -30,6 +30,7 @@ import { CreateItem } from './Actions/CreateItem.js'
 import { CreateLibrary } from './Actions/CreateLibrary.js'
 import { CreateList } from './Actions/CreateList.js'
 import { CreateSite } from './Actions/CreateSite.js'
+import { CustomEditForm } from './Actions/CustomEditForm.js'
 import { CustomNewForm } from './Actions/CustomNewForm.js'
 import { Data } from './Actions/Data.js'
 import { DeleteApp } from './Actions/DeleteApp.js'
@@ -103,8 +104,9 @@ import { StartAndEndOfWeek } from './Models/StartAndEndOfWeek.js'
 import { Themes } from './Models/Themes.js'
 import { ActionTemplate } from './Templates/ActionTemplate.js'
 import { ComponentTemplate } from './Templates/ComponentTemplate.js'
-import { FormTemplate } from './Templates/FormTemplate.js'
+import { EditFormTemplate } from './Templates/EditFormTemplate.js'
 import { ModelTemplate } from './Templates/ModelTemplate.js'
+import { NewFormTemplate } from './Templates/NewFormTemplate.js'
 import { RouteTemplate } from './Templates/RouteTemplate.js'
 
 export {
@@ -126,6 +128,7 @@ export {
     CreateLibrary,
     CreateList,
     CreateSite,
+    CustomEditForm,
     CustomNewForm,
     Data,
     DeleteApp,
@@ -199,7 +202,8 @@ export {
     Themes,
     ActionTemplate,
     ComponentTemplate,
-    FormTemplate,
+    EditFormTemplate,
     ModelTemplate,
+    NewFormTemplate,
     RouteTemplate
 }
