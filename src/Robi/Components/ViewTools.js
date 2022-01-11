@@ -1,5 +1,4 @@
 import { Component } from '../Actions/Component.js'
-import { GenerateUUID } from '../Actions/GenerateUUID.js'
 import { EditLayout } from '../Actions/EditLayout.js'
 import { ModifyFile } from '../Actions/ModifyFile.js'
 import { Store } from '../Robi.js';
@@ -7,10 +6,8 @@ import { Store } from '../Robi.js';
 // @START-File
 /**
  * 
- * @param {Object} param - Object passed in as only argument to a Robi component
- * @param {(Object | HTMLElement | String)} param.parent - A Robi component, HTMLElement, or css selector as a string. 
- * @param {String} param.position - Options: beforebegin, afterbegin, beforeend, afterend.
- * @returns {Object} - Robi component.
+ * @param {*} param 
+ * @returns 
  */
 export function ViewTools(param) {
     const {
@@ -19,10 +16,12 @@ export function ViewTools(param) {
         position
     } = param;
 
+    let isOpen = false;
+
     const component = Component({
         html: /*html*/ `
             <div class='viewtools'>
-                <button class='btn tools' type='button' data-state='closed'>
+                <button class='btn tools' type='button'>
                     •••
                 </button>
                 <div class='grow-in-center'>
@@ -104,7 +103,6 @@ export function ViewTools(param) {
                 height: 62px;
                 width: 100%;
                 color: var(--primary);
-                z-index: 10000;
             }
 
             #id .tools {
@@ -124,6 +122,7 @@ export function ViewTools(param) {
             }
 
             #id .grow-in-center {
+                z-index: 10000;
                 top: 5px;
                 position: absolute;
 
@@ -209,34 +208,15 @@ export function ViewTools(param) {
                 listener(event) {
                     this.classList.add('scale-up');
 
-                    const state = this.dataset.state;
+                    if (!isOpen) {
+                        isOpen = true;
 
-                    if (state === 'closed') {
-                        console.log('viewtools: open');
-                        this.dataset.state = 'open';
-                        // component.find('.menu').classList.remove('d-none');
                         component.find('.grow-in-center').classList.add('open');
+                        setTimeout(() => {
+                            Store.get('appcontainer').on('click', close);
+                        }, 0);
                     } else {
-                        console.log('viewtools: close');
-                        this.dataset.state = 'closed';
-                        // component.find('.menu').classList.add('d-none');
-                        component.find('.grow-in-center').classList.remove('open');
-                        component.find('.tools').classList.remove('scale-up');
-                    }
-                }
-            },
-            {
-                selector: '#id .tools',
-                event: 'focusout',
-                listener(event) {
-                    const state = this.dataset.state;
-
-                    if (state === 'open') {
-                        console.log('viewtools: close');
-                        this.dataset.state = 'closed';
-                        // component.find('.menu').classList.add('d-none');
-                        component.find('.grow-in-center').classList.remove('open');
-                        component.find('.tools').classList.remove('scale-up');
+                        close();
                     }
                 }
             },
@@ -316,8 +296,20 @@ export function ViewTools(param) {
                     });
                 }
             }
-        ]
+        ],
+        onAdd() {
+
+        }
     });
+
+    function close(event) {
+        isOpen = false;
+
+        component.find('.grow-in-center').classList.remove('open');
+        component.find('.tools').classList.remove('scale-up');
+
+        Store.get('appcontainer').off('click', close);
+    }
 
     return component;
 }

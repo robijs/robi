@@ -153,7 +153,7 @@ export async function ModifyFile(param) {
 
             // FIXME: Remember initial codemirorr doc value
             // compare this with current doc value
-            let docValue;
+            let docValue = '';
 
             function setEditor() {
                 editor.setSize('100%', '100%');

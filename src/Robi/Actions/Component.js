@@ -245,6 +245,9 @@ export function Component(param) {
         on(event, listener) {
             this.get().addEventListener(event, listener);
         },
+        off(event, listener) {
+            this.get().removeEventListener(event, listener);
+        },
         add(localParent) {
             addStyle();
             insertElement(localParent);
