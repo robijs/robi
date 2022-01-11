@@ -88,7 +88,7 @@ export function TableToolbar(param) {
                                     <div class='d-flex justify-content-start load-search-container' style='flex: 2;'>
                                         <button type='button' class='btn btn-robi-light' id='${id}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Load</button>
                                         <div class='dropdown-menu' aria-labelledby='${id}'>
-                                            <div class='grown-in-top-left saved-search-menu'>
+                                            <div class='grow-in-top-left saved-search-menu'>
                                                 ${
                                                     searches.length ? searches.map(search => {
                                                         const { name } = search;
