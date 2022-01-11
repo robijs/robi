@@ -325,9 +325,9 @@ export async function Table(param) {
                             if (schema.newForm) {
                                 selectedForm = await schema.newForm(formParam);
                             } else if (NewForm) {
-                                selectedForm = await newForm(formParam);
-                            } else {
                                 selectedForm = await NewForm(formParam);
+                            } else {
+                                selectedForm = await newForm(formParam);
                             }
 
                             // Set button value

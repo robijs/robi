@@ -2,6 +2,7 @@
 import CustomFormNewForm from './Forms/CustomForm/NewForm.js'
 import CustomFormEditForm from './Forms/CustomForm/EditForm.js'
 import MLOTNewForm from './Forms/MLOT/NewForm.js'
+import SLOTEditForm from './Forms/SLOT/EditForm.js'
 // @END-IMPORTS
 
 export default [
@@ -51,6 +52,7 @@ export default [
     },
     {
         list: 'SLOT',
+        editForm: SLOTEditForm,
         heading: 'Single Line of Text',
         fields: [
             {
