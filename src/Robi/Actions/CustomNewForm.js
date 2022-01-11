@@ -63,12 +63,7 @@ export async function CustomNewForm({ list, display, fields }) {
                     document.querySelector('#app').style.filter = 'blur(5px)';
 
                     await updateLists();
-
-                    return;
-
                     await createForm();
-
-                    return;
 
                     if (App.isProd()) {
                         await Wait(5000);
@@ -109,21 +104,12 @@ export async function CustomNewForm({ list, display, fields }) {
                         // NOTE: This won't work if there's a space between list and name of type string
                         updatedContent = content.replace(`list: '${list}',`, `list: '${list}',\n        newForm: ${list}NewForm,`);
 
-                        console.log(updatedContent);
-
-                        // console.log('OLD\n----------------------------------------\n', content);
-                        // console.log('\n****************************************');
-                        // console.log('NEW\n----------------------------------------\n', updatedContent);
-                        // console.log('\n****************************************');
+                        // console.log(updatedContent);
 
                         let setFile;
 
-                        return;
-
                         if (App.isProd()) {
-                            // TODO: Make a copy of app.js first
-                            // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
-                            setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='app.js',overwrite=true)`, {
+                            setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files/Add(url='lists.js',overwrite=true)`, {
                                 method: 'POST',
                                 body: updatedContent, 
                                 headers: {

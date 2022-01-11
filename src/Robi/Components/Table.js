@@ -90,6 +90,7 @@ export async function Table(param) {
     // Item Id
     const idProperty = 'Id';
     let formFields = [];
+    let schema;
 
     if (list) {
         if (App.isDev()) {
@@ -107,7 +108,7 @@ export async function Table(param) {
         });
 
         // Get fields in view
-        const schema = lists.concat(Lists()).find(item => item.list === list);
+        schema = lists.concat(Lists()).find(item => item.list === list);
             
         if (view) {
             fields = fields || schema?.views
@@ -321,7 +322,13 @@ export async function Table(param) {
                                 table
                             };
 
-                            selectedForm = newForm ? await newForm(formParam) : await NewForm(formParam);
+                            if (schema.newForm) {
+                                selectedForm = await schema.newForm(formParam);
+                            } else if (NewForm) {
+                                selectedForm = await newForm(formParam);
+                            } else {
+                                selectedForm = await NewForm(formParam);
+                            }
 
                             // Set button value
                             if (selectedForm?.label) {
