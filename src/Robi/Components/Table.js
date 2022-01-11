@@ -618,7 +618,13 @@ export async function Table(param) {
                     async addContent(modalBody) {
                         const formParam = { item, table, row, fields: formFields, list, modal: rowModal, parent: modalBody };
 
-                        selectedForm = editForm ? await editForm(formParam) : await EditForm(formParam);
+                        if (schema.editForm) {
+                            selectedForm = await schema.editForm(formParam);
+                        } else if (EditForm) {
+                            selectedForm = await editForm(formParam);
+                        } else {
+                            selectedForm = await EditForm(formParam);
+                        }
 
                         if (formFooter !== false) {
                             rowModal.showFooter();
