@@ -1,6 +1,7 @@
 // @START-IMPORTS
 import CustomFormNewForm from './Forms/CustomForm/NewForm.js'
 import CustomFormEditForm from './Forms/CustomForm/EditForm.js'
+import MLOTNewForm from './Forms/MLOT/NewForm.js'
 // @END-IMPORTS
 
 export default [
@@ -61,6 +62,7 @@ export default [
     },
     {
         list: 'MLOT',
+        newForm: MLOTNewForm,
         heading: 'Multiple Lines of Text',
         fields: [
             {

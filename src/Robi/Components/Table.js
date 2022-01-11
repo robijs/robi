@@ -620,7 +620,7 @@ export async function Table(param) {
 
                         if (schema.editForm) {
                             selectedForm = await schema.editForm(formParam);
-                        } else if (EditForm) {
+                        } else if (editForm) {
                             selectedForm = await editForm(formParam);
                         } else {
                             selectedForm = await EditForm(formParam);

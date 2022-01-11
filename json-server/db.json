@@ -191,6 +191,27 @@
       "Created": "Tue, 11 Jan 2022 06:42:51 GMT",
       "Modified": "Tue, 11 Jan 2022 06:42:51 GMT",
       "Id": 9
+    },
+    {
+      "SessionId": null,
+      "Message": "editForm is not a function",
+      "Error": "TypeError: editForm is not a function\n    at addContent (http://127.0.0.1:8080/src/Robi/Components/Table.js:624:50)\n    at onAdd (http://127.0.0.1:8080/src/Robi/Components/Modal.js:296:17)\n    at Object.add (http://127.0.0.1:8080/src/Robi/Actions/Component.js:257:17)\n    at onRowClick (http://127.0.0.1:8080/src/Robi/Components/Table.js:703:26)\n    at HTMLTableRowElement.<anonymous> (http://127.0.0.1:8080/src/Robi/Components/DataTable.js:758:21)\n    at HTMLTableElement.dispatch (http://127.0.0.1:8080/src/Libraries/lib.js:3:42571)\n    at HTMLTableElement.v.handle (http://127.0.0.1:8080/src/Libraries/lib.js:3:40572)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 06:48:23 GMT",
+      "Modified": "Tue, 11 Jan 2022 06:48:23 GMT",
+      "Id": 10
     }
   ],
   "Log": [
@@ -4267,6 +4288,90 @@
       "Created": "Tue, 11 Jan 2022 06:47:31 GMT",
       "Modified": "Tue, 11 Jan 2022 06:47:31 GMT",
       "Id": 194
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#SortTables\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 06:47:55 GMT",
+      "Modified": "Tue, 11 Jan 2022 06:47:55 GMT",
+      "Id": 195
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#SortTables\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 06:48:02 GMT",
+      "Modified": "Tue, 11 Jan 2022 06:48:02 GMT",
+      "Id": 196
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#SortTables\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 06:48:44 GMT",
+      "Modified": "Tue, 11 Jan 2022 06:48:44 GMT",
+      "Id": 197
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#SortTables\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 06:48:57 GMT",
+      "Modified": "Tue, 11 Jan 2022 06:48:57 GMT",
+      "Id": 198
     }
   ],
   "Users": [
@@ -4348,7 +4453,24 @@
     }
   ],
   "SLOT": [],
-  "MLOT": [],
+  "MLOT": [
+    {
+      "MLOT": "Test",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 06:48:21 GMT",
+      "Modified": "Tue, 11 Jan 2022 06:48:21 GMT",
+      "Id": 1
+    }
+  ],
   "Number": [],
   "Choice": []
 }
