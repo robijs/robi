@@ -13,11 +13,7 @@ import { DateField } from './DateField.js'
  * @param {*} param
  * @returns
  */
-export async function EditForm(param) {
-    const { event, fields, item, list, modal, parent, table } = param;
-
-    console.log(param);
-
+export async function EditForm({ event, fields, item, list, modal, parent, table }) {
     const components = fields
         ?.filter(field => field.name !== 'Id')
         ?.map(field => {
