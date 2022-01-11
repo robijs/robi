@@ -102,7 +102,7 @@ export async function CustomNewForm({ list, display, fields }) {
 
                         // Set form
                         // NOTE: This won't work if there's a space between list and name of type string
-                        updatedContent = content.replace(`list: '${list}',`, `list: '${list}',\n        newForm: ${list}NewForm,`);
+                        updatedContent = updatedContent.replace(`list: '${list}',`, `list: '${list}',\n        newForm: ${list}NewForm,`);
 
                         // console.log(updatedContent);
 
