@@ -3,12 +3,19 @@
 // Just be sure to put @START and @END sigils in the right places.
 // Otherwise, changes made with GUI tools will not render properly.
 
-import { App, CustomNewForm, CustomEditForm } from '../../Robi/Robi.js'
+import { App, CustomNewForm, CustomEditForm, NewFormTemplate, EditFormTemplate } from '../../Robi/Robi.js'
 import { Row, Table } from '../../Robi/RobiUI.js'
 
 // @START-CustomForm
 export default async function CustomForm({ parent }) {
     // @START-Rows
+    Row(async (parent) => {
+        const { list, display, fields } = App.list('CustomForm');
+        const newForm = NewFormTemplate({ list, display, fields });
+
+        console.log(newForm);
+    });
+    // @Row
     Row(async (parent) => {
         await Table({
             list: 'CustomForm',
@@ -23,10 +30,6 @@ export default async function CustomForm({ parent }) {
                 }
             ]
         });
-    });
-    // @Row
-    Row(async (parent) => {
-
     });
     // @END-Rows
 }

@@ -33,7 +33,7 @@ export async function GetCurrentUser(param) {
         });
 
         if (appUser && appUser[0]) {
-            console.log(`%cUser: ${appUser[0].Title}.`, 'background: seagreen; color: white');
+            console.log(`User: ${appUser[0].Title}`);
 
             // Add SiteId prop to Users list item
             appUser[0].SiteId = response.d.Id;
@@ -52,14 +52,14 @@ export async function GetCurrentUser(param) {
             console.log(`%cMissing user account.`, 'color: red');
             console.log(`Creating user account for ${Title}....`);
 
-            /** Create user */
+            // Create new user
             const newUser = await CreateItem({
                 list: 'Users',
                 data: {
                     Title,
                     Email,
                     LoginName: LoginName.split('|')[2],
-                    Role: App.get('userDefaultRole') /** Default, can be changed later */,
+                    Role: App.get('userDefaultRole'),
                     Settings: App.get('userSettings')
                 }
             });
@@ -86,13 +86,13 @@ export async function GetCurrentUser(param) {
         } = App.get('dev').user;
 
         if (response[0]) {
-            console.log(`%cFound user account for '${response[0].Title}'.`, 'color: mediumseagreen');
+            console.log(`User: ${response[0].Title}`);
             return response[0];
         } else {
             console.log(`%cMissing user account.`, 'color: red');
             console.log(`Creating user account for ${Title}....`);
 
-            /** Create user */
+            // Create new user
             const newUser = await CreateItem({
                 list: 'Users',
                 data: {

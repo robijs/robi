@@ -4,7 +4,7 @@
 // Otherwise, changes made with CLI and GUI tools will not render properly.
 
 import { UpdateItem } from '../../Robi/Robi.js'
-import { BootstrapDropdown, DateField, MultiLineTextField, NumberField, SingleLineTextField } from '../../Robi/RobiUI.js'
+import { BootstrapDropdown, DateField, MultiLineTextField, NumberField, Row, SingleLineTextField } from '../../Robi/RobiUI.js'
 
 // @START-CustomForm
 export default async function EditForm({ event, fields, item, list, modal, parent, table }) {
@@ -13,7 +13,11 @@ export default async function EditForm({ event, fields, item, list, modal, paren
     const fieldsToCreate = fields?.filter(field => field.name !== 'Id');
     const components = fieldsToCreate?.map((field, index) => {
         const { name, display, type, choices, action } = field;
-    
+
+        // Row(async (parent) => {
+
+        // });
+
         let component = {};
     
         switch (type) {
@@ -63,6 +67,8 @@ export default async function EditForm({ event, fields, item, list, modal, paren
             field
         };
     });
+
+    console.log(components);
     
     return {
         async onUpdate(event) {

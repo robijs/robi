@@ -7,8 +7,11 @@ import { Store } from '../Core/Store.js'
  * @param {*} param
  * @returns
  */
-export function Row(render) {
+export function Row(render, options = {}) {
+    const { parent } = options;
+    
     const id = Store.getNextRow();
+
     const component = Component({
         html: /*html*/ `
             <div class='robi-row' data-row='${id}'></div>
@@ -24,7 +27,7 @@ export function Row(render) {
             }
         `,
         // FIXME: Do I like this? Does it assume too much?
-        parent: Store.get('viewcontainer'),
+        parent: parent || Store.get('viewcontainer'),
         events: [],
         onAdd() {
             render(component);
