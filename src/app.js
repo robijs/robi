@@ -14,6 +14,7 @@ import SelectIcon from './Routes/SelectIcon/SelectIcon.js'
 import ChartDemo from './Routes/ChartDemo/ChartDemo.js'
 import ModifyFile from './Routes/ModifyFile/ModifyFile.js'
 import Button from './Routes/Button/Button.js'
+import CustomForm from './Routes/CustomForm/CustomForm.js'
 // @END-IMPORTS
 
 // @START
@@ -22,6 +23,15 @@ Start({
     // Routes are directly addressable. Ex: https://site#path.
     routes: [
         // @START-ROUTES
+        // @START-CustomForm
+        {
+            path: 'CustomForm',
+            title: 'Custom Form',
+            icon: 'bs-checks-grid',
+            go: CustomForm
+        }
+        // @END-CustomForm
+        , // @ROUTE
         // @START-SortTables
         {
             path: 'SortTables',

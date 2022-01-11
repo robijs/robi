@@ -158,7 +158,7 @@ export function ViewTools(param) {
                 transition: filter 300ms ease, background-color 150ms ease;
             }
 
-            #id .menu .dropdown-item .icon {
+            #id .dropdown-item .icon {
                 fill: var(--primary);
             }
 

@@ -665,12 +665,11 @@ export function AppContainer() {
 
             /* Sortable */
             .ui-sortable-handle {
-                cursor: grab;
+                cursor: grab !important;
             }
 
             .ui-sortable-helper {
-                cursor: grabbing;
-              
+                cursor: grabbing !important;
             }
 
             /* Row */
@@ -696,7 +695,7 @@ export function AppContainer() {
             }
 
             /* Menu */
-            .grown-in-top-left,
+            .grow-in-top-left,
             .grow-in-center {
                 background: var(--inputBackground);
                 box-shadow: var(--box-shadow);
@@ -721,21 +720,7 @@ export function AppContainer() {
                 padding: .5rem;
             }
 
-            /* @keyframes grown-in-center {
-                from {
-                    transform: scale(0);
-                    transform-origin: center;
-                    opacity: 0;
-                }
-                to {
-                    transform: scale(1);
-                    transform-origin: center;
-                    opacity: 1;
-                }
-            } */
-
             .grow-in-center {
-                /* animation: 150ms ease-in-out forwards grown-in-center; */
                 border-radius: 20px;
                 padding: 10px;
                 display: flex;

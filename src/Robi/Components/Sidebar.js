@@ -42,7 +42,7 @@ export function Sidebar({ parent, path }) {
                                             Edit
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="${id}">
-                                            <div class="grown-in-top-left">
+                                            <div class="grow-in-top-left">
                                                 <button class="dropdown-item modify-routes" type="button">Modify routes</button>
                                                 <button class="dropdown-item reorder-routes" type="button">Reorder routes</button>
                                                 <button class="dropdown-item hide-routes" type="button">Hide routes</button>
@@ -515,7 +515,7 @@ export function Sidebar({ parent, path }) {
         component.findAll('.nav-container .nav').forEach(node => {
             node.classList.remove('nav-selected');
             node.dataset.shouldroute = 'no';
-            node.style.cursor = 'initial';
+            // node.style.cursor = 'initial';
         });
 
         // Find sortable nav
