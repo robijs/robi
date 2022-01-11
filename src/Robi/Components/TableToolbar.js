@@ -1,6 +1,7 @@
 import { Component } from '../Actions/Component.js'
 import { UpdateItem } from '../Actions/UpdateItem.js'
 import { CustomNewForm } from '../Actions/CustomNewForm.js'
+import { CustomEditForm } from '../Actions/CustomEditForm.js'
 import { Alert } from './Alert.js'
 import { BootstrapButton } from './BootstrapButton.js'
 import { Modal } from './Modal.js'
@@ -282,7 +283,7 @@ export function TableToolbar(param) {
                     const { newForm, display, fields } = App.list(list);
 
                     if (newForm) {
-                        console.log('new form');
+                        console.log('show new form');
                     } else {
                         CustomNewForm({ list, display, fields });
                     }
@@ -292,7 +293,13 @@ export function TableToolbar(param) {
                 selector: `#id .edit-table .edit-form`,
                 event: 'click',
                 listener(event) {
-                    console.log('edit form');
+                    const { editForm, display, fields } = App.list(list);
+
+                    if (newForm) {
+                        console.log('show edit form');
+                    } else {
+                        CustomEditForm({ list, display, fields });
+                    }
                 }
             }
         ]

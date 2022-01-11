@@ -26,8 +26,7 @@ export default async function CustomForm({ parent }) {
     });
     // @Row
     Row(async (parent) => {
-        const { list, display, fields } = App.list('CustomForm');
-        CustomEditForm({ list, display, fields });
+
     });
     // @END-Rows
 }
