@@ -7,7 +7,6 @@ export default [
     {
         list: 'CustomForm',
         editForm: CustomFormEditForm,
-        editForm: CustomFormEditForm,
         newForm: CustomFormNewForm,
         display: 'Custom Form',
         fields: [

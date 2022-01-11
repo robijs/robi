@@ -16,7 +16,7 @@ export function EditFormTemplate({ list, display, fields }) {
         ``,
         `// @START-${list}`,
         `export default async function EditForm({ event, fields, item, list, modal, parent, table }) {`,
-        `    console.log(list:, 'edit form');`,
+        `    console.log(list, 'edit form');`,
         ``,
         `    const fieldsToCreate = fields?.filter(field => field.name !== 'Id');`,
         `    const components = fieldsToCreate?.map((field, index) => {`,
