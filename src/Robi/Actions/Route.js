@@ -95,20 +95,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         return;
     }
 
-    // Route title
-    let viewTitle;
-
-    if (title !== false) {
-        viewTitle = Title({
-            title: route.title,
-            parent: viewContainer,
-            margin: '0px 0px 30px 0px'
-        });
-
-        viewTitle.add();
-    }
-
-    // Add source tools
+    // Add tools
     if (route.type !== 'system' && Store.user().Role === 'Developer') {
         const viewTools = ViewTools({
             route,
@@ -121,6 +108,19 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
             name: 'viewtools',
             component: viewTools
         });
+    }
+
+    // Route title
+    let viewTitle;
+
+    if (title !== false) {
+        viewTitle = Title({
+            title: route.title,
+            parent: viewContainer,
+            margin: '0px 0px 30px 0px'
+        });
+
+        viewTitle.add();
     }
 
     // Set browswer history state and window title

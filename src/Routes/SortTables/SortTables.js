@@ -5,11 +5,12 @@
 
 import { Table, Row } from '../../Robi/RobiUI.js'
 
+// @START-SortTables
 export default async function SortTables({ parent }) {
     // @START-Rows
     Row(async (parent) => {
         await Table({
-            list: 'SLOT',
+            list: 'MLOT',
             parent,
             advancedSearch: true,
             toolbar: [
@@ -25,7 +26,7 @@ export default async function SortTables({ parent }) {
     // @Row
     Row(async (parent) => {
         await Table({
-            list: 'MLOT',
+            list: 'SLOT',
             parent,
             advancedSearch: true,
             toolbar: [
@@ -72,3 +73,4 @@ export default async function SortTables({ parent }) {
     });
     // @END-Rows
 }
+// @END-SortTables

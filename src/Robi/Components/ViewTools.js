@@ -19,82 +19,77 @@ export function ViewTools(param) {
         position
     } = param;
 
-    const id = GenerateUUID();
-
     const component = Component({
         html: /*html*/ `
-            <div class=''>
-                <!-- data-offset = -758px (dropdown-menu width / 2) + 25px (button width / 2) -->
-                <button class='btn tools' type='button' id='${id}' data-toggle='dropdown' data-offset='-404px + 25px, -1px' aria-haspopup='true' aria-expanded='false'>
+            <div class='viewtools'>
+                <button class='btn tools' type='button' data-state='closed'>
                     •••
                 </button>
-                <div class='dropdown-menu' aria-labelledby='${id}'>
-                    <div class='grown-in-center'>
-                        <!-- Add Table -->
-                        <button class='dropdown-item add-table' type='button'>
-                            <div class='icon-container'>
-                                <svg class='icon' style='font-size: 48px;'>
-                                    <use href='#icon-bs-table'></use>
+                <div class='grow-in-center'>
+                    <!-- Add Table -->
+                    <button class='dropdown-item add-table' type='button'>
+                        <div class='icon-container'>
+                            <svg class='icon' style='font-size: 48px;'>
+                                <use href='#icon-bs-table'></use>
+                            </svg>
+                        </div>
+                        <div style='font-weight: 700; margin-top: 10px;'>Table</div>
+                    </button>
+                    <!-- Add Chart -->
+                    <button class='dropdown-item add-chart' type='button'>
+                        <div class='icon-container'>
+                            <svg class='icon' style='font-size: 48px;'>
+                                <use href='#icon-bs-bar-chart'></use>
+                            </svg>
+                        </div>
+                        <div style='font-weight: 700; margin-top: 10px;'>Chart</div>
+                    </button>
+                    <!-- Add Text Block -->
+                    <button class='dropdown-item add-text-block' type='button'>
+                        <div class='icon-container'>
+                            <span class='d-flex align-items-center justify-content center' style='font-size: 28; font-weight: 600; color: var(--primary);'>
+                                <span>Aa</span>
+                                <svg class='icon' style='font-size: 32px;'>
+                                    <use href='#icon-bs-cursor-text'></use>
                                 </svg>
-                            </div>
-                            <div style='font-weight: 700; margin-top: 10px;'>Table</div>
-                        </button>
-                        <!-- Add Chart -->
-                        <button class='dropdown-item add-chart' type='button'>
-                            <div class='icon-container'>
-                                <svg class='icon' style='font-size: 48px;'>
-                                    <use href='#icon-bs-bar-chart'></use>
-                                </svg>
-                            </div>
-                            <div style='font-weight: 700; margin-top: 10px;'>Chart</div>
-                        </button>
-                        <!-- Add Text Block -->
-                        <button class='dropdown-item add-text-block' type='button'>
-                            <div class='icon-container'>
-                                <span class='d-flex align-items-center justify-content center' style='font-size: 28; font-weight: 600; color: var(--primary);'>
-                                    <span>Aa</span>
-                                    <svg class='icon' style='font-size: 32px;'>
-                                        <use href='#icon-bs-cursor-text'></use>
-                                    </svg>
-                                </span>
-                            </div>
-                            <div style='font-weight: 700; margin-top: 10px;'>Text block</div>
-                        </button>
-                        <!-- Add Light Button -->
-                        <button class='dropdown-item add-button-light' type='button'>
-                            <div class='icon-container '>
-                                <div class='btn btn-robi'>Button</div>
-                            </div>
-                            <div style='font-weight: 700; margin-top: 10px;'>Light</div>
-                        </button>
-                        <!-- Add Dark Button -->
-                        <button class='dropdown-item add-button-dark' type='button'>
-                            <div class='icon-container'>
-                                <div class='btn btn-robi-reverse'>Button</div>
-                            </div>
-                            <div style='font-weight: 700; margin-top: 10px;'>Dark</div>
-                        </button>
-                        <!-- Divider -->
-                        <div class='dropdown-divider'></div>
-                        <!-- Edit Layout -->
-                        <button class='dropdown-item edit-layout' type='button'>
-                            <div class='icon-container'>
-                                <svg class='icon' style='font-size: 40px; fill: var(--color);'>
-                                    <use href='#icon-bs-grid-1x2'></use>
-                                </svg>
-                            </div>
-                            <div style='font-weight: 700; margin-top: 10px; color: var(--color);'>Edit Layout</div>
-                        </button>
-                        <!-- Edit Source -->
-                        <button class='dropdown-item edit-source' type='button'>
-                            <div class='icon-container'>
-                                <svg class='icon' style='font-size: 40px; fill: var(--color);'>
-                                    <use href='#icon-bs-code'></use>
-                                </svg>
-                            </div>
-                            <div style='font-weight: 700; margin-top: 10px; color: var(--color);'>Edit Source</div>
-                        </button>
-                    </div>
+                            </span>
+                        </div>
+                        <div style='font-weight: 700; margin-top: 10px;'>Text block</div>
+                    </button>
+                    <!-- Add Light Button -->
+                    <button class='dropdown-item add-button-light' type='button'>
+                        <div class='icon-container '>
+                            <div class='btn btn-robi'>Button</div>
+                        </div>
+                        <div style='font-weight: 700; margin-top: 10px;'>Light</div>
+                    </button>
+                    <!-- Add Dark Button -->
+                    <button class='dropdown-item add-button-dark' type='button'>
+                        <div class='icon-container'>
+                            <div class='btn btn-robi-reverse'>Button</div>
+                        </div>
+                        <div style='font-weight: 700; margin-top: 10px;'>Dark</div>
+                    </button>
+                    <!-- Divider -->
+                    <div class='dropdown-divider'></div>
+                    <!-- Edit Layout -->
+                    <button class='dropdown-item edit-layout' type='button'>
+                        <div class='icon-container'>
+                            <svg class='icon' style='font-size: 40px; fill: var(--color);'>
+                                <use href='#icon-bs-grid-1x2'></use>
+                            </svg>
+                        </div>
+                        <div style='font-weight: 700; margin-top: 10px; color: var(--color);'>Edit Layout</div>
+                    </button>
+                    <!-- Edit Source -->
+                    <button class='dropdown-item edit-source' type='button'>
+                        <div class='icon-container'>
+                            <svg class='icon' style='font-size: 40px; fill: var(--color);'>
+                                <use href='#icon-bs-code'></use>
+                            </svg>
+                        </div>
+                        <div style='font-weight: 700; margin-top: 10px; color: var(--color);'>Edit Source</div>
+                    </button>
                 </div>
             </div>
         `,
@@ -109,6 +104,7 @@ export function ViewTools(param) {
                 height: 62px;
                 width: 100%;
                 color: var(--primary);
+                z-index: 10000;
             }
 
             #id .tools {
@@ -123,12 +119,24 @@ export function ViewTools(param) {
                 transform: scale(2);
             }
 
-            #id .dropdown-menu {
-                background: transparent;
-                border-radius: 10px;
-                border: none;
-                padding: 0px;
-                min-width: 0px;
+            #id .menu {
+
+            }
+
+            #id .grow-in-center {
+                top: 5px;
+                position: absolute;
+
+                transform: scale(0);
+                transform-origin: top;
+                opacity: 0;
+                transition: transform 150ms ease, opacity 150ms ease;
+            }
+
+            #id .grow-in-center.open {
+                transform: scale(1);
+                transform-origin: top;
+                opacity: 1;
             }
 
             #id .dropdown-divider {
@@ -151,7 +159,7 @@ export function ViewTools(param) {
                 transition: filter 300ms ease, background-color 150ms ease;
             }
 
-            #id .dropdown-menu .dropdown-item .icon {
+            #id .menu .dropdown-item .icon {
                 fill: var(--primary);
             }
 
@@ -199,7 +207,37 @@ export function ViewTools(param) {
                 selector: '#id .tools',
                 event: 'click',
                 listener(event) {
-                    event.target.classList.add('scale-up');
+                    this.classList.add('scale-up');
+
+                    const state = this.dataset.state;
+
+                    if (state === 'closed') {
+                        console.log('viewtools: open');
+                        this.dataset.state = 'open';
+                        // component.find('.menu').classList.remove('d-none');
+                        component.find('.grow-in-center').classList.add('open');
+                    } else {
+                        console.log('viewtools: close');
+                        this.dataset.state = 'closed';
+                        // component.find('.menu').classList.add('d-none');
+                        component.find('.grow-in-center').classList.remove('open');
+                        component.find('.tools').classList.remove('scale-up');
+                    }
+                }
+            },
+            {
+                selector: '#id .tools',
+                event: 'focusout',
+                listener(event) {
+                    const state = this.dataset.state;
+
+                    if (state === 'open') {
+                        console.log('viewtools: close');
+                        this.dataset.state = 'closed';
+                        // component.find('.menu').classList.add('d-none');
+                        component.find('.grow-in-center').classList.remove('open');
+                        component.find('.tools').classList.remove('scale-up');
+                    }
                 }
             },
             {
@@ -278,12 +316,7 @@ export function ViewTools(param) {
                     });
                 }
             }
-        ],
-        onAdd() {
-            $(`#${component.get().id}`).on('hidden.bs.dropdown', function () {
-                component.find('.tools').classList.remove('scale-up');
-            });
-        }
+        ]
     });
 
     return component;

@@ -697,7 +697,7 @@ export function AppContainer() {
 
             /* Menu */
             .grown-in-top-left,
-            .grown-in-center {
+            .grow-in-center {
                 background: var(--inputBackground);
                 box-shadow: var(--box-shadow);
             }
@@ -715,13 +715,13 @@ export function AppContainer() {
                 }
             }
 
-            .grown-in-top-left {
+            .grow-in-top-left {
                 animation: 150ms ease-in-out forwards grown-in-top-left;
                 border-radius: 10px;
                 padding: .5rem;
             }
 
-            @keyframes grown-in-center {
+            /* @keyframes grown-in-center {
                 from {
                     transform: scale(0);
                     transform-origin: center;
@@ -732,10 +732,10 @@ export function AppContainer() {
                     transform-origin: center;
                     opacity: 1;
                 }
-            }
+            } */
 
-            .grown-in-center {
-                animation: 150ms ease-in-out forwards grown-in-center;
+            .grow-in-center {
+                /* animation: 150ms ease-in-out forwards grown-in-center; */
                 border-radius: 20px;
                 padding: 10px;
                 display: flex;
