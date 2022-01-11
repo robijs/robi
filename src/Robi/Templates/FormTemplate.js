@@ -15,7 +15,7 @@ export function FormTemplate({ list, display, fields }) {
         `import { } from '../../Robi/RobiUI.js'`,
         ``,
         `// @START-${list}`,
-        `export default async function ${list}NewForm({ event, fields, list, modal, parent, table }) {`,
+        `export default async function NewForm({ event, fields, list, modal, parent, table }) {`,
         `    const fieldsToCreate = fields?.filter(field => field.name !== 'Id');`,
         `    const components = fieldsToCreate?.map((field, index) => {`,
         `        const { name, display, type, choices, action } = field;`,

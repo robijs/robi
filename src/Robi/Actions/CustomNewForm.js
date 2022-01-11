@@ -62,9 +62,9 @@ export async function CustomNewForm({ list, display, fields }) {
                     document.querySelector('#app').style.transition = 'filter 150ms';
                     document.querySelector('#app').style.filter = 'blur(5px)';
 
-                    // await updateLists();
+                    await updateLists();
 
-                    // return;
+                    return;
 
                     await createForm();
 
@@ -102,44 +102,23 @@ export async function CustomNewForm({ list, display, fields }) {
 
                         // Set import
                         const imports = content.match(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/);
-                        const newImports = imports[1] + `import ${list}NewForm from './Forms/${list}/NewForm.js'\n`
+                        const newImports = imports[1] + `import ${list}NewForm from './Forms/${list}/NewForm.js'\n`;
                         updatedContent = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS${newImports}// @END-IMPORTS`);
 
-                        // Set routes
-                        const routes = content.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
-                        const ordered = routes[1].split(', // @ROUTE');
-                        // FIXME: replace hard coded spaces (4 === 1 tab) with variable that includes 4 space characters
-                        // TODO: Extract to template
-                        const newRoute = [
-                            ``,
-                            `        // @START-${routePath.value()}`,
-                            `        {`,
-                            `            path: '${routePath.value()}',`,
-                            `            title: '${routeTitle.value()}',`,
-                            `            icon: '${routeIcon.value()}',`,
-                            `            go: ${routePath.value()}`,
-                            `        }`,
-                            `        // @END-${routePath.value()}`,
-                            ``
-                        ].join('\n');
+                        // Set form
+                        // NOTE: This won't work if there's a space between list and name of type string
+                        updatedContent = content.replace(`list: '${list}',`, `list: '${list}',\n        newForm: ${list}NewForm,`);
 
-                        ordered.push(newRoute);
+                        console.log(updatedContent);
 
-                        console.log('New:', ordered);
-
-                        const newRoutes = ordered.join(', // @ROUTE');
-
-                        console.log(newRoutes);
-
-                        // TODO: Will you always need to add 8 spaces before // @END-ROUTES?
-                        updatedContent = updatedContent.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes}        // @END-ROUTES`);
-
-                        console.log('OLD\n----------------------------------------\n', content);
-                        console.log('\n****************************************');
-                        console.log('NEW\n----------------------------------------\n', updatedContent);
-                        console.log('\n****************************************');
+                        // console.log('OLD\n----------------------------------------\n', content);
+                        // console.log('\n****************************************');
+                        // console.log('NEW\n----------------------------------------\n', updatedContent);
+                        // console.log('\n****************************************');
 
                         let setFile;
+
+                        return;
 
                         if (App.isProd()) {
                             // TODO: Make a copy of app.js first
@@ -154,7 +133,7 @@ export async function CustomNewForm({ list, display, fields }) {
                                 }
                             });
                         } else {
-                            setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
+                            setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=lists.js`, {
                                 method: 'POST',
                                 body: updatedContent
                             });
