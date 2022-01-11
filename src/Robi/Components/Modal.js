@@ -414,6 +414,10 @@ export function Modal(param) {
         return $(`#${component.get().id}`);
     };
 
+    component.getHeader = () => {
+        return component.find('.modal-header');
+    };
+
     component.close = (onClose) => {
         if (onClose) {
             $(component.get()).on('hidden.bs.modal', event => {

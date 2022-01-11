@@ -51,6 +51,7 @@ import { FilesTable } from './Components/FilesTable.js'
 import { FixedToast } from './Components/FixedToast.js'
 import { FoldingCube } from './Components/FoldingCube.js'
 import { FormSection } from './Components/FormSection.js'
+import { FormTools } from './Components/FormTools.js'
 import { Heading } from './Components/Heading.js'
 import { Help } from './Components/Help.js'
 import { IconField } from './Components/IconField.js'
@@ -157,6 +158,7 @@ export {
     FixedToast,
     FoldingCube,
     FormSection,
+    FormTools,
     Heading,
     Help,
     IconField,

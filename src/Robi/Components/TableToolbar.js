@@ -2,6 +2,7 @@ import { Component } from '../Actions/Component.js'
 import { UpdateItem } from '../Actions/UpdateItem.js'
 import { CustomNewForm } from '../Actions/CustomNewForm.js'
 import { CustomEditForm } from '../Actions/CustomEditForm.js'
+import { ModifyNewForm } from '../Actions/ModifyNewForm.js'
 import { Alert } from './Alert.js'
 import { BootstrapButton } from './BootstrapButton.js'
 import { Modal } from './Modal.js'
@@ -21,9 +22,11 @@ export function TableToolbar(param) {
     const {
         advancedSearch,
         action,
+        editForm,
         heading,
         list,
         options,
+        newForm,
         parent,
         position,
         search
@@ -284,6 +287,7 @@ export function TableToolbar(param) {
 
                     if (newForm) {
                         console.log('show new form');
+                        ModifyNewForm({ list, display, fields, newForm });
                     } else {
                         CustomNewForm({ list, display, fields });
                     }

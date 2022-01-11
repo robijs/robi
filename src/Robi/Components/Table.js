@@ -513,6 +513,8 @@ export async function Table(param) {
             parent: fadeContainer,
             advancedSearch,
             list,
+            newForm: schema.newForm,
+            editForm: schema.editForm,
             action(label) {
                 const { filter } = toolbar.find(option => option.label === label);
 

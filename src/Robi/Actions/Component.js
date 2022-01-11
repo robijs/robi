@@ -183,12 +183,12 @@ export function Component(param) {
             const node = this.get();
 
             if (delay) {
-                setTimeout(findAndRemoveStyleAndNode, delay);
+                setTimeout(removeStyleAndNode, delay);
             } else {
-                findAndRemoveStyleAndNode();
+                removeStyleAndNode();
             }
 
-            function findAndRemoveStyleAndNode() {
+            function removeStyleAndNode() {
                 const styleNode = document.querySelector(`style[data-name='${id}']`);
 
                 if (styleNode) {
