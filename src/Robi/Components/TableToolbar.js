@@ -1,5 +1,6 @@
 import { Component } from '../Actions/Component.js'
 import { UpdateItem } from '../Actions/UpdateItem.js'
+import { CustomNewForm } from '../Actions/CustomNewForm.js'
 import { Alert } from './Alert.js'
 import { BootstrapButton } from './BootstrapButton.js'
 import { Modal } from './Modal.js'
@@ -271,6 +272,27 @@ export function TableToolbar(param) {
 
                         runSearch(component.find('.run-search'));
                     }
+                }
+            },
+            // Edit table
+            {
+                selector: `#id .edit-table .new-form`,
+                event: 'click',
+                listener(event) {
+                    const { newForm, display, fields } = App.list(list);
+
+                    if (newForm) {
+                        console.log('new form');
+                    } else {
+                        CustomNewForm({ list, display, fields });
+                    }
+                }
+            },
+            {
+                selector: `#id .edit-table .edit-form`,
+                event: 'click',
+                listener(event) {
+                    console.log('edit form');
                 }
             }
         ]

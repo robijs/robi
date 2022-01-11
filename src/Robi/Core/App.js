@@ -3,6 +3,9 @@ let appSettings = {};
 let appLists;
 
 const App = {
+    list(name) {
+        return appLists.find(item => item.list === name);
+    },
     lists() {
         return appLists;
     },

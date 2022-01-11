@@ -14,22 +14,38 @@ createServer((req, res) => {
         req.on("data", data => {
             body = data;
 
-            // TODO: Handle malformed requests
+            // TODO: Handle other methods
             const url = decodeURI(req.url);
             const query = url.split('?')[1];
             const props = query.split('&');
+
+            console.log(props);
+
             const { path, file } = Object.fromEntries(props.map(prop => {
                 const [ key, value ] = prop.split('=');
+
+                console.log(prop, key, value);
+
                 return [ key, value ];
             }));
 
-            // Make dirs if they don't exist
-            mkdirSync(`./${path}`, { recursive: true });
+            if (path === 'newform') {
+                // Make dirs if they don't exist
+                mkdirSync(`./src/Forms`, { recursive: true });
 
-            const writableStream = createWriteStream(`./${path}/${file}`);
-            writableStream.write(data);
+                const writableStream = createWriteStream(`./src/Forms/${file}.js`);
+                writableStream.write(data);
 
-            console.log(`\nSuccessfully wrote to -> ${path}/${file}\n`);
+                console.log(`\nSuccessfully created form -> ${file}\n`);
+            } else {
+                // Make dirs if they don't exist
+                mkdirSync(`./${path}`, { recursive: true });
+
+                const writableStream = createWriteStream(`./${path}/${file}`);
+                writableStream.write(data);
+
+                console.log(`\nSuccessfully wrote to -> ${path}/${file}\n`);
+            }
         });
 
         req.on("end", () => {

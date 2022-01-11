@@ -1,6 +1,10 @@
+// @START-IMPORTS
+// @END-IMPORTS
+
 export default [
     {
         list: 'CustomForm',
+        display: 'Custom Form',
         fields: [
             {
                 name: 'SLOT',

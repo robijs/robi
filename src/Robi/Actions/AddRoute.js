@@ -1,6 +1,5 @@
 import { Modal } from '../Components/Modal.js'
 import { BootstrapButton } from '../Components/BootstrapButton.js'
-import { BootstrapDropdown } from '../Components/BootstrapDropdown.js'
 import { IconField } from '../Components/IconField.js'
 import { LoadingSpinner } from '../Components/LoadingSpinner.js'
 import { Alert } from '../Components/Alert.js'
@@ -24,6 +23,7 @@ export async function AddRoute(event) {
     const addRouteModal = Modal({
         title: false,
         scrollable: true,
+        close: true,
         async addContent(modalBody) {
             modalBody.classList.add('install-modal');
             addRouteModal.find('.modal-dialog').style.maxWidth = 'fit-content';

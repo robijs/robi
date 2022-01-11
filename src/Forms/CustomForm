@@ -1,0 +1,7 @@
+// This file can be edited programmatically.
+// If you know the API, feel free to make changes by hand.
+// Just be sure to put @START and @END sigils in the right places.
+
+CustomForm
+Custom Form
+[{"name":"SLOT","display":"Single Line of Text","type":"slot"},{"name":"MLOT","display":"Multiple Lines of Text","type":"mlot"},{"name":"Number","type":"number"},{"name":"Choice","type":"choice","value":null,"choices":["One","Two","Three"]},{"name":"MultiChoice","display":"Multi Choice","type":"choice","fillIn":true,"value":null,"choices":["One","Two","Three"]}]

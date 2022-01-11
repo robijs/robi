@@ -5,9 +5,9 @@
   "Errors": [
     {
       "SessionId": null,
-      "Message": "Row is not defined",
-      "Error": "ReferenceError: Row is not defined\n    at Object.CustomForm [as go] (http://127.0.0.1:8080/src/Routes/CustomForm/CustomForm.js:12:5)\n    at Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:150:11)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:124:5)",
-      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "Message": "Uncaught ReferenceError: routeTitle is not defined",
+      "Error": "{\"stack\":\"ReferenceError: routeTitle is not defined\\n    at http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:263:17\",\"message\":\"routeTitle is not defined\"}",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js",
       "UserAgent": null,
       "Status": null,
       "AuthorId": 1,
@@ -20,14 +20,14 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 03:59:36 GMT",
-      "Modified": "Tue, 11 Jan 2022 03:59:36 GMT",
+      "Created": "Tue, 11 Jan 2022 05:02:04 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:02:04 GMT",
       "Id": 1
     },
     {
       "SessionId": null,
-      "Message": "Row is not defined",
-      "Error": "ReferenceError: Row is not defined\n    at Object.CustomForm [as go] (http://127.0.0.1:8080/src/Routes/CustomForm/CustomForm.js:12:5)\n    at Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:150:11)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:124:5)",
+      "Message": "CustomNewForm is not defined",
+      "Error": "ReferenceError: CustomNewForm is not defined\n    at http://127.0.0.1:8080/src/Routes/CustomForm/CustomForm.js:29:9\n    at onAdd (http://127.0.0.1:8080/src/Robi/Components/Row.js:30:13)\n    at Object.add (http://127.0.0.1:8080/src/Robi/Actions/Component.js:257:17)\n    at Row (http://127.0.0.1:8080/src/Robi/Components/Row.js:34:15)\n    at Object.CustomForm [as go] (http://127.0.0.1:8080/src/Routes/CustomForm/CustomForm.js:28:5)\n    at Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:150:11)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:124:5)",
       "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
       "UserAgent": null,
       "Status": null,
@@ -41,9 +41,72 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 03:59:40 GMT",
-      "Modified": "Tue, 11 Jan 2022 03:59:40 GMT",
+      "Created": "Tue, 11 Jan 2022 05:05:02 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:05:02 GMT",
       "Id": 2
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot destructure property 'list' of 'undefined' as it is undefined.",
+      "Error": "TypeError: Cannot destructure property 'list' of 'undefined' as it is undefined.\n    at CustomNewForm (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:16:39)\n    at http://127.0.0.1:8080/src/Routes/CustomForm/CustomForm.js:29:9\n    at onAdd (http://127.0.0.1:8080/src/Robi/Components/Row.js:30:13)\n    at Object.add (http://127.0.0.1:8080/src/Robi/Actions/Component.js:257:17)\n    at Row (http://127.0.0.1:8080/src/Robi/Components/Row.js:34:15)\n    at Object.CustomForm [as go] (http://127.0.0.1:8080/src/Routes/CustomForm/CustomForm.js:28:5)\n    at Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:150:11)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:124:5)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 05:05:58 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:05:58 GMT",
+      "Id": 3
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot destructure property 'list' of 'undefined' as it is undefined.",
+      "Error": "TypeError: Cannot destructure property 'list' of 'undefined' as it is undefined.\n    at CustomNewForm (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:16:39)\n    at http://127.0.0.1:8080/src/Routes/CustomForm/CustomForm.js:29:9\n    at onAdd (http://127.0.0.1:8080/src/Robi/Components/Row.js:30:13)\n    at Object.add (http://127.0.0.1:8080/src/Robi/Actions/Component.js:257:17)\n    at Row (http://127.0.0.1:8080/src/Robi/Components/Row.js:34:15)\n    at Object.CustomForm [as go] (http://127.0.0.1:8080/src/Routes/CustomForm/CustomForm.js:28:5)\n    at Route (http://127.0.0.1:8080/src/Robi/Actions/Route.js:150:11)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:124:5)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 05:06:13 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:06:13 GMT",
+      "Id": 4
+    },
+    {
+      "SessionId": null,
+      "Message": "Failed to fetch",
+      "Error": "TypeError: Failed to fetch",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 05:07:27 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:07:27 GMT",
+      "Id": 5
     }
   ],
   "Log": [
@@ -64,8 +127,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 03:51:44 GMT",
-      "Modified": "Tue, 11 Jan 2022 03:51:44 GMT",
+      "Created": "Tue, 11 Jan 2022 05:00:32 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:00:32 GMT",
       "Id": 1
     },
     {
@@ -85,8 +148,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 03:57:54 GMT",
-      "Modified": "Tue, 11 Jan 2022 03:57:54 GMT",
+      "Created": "Tue, 11 Jan 2022 05:02:00 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:02:00 GMT",
       "Id": 2
     },
     {
@@ -106,8 +169,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 03:59:36 GMT",
-      "Modified": "Tue, 11 Jan 2022 03:59:36 GMT",
+      "Created": "Tue, 11 Jan 2022 05:02:11 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:02:11 GMT",
       "Id": 3
     },
     {
@@ -127,14 +190,14 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 03:59:40 GMT",
-      "Modified": "Tue, 11 Jan 2022 03:59:40 GMT",
+      "Created": "Tue, 11 Jan 2022 05:02:14 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:02:14 GMT",
       "Id": 4
     },
     {
       "Title": "First Last logged in",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
       "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
       "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
       "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
@@ -148,8 +211,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:00:03 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:00:03 GMT",
+      "Created": "Tue, 11 Jan 2022 05:02:20 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:02:20 GMT",
       "Id": 5
     },
     {
@@ -169,8 +232,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:02:26 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:02:26 GMT",
+      "Created": "Tue, 11 Jan 2022 05:02:50 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:02:50 GMT",
       "Id": 6
     },
     {
@@ -190,8 +253,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:02:30 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:02:30 GMT",
+      "Created": "Tue, 11 Jan 2022 05:03:01 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:03:01 GMT",
       "Id": 7
     },
     {
@@ -211,8 +274,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:02:34 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:02:34 GMT",
+      "Created": "Tue, 11 Jan 2022 05:03:09 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:03:09 GMT",
       "Id": 8
     },
     {
@@ -232,8 +295,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:03:53 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:03:53 GMT",
+      "Created": "Tue, 11 Jan 2022 05:03:39 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:03:39 GMT",
       "Id": 9
     },
     {
@@ -253,8 +316,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:04:41 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:04:41 GMT",
+      "Created": "Tue, 11 Jan 2022 05:03:47 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:03:47 GMT",
       "Id": 10
     },
     {
@@ -274,8 +337,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:04:50 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:04:50 GMT",
+      "Created": "Tue, 11 Jan 2022 05:04:46 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:04:46 GMT",
       "Id": 11
     },
     {
@@ -295,8 +358,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:04:57 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:04:57 GMT",
+      "Created": "Tue, 11 Jan 2022 05:05:02 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:05:02 GMT",
       "Id": 12
     },
     {
@@ -316,8 +379,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:05:09 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:05:09 GMT",
+      "Created": "Tue, 11 Jan 2022 05:05:07 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:05:07 GMT",
       "Id": 13
     },
     {
@@ -337,8 +400,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:05:12 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:05:12 GMT",
+      "Created": "Tue, 11 Jan 2022 05:05:40 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:05:40 GMT",
       "Id": 14
     },
     {
@@ -358,8 +421,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:05:31 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:05:31 GMT",
+      "Created": "Tue, 11 Jan 2022 05:05:51 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:05:51 GMT",
       "Id": 15
     },
     {
@@ -379,8 +442,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:05:38 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:05:38 GMT",
+      "Created": "Tue, 11 Jan 2022 05:05:58 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:05:58 GMT",
       "Id": 16
     },
     {
@@ -400,14 +463,14 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:05:43 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:05:43 GMT",
+      "Created": "Tue, 11 Jan 2022 05:06:13 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:06:13 GMT",
       "Id": 17
     },
     {
       "Title": "First Last logged in",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
       "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
       "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
       "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
@@ -421,8 +484,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:05:46 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:05:46 GMT",
+      "Created": "Tue, 11 Jan 2022 05:07:27 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:07:27 GMT",
       "Id": 18
     },
     {
@@ -442,8 +505,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:06:35 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:06:35 GMT",
+      "Created": "Tue, 11 Jan 2022 05:07:54 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:07:54 GMT",
       "Id": 19
     },
     {
@@ -463,8 +526,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:06:59 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:06:59 GMT",
+      "Created": "Tue, 11 Jan 2022 05:08:28 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:08:28 GMT",
       "Id": 20
     },
     {
@@ -484,8 +547,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:07:29 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:07:29 GMT",
+      "Created": "Tue, 11 Jan 2022 05:08:36 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:08:36 GMT",
       "Id": 21
     },
     {
@@ -505,8 +568,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:07:45 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:07:45 GMT",
+      "Created": "Tue, 11 Jan 2022 05:08:41 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:08:41 GMT",
       "Id": 22
     },
     {
@@ -526,8 +589,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:08:18 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:08:18 GMT",
+      "Created": "Tue, 11 Jan 2022 05:08:58 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:08:58 GMT",
       "Id": 23
     },
     {
@@ -547,8 +610,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:14:18 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:14:18 GMT",
+      "Created": "Tue, 11 Jan 2022 05:09:29 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:09:29 GMT",
       "Id": 24
     },
     {
@@ -568,8 +631,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:14:21 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:14:21 GMT",
+      "Created": "Tue, 11 Jan 2022 05:10:05 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:10:05 GMT",
       "Id": 25
     },
     {
@@ -589,8 +652,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:14:40 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:14:40 GMT",
+      "Created": "Tue, 11 Jan 2022 05:10:09 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:10:09 GMT",
       "Id": 26
     },
     {
@@ -610,8 +673,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:15:44 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:15:44 GMT",
+      "Created": "Tue, 11 Jan 2022 05:10:13 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:10:13 GMT",
       "Id": 27
     },
     {
@@ -631,8 +694,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:15:48 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:15:48 GMT",
+      "Created": "Tue, 11 Jan 2022 05:10:27 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:10:27 GMT",
       "Id": 28
     },
     {
@@ -652,8 +715,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:15:52 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:15:52 GMT",
+      "Created": "Tue, 11 Jan 2022 05:10:30 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:10:30 GMT",
       "Id": 29
     },
     {
@@ -673,8 +736,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:16:10 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:16:10 GMT",
+      "Created": "Tue, 11 Jan 2022 05:10:52 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:10:52 GMT",
       "Id": 30
     },
     {
@@ -694,8 +757,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:18:21 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:18:21 GMT",
+      "Created": "Tue, 11 Jan 2022 05:10:56 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:10:56 GMT",
       "Id": 31
     },
     {
@@ -715,8 +778,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:19:29 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:19:29 GMT",
+      "Created": "Tue, 11 Jan 2022 05:11:26 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:11:26 GMT",
       "Id": 32
     },
     {
@@ -736,8 +799,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:19:54 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:19:54 GMT",
+      "Created": "Tue, 11 Jan 2022 05:11:36 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:11:36 GMT",
       "Id": 33
     },
     {
@@ -757,8 +820,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:21:11 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:21:11 GMT",
+      "Created": "Tue, 11 Jan 2022 05:11:47 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:11:47 GMT",
       "Id": 34
     },
     {
@@ -778,8 +841,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:21:22 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:21:22 GMT",
+      "Created": "Tue, 11 Jan 2022 05:12:01 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:12:01 GMT",
       "Id": 35
     },
     {
@@ -799,8 +862,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:21:45 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:21:45 GMT",
+      "Created": "Tue, 11 Jan 2022 05:14:50 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:14:50 GMT",
       "Id": 36
     },
     {
@@ -820,8 +883,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:22:08 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:22:08 GMT",
+      "Created": "Tue, 11 Jan 2022 05:15:25 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:15:25 GMT",
       "Id": 37
     },
     {
@@ -841,8 +904,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:22:16 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:22:16 GMT",
+      "Created": "Tue, 11 Jan 2022 05:15:29 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:15:29 GMT",
       "Id": 38
     },
     {
@@ -862,8 +925,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:22:57 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:22:57 GMT",
+      "Created": "Tue, 11 Jan 2022 05:20:07 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:20:07 GMT",
       "Id": 39
     },
     {
@@ -883,8 +946,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:25:27 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:25:27 GMT",
+      "Created": "Tue, 11 Jan 2022 05:20:24 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:20:24 GMT",
       "Id": 40
     },
     {
@@ -904,8 +967,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:25:43 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:25:43 GMT",
+      "Created": "Tue, 11 Jan 2022 05:25:21 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:25:21 GMT",
       "Id": 41
     },
     {
@@ -925,14 +988,14 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:25:50 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:25:50 GMT",
+      "Created": "Tue, 11 Jan 2022 05:29:08 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:29:08 GMT",
       "Id": 42
     },
     {
       "Title": "First Last logged in",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
       "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
       "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
       "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
@@ -946,14 +1009,14 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:26:11 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:26:11 GMT",
+      "Created": "Tue, 11 Jan 2022 05:29:42 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:29:42 GMT",
       "Id": 43
     },
     {
       "Title": "First Last logged in",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
       "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
       "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
       "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
@@ -967,14 +1030,14 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:26:17 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:26:17 GMT",
+      "Created": "Tue, 11 Jan 2022 05:31:35 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:31:35 GMT",
       "Id": 44
     },
     {
       "Title": "First Last logged in",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
       "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
       "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
       "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
@@ -988,8 +1051,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:26:21 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:26:21 GMT",
+      "Created": "Tue, 11 Jan 2022 05:34:25 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:34:25 GMT",
       "Id": 45
     },
     {
@@ -1009,14 +1072,14 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:26:28 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:26:28 GMT",
+      "Created": "Tue, 11 Jan 2022 05:35:34 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:35:34 GMT",
       "Id": 46
     },
     {
       "Title": "First Last logged in",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
       "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
       "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
       "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
@@ -1030,8 +1093,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:26:32 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:26:32 GMT",
+      "Created": "Tue, 11 Jan 2022 05:35:57 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:35:57 GMT",
       "Id": 47
     },
     {
@@ -1051,8 +1114,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:28:58 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:28:58 GMT",
+      "Created": "Tue, 11 Jan 2022 05:36:06 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:36:06 GMT",
       "Id": 48
     },
     {
@@ -1072,14 +1135,14 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:29:00 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:29:00 GMT",
+      "Created": "Tue, 11 Jan 2022 05:37:07 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:37:07 GMT",
       "Id": 49
     },
     {
       "Title": "First Last logged in",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
       "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
       "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
       "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
@@ -1093,9 +1156,51 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:29:54 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:29:54 GMT",
+      "Created": "Tue, 11 Jan 2022 05:37:21 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:37:21 GMT",
       "Id": 50
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 05:39:18 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:39:18 GMT",
+      "Id": 51
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 05:40:29 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:40:29 GMT",
+      "Id": 52
     },
     {
       "Title": "First Last logged in",
@@ -1114,9 +1219,30 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 04:30:45 GMT",
-      "Modified": "Tue, 11 Jan 2022 04:30:45 GMT",
-      "Id": 51
+      "Created": "Tue, 11 Jan 2022 05:40:59 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:40:59 GMT",
+      "Id": 53
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 05:41:03 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:41:03 GMT",
+      "Id": 54
     }
   ],
   "Users": [
@@ -1137,8 +1263,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Tue, 11 Jan 2022 03:51:44 GMT",
-      "Modified": "Tue, 11 Jan 2022 03:51:44 GMT",
+      "Created": "Tue, 11 Jan 2022 05:00:31 GMT",
+      "Modified": "Tue, 11 Jan 2022 05:00:31 GMT",
       "Id": 1
     }
   ],
