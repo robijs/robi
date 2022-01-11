@@ -4,10 +4,26 @@
 // Otherwise, changes made with GUI tools will not render properly.
 
 import { } from '../../Robi/Robi.js'
-import { } from '../../Robi/RobiUI.js'
+import { Row, Table } from '../../Robi/RobiUI.js'
 
 // @START-CustomForm
 export default async function CustomForm({ parent }) {
-
+    // @START-Rows
+    Row(async (parent) => {
+        await Table({
+            list: 'CustomForm',
+            parent,
+            advancedSearch: true,
+            toolbar: [
+                {
+                    label: 'All',
+                    filter(data) {
+                        return data;
+                    }
+                }
+            ]
+        });
+    });
+    // @END-Rows
 }
 // @END-CustomForm

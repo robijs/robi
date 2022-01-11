@@ -735,6 +735,10 @@ export async function Table(param) {
     setTimeout(() => {
         fadeContainer.get().style.transition = 'opacity 300ms ease 100ms';
         fadeContainer.get().style.opacity = '1';
+        // FIXME: How to safely move this to Shimmer without overriding transition?
+        setTimeout(() => {
+            tableContainer.get().style.transition = 'none';
+        }, 500);
     }, 0);
 
     // Shimmer off

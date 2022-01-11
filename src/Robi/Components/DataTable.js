@@ -246,13 +246,12 @@ export function DataTable(param) {
 
             #id_wrapper .buttons-html5 span{
                 color: var(--color) !important;
-
                 display: inline-block;
                 margin: 0px 10px;
                 padding: 4px 24px;
                 flex: 1;
                 text-align: center;
-                border-radius: 10px;
+                border-radius: 8px;
             }
 
             #id_wrapper .buttons-html5 span:hover {

@@ -16,7 +16,11 @@ export function RouteTemplate({ name }) {
         ``,
         `// @START-${name}`,
         `export default async function ${name}({ parent }) {`,
+        `// @START-Rows`,
+        `Row((parent) => {`,
         ``,
+        `})`,
+        `// @END-Rows`,
         `}`,
         `// @END-${name}`,
         ``

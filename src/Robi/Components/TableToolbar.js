@@ -39,6 +39,31 @@ export function TableToolbar(param) {
             <div class='btn-toolbar w-100' role='toolbar'>
                 <div class='text'>${heading}</div>
                 ${
+                    Store.user().Role === 'Developer' ?
+                    (() => {
+                        const id = GenerateUUID();
+
+                        return /*html*/ `
+                            <div class='edit-table'>
+                                <button class='btn' type='button' id='${id}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>•••</button>
+                                <div class='dropdown-menu' aria-labelledby='${id}'>
+                                    <div class='grow-in-top-left'>
+                                        <button class='dropdown-item new-form' type='button'>New Form</button>
+                                        <button class='dropdown-item edit-form' type='button'>Edit Form</button>
+                                        <button class='dropdown-item fields' type='button'>Form Sections</button>
+                                        <div class='dropdown-divider'></div>
+                                        <button class='dropdown-item views' type='button'>Views</button>
+                                        <div class='dropdown-divider'></div>
+                                        <button class='dropdown-item fields' type='button'>Fields</button>
+                                        <div class='dropdown-divider'></div>
+                                        <button class='dropdown-item settings' type='button' style='color: var(--primary);'>Settings</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    })() : ''
+                }
+                ${
                     advancedSearch ? 
                     /*html*/ `
                         <button type='button' class='btn btn-robi-light mr-2 advanced-search'>Advanced search</button>
@@ -59,14 +84,14 @@ export function TableToolbar(param) {
                                 <!-- Buttons -->
                                 <div class='d-flex justify-content-end run-search-container pt-2'>
                                     <div class='d-flex justify-content-start load-search-container' style='flex: 2;'>
-                                        <button type='button' class='btn btn-robi-light' id="${id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Load</button>
-                                        <div class="dropdown-menu" aria-labelledby="${id}">
-                                            <div class="grown-in-top-left saved-search-menu">
+                                        <button type='button' class='btn btn-robi-light' id='${id}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Load</button>
+                                        <div class='dropdown-menu' aria-labelledby='${id}'>
+                                            <div class='grown-in-top-left saved-search-menu'>
                                                 ${
                                                     searches.length ? searches.map(search => {
                                                         const { name } = search;
 
-                                                        return /*html*/ `<button class="dropdown-item load-search" type="button">${name}</button>`;
+                                                        return /*html*/ `<button class='dropdown-item load-search' type='button'>${name}</button>`;
                                                     }).join('\n') : 
                                                     /*html*/ `
                                                         <div style='font-size: 13px; padding: .25rem 1.5rem;'>No saved searches</div>
@@ -94,7 +119,6 @@ export function TableToolbar(param) {
             }
 
             #id .text {
-                flex: 1;
                 font-size: 20px;
                 font-weight: 700;
             }
@@ -165,6 +189,17 @@ export function TableToolbar(param) {
                 border-radius: 10px;
                 border: none;
                 padding: none;
+            }
+
+            /* Edit table */
+            #id .edit-table {
+                flex: 1;
+            }
+
+            #id .edit-table .btn {
+                font-size: 16px;
+                cursor: pointer;
+                color: var(--primary);
             }
         `,
         parent,
@@ -321,7 +356,7 @@ export function TableToolbar(param) {
                     // Disable button
                     saveSearchBtn.get().disabled = true;
                     saveSearchBtn.get().innerHTML = /*html*/ `
-                        <span class="spinner-border" role="status" aria-hidden="true" style="width: 20px; height: 20px; border-width: 3px"></span> Saving search
+                        <span class='spinner-border' role='status' aria-hidden='true' style='width: 20px; height: 20px; border-width: 3px'></span> Saving search
                     `;
 
                     // Get rows

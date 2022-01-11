@@ -21,9 +21,7 @@ export function ViewTools(param) {
     const component = Component({
         html: /*html*/ `
             <div class='viewtools'>
-                <button class='btn tools' type='button'>
-                    •••
-                </button>
+                <button class='btn tools' type='button'>•••</button>
                 <div class='grow-in-center'>
                     <!-- Add Table -->
                     <button class='dropdown-item add-table' type='button'>

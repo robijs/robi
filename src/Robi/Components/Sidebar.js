@@ -37,17 +37,17 @@ export function Sidebar({ parent, path }) {
 
                             return /*html*/ `
                                 <div class='dev-buttons-container'>
-                                    <div class="dropdown">
-                                        <button class="btn w-100 open-dev-menu" type="button" id="${id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class='dropdown'>
+                                        <button class='btn w-100 open-dev-menu' type='button' id='${id}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                                             Edit
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="${id}">
-                                            <div class="grow-in-top-left">
-                                                <button class="dropdown-item modify-routes" type="button">Modify routes</button>
-                                                <button class="dropdown-item reorder-routes" type="button">Reorder routes</button>
-                                                <button class="dropdown-item hide-routes" type="button">Hide routes</button>
-                                                <div class="dropdown-divider"></div>
-                                                <button class="dropdown-item delete-routes" type="button">Delete routes</button>
+                                        <div class='dropdown-menu' aria-labelledby='${id}'>
+                                            <div class='grow-in-top-left'>
+                                                <button class='dropdown-item modify-routes' type='button'>Modify routes</button>
+                                                <button class='dropdown-item reorder-routes' type='button'>Reorder routes</button>
+                                                <button class='dropdown-item hide-routes' type='button'>Hide routes</button>
+                                                <div class='dropdown-divider'></div>
+                                                <button class='dropdown-item delete-routes' type='button'>Delete routes</button>
                                             </div>
                                         </div>
                                     </div>
