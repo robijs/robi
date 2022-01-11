@@ -5,7 +5,13 @@
  * @returns 
  */
 export function NewFormTemplate({ list, display, fields }) {
-    const fieldsToCreate = fields?.filter(field => field.name !== 'Id');
+    if (!list && !fields) {
+        return;
+    }
+
+    console.log(fields);
+
+    const fieldsToCreate = fields.filter(field => field.name !== 'Id');
 
     let template = [
         `// This file can be edited programmatically.`,

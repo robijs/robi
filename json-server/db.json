@@ -338,6 +338,111 @@
       "Created": "Tue, 11 Jan 2022 18:24:07 GMT",
       "Modified": "Tue, 11 Jan 2022 18:24:07 GMT",
       "Id": 16
+    },
+    {
+      "SessionId": null,
+      "Message": "fields?.filter is not a function",
+      "Error": "TypeError: fields?.filter is not a function\n    at NewFormTemplate (http://127.0.0.1:8080/src/Robi/Templates/NewFormTemplate.js:8:36)\n    at createForm (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:132:42)\n    at HTMLButtonElement.action (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:65:27)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:47:56 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:47:56 GMT",
+      "Id": 17
+    },
+    {
+      "SessionId": null,
+      "Message": "fields.filter is not a function",
+      "Error": "TypeError: fields.filter is not a function\n    at NewFormTemplate (http://127.0.0.1:8080/src/Robi/Templates/NewFormTemplate.js:12:35)\n    at createForm (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:132:42)\n    at HTMLButtonElement.action (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:65:27)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:53:43 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:53:43 GMT",
+      "Id": 18
+    },
+    {
+      "SessionId": null,
+      "Message": "fields.filter is not a function",
+      "Error": "TypeError: fields.filter is not a function\n    at NewFormTemplate (http://127.0.0.1:8080/src/Robi/Templates/NewFormTemplate.js:14:35)\n    at createForm (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:132:42)\n    at HTMLButtonElement.action (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:65:27)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:54:49 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:54:49 GMT",
+      "Id": 19
+    },
+    {
+      "SessionId": null,
+      "Message": "fields.filter is not a function",
+      "Error": "TypeError: fields.filter is not a function\n    at NewFormTemplate (http://127.0.0.1:8080/src/Robi/Templates/NewFormTemplate.js:14:35)\n    at createForm (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:132:42)\n    at HTMLButtonElement.action (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:65:27)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:56:37 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:56:37 GMT",
+      "Id": 20
+    },
+    {
+      "SessionId": null,
+      "Message": "fields.filter is not a function",
+      "Error": "TypeError: fields.filter is not a function\n    at NewFormTemplate (http://127.0.0.1:8080/src/Robi/Templates/NewFormTemplate.js:14:35)\n    at createForm (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:132:42)\n    at HTMLButtonElement.action (http://127.0.0.1:8080/src/Robi/Actions/CustomNewForm.js:65:27)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:58:19 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:58:19 GMT",
+      "Id": 21
     }
   ],
   "Log": [
@@ -5926,6 +6031,153 @@
       "Created": "Tue, 11 Jan 2022 18:46:44 GMT",
       "Modified": "Tue, 11 Jan 2022 18:46:44 GMT",
       "Id": 266
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:47:45 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:47:45 GMT",
+      "Id": 267
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:53:36 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:53:36 GMT",
+      "Id": 268
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:54:43 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:54:43 GMT",
+      "Id": 269
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:56:29 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:56:29 GMT",
+      "Id": 270
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:58:06 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:58:06 GMT",
+      "Id": 271
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:58:13 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:58:13 GMT",
+      "Id": 272
+    },
+    {
+      "Title": "First Last logged in",
+      "SessionId": null,
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:116:25)\"",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55",
+      "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Tue, 11 Jan 2022 18:59:11 GMT",
+      "Modified": "Tue, 11 Jan 2022 18:59:11 GMT",
+      "Id": 273
     }
   ],
   "Users": [

@@ -132,7 +132,7 @@ export async function CustomNewForm({ list, display, fields }) {
                         const contents = NewFormTemplate({
                             list,
                             display,
-                            fields: JSON.stringify(fields)
+                            fields: fields
                         });
                     
                         let newFile;

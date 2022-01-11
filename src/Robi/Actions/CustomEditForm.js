@@ -132,7 +132,7 @@ export async function CustomEditForm({ list, display, fields }) {
                         const contents = EditFormTemplate({
                             list,
                             display,
-                            fields: JSON.stringify(fields)
+                            fields: fields
                         });
                     
                         let newFile;

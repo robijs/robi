@@ -1,5 +1,4 @@
 // @START-IMPORTS
-import CustomFormNewForm from './Forms/CustomForm/NewForm.js'
 import CustomFormEditForm from './Forms/CustomForm/EditForm.js'
 import MLOTNewForm from './Forms/MLOT/NewForm.js'
 import SLOTEditForm from './Forms/SLOT/EditForm.js'
@@ -9,7 +8,6 @@ export default [
     {
         list: 'CustomForm',
         editForm: CustomFormEditForm,
-        newForm: CustomFormNewForm,
         display: 'Custom Form',
         fields: [
             {
