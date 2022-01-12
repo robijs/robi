@@ -103,8 +103,7 @@ Start({
         // name: app name (AUTOPOPULATED if created by Robi)
         // questionTypes: define at least one questionType with title and path props
         // theme: ('Blue' | 'Brown' | 'Gray' | 'Green' | 'Gold' | 'Magenta' | 'Orange' | 'Pink' | 'Purple' | 'Red' | 'Slate' | 'Teal')
-        // title: site title (AUTOPOPULATED if created with CREATE APP)
-        // titleColor: core Title component text color
+        // title: site title
         // userDefaultRole: default role for newly created use accounts
         // userSettings: new user account 'Settings' field default JSON value
         name: /* @START-name */'App'/* @END-name */,
