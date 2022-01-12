@@ -16,8 +16,8 @@ export function NewFormTemplate({ list, display, fields }) {
     let template = [
         `// This file can be edited programmatically.`,
         `// If you know the API, feel free to make changes by hand.`,
-        `// Just be sure to put @START and @END sigils in the right places.`,
-        `// Otherwise, changes made with CLI and GUI tools will not render properly.`,
+        `// Just be sure to put @START, @END, and @[Spacer Name] sigils in the right places.`,
+        `// Otherwise, changes made from CLI and GUI tools won't work properly.`,
         ``,
         `import { CreateItem } from '../../Robi/Robi.js'`,
         `import { ${modules()} } from '../../Robi/RobiUI.js'`,
@@ -26,7 +26,12 @@ export function NewFormTemplate({ list, display, fields }) {
         `export default async function NewForm({ event, fields, list, modal, parent, table }) {`,
         `    console.log(list, 'custom new form');`,
         ``,
-        `   const [`
+        `    // @START-Title`,
+        `    modal.setTitle('New Item');`,
+        `    // @END-Title`,
+        ``,
+        `    // @Start-Props`,
+        `    const [`
     ];
 
     function modules() {
@@ -54,12 +59,15 @@ export function NewFormTemplate({ list, display, fields }) {
 
     template = template.concat([
         `    ] = fields;`,
+        `    // @END-Props`,
         ``,
+        `    // @START-Fields`
     ]);
 
     template = template.concat(fieldsToCreate.map(field => `    let ${field.name}_field;`));
 
     template = template.concat([
+        `    // @END-Fields`,
         ``,
         `    // @START-Rows`
     ]);
@@ -176,6 +184,7 @@ export function NewFormTemplate({ list, display, fields }) {
     template = template.concat([
         `    // @END-Rows`,
         ``,
+        `    // @START-Return`,
         `    return {`,
         `        async onCreate(event) {`,
         `            const data = {};`,
@@ -201,8 +210,10 @@ export function NewFormTemplate({ list, display, fields }) {
         `            });`,
         ``,
         `            return newItem;`,
-        `        }`,
+        `        },`,
+        `        label: 'Create'`,
         `    };`,
+        `    // @END-Return`,
         `}`,
         `// @END-${list}`,
         ``

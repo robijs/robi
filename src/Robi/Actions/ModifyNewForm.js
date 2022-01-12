@@ -61,5 +61,7 @@ export async function ModifyNewForm({ list, display, fields, newForm }) {
     });
 
     tools.add();
+
+    
 }
 // @END-File

@@ -440,6 +440,14 @@ export function Modal(param) {
         }
     };
 
+    component.setTitle = (text) => {
+        const node = component.find('.modal-title');
+
+        if (node) {
+            node.innerHTML = text;
+        }
+    };
+
     return component;
 }
 // @END-File

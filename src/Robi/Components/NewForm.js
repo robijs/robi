@@ -2,6 +2,7 @@ import { CreateItem } from '../Actions/CreateItem.js'
 import { BootstrapDropdown } from './BootstrapDropdown.js'
 import { DateField } from './DateField.js'
 import { MultiLineTextField } from './MultiLineTextField.js'
+import { MultiChoiceField } from './MultiChoiceField.js'
 import { NumberField } from './NumberField.js'
 import { SingleLineTextField } from './SingleLineTextField.js' 
 
@@ -14,7 +15,7 @@ import { SingleLineTextField } from './SingleLineTextField.js'
 export async function NewForm({ event, fields, list, modal, parent, table }) {
     const fieldsToCreate = fields?.filter(field => field.name !== 'Id');
     const components = fieldsToCreate?.map((field, index) => {
-        const { name, display, type, choices, action } = field;
+        const { name, display, type, choices, action, value, fillIn } = field;
 
         let component = {};
 
@@ -46,6 +47,14 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
                             label: choice
                         };
                     }),
+                    parent
+                });
+                break;
+            case 'multichoice':
+                component = MultiChoiceField({
+                    label: display || name,
+                    fillIn,
+                    choices,
                     parent
                 });
                 break;
@@ -81,6 +90,7 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
                         case 'slot':
                         case 'mlot':
                         case 'choice':
+                        case 'multichoice':
                             if (value) {
                                 data[name] = value;
                             }
