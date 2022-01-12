@@ -37,7 +37,7 @@ export default async function NewForm({ event, fields, list, modal, parent, tabl
         const { name, display } = SLOT_props
 
         SLOT_field = SingleLineTextField({
-            label: display || name,
+            label: /* @START-SLOT_label */display || name/* @END-SLOT_label */,
             fieldMargin: '0px',
             parent
         });
