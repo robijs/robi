@@ -27,6 +27,7 @@ export async function Table(param) {
         checkboxes,
         createdRow,
         defaultButtons,
+        deleteButton,
         editForm,
         editFormTitle,
         exportButtons,
@@ -39,6 +40,7 @@ export async function Table(param) {
         margin,
         newForm,
         newFormTitle,
+        onRowClick,
         onDelete,
         openInModal,
         order,
@@ -62,7 +64,7 @@ export async function Table(param) {
 
     const tableContainer = Container({
         display: 'block',
-        classes: ['table-container'],
+        classes: ['table-container', 'w-100'],
         shimmer: true,
         minHeight: '200px',
         radius: '20px',
@@ -116,12 +118,12 @@ export async function Table(param) {
                 ?.fields
                 .map(name => {
                     // FIXME: Set default SharePoint Fields (won't be listed in schema)
-                    // TODO: Only set 'Name' as an option if schema.template === 101
+                    // TODO: Only set 'Name' as an option if schema?.template === 101
                     const spFields = ['Created', 'Modified', 'Author', 'Editor', 'Name'];
                     if (spFields.includes(name)) {
                         return { name };
                     } else {
-                        return schema.fields.find(field => field.name === name);
+                        return schema?.fields.find(field => field.name === name);
                     }
                 });
 
@@ -134,12 +136,12 @@ export async function Table(param) {
                         ?.fields
                         .map(name => {
                             // FIXME: Set default SharePoint Fields (won't be listed in schema)
-                            // TODO: Only set 'Name' as an option if schema.template === 101
+                            // TODO: Only set 'Name' as an option if schema?.template === 101
                             const spFields = ['Created', 'Modified', 'Author', 'Editor', 'Name'];
                             if (spFields.includes(name)) {
                                 return { name };
                             } else {
-                                return schema.fields.find(field => field.name === name);
+                                return schema?.fields.find(field => field.name === name);
                             }
                         });
                 }
@@ -197,6 +199,13 @@ export async function Table(param) {
                         return /*html*/ `
                         <div class='dt-mlot'>${data || ''}</data>
                     `;
+                    };
+                }
+
+                // NOTE: What will break on this?
+                else if (type === 'multichoice') {
+                    columnOptions.render = (data, type, row) => {
+                        return data ? data.results.join(', ') : '';
                     };
                 }
 
@@ -322,12 +331,14 @@ export async function Table(param) {
                                 table
                             };
 
-                            if (schema.newForm) {
-                                selectedForm = await schema.newForm(formParam);
-                            } else if (NewForm) {
-                                selectedForm = await NewForm(formParam);
-                            } else {
+                            if (schema?.newForm) {
+                                // NOTE: Must pass in all fields, not just what the selected view provides
+                                formParam.fields = schema?.fields;
+                                selectedForm = await schema?.newForm(formParam);
+                            } else if (newForm) {
                                 selectedForm = await newForm(formParam);
+                            } else {
+                                selectedForm = await NewForm(formParam);
                             }
 
                             // Set button value
@@ -401,7 +412,7 @@ export async function Table(param) {
     }
 
     if (defaultButtons !== false) {
-        if (checkboxes !== false) {
+        if (checkboxes !== false && deleteButton !== false) {
             buttons.push({
                 text: /*html*/ `
                     <svg class='icon'>
@@ -449,7 +460,9 @@ export async function Table(param) {
         if (exportButtons !== false) {
             buttons.push({
                 extend: 'collection',
-                text: 'Export',
+                autoClose: true,
+                background: false,
+                fade: 0,
                 text: /*html*/ `
                     <svg class="icon">
                         <use href="#icon-bs-download"></use>
@@ -513,8 +526,8 @@ export async function Table(param) {
             parent: fadeContainer,
             advancedSearch,
             list,
-            newForm: schema.newForm,
-            editForm: schema.editForm,
+            newForm: schema?.newForm,
+            editForm: schema?.editForm,
             action(label) {
                 const { filter } = toolbar.find(option => option.label === label);
 
@@ -604,7 +617,7 @@ export async function Table(param) {
         order: order || [[1, 'asc']], /** Sort by 1st column (hidden Id field at [0]) {@link https://datatables.net/reference/api/order()} */
         buttons,
         createdRow,
-        onRowClick(param) {
+        onRowClick: onRowClick || function (param) {
             const {
                 row, item
             } = param;
@@ -623,8 +636,8 @@ export async function Table(param) {
                     async addContent(modalBody) {
                         const formParam = { item, table, row, fields: formFields, list, modal: rowModal, parent: modalBody };
 
-                        if (schema.editForm) {
-                            selectedForm = await schema.editForm(formParam);
+                        if (schema?.editForm) {
+                            selectedForm = await schema?.editForm(formParam);
                         } else if (editForm) {
                             selectedForm = await editForm(formParam);
                         } else {
@@ -707,8 +720,6 @@ export async function Table(param) {
 
                 rowModal.add();
             }
-
-
         },
         onSelect(param) {
             const selected = table.selected();
@@ -811,6 +822,23 @@ export async function Table(param) {
             row.querySelector('td:last-child').classList.remove('btrr-0', 'bbrr-0');
         });
     }
+
+    
+    // TODO: Generalize
+    // TODO: If form is modal, launch modal
+    // TODO: If form is view, Route to view
+    // Open modal
+    // if (itemId) {
+    //     const row = table.findRowById(itemId);
+
+    //     if (row) {
+    //         if (row.show) {
+    //             row.show().draw(false).node().click();
+    //         } else {
+    //             row.draw(false).node().click();
+    //         }
+    //     }
+    // }
 
     return table;
 }
