@@ -82,7 +82,7 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
             components
                 .forEach(item => {
                     const { component, field } = item;
-                    const { name, type } = field;
+                    const { name, type, validate } = field;
 
                     const value = component.value();
 
@@ -92,7 +92,11 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
                         case 'choice':
                         case 'date':
                             if (value) {
-                                data[name] = value;
+                                if (validate && validate(validate)) {
+                                    data[name] = value;
+                                } else {
+                                    data[name] = value;
+                                }
                             }
                             break;
                         case 'multichoice':
@@ -111,6 +115,8 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
                 });
 
             console.log(data);
+
+            return;
 
             const newItem = await CreateItem({
                 list,
