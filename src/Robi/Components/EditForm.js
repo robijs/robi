@@ -98,6 +98,7 @@ export async function EditForm({ event, fields, item, list, modal, parent, table
                         case 'mlot':
                         case 'choice':
                         case 'multichoice':
+                        case 'date':
                             if (value) {
                                 data[name] = value;
                             }

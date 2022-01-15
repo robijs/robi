@@ -91,6 +91,7 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
                         case 'mlot':
                         case 'choice':
                         case 'multichoice':
+                        case 'date':
                             if (value) {
                                 data[name] = value;
                             }
