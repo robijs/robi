@@ -133,7 +133,11 @@ Start({
                 Title: "First Last",
                 Email: "first.mi.last.ctr@mail.mil",
                 LoginName: "0987654321@mil",
-                Role: "Developer",
+                Roles: {
+                    results: [
+                        "Developer"
+                    ]
+                },
                 SiteId: 1
             },
             testInstall: false,

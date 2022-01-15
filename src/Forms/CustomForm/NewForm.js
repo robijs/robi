@@ -34,18 +34,6 @@ export default async function NewForm({ event, fields, list, modal, parent, tabl
 
     // @START-Rows
     Row(async (parent) => {
-        const { name, display } = MLOT_props
-
-        MLOT_field = MultiLineTextField({
-            label: 'Hello!',
-            fieldMargin: '0px',
-            parent
-        });
-
-        MLOT_field.add();
-    }, { parent });
-    // @Row
-    Row(async (parent) => {
         const { name, display } = SLOT_props
 
         SLOT_field = SingleLineTextField({
@@ -55,6 +43,18 @@ export default async function NewForm({ event, fields, list, modal, parent, tabl
         });
 
         SLOT_field.add();
+    }, { parent });
+    // @Row
+    Row(async (parent) => {
+        const { name, display } = MLOT_props
+
+        MLOT_field = MultiLineTextField({
+            label: 'Hello!',
+            fieldMargin: '0px',
+            parent
+        });
+
+        MLOT_field.add();
     }, { parent });
     // @Row
     Row(async (parent) => {

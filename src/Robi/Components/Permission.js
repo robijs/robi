@@ -19,6 +19,7 @@ export async function Permission({ parent }) {
 
             .permissions {
                 font-size: 14px;
+                width: 100%;
             }
 
             .permissions td,
@@ -50,75 +51,32 @@ export async function Permission({ parent }) {
                 <thead>
                     <tr>
                         <th>Role</th>
-                        <th>Measure Development Checklist</th>
-                        <th>Measure Intake Form</th>
-                        <th>Data Files</th>
-                        <th>New Access Request</th>
-                        <th>Resource Library</th>
+                        <th>SharePoint Group</th>
+                        <th>Settings</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>ML Action Officer</td>
+                        <td>Administrator</td>
                         <td><a href="/sites/J5/AED/MRB/ML/_layouts/15/people.aspx?MembershipGroupId=753" target="_blank">Manage</a></td>
-                        <td>R</td>
-                        <td>C</td>
-                        <td></td>
-                        <td>C</td>
-                        <td>C</td>
-                        <td>R</td>
-                        <td data-page="Help Requests">R</td>
-                        <td data-page="Instructions">R</td>
-                        <td data-page="Admin">R</td>
+                        <td>W</td>
                     </tr>
                     <tr>
-                        <td>
-                            ML Data Scientist
-                        </td>
+                        <td>Developer</td>
                         <td><a href="/sites/J5/AED/MRB/ML/_layouts/15/people.aspx?MembershipGroupId=754" target="_blank">Manage</a></td>
-                        <td>C</td>
-                        <td>C</td>
-                        <td></td>
-                        <td>C</td>
-                        <td>C</td>
-                        <td>R</td>
-                        <td data-page="Help Requests">R</td>
-                        <td data-page="Instructions">R</td>
-                        <td data-page="Admin">R</td>
+                        <td>W</td>
                     </tr>
                     <tr>
-                        <td>ML Data Administrator</td>
-                        <td><a href="/sites/J5/AED/MRB/ML/_layouts/15/people.aspx?MembershipGroupId=755" target="_blank">Manage</a></td>
-                        <td>C</td>
-                        <td>C</td>
-                        <td></td>
-                        <td>C</td>
-                        <td>C</td>
-                        <td>C</td>
-                        <td data-page="Help Requests">X</td>
-                        <td data-page="Instructions">R</td>
-                        <td data-page="Admin">R</td>
-                    </tr>
-                    <tr>
-                        <td>Everyone</td>
+                        <td>User</td>
                         <td>AD Group</td>
-                        <td></td>
                         <td>R</td>
-                        <td></td>
-                        <td></td>
-                        <td>C</td>
-                        <td>R</td>
-                        <td data-page="Help Requests">R</td>
-                        <td data-page="Instructions">R</td>
-                        <td data-page="Admin">R</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="alert alert-robi-secondary mt-4 w-100">
             <div><strong>Read</strong> = R</div>
-            <div><strong>Access</strong> = X</div>
-            <div><strong>Contributor</strong> = C</div>
+            <div><strong>Write</strong> = W</div>
         </div>
     `);
 }

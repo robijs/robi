@@ -306,7 +306,7 @@ export function Title(param) {
         }
     };
 
-    component.setDisplayText = (text) => {
+    component.setTitle = (text) => {
         const title = component.find('h1');
 
         title.innerHTML = text;
