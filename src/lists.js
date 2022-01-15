@@ -7,6 +7,7 @@
 import MLOTNewForm from './Forms/MLOT/NewForm.js'
 import SLOTEditForm from './Forms/SLOT/EditForm.js'
 import CustomFormNewForm from './Forms/CustomForm/NewForm.js'
+import SLOTNewForm from './Forms/SLOT/NewForm.js'
 // @END-IMPORTS
 
 export default [
@@ -54,6 +55,7 @@ export default [
     },
     {
         list: 'SLOT',
+        newForm: SLOTNewForm,
         editForm: SLOTEditForm,
         heading: 'Single Line of Text',
         fields: [
