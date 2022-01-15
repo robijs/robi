@@ -36,14 +36,14 @@ export function MultiLineTextField(param) {
             }
 
             #id .form-field-multi-line-text {
-                color: var(--color); /* Bootstrap@4.5.2 input color */
+                color: var(--color);
                 margin-top: 2px;
                 margin-bottom: 4px;
                 padding: 0.375rem 0.75rem;
             }
 
             #id .form-field-multi-line-text > * {
-                color: var(--color); /* Bootstrap@4.5.2 input color */
+                color: var(--color);
             }
 
             #id .form-field-multi-line-text.editable {
@@ -100,6 +100,16 @@ export function MultiLineTextField(param) {
         const field = component.find('.form-field-multi-line-text');
 
         field.focus();
+    };
+
+    component.isValid = (state) => {
+        if (state) {
+            component.find('.form-field-multi-line-text').classList.remove('invalid');
+            component.find('.form-field-multi-line-text').classList.add('valid');
+        } else {
+            component.find('.form-field-multi-line-text').classList.remove('valid');
+            component.find('.form-field-multi-line-text').classList.add('invalid');
+        }
     };
 
     component.value = (param, options = {}) => {

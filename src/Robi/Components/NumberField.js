@@ -33,13 +33,6 @@ export function NumberField(param) {
                 font-size: 14px;
                 margin-bottom:  0.5rem;
             }
-
-            /* #id input:active,
-            #id input:focus {
-                outline: none;
-                border: solid 1px transparent;
-                box-shadow: 0px 0px 0px 1px var(--primary);
-            } */
         `,
         parent: parent,
         position,
@@ -73,32 +66,13 @@ export function NumberField(param) {
         field.focus();
     };
 
-    component.addError = (param) => {
-        component.removeError();
-
-        let text = typeof param === 'object' ? param.text : param;
-
-        const html = /*html*/ `
-            <div class='alert alert-danger' role='alert'>
-                ${text}
-                ${param.button ?
-            /*html*/ ` 
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    `
-                : ''}
-            </div>
-        `;
-
-        component.find('.form-field-single-line-text').insertAdjacentHTML('beforebegin', html);
-    };
-
-    component.removeError = () => {
-        const message = component.find('.alert');
-
-        if (message) {
-            message.remove();
+    component.isValid = (state) => {
+        if (state) {
+            component.find('.form-control').classList.remove('invalid');
+            component.find('.form-control').classList.add('valid');
+        } else {
+            component.find('.form-control').classList.remove('valid');
+            component.find('.form-control').classList.add('invalid');
         }
     };
 

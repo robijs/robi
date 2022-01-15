@@ -14,35 +14,7 @@ export function SingleLineTextField(param) {
     let events = [];
 
     if (onKeydown) {
-        events.push({
-            selector: '#id .form-control',
-            event: 'keydown',
-            listener: onKeydown
-        });
-    }
 
-    if (onKeyup) {
-        events.push({
-            selector: '#id .form-control',
-            event: 'keyup',
-            listener: onKeyup
-        });
-    }
-
-    if (onKeypress) {
-        events.push({
-            selector: '#id .form-control',
-            event: 'keypress',
-            listener: onKeypress
-        });
-    }
-
-    if (onFocusout) {
-        events.push({
-            selector: '#id .form-control',
-            event: 'focusout',
-            listener: onFocusout
-        });
     }
 
     const component = Component({
@@ -98,7 +70,7 @@ export function SingleLineTextField(param) {
                 margin-bottom:  0.5rem;
             }
 
-            #id .form-field-single-line-text {
+            #id .slot-field {
                 width: ${width || 'unset'};
                 font-size: ${fontSize || '13px'};
                 font-weight: 500;
@@ -108,7 +80,7 @@ export function SingleLineTextField(param) {
                 transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
             }
 
-            #id .form-field-single-line-text.readonly {
+            #id .slot-field.readonly {
                 font-size: 13px;
                 font-weight: 400;
                 color: var(--color); 
@@ -120,16 +92,37 @@ export function SingleLineTextField(param) {
         `,
         parent: parent,
         position,
-        events
+        events: [
+            {
+                selector: '#id .form-control',
+                event: 'keydown',
+                listener: onKeydown
+            },
+            {
+                selector: '#id .form-control',
+                event: 'keyup',
+                listener: onKeyup
+            },
+            {
+                selector: '#id .form-control',
+                event: 'keypress',
+                listener: onKeypress
+            },
+            {
+                selector: '#id .form-control',
+                event: 'focusout',
+                listener: onFocusout
+            }
+        ]
     });
 
+    // NOTE: Edge won't respect autocomplete='off', but autocomplete='new-password' seems to work
     function Field() {
         return readOnly ?
         /*html*/ `
-            <div type='text' class='form-field-single-line-text readonly'>${value || ''}</div>
+            <div type='text' class='slot-field readonly'>${value || ''}</div>
         ` :
         /*html*/ `
-            <!-- Edge won't respect autocomplete='off', but autocomplete='new-password' seems to work -->
             <input type='text' class='form-control' value='${value || ''}' list='autocompleteOff' autocomplete='new-password' placeholder='${placeholder || ''}'>
         `;
     }
@@ -140,35 +133,16 @@ export function SingleLineTextField(param) {
         field?.focus();
     };
 
-    component.addError = (param) => {
-        component.removeError();
-
-        let text = typeof param === 'object' ? param.text : param;
-
-        const html = /*html*/ `
-            <div class='alert alert-danger' role='alert'>
-                ${text}
-                ${param.button ?
-            /*html*/ ` 
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    `
-                : ''}
-            </div>
-        `;
-
-        component.find('.form-field-single-line-text').insertAdjacentHTML('beforebegin', html);
-    };
-
-    component.removeError = () => {
-        const message = component.find('.alert');
-
-        if (message) {
-            message.remove();
+    component.isValid = (state) => {
+        if (state) {
+            component.find('.form-control').classList.remove('invalid');
+            component.find('.form-control').classList.add('valid');
+        } else {
+            component.find('.form-control').classList.remove('valid');
+            component.find('.form-control').classList.add('invalid');
         }
     };
-
+    
     component.value = (param) => {
         const field = component.find('.form-control');
 

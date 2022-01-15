@@ -152,6 +152,16 @@ export function ChoiceField(param) {
         }
     };
 
+    component.isValid = (state) => {
+        if (state) {
+            component.find('.dropdown-toggle').classList.remove('invalid');
+            component.find('.dropdown-toggle').classList.add('valid');
+        } else {
+            component.find('.dropdown-toggle').classList.remove('valid');
+            component.find('.dropdown-toggle').classList.add('invalid');
+        }
+    };
+
     component.selected = () => {
         const field = component.find('.dropdown-toggle');
 

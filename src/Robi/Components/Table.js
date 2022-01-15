@@ -375,6 +375,13 @@ export async function Table(param) {
                                         // Call newForm.onCreate() and wait for it to complete
                                         const newItem = await selectedForm?.onCreate(event);
 
+                                        // TODO: Don't create item if newItem == false;
+
+                                        if (!newItem) {
+                                            console.log('validation failed');
+                                            return;
+                                        }
+
                                         if (Array.isArray(newItem)) {
                                             items.concat(newItem);
 

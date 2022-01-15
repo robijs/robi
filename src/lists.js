@@ -4,16 +4,11 @@
 // Otherwise, changes made from CLI and GUI tools won't work properly.
 
 // @START-IMPORTS
-import MLOTNewForm from './Forms/MLOT/NewForm.js'
-import SLOTEditForm from './Forms/SLOT/EditForm.js'
-import CustomFormNewForm from './Forms/CustomForm/NewForm.js'
-import SLOTNewForm from './Forms/SLOT/NewForm.js'
 // @END-IMPORTS
 
 export default [
     {
         list: 'CustomForm',
-        newForm: CustomFormNewForm,
         display: 'Custom Form',
         fields: [
             {
@@ -55,26 +50,37 @@ export default [
     },
     {
         list: 'SLOT',
-        newForm: SLOTNewForm,
-        editForm: SLOTEditForm,
         heading: 'Single Line of Text',
         fields: [
             {
                 name: 'SLOT',
                 display: 'Single Line of Text',
-                type: 'slot'
+                type: 'slot',
+                validate(value) {
+                    if (value === 'Test') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             }
         ]
     },
     {
         list: 'MLOT',
-        newForm: MLOTNewForm,
         heading: 'Multiple Lines of Text',
         fields: [
             {
                 name: 'MLOT',
                 display: 'Multiple Lines of Text',
-                type: 'mlot'
+                type: 'mlot',
+                validate(value) {
+                    if (value === 'Test') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             }
         ]
     },
@@ -83,7 +89,14 @@ export default [
         fields: [
             {
                 name: 'Number',
-                type: 'number'
+                type: 'number',
+                validate(value) {
+                    if (value === 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             }
         ]
     },
@@ -98,7 +111,14 @@ export default [
                     'One',
                     'Two',
                     'Three'
-                ]
+                ],
+                validate(value) {
+                    if (value === 'Two') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             }
         ]
     }

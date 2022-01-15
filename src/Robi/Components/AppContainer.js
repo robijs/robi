@@ -383,6 +383,26 @@ export function AppContainer() {
                 ${cancelButton};
             }
 
+            .form-control.valid,
+            .form-control.valid:focus {
+                box-shadow: 0px 0px 0px 3px seagreen;
+            }
+
+            .form-control.invalid,
+            .form-control.invalid:focus {
+                box-shadow: 0px 0px 0px 3px crimson;
+            }
+
+            .form-field-multi-line-text.valid,
+            .form-field-multi-line-text.valid:focus {
+                box-shadow: 0px 0px 0px 4px seagreen;
+            }
+
+            .form-field-multi-line-text.invalid,
+            .form-field-multi-line-text.invalid:focus {
+                box-shadow: 0px 0px 0px 4px crimson;
+            }
+
             /* Alert */
             .alert {
                 font-size: 14px;

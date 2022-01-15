@@ -15,7 +15,7 @@ import { SingleLineTextField } from './SingleLineTextField.js'
 export async function NewForm({ event, fields, list, modal, parent, table }) {
     const fieldsToCreate = fields?.filter(field => field.name !== 'Id');
     const components = fieldsToCreate?.map((field, index) => {
-        const { name, display, type, choices, action, value, fillIn } = field;
+        const { name, display, type, value, validate, choices, fillIn } = field;
 
         let component = {};
 
@@ -23,48 +23,73 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
             case 'slot':
                 component = SingleLineTextField({
                     label: display || name,
-                    parent
+                    value,
+                    parent,
+                    onKeydown() {
+                        console.log('down');
+                    },
+                    onFocusout
                 });
                 break;
             case 'mlot':
                 component = MultiLineTextField({
                     label: display || name,
-                    parent
+                    value,
+                    parent,
+                    onFocusout
                 });
                 break;
             case 'number':
                 component = NumberField({
                     label: display || name,
-                    parent
+                    value,
+                    parent,
+                    onFocusout
                 });
                 break;
             case 'choice':
                 component = ChoiceField({
                     label: display || name,
-                    value: choices[0],
+                    value,
                     options: choices.map(choice => {
                         return {
                             label: choice
                         };
                     }),
-                    parent
+                    parent,
+                    onFocusout
                 });
                 break;
             case 'multichoice':
                 component = MultiChoiceField({
                     label: display || name,
+                    value,
                     fillIn,
                     choices,
-                    parent
+                    parent,
+                    onFocusout
                 });
                 break;
             case 'date':
                 component = DateField({
                     label: display || name,
-                    value: '',
-                    parent
+                    value,
+                    parent,
+                    onFocusout
                 });
                 break;
+        }
+
+        function onFocusout() {
+            return !validate ? undefined : () => {
+                const value = component.value();
+    
+                if (validate(value)) {
+                    component.isValid(true);
+                } else {
+                    component.isValid(false);
+                }
+            }
         }
 
         component.add();
@@ -96,9 +121,10 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
                                     const isValidated = validate(value);
 
                                     if (isValidated) {
+                                        component.isValid(true);
                                         data[name] = value;
                                     } else {
-                                        component.invalid();
+                                        component.isValid(false);
                                     }
                                 } else {
                                     data[name] = value;
@@ -122,7 +148,7 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
 
             console.log(data);
 
-            return;
+            return false;
 
             const newItem = await CreateItem({
                 list,

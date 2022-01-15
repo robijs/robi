@@ -31,19 +31,29 @@ export function DateField(param) {
                 font-weight: 500;
             }
 
-            #id .form-field-date {
-                width: auto;
-            }
-
             #id .form-field-description {
                 font-size: 14px;
                 margin-bottom:  0.5rem;
+            }
+
+            #id .form-field-date {
+                width: auto;
             }
         `,
         parent: parent,
         position,
         events: []
     });
+
+    component.isValid = (state) => {
+        if (state) {
+            component.find('.form-control').classList.remove('invalid');
+            component.find('.form-control').classList.add('valid');
+        } else {
+            component.find('.form-control').classList.remove('valid');
+            component.find('.form-control').classList.add('invalid');
+        }
+    };
 
     component.value = (param) => {
         const field = component.find('.form-field-date');

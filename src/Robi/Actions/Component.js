@@ -73,17 +73,18 @@ export function Component(param) {
         }
 
         events.forEach(item => {
-            const eventTypes = item.event.split(' ');
+            const { selector, event, listener } = item;
+            const eventTypes = event.split(' ');
 
             eventTypes.forEach(event => {
-                if (typeof item.selector === 'string') {
-                    const replaceIdPlaceholder = item.selector.replace(/#id/g, `#${id}`);
+                if (typeof selector === 'string') {
+                    const replaceIdPlaceholder = selector.replace(/#id/g, `#${id}`);
 
                     document.querySelectorAll(replaceIdPlaceholder).forEach((node) => {
-                        node.addEventListener(event, item.listener);
+                        node.addEventListener(event, listener);
                     });
                 } else {
-                    item.selector.addEventListener(event, item.listener);
+                    selector.addEventListener(event, listener);
                 }
             });
         });
@@ -148,7 +149,14 @@ export function Component(param) {
             return param;
         },
         get() {
-            return document?.querySelector(`#${id}`);
+            const node = document?.querySelector(`#${id}`);
+            
+            if (node) {
+                node.on = this.on;
+                node.off = this.off;
+
+                return node;
+            }
         },
         find(selector) {
             const node = this.get()?.querySelector(selector);
