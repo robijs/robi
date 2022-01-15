@@ -1,5 +1,5 @@
 import { writeFile } from 'fs';
-import lists from '../src/lists.js'
+import { readdir } from 'fs/promises'
 
 let db = {
     "Actions": [],
@@ -48,15 +48,19 @@ let db = {
     ]
 }
 
-lists.forEach(item => {
-    const { list, options } = item;
+const lists = await readdir('./src/Lists', { withFileTypes: true });
+const listInfo = lists.filter(list => list.isDirectory()).map(list => list.name)
+
+for (let info of listInfo) {
+    const module = await import(`../src/Lists/${info}/Schema.js`);
+    const { list, options } = module.default;
 
     db[list] = [];
 
     if (options?.files) {
         db[list + 'Files'] = [];
     }
-});
+}
 
 writeFile('./json-server/db.json', JSON.stringify(db), err => {
     if (err) {
@@ -65,4 +69,4 @@ writeFile('./json-server/db.json', JSON.stringify(db), err => {
     }
 })
 
-console.log('db.json reset');
+console.log('reset db.json');

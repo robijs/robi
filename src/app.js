@@ -4,31 +4,48 @@
 // Otherwise, changes made with GUI tools will not render properly.
 
 import { Start } from './Robi/Robi.js'
-import lists from './lists.js'
 
-// @START-IMPORTS
-import SortTables from './Routes/SortTables/SortTables.js'
-import Test from './Routes/Test/Test.js'
-import LookupField from './Routes/LookupField/LookupField.js'
-import SelectIcon from './Routes/SelectIcon/SelectIcon.js'
-import ChartDemo from './Routes/ChartDemo/ChartDemo.js'
-import ModifyFile from './Routes/ModifyFile/ModifyFile.js'
-import Button from './Routes/Button/Button.js'
-import CustomForm from './Routes/CustomForm/CustomForm.js'
-// @END-IMPORTS
+// @START-Imports:Lists
+import List_AllTypes from './Lists/AllTypes/Schema.js'
+import List_SLOT from './Lists/SLOT/Schema.js'
+import List_MLOT from './Lists/MLOT/Schema.js'
+import List_Date from './Lists/Date/Schema.js'
+import List_Choice from './Lists/Choice/Schema.js'
+import List_Number from './Lists/Number/Schema.js'
+import List_MultiChoice from './Lists/MultiChoice/Schema.js'
+// @END:Lists
+
+// @START-Imports:Routes
+import Route_SortTables from './Routes/SortTables/SortTables.js'
+import Route_Test from './Routes/Test/Test.js'
+import Route_LookupField from './Routes/LookupField/LookupField.js'
+import Route_SelectIcon from './Routes/SelectIcon/SelectIcon.js'
+import Route_ChartDemo from './Routes/ChartDemo/ChartDemo.js'
+import Route_ModifyFile from './Routes/ModifyFile/ModifyFile.js'
+import Route_Button from './Routes/Button/Button.js'
+import Route_CustomForm from './Routes/CustomForm/CustomForm.js'
+// @END-Imports:Routes
 
 // @START
 Start({
-    lists,
+    lists: [
+        List_AllTypes,
+        List_SLOT,
+        List_MLOT,
+        List_Choice,
+        List_Date,
+        List_Number,
+        List_MultiChoice
+    ],
     // Routes are directly addressable. Ex: https://site#path.
     routes: [
-        // @START-ROUTES
+        // @START-Routes
         // @START-CustomForm
         {
             path: 'CustomForm',
             title: 'Custom Form',
             icon: 'bs-checks-grid',
-            go: CustomForm
+            go: Route_CustomForm
         }
         // @END-CustomForm
         , // @ROUTE
@@ -37,7 +54,7 @@ Start({
             path: 'SortTables',
             title: 'Sort Tables',
             icon: 'bs-table',
-            go: SortTables
+            go: Route_SortTables
         }
         // @END-SortTables
         , // @ROUTE
@@ -46,7 +63,7 @@ Start({
             path: 'Test',
             title: 'Test',
             icon: 'bs-tools',
-            go: Test
+            go: Route_Test
         }
         // @END-Test
         , // @ROUTE
@@ -55,7 +72,7 @@ Start({
             path: 'LookupField',
             title: 'Lookup Field',
             icon: 'bs-file-earmarked-ruled',
-            go: LookupField
+            go: Route_LookupField
         }
         // @END-LookupField
         , // @ROUTE
@@ -64,7 +81,7 @@ Start({
             path: 'SelectIcon',
             title: 'Select Icon',
             icon: 'bs-app',
-            go: SelectIcon
+            go: Route_SelectIcon
         }
         // @END-SelectIcon
         , // @ROUTE
@@ -73,7 +90,7 @@ Start({
             path: 'ChartDemo',
             title: 'Chart Demo',
             icon: 'stats-bars',
-            go: ChartDemo
+            go: Route_ChartDemo
         }
         // @END-ChartDemo
         , // @ROUTE
@@ -82,7 +99,7 @@ Start({
             path: 'ModifyFile',
             title: 'Modify File',
             icon: 'bs-code-slash',
-            go: ModifyFile
+            go: Route_ModifyFile
         }
         // @END-ModifyFile
         , // @ROUTE
@@ -91,10 +108,10 @@ Start({
             path: 'Button',
             title: 'Button',
             icon: 'bs-stop-fill',
-            go: Button
+            go: Route_Button
         }
         // @END-Button
-        // @END-ROUTES
+        // @END-Routes
     ],
     settings: {
         // @START-SETTINGS

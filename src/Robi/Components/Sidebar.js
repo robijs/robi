@@ -19,8 +19,6 @@ import { Wait } from '../Actions/Wait.js'
  * @returns
  */
 export function Sidebar({ parent, path }) {
-    console.log(Store.user());
-    
     const component = Component({
         name: 'sidebar',
         html: /*html*/ `

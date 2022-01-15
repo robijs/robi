@@ -8,22 +8,43 @@
 
 export default [
     {
-        list: 'CustomForm',
-        display: 'Custom Form',
+        list: 'AllTypes',
+        display: 'All Types',
         fields: [
             {
                 name: 'SLOT',
                 display: 'Single Line of Text',
-                type: 'slot'
+                type: 'slot',
+                validate(value) {
+                    if (value === 'Test') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             },
             {
                 name: 'MLOT',
                 display: 'Multiple Lines of Text',
-                type: 'mlot'
+                type: 'mlot',
+                validate(value) {
+                    if (value === 'Test') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             },
             {
                 name: 'Number',
-                type: 'number'
+                type: 'number',
+                validate(value) {
+                    if (value === 'Test') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             },
             {
                 name: 'Choice',
@@ -33,7 +54,14 @@ export default [
                     'One',
                     'Two',
                     'Three'
-                ]
+                ],
+                validate(value) {
+                    if (value === 'Test') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             },
             {
                 name: 'MultiChoice',
@@ -44,7 +72,14 @@ export default [
                     'One',
                     'Two',
                     'Three'
-                ]
+                ],
+                validate(value) {
+                    if (value === 'Test') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             }
         ]
     },

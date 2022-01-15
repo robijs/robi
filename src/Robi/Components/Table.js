@@ -528,7 +528,7 @@ export async function Table(param) {
     // Toolbar
     if (toolbar || advancedSearch) {
         const tableToolbar = TableToolbar({
-            heading: heading || ( heading === '' ? '' : list ? (lists.find(item => item.list === list)?.heading || list.split(/(?=[A-Z])/).join(' '))  : '' ),
+            heading: heading || ( heading === '' ? '' : list ? (lists.find(item => item.list === list)?.display || list.split(/(?=[A-Z])/).join(' '))  : '' ),
             options: toolbar || [],
             parent: fadeContainer,
             advancedSearch,

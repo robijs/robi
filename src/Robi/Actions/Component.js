@@ -149,14 +149,7 @@ export function Component(param) {
             return param;
         },
         get() {
-            const node = document?.querySelector(`#${id}`);
-            
-            if (node) {
-                node.on = this.on;
-                node.off = this.off;
-
-                return node;
-            }
+            return document?.querySelector(`#${id}`);
         },
         find(selector) {
             const node = this.get()?.querySelector(selector);

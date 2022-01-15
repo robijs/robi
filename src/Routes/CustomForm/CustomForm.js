@@ -10,15 +10,17 @@ import { Row, Table } from '../../Robi/RobiUI.js'
 export default async function CustomForm({ parent }) {
     // @START-Rows
     Row(async (parent) => {
-        const { list, display, fields } = App.list('CustomForm');
+        // const { list, display, fields } = App.list('AllTypes');
 
         // CustomNewForm({ list, display, fields });
         // CustomEditForm({ list, display, fields });
     });
     // @Row
     Row(async (parent) => {
+        console.log(App.lists());
+
         await Table({
-            list: 'CustomForm',
+            list: 'AllTypes',
             parent,
             advancedSearch: true,
             toolbar: [

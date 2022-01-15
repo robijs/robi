@@ -25,9 +25,6 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
                     label: display || name,
                     value,
                     parent,
-                    onKeydown() {
-                        console.log('down');
-                    },
                     onFocusout
                 });
                 break;

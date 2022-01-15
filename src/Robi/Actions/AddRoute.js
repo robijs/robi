@@ -149,12 +149,12 @@ export async function AddRoute(event) {
                         let updatedContent;
 
                         // Set import
-                        const imports = content.match(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/);
-                        const newImports = imports[1] + `import ${routePath.value()} from './Routes/${routePath.value()}/${routePath.value()}.js'\n`
-                        updatedContent = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS${newImports}// @END-IMPORTS`);
+                        const imports = content.match(/\/\/ @START-Imports:Routes([\s\S]*?)\/\/ @END-Imports:Routes/);
+                        const newImports = imports[1] + `import Route_${routePath.value()} from './Routes/${routePath.value()}/${routePath.value()}.js'\n`
+                        updatedContent = content.replace(/\/\/ @START-Imports:Routes([\s\S]*?)\/\/ @END-Imports:Routes/, `// @START-Imports:Routes${newImports}// @END-Imports:Routes`);
 
                         // Set routes
-                        const routes = content.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
+                        const routes = content.match(/\/\/ @START-Routes([\s\S]*?)\/\/ @END-Routes/);
                         const ordered = routes[1].split(', // @ROUTE');
                         // FIXME: replace hard coded spaces (4 === 1 tab) with variable that includes 4 space characters
                         // TODO: Extract to template
@@ -165,7 +165,7 @@ export async function AddRoute(event) {
                             `            path: '${routePath.value()}',`,
                             `            title: '${routeTitle.value()}',`,
                             `            icon: '${routeIcon.value()}',`,
-                            `            go: ${routePath.value()}`,
+                            `            go: Route_${routePath.value()}`,
                             `        }`,
                             `        // @END-${routePath.value()}`,
                             ``
@@ -180,7 +180,7 @@ export async function AddRoute(event) {
                         console.log(newRoutes);
 
                         // TODO: Will you always need to add 8 spaces before // @END-ROUTES?
-                        updatedContent = updatedContent.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes}        // @END-ROUTES`);
+                        updatedContent = updatedContent.replace(/\/\/ @START-Routes([\s\S]*?)\/\/ @END-Routes/, `// @START-Routes${newRoutes}        // @END-Routes`);
 
                         console.log('OLD\n----------------------------------------\n', content);
                         console.log('\n****************************************');
