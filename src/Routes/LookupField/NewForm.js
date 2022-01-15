@@ -1,5 +1,5 @@
 import { CreateItem, Get } from '../../Robi/Robi.js'
-import { BootstrapDropdown, DateField, MultiLineTextField, NumberField, SingleLineTextField, LookupField } from '../../Robi/RobiUI.js'
+import { ChoiceField, DateField, MultiLineTextField, NumberField, SingleLineTextField, LookupField } from '../../Robi/RobiUI.js'
 
 // @START-File
 /**
@@ -162,7 +162,7 @@ export async function NewForm(param) {
                     });
                     break;
                 case 'choice':
-                    component = BootstrapDropdown({
+                    component = ChoiceField({
                         label: display || name,
                         value: choices[0],
                         options: choices.map(choice => {

@@ -1,7 +1,7 @@
 import { Get } from '../Actions/Get.js'
 import { Style } from '../Actions/Style.js'
 import { Alert } from './Alert.js'
-import { BootstrapDropdown } from './BootstrapDropdown.js'
+import { ChoiceField } from './ChoiceField.js'
 import { Container } from './Container.js'
 import { LinksField } from './LinksField.js'
 import { MultiChoiceField } from './MultiChoiceField.js'
@@ -296,7 +296,7 @@ export function FormSection(param) {
                         });
                         break;
                     case 'choice':
-                        component = BootstrapDropdown({
+                        component = ChoiceField({
                             label: label || display || name,
                             description,
                             value: formData[name],

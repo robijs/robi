@@ -1,6 +1,6 @@
 import { DeleteItem } from '../Actions/DeleteItem.js'
 import { UpdateItem } from '../Actions/UpdateItem.js'
-import { BootstrapDropdown } from './BootstrapDropdown.js'
+import { ChoiceField } from './ChoiceField.js'
 import { MultiChoiceField } from './MultiChoiceField.js'
 import { MultiLineTextField } from './MultiLineTextField.js'
 import { NumberField } from './NumberField.js'
@@ -44,7 +44,7 @@ export async function EditForm({ event, fields, item, list, modal, parent, table
                     });
                     break;
                 case 'choice':
-                    component = BootstrapDropdown({
+                    component = ChoiceField({
                         label: display || name,
                         value: item[name],
                         setWidthDelay: 200,

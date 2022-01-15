@@ -4,7 +4,7 @@
 // Otherwise, changes made from CLI and GUI tools won't work properly.
 
 import { CreateItem } from '../../Robi/Robi.js'
-import { BootstrapDropdown, MultiChoiceField, MultiLineTextField, NumberField, Row, SingleLineTextField } from '../../Robi/RobiUI.js'
+import { ChoiceField, MultiChoiceField, MultiLineTextField, NumberField, Row, SingleLineTextField } from '../../Robi/RobiUI.js'
 
 // @START-CustomForm
 export default async function NewForm({ event, fields, list, modal, parent, table }) {
@@ -72,7 +72,7 @@ export default async function NewForm({ event, fields, list, modal, parent, tabl
     Row(async (parent) => {
         const { name, display, value, choices } = Choice_props
 
-        Choice_field = BootstrapDropdown({
+        Choice_field = ChoiceField({
             label: display || name,
             fieldMargin: '0px',
             value: value || '',

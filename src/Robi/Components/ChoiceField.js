@@ -8,7 +8,7 @@ import { GenerateUUID } from '../Robi.js';
  * @param {*} param
  * @returns
  */
-export function BootstrapDropdown(param) {
+export function ChoiceField(param) {
     const {
         action, classes, label, description, parent, position, options, value, fieldMargin, padding, setWidthDelay, maxHeight, maxWidth, valueType, buttonStyle
     } = param;

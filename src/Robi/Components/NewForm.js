@@ -1,5 +1,5 @@
 import { CreateItem } from '../Actions/CreateItem.js'
-import { BootstrapDropdown } from './BootstrapDropdown.js'
+import { ChoiceField } from './ChoiceField.js'
 import { DateField } from './DateField.js'
 import { MultiLineTextField } from './MultiLineTextField.js'
 import { MultiChoiceField } from './MultiChoiceField.js'
@@ -39,7 +39,7 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
                 });
                 break;
             case 'choice':
-                component = BootstrapDropdown({
+                component = ChoiceField({
                     label: display || name,
                     value: choices[0],
                     options: choices.map(choice => {
@@ -92,8 +92,14 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
                         case 'choice':
                         case 'date':
                             if (value) {
-                                if (validate && validate(validate)) {
-                                    data[name] = value;
+                                if (validate) {
+                                    const isValidated = validate(value);
+
+                                    if (isValidated) {
+                                        data[name] = value;
+                                    } else {
+                                        component.invalid();
+                                    }
                                 } else {
                                     data[name] = value;
                                 }

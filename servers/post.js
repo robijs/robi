@@ -19,12 +19,12 @@ createServer((req, res) => {
             const query = url.split('?')[1];
             const props = query.split('&');
 
-            console.log(props);
+            // console.log(props);
 
             const { path, file } = Object.fromEntries(props.map(prop => {
                 const [ key, value ] = prop.split('=');
 
-                console.log(prop, key, value);
+                // console.log(prop, key, value);
 
                 return [ key, value ];
             }));
@@ -55,6 +55,7 @@ createServer((req, res) => {
                 return;
             }
 
+            // FIXME: Sometimes file is saved without any data
             // Make dirs if they don't exist
             mkdirSync(`./${path}`, { recursive: true });
 

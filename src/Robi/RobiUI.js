@@ -23,7 +23,6 @@ import { Attachments } from './Components/Attachments.js'
 import { AttachmentsContainer } from './Components/AttachmentsContainer.js'
 import { Banner } from './Components/Banner.js'
 import { BootstrapButton } from './Components/BootstrapButton.js'
-import { BootstrapDropdown } from './Components/BootstrapDropdown.js'
 import { BootstrapTextarea } from './Components/BootstrapTextarea.js'
 import { BuildInfo } from './Components/BuildInfo.js'
 import { Button } from './Components/Button.js'
@@ -32,6 +31,7 @@ import { Cell } from './Components/Cell.js'
 import { ChangeTheme } from './Components/ChangeTheme.js'
 import { ChartButtons } from './Components/ChartButtons.js'
 import { ChartJs } from './Components/ChartJs.js'
+import { ChoiceField } from './Components/ChoiceField.js'
 import { Comments } from './Components/Comments.js'
 import { CommentsContainer } from './Components/CommentsContainer.js'
 import { Container } from './Components/Container.js'
@@ -89,9 +89,9 @@ import { QuestionBoard } from './Components/QuestionBoard.js'
 import { QuestionCard } from './Components/QuestionCard.js'
 import { QuestionCards } from './Components/QuestionCards.js'
 import { QuestionContainer } from './Components/QuestionContainer.js'
+import { QuestionsToolbar } from './Components/QuestionsToolbar.js'
 import { QuestionType } from './Components/QuestionType.js'
 import { QuestionTypes } from './Components/QuestionTypes.js'
-import { QuestionsToolbar } from './Components/QuestionsToolbar.js'
 import { ReleaseNotes } from './Components/ReleaseNotes.js'
 import { ReleaseNotesContainer } from './Components/ReleaseNotesContainer.js'
 import { Reply } from './Components/Reply.js'
@@ -131,7 +131,6 @@ export {
     AttachmentsContainer,
     Banner,
     BootstrapButton,
-    BootstrapDropdown,
     BootstrapTextarea,
     BuildInfo,
     Button,
@@ -140,6 +139,7 @@ export {
     ChangeTheme,
     ChartButtons,
     ChartJs,
+    ChoiceField,
     Comments,
     CommentsContainer,
     Container,
@@ -197,9 +197,9 @@ export {
     QuestionCard,
     QuestionCards,
     QuestionContainer,
+    QuestionsToolbar,
     QuestionType,
     QuestionTypes,
-    QuestionsToolbar,
     ReleaseNotes,
     ReleaseNotesContainer,
     Reply,

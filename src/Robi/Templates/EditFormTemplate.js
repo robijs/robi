@@ -46,7 +46,7 @@ export function EditFormTemplate({ list, display, fields }) {
                 case 'number':
                     return 'NumberField';
                 case 'choice':
-                    return 'BootstrapDropdown';
+                    return 'ChoiceField';
                 case 'multichoice':
                     return 'MultiChoiceField';
                 case 'date':
@@ -127,7 +127,7 @@ export function EditFormTemplate({ list, display, fields }) {
                 component = [
                     `        const { name, display, value, choices } = ${name}_props`,
                     ``,
-                    `        ${name}_field = BootstrapDropdown({`,
+                    `        ${name}_field = ChoiceField({`,
                     `            label: display || name,`,
                     `            fieldMargin: '0px',`,
                     `            value: item[name],`,
@@ -242,7 +242,7 @@ export function EditFormTemplate({ list, display, fields }) {
     //     `// Otherwise, changes made with CLI and GUI tools will not render properly.`,
     //     ``,
     //     `import { UpdateItem } from '../../Robi/Robi.js'`,
-    //     `import { BootstrapDropdown, DateField, MultiLineTextField, NumberField, SingleLineTextField } from '../../Robi/RobiUI.js'`,
+    //     `import { ChoiceField, DateField, MultiLineTextField, NumberField, SingleLineTextField } from '../../Robi/RobiUI.js'`,
     //     ``,
     //     `// @START-${list}`,
     //     `export default async function EditForm({ event, fields, item, list, modal, parent, table }) {`,
@@ -274,7 +274,7 @@ export function EditFormTemplate({ list, display, fields }) {
     //     `                });`,
     //     `                break;`,
     //     `            case 'choice':`,
-    //     `                component = BootstrapDropdown({`,
+    //     `                component = ChoiceField({`,
     //     `                    label: display || name,`,
     //     `                    value: choices[0],`,
     //     `                    options: choices.map(choice => {`,

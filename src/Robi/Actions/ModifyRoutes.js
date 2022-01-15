@@ -1,6 +1,6 @@
 import { Modal } from '../Components/Modal.js'
 import { BootstrapButton } from '../Components/BootstrapButton.js'
-import { BootstrapDropdown } from '../Components/BootstrapDropdown.js'
+import { ChoiceField } from '../Components/ChoiceField.js'
 import { LoadingSpinner } from '../Components/LoadingSpinner.js'
 import { Alert } from '../Components/Alert.js'
 import { SingleLineTextField } from '../Components/SingleLineTextField.js'
@@ -98,7 +98,7 @@ export async function ModifyRoutes(event) {
                 routePath.add();
 
                 // Route icon
-                const routeIcon = BootstrapDropdown({
+                const routeIcon = ChoiceField({
                     classes: ['mb-0', 'mr-0'],
                     label: '',
                     parent: row, 

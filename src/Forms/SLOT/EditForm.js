@@ -4,7 +4,7 @@
 // Otherwise, changes made with CLI and GUI tools will not render properly.
 
 import { UpdateItem } from '../../Robi/Robi.js'
-import { BootstrapDropdown, DateField, MultiLineTextField, NumberField, SingleLineTextField } from '../../Robi/RobiUI.js'
+import { ChoiceField, DateField, MultiLineTextField, NumberField, SingleLineTextField } from '../../Robi/RobiUI.js'
 
 // @START-SLOT
 export default async function EditForm({ event, fields, item, list, modal, parent, table }) {
@@ -36,7 +36,7 @@ export default async function EditForm({ event, fields, item, list, modal, paren
                 });
                 break;
             case 'choice':
-                component = BootstrapDropdown({
+                component = ChoiceField({
                     label: display || name,
                     value: choices[0],
                     options: choices.map(choice => {
