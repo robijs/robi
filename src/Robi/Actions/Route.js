@@ -96,7 +96,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
     }
 
     // Add tools
-    if (route.type !== 'system' && Store.user().Role === 'Developer') {
+    if (route.type !== 'system' && Store.user().Roles.results.includes('Developer')) {
         const viewTools = ViewTools({
             route,
             parent: viewContainer

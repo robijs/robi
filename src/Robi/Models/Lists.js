@@ -1,3 +1,5 @@
+import { App } from '../Core/App.js'
+
 // @START-File
 // TODO: Export array instead of function?
 /**
@@ -219,13 +221,13 @@ export function Lists() {
                     type: 'slot'
                 },
                 {
-                    name: "Role",
-                    type: 'choice',
+                    name: "Roles",
+                    type: 'multichoice',
                     choices: [
                         'Administrator',
                         'Developer',
                         'User'
-                    ]
+                    ].concat(App.get('roles') || [])
                 },
                 {
                     name: "Settings",
@@ -239,7 +241,7 @@ export function Lists() {
                         'Title',
                         'Email',
                         'LoginName',
-                        'Role'
+                        'Roles'
                     ]
                 }
             ]

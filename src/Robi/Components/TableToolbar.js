@@ -9,7 +9,7 @@ import { Modal } from './Modal.js'
 import { SingleLineTextField } from './SingleLineTextField.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
-import { GenerateUUID } from '../Robi.js';
+import { GenerateUUID, Lists } from '../Robi.js';
 
 // @START-File
 // TODO: Compute advanced search container and row heights in onAdd()
@@ -44,7 +44,7 @@ export function TableToolbar(param) {
             <div class='btn-toolbar w-100' role='toolbar'>
                 <div class='text'>${heading}</div>
                 ${
-                    Store.user().Role === 'Developer' ?
+                    listInfo?.options?.menu !== false && Store.user().Roles.results.includes('Developer') ?
                     (() => {
                         const id = GenerateUUID();
 
@@ -283,7 +283,7 @@ export function TableToolbar(param) {
                 selector: `#id .edit-table .new-form`,
                 event: 'click',
                 listener(event) {
-                    const { newForm, display, fields } = App.list(list);
+                    const { newForm, display, fields } = App.list(list) || Lists().find(item => item.list === list);
 
                     if (newForm) {
                         console.log('show new form');
@@ -297,7 +297,7 @@ export function TableToolbar(param) {
                 selector: `#id .edit-table .edit-form`,
                 event: 'click',
                 listener(event) {
-                    const { editForm, display, fields } = App.list(list);
+                    const { editForm, display, fields } = App.list(list) || Lists().find(item => item.list === list);
 
                     if (editForm) {
                         console.log('show edit form');

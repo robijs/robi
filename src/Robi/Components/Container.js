@@ -62,7 +62,7 @@ export function Container(param) {
                 -webkit-user-select: ${userSelect || 'initial'};
                 -moz-user-select: ${userSelect || 'initial'};
                 -ms-user-select: ${userSelect || 'initial'};
-                background-color: ${background || 'inherit'};
+                background-color: ${background || 'unset'};
                 flex-wrap: ${flexwrap || 'unset'};
                 flex-direction: ${direction || 'row'};
                 justify-content: ${justify || 'flex-start'};

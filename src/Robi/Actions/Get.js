@@ -131,7 +131,11 @@ export async function Get(param) {
         }
 
         // await Wait(500);
-        return (await Promise.all(fetchAll.map(async response => await response.json()))).flat();
+        const all = (await Promise.all(fetchAll.map(async response => await response.json()))).flat();
+        // https://stackoverflow.com/a/58429784
+        const unique = [...new Map(all.map(item => [ item.Id, item ])).values()];
+
+        return unique;
     }
 }
 // @END-File

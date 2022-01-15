@@ -106,9 +106,10 @@ export function NumberField(param) {
         const field = component.find('input');
 
         if (param !== undefined) {
+            console.log(param);
             field.value = parseFloat(param);
         } else {
-            return field.value;
+            return parseFloat(field.value);
         }
     };
 

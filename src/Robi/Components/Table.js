@@ -215,7 +215,7 @@ export async function Table(param) {
                     };
                 }
 
-                else if (name.includes('Created') || name.includes('Date')) {
+                else if (type === 'date' || name.includes('Created') || name.includes('Date')) {
                     columnOptions.render = (data, type, row) => {
                         // return data ? new Date(data).toLocaleString() : '';
                         return data ? new Date(data).toLocaleDateString() : '';

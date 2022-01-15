@@ -82,12 +82,16 @@ export function DataTable(param) {
                 color: var(--color);
             }
 
-            #id tr {
+            #id_wrapper tr {
                 cursor: ${cursor || 'pointer'};
             }
-
-            #id tr td.dataTables_empty {
+            
+            #id_wrapper tr td.dataTables_empty {
                 cursor: default;
+            }
+
+            #id_wrapper table.dataTable.table-sm > thead > tr > th:not(.sorting_disabled) {
+                padding-right: 25px;
             }
 
             /* 
@@ -649,7 +653,7 @@ export function DataTable(param) {
             language: {
                 search: /*html*/ `
                     <span class='filter-search-icon d-inline-flex justify-content-center align-items-center'>
-                        <svg class='icon' style='font-size: 16px; fill: var(--primary6b)'>
+                        <svg class='icon' style='font-size: 16px; fill: #adb5bd;'>
                             <use href='#icon-bs-search'></use>
                         </svg>
                     </span>

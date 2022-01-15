@@ -59,7 +59,12 @@ export async function GetCurrentUser(param) {
                     Title,
                     Email,
                     LoginName: LoginName.split('|')[2],
-                    Role: App.get('userDefaultRole'),
+                    // Role: App.get('userDefaultRole'),
+                    Roles: {
+                        results: [
+                            'Developer'
+                        ]
+                    },
                     Settings: App.get('userSettings')
                 }
             });
@@ -80,7 +85,7 @@ export async function GetCurrentUser(param) {
             Title,
             Email,
             LoginName,
-            Role,
+            Roles,
             SiteId,
             Settings
         } = App.get('dev').user;
@@ -99,7 +104,8 @@ export async function GetCurrentUser(param) {
                     Title,
                     Email,
                     LoginName,
-                    Role,
+                    // Role,
+                    Roles,
                     SiteId,
                     Settings: Settings || App.get('userSettings')
                 }

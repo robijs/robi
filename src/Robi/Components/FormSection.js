@@ -285,8 +285,14 @@ export function FormSection(param) {
                         component = NumberField({
                             label: label || display || name,
                             description,
+                            value: formData[name],
                             fieldMargin,
-                            parent
+                            parent,
+                            onKeyup(event) {
+                                // Set form data
+                                console.log(formData, formData[name], component.value());
+                                formData[name] = component.value();
+                            }
                         });
                         break;
                     case 'choice':

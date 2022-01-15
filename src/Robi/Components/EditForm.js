@@ -61,7 +61,7 @@ export async function EditForm({ event, fields, item, list, modal, parent, table
                         label: display || name,
                         fillIn,
                         choices,
-                        value: item[name],
+                        value: item[name].results,
                         parent
                     });
                     break;
@@ -97,10 +97,16 @@ export async function EditForm({ event, fields, item, list, modal, parent, table
                         case 'slot':
                         case 'mlot':
                         case 'choice':
-                        case 'multichoice':
                         case 'date':
                             if (value) {
                                 data[name] = value;
+                            }
+                            break;
+                        case 'multichoice':
+                            if (value) {
+                                data[name] = {
+                                    results: value
+                                }
                             }
                             break;
                         case 'number':

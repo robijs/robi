@@ -1,5 +1,5 @@
 import { Table } from './Table.js'
-import { NewUser } from './NewUser.js'
+import { Row } from './Row.js'
 import { Title } from './Title.js'
 import { Timer } from './Timer.js'
 import { Container } from './Container.js'
@@ -18,6 +18,7 @@ import { Route } from '../Actions/Route.js'
 import { ActionsCards } from './ActionsCards.js'
 import { LogsContainer } from './LogsContainer.js'
 import { Preferences } from './Preferences.js'
+import { Permission } from './Permission.js'
 
 // @START-File
 /**
@@ -39,7 +40,9 @@ export async function Settings({ parent, pathParts, title }) {
         'Theme'
     ];
 
-    if (devPaths.includes(path) && Store.user().Role !== 'Developer') {
+    // console.log(Store.user().Roles, Store.user().Roles.results.includes('Developer'));
+
+    if (devPaths.includes(path) && !Store.user().Roles.results.includes('Developer')) {
         Route('403');
     }
 
@@ -64,7 +67,8 @@ export async function Settings({ parent, pathParts, title }) {
     ];
 
     // Developers can see additional options
-    if (Store.user().Role === 'Developer') {
+    // TODO: API for checking user roles
+    if ( Store.user().Roles.results.includes('Developer')) {
         sections = sections.concat([
             {
                 name: 'Actions',
@@ -97,6 +101,10 @@ export async function Settings({ parent, pathParts, title }) {
             {
                 name: 'Users',
                 path: 'Users'
+            },
+            {
+                name: 'Permissions',
+                path: 'Permissions'
             }
         ]);
     }
@@ -301,7 +309,12 @@ export async function Settings({ parent, pathParts, title }) {
                 view: 'Users',
                 formView: 'All',
                 width: '100%',
-                newForm: NewUser,
+                toolbar: [],
+                parent: planContainer
+            });
+            break;
+        case 'Permissions':
+            Permission({
                 parent: planContainer
             });
             break;

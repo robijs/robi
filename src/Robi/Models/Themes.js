@@ -201,7 +201,7 @@ const Themes = [
             borderColor: '#d6d8db80'
         },
         dark: {
-            primary: '#e63e44',
+            primary: '#fd4a50',
             secondary: '#151515',
             background: '#1e1e1e',
             color: '#d4d4d4',
@@ -244,27 +244,6 @@ const Themes = [
         },
         dark: {
             primary: '#008080',
-            secondary: '#151515',
-            background: '#1e1e1e',
-            color: '#d4d4d4',
-            selectedRowOpacity: 10,
-            buttonBackgroundColor: '#242628',
-            borderColor: '#343a4080'
-        }
-    },
-    { 
-        name: 'Navy',
-        light: {
-            primary: '#000080',
-            secondary: '#fff',
-            background: '#F8F8FC',
-            color: '#24292f',
-            selectedRowOpacity: 10,
-            buttonBackgroundColor: '#e9ecef',
-            borderColor: '#d6d8db80'
-        },
-        dark: {
-            primary: '#7a7aff',
             secondary: '#151515',
             background: '#1e1e1e',
             color: '#d4d4d4',

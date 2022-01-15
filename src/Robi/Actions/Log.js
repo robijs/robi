@@ -38,7 +38,8 @@ export async function Log(param) {
                 Message: JSON.stringify({
                     body: Message,
                     location: location.href,
-                    role: Store.user().Role
+                    // FIXME: what should this property be instead, since users can have multiple roles?
+                    role: Store.user().Roles.results.join(', ')
                 }),
                 StackTrace: JSON.stringify(StackTrace.replace('Error\n    at ', '')),
                 Module,
@@ -67,7 +68,7 @@ export async function Log(param) {
                 Message: JSON.stringify({
                     body: Message,
                     location: location.href,
-                    role: Store.user().Role
+                    role: Store.user().Roles.results.join(', ')
                 }),
                 StackTrace: JSON.stringify(StackTrace.replace('Error\n    at ', '')),
                 UserAgent: navigator.userAgent,

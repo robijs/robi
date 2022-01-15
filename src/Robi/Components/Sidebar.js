@@ -19,6 +19,8 @@ import { Wait } from '../Actions/Wait.js'
  * @returns
  */
 export function Sidebar({ parent, path }) {
+    console.log(Store.user());
+    
     const component = Component({
         name: 'sidebar',
         html: /*html*/ `
@@ -31,7 +33,7 @@ export function Sidebar({ parent, path }) {
                     </span>
                     <!-- Developer options --> 
                     ${
-                        Store.user().Role === 'Developer' ?
+                        Store.user().Roles.results.includes('Developer') ?
                         (() => {
                             const id = GenerateUUID();
 
@@ -64,7 +66,7 @@ export function Sidebar({ parent, path }) {
                 </div>
                 <div style='padding: 0px 15px; overflow: hidden;'>
                 ${
-                    Store.user().Role === 'Developer' ?
+                    Store.user().Roles.results.includes('Developer') ?
                     /*html*/ `
                         <span class='nav add-route'>
                             <span class='icon-container' style='padding: 0px;'>
@@ -1025,7 +1027,9 @@ export function Sidebar({ parent, path }) {
             } = route;
 
             if (roles) {
-                if (roles.includes(Store.user().Role)) {
+                //  Store.user().Roles.results.includes('Developer')
+                //if (roles.includes(Store.user().Role)) {
+                if (roles.some(r => Store.user().Roles.results.includes(r))) {
                     return navTemplate(path, icon, type, title);
                 } else {
                     return '';
@@ -1211,8 +1215,7 @@ export function Sidebar({ parent, path }) {
             });
             component.find('.title').classList.add('fade-out-left');
 
-            if(Store.user().Role === "Developer")
-            {
+            if (Store.user().Roles.results.includes('Developer')) {
                 // Fade out Edit
                 component.find('.dev-buttons-container').style.opacity = '0';
                 component.find('.dev-buttons-container').style.pointerEvents = 'none';
@@ -1247,7 +1250,7 @@ export function Sidebar({ parent, path }) {
                 event.target.classList.remove('fade-in-right');
             });
 
-            if (Store.user().Role === 'Developer') {
+            if (Store.user().Roles.results.includes('Developer')) {
                 // Fade in Edit
                 component.find('.dev-buttons-container').style.opacity = '1';
                 component.find('.dev-buttons-container').style.pointerEvents = 'auto';
@@ -1275,7 +1278,7 @@ export function Sidebar({ parent, path }) {
                 } = route;
 
                 if (roles) {
-                    if (roles.includes(Store.user().Role)) {
+                    if (roles.some(r => Store.user().Roles.results.includes(r))) {
                         return navTemplate(path, icon, type, title, hide);
                     } else {
                         return '';

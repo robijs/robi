@@ -90,7 +90,7 @@ const Store = {
         return `row-${store.rowIdCounter++}`;
     },
     getNextCell() {
-        return `cell-${store.rowIdCounter++}-${cellIdCounter}`;
+        return `cell-${store.cellIdCounter++}`;
     },
     remove(name) {
         store.components[name].component.remove();

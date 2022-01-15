@@ -28,6 +28,7 @@ import { BootstrapTextarea } from './Components/BootstrapTextarea.js'
 import { BuildInfo } from './Components/BuildInfo.js'
 import { Button } from './Components/Button.js'
 import { Card } from './Components/Card.js'
+import { Cell } from './Components/Cell.js'
 import { ChangeTheme } from './Components/ChangeTheme.js'
 import { ChartButtons } from './Components/ChartButtons.js'
 import { ChartJs } from './Components/ChartJs.js'
@@ -78,6 +79,7 @@ import { NewReply } from './Components/NewReply.js'
 import { NewUser } from './Components/NewUser.js'
 import { NumberField } from './Components/NumberField.js'
 import { PercentField } from './Components/PercentField.js'
+import { Permission } from './Components/Permission.js'
 import { PhoneField } from './Components/PhoneField.js'
 import { Preferences } from './Components/Preferences.js'
 import { ProgressBar } from './Components/ProgressBar.js'
@@ -114,7 +116,6 @@ import { Toast } from './Components/Toast.js'
 import { Unauthorized } from './Components/Unauthorized.js'
 import { UpgradeAppButton } from './Components/UpgradeAppButton.js'
 import { UploadButton } from './Components/UploadButton.js'
-import { Users } from './Components/Users.js'
 import { ViewContainer } from './Components/ViewContainer.js'
 import { ViewTools } from './Components/ViewTools.js'
 
@@ -135,6 +136,7 @@ export {
     BuildInfo,
     Button,
     Card,
+    Cell,
     ChangeTheme,
     ChartButtons,
     ChartJs,
@@ -185,6 +187,7 @@ export {
     NewUser,
     NumberField,
     PercentField,
+    Permission,
     PhoneField,
     Preferences,
     ProgressBar,
@@ -221,7 +224,6 @@ export {
     Unauthorized,
     UpgradeAppButton,
     UploadButton,
-    Users,
     ViewContainer,
     ViewTools
 }

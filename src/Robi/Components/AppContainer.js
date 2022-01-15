@@ -681,12 +681,8 @@ export function AppContainer() {
             .robi-row.ui-sortable-handle {
                 margin: 20px 0px !important;
                 padding: 20px !important;
-                background: var(--background) !important;
+                background: var(--secondary) !important;
                 box-shadow: 0px 0px 0px 2px var(--primary) !important;
-            }
-
-            .robi-row.ui-sortable-handle > div {
-                transform: scale(.95);
             }
 
             .robi-row.ui-sortable-helper {
@@ -712,6 +708,10 @@ export function AppContainer() {
                     transform-origin: top left;
                     opacity: 1;
                 }
+            }
+            
+            .dt-button-collection {
+                animation: 150ms ease-in-out forwards grown-in-top-left;
             }
 
             .grow-in-top-left {

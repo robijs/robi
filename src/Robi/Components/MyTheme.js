@@ -4,6 +4,7 @@ import { SetLocal } from '../Actions/SetLocal.js'
 import { RemoveLocal } from '../Actions/RemoveLocal.js'
 import { Themes } from '../Models/Themes.js'
 import { SetTheme } from '../Actions/SetTheme.js'
+import { GetLocal } from '../Robi.js'
 
 // TODO: add transition animation to theme change
 // @START-File
@@ -26,8 +27,12 @@ export function MyTheme(param) {
                     ${containerTemplate({ theme, mode: 'light' })}
                     ${containerTemplate({ theme, mode: 'dark' })}
                 </div>
-                <div>
-                    <button type='buton' class='btn btn-robi'>Set to Operating System preference</button>
+                <div class='d-flex align-items-center'>
+                    <div>Operating System Preference</div>
+                    <div class="custom-control custom-switch grab switch">
+                        <input type="checkbox" class="custom-control-input" id='os-switch' data-mode='os'>
+                        <label class="custom-control-label" for="os-switch"></label>
+                    </div>
                 </div>
             </div>
         `,
@@ -137,25 +142,28 @@ export function MyTheme(param) {
                     // Always select current switch
                     event.target.checked = true;
 
-                    // Save user preference to local storage
-                    SetLocal('prefersColorScheme', mode);
+                    if (mode == 'os') {
+                        // Remove key from local storage
+                        RemoveLocal("prefersColorScheme");
+                    } else {
+                        // Save user preference to local storage
+                        SetLocal('prefersColorScheme', mode);
+                    }
 
                     // Reset theme
                     SetTheme();
                 }
-            },
-            {
-                selector: '#id .btn',
-                event: 'click',
-                listener() {
-                    // Remove key from local storage
-                    RemoveLocal("prefersColorScheme");
-                    
-                    // Reset theme
-                    SetTheme();
-                }
             }
-        ]
+        ],
+        onAdd() {
+            if (!GetLocal('prefersColorScheme')) {
+                // Deselect mode
+                component.find('.custom-control-input:checked').checked = false;
+
+                // Select OS switch
+                component.find('.custom-control-input[data-mode="os"]').checked = true;
+            }
+        }
     });
 
     function containerTemplate({theme, mode}) {

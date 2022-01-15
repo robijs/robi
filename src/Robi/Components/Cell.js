@@ -7,28 +7,28 @@ import { Store } from '../Core/Store.js'
  * @param {*} param
  * @returns
  */
-export function Row(render, options = {}) {
-    const { parent, display, height, minHeight, flex, align } = options;
+export function Cell(render, options = {}) {
+    const { parent, height, minHeight, display, flex, background, radius, padding } = options;
     
-    const id = Store.getNextRow();
+    const id = Store.getNextCell();
 
     const component = Component({
         html: /*html*/ `
-            <div class='robi-row' data-row='${id}'></div>
+            <div class='robi-cell' data-row='${id}'></div>
         `,
         style: /*css*/ `
-            /* TODO: Make flex work */
-            #id.robi-row {
-                width: 100%;
+            #id.robi-cell {
                 display: ${display || 'block'};
                 ${height ? `height: ${height};` : ''}
                 ${minHeight ? `min-height: ${minHeight};` : ''}
                 ${flex ? `flex: ${flex};` : ''}
-                ${align ? `align-items: ${align};` : ''}
+                ${background ? `background: ${background};` : ''}
+                ${radius ? `border-radius: ${radius};` : ''}
+                ${padding ? `padding: ${padding};` : ''}
             }
 
-            .robi-row:not(:last-child) {
-                margin-bottom: 30px;
+            .robi-cell:not(:last-child) {
+                margin-right: 30px;
             }
         `,
         // FIXME: Do I like this? Does it assume too much?

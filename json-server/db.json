@@ -2,7 +2,50 @@
   "Actions": [],
   "Searches": [],
   "Comments": [],
-  "Errors": [],
+  "Errors": [
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'results')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'results')\n    at Sidebar (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:36:43)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:75:64)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Sat, 15 Jan 2022 17:13:25 GMT",
+      "Modified": "Sat, 15 Jan 2022 17:13:25 GMT",
+      "Id": 1
+    },
+    {
+      "SessionId": null,
+      "Message": "Cannot read properties of undefined (reading 'results')",
+      "Error": "TypeError: Cannot read properties of undefined (reading 'results')\n    at Sidebar (http://127.0.0.1:8080/src/Robi/Components/Sidebar.js:36:43)\n    at LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:75:64)",
+      "Source": "http://127.0.0.1:8080/src/Robi/Actions/Start.js",
+      "UserAgent": null,
+      "Status": null,
+      "AuthorId": 1,
+      "Author": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "EditorId": 1,
+      "Editor": {
+        "Title": "First Last",
+        "LoginName": "0987654321@mil"
+      },
+      "Created": "Sat, 15 Jan 2022 17:14:46 GMT",
+      "Modified": "Sat, 15 Jan 2022 17:14:46 GMT",
+      "Id": 2
+    }
+  ],
   "Log": [
     {
       "Title": "Log in",

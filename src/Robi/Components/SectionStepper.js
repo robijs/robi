@@ -1,6 +1,5 @@
 import { Component } from '../Actions/Component.js'
 import { Route } from '../Actions/Route.js'
-import { App } from '../Core/App.js'
 
 // TODO: If selected group is hidden, scroll container
 // @START-File
@@ -11,13 +10,36 @@ import { App } from '../Core/App.js'
  */
 export function SectionStepper(param) {
     const {
-        title, sections, selected, route, padding, parent, position, numbers
+        title, sections, selected, route, padding, parent, position, numbers, backButton
     } = param;
 
     const component = Component({
         html: /*html*/ `
             <div class='section-stepper'>
-                ${title ? /*html*/ `<div class='section-title'>${title.text}</div>` : ''}
+                <div class='title-container'>
+                    ${
+                        backButton ? /*html*/ `
+                        <button type='button' class='btn'>
+                            <div class='d-flex back-btn' style='' title='Back'>
+                                <svg class='icon' style='fill: var(--primary); font-size: 26px;'>
+                                    <use href='#icon-bs-arrow-left-cirlce-fill'></use>
+                                </svg>
+                            </div>
+                        </button>               
+                        ` : ''
+                    }
+                    ${
+                        title ? /*html*/ `
+                            <!-- <div class='section-title'>${title.text}</div> -->
+
+                            <div class='section-group title pt-0' data-path=''>
+                                <div class='section-circle' data-name='' style='opacity: 0;'>0</div>
+                                <span class='section-title' data-name=''>${title.text}</span>
+                            </div>
+                        ` : ''
+                    }
+
+                </div>
                 <div class='section-title-group'>
                     <div class='section-group-container'>
                         ${createHTML()}
@@ -36,9 +58,31 @@ export function SectionStepper(param) {
                 transition: width 300ms, min-width 300ms;
             }
 
-            #id .section-title-group {
-                overflow: overlay;
+            /* Title */
+            #id .title-container {
+                display: flex;
+                position: relative;
             }
+
+            #id .title-container .btn {
+                padding: 0px;
+                height: 37px;
+                position: absolute;
+                /* Align with prev and next view back button */
+                top: -1px;
+                left: -3px;
+            }
+
+            #id .section-title {
+                flex: 1;
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--primary);
+                /* Align baseline with view title */
+                transform: translateY(8px);
+                cursor: pointer;
+            }
+
 
             /* Buttons */
             #id .btn-secondary {
@@ -47,20 +91,15 @@ export function SectionStepper(param) {
                 border-color: transparent;
             }
 
-            #id .section-title {
-                font-size: 18px;
-                font-weight: 700;
-                color: var(--primary);
-                border-radius: 10px;
-                padding: 8px 20px 10px 20px; /* -2px on top to align baseline with view title */
-                cursor: pointer;
-            }
-
             /* Sections */
             #id .section-group-container {
                 font-weight: 500;
                 padding: 0px;
                 border-radius: 10px;
+            }
+
+            #id .section-title-group {
+                overflow: overlay;
             }
             
             #id .section-group {
@@ -83,6 +122,7 @@ export function SectionStepper(param) {
 
             /* Number */
             #id .section-circle {
+                min-width: 10px;
                 color: var(--primary);
                 margin-right: 10px;
             }
@@ -115,6 +155,15 @@ export function SectionStepper(param) {
                 listener(event) {
                     if (title && title.action) {
                         title.action(event);
+                    }
+                }
+            },
+            {
+                selector: '#id .back-btn',
+                event: 'click',
+                listener(event) {
+                    if (backButton.action) {
+                        backButton.action(event);
                     }
                 }
             }
