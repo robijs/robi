@@ -83,7 +83,7 @@ export function NewFormTemplate({ list, fields }) {
         switch (type) {
             case 'slot':
                 component = [
-                    `        const { name, display, validate, value } = ${name}_props`,
+                    `        const { name, display, validate, value } = ${name}_props;`,
                     ``,
                     `        ${name}_field = SingleLineTextField({`,
                     `            label: display || name,`,
@@ -112,7 +112,7 @@ export function NewFormTemplate({ list, fields }) {
                 break;
             case 'mlot':
                 component = [
-                    `        const { name, display, validate, value } = ${name}_props`,
+                    `        const { name, display, validate, value } = ${name}_props;`,
                     ``,
                     `        ${name}_field = MultiLineTextField({`,
                     `            label: display || name,`,
@@ -141,7 +141,7 @@ export function NewFormTemplate({ list, fields }) {
                 break;
             case 'number':
                 component = [
-                    `        const { name, display, validate, value } = ${name}_props`,
+                    `        const { name, display, validate, value } = ${name}_props;`,
                     ``,
                     `        ${name}_field = NumberField({`,
                     `            label: display || name,`,
@@ -170,7 +170,7 @@ export function NewFormTemplate({ list, fields }) {
                 break;
             case 'choice':
                 component = [
-                    `        const { name, display, value, choices, validate } = ${name}_props`,
+                    `        const { name, display, value, choices, validate } = ${name}_props;`,
                     ``,
                     `        ${name}_field = ChoiceField({`,
                     `            label: display || name,`,
@@ -204,7 +204,7 @@ export function NewFormTemplate({ list, fields }) {
                 break;
             case 'multichoice':
                 component = [
-                    `        const { name, display, choices, fillIn, validate, value } = ${name}_props`,
+                    `        const { name, display, choices, fillIn, validate, value } = ${name}_props;`,
                     ``,
                     `        ${name}_field = MultiChoiceField({`,
                     `            label: display || name,`,
@@ -235,7 +235,7 @@ export function NewFormTemplate({ list, fields }) {
                 break;
             case 'date':
                 component = [
-                    `        const { name, display, validate, value } = ${name}_props`,
+                    `        const { name, display, validate, value } = ${name}_props;`,
                     ``,
                     `        ${name}_field = DateField({`,
                     `            label: display || name,`,
