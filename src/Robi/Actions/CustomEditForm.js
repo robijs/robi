@@ -61,49 +61,49 @@ export async function CustomEditForm({ list, display, fields }) {
                     document.querySelector('#app').style.transition = 'filter 150ms';
                     document.querySelector('#app').style.filter = 'blur(5px)';
 
-                    await updateLists();
-                    await createForm();
+                    await updateSchema();
+                    // await createForm();
 
                     if (App.isProd()) {
                         await Wait(5000);
-                        location.reload();
                     }
+
+                    // location.reload();
 
                     modal.close();
 
-                    async function updateLists() {
+                    async function updateSchema() {
                         // Update app.js
                         let digest;
                         let request;
 
                         if (App.isProd()) {
-                            digest = await GetRequestDigest();
-                            request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('lists.js')/$value`, {
-                                method: 'GET',
-                                headers: {
-                                    'binaryStringRequestBody': 'true',
-                                    'Accept': 'application/json;odata=verbose;charset=utf-8',
-                                    'X-RequestDigest': digest
-                                }
-                            });
+                            // digest = await GetRequestDigest();
+                            // request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('lists.js')/$value`, {
+                            //     method: 'GET',
+                            //     headers: {
+                            //         'binaryStringRequestBody': 'true',
+                            //         'Accept': 'application/json;odata=verbose;charset=utf-8',
+                            //         'X-RequestDigest': digest
+                            //     }
+                            // });
                         } else {
-                            request = await fetch(`http://127.0.0.1:8080/src/lists.js`);
+                            request = await fetch(`http://127.0.0.1:8080/src/Lists/${list}/Schema.js`);
                             await Wait(1000);
                         }
 
                         let content = await request.text();
-                        let updatedContent;
+                        let updatedContent = content.trim().replace(/[\s]*?(export default {[\s\S]*?})$/, `\nimport EditForm from './EditForm.js'\n\n$1\n`).trim();
 
-                        // Set import
-                        const imports = content.match(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/);
-                        const newImports = imports[1] + `import ${list}EditForm from './Forms/${list}/EditForm.js'\n`;
-                        updatedContent = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS${newImports}// @END-IMPORTS`);
+                        const lines = updatedContent.trim().split('\n');
+                        // FIXME: Check if a comma already exists
+                        lines[lines.length - 2] = lines[lines.length - 2].trim() + ',\n    editForm: EditForm'
 
-                        // Set form
-                        // NOTE: This won't work if there's a space between list and name of type string
-                        updatedContent = updatedContent.replace(`list: '${list}',`, `list: '${list}',\n        editForm: ${list}EditForm,`);
+                        updatedContent = lines.join('\n');
 
-                        // console.log(updatedContent);
+                        console.log(updatedContent);
+
+                        return;
 
                         let setFile;
 
@@ -118,7 +118,7 @@ export async function CustomEditForm({ list, display, fields }) {
                                 }
                             });
                         } else {
-                            setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=lists.js`, {
+                            setFile = await fetch(`http://127.0.0.1:2035/?path=src/Lists/${list}&file=Schema.js`, {
                                 method: 'POST',
                                 body: updatedContent
                             });

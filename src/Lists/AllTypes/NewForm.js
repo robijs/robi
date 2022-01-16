@@ -34,63 +34,7 @@ export default async function NewForm({ fields, list, modal, parent }) {
 
     // @START-Rows
     Row(async (parent) => {
-        const { name, display, validate, value } = Number_props
-
-        Number_field = NumberField({
-            label: display || name,
-            value,
-            fieldMargin: '0px',
-            parent,
-            onFocusout
-        });
-
-        function onFocusout() {
-            return !validate ? undefined : (() => {
-                const value = Number_field.value();
-
-                console.log('validate');
-
-                if (validate(value)) {
-                    Number_field.isValid(true);
-                } else {
-                    Number_field.isValid(false);
-                }
-            })();
-        }
-
-        Number_field.add();
-    }, { parent });
-    // @Row
-    Row(async (parent) => {
-        const { name, display, validate, value } = MLOT_props
-
-        MLOT_field = MultiLineTextField({
-            label: display || name,
-            value,
-            fieldMargin: '0px',
-            parent,
-            onFocusout
-        });
-
-        function onFocusout() {
-            return !validate ? undefined : (() => {
-                const value = MLOT_field.value();
-
-                console.log('validate');
-
-                if (validate(value)) {
-                    MLOT_field.isValid(true);
-                } else {
-                    MLOT_field.isValid(false);
-                }
-            })();
-        }
-
-        MLOT_field.add();
-    }, { parent });
-    // @Row
-    Row(async (parent) => {
-        const { name, display, validate, value } = SLOT_props
+        const { name, display, validate, value } = SLOT_props;
 
         SLOT_field = SingleLineTextField({
             label: display || name,
@@ -118,7 +62,63 @@ export default async function NewForm({ fields, list, modal, parent }) {
     }, { parent });
     // @Row
     Row(async (parent) => {
-        const { name, display, value, choices, validate } = Choice_props
+        const { name, display, validate, value } = MLOT_props;
+
+        MLOT_field = MultiLineTextField({
+            label: display || name,
+            value,
+            fieldMargin: '0px',
+            parent,
+            onFocusout
+        });
+
+        function onFocusout() {
+            return !validate ? undefined : (() => {
+                const value = MLOT_field.value();
+
+                console.log('validate');
+
+                if (validate(value)) {
+                    MLOT_field.isValid(true);
+                } else {
+                    MLOT_field.isValid(false);
+                }
+            })();
+        }
+
+        MLOT_field.add();
+    }, { parent });
+    // @Row
+    Row(async (parent) => {
+        const { name, display, validate, value } = Number_props;
+
+        Number_field = NumberField({
+            label: display || name,
+            value,
+            fieldMargin: '0px',
+            parent,
+            onFocusout
+        });
+
+        function onFocusout() {
+            return !validate ? undefined : (() => {
+                const value = Number_field.value();
+
+                console.log('validate');
+
+                if (validate(value)) {
+                    Number_field.isValid(true);
+                } else {
+                    Number_field.isValid(false);
+                }
+            })();
+        }
+
+        Number_field.add();
+    }, { parent });
+    // @Row
+    Row(async (parent) => {
+        const { name, display, value, choices, validate } = Choice_props;
 
         Choice_field = ChoiceField({
             label: display || name,
@@ -151,7 +151,7 @@ export default async function NewForm({ fields, list, modal, parent }) {
     }, { parent });
     // @Row
     Row(async (parent) => {
-        const { name, display, choices, fillIn, validate, value } = MultiChoice_props
+        const { name, display, choices, fillIn, validate, value } = MultiChoice_props;
 
         MultiChoice_field = MultiChoiceField({
             label: display || name,
