@@ -76,8 +76,6 @@ export async function Table(param) {
 
     tableContainer.add();
 
-    tableContainer.get().style.transition = 'background-color 500ms ease';
-
     // Columns
     const headers = [];
     const columns = [];
@@ -511,26 +509,12 @@ export async function Table(param) {
         }
     }
 
-    // Fade container
-    const fadeContainer = Container({
-        parent: tableContainer,
-        classes: ['w-100'],
-        name: 'fade-container',
-        display: 'block'
-    });
-
-    fadeContainer.add();
-   
-    if (fadeContainer.get()) {
-        fadeContainer.get().style.opacity = '0';
-    }
-
     // Toolbar
     if (toolbar || advancedSearch) {
         const tableToolbar = TableToolbar({
             heading: heading || ( heading === '' ? '' : list ? (lists.find(item => item.list === list)?.display || list.split(/(?=[A-Z])/).join(' '))  : '' ),
             options: toolbar || [],
-            parent: fadeContainer,
+            parent: tableContainer,
             advancedSearch,
             list,
             newForm: schema?.newForm,
@@ -766,28 +750,10 @@ export async function Table(param) {
             setSelectedRadius();
             removeSelectedRadius();
         },
-        parent: fadeContainer
+        parent: tableContainer
     });
 
     table.add();
-
-    // Fade in
-    setTimeout(() => {
-        const exists = fadeContainer.get();
-
-        if (exists) {
-            exists.style.transition = 'opacity 300ms ease 100ms';
-            exists.style.opacity = '1';
-        }
-        // FIXME: How to safely move this to Shimmer without overriding transition?
-        setTimeout(() => {
-            const exists = tableContainer.get(); 
-
-            if (exists) {
-                exists.style.transition = 'none';
-            }
-        }, 500);
-    }, 0);
 
     // Shimmer off
     tableContainer.shimmerOff();
