@@ -48,7 +48,10 @@ export async function AddRoute(event) {
                 onFocusout(event) {
                     const path = routeTitle.value().toTitleCase().split(' ').join('');
                     routePath.value(path);
+
                     showMessage(path);
+
+                    canEnable();
                 }
             });
 

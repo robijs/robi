@@ -204,7 +204,7 @@ export async function Settings({ parent, pathParts, title }) {
     const planContainer = Container({
         width: '100%',
         name: 'plan',
-        padding: '15px 30px 0px 30px;',
+        padding: '15px 30px',
         direction: 'column',
         parent: projectContainer
     });

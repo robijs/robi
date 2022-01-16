@@ -24,6 +24,7 @@ import Route_ChartDemo from './Routes/ChartDemo/ChartDemo.js'
 import Route_ModifyFile from './Routes/ModifyFile/ModifyFile.js'
 import Route_Button from './Routes/Button/Button.js'
 import Route_CustomForm from './Routes/CustomForm/CustomForm.js'
+import Route_NewRoute from './Routes/NewRoute/NewRoute.js'
 // @END-Imports:Routes
 
 // @START
@@ -111,6 +112,15 @@ Start({
             go: Route_Button
         }
         // @END-Button
+        , // @ROUTE
+        // @START-NewRoute
+        {
+            path: 'NewRoute',
+            title: 'New Route',
+            icon: 'bs-bookmark-plus',
+            go: Route_NewRoute
+        }
+        // @END-NewRoute
         // @END-Routes
     ],
     settings: {
