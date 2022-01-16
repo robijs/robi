@@ -187,22 +187,87 @@ export function NewFormTemplate({ list, display, fields }) {
         `    // @START-Return`,
         `    return {`,
         `        async onCreate(event) {`,
+        `            let isValid = true;`,
+        ``,
         `            const data = {};`,
         ``
     ]);
 
     fieldsToCreate?.forEach(field => {
-        const { name } = field;
         template = template.concat([
-            `            if (${name}_field.value()) {`,
-            `                data.${name} = ${name}_field.value();`,
-            `            }`,
-            ``,
-        ])
+            setFieldValue(field),
+            ``
+        ]);
     });
 
+    function setFieldValue(field) {
+        const { type, name } = field;
+
+        switch (type) {
+            case 'slot':
+            case 'mlot':
+            case 'choice':
+            case 'date':
+                return [
+                    `            if (${name}_props.validate) {`,
+                    `                const isValidated = validate(${name}_field.value());`,
+                    `            `,
+                    `                if (isValidated) {`,
+                    `                    data.${name} = ${name}_field.value();`,
+                    `                    ${name}_field.isValid(true);`,
+                    `                } else {`,
+                    `                    isValid = false;`,
+                    `                    ${name}_field.isValid(false);`,
+                    `                }`,
+                    `            } else if (value) {`,
+                    `                data.${name} = ${name}_field.value();`,
+                    `            }`,
+                ].join('\n');
+            case 'multichoice':
+                return [
+                    `            if (${name}_props.validate) {`,
+                    `                const isValidated = validate(${name}_field.value());`,
+                    `            `,
+                    `                if (isValidated) {`,
+                    `                    data.${name} = {`,
+                    `                        results: ${name}_field.value()`,
+                    `                    }`,
+                    `                    ${name}_field.isValid(true);`,
+                    `                } else {`,
+                    `                    isValid = false;`,
+                    `                    ${name}_field.isValid(false);`,
+                    `                }`,
+                    `            } else if (value) {`,
+                    `                data.${name} = {`,
+                    `                    results: ${name}_field.value()`,
+                    `                }`,
+                    `            }`,
+                ].join('\n');
+            case 'number':
+                return [
+                    `            if (${name}_props.validate) {`,
+                    `                const isValidated = validate(${name}_field.value());`,
+                    `            `,
+                    `                if (isValidated) {`,
+                    `                    data.${name} = ${name}_field.value();`,
+                    `                    ${name}_field.isValid(true);`,
+                    `                } else {`,
+                    `                    isValid = false;`,
+                    `                    ${name}_field.isValid(false);`,
+                    `                }`,
+                    `            } else if (value) {`,
+                    `                data.${name} = parseInt(${name}_field.value());`,
+                    `            }`,
+                ].join('\n');
+        }
+    }
+
     template = template.concat([
-        `            console.log(data);`,
+        `            console.log(isValid, data);`,
+        ``,
+        `            if (!isValid) {`,
+        `                return false;`,
+        `            }`,
         ``,
         `            const newItem = await CreateItem({`,
         `                list,`,

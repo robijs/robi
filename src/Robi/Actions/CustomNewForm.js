@@ -126,7 +126,9 @@ export async function CustomNewForm({ list, display, fields }) {
                             display,
                             fields: fields
                         });
-                    
+
+                        console.log(contents);
+
                         let newFile;
 
                         // TODO: Create Forms sub directory if it doesn't exist
