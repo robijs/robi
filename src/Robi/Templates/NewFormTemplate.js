@@ -1,10 +1,10 @@
 // @START-File
 /**
  * 
- * @param {*} param0 
+ * @param {*} param
  * @returns 
  */
-export function NewFormTemplate({ list, display, fields }) {
+export function NewFormTemplate({ list, fields }) {
     if (!list && !fields) {
         return;
     }
@@ -35,7 +35,7 @@ export function NewFormTemplate({ list, display, fields }) {
     ];
 
     function modules() {
-        return [ 'Row' ].concat(fieldsToCreate.map(field => {
+        return [... new Set([ 'Row' ].concat(fieldsToCreate.map(field => {
             const {type } = field;
 
             switch (type) {
@@ -52,7 +52,7 @@ export function NewFormTemplate({ list, display, fields }) {
                 case 'date':
                     return 'DateField';
             }
-        })).sort().join(', ');
+        })).sort())].join(', ');
     }
 
     template = template.concat(fieldsToCreate.map(field => `        ${field.name}_props,`));
@@ -73,7 +73,7 @@ export function NewFormTemplate({ list, display, fields }) {
     ]);
 
     fieldsToCreate.forEach((field, index) => {
-        const { name, display, type, choices, action, value } = field;
+        const { name, type } = field;
 
         let row = [
             `    Row(async (parent) => {`
@@ -83,86 +83,181 @@ export function NewFormTemplate({ list, display, fields }) {
         switch (type) {
             case 'slot':
                 component = [
-                    `        const { name, display } = ${name}_props`,
+                    `        const { name, display, validate, value } = ${name}_props`,
                     ``,
                     `        ${name}_field = SingleLineTextField({`,
                     `            label: display || name,`,
+                    `            value,`,
                     `            fieldMargin: '0px',`,
-                    `            parent`,
+                    `            parent,`,
+                    `            onFocusout`,
                     `        });`,
+                    ``,
+                    `        function onFocusout() {`,
+                    `            return !validate ? undefined : (() => {`,
+                    `                const value = ${name}_field.value();`,
+                    ``,
+                    `                console.log('validate');`,
+                    ``,
+                    `                if (validate(value)) {`,
+                    `                    ${name}_field.isValid(true);`,
+                    `                } else {`,
+                    `                    ${name}_field.isValid(false);`,
+                    `                }`,
+                    `            })();`,
+                    `        }`,
                     ``,
                     `        ${name}_field.add();`
                 ];
                 break;
             case 'mlot':
                 component = [
-                    `        const { name, display } = ${name}_props`,
+                    `        const { name, display, validate, value } = ${name}_props`,
                     ``,
                     `        ${name}_field = MultiLineTextField({`,
                     `            label: display || name,`,
+                    `            value,`,
                     `            fieldMargin: '0px',`,
-                    `            parent`,
+                    `            parent,`,
+                    `            onFocusout`,
                     `        });`,
+                    ``,
+                    `        function onFocusout() {`,
+                    `            return !validate ? undefined : (() => {`,
+                    `                const value = ${name}_field.value();`,
+                    ``,
+                    `                console.log('validate');`,
+                    ``,
+                    `                if (validate(value)) {`,
+                    `                    ${name}_field.isValid(true);`,
+                    `                } else {`,
+                    `                    ${name}_field.isValid(false);`,
+                    `                }`,
+                    `            })();`,
+                    `        }`,
                     ``,
                     `        ${name}_field.add();`
                 ];
                 break;
             case 'number':
                 component = [
-                    `        const { name, display } = ${name}_props`,
+                    `        const { name, display, validate, value } = ${name}_props`,
                     ``,
                     `        ${name}_field = NumberField({`,
                     `            label: display || name,`,
+                    `            value,`,
                     `            fieldMargin: '0px',`,
-                    `            parent`,
+                    `            parent,`,
+                    `            onFocusout`,
                     `        });`,
+                    ``,
+                    `        function onFocusout() {`,
+                    `            return !validate ? undefined : (() => {`,
+                    `                const value = ${name}_field.value();`,
+                    ``,
+                    `                console.log('validate');`,
+                    ``,
+                    `                if (validate(value)) {`,
+                    `                    ${name}_field.isValid(true);`,
+                    `                } else {`,
+                    `                    ${name}_field.isValid(false);`,
+                    `                }`,
+                    `            })();`,
+                    `        }`,
                     ``,
                     `        ${name}_field.add();`
                 ];
                 break;
             case 'choice':
                 component = [
-                    `        const { name, display, value, choices } = ${name}_props`,
+                    `        const { name, display, value, choices, validate } = ${name}_props`,
                     ``,
                     `        ${name}_field = ChoiceField({`,
                     `            label: display || name,`,
                     `            fieldMargin: '0px',`,
-                    `            value: value || '',`,
+                    `            value,`,
                     `            options: choices.map(choice => {`,
                     `                return {`,
                     `                    label: choice`,
                     `                };`,
                     `            }),`,
-                    `            parent`,
+                    `            parent,`,
+                    `            action`,
                     `        });`,
+                    ``,
+                    `        function action() {`,
+                    `            return !validate ? undefined : (() => {`,
+                    `                const value = ${name}_field.value();`,
+                    ``,
+                    `                console.log('validate');`,
+                    ``,
+                    `                if (validate(value)) {`,
+                    `                    ${name}_field.isValid(true);`,
+                    `                } else {`,
+                    `                    ${name}_field.isValid(false);`,
+                    `                }`,
+                    `            })();`,
+                    `        }`,
                     ``,
                     `        ${name}_field.add();`
                 ];
                 break;
             case 'multichoice':
                 component = [
-                    `        const { name, display, choices, fillIn } = ${name}_props`,
+                    `        const { name, display, choices, fillIn, validate, value } = ${name}_props`,
                     ``,
                     `        ${name}_field = MultiChoiceField({`,
                     `            label: display || name,`,
+                    `            value,`,
                     `            fieldMargin: '0px',`,
                     `            choices,`,
                     `            fillIn,`,
-                    `            parent`,
+                    `            parent,`,
+                    `            validate: onValidate`,
                     `        });`,
+                    ``,
+                    `        function onValidate() {`,
+                    `            return !validate ? undefined : (() => {`,
+                    `                const value = ${name}_field.value();`,
+                    ``,
+                    `                console.log('validate');`,
+                    ``,
+                    `                if (validate(value)) {`,
+                    `                    ${name}_field.isValid(true);`,
+                    `                } else {`,
+                    `                    ${name}_field.isValid(false);`,
+                    `                }`,
+                    `            })();`,
+                    `        }`,
                     ``,
                     `        ${name}_field.add();`
                 ]
                 break;
             case 'date':
                 component = [
-                    `        const { name, display } = ${name}_props`,
+                    `        const { name, display, validate, value } = ${name}_props`,
                     ``,
                     `        ${name}_field = DateField({`,
                     `            label: display || name,`,
+                    `            value,`,
                     `            margin: '0px',`,
-                    `            parent`,
+                    `            parent,`,
+                    `            onFocusout`,
                     `        });`,
+                    ``,
+                    `        function onValidate() {`,
+                    `            return !validate ? undefined : (() => {`,
+                    `                const value = ${name}_field.value();`,
+                    ``,
+                    `                console.log('validate');`,
+                    ``,
+                    `                if (validate(value)) {`,
+                    `                    ${name}_field.isValid(true);`,
+                    `                } else {`,
+                    `                    ${name}_field.isValid(false);`,
+                    `                }`,
+                    `            })();`,
+                    `        }`,
                     ``,
                     `        ${name}_field.add();`
                 ];
@@ -210,7 +305,7 @@ export function NewFormTemplate({ list, display, fields }) {
             case 'date':
                 return [
                     `            if (${name}_props.validate) {`,
-                    `                const isValidated = validate(${name}_field.value());`,
+                    `                const isValidated = ${name}_props.validate(${name}_field.value());`,
                     `            `,
                     `                if (isValidated) {`,
                     `                    data.${name} = ${name}_field.value();`,
@@ -226,7 +321,7 @@ export function NewFormTemplate({ list, display, fields }) {
             case 'multichoice':
                 return [
                     `            if (${name}_props.validate) {`,
-                    `                const isValidated = validate(${name}_field.value());`,
+                    `                const isValidated = ${name}_props.validate(${name}_field.value());`,
                     `            `,
                     `                if (isValidated) {`,
                     `                    data.${name} = {`,
@@ -246,7 +341,7 @@ export function NewFormTemplate({ list, display, fields }) {
             case 'number':
                 return [
                     `            if (${name}_props.validate) {`,
-                    `                const isValidated = validate(${name}_field.value());`,
+                    `                const isValidated = ${name}_props.validate(${name}_field.value());`,
                     `            `,
                     `                if (isValidated) {`,
                     `                    data.${name} = ${name}_field.value();`,
@@ -285,114 +380,5 @@ export function NewFormTemplate({ list, display, fields }) {
     ]).join('\n');
 
     return template;
-
-    // return [
-    //     `// This file can be edited programmatically.`,
-    //     `// If you know the API, feel free to make changes by hand.`,
-    //     `// Just be sure to put @START and @END sigils in the right places.`,
-    //     `// Otherwise, changes made with CLI and GUI tools will not render properly.`,
-    //     ``,
-    //     `import { CreateItem } from '../../Robi/Robi.js'`,
-    //     `import { ChoiceField, DateField, MultiLineTextField, NumberField, SingleLineTextField } from '../../Robi/RobiUI.js'`,
-    //     ``,
-    //     `// @START-${list}`,
-    //     `export default async function NewForm({ event, fields, list, modal, parent, table }) {`,
-    //     `    console.log(list, 'new form');`,
-    //     ``,
-    //     `    const fieldsToCreate = fields?.filter(field => field.name !== 'Id');`,
-    //     `    const components = fieldsToCreate?.map((field, index) => {`,
-    //     `        const { name, display, type, choices, action } = field;`,
-    //     `    `,
-    //     `        let component = {};`,
-    //     `    `,
-    //     `        switch (type) {`,
-    //     `            case 'slot':`,
-    //     `                component = SingleLineTextField({`,
-    //     `                    label: display || name,`,
-    //     `                    parent`,
-    //     `                });`,
-    //     `                break;`,
-    //     `            case 'mlot':`,
-    //     `                component = MultiLineTextField({`,
-    //     `                    label: display || name,`,
-    //     `                    parent`,
-    //     `                });`,
-    //     `                break;`,
-    //     `            case 'number':`,
-    //     `                component = NumberField({`,
-    //     `                    label: display || name,`,
-    //     `                    parent`,
-    //     `                });`,
-    //     `                break;`,
-    //     `            case 'choice':`,
-    //     `                component = ChoiceField({`,
-    //     `                    label: display || name,`,
-    //     `                    value: choices[0],`,
-    //     `                    options: choices.map(choice => {`,
-    //     `                        return {`,
-    //     `                            label: choice`,
-    //     `                        };`,
-    //     `                    }),`,
-    //     `                    parent`,
-    //     `                });`,
-    //     `                break;`,
-    //     `            case 'date':`,
-    //     `                component = DateField({`,
-    //     `                    label: display || name,`,
-    //     `                    value: '',`,
-    //     `                    parent`,
-    //     `                });`,
-    //     `                break;`,
-    //     `        }`,
-    //     `    `,
-    //     `        component.add();`,
-    //     `    `,
-    //     `        return {`,
-    //     `            component,`,
-    //     `            field`,
-    //     `        };`,
-    //     `    });`,
-    //     `    `,
-    //     `    return {`,
-    //     `        async onCreate(event) {`,
-    //     `            const data = {};`,
-    //     `    `,
-    //     `            components`,
-    //     `                .forEach(item => {`,
-    //     `                    const { component, field } = item;`,
-    //     `                    const { name, type } = field;`,
-    //     `    `,
-    //     `                    const value = component.value();`,
-    //     `    `,
-    //     `                    switch (type) {`,
-    //     `                        case 'slot':`,
-    //     `                        case 'mlot':`,
-    //     `                        case 'choice':`,
-    //     `                            if (value) {`,
-    //     `                                data[name] = value;`,
-    //     `                            }`,
-    //     `                            break;`,
-    //     `                        case 'number':`,
-    //     `                            if (value) {`,
-    //     `                                data[name] = parseInt(value);`,
-    //     `                            }`,
-    //     `                            break;`,
-    //     `                    }`,
-    //     `                });`,
-    //     `    `,
-    //     `            console.log(data);`,
-    //     `    `,
-    //     `            const newItem = await CreateItem({`,
-    //     `                list,`,
-    //     `                data`,
-    //     `            });`,
-    //     `    `,
-    //     `            return newItem;`,
-    //     `        }`,
-    //     `    };`,
-    //     `}`,
-    //     `// @END-${list}`,
-    //     ``
-    // ].join('\n');
 }
 // @END-File

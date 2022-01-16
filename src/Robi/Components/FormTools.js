@@ -203,7 +203,7 @@ export function FormTools(param) {
                 event: 'click',
                 listener(event) {
                     ModifyFile({
-                        path: `App/src/Forms/${list}`,
+                        path: `App/src/Lists/${list}`,
                         file: `${form}.js`
                     });
                 }
