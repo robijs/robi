@@ -68,7 +68,7 @@ export async function CustomNewForm({ list, display, fields }) {
                         await Wait(5000);
                     }
 
-                    // location.reload();
+                    location.reload();
 
                     modal.close();
 

@@ -62,13 +62,13 @@ export async function CustomEditForm({ list, display, fields }) {
                     document.querySelector('#app').style.filter = 'blur(5px)';
 
                     await updateSchema();
-                    // await createForm();
+                    await createForm();
 
                     if (App.isProd()) {
                         await Wait(5000);
                     }
 
-                    // location.reload();
+                    location.reload();
 
                     modal.close();
 
@@ -93,17 +93,10 @@ export async function CustomEditForm({ list, display, fields }) {
                         }
 
                         let content = await request.text();
-                        let updatedContent = content.trim().replace(/[\s]*?(export default {[\s\S]*?})$/, `\nimport EditForm from './EditForm.js'\n\n$1\n`).trim();
-
-                        const lines = updatedContent.trim().split('\n');
-                        // FIXME: Check if a comma already exists
-                        lines[lines.length - 2] = lines[lines.length - 2].trim() + ',\n    editForm: EditForm'
-
-                        updatedContent = lines.join('\n');
+                        let updatedContent = content.trim().replace(/[\s]*?(export default {[\s\S]*?})$/, `\nimport EditForm from './EditForm.js'\n\n$1`).trim();
+                        updatedContent = updatedContent.replace(/(\s\S*?})$/, `,\n    editForm: EditForm$1`);
 
                         console.log(updatedContent);
-
-                        return;
 
                         let setFile;
 
@@ -134,6 +127,8 @@ export async function CustomEditForm({ list, display, fields }) {
                             display,
                             fields: fields
                         });
+
+                        console.log(contents);
                     
                         let newFile;
 
