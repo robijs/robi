@@ -43,7 +43,8 @@ export function Modal(param) {
                             !title ?
                             /*html*/ `
                                 <button type='button' class='close ${close ? '' : 'd-none'}' style='position: absolute; right: 0px; ${closeStyle || ''}' data-dismiss='modal' aria-label='Close'>
-                                    <span class='icon-container' style='right: 20px; top: 20px;'>
+                                    <!-- <span class='icon-container' style='right: 20px; top: 20px;'> -->
+                                    <span class='icon-container'>
                                         <svg class='icon x-circle-fill'>
                                             <use href='#icon-bs-x-circle-fill'></use>
                                         </svg>
@@ -164,6 +165,11 @@ export function Modal(param) {
                 font-weight: 500;
                 text-shadow: unset;
                 opacity: 1;
+                width: 60px;
+                height: 60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             #id .close .icon-container {
@@ -232,18 +238,22 @@ export function Modal(param) {
                 min-height: 50px;
             } */
 
+            #id .modal-dialog-scrollable .modal-body {
+                overflow-y: overlay;
+            }
+
             #id.scrollbar-wide .modal-body::-webkit-scrollbar {
-                width: 25px;
+                width: 15px;
             }
 
             #id.scrollbar-wide .modal-body::-webkit-scrollbar-thumb {
-                border: 8px solid transparent;
+                border: 4px solid transparent;
                 border-radius: 20px;
                 min-height: 75px;
             }
 
             #id.scrollbar-wide .modal-body::-webkit-scrollbar-button {
-                height: 10px;
+                height: 12px;
             }
 
             ${
@@ -260,16 +270,16 @@ export function Modal(param) {
                 !title ?
                 /*css*/ `
                     #id .modal-body::-webkit-scrollbar {
-                        width: 25px;
+                        width: 60px;
                     }
 
                     #id .modal-body::-webkit-scrollbar-thumb {
-                        border: 8px solid transparent;
-                        border-radius: 20px;
+                        border: 27px solid transparent;
+                        border-radius: 60px;
                     }
 
                     #id .modal-body::-webkit-scrollbar-button {
-                        height: 10px;
+                        height: 30px;
                     }
                 ` : ''
             }
