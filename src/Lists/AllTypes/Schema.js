@@ -33,7 +33,7 @@ export default {
             name: 'Number',
             type: 'number',
             validate(value) {
-                if (value === 'Test') {
+                if (value === 1) {
                     return true;
                 } else {
                     return false;
@@ -50,7 +50,7 @@ export default {
                 'Three'
             ],
             validate(value) {
-                if (value === 'Test') {
+                if (value === 'Two') {
                     return true;
                 } else {
                     return false;
@@ -68,7 +68,7 @@ export default {
                 'Three'
             ],
             validate(value) {
-                if (value === 'Test') {
+                if (value.length) {
                     return true;
                 } else {
                     return false;

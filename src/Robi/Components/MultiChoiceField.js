@@ -10,15 +10,24 @@ import { App } from '../Core/App.js'
  */
 export function MultiChoiceField(param) {
     const {
-        label, description, choices, value, fillIn, parent, position, fieldMargin, onChange
+        choices,
+        description,
+        fieldMargin,
+        fillIn,
+        label,
+        onChange,
+        parent,
+        position,
+        validate,
+        value
     } = param;
 
     const component = Component({
         html: /*html*/ `
             <div class='form-field'>
-                ${label ? /*html*/ `<label>${label}</label>` : ''}
+                ${label ? /*html*/ `<label class='field-label'>${label}</label>` : ''}
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
-                <div>
+                <div class='checkbox-container'>
                     ${
                         choices.map(choice => {
                             const id = GenerateUUID();
@@ -28,10 +37,6 @@ export function MultiChoiceField(param) {
                                     <input type="checkbox" class="custom-control-input" id="${id}" data-label='${choice}' ${value?.includes(choice) ? 'checked' : ''}>
                                     <label class="custom-control-label" for="${id}">${choice}</label>
                                 </div>
-                                <!-- <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="${id}">
-                                    <label class="custom-control-label" for="${id}">${choice}</label>
-                                </div> -->
                             `;
                         }).join('\n')
                     }
@@ -56,6 +61,7 @@ export function MultiChoiceField(param) {
         `,
         style: /*css*/ `
             #id.form-field {
+                position: relative;
                 margin: ${fieldMargin || '0px 0px 20px 0px'};
                 width: inherit;
             }
@@ -89,10 +95,9 @@ export function MultiChoiceField(param) {
                 border-color: ${App.get('primarColor') + '6b'}  !important;
             }
             
-            /* #id .other-label.custom-control-label::before,
-            #id  .other-label.custom-control-label::after {
-                top: .5rem;
-            } */
+            #id .checkbox-container {
+                border-radius: 10px;
+            }
         `,
         parent: parent,
         position,
@@ -100,7 +105,17 @@ export function MultiChoiceField(param) {
             {
                 selector: '#id .custom-control-input',
                 event: 'change',
-                listener: onChange
+                listener(event) {
+                    console.log(event.target.checked);
+
+                    if (validate) {
+                        validate();
+                    }
+
+                    if (onChange) {
+                        onChange(event);
+                    }
+                }
             },
             {
                 selector: '#id .Other',
@@ -126,9 +141,46 @@ export function MultiChoiceField(param) {
                         onChange(event);
                     }
                 }
+            },
+            {
+                selector: '#id .Other',
+                event: 'focusout',
+                listener(event) {
+                    if (validate) {
+                        validate(event);
+                    }
+                }
             }
         ],
     });
+
+    component.isValid = (state) => {
+        const node = component.find('.is-valid-container');
+
+        if (node) {
+            node.remove();
+        }
+
+        if (state) {
+            component.find('.field-label').style.color = 'seagreen';
+            component.append(/*html*/ `
+                <div class='is-valid-container d-flex justify-content-center align-items-center' style='height: 33.5px; width: 46px; position: absolute; bottom: 0px; right: -46px;'>
+                    <svg class='icon' style='fill: seagreen; font-size: 22px;'>
+                        <use href='#icon-bs-check-circle-fill'></use>
+                    </svg>
+                </div>
+            `);
+        } else {
+            component.find('.field-label').style.color = 'crimson';
+            component.append(/*html*/ `
+                <div class='is-valid-container d-flex justify-content-center align-items-center' style='height: 33.5px; width: 46px; position: absolute; bottom: 0px; right: -46px;'>
+                    <svg class='icon' style='fill: crimson; font-size: 22px;'>
+                        <use href='#icon-bs-exclamation-circle-fill'></use>
+                    </svg>
+                </div>
+            `);
+        }
+    };
 
     component.value = (param, options = {}) => {
         const checked = component.findAll('.custom-control-input:not(.other-checkbox):checked');

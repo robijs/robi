@@ -367,20 +367,20 @@ export async function Table(param) {
                                     value: 'Create',
                                     classes: 'btn-robi',
                                     async onClick(event) {
-                                        // Disable button - Prevent user from clicking this item more than once
-                                        $(event.target)
-                                            .attr('disabled', '')
-                                            .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Creating');
-
                                         // Call newForm.onCreate() and wait for it to complete
                                         const newItem = await selectedForm?.onCreate(event);
 
                                         // TODO: Don't create item if newItem == false;
 
                                         if (!newItem) {
-                                            console.log('validation failed');
+                                            console.log('Data not valid, alert user');
                                             return;
                                         }
+
+                                        // Disable button - Prevent user from clicking this item more than once
+                                        $(event.target)
+                                            .attr('disabled', '')
+                                            .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Creating');
 
                                         if (Array.isArray(newItem)) {
                                             items.concat(newItem);
@@ -672,20 +672,24 @@ export async function Table(param) {
                                 // disabled: true,
                                 classes: 'btn-robi',
                                 async onClick(event) {
+                                    // Call newForm.onUpdate() and wait for it to complete
+                                    const updatedItem = await selectedForm?.onUpdate(event);
+
+                                    if (!updatedItem) {
+                                        console.log('Data not valid, alert user');
+
+                                        return;
+                                    }
+
                                     /** Disable button - Prevent user from clicking this item more than once */
                                     $(event.target)
                                         .attr('disabled', '')
                                         .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Updating');
 
-                                    // Call newForm.onUpdate() and wait for it to complete
-                                    const updatedItem = await selectedForm?.onUpdate(event);
-
-                                    if (updatedItem) {
-                                        table.updateRow({
-                                            row: selectedRow,
-                                            data: updatedItem
-                                        });
-                                    }
+                                    table.updateRow({
+                                        row: selectedRow,
+                                        data: updatedItem
+                                    });
 
                                     /** Enable button */
                                     $(event.target)

@@ -10,7 +10,21 @@ import { GenerateUUID } from '../Robi.js';
  */
 export function ChoiceField(param) {
     const {
-        action, classes, label, description, parent, position, options, value, fieldMargin, padding, setWidthDelay, maxHeight, maxWidth, valueType, buttonStyle
+        action,
+        buttonStyle,
+        classes,
+        description,
+        fieldMargin,
+        label,
+        maxHeight,
+        maxWidth,
+        onFocusout,
+        options,
+        padding,
+        parent,
+        position,
+        value,
+        valueType
     } = param;
 
     const id = GenerateUUID();
@@ -18,7 +32,7 @@ export function ChoiceField(param) {
     const component = Component({
         html: /*html*/ `
             <div class='form-field${classes ? ` ${classes.join(' ')}` : ''}'>
-                ${label ? /*html*/ `<label>${label}</label>` : ''}
+                ${label ? /*html*/ `<label class='field-label'>${label}</label>` : ''}
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
                 <div class='dropdown'>
                     <button class='btn dropdown-toggle' ${buttonStyle ? `style='${buttonStyle}'` : ''} type='button' id='${id}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
@@ -34,6 +48,7 @@ export function ChoiceField(param) {
         `,
         style: /*css*/ `
             #id {
+                position: relative;
                 margin: ${fieldMargin || '0px 0px 20px 0px'};
                 padding: ${padding || '0px'};
             }
@@ -106,6 +121,11 @@ export function ChoiceField(param) {
                         action(event);
                     }
                 }
+            },
+            {
+                selector: `#id .dropdown-toggle`,
+                event: 'focusout',
+                listener: onFocusout
             }
         ]
     });
@@ -147,18 +167,36 @@ export function ChoiceField(param) {
             if (valueType === 'html') {
                 return component.find('.dropdown-toggle');
             } else {
-                return field.innerText;
+                return field.innerText === 'Choose' ? '' : field.innerText;
             }
         }
     };
 
     component.isValid = (state) => {
+        const node = component.find('.is-valid-container');
+
+        if (node) {
+            node.remove();
+        }
+
         if (state) {
-            component.find('.dropdown-toggle').classList.remove('invalid');
-            component.find('.dropdown-toggle').classList.add('valid');
+            component.find('.field-label').style.color = 'seagreen';
+            component.append(/*html*/ `
+                <div class='is-valid-container d-flex justify-content-center align-items-center' style='height: 33.5px; width: 46px; position: absolute; bottom: 0px; right: -46px;'>
+                    <svg class='icon' style='fill: seagreen; font-size: 22px;'>
+                        <use href='#icon-bs-check-circle-fill'></use>
+                    </svg>
+                </div>
+            `);
         } else {
-            component.find('.dropdown-toggle').classList.remove('valid');
-            component.find('.dropdown-toggle').classList.add('invalid');
+            component.find('.field-label').style.color = 'crimson';
+            component.append(/*html*/ `
+                <div class='is-valid-container d-flex justify-content-center align-items-center' style='height: 33.5px; width: 46px; position: absolute; bottom: 0px; right: -46px;'>
+                    <svg class='icon' style='fill: crimson; font-size: 22px;'>
+                        <use href='#icon-bs-exclamation-circle-fill'></use>
+                    </svg>
+                </div>
+            `);
         }
     };
 

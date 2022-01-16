@@ -15,13 +15,14 @@ export function NumberField(param) {
     const component = Component({
         html: /*html*/ `
             <div>
-                <label>${label}</label>
+                <label class='field-label'>${label}</label>
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
                 <input type="number" class="form-control" value="${value !== undefined ? parseFloat(value) : ''}">
             </div>
         `,
         style: /*css*/ `
             #id {
+                position: relative;
                 margin: ${fieldMargin || '0px 0px 20px 0px'};
             }
 
@@ -67,12 +68,30 @@ export function NumberField(param) {
     };
 
     component.isValid = (state) => {
+        const node = component.find('.is-valid-container');
+
+        if (node) {
+            node.remove();
+        }
+
         if (state) {
-            component.find('.form-control').classList.remove('invalid');
-            component.find('.form-control').classList.add('valid');
+            component.find('.field-label').style.color = 'seagreen';
+            component.append(/*html*/ `
+                <div class='is-valid-container d-flex justify-content-center align-items-center' style='height: 33.5px; width: 46px; position: absolute; bottom: 0px; right: -46px;'>
+                    <svg class='icon' style='fill: seagreen; font-size: 22px;'>
+                        <use href='#icon-bs-check-circle-fill'></use>
+                    </svg>
+                </div>
+            `);
         } else {
-            component.find('.form-control').classList.remove('valid');
-            component.find('.form-control').classList.add('invalid');
+            component.find('.field-label').style.color = 'crimson';
+            component.append(/*html*/ `
+                <div class='is-valid-container d-flex justify-content-center align-items-center' style='height: 33.5px; width: 46px; position: absolute; bottom: 0px; right: -46px;'>
+                    <svg class='icon' style='fill: crimson; font-size: 22px;'>
+                        <use href='#icon-bs-exclamation-circle-fill'></use>
+                    </svg>
+                </div>
+            `);
         }
     };
 
@@ -83,7 +102,7 @@ export function NumberField(param) {
             console.log(param);
             field.value = parseFloat(param);
         } else {
-            return parseFloat(field.value);
+            return parseFloat(field.value) || undefined;
         }
     };
 

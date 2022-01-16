@@ -103,7 +103,7 @@ export async function EditForm({ event, fields, item, list, modal, parent, table
                             }
                             break;
                         case 'multichoice':
-                            if (value) {
+                            if (value.length) {
                                 data[name] = {
                                     results: value
                                 }

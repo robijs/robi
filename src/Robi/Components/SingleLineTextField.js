@@ -8,20 +8,36 @@ import { Component } from '../Actions/Component.js'
  */
 export function SingleLineTextField(param) {
     const {
-        addon, classes, label, description, value, readOnly, parent, position, width, margin, padding, placeholder, background, borderRadius, flex, maxWidth, fieldMargin, optional, onKeydown, onKeyup, onKeypress, fontSize, onFocusout,
+        addon,
+        background,
+        borderRadius,
+        classes,
+        description,
+        fieldMargin,
+        flex,
+        fontSize,
+        label,
+        margin,
+        maxWidth,
+        onFocusout,
+        onKeydown,
+        onKeypress,
+        onKeyup,
+        optional,
+        padding,
+        parent,
+        placeholder,
+        position,
+        readOnly,
+        value,
+        width
     } = param;
-
-    let events = [];
-
-    if (onKeydown) {
-
-    }
 
     const component = Component({
         html: /*html*/ `
             
             <div class='form-field${classes ? ` ${classes.join(' ')}` : ''}'>
-                ${label ? /*html*/ `<label class='form-label'>${label}</label>` : ''}
+                ${label ? /*html*/ `<label class='field-label'>${label}</label>` : ''}
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
                 ${
                     addon ?
@@ -134,12 +150,30 @@ export function SingleLineTextField(param) {
     };
 
     component.isValid = (state) => {
+        const node = component.find('.is-valid-container');
+
+        if (node) {
+            node.remove();
+        }
+
         if (state) {
-            component.find('.form-control').classList.remove('invalid');
-            component.find('.form-control').classList.add('valid');
+            component.find('.field-label').style.color = 'seagreen';
+            component.append(/*html*/ `
+                <div class='is-valid-container d-flex justify-content-center align-items-center' style='height: 33.5px; width: 46px; position: absolute; bottom: 0px; right: -46px;'>
+                    <svg class='icon' style='fill: seagreen; font-size: 22px;'>
+                        <use href='#icon-bs-check-circle-fill'></use>
+                    </svg>
+                </div>
+            `);
         } else {
-            component.find('.form-control').classList.remove('valid');
-            component.find('.form-control').classList.add('invalid');
+            component.find('.field-label').style.color = 'crimson';
+            component.append(/*html*/ `
+                <div class='is-valid-container d-flex justify-content-center align-items-center' style='height: 33.5px; width: 46px; position: absolute; bottom: 0px; right: -46px;'>
+                    <svg class='icon' style='fill: crimson; font-size: 22px;'>
+                        <use href='#icon-bs-exclamation-circle-fill'></use>
+                    </svg>
+                </div>
+            `);
         }
     };
     

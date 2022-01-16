@@ -335,15 +335,11 @@ export function AppContainer() {
             }
 
             .form-control:not(.dataTables_length .custom-select):focus,
-            .custom-select:not(.dataTables_length .custom-select):focus {
-                border-color: transparent !important;
-                box-shadow: 0 0 0 3px var(--primary6b) !important;
-            }
-
+            .custom-select:not(.dataTables_length .custom-select):focus,
             .form-field-multi-line-text.editable:focus,
             .btn.dropdown-toggle:focus {
                 border-color: transparent !important;
-                box-shadow: 0 0 0 4px var(--primary6b) !important;
+                box-shadow: 0 0 0 3px var(--primary6b) !important;
             }
 
             .custom-select,
@@ -381,26 +377,6 @@ export function AppContainer() {
                 height: 16px;
                 width: 16px;
                 ${cancelButton};
-            }
-
-            .form-control.valid,
-            .form-control.valid:focus {
-                box-shadow: 0px 0px 0px 3px seagreen;
-            }
-
-            .form-control.invalid,
-            .form-control.invalid:focus {
-                box-shadow: 0px 0px 0px 3px crimson;
-            }
-
-            .form-field-multi-line-text.valid,
-            .form-field-multi-line-text.valid:focus {
-                box-shadow: 0px 0px 0px 4px seagreen;
-            }
-
-            .form-field-multi-line-text.invalid,
-            .form-field-multi-line-text.invalid:focus {
-                box-shadow: 0px 0px 0px 4px crimson;
             }
 
             /* Alert */

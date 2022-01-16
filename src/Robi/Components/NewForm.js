@@ -54,7 +54,7 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
                         };
                     }),
                     parent,
-                    onFocusout
+                    action: onFocusout 
                 });
                 break;
             case 'multichoice':
@@ -64,7 +64,7 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
                     fillIn,
                     choices,
                     parent,
-                    onFocusout
+                    validate: onFocusout
                 });
                 break;
             case 'date':
@@ -78,15 +78,17 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
         }
 
         function onFocusout() {
-            return !validate ? undefined : () => {
+            return !validate ? undefined : (() => {
                 const value = component.value();
+
+                console.log('validate');
     
                 if (validate(value)) {
                     component.isValid(true);
                 } else {
                     component.isValid(false);
                 }
-            }
+            })();
         }
 
         component.add();
@@ -99,53 +101,81 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
 
     return {
         async onCreate(event) {
+            let isValid = true;
+
             const data = {};
 
-            components
-                .forEach(item => {
-                    const { component, field } = item;
-                    const { name, type, validate } = field;
+            components.forEach(item => {
+                const { component, field } = item;
+                const { name, type, validate } = field;
 
-                    const value = component.value();
+                const value = component.value();
 
-                    switch (type) {
-                        case 'slot':
-                        case 'mlot':
-                        case 'choice':
-                        case 'date':
-                            if (value) {
-                                if (validate) {
-                                    const isValidated = validate(value);
+                console.log(name, value);
 
-                                    if (isValidated) {
-                                        component.isValid(true);
-                                        data[name] = value;
-                                    } else {
-                                        component.isValid(false);
-                                    }
-                                } else {
-                                    data[name] = value;
-                                }
+                switch (type) {
+                    case 'slot':
+                    case 'mlot':
+                    case 'choice':
+                    case 'date':
+                        if (validate) {
+                            const isValidated = validate(value);
+
+                            if (isValidated) {
+                                data[name] = value;
+                                component.isValid(true);
+                            } else {
+                                isValid = false;
+                                component.isValid(false);
                             }
-                            break;
-                        case 'multichoice':
-                            if (value) {
+                        } else if (value) {
+                            data[name] = value;
+                        }
+                        break;
+                    case 'multichoice':
+                        if (validate) {
+                            const isValidated = validate(value);
+
+                            if (isValidated) {
                                 data[name] = {
                                     results: value
-                                }
+                                };
+                                component.isValid(true);
+                            } else {
+                                isValid = false;
+                                component.isValid(false);
                             }
-                            break;
-                        case 'number':
-                            if (value) {
-                                data[name] = parseInt(value);
-                            }
-                            break;
-                    }
-                });
+                        } else if (value.length) {
+                            data[name] = {
+                                results: value
+                            };
+                        }
+                        break;
+                    case 'number':
+                        if (validate) {
+                            const isValidated = validate(value);
 
-            console.log(data);
+                            if (isValidated) {
+                                data[name] = value;
+                                component.isValid(true);
+                            } else {
+                                isValid = false;
+                                component.isValid(false);
+                            }
+                        } else if (value) {
+                            data[name] = parseInt(value);
+                        }
+                        break;
+                }
+            });
+
+            console.log(isValid, data);
 
             return false;
+
+            if (!isValid) {
+                return false;
+            }
 
             const newItem = await CreateItem({
                 list,
