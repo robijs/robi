@@ -109,8 +109,9 @@ export async function EditLayout({ order, path, file }) {
 
     if (App.isProd()) {
         await Wait(5000);
-        location.reload();
     }
+
+    location.reload();
 
     modal.close();
 }

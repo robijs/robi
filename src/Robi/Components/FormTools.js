@@ -269,7 +269,7 @@ export function FormTools(param) {
             // Edit file
             EditLayout({
                 order: newOrder,
-                path: `App/src/Forms/${list}`,
+                path: `App/src/Lists/${list}`,
                 file: `${form}.js`
             });
         });
