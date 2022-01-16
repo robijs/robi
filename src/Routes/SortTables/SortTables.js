@@ -10,7 +10,7 @@ export default async function SortTables({ parent }) {
     // @START-Rows
     Row(async (parent) => {
         await Table({
-            list: 'MLOT',
+            list: 'Choice',
             parent,
             advancedSearch: true,
             toolbar: [
@@ -42,7 +42,7 @@ export default async function SortTables({ parent }) {
     // @Row
     Row(async (parent) => {
         await Table({
-            list: 'Choice',
+            list: 'MLOT',
             parent,
             advancedSearch: true,
             toolbar: [
