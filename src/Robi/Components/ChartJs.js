@@ -39,7 +39,7 @@ export function ChartJs(param) {
                 min-height: 27px;
                 color: var(--color);
                 font-size: 18px;
-                font-weight: 700;
+                font-weight: 500;
                 text-align: center;
                 transition: opacity 500ms ease;
                 opacity: 0;
@@ -70,8 +70,9 @@ export function ChartJs(param) {
                 scales: {
                     x: {
                         grid: {
-                            borderColor: App.get('primaryColor'),
-                            display: false
+                            // borderColor: App.get('primaryColor'),
+                            borderColor: App.get('borderColor'),
+                            // display: false
                         },
                         stacked: true,
                         ticks: {
@@ -84,8 +85,9 @@ export function ChartJs(param) {
                     },
                     y: {
                         grid: {
-                            borderColor: App.get('primaryColor'),
-                            display: false
+                            // borderColor: App.get('primaryColor'),
+                            borderColor: App.get('borderColor'),
+                            // display: false
                         },
                         stacked: true,
                         ticks: {

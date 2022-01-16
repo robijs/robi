@@ -80,20 +80,6 @@ export function MultiChoiceField(param) {
                 font-weight: 400;
                 white-space: nowrap;
             }
-
-            #id .custom-control-input:checked ~ .custom-control-label::before {
-                color: #fff;
-                border-color: ${App.get('primarColor')};
-                background-color: ${App.get('primarColor')};
-            }
-
-            #id .custom-control-input:focus~.custom-control-label::before {
-                box-shadow: 0 0 0 0.2rem ${App.get('primarColor') + '6b'} !important;
-            }
-            
-            #id .custom-control-input:focus:not(:checked)~.custom-control-label::before {
-                border-color: ${App.get('primarColor') + '6b'}  !important;
-            }
             
             #id .checkbox-container {
                 border-radius: 10px;

@@ -41,7 +41,7 @@ export default async function ChartDemo(param) {
                     'rgba(153, 102, 255, 1)',
                     'rgba(255, 159, 64, 1)'
                 ],
-                borderWidth: 1
+                borderWidth: 3
             }]
         },
         options: {
@@ -54,6 +54,7 @@ export default async function ChartDemo(param) {
             scales: {
                 x: {
                     grid: {
+                        borderWidth: 3,
                         borderColor: App.get('primaryColor'),
                         display: false
                     },
@@ -68,12 +69,14 @@ export default async function ChartDemo(param) {
                 },
                 y: {
                     grid: {
+                        borderWidth: 3,
                         borderColor: App.get('primaryColor'),
                         display: false
                     },
                     stacked: true,
                     ticks: {
                         font: {
+                            weight: 700,
                             family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
                         },
                         color: App.get('defaultColor'),

@@ -128,7 +128,7 @@ import { Get, SiteUsageModel } from '../Robi.js'
                     value: mostPopularRole
                 },
                 {
-                    label: 'Most Active Visitor',
+                    label: 'Most Active User',
                     value: formatName(visitors[0]),
                     description: '' // TODO: Display user's role
                 },

@@ -95,7 +95,7 @@ export async function SiteUsageContainer({ parent }) {
                 hide: true
             },
             {
-                label: 'Most Active Visitor',
+                label: 'Most Active User',
                 hide: true
             },
             {
@@ -240,7 +240,7 @@ export async function SiteUsageContainer({ parent }) {
                         backgroundColor: App.get('primaryColor'),
                         hoverBackgroundColor: App.get('primaryColor'),
                         borderWidth: 0,
-                        borderRadius: 4
+                        borderRadius: 3
                     };
                 })
             },

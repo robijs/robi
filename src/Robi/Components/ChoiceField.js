@@ -1,5 +1,4 @@
 import { Component } from '../Actions/Component.js'
-import { App } from '../Core/App.js'
 import { GenerateUUID } from '../Robi.js';
 
 // @START-File

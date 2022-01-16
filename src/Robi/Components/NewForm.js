@@ -12,9 +12,12 @@ import { SingleLineTextField } from './SingleLineTextField.js'
  * @param {*} param
  * @returns 
  */
-export async function NewForm({ event, fields, list, modal, parent, table }) {
-    const fieldsToCreate = fields?.filter(field => field.name !== 'Id');
-    const components = fieldsToCreate?.map((field, index) => {
+export async function NewForm({ fields, list, parent }) {
+    if (!Array.isArray(fields)) {
+        return false;
+    }
+
+    const components = fields.filter(field => field.name !== 'Id').map(field => {
         const { name, display, type, value, validate, choices, fillIn } = field;
 
         let component = {};
@@ -100,7 +103,7 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
     });
 
     return {
-        async onCreate(event) {
+        async onCreate() {
             let isValid = true;
 
             const data = {};
@@ -170,8 +173,6 @@ export async function NewForm({ event, fields, list, modal, parent, table }) {
             });
 
             console.log(isValid, data);
-
-            return false;
 
             if (!isValid) {
                 return false;
