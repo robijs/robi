@@ -9,14 +9,7 @@ export default {
                 'One',
                 'Two',
                 'Three'
-            ],
-            validate(value) {
-                if (value === 'Two') {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
+            ]
         }
     ]
 }

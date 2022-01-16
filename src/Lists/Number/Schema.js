@@ -5,14 +5,7 @@ export default {
         {
             name: 'Number',
             display: 'Number',
-            type: 'number',
-            validate(value) {
-                if (value === 'Test') {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
+            type: 'number'
         }
     ]
 }

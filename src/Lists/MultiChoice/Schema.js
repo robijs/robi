@@ -11,14 +11,7 @@ export default {
                 'One',
                 'Two',
                 'Three'
-            ],
-            validate(value) {
-                if (value === 'Test') {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
+            ]
         }
     ]
 }

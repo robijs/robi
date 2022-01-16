@@ -5,14 +5,7 @@ export default {
         {
             name: 'MLOT',
             display: 'Multiple Lines of Text',
-            type: 'mlot',
-            validate(value) {
-                if (value === 'Test') {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
+            type: 'mlot'
         }
     ]
 }
