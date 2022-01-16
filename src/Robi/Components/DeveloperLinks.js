@@ -160,7 +160,7 @@ export async function DeveloperLinks(param) {
                     margin: '10px 0px 0px 10px',
                     parent: buttonContainer,
                     async action(event) {
-                        window.open(`${url}Files`);
+                        window.open(`${App.get('site')}/${value}Files`);
                     }
                 });
     
