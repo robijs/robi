@@ -61,7 +61,7 @@ export async function CustomNewForm({ list, display, fields }) {
                     document.querySelector('#app').style.transition = 'filter 150ms';
                     document.querySelector('#app').style.filter = 'blur(5px)';
 
-                    await updateLists();
+                    await updateSchema();
                     await createForm();
 
                     if (App.isProd()) {
@@ -71,39 +71,29 @@ export async function CustomNewForm({ list, display, fields }) {
 
                     modal.close();
 
-                    async function updateLists() {
-                        // Update app.js
+                    async function updateSchema() {
                         let digest;
                         let request;
 
                         if (App.isProd()) {
-                            digest = await GetRequestDigest();
-                            request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('lists.js')/$value`, {
-                                method: 'GET',
-                                headers: {
-                                    'binaryStringRequestBody': 'true',
-                                    'Accept': 'application/json;odata=verbose;charset=utf-8',
-                                    'X-RequestDigest': digest
-                                }
-                            });
+                            // digest = await GetRequestDigest();
+                            // request  = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('App/src')/Files('lists.js')/$value`, {
+                            //     method: 'GET',
+                            //     headers: {
+                            //         'binaryStringRequestBody': 'true',
+                            //         'Accept': 'application/json;odata=verbose;charset=utf-8',
+                            //         'X-RequestDigest': digest
+                            //     }
+                            // });
                         } else {
-                            request = await fetch(`http://127.0.0.1:8080/src/lists.js`);
+                            request = await fetch(`http://127.0.0.1:8080/src/Lists/${list}/Schema.js`);
                             await Wait(1000);
                         }
 
                         let content = await request.text();
-                        let updatedContent;
+                        let updatedContent = content.replace(/[\s]*?export default {([\s\S]*?)(\s}$)/, `\nimport NewForm from './NewForm.js'\n\nexport default {$1,\n    newForm: NewForm$2`).trim();;
 
-                        // Set import
-                        const imports = content.match(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/);
-                        const newImports = imports[1] + `import ${list}NewForm from './Forms/${list}/NewForm.js'\n`;
-                        updatedContent = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS${newImports}// @END-IMPORTS`);
-
-                        // Set form
-                        // NOTE: This won't work if there's a space between list and name of type string
-                        updatedContent = updatedContent.replace(`list: '${list}',`, `list: '${list}',\n        newForm: ${list}NewForm,`);
-
-                        // console.log(updatedContent);
+                        console.log(updatedContent);
 
                         let setFile;
 
@@ -118,7 +108,7 @@ export async function CustomNewForm({ list, display, fields }) {
                                 }
                             });
                         } else {
-                            setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=lists.js`, {
+                            setFile = await fetch(`http://127.0.0.1:2035/?path=src/Lists/${list}&file=Schema.js`, {
                                 method: 'POST',
                                 body: updatedContent
                             });
@@ -161,8 +151,6 @@ export async function CustomNewForm({ list, display, fields }) {
                             //     }
                             // });
                         } else {
-                            console.log('create route dir and file');
-                            // Create file (missing dirs will be created recursively)
                             newFile = await fetch(`http://127.0.0.1:2035/?path=newform&file=${list}`, {
                                 method: 'POST',
                                 body: contents

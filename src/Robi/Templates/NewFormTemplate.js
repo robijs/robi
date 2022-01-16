@@ -23,7 +23,7 @@ export function NewFormTemplate({ list, display, fields }) {
         `import { ${modules()} } from '../../Robi/RobiUI.js'`,
         ``,
         `// @START-${list}`,
-        `export default async function NewForm({ event, fields, list, modal, parent, table }) {`,
+        `export default async function NewForm({ fields, list, modal, parent }) {`,
         `    console.log(list, 'custom new form');`,
         ``,
         `    // @START-Title`,

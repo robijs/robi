@@ -32,9 +32,9 @@ createServer((req, res) => {
             // METHOD: newform
             if (path === 'newform') {
                 // Make dirs if they don't exist
-                mkdirSync(`./src/Forms/${file}`, { recursive: true });
+                mkdirSync(`./src/Lists/${file}`, { recursive: true });
 
-                const writableStream = createWriteStream(`./src/Forms/${file}/NewForm.js`);
+                const writableStream = createWriteStream(`./src/Lists/${file}/NewForm.js`);
                 writableStream.write(data);
 
                 console.log(`\nCreated '${file}' new form\n`);
@@ -45,9 +45,9 @@ createServer((req, res) => {
             // METHOD: editform
             if (path === 'editform') {
                 // Make dirs if they don't exist
-                mkdirSync(`./src/Forms/${file}`, { recursive: true });
+                mkdirSync(`./src/Lists/${file}`, { recursive: true });
 
-                const writableStream = createWriteStream(`./src/Forms/${file}/EditForm.js`);
+                const writableStream = createWriteStream(`./src/Lists/${file}/EditForm.js`);
                 writableStream.write(data);
 
                 console.log(`\nCreated '${file}' new form\n`);
