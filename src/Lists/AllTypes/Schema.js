@@ -1,3 +1,5 @@
+import NewForm from './NewForm.js'
+
 export default {
     list: 'AllTypes',
     display: 'All Types',
@@ -75,5 +77,5 @@ export default {
                 }
             }
         }
-    ]
-}
+    ],
+    newForm:NewForm}

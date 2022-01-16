@@ -66,8 +66,9 @@ export async function CustomNewForm({ list, display, fields }) {
 
                     if (App.isProd()) {
                         await Wait(5000);
-                        location.reload();
                     }
+
+                    location.reload();
 
                     modal.close();
 
@@ -91,7 +92,8 @@ export async function CustomNewForm({ list, display, fields }) {
                         }
 
                         let content = await request.text();
-                        let updatedContent = content.replace(/[\s]*?export default {([\s\S]*?)(\s}$)/, `\nimport NewForm from './NewForm.js'\n\nexport default {$1,\n    newForm: NewForm$2`).trim();;
+                        let updatedContent = content.replace(/[\s]*?export default {([\s\S]*?)(\s}$)/, `\nimport NewForm from './NewForm.js'\n\nexport default {$1}`).trim();
+                        updatedContent = updatedContent.replace(/(\s}$)/, `,\n    newForm: NewForm$1`);
 
                         console.log(updatedContent);
 
