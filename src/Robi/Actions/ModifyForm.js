@@ -6,23 +6,24 @@ import { FormTools } from '../Components/FormTools.js'
  *
  * @param {*} param
  */
-export async function ModifyNewForm({ list, display, fields, newForm }) {
+export async function ModifyForm({ list, fields, form, type }) {
     const modal = Modal({
         contentPadding: '30px',
-        title: `Modify New Item Form`,
+        title: `Modify ${type} Item Form`,
         async addContent(modalBody) {
-            const form = await newForm({
+            const formComponent = await form({
+                item: {},
                 fields,
                 list,
                 modal: modal,
                 parent: modalBody
             });
 
-            if (form.label) {
+            if (formComponent.label) {
                 modal.getButton('Create').innerText = form.label;
             }
 
-            if (form) {
+            if (formComponent) {
                 modal.showFooter();
             }
         },
@@ -53,7 +54,7 @@ export async function ModifyNewForm({ list, display, fields, newForm }) {
     modal.add();
 
     const tools = FormTools({
-        form: 'NewForm',
+        type,
         list,
         container: modal,
         parent: modal.getHeader(),

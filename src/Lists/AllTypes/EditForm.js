@@ -34,34 +34,6 @@ export default async function EditForm({ item, fields, list, modal, parent }) {
 
     // @START-Rows
     Row(async (parent) => {
-        const { name, display, validate, value } = SLOT_props;
-
-        SLOT_field = SingleLineTextField({
-            label: display || name,
-            value: item[name],
-            fieldMargin: '0px',
-            parent,
-            onFocusout
-        });
-
-        function onFocusout() {
-            return !validate ? undefined : (() => {
-                const value = SLOT_field.value();
-
-                console.log('validate');
-
-                if (validate(value)) {
-                    SLOT_field.isValid(true);
-                } else {
-                    SLOT_field.isValid(false);
-                }
-            })();
-        }
-
-        SLOT_field.add();
-    }, { parent });
-    // @Row
-    Row(async (parent) => {
         const { name, display, validate, value } = MLOT_props;
 
         MLOT_field = MultiLineTextField({
@@ -87,6 +59,34 @@ export default async function EditForm({ item, fields, list, modal, parent }) {
         }
 
         MLOT_field.add();
+    }, { parent });
+    // @Row
+    Row(async (parent) => {
+        const { name, display, validate, value } = SLOT_props;
+
+        SLOT_field = SingleLineTextField({
+            label: display || name,
+            value: item[name],
+            fieldMargin: '0px',
+            parent,
+            onFocusout
+        });
+
+        function onFocusout() {
+            return !validate ? undefined : (() => {
+                const value = SLOT_field.value();
+
+                console.log('validate');
+
+                if (validate(value)) {
+                    SLOT_field.isValid(true);
+                } else {
+                    SLOT_field.isValid(false);
+                }
+            })();
+        }
+
+        SLOT_field.add();
     }, { parent });
     // @Row
     Row(async (parent) => {

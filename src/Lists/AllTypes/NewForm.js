@@ -34,6 +34,34 @@ export default async function NewForm({ fields, list, modal, parent }) {
 
     // @START-Rows
     Row(async (parent) => {
+        const { name, display, validate, value } = Number_props;
+
+        Number_field = NumberField({
+            label: display || name,
+            value,
+            fieldMargin: '0px',
+            parent,
+            onFocusout
+        });
+
+        function onFocusout() {
+            return !validate ? undefined : (() => {
+                const value = Number_field.value();
+
+                console.log('validate');
+
+                if (validate(value)) {
+                    Number_field.isValid(true);
+                } else {
+                    Number_field.isValid(false);
+                }
+            })();
+        }
+
+        Number_field.add();
+    }, { parent });
+    // @Row
+    Row(async (parent) => {
         const { name, display, validate, value } = SLOT_props;
 
         SLOT_field = SingleLineTextField({
@@ -87,34 +115,6 @@ export default async function NewForm({ fields, list, modal, parent }) {
         }
 
         MLOT_field.add();
-    }, { parent });
-    // @Row
-    Row(async (parent) => {
-        const { name, display, validate, value } = Number_props;
-
-        Number_field = NumberField({
-            label: display || name,
-            value,
-            fieldMargin: '0px',
-            parent,
-            onFocusout
-        });
-
-        function onFocusout() {
-            return !validate ? undefined : (() => {
-                const value = Number_field.value();
-
-                console.log('validate');
-
-                if (validate(value)) {
-                    Number_field.isValid(true);
-                } else {
-                    Number_field.isValid(false);
-                }
-            })();
-        }
-
-        Number_field.add();
     }, { parent });
     // @Row
     Row(async (parent) => {

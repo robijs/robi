@@ -2,7 +2,7 @@ import { Component } from '../Actions/Component.js'
 import { UpdateItem } from '../Actions/UpdateItem.js'
 import { CustomNewForm } from '../Actions/CustomNewForm.js'
 import { CustomEditForm } from '../Actions/CustomEditForm.js'
-import { ModifyNewForm } from '../Actions/ModifyNewForm.js'
+import { ModifyForm } from '../Actions/ModifyForm.js'
 import { Alert } from './Alert.js'
 import { BootstrapButton } from './BootstrapButton.js'
 import { Modal } from './Modal.js'
@@ -22,11 +22,9 @@ export function TableToolbar(param) {
     const {
         advancedSearch,
         action,
-        editForm,
         heading,
         list,
         options,
-        newForm,
         parent,
         position,
         search
@@ -159,7 +157,9 @@ export function TableToolbar(param) {
 
             /* Search */
             #id .advanced-search {
+                width: 126px;
                 transition: 300ms opacity ease;
+                text-align: right;
             }
 
             #id .search-container {
@@ -238,7 +238,7 @@ export function TableToolbar(param) {
                         }, 0);
                     } else {
                         open = true;
-                        event.target.innerText = 'Close search'
+                        event.target.innerText = 'Close'
                         setTimeout(() => {
                             component.find('.search-container').classList.remove('height-0', 'opacity-0', 'pt-0', 'pb-0');
                         }, 0);
@@ -286,8 +286,7 @@ export function TableToolbar(param) {
                     const { newForm, display, fields } = App.list(list) || Lists().find(item => item.list === list);
 
                     if (newForm) {
-                        console.log('show new form');
-                        ModifyNewForm({ list, display, fields, newForm });
+                        ModifyForm({ list, display, fields, form: newForm, type: 'New' });
                     } else {
                         CustomNewForm({ list, display, fields });
                     }
@@ -300,7 +299,7 @@ export function TableToolbar(param) {
                     const { editForm, display, fields } = App.list(list) || Lists().find(item => item.list === list);
 
                     if (editForm) {
-                        console.log('show edit form');
+                        ModifyForm({ list, display, fields, form: editForm, type: 'Edit'  });
                     } else {
                         CustomEditForm({ list, display, fields });
                     }

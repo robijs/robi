@@ -10,7 +10,7 @@ import { ModifyFile } from '../Actions/ModifyFile.js'
  */
 export function FormTools(param) {
     const {
-        form,
+        type,
         list,
         parent,
         container,
@@ -204,7 +204,7 @@ export function FormTools(param) {
                 listener(event) {
                     ModifyFile({
                         path: `App/src/Lists/${list}`,
-                        file: `${form}.js`
+                        file: `${type}Form.js`
                     });
                 }
             }
@@ -270,7 +270,7 @@ export function FormTools(param) {
             EditLayout({
                 order: newOrder,
                 path: `App/src/Lists/${list}`,
-                file: `${form}.js`
+                file: `${type}Form.js`
             });
         });
 
