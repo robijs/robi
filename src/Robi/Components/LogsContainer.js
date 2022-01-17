@@ -128,7 +128,7 @@ export async function LogsContainer({ parent }) {
                 displayName: 'Author'
             }
         ],
-        buttonColor: '#dee2e6',
+        buttonColor: App.get('prefersColorScheme') === 'dark' ? '#303336' : '#dee2e6',
         showId: true,
         addButton: false,
         checkboxes: false,

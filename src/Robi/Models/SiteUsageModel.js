@@ -7,7 +7,7 @@ import { StartAndEndOfWeek } from './StartAndEndOfWeek.js'
  * @returns
  */
 export function SiteUsageModel({ items, type, date }) {
-    console.log(type, date);
+    // console.log(type, date);
 
     switch (type) {
         case 'today':

@@ -147,9 +147,13 @@ export async function SiteUsageContainer({ parent }) {
             data: chartData
         });
 
-        // Remove shimmmer
         chartCard.shimmerOff();
-        middleContainer.get().style.background = 'var(--secondary)';
+
+        const node = middleContainer.get();
+
+        if (node) {
+            node.style.background = 'var(--secondary)';
+        }
     };
 
     // TODO: This should live in Chart component

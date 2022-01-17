@@ -117,7 +117,7 @@ export function SectionStepper(param) {
             }
 
             #id .section-group.selected * {
-                color: white;
+                color: var(--secondary);
             }
 
             /* Number */

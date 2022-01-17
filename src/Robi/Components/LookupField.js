@@ -1,7 +1,6 @@
 import { Component } from '../Actions/Component.js'
 import { Route } from '../Actions/Route.js'
 import { Get } from '../Actions/Get.js'
-import { App } from '../Core/App.js';
 
 // @START-File
 /**
@@ -39,7 +38,7 @@ export function LookupField(param) {
                         </div> 
                         <!-- <a href='javascript:void(0)' class='dropdown-item' data-path=''>
                             <span class='searching'>
-                                <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> 
+                                <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>
                                 Searching for CarePoint accounts...
                             <span>
                         </a> -->

@@ -57,7 +57,13 @@ export function ChartJs(param) {
     component.setChart = (param) => {
         const { data, stepSize } = param;
 
-        return new Chart(component.getChart(), {
+        const chart = component.getChart();
+
+        if (!chart) {
+            return;
+        }
+
+        return new Chart(chart, {
             type: 'bar',
             data,
             options: {
@@ -120,7 +126,7 @@ export function ChartJs(param) {
     };
 
     component.getChart = () => {
-        return component.find('.chart-canvas').getContext('2d');
+        return component.find('.chart-canvas')?.getContext('2d');
     };
 
     return component;

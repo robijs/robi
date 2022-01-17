@@ -79,7 +79,6 @@ import { NewReply } from './Components/NewReply.js'
 import { NewUser } from './Components/NewUser.js'
 import { NumberField } from './Components/NumberField.js'
 import { PercentField } from './Components/PercentField.js'
-import { Permission } from './Components/Permission.js'
 import { PhoneField } from './Components/PhoneField.js'
 import { Preferences } from './Components/Preferences.js'
 import { ProgressBar } from './Components/ProgressBar.js'
@@ -89,9 +88,9 @@ import { QuestionBoard } from './Components/QuestionBoard.js'
 import { QuestionCard } from './Components/QuestionCard.js'
 import { QuestionCards } from './Components/QuestionCards.js'
 import { QuestionContainer } from './Components/QuestionContainer.js'
+import { QuestionsToolbar } from './Components/QuestionsToolbar.js'
 import { QuestionType } from './Components/QuestionType.js'
 import { QuestionTypes } from './Components/QuestionTypes.js'
-import { QuestionsToolbar } from './Components/QuestionsToolbar.js'
 import { ReleaseNotes } from './Components/ReleaseNotes.js'
 import { ReleaseNotesContainer } from './Components/ReleaseNotesContainer.js'
 import { Reply } from './Components/Reply.js'
@@ -187,7 +186,6 @@ export {
     NewUser,
     NumberField,
     PercentField,
-    Permission,
     PhoneField,
     Preferences,
     ProgressBar,
@@ -197,9 +195,9 @@ export {
     QuestionCard,
     QuestionCards,
     QuestionContainer,
+    QuestionsToolbar,
     QuestionType,
     QuestionTypes,
-    QuestionsToolbar,
     ReleaseNotes,
     ReleaseNotesContainer,
     Reply,

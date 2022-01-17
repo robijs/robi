@@ -470,7 +470,7 @@ export async function Table(param) {
                 fade: 0,
                 text: /*html*/ `
                     <svg class="icon">
-                        <use href="#icon-bs-download"></use>
+                        <use href="#icon-bs-arrow-down-circle-fill"></use>
                     </svg>
                 `,
                 buttons: [

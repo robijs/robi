@@ -1,5 +1,4 @@
 import { Table } from './Table.js'
-import { Row } from './Row.js'
 import { Title } from './Title.js'
 import { Timer } from './Timer.js'
 import { Container } from './Container.js'
@@ -18,7 +17,6 @@ import { Route } from '../Actions/Route.js'
 import { ActionsCards } from './ActionsCards.js'
 import { LogsContainer } from './LogsContainer.js'
 import { Preferences } from './Preferences.js'
-import { Permission } from './Permission.js'
 
 // @START-File
 /**
@@ -101,10 +99,6 @@ export async function Settings({ parent, pathParts, title }) {
             {
                 name: 'Users',
                 path: 'Users'
-            },
-            {
-                name: 'Permissions',
-                path: 'Permissions'
             }
         ]);
     }
@@ -310,11 +304,6 @@ export async function Settings({ parent, pathParts, title }) {
                 formView: 'All',
                 width: '100%',
                 toolbar: [],
-                parent: planContainer
-            });
-            break;
-        case 'Permissions':
-            Permission({
                 parent: planContainer
             });
             break;

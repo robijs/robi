@@ -721,6 +721,10 @@ export function AppContainer() {
                 padding: 10px;
                 display: flex;
             }
+
+            .dropdown-divider {
+                border-color: var(--borderColor);
+            }
         `,
         position: 'afterbegin',
         events: []

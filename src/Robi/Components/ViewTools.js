@@ -140,7 +140,7 @@ export function ViewTools(param) {
                 height: unset;
                 margin: .5rem;
                 overflow: hidden;
-                border-left: 2px solid var(--buttonBackground);
+                border-left: 1px solid var(--borderColor);
                 border-top: none;
             }
 

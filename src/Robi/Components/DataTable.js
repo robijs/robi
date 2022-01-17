@@ -169,7 +169,7 @@ export function DataTable(param) {
 
             #id_wrapper .datatable-toolbar .btn-secondary {
                 border-color: transparent;
-                /* margin-right: 10px; */
+                margin-right: 10px;
                 border-radius: 8px;
             }
 
@@ -180,7 +180,7 @@ export function DataTable(param) {
             /** Add Item Button */
             #id_wrapper .datatable-toolbar .add-item {
                 background: var(--buttonBackground);
-                margin-right: 10px;
+                margin-right: 20px;
             }
 
             #id_wrapper .datatable-toolbar .add-item span {
@@ -208,12 +208,7 @@ export function DataTable(param) {
             /** Delete Item Button */
             #id_wrapper .datatable-toolbar .delete-item {
                 font-size: 20px;
-                background: transparent;
-                border: none;
-            }
-
-            #id_wrapper .datatable-toolbar .delete-item:hover {
-                background: var(--buttonBackground);
+                background: ${buttonColor || 'var(--buttonBackground)'} !important;
             }
 
             #id_wrapper .datatable-toolbar .delete-item span {
@@ -285,12 +280,8 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-collection {
-                background: none;
+                background: ${buttonColor || 'var(--buttonBackground)'} !important;
                 border: none;
-            }
-
-            #id_wrapper .buttons-collection:hover {
-                background: var(--buttonBackground);
             }
 
             #id_wrapper .buttons-collection span {
@@ -431,12 +422,6 @@ export function DataTable(param) {
             #id_wrapper .sorting_desc::after {
                 color: var(--primary);
             }
-
-            /* #id_wrapper .sorting::before,
-            #id_wrapper .sorting_asc::before,
-            #id_wrapper .sorting_desc::before {
-                right: .5em;
-            } */
 
             #id_wrapper .sorting::after,
             #id_wrapper .sorting_asc::after,
