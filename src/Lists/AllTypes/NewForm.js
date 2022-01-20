@@ -65,7 +65,7 @@ export default async function NewForm({ fields, list, modal, parent }) {
         const { name, display, validate, value } = SLOT_props;
 
         SLOT_field = SingleLineTextField({
-            label: display || name,
+            label: 'Hard code label',
             value,
             fieldMargin: '0px',
             parent,

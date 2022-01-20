@@ -3,15 +3,15 @@
 // Just be sure to put @START, @END, and @[Spacer Name] sigils in the right places.
 // Otherwise, changes made from CLI and GUI tools won't work properly.
 
-import { UpdateItem, DeleteItem } from '../../Robi/Robi.js'
+import { CreateItem } from '../../Robi/Robi.js'
 import { ChoiceField, MultiChoiceField, MultiLineTextField, NumberField, Row, SingleLineTextField } from '../../Robi/RobiUI.js'
 
 // @START-AllTypes
-export default async function EditForm({ item, fields, list, modal, parent }) {
-    console.log(list, 'custom edit form');
+export default async function NewForm({ fields, list, modal, parent }) {
+    console.log(list, 'custom new form');
 
     // @START-Title
-    modal.setTitle('Edit Item');
+    modal.setTitle('New Item');
     // @END-Title
 
     // @Start-Props
@@ -34,67 +34,11 @@ export default async function EditForm({ item, fields, list, modal, parent }) {
 
     // @START-Rows
     Row(async (parent) => {
-        const { name, display, validate, value } = MLOT_props;
-
-        MLOT_field = MultiLineTextField({
-            label: display || name,
-            value: item[name],
-            fieldMargin: '0px',
-            parent,
-            onFocusout
-        });
-
-        function onFocusout() {
-            return !validate ? undefined : (() => {
-                const value = MLOT_field.value();
-
-                console.log('validate');
-
-                if (validate(value)) {
-                    MLOT_field.isValid(true);
-                } else {
-                    MLOT_field.isValid(false);
-                }
-            })();
-        }
-
-        MLOT_field.add();
-    }, { parent });
-    // @Row
-    Row(async (parent) => {
-        const { name, display, validate, value } = SLOT_props;
-
-        SLOT_field = SingleLineTextField({
-            label: display || name,
-            value: item[name],
-            fieldMargin: '0px',
-            parent,
-            onFocusout
-        });
-
-        function onFocusout() {
-            return !validate ? undefined : (() => {
-                const value = SLOT_field.value();
-
-                console.log('validate');
-
-                if (validate(value)) {
-                    SLOT_field.isValid(true);
-                } else {
-                    SLOT_field.isValid(false);
-                }
-            })();
-        }
-
-        SLOT_field.add();
-    }, { parent });
-    // @Row
-    Row(async (parent) => {
         const { name, display, validate, value } = Number_props;
 
         Number_field = NumberField({
             label: display || name,
-            value: item[name],
+            value,
             fieldMargin: '0px',
             parent,
             onFocusout
@@ -118,12 +62,68 @@ export default async function EditForm({ item, fields, list, modal, parent }) {
     }, { parent });
     // @Row
     Row(async (parent) => {
+        const { name, display, validate, value } = SLOT_props;
+
+        SLOT_field = SingleLineTextField({
+            label: 'Hard code label',
+            value,
+            fieldMargin: '0px',
+            parent,
+            onFocusout
+        });
+
+        function onFocusout() {
+            return !validate ? undefined : (() => {
+                const value = SLOT_field.value();
+
+                console.log('validate');
+
+                if (validate(value)) {
+                    SLOT_field.isValid(true);
+                } else {
+                    SLOT_field.isValid(false);
+                }
+            })();
+        }
+
+        SLOT_field.add();
+    }, { parent });
+    // @Row
+    Row(async (parent) => {
+        const { name, display, validate, value } = MLOT_props;
+
+        MLOT_field = MultiLineTextField({
+            label: display || name,
+            value,
+            fieldMargin: '0px',
+            parent,
+            onFocusout
+        });
+
+        function onFocusout() {
+            return !validate ? undefined : (() => {
+                const value = MLOT_field.value();
+
+                console.log('validate');
+
+                if (validate(value)) {
+                    MLOT_field.isValid(true);
+                } else {
+                    MLOT_field.isValid(false);
+                }
+            })();
+        }
+
+        MLOT_field.add();
+    }, { parent });
+    // @Row
+    Row(async (parent) => {
         const { name, display, value, choices, validate } = Choice_props;
 
         Choice_field = ChoiceField({
             label: display || name,
             fieldMargin: '0px',
-            value: item[name],
+            value,
             options: choices.map(choice => {
                 return {
                     label: choice
@@ -155,7 +155,7 @@ export default async function EditForm({ item, fields, list, modal, parent }) {
 
         MultiChoice_field = MultiChoiceField({
             label: display || name,
-            value: item[name]?.results,
+            value,
             fieldMargin: '0px',
             choices,
             fillIn,
@@ -183,7 +183,7 @@ export default async function EditForm({ item, fields, list, modal, parent }) {
 
     // @START-Return
     return {
-        async onUpdate(event) {
+        async onCreate(event) {
             let isValid = true;
 
             const data = {};
@@ -268,23 +268,14 @@ export default async function EditForm({ item, fields, list, modal, parent }) {
                 return false;
             }
 
-            const updatedItem = await UpdateItem({
+            const newItem = await CreateItem({
                 list,
-                itemId: item.Id,
                 data
             });
 
-            return updatedItem;
+            return newItem;
         },
-        async onDelete(event) {
-            const deletedItem = await DeleteItem({
-                list,
-                itemId: item.Id
-            });
-
-            return deletedItem;
-        },
-        label: 'Update'
+        label: 'Create'
     };
     // @END-Return
 }

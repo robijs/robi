@@ -137,11 +137,11 @@ export function ChoiceField(param) {
 
     function dropdownTemplate(dropdown) {
         const {
-            label, path
+            label, path, id
         } = dropdown;
 
         return /*html*/ `
-            <button type='button' class='dropdown-item' data-path='${path || ''}'>${label}</button>
+            <button type='button' class='dropdown-item' data-path='${path || ''}' data-id='${id || ''}'>${label}</button>
         `;
     }
 

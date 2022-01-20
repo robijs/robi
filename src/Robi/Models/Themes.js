@@ -255,7 +255,7 @@ const Themes = [
     { 
         name: 'Navy',
         light: {
-            primary: '#000080',
+            primary: '#051D49',
             secondary: '#fff',
             background: '#F8F8FC',
             color: '#24292f',
@@ -264,13 +264,13 @@ const Themes = [
             borderColor: '#d6d8db80'
         },
         dark: {
-            primary: '#7a7aff',
-            secondary: '#151515',
-            background: '#1e1e1e',
-            color: '#d4d4d4',
+            primary: '#ffffff',
+            secondary: '#0e1b34',
+            background: '#051d49',
+            color: '#ffffff',
             selectedRowOpacity: 10,
-            buttonBackgroundColor: '#242628',
-            borderColor: '#343a4080'
+            buttonBackgroundColor: '#2d357d',
+            borderColor: '#00000080'
         }
     }
 ]

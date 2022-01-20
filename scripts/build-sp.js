@@ -90,9 +90,9 @@ async function min() {
         await copy('./src/Images', './dist/src/Images');
         console.log('Copied ./src/Images > ./dist/src/Images');
 
-        // Copy Forms
-        await copy('./src/Forms', './dist/src/Forms');
-        console.log('Copied ./src/Forms > ./dist/src/Forms');
+        // Copy Lists
+        await copy('./src/Lists', './dist/src/Lists');
+        console.log('Copied ./src/Lists > ./dist/src/Lists');
 
         // Copy Libraries
         await copy('./src/Libraries', './dist/src/Libraries');
@@ -109,10 +109,6 @@ async function min() {
         // Copy app.js
         await copy('./src/app.js', './dist/src/app.js');
         console.log('Copied ./src/app.js > ./dist/src/app.js')
-
-        // Copy lists.js
-        await copy('./src/lists.js', './dist/src/lists.js');
-        console.log('Copied ./src/lists.js > ./dist/src/lists.js');
 
         // Success
         console.log('\nDone!');

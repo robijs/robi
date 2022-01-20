@@ -19,7 +19,7 @@ import { Store } from '../Core/Store.js'
  */
 export async function LaunchApp(param) {
     const {
-        routes, settings
+        releaseNotes, routes, settings
     } = param;
 
     const {
@@ -126,42 +126,81 @@ export async function LaunchApp(param) {
         log: false
     });
 
-    /** Check Local Storage for release notes */
-    const isReleaseNotesDismissed = localStorage.getItem(`${storageKeyPrefix}-releaseNotesDismissed`);
+    if (releaseNotes) {
+        const { show, version, title, message } = releaseNotes;
 
-    if (!isReleaseNotesDismissed) {
-        /** Release Notes */
-        const releaseNotes = FixedToast({
-            type: 'robi',
-            title: `New version ${'0.1.0'}`,
-            message: `View release notes`,
-            bottom: '20px',
-            right: '10px',
-            action(event) {
-                const modal = Modal({
-                    fade: true,
-                    background: settings.secondaryColor,
-                    centered: true,
-                    close: true,
-                    addContent(modalBody) {
-                        ReleaseNotesContainer({
-                            margin: '0px',
-                            parent: modalBody,
-                        });
-                    },
-                    parent: appContainer
-                });
+        const isDismissed = localStorage.getItem(`${storageKeyPrefix}-releaseNotesDismissed-${version}`);
 
-                modal.add();
-            },
-            onClose(event) {
-                /** Set Local Storage */
-                localStorage.setItem(`${storageKeyPrefix}-releaseNotesDismissed`, 'true');
-            },
-            parent: appContainer
-        });
-
-        releaseNotes.add();
+        if (show && !isDismissed) {
+            const toast = FixedToast({
+                type: 'robi',
+                title,
+                message,
+                bottom: '20px',
+                right: '10px',
+                action(event) {
+                    const modal = Modal({
+                        fade: true,
+                        background: settings.secondaryColor,
+                        centered: true,
+                        close: true,
+                        addContent(modalBody) {
+                            ReleaseNotesContainer({
+                                margin: '0px',
+                                parent: modalBody,
+                            });
+                        },
+                        parent: appContainer
+                    });
+    
+                    modal.add();
+                },
+                onClose(event) {
+                    localStorage.setItem(`${storageKeyPrefix}-releaseNotesDismissed-${version}`, 'true');
+                },
+                parent: appContainer
+            });
+    
+            toast.add();
+        }
     }
+
+    // /** Check Local Storage for release notes */
+    // const isReleaseNotesDismissed = localStorage.getItem(`${storageKeyPrefix}-releaseNotesDismissed`);
+
+    // if (!isReleaseNotesDismissed) {
+    //     /** Release Notes */
+    //     const releaseNotes = FixedToast({
+    //         type: 'robi',
+    //         title: `New version ${'0.1.0'}`,
+    //         message: `View release notes`,
+    //         bottom: '20px',
+    //         right: '10px',
+    //         action(event) {
+    //             const modal = Modal({
+    //                 fade: true,
+    //                 background: settings.secondaryColor,
+    //                 centered: true,
+    //                 close: true,
+    //                 addContent(modalBody) {
+    //                     ReleaseNotesContainer({
+    //                         margin: '0px',
+    //                         parent: modalBody,
+    //                     });
+    //                 },
+    //                 parent: appContainer
+    //             });
+
+    //             modal.add();
+    //         },
+    //         onClose(event) {
+    //             /** Set Local Storage */
+    //             localStorage.setItem(`${storageKeyPrefix}-releaseNotesDismissed`, 'true');
+    //         },
+    //         parent: appContainer
+    //     });
+
+    //     releaseNotes.add();
+    // }
 }
 // @END-File
