@@ -456,7 +456,7 @@ export function InstallApp(param) {
                             Title: response.d.Title,
                             Email: response.d.Email,
                             LoginName: response.d.LoginName.split('|')[2],
-                            Role: 'Developer',
+                            Roles: {results : ['Developer']},
                             Settings: App.get('userSettings')
                         }
                     });
