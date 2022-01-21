@@ -46,7 +46,7 @@ Start({
     ],
     // Routes are directly addressable. Ex: https://site#path.
     routes: [
-        // @START-Routes
+        // @START-ROUTES
         // @START-CustomForm
         {
             path: 'CustomForm',
@@ -127,7 +127,7 @@ Start({
             go: Route_NewRoute
         }
         // @END-NewRoute
-        // @END-Routes
+        // @END-ROUTES
     ],
     settings: {
         // @START-SETTINGS
