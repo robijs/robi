@@ -46,7 +46,7 @@ export async function HideRoutes({ paths }) {
                 `            path: '${path}',`,
                 `            title: '${title}',`,
                 `            icon: '${icon}',`,
-                `            go: ${path}`,
+                `            go: ${ "Route_" + path}`,
                 `        }`,
                 `        // @END-${path}`,
                 // `        `
