@@ -52,11 +52,11 @@ export async function HideRoutes({ paths }) {
                 // `        `
             ].join('\n');
         }
-    }).join('\n        , // @ROUTE\n');
+    }).join('\n        , // @Route\n');
 
     // console.log(newRoutes);
 
-    const updated = value.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES\n${newRoutes}\n// @END-ROUTES`);
+    const updated = value.replace(/\/\/ @START-Routes([\s\S]*?)\/\/ @END-Routes/, `// @START-Routes\n${newRoutes}\n// @END-Routes`);
 
     // console.log('OLD\n----------------------------------------\n', value);
     // console.log('\n****************************************');
