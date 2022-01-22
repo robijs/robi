@@ -88,9 +88,9 @@ import { QuestionBoard } from './Components/QuestionBoard.js'
 import { QuestionCard } from './Components/QuestionCard.js'
 import { QuestionCards } from './Components/QuestionCards.js'
 import { QuestionContainer } from './Components/QuestionContainer.js'
-import { QuestionsToolbar } from './Components/QuestionsToolbar.js'
 import { QuestionType } from './Components/QuestionType.js'
 import { QuestionTypes } from './Components/QuestionTypes.js'
+import { QuestionsToolbar } from './Components/QuestionsToolbar.js'
 import { ReleaseNotes } from './Components/ReleaseNotes.js'
 import { ReleaseNotesContainer } from './Components/ReleaseNotesContainer.js'
 import { Reply } from './Components/Reply.js'
@@ -195,9 +195,9 @@ export {
     QuestionCard,
     QuestionCards,
     QuestionContainer,
-    QuestionsToolbar,
     QuestionType,
     QuestionTypes,
+    QuestionsToolbar,
     ReleaseNotes,
     ReleaseNotesContainer,
     Reply,
