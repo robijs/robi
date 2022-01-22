@@ -169,11 +169,11 @@ export async function Table(param) {
 
                 const columnOptions = {
                     data: name === titleDisplayName ? 'Title' : name,
-                    type: name === 'Id' ? 'number' : 'string',
+                    type: name === 'Id' || type === 'number' ? 'num' : 'string',
                     visible: name === 'Id' && !showId ? false : true
                 };
 
-                /** Classes */
+                // Classes
                 if (name === 'Id') {
                     columnOptions.className = 'do-not-export bold';
                     columnOptions.render = (data, type, row) => {
@@ -181,7 +181,7 @@ export async function Table(param) {
                     };
                 }
 
-                /** Render */
+                // Render
                 if (render) {
                     columnOptions.render = render;
                 }
@@ -207,13 +207,20 @@ export async function Table(param) {
                     };
                 }
 
+                else if (type === 'date') {
+                    columnOptions.render = (data, type, row) => {
+                        // return data ? new Date(data).toLocaleString() : '';
+                        return data ? new Date(data.split('T')[0].replace(/-/g, '\/')).toLocaleDateString() : '';
+                    };
+                }
+
                 else if (name === 'Author') {
                     columnOptions.render = (data, type, row) => {
                         return data.Title.split(' ').slice(0, 2).join(' ');
                     };
                 }
 
-                else if (type === 'date' || name.includes('Created') || name.includes('Date')) {
+                else if (name.includes('Created')) {
                     columnOptions.render = (data, type, row) => {
                         // return data ? new Date(data).toLocaleString() : '';
                         return data ? new Date(data).toLocaleDateString() : '';
@@ -229,72 +236,79 @@ export async function Table(param) {
                 columns.push(columnOptions);
             });
     } else {
-        /** typeof fields === 'object' */
         (Array.isArray(fields) ? fields : fields.split(','))
-            .forEach(field => {
-                const {
-                    render
-                } = field;
+        .forEach(field => {
+            const {
+                render
+            } = field;
 
-                const internalFieldName = typeof field === 'object' ? field.internalFieldName : field;
-                const displayName = typeof field === 'object' ? field.displayName : field;
-                const type = typeof field === 'object' ? field.type || 'slot' : 'slot';
+            const internalFieldName = typeof field === 'object' ? field.internalFieldName : field;
+            const displayName = typeof field === 'object' ? field.displayName : field;
+            const type = typeof field === 'object' ? field.type || 'slot' : 'slot';
 
-                headers.push(displayName);
+            headers.push(displayName);
 
-                const columnOptions = {
-                    data: internalFieldName === titleDisplayName ? 'Title' : internalFieldName,
-                    type: internalFieldName === 'Id' ? 'number' : 'string',
-                    visible: internalFieldName === 'Id' && !showId ? false : true
+            const columnOptions = {
+                data: internalFieldName === titleDisplayName ? 'Title' : internalFieldName,
+                type: internalFieldName === 'Id' ? 'number' : 'string',
+                visible: internalFieldName === 'Id' && !showId ? false : true
+            };
+
+            /** Classes */
+            if (internalFieldName === 'Id') {
+                columnOptions.className = 'do-not-export bold';
+                columnOptions.render = (data, type, row) => {
+                    return data;
                 };
+            }
 
-                /** Classes */
-                if (internalFieldName === 'Id') {
-                    columnOptions.className = 'do-not-export bold';
-                    columnOptions.render = (data, type, row) => {
-                        return data;
-                    };
-                }
+            /** Render */
+            if (render) {
+                columnOptions.render = render;
+            }
 
-                /** Render */
-                if (render) {
-                    columnOptions.render = render;
-                }
+            else if (internalFieldName.includes('Percent')) {
+                columnOptions.render = (data, type, row) => {
+                    return `${Math.round(parseFloat(data || 0) * 100)}%`;
+                };
+            }
 
-                else if (internalFieldName.includes('Percent')) {
-                    columnOptions.render = (data, type, row) => {
-                        return `${Math.round(parseFloat(data || 0) * 100)}%`;
-                    };
-                }
+            else if (type === 'mlot') {
+                columnOptions.render = (data, type, row) => {
+                    return /*html*/ `
+                    <div class='dt-mlot'>${data || ''}</data>
+                `;
+                };
+            }
 
-                else if (type === 'mlot') {
-                    columnOptions.render = (data, type, row) => {
-                        return /*html*/ `
-                        <div class='dt-mlot'>${data || ''}</data>
-                    `;
-                    };
-                }
+            else if (type === 'date') {
+                columnOptions.render = (data, type, row) => {
+                    // return data ? new Date(data).toLocaleString() : '';
+                    return data ? new Date(data.split('T')[0].replace(/-/g, '\/')).toLocaleDateString() : '';
+                };
+            }
 
-                else if (internalFieldName === 'Author') {
-                    columnOptions.render = (data, type, row) => {
-                        return data.Title;
-                    };
-                }
+            else if (internalFieldName === 'Author') {
+                columnOptions.render = (data, type, row) => {
+                    return data.Title;
+                };
+            }
 
-                else if (internalFieldName.includes('Created') || internalFieldName.includes('Date')) {
-                    columnOptions.render = (data, type, row) => {
-                        return new Date(data).toLocaleString();
-                    };
-                }
+            else if (internalFieldName.includes('Created')) {
+                columnOptions.render = (data, type, row) => {
+                    // return data ? new Date(data).toLocaleString() : '';
+                    return data ? new Date(data).toLocaleDateString() : '';
+                };
+            }
 
-                else if (internalFieldName !== 'Id') {
-                    columnOptions.render = (data, type, row) => {
-                        return typeof data === 'number' ? parseFloat(data).toLocaleString('en-US') : data;
-                    };
-                }
+            else if (internalFieldName !== 'Id') {
+                columnOptions.render = (data, type, row) => {
+                    return typeof data === 'number' ? parseFloat(data).toLocaleString('en-US') : data;
+                };
+            }
 
-                columns.push(columnOptions);
-            });
+            columns.push(columnOptions);
+        });
     }
 
     // Buttons

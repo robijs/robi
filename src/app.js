@@ -46,7 +46,7 @@ Start({
     ],
     // Routes are directly addressable. Ex: https://site#path.
     routes: [
-        // @START-ROUTES
+        // @START-Routes
         // @START-CustomForm
         {
             path: 'CustomForm',
@@ -55,7 +55,7 @@ Start({
             go: Route_CustomForm
         }
         // @END-CustomForm
-        , // @ROUTE
+        , // @Route
         // @START-SortTables
         {
             path: 'SortTables',
@@ -64,7 +64,7 @@ Start({
             go: Route_SortTables
         }
         // @END-SortTables
-        , // @ROUTE
+        , // @Route
         // @START-Test
         {
             path: 'Test',
@@ -73,7 +73,7 @@ Start({
             go: Route_Test
         }
         // @END-Test
-        , // @ROUTE
+        , // @Route
         // @START-LookupField
         {
             path: 'LookupField',
@@ -82,7 +82,7 @@ Start({
             go: Route_LookupField
         }
         // @END-LookupField
-        , // @ROUTE
+        , // @Route
         // @START-SelectIcon
         {
             path: 'SelectIcon',
@@ -91,7 +91,7 @@ Start({
             go: Route_SelectIcon
         }
         // @END-SelectIcon
-        , // @ROUTE
+        , // @Route
         // @START-ChartDemo
         {
             path: 'ChartDemo',
@@ -100,7 +100,7 @@ Start({
             go: Route_ChartDemo
         }
         // @END-ChartDemo
-        , // @ROUTE
+        , // @Route
         // @START-ModifyFile
         {
             path: 'ModifyFile',
@@ -109,7 +109,7 @@ Start({
             go: Route_ModifyFile
         }
         // @END-ModifyFile
-        , // @ROUTE
+        , // @Route
         // @START-Button
         {
             path: 'Button',
@@ -118,7 +118,7 @@ Start({
             go: Route_Button
         }
         // @END-Button
-        , // @ROUTE
+        , // @Route
         // @START-NewRoute
         {
             path: 'NewRoute',
@@ -127,7 +127,7 @@ Start({
             go: Route_NewRoute
         }
         // @END-NewRoute
-        // @END-ROUTES
+        // @END-Routes
     ],
     settings: {
         // @START-SETTINGS

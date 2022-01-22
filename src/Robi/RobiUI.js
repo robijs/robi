@@ -20,7 +20,6 @@ import { AppContainer } from './Components/AppContainer.js'
 import { AttachFilesButton } from './Components/AttachFilesButton.js'
 import { AttachFilesField } from './Components/AttachFilesField.js'
 import { Attachments } from './Components/Attachments.js'
-import { AttachmentsContainer } from './Components/AttachmentsContainer.js'
 import { Banner } from './Components/Banner.js'
 import { BootstrapButton } from './Components/BootstrapButton.js'
 import { BootstrapTextarea } from './Components/BootstrapTextarea.js'
@@ -43,11 +42,12 @@ import { DeveloperLinks } from './Components/DeveloperLinks.js'
 import { Dialog } from './Components/Dialog.js'
 import { DropDownField } from './Components/DropDownField.js'
 import { DropDownMenu } from './Components/DropDownMenu.js'
+import { DropZone } from './Components/DropZone.js'
 import { EditForm } from './Components/EditForm.js'
 import { EditQuestion } from './Components/EditQuestion.js'
 import { ErrorForm } from './Components/ErrorForm.js'
 import { Errors } from './Components/Errors.js'
-import { Files } from './Components/Files.js'
+import { FilesField } from './Components/FilesField.js'
 import { FilesTable } from './Components/FilesTable.js'
 import { FixedToast } from './Components/FixedToast.js'
 import { FoldingCube } from './Components/FoldingCube.js'
@@ -88,9 +88,9 @@ import { QuestionBoard } from './Components/QuestionBoard.js'
 import { QuestionCard } from './Components/QuestionCard.js'
 import { QuestionCards } from './Components/QuestionCards.js'
 import { QuestionContainer } from './Components/QuestionContainer.js'
+import { QuestionsToolbar } from './Components/QuestionsToolbar.js'
 import { QuestionType } from './Components/QuestionType.js'
 import { QuestionTypes } from './Components/QuestionTypes.js'
-import { QuestionsToolbar } from './Components/QuestionsToolbar.js'
 import { ReleaseNotes } from './Components/ReleaseNotes.js'
 import { ReleaseNotesContainer } from './Components/ReleaseNotesContainer.js'
 import { Reply } from './Components/Reply.js'
@@ -127,7 +127,6 @@ export {
     AttachFilesButton,
     AttachFilesField,
     Attachments,
-    AttachmentsContainer,
     Banner,
     BootstrapButton,
     BootstrapTextarea,
@@ -150,11 +149,12 @@ export {
     Dialog,
     DropDownField,
     DropDownMenu,
+    DropZone,
     EditForm,
     EditQuestion,
     ErrorForm,
     Errors,
-    Files,
+    FilesField,
     FilesTable,
     FixedToast,
     FoldingCube,
@@ -195,9 +195,9 @@ export {
     QuestionCard,
     QuestionCards,
     QuestionContainer,
+    QuestionsToolbar,
     QuestionType,
     QuestionTypes,
-    QuestionsToolbar,
     ReleaseNotes,
     ReleaseNotesContainer,
     Reply,

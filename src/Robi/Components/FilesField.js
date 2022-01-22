@@ -1,4 +1,5 @@
 import { Component } from '../Actions/Component.js'
+import { Alert } from '../Components/Alert.js'
 import { App } from '../Core/App.js';
 
 // @START-File
@@ -7,9 +8,20 @@ import { App } from '../Core/App.js';
  * @param {*} param
  * @returns
  */
-export function Files(param) {
+export function FilesField(param) {
     const {
-        allFiles, description, itemId, width, onUndo, onUpload, onChange, padding, margin, parent, position
+        description,
+        itemId,
+        width,
+        library,
+        multiple,
+        onUndo,
+        onUpload,
+        onChange,
+        padding,
+        margin,
+        parent,
+        position
     } = param;
 
     let {
@@ -21,7 +33,7 @@ export function Files(param) {
             <div>
                 ${description ? /*html*/ `<div class="form-field-description text-muted">${description}</div>` : ''}
                 <div class='files-list'>
-                    <input type='file' multiple style='display: none;' id='drop-zone-files'>
+                    <input type='file' style='display: none;' id='drop-zone-files' ${multiple !== false ? 'multiple' : ''}>
                     <div class='drop-zone'>
                         <!-- Hidden files input -->
                         <div class='files-list-container'>
@@ -63,15 +75,6 @@ export function Files(param) {
                 position: relative;
                 background: rgba(${App.get('primaryColorRGB')}, .15);
             }
-
-            /* #id .drag-over::after {
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                height: 100%;
-                width: 100%;
-                content: 'Drop files here'
-            } */
 
             /* Hidden */
             #id .hidden {
@@ -146,15 +149,17 @@ export function Files(param) {
             }
 
             #id .file-icon-container {
+                width: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                ${itemId ? 'cursor: pointer;' : ''}
             }
 
             #id .file-name-container {
+                width: 100%;
                 display: flex;
                 flex-direction: column;
-                ${itemId ? 'cursor: pointer;' : ''}
             }
 
             #id .file-icon {
@@ -162,13 +167,17 @@ export function Files(param) {
             }
 
             #id .remove-container {
-                cursor: pointer;
                 display: flex;
                 align-items: center;
                 justify-content: flex-end;
                 min-width: 105px;
             }
 
+            #id .remove-container .remove-icon {
+                display: flex;
+                cursor: pointer;
+            }
+            
             #id .removed {
                 transform: scale(0);
                 display: none;
@@ -226,10 +235,10 @@ export function Files(param) {
                 align-items: center;
                 justify-content: space-between;
                 width: 100%;
-                /* padding: 9px 12px; */
-                padding: 9px 0px;
+                padding: 9px 12px;
+                /* padding: 9px 0px; */
                 border-radius: 15px;
-                /* background: white; */
+                background: var(--secondary);
                 transition: all 200ms;
             }
 
@@ -299,7 +308,7 @@ export function Files(param) {
             }
 
             #id .icon.remove {
-                fill: gray;
+                fill: var(--primary);
             }
 
             #id .icon.undo {
@@ -369,18 +378,17 @@ export function Files(param) {
                 event: 'drop',
                 listener: drop
             },
-            // {
-            //     selector: '.undo-all',
-            //     event: 'click',
-            //     listener(event) {
-            //         reset();
-            //     }
-            // },
-            /**  */
             {
                 selector: '.remove-container:not(.delete-on-remove)',
                 event: 'click',
                 listener: removeFilePreview
+            },
+            {
+                selector: '.remove-container.delete-on-remove .remove-icon',
+                event: 'click',
+                listener(event) {
+                    component.delete(event);
+                }
             },
             {
                 selector: `input[type='file']`,
@@ -392,14 +400,19 @@ export function Files(param) {
             {
                 selector: `#id .file-name-container`,
                 event: 'click',
-                listener(event) {
-                    window.open(files.find(file => file.name = this.dataset.filename).url, '_self');
+                listener() {
+                    const name = files.find(file => file.name = this.dataset.filename).name;
+                    const link = `${App.get('site')}/${library}/${name}`;
+
+                    console.log('Open file:', link);
+
+                    window.open(link);
                 }
             }
         ]
     });
 
-    /** START: Drag and drop */
+    // Drag and drop
     function preventFileOpen(event) {
         event.preventDefault();
 
@@ -432,45 +445,73 @@ export function Files(param) {
         addFiles(event.dataTransfer.files);
     }
 
-    /*** END: Drag and Drop */
-    let newFiles = [];
-
+    // Files
     function addFiles(fileList) {
+        console.log(multiple, fileList.length);
+
+        if (multiple === false && fileList.length > 1) {
+            const message = Alert({
+                type: 'danger',
+                text: `Only one file can be uploaded at a time`,
+                classes: ['alert-in', 'w-100'],
+                top: attachments.get().offsetHeight,
+                parent: attachments
+            });
+
+            message.add();
+        }
+
         // Use DataTransferItemList interface to access the file(s)
-        [...fileList].forEach(file => {
-            const alreadyDropped = allFiles.find(droppedFile => droppedFile.name === file.name);
+        const newFiles = [...fileList]
+        .filter(file => {
+            const { name } = file;
+            const exists = files.find(file => file.name === name);
 
-            if (!alreadyDropped) {
-                newFiles.push(file);
-                addPreview(file);
+            if (!exists) {
+                return file;
+            } else {
+                console.log('Toast: File already added/uploaded.');
 
-                // If item already created, upload right away
-                // console.log(itemId);
-                if (itemId) {
-                    onUpload(file); // Waiting for update
-                } else {
-                    onChange(newFiles);
-                }
+                const message = Alert({
+                    type: 'danger',
+                    text: `Files already added`,
+                    classes: ['alert-in', 'w-100'],
+                    top: component.get().offsetHeight - 5,
+                    parent: component
+                });
+
+                message.add();
+
+                setTimeout(() => {
+                    message.remove();
+                }, 3000);
+            } 
+        })
+        .map(file => {
+            addPreview(file);
+
+            // If item already created, upload right away
+            if (itemId) {
+                onUpload(file);
             }
+
+            return file;
         });
 
+        files = files.concat(newFiles);
+
         if (newFiles.length) {
-            component.find('.pending-count').innerText = `(${newFiles.length} pending)`;
-            component.find('.pending-count').classList.remove('hidden');
+            if (onChange) {
+                onChange(files);
+            }
+    
+            if (fileList.length) {
+                component.find('.pending-count').innerText = `(${fileList.length} pending)`;
+                component.find('.pending-count').classList.remove('hidden');
+            } 
+        } else {
+            console.log('Toast: no new files added.');
         }
-    }
-
-    /** Reset */
-    function reset() {
-        // component.find('.upload').classList.add('hidden');
-        component.find('.reset').classList.add('hidden');
-        component.find('.pending-count').classList.remove('hidden');
-
-        newFiles = [];
-        component.find(`input[type='file']`).value = null;
-
-        /** Empty preview container */
-        component.find('.files-list-container').innerHTML = '';
     }
 
     function returnFileSize(number) {
@@ -527,25 +568,25 @@ export function Files(param) {
         `;
     }
 
+    // Remove file node
     function removeFilePreview(event) {
         const fileName = this.dataset.filename;
-        const file = newFiles.find(file => file.name === fileName);
-        const index = newFiles.indexOf(file);
+        const file = files.find(file => file.name === fileName);
+        const index = files.indexOf(file);
 
-        console.log(fileName, file, newFiles, index);
+        console.log(fileName, file, files, index);
 
-        newFiles.splice(index, 1);
+        files.splice(index, 1);
 
-        // if (onUndo) {
-        //     onUndo(this.dataset.itemid);
-        // }
-        console.log(newFiles);
+        if (onChange) {
+            onChange(files);
+        }
 
-        if (!newFiles.length) {
+        if (!files.length) {
             component.find('.pending-count').classList.remove('hidden');
             component.find('.pending-count').innerText = '';
         } else {
-            component.find('.pending-count').innerText = `(${newFiles.length} pending)`;
+            component.find('.pending-count').innerText = `(${files.length} pending)`;
         }
 
         this.closest('.file-preview').classList.add('removed');
@@ -577,8 +618,49 @@ export function Files(param) {
         }
     }
 
+    component.delete = async (event) => {
+        const container = event.target.closest('.remove-container');
+        const file = files.find(file => file.name === container.dataset.filename);
+        const name = file.name;
+        const index = files.indexOf(file);
+
+        console.log(name, file, files, index);
+
+        files.splice(index, 1);
+
+        if (onChange) {
+            onChange(files);
+        }
+
+        component.find('.count-container').innerHTML = /*html*/ `
+            <div class="count-container">
+                <span class="count">${files.length}</span>
+                <span>${files.length === 1 ? 'file' : 'files'}</span>
+                <span class="pending-count hidden"></span>
+            </div>
+        `;
+
+        container.closest('.file-preview').classList.add('removed');
+
+        setTimeout(() => {
+            container.closest('.file-preview').remove();
+        }, 150);
+
+        const digest = await GetRequestDigest();
+        const response = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${library}')/Files('${name}')`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json;odata=verbose;charset=utf-8',
+                'X-RequestDigest': digest,
+                'If-Match': '*'
+            }
+        });
+
+        console.log(response);
+    };
+
     component.upload = () => {
-        newFiles.forEach(file => {
+        files.forEach(file => {
             onUpload(file);
         });
     };

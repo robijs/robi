@@ -157,8 +157,8 @@ export async function AddRoute(event) {
                         updatedContent = content.replace(/\/\/ @START-Imports:Routes([\s\S]*?)\/\/ @END-Imports:Routes/, `// @START-Imports:Routes${newImports}// @END-Imports:Routes`);
 
                         // Set routes
-                        const routes = content.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
-                        const ordered = routes[1].split(', // @ROUTE');
+                        const routes = content.match(/\/\/ @START-Routes([\s\S]*?)\/\/ @END-Routes/);
+                        const ordered = routes[1].split(', // @Route');
                         // FIXME: replace hard coded spaces (4 === 1 tab) with variable that includes 4 space characters
                         // TODO: Extract to template
                         const newRoute = [
@@ -178,12 +178,12 @@ export async function AddRoute(event) {
 
                         console.log('New:', ordered);
 
-                        const newRoutes = ordered.join(', // @ROUTE');
+                        const newRoutes = ordered.join(', // @Route');
 
                         console.log(newRoutes);
 
                         // TODO: Will you always need to add 8 spaces before // @END-ROUTES?
-                        updatedContent = updatedContent.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes}        // @END-ROUTES`);
+                        updatedContent = updatedContent.replace(/\/\/ @START-Routes([\s\S]*?)\/\/ @END-Routes/, `// @START-Routes${newRoutes}        // @END-Routes`);
 
                         console.log('OLD\n----------------------------------------\n', content);
                         console.log('\n****************************************');

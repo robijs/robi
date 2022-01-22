@@ -22,6 +22,7 @@ export function ChoiceField(param) {
         padding,
         parent,
         position,
+        readOnly,
         value,
         valueType
     } = param;
@@ -34,14 +35,22 @@ export function ChoiceField(param) {
                 ${label ? /*html*/ `<label class='field-label'>${label}</label>` : ''}
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
                 <div class='dropdown'>
-                    <button class='btn dropdown-toggle' ${buttonStyle ? `style='${buttonStyle}'` : ''} type='button' id='${id}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-                        ${value || `<span style='opacity: 0;'>Choose</span>`}
-                    </button>
-                    <div class='dropdown-menu' aria-labelledby='${id}'>
-                        <div class='scroll-container'>
-                            ${buildDropdown(options)}
-                        </div>
-                    </div>
+                    ${
+                        readOnly ? 
+                        /*html*/ `
+                            <div class='btn btn-choice' style='cursor: initial;'>${value}</div>
+                        ` : 
+                        /*html*/ `
+                            <button class='btn btn-choice dropdown-toggle' ${buttonStyle ? `style='${buttonStyle}'` : ''} type='button' id='${id}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                                ${value || `<span style='opacity: 0;'>Choose</span>`}
+                            </button>
+                            <div class='dropdown-menu' aria-labelledby='${id}'>
+                                <div class='scroll-container'>
+                                    ${buildDropdown(options)}
+                                </div>
+                            </div>   
+                        `
+                    }
                 </div>
             </div>
         `,
@@ -116,6 +125,8 @@ export function ChoiceField(param) {
                         component.find('.dropdown-toggle').innerText = event.target.innerText;
                     }
 
+                    component.find('.dropdown-toggle').dataset.id = this.dataset.id;
+
                     if (action) {
                         action(event);
                     }
@@ -141,7 +152,7 @@ export function ChoiceField(param) {
         } = dropdown;
 
         return /*html*/ `
-            <button type='button' class='dropdown-item' data-path='${path || ''}' data-id='${id || ''}'>${label}</button>
+            <button type='button' class='dropdown-item' data-path='${path || ''}' data-id='${id}'>${label}</button>
         `;
     }
 
@@ -154,17 +165,24 @@ export function ChoiceField(param) {
     };
 
     component.value = (param) => {
-        const field = component.find('.dropdown-toggle');
-
+        const field = component.find('.btn-choice');
+        
         if (param !== undefined) {
+            let label = typeof param === 'object' ? param.label : param;
             if (valueType === 'html') {
-                field.innerHTML = param;
+                field.innerHTML = label;
             } else {
-                field.innerText = param;
+                field.innerText = label;
+            }
+            if (param.id) {
+                field.dataset.id = param.id;
+            }
+            if (param.path) {
+                field.dataset.path = param.path;
             }
         } else {
             if (valueType === 'html') {
-                return component.find('.dropdown-toggle');
+                return component.find('.btn-choice');
             } else {
                 return field.innerText === 'Choose' ? '' : field.innerText;
             }
@@ -200,9 +218,13 @@ export function ChoiceField(param) {
     };
 
     component.selected = () => {
-        const field = component.find('.dropdown-toggle');
+        const field = component.find('.btn-choice');
 
         return options.find(item => item.label === field.innerText)?.path
+    };
+
+    component.data = () => {
+        return options[parseInt(component.find('.btn-choice').dataset.id)];
     };
 
     return component;

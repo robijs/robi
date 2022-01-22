@@ -1,4 +1,3 @@
-import { Get } from '../Actions/Get.js'
 import { Style } from '../Actions/Style.js'
 import { Alert } from './Alert.js'
 import { ChoiceField } from './ChoiceField.js'
@@ -9,8 +8,7 @@ import { MultiLineTextField } from './MultiLineTextField.js'
 import { NumberField } from './NumberField.js'
 import { SingleLineTextField } from './SingleLineTextField.js'
 import { TaggleField } from './TaggleField.js'
-import { AttachmentsContainer } from './AttachmentsContainer.js'
-import { App } from '../Core/App.js'
+import { DropZone } from './DropZone.js'
 import { Store } from '../Core/Store.js'
 
 // @START-File
@@ -145,7 +143,7 @@ export function FormSection(param) {
             
             // If field name is Files, render drop zone
             else if (name === 'Files') {
-                component = AttachmentsContainer({
+                component = DropZone({
                     label: label || display || name,
                     description: customDescription,
                     // value: formData[name],
