@@ -457,7 +457,9 @@ export function DataTable(param) {
 
             #id_wrapper tbody td.select-checkbox:after, 
             #id_wrapper tbody th.select-checkbox:after {
-                margin-top: -18px;
+                /* FIXME: test on desktop, see if this is a retina/DPI thing */
+                /* NOTE: used to be -18px, why did this need to change */
+                margin-top: -17px; 
                 top: auto;
                 text-shadow: none;
                 color: var(--primary);

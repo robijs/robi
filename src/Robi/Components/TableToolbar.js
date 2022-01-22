@@ -157,6 +157,7 @@ export function TableToolbar(param) {
 
             /* Search */
             #id .advanced-search {
+                white-space: nowrap;
                 width: 126px;
                 transition: 300ms opacity ease;
                 text-align: right;
