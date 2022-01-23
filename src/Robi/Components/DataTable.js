@@ -159,7 +159,7 @@ export function DataTable(param) {
 
             /** Buttons */
             #id_wrapper .btn-group {
-                margin: 0px 10px 0px 0px;
+                /* margin: 0px 10px 0px 0px; */
             }
 
             #id_wrapper .btn {
@@ -285,6 +285,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-collection span {
+                display: flex;
                 color: #444;
                 font-weight: 500;
             }

@@ -28,6 +28,7 @@ export async function Table(param) {
         createdRow,
         defaultButtons,
         deleteButton,
+        editButton,
         editForm,
         editFormTitle,
         exportButtons,
@@ -519,6 +520,19 @@ export async function Table(param) {
                     //     }
                     // },
                 ]
+            });
+        }
+
+        if (editButton !== false) {
+            buttons.push({
+                text: /*html*/ `
+                    Edit
+                `,
+                className: 'btn-robi-light',
+                name: 'edit-mode',
+                action: async function (e, dt, node, config) {
+                    alert('edit mode');
+                }
             });
         }
     }
