@@ -418,6 +418,11 @@ export function AppContainer() {
                 color: var(--primaryHSL-10) !important;
             }
 
+            .alert-robi-reverse {
+                background: var(--primary) !important;
+                color: var(--secondary) !important;
+            }
+
             .alert-robi-secondary {
                 background: var(--background) !important;
                 color: var(--color) !important;

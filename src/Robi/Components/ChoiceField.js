@@ -38,7 +38,17 @@ export function ChoiceField(param) {
                     ${
                         readOnly ? 
                         /*html*/ `
-                            <div class='btn btn-choice' style='cursor: initial;'>${value}</div>
+                            ${
+                                (() => {
+                                    const { label, path, id } = value;
+
+                                    return /*html*/ `
+                                        <div class='btn btn-choice' style='cursor: initial;' data-id='${id}'>
+                                            <span data-path='${path || ''}' >${label}</span>
+                                        </div>
+                                    `;
+                                })()
+                            }
                         ` : 
                         /*html*/ `
                             <button class='btn btn-choice dropdown-toggle' ${buttonStyle ? `style='${buttonStyle}'` : ''} type='button' id='${id}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
@@ -220,11 +230,11 @@ export function ChoiceField(param) {
     component.selected = () => {
         const field = component.find('.btn-choice');
 
-        return options.find(item => item.label === field.innerText)?.path
+        return readOnly ? value.path : options.find(item => item.label === field.innerText)?.path;
     };
 
     component.data = () => {
-        return options[parseInt(component.find('.btn-choice').dataset.id)];
+        return readOnly ? value : options[parseInt(component.find('.btn-choice').dataset.id)];
     };
 
     return component;

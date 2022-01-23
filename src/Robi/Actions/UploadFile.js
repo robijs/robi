@@ -15,14 +15,14 @@ import { CreateItem } from './CreateItem.js';
  */
 export async function UploadFile(param) {
     const {
-        file, data, library
+        file, name, data, library
     } = param;
 
     if (App.isProd()) {
         // Get new request digest
         const requestDigest = await GetRequestDigest();
         const fileBuffer = await getFileBuffer(file);
-        const upload = await fetch(`${App.get('site')}/_api/web/folders/GetByUrl('${library}')/Files/add(overwrite=true,url='${file.name}')`, {
+        const upload = await fetch(`${App.get('site')}/_api/web/folders/GetByUrl('${library}')/Files/add(overwrite=true,url='${name || file.name}')`, {
             method: 'POST',
             headers: {
                 "Accept": "application/json;odata=verbose",
@@ -69,8 +69,9 @@ export async function UploadFile(param) {
         let fakeFile = {
             File: {
                 Name: file.name,
-                Length: fileBuffer.byteLength,
+                Length: 0,
             },
+            Name: file.name,
             OData__dlc_DocIdUrl: {
                 Url: '#'
             }

@@ -12,12 +12,14 @@ import { Store } from '../Core/Store.js'
  */
 export function DropZone(param) {
     const {
+        allowDelete,
         parent,
         label,
         description,
         list,
         itemId,
         onChange,
+        beforeChange,
         onUpload,
         library,
         multiple
@@ -56,8 +58,10 @@ export function DropZone(param) {
     heading.add();
 
     const filesContainer = FilesField({
+        allowDelete,
         description,
         multiple,
+        beforeChange,
         onChange,
         files: itemId ? value?.map(item => {
             if (item.url) {
@@ -147,7 +151,6 @@ export function DropZone(param) {
             // dropZone.find('.undo-all').classList.remove('hidden');
             // dropZone.find('.reset').classList.remove('hidden');
         },
-        width: '-webkit-fill-available',
         parent: card
     });
 

@@ -68,11 +68,11 @@ export function Sidebar({ parent, path }) {
                     /*html*/ `
                         <span class='nav add-route'>
                             <span class='icon-container' style='padding: 0px;'>
-                                <span class='square d-flex' style='padding: 0px; margin: 7px'>
-                                    <svg class='icon' style='font-size: 28px;'><use href='#icon-bs-plus'></use></svg>
+                                <span class='square d-flex' style='padding: 3px; margin: 7px'>
+                                    <svg class='icon' style='font-size: 22px;'><use href='#icon-bs-plus'></use></svg>
                                 </span>
                             </span>
-                            <span class='text' data-width='200px' style='white-space: nowrap; color: var(--primary)'>New Route</span>
+                            <span class='text' data-width='200px' style='white-space: nowrap; color: var(--primary); font-size: 14px;'>New Route</span>
                         </span>
                     `: ''
                 }
