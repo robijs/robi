@@ -523,15 +523,73 @@ export async function Table(param) {
             });
         }
 
+        let show = true;
+
         if (editButton !== false) {
             buttons.push({
-                text: /*html*/ `
-                    Edit
-                `,
+                text: 'Edit',
                 className: 'btn-robi-light',
                 name: 'edit-mode',
                 action: async function (e, dt, node, config) {
-                    alert('edit mode');
+                    if (show) {
+                        e.target.innerText = 'Done';
+                        table.hide();
+                        show = false;
+
+                        console.clear();
+
+                        // Show editable table
+                        const pageData = table.DataTable().rows( {page:'current'} ).data();
+
+                        table.after(/*html*/ `
+                            <table class='w-100 editable-table'>
+                                <thead>
+                                    <tr>
+                                        ${
+                                            headers
+                                            .filter(h => h)
+                                            .map(header => {
+                                                console.log(header);
+
+                                                return /*html*/ `
+                                                    <th>${header}</th>
+                                                `;
+                                            }).join('\n')
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${
+                                        pageData.map(row => {
+                                            console.log(row);
+
+                                            return /*html*/ `
+                                                <tr>
+                                                    ${
+                                                        columns
+                                                        .filter(c => c.data)
+                                                        .map(column => {
+                                                            const { data } = column;
+
+                                                            // TODO: Add input tag based on field type
+                                                            return /*html*/ `
+                                                                <td>${row[data]}</td>
+                                                            `;
+                                                        }).join('\n')
+                                                    }
+                                                </tr>
+                                            `;
+                                        }).join('\n')
+                                    }
+                                </tbody>
+                            </table>
+                        `)
+                    } else {
+                        e.target.innerText = 'Edit';
+                        table.show();
+                        show = true;
+                        tableContainer.find('.editable-table')?.remove();
+                    }
                 }
             });
         }

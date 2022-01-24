@@ -158,28 +158,16 @@ export function DataTable(param) {
             }
 
             /** Buttons */
-            #id_wrapper .btn-group {
-                /* margin: 0px 10px 0px 0px; */
-            }
-
             #id_wrapper .btn {
                 font-size: 13px;
                 padding: 5px 20px;
-            }
-
-            #id_wrapper .datatable-toolbar .btn-secondary {
                 border-color: transparent;
                 margin-right: 10px;
                 border-radius: 8px;
             }
 
-            #id_wrapper .datatable-toolbar .btn-secondary:focus {
-                box-shadow: none;
-            }
-
             /** Add Item Button */
             #id_wrapper .datatable-toolbar .add-item {
-                background: var(--buttonBackground);
                 margin-right: 20px;
             }
 
@@ -653,7 +641,15 @@ export function DataTable(param) {
             deferRender: true, // https://datatables.net/reference/option/deferRender
             order: order || [[1, 'asc']],
             columns,
-            buttons: buttons || []
+            buttons: {
+                dom: {
+                  button: {
+                    className: 'btn btn-robi'
+                  }
+                },
+                buttons: buttons || []
+            }
+            // buttons: buttons || []
         };
 
         if (paging === false) {
