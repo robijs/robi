@@ -1,4 +1,5 @@
 import NewForm from './NewForm.js'
+import EditForm from './EditForm.js'
 
 export default {
     list: 'AllTypes',
@@ -78,5 +79,6 @@ export default {
             }
         }
     ],
-    newForm: NewForm
+    newForm: NewForm,
+    editForm: EditForm
 }
