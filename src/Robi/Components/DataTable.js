@@ -157,13 +157,10 @@ export function DataTable(param) {
             }
 
             /** Buttons */
-            #id_wrapper .btn-group {
-                margin: 0px 10px 0px 0px;
-            }
-
             #id_wrapper .btn {
                 font-size: 13px;
-                padding: 5px 20px;
+                border-radius: 10px;
+                margin-right: 10px;
             }
 
             #id_wrapper .datatable-toolbar .btn-secondary {

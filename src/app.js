@@ -160,6 +160,7 @@ Start({
         // maincontainer: replace default maincontainer with your component (type function, typically imported from /Components/myComponent.js)
         // sidebar: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
         // usersLists: override default name for 'Users' lists
+        allowFeedback: true,
         appcontainer: null,
         dev: {
             user: {
