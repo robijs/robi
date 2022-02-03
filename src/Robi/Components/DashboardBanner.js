@@ -43,7 +43,7 @@ export function DashboardBanner(param) {
             }
 
             #id .dashboard-banner-group.selected {
-                background: var(--buttonBackground) !important;
+                background: var(--button-background) !important;
             }
 
             #id .dashboard-banner-group:not(:last-child) {

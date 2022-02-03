@@ -115,7 +115,7 @@ export function FormTools(param) {
                 height: unset;
                 margin: .5rem;
                 overflow: hidden;
-                border-left: 2px solid var(--buttonBackground);
+                border-left: 2px solid var(--button-background);
                 border-top: none;
             }
 

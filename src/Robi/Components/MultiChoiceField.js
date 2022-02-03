@@ -123,7 +123,7 @@ export function MultiChoiceField(param) {
                 selector: '#id .Other',
                 event: 'keyup',
                 listener(event) {
-                    if (event.target.value && onchange) {
+                    if (event.target.value && onChange) {
                         onChange(event);
                     }
                 }

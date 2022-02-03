@@ -68,6 +68,7 @@ export function Title(param) {
             }
 
             #id .title-subtitle {
+                width: 100%;
                 position: relative;
                 display: flex;
                 flex-direction: row;
@@ -84,6 +85,7 @@ export function Title(param) {
             }
 
             #id.title h2 {
+                width: 100%;
                 font-size: 1.1rem;
                 font-weight: 500;
                 margin: 0px;
@@ -113,7 +115,7 @@ export function Title(param) {
             }
 
             #id.across h2 {
-                margin: 0px 20px;
+                margin-left: 20px;
             }
 
             /* a, spacer */

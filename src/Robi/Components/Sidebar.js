@@ -57,7 +57,17 @@ export function Sidebar({ parent, path }) {
                     }
                 </div>
                 <div class='title-container position-relative'>
-                    <h3 class='title'>${App.get('title')}</h3>
+                    ${
+                        (() => {
+                            const initialWidth = window.innerWidth;
+                            
+                            return initialWidth >= 1305 ? /*html*/ `
+                                <h3 class='title'>${App.get('title')}</h3>
+                            ` : /*html*/ `
+                                <h3 class='placeholder' style='opacity: 0;'>${App.get('title')[0]}</h3>
+                            `;
+                        })()
+                    }
                 </div>
                 <div class='nav-container'>
                     ${buildNav()}
@@ -96,7 +106,7 @@ export function Sidebar({ parent, path }) {
                 flex-direction: column;
                 justify-content: flex-start;
                 background: var(--background);
-                border-right: solid 1px var(--borderColor);
+                border-right: solid 1px var(--border-color);
                 height: 100vh;
                 transition: width 300ms, min-width 300ms, background-color 300ms;
             }
@@ -149,7 +159,7 @@ export function Sidebar({ parent, path }) {
             }
 
             /* .sidebar .nav:not(.nav-selected):hover {
-                background-color: var(--primary20);
+                background-color: var(--primary-20);
             } */
 
             .sidebar .icon-container {
@@ -267,7 +277,7 @@ export function Sidebar({ parent, path }) {
             }
 
             #id .square {
-                background: var(--buttonBackground);
+                background: var(--button-background);
                 border-radius: 6px;
             }
 
@@ -492,9 +502,17 @@ export function Sidebar({ parent, path }) {
                     node.style.width = `${node.offsetWidth}px`;
                     node.dataset.width = `${node.offsetWidth}px`;
                 });
-            }, 0); // FIXME: Will this always work, even on CarePoint/LaunchPad?
+            }, 0);
 
             // Window resize event
+            const mode = component.get().dataset.mode;
+
+            if (window.innerWidth <= 1305) {
+                closeSidebar(mode);
+            } else {
+                openSidebar(mode);
+            }
+
             window.addEventListener('resize', event => {
                 const mode = component.get().dataset.mode;
 
@@ -688,55 +706,12 @@ export function Sidebar({ parent, path }) {
         component.find('.edit-buttons').style.opacity = '1';
 
         // Add cancel behavior
-        component.find('.cancel-edit').addEventListener('click', event => {
-            // NOTE: Testing showing hidden routes
-
+        component.find('.cancel-edit').addEventListener('click', () => {
             component.findAll('.nav-container .nav.hidden').forEach(node => {
                 node.style.height = '0px';
                 node.style.opacity = '0';
             });
 
-            // setTimeout(() => {
-            //     // Enable route
-            //     component.findAll('.nav-container .nav').forEach(node => {
-            //         node.dataset.shouldroute = 'yes';
-            //         node.style.cursor = 'pointer';
-            //     });
-
-            //     // Animate cancel fade out
-            //     component.find('.cancel-edit').addEventListener('animationend', event => {
-            //         console.log('end cancel');
-
-            //         // Select node
-            //         const selected = location.href.split('#')[1].split('/')[0];
-            //         component.find(`.nav[data-path='${selected}']`).style.transition = 'background-color 200ms ease';
-            //         component.find(`.nav[data-path='${selected}']`)?.classList.add('nav-selected');
-            //         setTimeout(() => {
-            //             component.find(`.nav[data-path='${selected}']`).style.transition = 'auto';
-            //         }, 200);
-
-            //         // Remove cancel edit button
-            //         component.find('.edit-buttons')?.remove();
-
-            //         // Remove hide
-            //         // console.log(component.find('.hide-label'));
-            //         component.find('.hide-label')?.remove();
-
-            //         // Turn edit back on
-            //         component.find('.open-dev-menu').disabled = false;
-            //         component.find('.open-dev-menu').style.opacity = '1';
-            //     });
-            //     component.find('.cancel-edit').classList.add('fade-out');
-            
-            //     // Remove grab handles
-            //     component.findAll('.nav-container .nav .grab').forEach(node => {
-            //         node.addEventListener('animationend', () => node.remove());
-            //         node.classList.add('grab-show-reverse');
-            //     });
-            // }, 0);
-
-            // NOTE: END TESTING
-                
             // Enable route
             component.findAll('.nav-container .nav').forEach(node => {
                 node.dataset.shouldroute = 'yes';
@@ -744,7 +719,7 @@ export function Sidebar({ parent, path }) {
             });
 
             // Animate cancel fade out
-            component.find('.cancel-edit').addEventListener('animationend', event => {
+            component.find('.cancel-edit').addEventListener('animationend', () => {
                 console.log('end cancel');
 
                 // Select node
@@ -809,7 +784,6 @@ export function Sidebar({ parent, path }) {
         });
 
         // Add hide label
-        // TODO: add absolutely positioned hide label
         component.find('.title-container').insertAdjacentHTML('beforeend', /*html*/ `
             <div class='d-flex justify-content-end position-absolute hide-label' style='bottom: -5px; right: 25px; font-size: 14px; font-weight: 500;'>
                 <div>Hide</div>
@@ -1203,15 +1177,27 @@ export function Sidebar({ parent, path }) {
             });
 
             // Fade out long title to the left
-            component.find('.title').addEventListener('animationend', event => {
-                // console.log(event.target);
-                event.target.remove();
+            const title = component.find('.title');
+
+            if (title) {
+                component.find('.title').addEventListener('animationend', event => {
+                    event.target.remove();
+
+                    // Set short title
+                    component.find('.title-container').insertAdjacentHTML('beforeend', /*html*/ `
+                        <h3 class='fade-in title' style='text-align: center;'>${App.get('title')[0]}</h3>
+                    `);
+                });
+
+                component.find('.title').classList.add('fade-out-left');
+            } else {
+                component.find('.title-container .placeholder')?.remove();
+
                 // Set short title
                 component.find('.title-container').insertAdjacentHTML('beforeend', /*html*/ `
-                    <h3 class='fade-in title' style='text-align: center;'>${App.get('title')[0]}</h3>                
+                    <h3 class='title' style='text-align: center;'>${App.get('title')[0]}</h3>
                 `);
-            });
-            component.find('.title').classList.add('fade-out-left');
+            }
 
             if (Store.user().Roles.results.includes('Developer')) {
                 // Fade out Edit

@@ -165,14 +165,14 @@ export function AppContainer() {
             .btn-robi,
             .btn-robi:hover {
                 color: var(--primary);
-                background: var(--buttonBackground);
+                background: var(--button-background);
                 font-weight: 500;
             }
 
             .btn-robi-success,
             .btn-robi-success:hover {
                 color: seagreen;
-                background: var(--buttonBackground);
+                background: var(--button-background);
                 font-weight: 500;
             }
 
@@ -279,14 +279,14 @@ export function AppContainer() {
 
             /* Cards */
             .card-footer {
-                border-top: solid 1px var(--borderColor);
+                border-top: solid 1px var(--border-color);
             }
 
             /* Form Controls */
             .form-field {
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
+                /* justify-content: space-between; */
             }
 
             .form-field .form-field-description {
@@ -308,13 +308,13 @@ export function AppContainer() {
             .form-control,
             .form-field-multi-line-text.editable,
             .input-group-text {
-                border: 1px solid var(--borderColor);
+                border: 1px solid var(--border-color);
             }
 
             .form-control:focus,
             .form-field-multi-line-text.editable:focus,
             .btn.dropdown-toggle:focus {
-                border: 1px solid var(--borderColor);
+                border: 1px solid var(--border-color);
                 background: var(--inputBackground);
             }
 
@@ -339,7 +339,7 @@ export function AppContainer() {
             .form-field-multi-line-text.editable:focus,
             .btn.dropdown-toggle:focus {
                 border-color: transparent !important;
-                box-shadow: 0 0 0 3px var(--primary6b) !important;
+                box-shadow: 0 0 0 3px var(--primary-6b) !important;
             }
 
             .custom-select,
@@ -351,11 +351,11 @@ export function AppContainer() {
 
             .custom-select {
                 background: var(--inputBackground) !important;
-                border-color: var(--borderColor);
+                border-color: var(--border-color);
             }
 
             input[type='search'] {
-                background: var(--buttonBackground) !important;
+                background: var(--button-background) !important;
                 border-color: transparent;
             }
 
@@ -377,7 +377,7 @@ export function AppContainer() {
                 height: 16px;
                 width: 16px;
                 ${cancelButton};
-            }
+            }            
 
             /* Alert */
             .alert {
@@ -401,21 +401,21 @@ export function AppContainer() {
             }
 
             .alert-robi-primary {
-                background: var(--primary20) !important;
-                color: var(--primaryHSL-5) !important;
+                background: var(--primary-20) !important;
+                color: var(--primary-hsl-5) !important;
             }
 
             .alert-robi-primary *:not(.btn) {
-                color: var(--primaryHSL-5) !important;
+                color: var(--primary-hsl-5) !important;
             }
 
             .alert-robi-primary-high-contrast {
-                background: var(--primary19) !important;
-                color: var(--primaryHSL-10) !important;
+                background: var(--primary-19) !important;
+                color: var(--primary-hsl-10) !important;
             }
 
             .alert-robi-primary-high-contrast *:not(.btn) {
-                color: var(--primaryHSL-10) !important;
+                color: var(--primary-hsl-10) !important;
             }
 
             .alert-robi-reverse {
@@ -430,6 +430,15 @@ export function AppContainer() {
 
             .alert-robi-secondary *:not(.btn) {
                 color: var(--color) !important;
+            }
+
+            .alert-robi-primary hr,
+            .alert-robi-primary-high-contrast hr {
+                border-top: 1px solid var(--primary-30);
+            }
+
+            .alert-robi-secondary hr {
+                border-top: 1px solid var(--background-HSL-5);
             }
             
             /** Badge */
@@ -621,11 +630,11 @@ export function AppContainer() {
             }
 
             .custom-control-input:focus ~ .custom-control-label::before {
-                box-shadow: 0 0 0 4px var(--primary6b) !important;
+                box-shadow: 0 0 0 4px var(--primary-6b) !important;
             }
 
             .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
-                border-color: var(--primary6b);
+                border-color: var(--primary-6b);
             }
             
             .custom-control-input:active {
@@ -633,11 +642,22 @@ export function AppContainer() {
             }
 
             /* Dropdown */
+            .dropdown-toggle {
+                min-height: 33.5px;
+                min-width: 160px;
+                font-size: 13px;
+                border-radius: 0.125rem 0px;
+                border: 1px solid var(--border-color);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
             .dropdown-menu {
                 background: var(--inputBackground);
                 margin: .125rem;
                 padding: .125rem;
-                border: solid 1px var(--borderColor);
+                border: solid 1px var(--border-color);
                 background: var(--inputBackground);
             }
             
@@ -661,7 +681,7 @@ export function AppContainer() {
             .dropdown-item:hover {
                 color: var(--color);
                 text-decoration: none;
-                background-color: var(--primary20);
+                background-color: var(--primary-20);
             }
 
             /* Sortable */
@@ -687,7 +707,7 @@ export function AppContainer() {
             }
 
             .robi-row.ui-sortable-helper {
-                box-shadow: var(--sortShadow) !important;
+                box-shadow: var(--sort-shadow) !important;
                 transform: scale(1.05);
             }
 
@@ -728,7 +748,7 @@ export function AppContainer() {
             }
 
             .dropdown-divider {
-                border-color: var(--borderColor);
+                border-color: var(--border-color);
             }
         `,
         position: 'afterbegin',

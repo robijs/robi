@@ -46,7 +46,7 @@ export function PhoneField(param) {
                 padding: 10px;
                 background: white;
                 border-radius: 4px;
-                border: solid 1px var(--borderColor);
+                border: solid 1px var(--border-color);
             }
 
             #id .form-field-phone-number {

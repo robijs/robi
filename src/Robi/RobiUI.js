@@ -47,6 +47,7 @@ import { EditForm } from './Components/EditForm.js'
 import { EditQuestion } from './Components/EditQuestion.js'
 import { ErrorForm } from './Components/ErrorForm.js'
 import { Errors } from './Components/Errors.js'
+import { Feedback } from './Components/Feedback.js'
 import { FilesField } from './Components/FilesField.js'
 import { FilesTable } from './Components/FilesTable.js'
 import { FixedToast } from './Components/FixedToast.js'
@@ -91,6 +92,8 @@ import { QuestionContainer } from './Components/QuestionContainer.js'
 import { QuestionsToolbar } from './Components/QuestionsToolbar.js'
 import { QuestionType } from './Components/QuestionType.js'
 import { QuestionTypes } from './Components/QuestionTypes.js'
+import { RecordScreen } from './Components/RecordScreen.js'
+import { Recurrence } from './Components/Recurrence.js'
 import { ReleaseNotes } from './Components/ReleaseNotes.js'
 import { ReleaseNotesContainer } from './Components/ReleaseNotesContainer.js'
 import { Reply } from './Components/Reply.js'
@@ -108,6 +111,7 @@ import { Table } from './Components/Table.js'
 import { TableToolbar } from './Components/TableToolbar.js'
 import { TaggleField } from './Components/TaggleField.js'
 import { TasksList } from './Components/TasksList.js'
+import { Textarea } from './Components/Textarea.js'
 import { ThemeField } from './Components/ThemeField.js'
 import { Timer } from './Components/Timer.js'
 import { Title } from './Components/Title.js'
@@ -154,6 +158,7 @@ export {
     EditQuestion,
     ErrorForm,
     Errors,
+    Feedback,
     FilesField,
     FilesTable,
     FixedToast,
@@ -198,6 +203,8 @@ export {
     QuestionsToolbar,
     QuestionType,
     QuestionTypes,
+    RecordScreen,
+    Recurrence,
     ReleaseNotes,
     ReleaseNotesContainer,
     Reply,
@@ -215,6 +222,7 @@ export {
     TableToolbar,
     TaggleField,
     TasksList,
+    Textarea,
     ThemeField,
     Timer,
     Title,

@@ -125,14 +125,16 @@ export function FormSection(param) {
         });
 
         rowFields?.forEach(field => {
-            const { name, label, style, component: renderComponent, description: customDescription } = field;
+            const { name, label, style, component: customComponent, description: customDescription } = field;
+            // const label = label || display || name;
             const parent = fieldRow;
             let fieldMargin = '0px';
             let component = {};
 
             // Render passed in component
-            if (renderComponent) {
-                component = renderComponent({ 
+            if (customComponent) {
+                component = customComponent({
+                    item,
                     parent,
                     formData,
                     getComponent() {
@@ -162,7 +164,19 @@ export function FormSection(param) {
             // Render field by type
             else {
                 const { display, description: defaultDescription, type, choices, fillIn, action } = fields?.find(item => item.name === name);
-                const description = customDescription || defaultDescription;
+                // const description = customDescription || defaultDescription;
+                
+                let description;
+
+                if (customDescription === false) {
+                    description = '';
+                } else if (customDescription) {
+                    description = customDescription;
+                } else if (defaultDescription === false) {
+                    description = '';
+                } else if (defaultDescription) {
+                    description = defaultDescription;
+                }
 
                 switch (type) {
                     case 'slot':
@@ -234,6 +248,8 @@ export function FormSection(param) {
                         });
                         break;
                     case 'mlot':
+                        // TODO: Dark mode
+                        // TODO: Pass type or custom component instead of assuming intent by field name
                         if (name.toLowerCase() === 'tags') {
                             component = TaggleField({
                                 label: label || display || name,
@@ -252,7 +268,8 @@ export function FormSection(param) {
                                     formData[name] = component.value();
                                 }
                             });
-                        } else if (name.toLowerCase() === 'dashboardlinks' || name.toLowerCase() === 'links') { // TODO: I don't like this, assumes too much
+                        // TODO: Pass type or custom component instead of assuming intent by field name
+                        } else if (name.toLowerCase() === 'dashboardlinks' || name.toLowerCase() === 'links') {
                             component = LinksField({
                                 label: label || display || name,
                                 links: formData[name],
@@ -298,6 +315,7 @@ export function FormSection(param) {
                             label: label || display || name,
                             description,
                             value: formData[name],
+                            fillIn,
                             options: choices.map(choice => {
                                 return {
                                     label: choice
@@ -305,7 +323,7 @@ export function FormSection(param) {
                             }),
                             parent,
                             fieldMargin,
-                            action(event) {
+                            onChange() {
                                 formData[name] = component.value();
                             }
                         });
@@ -313,6 +331,7 @@ export function FormSection(param) {
                     case 'multichoice':
                         component = MultiChoiceField({
                             label: label || display || name,
+                            description,
                             choices,
                             fillIn,
                             value: formData[name]?.results,

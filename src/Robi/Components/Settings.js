@@ -123,7 +123,7 @@ export async function Settings({ parent, pathParts, title }) {
         minWidth: 'fit-content',
         direction: 'column',
         padding: '62px 20px 20px 20px',
-        borderRight: `solid 1px var(--borderColor)`,
+        borderRight: `solid 1px var(--border-color)`,
         parent: formContainer
     });
 
@@ -188,7 +188,7 @@ export async function Settings({ parent, pathParts, title }) {
     // Scroll listener
     projectContainer.get().addEventListener('scroll', event => {
         if (event.target.scrollTop > 0) {
-            projectContainer.get().style.borderTop = `solid 1px var(--borderColor)`;
+            projectContainer.get().style.borderTop = `solid 1px var(--border-color)`;
         } else {
             projectContainer.get().style.borderTop = `none`;
         }

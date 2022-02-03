@@ -78,11 +78,11 @@ export function IconField(param) {
 
             #id .icon-container.selected {
                 box-shadow: 0px 0px 0px 2px var(--primary);
-                background-color: var(--primary20); 
+                background-color: var(--primary-20); 
             }
 
             #id .icon-container:hover {
-                background-color: var(--primary20);
+                background-color: var(--primary-20);
                 transform: scale(1);
             }
         `,

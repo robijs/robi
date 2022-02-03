@@ -1,6 +1,8 @@
 import { Get } from './Get.js'
 import { CreateItem } from './CreateItem.js'
 import { App } from '../Core/App.js'
+import { Store } from '../Robi.js';
+import { Wait } from './Wait.js';
 
 // @START-File
 /**
@@ -21,7 +23,7 @@ export async function GetCurrentUser(param) {
     };
 
     if (App.isProd()) {
-        const url = `${App.get('site')}/../_api/web/CurrentUser`;
+        const url = `${App.get('site')}/_api/web/CurrentUser`;
         const currentUser = await fetch(url, fetchOptions);
         const response = await currentUser.json();
         const email = response.d.Email;
@@ -70,6 +72,20 @@ export async function GetCurrentUser(param) {
             });
 
             if (newUser) {
+                // Add SiteId prop to Users list item
+                newUser.SiteId = response.d.Id;
+
+                if (App.get('onCreateUser')) {
+                    await App.get('onCreateUser')(newUser);
+                    
+                    // Get user again
+                    const updatedUser = await GetCurrentUser({
+                        list
+                    });
+
+                    return updatedUser;
+                }
+
                 console.log(`%cUser account for ${Title} created!`, 'color: mediumseagreen');
             } else {
                 console.log(`%cFailed to create a user account for ${Title}. Check POST data.`, 'background: firebrick; color: white');
@@ -113,6 +129,18 @@ export async function GetCurrentUser(param) {
 
             if (newUser) {
                 console.log(`%cCreated user account for ${Title}!`, 'color: mediumseagreen');
+                
+                if (App.get('onCreateUser')) {
+                    await App.get('onCreateUser')(newUser);
+                    
+                    // Get user again
+                    const updatedUser = await GetCurrentUser({
+                        list
+                    });
+
+                    return updatedUser;
+                }
+
                 return newUser;
             } else {
                 console.log(`%cFailed to create a user account for ${Title}. Check POST data.`, 'color: firebrick');

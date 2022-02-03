@@ -51,7 +51,7 @@ export function MultiLineTextField(param) {
                 min-height: ${minHeight || `200px`};
                 width: ${width || 'unset'};
                 border-radius: 4px;
-                border: 1px solid var(--borderColor);
+                border: 1px solid var(--border-color);
             }
 
             #id .form-field-multi-line-text.editable:active,

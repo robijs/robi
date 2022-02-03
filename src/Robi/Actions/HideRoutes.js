@@ -46,7 +46,7 @@ export async function HideRoutes({ paths }) {
                 `            path: '${path}',`,
                 `            title: '${title}',`,
                 `            icon: '${icon}',`,
-                `            go: ${ "Route_" + path}`,
+                `            go: Route_${path}`,
                 `        }`,
                 `        // @END-${path}`,
                 // `        `
@@ -56,7 +56,7 @@ export async function HideRoutes({ paths }) {
 
     // console.log(newRoutes);
 
-    const updated = value.replace(/\/\/ @START-Routes([\s\S]*?)\/\/ @END-Routes/, `// @START-Routes\n${newRoutes}\n// @END-Routes`);
+    const updated = value.replace(/\/\/ @START-Routes([\s\S]*?)\/\/ @END-Routes/, `// @START-Routes\n${newRoutes}\n        // @END-Routes`);
 
     // console.log('OLD\n----------------------------------------\n', value);
     // console.log('\n****************************************');

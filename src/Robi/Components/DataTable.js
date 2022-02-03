@@ -109,15 +109,14 @@ export function DataTable(param) {
                 ''}
 
             #id_wrapper .datatable-toolbar {
-                font-size: .9em;
                 padding: 0px 15px;
                 margin: 0px 0px 10px 0px;
                 width: 100%;
-                min-height: 33.33px;
                 display: flex;
                 justify-content: space-between;
                 flex-wrap: nowrap;
-                /* overflow: auto; */ /* Turned OFF to test buttons collection */
+                /* min-height: 33.33px; */
+                /* overflow: auto; */
             }
 
             #id_wrapper .datatable-toolbar .cell {
@@ -158,16 +157,28 @@ export function DataTable(param) {
             }
 
             /** Buttons */
+            #id_wrapper .btn-group {
+                margin: 0px 10px 0px 0px;
+            }
+
             #id_wrapper .btn {
                 font-size: 13px;
                 padding: 5px 20px;
+            }
+
+            #id_wrapper .datatable-toolbar .btn-secondary {
                 border-color: transparent;
                 margin-right: 10px;
                 border-radius: 8px;
             }
 
+            #id_wrapper .datatable-toolbar .btn-secondary:focus {
+                box-shadow: none;
+            }
+
             /** Add Item Button */
             #id_wrapper .datatable-toolbar .add-item {
+                background: var(--button-background);
                 margin-right: 20px;
             }
 
@@ -196,7 +207,7 @@ export function DataTable(param) {
             /** Delete Item Button */
             #id_wrapper .datatable-toolbar .delete-item {
                 font-size: 20px;
-                background: ${buttonColor || 'var(--buttonBackground)'} !important;
+                background: ${buttonColor || 'var(--button-background)'} !important;
             }
 
             #id_wrapper .datatable-toolbar .delete-item span {
@@ -242,7 +253,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-html5 span:hover {
-                background-color: var(--primary20);
+                background-color: var(--primary-20);
             }
 
             #id_wrapper .buttons-html5:first-child span {
@@ -268,7 +279,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-collection {
-                background: ${buttonColor || 'var(--buttonBackground)'} !important;
+                background: ${buttonColor || 'var(--button-background)'} !important;
                 border: none;
             }
 
@@ -286,7 +297,7 @@ export function DataTable(param) {
             /** Select and Search */
             #id_wrapper .custom-select,
             #id_wrapper input[type='search'] {
-                background: ${buttonColor || 'var(--buttonBackground)'} !important;
+                background: ${buttonColor || 'var(--button-background)'} !important;
             }
 
             #id_wrapper .dataTables_filter label {
@@ -294,13 +305,13 @@ export function DataTable(param) {
                 align-items: center;
                 justify-content: center;
                 border-radius: 10px;
-                background: ${buttonColor || 'var(--buttonBackground)'} !important;
+                background: ${buttonColor || 'var(--button-background)'} !important;
                 padding-left: 10px;
             }
 
             #id_wrapper .dataTables_filter label:focus-within {
                 border-color: transparent !important;
-                box-shadow: 0 0 0 3px var(--primary6b) !important;
+                box-shadow: 0 0 0 3px var(--primary-6b) !important;
             }
 
             #id_wrapper input[type='search'] {
@@ -446,9 +457,7 @@ export function DataTable(param) {
 
             #id_wrapper tbody td.select-checkbox:after, 
             #id_wrapper tbody th.select-checkbox:after {
-                /* FIXME: test on desktop, see if this is a retina/DPI thing */
-                /* NOTE: used to be -18px, why did this need to change */
-                margin-top: -17px; 
+                margin-top: -18px;
                 top: auto;
                 text-shadow: none;
                 color: var(--primary);
@@ -462,7 +471,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper tbody > tr.selected td {
-                background-color: var(--selectedRow) !important;
+                background-color: var(--selected-row) !important;
                 color:  var(--primary);
             }
 
@@ -554,12 +563,7 @@ export function DataTable(param) {
         parent,
         position,
         events: [
-            {
-                selector: `#id`,
-                event: 'click',
-                listener(event) {
-                }
-            }
+
         ],
         onAdd() {
             setData({

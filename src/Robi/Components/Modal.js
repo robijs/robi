@@ -190,7 +190,7 @@ export function Modal(param) {
             #id .close .x-circle-fill {
                 width: 24px;
                 height: 24px;
-                fill: var(--buttonBackground);
+                fill: var(--button-background);
                 z-index: 10;
             }
 

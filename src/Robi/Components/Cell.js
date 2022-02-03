@@ -8,7 +8,19 @@ import { Store } from '../Core/Store.js'
  * @returns
  */
 export function Cell(render, options = {}) {
-    const { parent, height, minHeight, display, flex, background, radius, padding } = options;
+    const { 
+        parent,
+        height,
+        minHeight,
+        display,
+        flex,
+        background,
+        radius,
+        padding,
+        narrowPadding,
+        narrowWidth,
+        responsive
+    } = options;
     
     const id = Store.getNextCell();
 
@@ -31,11 +43,42 @@ export function Cell(render, options = {}) {
                 margin-right: 30px;
             }
         `,
-        // FIXME: Do I like this? Does it assume too much?
         parent: parent || Store.get('viewcontainer'),
         events: [],
         onAdd() {
             render(component);
+
+            if (responsive) {
+                const node = component.get();
+
+                if (!node) {
+                    return;
+                }
+
+                if (window.innerWidth <= 1600) {
+                    node.style.padding = narrowPadding || '0px';
+                    node.style.margin = '0px';
+                } else {
+                    node.style.padding = padding || '0px';
+                    node.style.margin = '0px';
+                }
+
+                window.addEventListener('resize', event => {
+                    const node = component.get();
+
+                    if (!node) {
+                        return;
+                    }
+
+                    if (window.innerWidth <= 1600) {
+                        node.style.padding = narrowPadding || '0px';
+                        node.style.margin = '0px';
+                    } else {
+                        node.style.padding = padding || '0px';
+                        node.style.margin = '0px';
+                    }
+                });
+            }
         }
     });
 

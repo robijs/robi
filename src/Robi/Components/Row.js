@@ -8,7 +8,7 @@ import { Store } from '../Core/Store.js'
  * @returns
  */
 export function Row(render, options = {}) {
-    const { parent, display, height, minHeight, flex, align } = options;
+    const { parent, display, height, minHeight, flex, align, responsive } = options;
     
     const id = Store.getNextRow();
 
@@ -36,6 +36,34 @@ export function Row(render, options = {}) {
         events: [],
         onAdd() {
             render(component);
+
+            if (responsive) {
+                const node = component.get();
+
+                if (!node) {
+                    return;
+                }
+
+                if (window.innerWidth <= 1600) {
+                    node.style.flexDirection = 'column';
+                } else {
+                    node.style.flexDirection = 'row';
+                }
+
+                window.addEventListener('resize', event => {
+                    const node = component.get();
+
+                    if (!node) {
+                        return;
+                    }
+
+                    if (window.innerWidth <= 1600) {
+                        node.style.flexDirection = 'column';
+                    } else {
+                        node.style.flexDirection = 'row';
+                    }
+                });
+            }
         }
     });
 

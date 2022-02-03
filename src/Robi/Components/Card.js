@@ -62,7 +62,7 @@ export function Card(param) {
                 background: ${titleBackground || 'inherit'}; /** FIXME: Experimental */ /* alternate color: #d0d0d04d */
                 border-radius: 20px 20px 0px 0px;
                 color: ${titleColor || 'var(--color)'};
-                border-bottom: ${titleBorder || `solid 1px var(--borderColor)`};
+                border-bottom: ${titleBorder || `solid 1px var(--border-color)`};
             }
 
             #id .round-card-description {

@@ -59,7 +59,7 @@ export async function ModifyRoute({ route }) {
                     parent: row,
                     onKeyup(event) {
                         if (routeTitle.value() !== title) {
-                            row.get().style.background = 'var(--primary20)';
+                            row.get().style.background = 'var(--primary-20)';
                             row.find('.modified').style.opacity = '1';
                             // Use current path as key
                             
@@ -85,7 +85,7 @@ export async function ModifyRoute({ route }) {
                     },
                     onKeyup(event) {
                         if (routeTitle.value() !== title) {
-                            row.get().style.background = 'var(--primary20)';
+                            row.get().style.background = 'var(--primary-20)';
                             row.find('.modified').style.opacity = '1';
                         } else {
                             row.get().style.background = 'inherit';

@@ -36,7 +36,7 @@ export function SearchField(param) {
                 border-radius: .25rem;
                 font-size: 13px;
                 border: none;
-                background: var(--buttonBackground);
+                background: var(--button-background);
             }
 
             #id input[type='search']::-webkit-search-cancel-button {

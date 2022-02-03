@@ -23,22 +23,17 @@ export function DevConsole(param) {
                     <div style='margin-bottom: 20px; background: var(--background); border-radius: 20px;'>
                         <div class='dev-console-row'>
                             <div class='dev-console-text'>
-                                <div class='dev-console-label'>Edit lists and settings</div>
-                                <div class='dev-console-description'>Edit list schemas and app settings right in the browser.</div>
+                                <div class='dev-console-label'>Edit settings</div>
+                                <div class='dev-console-description'>Edit app initialization settings right in the browser</div>
                             </div>
-                            <div class='d-flex flex-column justify-content-center'>
-                                <div class='d-flex align-items-center ml-5'>
-                                    <button class='btn btn-robi mb-3 dev-console-button modify-lists'>Lists</button>
-                                </div>
-                                <div class='d-flex align-items-center ml-5'>
-                                    <button class='btn btn-robi dev-console-button modify-app'>Settings</button>
-                                </div>
+                            <div class='d-flex align-items-center ml-5'>
+                                <button class='btn btn-robi dev-console-button modify-app'>Settings</button>
                             </div>
                         </div>
                         <div class='dev-console-row update-row'>
                             <div class='dev-console-text'>
                                 <div class='dev-console-label'>Sync lists</div>
-                                <div class='dev-console-description'>Sync app with list schemas defined in <code>App/src/lists.js</code>.</div>
+                                <div class='dev-console-description'>Sync app with list schemas</div>
                             </div>
                             <div class='d-flex align-items-center ml-5'>
                                 <button class='btn btn-robi dev-console-button update'>Sync lists</button>
@@ -46,7 +41,7 @@ export function DevConsole(param) {
                         </div>
                         <div class='dev-console-row'>
                             <div class='dev-console-text'>
-                                <div class='dev-console-label'>Refresh installed lists</div>
+                                <div class='dev-console-label'>Refresh lists</div>
                                 <div class='dev-console-description'>Delete and recreate select lists. All items from selected lists will be deleted.</div>
                             </div>
                             <div class='d-flex align-items-center ml-5'>
@@ -66,7 +61,7 @@ export function DevConsole(param) {
                     <div class='dev-console-row alert-robi-secondary'>
                         <div class='dev-console-text'>
                             <div class='dev-console-label'>Backup</div>
-                            <div class='dev-console-description'>Download a backup of all lists, settings, and source code. You can use it to reinstall the app up to this point or port it to another site with data intact.</div>
+                            <div class='dev-console-description'>Download a backup of all lists, settings, and source code. You can use backups to reinstall the app or port it to another site.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
                             <button class='btn btn-robi dev-console-button delete'>Backup lists, data, and code</button>

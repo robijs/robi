@@ -245,6 +245,100 @@ export function Lists() {
                     ]
                 }
             ]
+        },
+        {
+            list: 'Feedback',
+            display: 'Feedback',
+            options: {
+                files: true
+            },
+            fields: [
+                {
+                    name: 'Summary',
+                    display: 'Summary',
+                    type: 'slot'
+                },
+                {
+                    name: 'Description',
+                    display: 'Description',
+                    type: 'mlot'
+                },
+                {
+                    name: 'Notes',
+                    display: 'Notes',
+                    type: 'mlot'
+                },
+                {
+                    name: 'Status',
+                    display: 'Status',
+                    value: 'Submitted',
+                    type: 'choice',
+                    choices: [
+                        'Submitted',
+                        'Cancelled',
+                        'Completed',
+                        'In Progress',
+                        'Next Revision',
+                        'On Hold',
+                        'Awaiting Feedback'
+                    ]
+                },
+                {
+                    name: 'RequestedDate',
+                    display: 'Requested Date',
+                    type: 'date'
+                },
+                {
+                    name: 'DueDate',
+                    display: 'Due Date',
+                    type: 'date'
+                },
+                {
+                    name: 'CompletedDate',
+                    display: 'Completed Date',
+                    type: 'date'
+                },
+                {
+                    name: 'RequestedBy',
+                    display: 'RequestedBy',
+                    type: 'SLOT'
+                },
+                {
+                    name: 'URL',
+                    display: 'URL',
+                    type: 'slot'
+                },
+                {
+                    name: 'Section',
+                    display: 'Area, Form, or Section',
+                    type: 'slot'
+                },
+                {
+                    name: 'SessionId',
+                    display: 'Session ID',
+                    type: 'slot'
+                },
+                {
+                    name: 'UserAgent',
+                    display: 'User Agent',
+                    type: 'mlot'
+                },
+                {
+                    name: 'LocalStorage',
+                    display: 'Local Storage',
+                    type: 'mlot'
+                },
+                {
+                    name: 'SessionStorage',
+                    display: 'Session Storage',
+                    type: 'mlot'
+                },
+                {
+                    name: 'Logs',
+                    display: 'Logs',
+                    type: 'mlot'
+                }
+            ]
         }
     ];
 }

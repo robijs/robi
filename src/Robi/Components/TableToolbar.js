@@ -136,13 +136,13 @@ export function TableToolbar(param) {
             }
 
             #id .ask-a-question {
-                background: var(--buttonBackground);
+                background: var(--button-background);
                 color: var(--primary);
                 font-weight: 500;
             }
             
             #id .search-questions {
-                background: var(--buttonBackground) !important;
+                background: var(--button-background) !important;
                 border-color: transparent;
                 border-radius: 8px;
                 min-width: 250px;
@@ -157,7 +157,6 @@ export function TableToolbar(param) {
 
             /* Search */
             #id .advanced-search {
-                white-space: nowrap;
                 width: 126px;
                 transition: 300ms opacity ease;
                 text-align: right;

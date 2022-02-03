@@ -83,24 +83,25 @@ export function SetTheme() {
                 --background-HSL-3: hsl(${background_HSL_3});
                 --background-HSL-5: hsl(${background_HSL_5});
                 --background-HSL-10: hsl(${background_HSL_10});
-                --borderColor: ${borderColor};
+                --border-color: ${borderColor};
                 --box-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? 40 : 10}%) 0px 0px 16px -2px;
-                --buttonBackground: ${buttonBackgroundColor};
+                --button-background: ${buttonBackgroundColor};
                 --color: ${color};
                 --inputBackground: ${App.get('prefersColorScheme') === 'dark' ? background : secondary};
                 --primary: ${primary};
-                --primaryHex: ${hex};
-                --primaryHSL: hsl(${hsl});
-                --primaryHSL-5: hsl(${hsl5});
-                --primaryHSL-10: hsl(${hsl10});
-                --primaryRGB: ${rgb};
-                --primary6b: ${primary + '6b'};
-                --primary19: ${primary + '19'}; 
-                --primary20: ${primary + '20'};
+                --primary-hex: ${hex};
+                --primary-hsl: hsl(${hsl});
+                --primary-hsl-5: hsl(${hsl5});
+                --primary-hsl-10: hsl(${hsl10});
+                ----primary-rgb: ${rgb};
+                --primary-6b: ${primary + '6b'};
+                --primary-19: ${primary + '19'}; 
+                --primary-20: ${primary + '20'};
+                --primary-30: ${primary + '30'};
                 --scrollbar: ${App.get('prefersColorScheme') === 'dark' ? 'dimgray' : 'lightgray'};
                 --secondary: ${secondary};
-                --selectedRow: ${primary + (selectedRowOpacity || '10')};
-                --sortShadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? 40 : 10}%) 0px 0px 32px 0px;
+                --selected-row: ${primary + (selectedRowOpacity || '10')};
+                --sort-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? 40 : 10}%) 0px 0px 32px 0px;
             }
         `
     });

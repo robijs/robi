@@ -37,7 +37,7 @@ export function Button(param) {
 
             #id.normal-button {
                 color: var(--primary);
-                background: var(--buttonBackground);
+                background: var(--button-background);
                 border: solid 1px transparent;
             }
 

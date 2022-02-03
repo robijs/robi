@@ -82,7 +82,7 @@ export function LinksField(param) {
                 min-height: 56px;
                 width: 100%;
                 border-radius: 10px;
-                border: 1px solid var(--borderColor);
+                border: 1px solid var(--border-color);
                 padding: 10px;
             }
             
@@ -99,7 +99,7 @@ export function LinksField(param) {
                 display: inline-flex;
                 border-radius: 10px;
                 padding: 5px 5px 5px 20px;
-                background: var(--buttonBackground);
+                background: var(--button-background);
                 color: #007bff;
                 font-weight: 500;
                 font-size: 13px;

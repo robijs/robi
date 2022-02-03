@@ -60,7 +60,7 @@ export async function ModifyRoutes(event) {
                     parent: row,
                     onKeyup(event) {
                         if (routeTitle.value() !== title) {
-                            row.get().style.background = 'var(--primary20)';
+                            row.get().style.background = 'var(--primary-20)';
                             row.find('.modified').style.opacity = '1';
                             // Use current path as key
                             
@@ -86,7 +86,7 @@ export async function ModifyRoutes(event) {
                     },
                     onKeyup(event) {
                         if (routeTitle.value() !== title) {
-                            row.get().style.background = 'var(--primary20)';
+                            row.get().style.background = 'var(--primary-20)';
                             row.find('.modified').style.opacity = '1';
                         } else {
                             row.get().style.background = 'inherit';
@@ -272,24 +272,28 @@ export async function ModifyRoutes(event) {
                             return `import ${route} from './Routes/${route}/${route}.js'`;
                         }).join('\n');
                     
-                        updated = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS\n${newImports || '\n'}\n// @END-IMPORTS`);
+                        updated = content.replace(/\/\/ @START-Imports:Routes([\s\S]*?)\/\/ @END-Imports:Routes/, `// @START-Imports:Routes\n${newImports || '\n'}\n// @END-Imports:Routes`);
                     
-                        // FIXME: Doesn't retain hide: true
                         // Set routes
-                        const allRoutes = updated.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
-                        const oldRoutes = allRoutes[1].split(', // @ROUTE');
+                        const allRoutes = updated.match(/\/\/ @START-Routes([\s\S]*?)\/\/ @END-Routes/);
+                        const oldRoutes = allRoutes[1].split(', // @Route');
 
-                        // console.log(oldRoutes);
+                        console.log(allRoutes);
+                        console.log(oldRoutes);
+                        console.log(fields);
 
                         const newRoutes = fields.map((field, index) => {
                             const { name, path, title, icon, current } = field.values();
                             const route = path || name;
                             const old = oldRoutes[index];
+
+                            console.log(route, old);
+
                             const hidden = old.match(/hide: true,/);
 
-                            // console.log(name);
-                            // console.log(old);
-                            // console.log(hidden);
+                            console.log(name);
+                            console.log(old);
+                            console.log(hidden);
 
                             return [
                                 `        `,
@@ -304,11 +308,13 @@ export async function ModifyRoutes(event) {
                                 `        // @END-${route}`,
                                 `        `
                             ].join('\n');
-                        }).join(', // @ROUTE');
+                        }).join(', // @Route');
+
+                        return;
 
                         // console.log(newRoutes);
                     
-                        updated = updated.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${newRoutes || '\n        '}// @END-ROUTES`);
+                        updated = updated.replace(/\/\/ @START-Routes([\s\S]*?)\/\/ @END-Routes/, `// @START-Routes${newRoutes || '\n        '}// @END-Routes`);
                     
                         // console.log('OLD\n----------------------------------------\n', content);
                         // console.log('\n****************************************');

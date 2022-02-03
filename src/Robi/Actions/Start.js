@@ -2,6 +2,7 @@ import { AppContainer } from '../Components/AppContainer.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { AddLinks } from './AddLinks.js'
+import { GetCurrentUser } from './GetCurrentUser.js'
 import { InitializeApp } from './InitializeApp.js'
 import { LogError } from './LogError.js'
 import { SetTheme } from './SetTheme.js'
@@ -17,9 +18,11 @@ export function Start(param) {
     } = param;
 
     const {
+        beforeInit,
         links,
         name,
         theme,
+        usersList
     } = settings;
 
     // Set app settings
@@ -75,7 +78,7 @@ export function Start(param) {
         });
     });
 
-    /** Start app on page load */
+    // Start app on page load
     window.onload = async () => {
         // Add links to head
         AddLinks({
@@ -91,6 +94,16 @@ export function Start(param) {
         });
 
         appContainer.add();
+
+        // Get/Set User
+        Store.user(await GetCurrentUser({
+            list: usersList
+        }));
+
+        // Before load
+        if (beforeInit) {
+            beforeInit();
+        }
 
         // Pass start param to InstallApp
         InitializeApp(param);

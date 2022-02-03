@@ -2,6 +2,7 @@ import { Card } from './Card.js'
 import { Container } from './Container.js'
 import { Button } from './Button.js'
 import { App } from '../Core/App.js'
+import { Lists } from '../Models/Lists.js'
 
 // @START-File
 /**
@@ -13,7 +14,7 @@ export async function DeveloperLinks(param) {
         parent,
     } = param;
 
-    const lists = App.lists();
+    const lists = App.lists().sort((a, b) => a.list.localeCompare(b.list));
 
     addSection({
         title: '',
@@ -53,32 +54,18 @@ export async function DeveloperLinks(param) {
 
     addSection({
         title: `Core Lists`,
-        buttons: [
-            {
-                value: `Errors`,
-                url: `${App.get('site')}/Lists/Errors`
-            },
-            {
-                value: `Log`,
-                url: `${App.get('site')}/Lists/Log`
-            },
-            {
-                value: `Questions`,
-                url: `${App.get('site')}/Lists/Questions`
-            },
-            {
-                value: `Settings`,
-                url: `${App.get('site')}/Lists/Settings`
-            },
-            {
-                value: `Users`,
-                url: `${App.get('site')}/Lists/Users`
-            },
-            {
-                value: `Release Notes`,
-                url: `${App.get('site')}/Lists/ReleaseNotes`
-            }
-        ]
+        buttons: Lists()
+        .sort((a, b) => a.list.localeCompare(b.list))
+        .filter(item => item.template !== 101)
+        .map(item => {
+            const { list, options } = item;
+
+            return {
+                value: list,
+                url: `${App.get('site')}/Lists/${list}`,
+                files: options?.files
+            };
+        })
     });
 
     addSection({

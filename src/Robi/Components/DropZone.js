@@ -89,7 +89,7 @@ export function DropZone(param) {
             filesContainer.find(`.remove-container[data-filename='${file.name}'] .status`).innerText = 'Queued';
             filesContainer.find(`.remove-container[data-filename='${file.name}'] .tip`).innerText = 'up next';
             filesContainer.find(`.remove-container[data-filename='${file.name}'] .remove-icon`).innerHTML = /*html*/ `
-                <div style='width: 22px; height: 22px; background: var(--borderColor); border-radius: 50%;'></div>
+                <div style='width: 22px; height: 22px; background: var(--border-color); border-radius: 50%;'></div>
             `;
 
             // /** TODO: @todo remove 'remove' event listener -> add 'cancel' event listener   */

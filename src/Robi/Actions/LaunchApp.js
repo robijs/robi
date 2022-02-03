@@ -1,4 +1,3 @@
-import { GetCurrentUser } from './GetCurrentUser.js'
 import { GenerateUUID } from './GenerateUUID.js'
 import { SetSessionStorage } from './SetSessionStorage.js'
 import { Route } from './Route.js'
@@ -11,6 +10,7 @@ import { Modal } from '../Components/Modal.js'
 import { ReleaseNotesContainer } from '../Components/ReleaseNotesContainer.js'
 import { Routes } from '../Core/Routes.js'
 import { Store } from '../Core/Store.js'
+import { Feedback } from '../Components/Feedback.js'
 
 // @START-File
 /**
@@ -23,7 +23,7 @@ export async function LaunchApp(param) {
     } = param;
 
     const {
-        title, usersList, svgSymbols, sessionStorageData, sidebar, maincontainer
+        title, svgSymbols, sessionStorageData, sidebar, maincontainer, allowFeedback
     } = settings;
 
     /** Set sessions storage */
@@ -42,11 +42,6 @@ export async function LaunchApp(param) {
         name: 'svgdefs',
         component: svgDefs
     });
-
-    /** Get AD user and Users list item properties */
-    Store.user(await GetCurrentUser({
-        list: usersList
-    }));
 
     /** Get current route */
     const path = location.href.split('#')[1];
@@ -119,6 +114,10 @@ export async function LaunchApp(param) {
         });
     } catch (error) {
         console.error(error);
+    }
+
+    if (allowFeedback) {
+        Feedback();
     }
 
     /** Run current route on page load */
