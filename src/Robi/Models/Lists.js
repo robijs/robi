@@ -230,6 +230,15 @@ export function Lists() {
                     ].concat(App.get('roles') || [])
                 },
                 {
+                    name: "Facilities",
+                    type: 'multichoice',
+                    choices: [
+                        'Bldg 1',
+                        'Bldg 2',
+                        'Bldg 3'
+                    ].concat(App.get('roles') || [])
+                },
+                {
                     name: "Settings",
                     type: 'mlot'
                 }
@@ -241,7 +250,8 @@ export function Lists() {
                         'Title',
                         'Email',
                         'LoginName',
-                        'Roles'
+                        'Roles',
+                        'Facilities'
                     ]
                 }
             ]

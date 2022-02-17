@@ -24,9 +24,9 @@ export async function AccountInfo(param) {
     accountInfoCard.add();
 
     const {
-        Title, LoginName, Email, Role,
+        Title, LoginName, Email, Roles, Facilities
     } = Store.user();
-
+    console.log(Store.user())
     /** Name */
     const nameField = SingleLineTextField({
         label: 'Name',
@@ -63,12 +63,23 @@ export async function AccountInfo(param) {
     /** Role */
     const roleField = SingleLineTextField({
         label: 'Role',
-        value: Role || 'User',
+        value: Roles.results || 'User',
+        readOnly: true,
+        fieldMargin: '0px 0px 20px 0px',
+        parent: accountInfoCard
+    });
+
+    roleField.add();
+
+    /** Facility */
+    const facilityField = SingleLineTextField({
+        label: 'Facility',
+        value: Facilities.results || 'Not Selected',
         readOnly: true,
         fieldMargin: '0px',
         parent: accountInfoCard
     });
 
-    roleField.add();
+    facilityField.add();
 }
 // @END-File

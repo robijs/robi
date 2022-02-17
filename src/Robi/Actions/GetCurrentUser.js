@@ -67,6 +67,9 @@ export async function GetCurrentUser(param) {
                             'Developer'
                         ]
                     },
+                    Facilities: {
+                        results: []
+                    },
                     Settings: App.get('userSettings')
                 }
             });

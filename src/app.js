@@ -3,7 +3,8 @@
 // Just be sure to put @START, @END, and @[Spacer Name] sigils in the right places.
 // Otherwise, changes made from CLI and GUI tools won't work properly.
 
-import { Start } from './Robi/Robi.js'
+import { App, Start, UpdateItem } from './Robi/Robi.js'
+import { BootstrapButton, ChoiceField, Modal } from './Robi/RobiUI.js'
 
 // @START-Imports:Lists
 import List_AllTypes from './Lists/AllTypes/Schema.js'
@@ -25,13 +26,14 @@ import Route_ModifyFile from './Routes/ModifyFile/ModifyFile.js'
 import Route_Button from './Routes/Button/Button.js'
 import Route_CustomForm from './Routes/CustomForm/CustomForm.js'
 import Route_NewRoute from './Routes/NewRoute/NewRoute.js'
+import Route_CurrencyForm from './Routes/CurrencyForm/CurrencyForm.js'
 // @END-Imports:Routes
 
 // @START
 Start({
     releaseNotes: {
         show: true,
-        version: '3.0.0',
+        version: '1.0.0',
         title: 'New version now live',
         message: 'View release notes'
     },
@@ -46,15 +48,15 @@ Start({
     ],
     // Routes are directly addressable. Ex: https://site#path.
     routes: [
-        // @START-Routes
-        // @START-CustomForm
+        // @START-Routes, // @Route
+        // @START-CurrencyForm
         {
-            path: 'CustomForm',
-            title: 'Custom Form',
-            icon: 'bs-checks-grid',
-            go: Route_CustomForm
+            path: 'CurrencyForm',
+            title: 'Currency Form',
+            icon: 'aid-kit',
+            go: Route_CurrencyForm
         }
-        // @END-CustomForm
+        // @END-CurrencyForm
         , // @Route
         // @START-SortTables
         {
@@ -139,15 +141,15 @@ Start({
         // title: site title
         // userDefaultRole: default role for newly created use accounts
         // userSettings: new user account 'Settings' field default JSON value
-        name: /* @START-name */'App'/* @END-name */,
+        name: /* @START-name */'External Currency'/* @END-name */,
         questionTypes: [
             {
                 title: 'General',
                 path: 'General'
             }
         ],
-        theme: /* @START-theme */'Purple'/* @END-theme */,
-        title: /* @START-title */'Title'/* @END-title */,
+        theme: /* @START-theme */'Green'/* @END-theme */,
+        title: /* @START-title */'External Currency'/* @END-title */,
         userDefaultRole: 'User',
         userSettings: /* @START-userSettings */JSON.stringify({ searches: {}, actions: [ { Name: 'Create SLOTs', FileNames: 'CreateSLOTItems.js' }, { Name: 'Update MLOT', FileNames: 'UpdateMLOT.js' } ] })/* @END-userSettings */,
         // OPTIONAL PROPERTIES
@@ -178,8 +180,92 @@ Start({
         },
         library: '',
         maincontainer: null,
+        facilities: [
+            'Bldg 1',
+            'Bldg 2',
+            'Bldg 3', 
+        ],
+        roles: [
+            'Physician',
+            'Site POC',
+            'Visitor'
+        ],
         sidebar: null,
-        usersList: 'Users'
+        usersList: 'Users',
+        async onCreateUser(user) {
+            return (async () => {
+                return await new Promise((resolve) => {
+                    const modal = Modal({
+                        title: false,
+                        disableBackdropClose: true,
+                        scrollable: true,
+                        async addContent(modalBody) {
+                            modalBody.classList.add('install-modal');
+                            modal.find('.modal-dialog').style.maxWidth = 'fit-content';
+                
+                            modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                <h3>
+                                    Welcome, ${user.Title}
+                                </h3>
+                                <p class='mb-4 mt-4'>Since this is your first time visiting <strong>External Currency</strong>, please <strong>choose your role</strong> and <strong>your facility.</strong>.
+                            `);
+
+                            const role = ChoiceField({
+                                label: 'Role',
+                                options: App.get('roles').map(role => { return { label: role } }),
+                                parent: modalBody
+                            
+                            });
+            
+                            role.add();
+
+                            const facility = ChoiceField({
+                                label: 'Facility',
+                                options: App.get('facilities').map(facility => { return { label: facility } }),
+                                parent: modalBody
+                            
+                            });
+            
+                            facility.add();
+
+                            const okBtn = BootstrapButton({
+                                async action(event) {
+                                    await UpdateItem({
+                                        list: 'Users',
+                                        itemId: user.Id,
+                                        data: {
+                                            Roles: {
+                                                results: user.Roles.results.concat([role.value()])
+                                            },
+                                            Facilities: {
+                                                results: facility.value()
+                                            }
+                                        }
+                                    });
+                                    
+                                    $(modal.get()).on('hidden.bs.modal', event => {
+                                        resolve();
+                                    });
+            
+                                    modal.close();
+                                },
+                                classes: ['w-100 mt-4'],
+                                width: '100%',
+                                parent: modalBody,
+                                type: 'robi',
+                                value: 'Start'
+                            });
+                
+                            okBtn.add();
+                        },
+                        centered: true,
+                        showFooter: false,
+                    });
+                
+                    modal.add();
+                });
+            })();
+        }
         // @END-SETTINGS
     }
 });

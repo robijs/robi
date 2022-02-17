@@ -7,9 +7,9 @@
     {
       "Title": "Log in",
       "SessionId": null,
-      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded Title\",\"location\":\"http://127.0.0.1:8080/dev/app.html#CustomForm\",\"role\":\"Developer\"}",
+      "Message": "{\"body\":\"first.mi.last.ctr@mail.mil successfully loaded External Currency\",\"location\":\"http://127.0.0.1:8080/dev/app.html\",\"role\":\"Developer, Visitor\"}",
       "StackTrace": "\"LaunchApp (http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js:112:25)\\n    at InitializeApp (http://127.0.0.1:8080/src/Robi/Actions/InitializeApp.js:57:13)\\n    at Start.window.onload (http://127.0.0.1:8080/src/Robi/Actions/Start.js:109:9)\"",
-      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 Edg/97.0.1072.76",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36 Edg/98.0.1108.50",
       "Module": "http://127.0.0.1:8080/src/Robi/Actions/LaunchApp.js",
       "AuthorId": 1,
       "Author": {
@@ -21,8 +21,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Thu, 03 Feb 2022 20:36:33 GMT",
-      "Modified": "Thu, 03 Feb 2022 20:36:33 GMT",
+      "Created": "Thu, 17 Feb 2022 19:05:34 GMT",
+      "Modified": "Thu, 17 Feb 2022 19:05:34 GMT",
       "Id": 1
     }
   ],
@@ -33,11 +33,15 @@
       "LoginName": "0987654321@mil",
       "Roles": {
         "results": [
-          "Developer"
+          "Developer",
+          "Visitor"
         ]
       },
       "SiteId": 1,
       "Settings": "{\"searches\":{},\"actions\":[{\"Name\":\"Create SLOTs\",\"FileNames\":\"CreateSLOTItems.js\"},{\"Name\":\"Update MLOT\",\"FileNames\":\"UpdateMLOT.js\"}]}",
+      "Facilities": {
+        "results": "Bldg 2"
+      },
       "AuthorId": 1,
       "Author": {
         "Title": "First Last",
@@ -48,8 +52,8 @@
         "Title": "First Last",
         "LoginName": "0987654321@mil"
       },
-      "Created": "Thu, 03 Feb 2022 20:36:33 GMT",
-      "Modified": "Thu, 03 Feb 2022 20:36:33 GMT",
+      "Created": "Thu, 17 Feb 2022 19:05:26 GMT",
+      "Modified": "Thu, 17 Feb 2022 19:05:34 GMT",
       "Id": 1
     }
   ],
