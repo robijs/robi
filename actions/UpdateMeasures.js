@@ -4,7 +4,7 @@ import { Get } from '../Actions/Get.js'
 import { HTML } from '../Actions/HTML.js'
 import { Store } from '../Core/Store.js'
 import { Style } from '../Actions/Style.js'
-import { CreateItem, UpdateColumn, UpdateItem } from '../Robi.js'
+import { CreateItem, UpdateColumn } from '../Robi.js'
 
 // @START-File
 /**
@@ -12,52 +12,10 @@ import { CreateItem, UpdateColumn, UpdateItem } from '../Robi.js'
  * @param {*} param
  * @returns
  */
-export async function ActionsCards({ parent, path }) {
-    // NOTE:
-
-    // const originalRes = await fetch('../../import.txt');
-    // const original = await originalRes.json();
-    // const measuresRes = await fetch('../../measures.json');
-    // const measures = await measuresRes.json();
-
-    // let output = [...Array(508).keys()].map(num => {
-    //     const measure = measures.find(m => parseInt(m.ID) === num + 1) || { MeasureName: 'PLACEHOLDER'};
-    //     const originalItem = original.find(m => parseInt(m.ID) === num + 1) || { MeasureName: 'PLACEHOLDER'};
-
-    //     if (measure.Status === 'Under Development') {
-    //         measure.Publisher = null;
-    //         measure.Published = null;
-    //     }
-
-    //     if (measure.MeasureName !== 'PLACEHOLDER') {
-    //         measure.ModifiedByAccount = originalItem.ModifiedByAccount;
-    //     }
-
-    //     const keys = Object.keys(measure);
-        
-    //     keys.forEach(key => {
-    //         if (measure[key] === '') {
-    //             measure[key] = null;
-    //         }
-    //     });
-
-    //     delete measure['Item Type'];
-    //     delete measure['Path'];
-        
-    //     measure.ModifiedByAccount = originalItem.ModifiedByAccount;
-        
-    //     return measure;
-    // });
-
-    // console.log(output);
-
-    // return;
-
-    // NOTE:
-
+export async function UpdateMeasures({ parent }) {
     // const measuresRes = await fetch('../../intakes.json');
-    // const measuresRes = await fetch('../../import.txt');
-    // const measures = await measuresRes.json();
+    const measuresRes = await fetch('../../import.txt');
+    const measures = await measuresRes.json();
 
     // const toMapRes = await fetch('../../file-types.json');
     // const toMapItems = await toMapRes.json();
@@ -478,37 +436,55 @@ export async function ActionsCards({ parent, path }) {
             }
         });
 
-        // Items
-        const items = await Get({
-            list: 'Measures',
-            select: `*,Author/Title,Editor/Title`,
-            expand: `File,Author,Editor`
-        });
-
-        console.log(items);
-
-        // {"Title":"First Last","Email":"first.mi.last.ctr@mail.mil","LoginName":"0987654321@mil","Roles":{"results":["Developer","Visitor"]},"SiteId":1,"Settings":"{\"searches\":{},\"watched\":[]}","AuthorId":1,"Author":{"Title":"First Last","LoginName":"0987654321@mil"},"EditorId":1,"Editor":{"Title":"First Last","LoginName":"0987654321@mil"},"Created":"Sat, 26 Feb 2022 22:28:51 GMT","Modified":"Sat, 26 Feb 2022 22:30:12 GMT","Id":1}
-        for (let [i, item] of items.entries()) {
+        for (let i = 475; i <= 508; i++) {
             if (run) {
-                const { ID, Author, Editor } = item;
-                const { Created, Modified } = measures.find(m => parseInt(m.ID) === ID);
-
-                // console.log(item, measure);
-                console.log({
-                    Modified,
-                    Published: Created,
-                    Publisher: Author
+                // Check if exists
+                const exists = Get({
+                    list: 'Measures',
+                    filter: `Id eq ${i}`
                 });
 
-                continue;
+                if (exists[0]) {
+                    console.log(`${i}: Measure already copied.`);
 
-                const updatedItem = await UpdateItem({
-                    list: 'Measures',
-                    itemId: ID,
-                    data: {
-                        // Published: 
-                    }
-                })
+                    continue;
+                }
+
+                // Find measure
+                const item = measures.find(measure => measure.ID === i);
+
+                // Copy measure
+                if (item) {
+                    const { ID } = item;
+
+                    console.log(`${ID}: COPY.`);
+
+                    // Delete props
+                    delete item.CreatedByAccount;
+                    delete item.CreatedByEmail;
+                    delete item.ModifiedByAccount;
+                    delete item.ModifiedByEmail;
+
+                    const newItem = await CreateItem({
+                        list: 'Measures',
+                        data: item
+                    });
+
+                    console.log(`${ID}: Created.`, newItem);
+                } 
+                
+                // Placeholder Item
+                else {
+                    await CreateItem({
+                        list: 'Measures',
+                        data: {
+                            ID: i,
+                            MeasureName: 'DELETE'
+                        }
+                    });
+
+                    console.log(`${i}: Not a measure. Created placeholder item.`);
+                }
 
                 if (i === measures.length - 1) {
                     timer.stop();
@@ -520,87 +496,5 @@ export async function ActionsCards({ parent, path }) {
             }
         }
     }
-
-    return;
-
-    // TODO: Make actions directly addressable ( how to make sure unique path betwen user and shared names/ids? )
-
-    let userSettings = JSON.parse(Store.user().Settings);
-    let myActions = userSettings.actions || [];
-    const sharedActions = await Get({
-        list: 'Actions'
-    });
-
-    Style({
-        name: 'action-cards',
-        style: /*css*/ `
-            .actions-title {
-                font-size: 20px;
-                font-weight: 700;
-                margin-bottom: 20px;
-            }
-
-            .action-card-container {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, 150px); /* passed in size or 22 plus (15 * 2 for padding) */
-                justify-content: space-between;
-                width: 100%;
-            }
-
-            .action-card {
-                cursor: pointer;
-                height: 150px;
-                width: 150px;
-                border-radius: 20px;
-                background: var(--background);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 16px;
-                font-weight: 500;
-            }
-
-            .action-btn {
-                margin-right: 12px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 32px;
-                height: 32px;
-                cursor: pointer;
-            }
-
-            .action-btn .icon {
-                fill: var(--primary);
-            }
-        `
-    });
-
-    // My Actions
-    parent.append(/*html*/ `
-        <div class='actions-title'>My Actions</div>
-        <div class='action-card-container'>
-            ${
-                HTML({
-                    items: myActions,
-                    each(item) {
-                        const { Name, FileNames } = item;
-                        
-                        return /*html*/ `
-                            <div class='action-card' data-files='${FileNames}'>${Name}</div>
-                        `
-                    }
-                })
-            }
-        </div>
-    `);
-
-    parent.findAll('.action-card').forEach(card => {
-        card.addEventListener('click', event => {
-            parent.empty();
-
-            ActionsEditor({ parent, files: event.target.dataset.files });
-        });
-    });
 }
 // @END-File

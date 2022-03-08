@@ -38,9 +38,8 @@ export async function Settings({ parent, pathParts, title }) {
         'Theme'
     ];
 
-    // console.log(Store.user().Roles, Store.user().Roles.results.includes('Developer'));
-
-    if (devPaths.includes(path) && !Store.user().Roles.results.includes('Developer')) {
+    // FIXME: Refactor hasRole to accept multiple args
+    if (devPaths.includes(path) && (!Store.user().hasRole('Developer') && !Store.user().hasRole('Administrator'))) {
         Route('403');
     }
 
@@ -66,7 +65,7 @@ export async function Settings({ parent, pathParts, title }) {
 
     // Developers can see additional options
     // TODO: API for checking user roles
-    if ( Store.user().Roles.results.includes('Developer')) {
+    if ( Store.user().hasRole('Developer')) {
         sections = sections.concat([
             {
                 name: 'Actions',
@@ -303,7 +302,7 @@ export async function Settings({ parent, pathParts, title }) {
                 view: 'Users',
                 formView: 'All',
                 width: '100%',
-                toolbar: [],
+                advancedSearch: true,
                 parent: planContainer
             });
             break;
@@ -402,7 +401,7 @@ export async function Settings({ parent, pathParts, title }) {
         // attachFilesButton.add();
 
         // /** Test Send Email */
-        // const sendEmailButton = BootstrapButton({
+        // const sendEmailButton = Button({
         //     async action(event) {
         //         await SendEmail({
         //             From: 'stephen.a.matheis.ctr@mail.mil',
