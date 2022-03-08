@@ -1,7 +1,6 @@
 import { Component } from '../Actions/Component.js'
 import { Shimmer } from '../Actions/Shimmer.js'
 import { Store } from '../Core/Store.js'
-import { LoadingSpinner } from './LoadingSpinner.js';
 
 // @START-File
 /**

@@ -706,8 +706,12 @@ export function AppContainer() {
 
             /* Row */
             .robi-row {
-                transition: background-color 250ms ease, padding 250ms ease, margin 250ms ease, transform 250ms ease, box-shadow 250ms ease;
+                /* transition: background-color 250ms ease, padding 250ms ease, margin 250ms ease, transform 250ms ease, box-shadow 250ms ease; */
                 border-radius: 20px !important;
+            }
+
+            .robi-row-transition {
+                transition: background-color 250ms ease, padding 250ms ease, margin 250ms ease, transform 250ms ease, box-shadow 250ms ease;
             }
 
             .robi-row.ui-sortable-handle {

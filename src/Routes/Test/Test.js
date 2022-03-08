@@ -3,7 +3,7 @@
 // Just be sure to put @START and @END sigils in the right places.
 // Otherwise, changes made with GUI tools will not render properly.
 
-import { ModalSlideUp, BootstrapButton, LoadingSpinner } from '../../Robi/RobiUI.js'
+import { ModalSlideUp, Button, LoadingSpinner } from '../../Robi/RobiUI.js'
 import { CreateApp  } from '../../Robi/Robi.js'
 
 /**
@@ -11,7 +11,7 @@ import { CreateApp  } from '../../Robi/Robi.js'
  * @param {*} param 
  */
 export default async function Test({ parent }) {
-    const copyAppBtn = BootstrapButton({
+    const copyAppBtn = Button({
         value: 'Copy app.js',
         classes: ['mr-3', 'mt-3'],
         type: 'robi',
@@ -34,7 +34,7 @@ export default async function Test({ parent }) {
 
     copyAppBtn.add();
 
-    const getSiteUsersBtn = BootstrapButton({
+    const getSiteUsersBtn = Button({
         value: 'Create dir',
         classes: ['mr-3', 'mt-3'],
         type: 'robi',
@@ -65,7 +65,7 @@ export default async function Test({ parent }) {
 
     getSiteUsersBtn.add();
 
-    const createDirBtn = BootstrapButton({
+    const createDirBtn = Button({
         value: 'Create dir',
         classes: ['mr-3', 'mt-3'],
         type: 'robi',
@@ -82,7 +82,7 @@ export default async function Test({ parent }) {
 
     createDirBtn.add();
 
-    const editTitle = BootstrapButton({
+    const editTitle = Button({
         value: 'Edit title',
         classes: ['mr-3', 'mt-3'],
         type: 'robi',
@@ -143,7 +143,7 @@ export default async function Test({ parent }) {
 
     editTitle.add();
 
-    const shrinkApp = BootstrapButton({
+    const shrinkApp = Button({
         value: 'Shrink app',
         classes: ['mr-3', 'mt-3'],
         type: 'robi',
@@ -349,7 +349,7 @@ export default async function Test({ parent }) {
                     modalBody.style.paddingTop = '0px';
     
                     // Save and close button
-                    const saveAndCloseBtn = BootstrapButton({
+                    const saveAndCloseBtn = Button({
                         async action(event) {
                             // TODO: only save file if changed
                             await saveFile(event);
@@ -378,7 +378,7 @@ export default async function Test({ parent }) {
     
                     saveAndCloseBtn.add();
     
-                    const cancelBtn = BootstrapButton({
+                    const cancelBtn = Button({
                         action(event) {
                             modal.close();
                         },
@@ -580,7 +580,7 @@ export default async function Test({ parent }) {
         modal.add();
     }
 
-    const parseRoutes = BootstrapButton({
+    const parseRoutes = Button({
         value: 'Parse routes',
         classes: ['mr-3', 'mt-3'],
         type: 'robi',
@@ -674,7 +674,7 @@ export default async function Test({ parent }) {
 
     parseRoutes.add();
 
-    const openVSCodeBtn = BootstrapButton({
+    const openVSCodeBtn = Button({
         value: 'VS Code',
         classes: ['mr-3', 'mt-3'],
         type: 'robi',
@@ -686,7 +686,7 @@ export default async function Test({ parent }) {
 
     openVSCodeBtn.add();
 
-    const createSiteBtn = BootstrapButton({
+    const createSiteBtn = Button({
         value: 'Create app',
         classes: ['mr-3', 'mt-3'],
         type: 'robi',

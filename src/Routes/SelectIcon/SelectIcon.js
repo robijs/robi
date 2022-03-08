@@ -4,11 +4,11 @@
 // Otherwise, changes made with GUI tools will not render properly.
 
 import { Store } from '../../Robi/Robi.js'
-import { BootstrapButton, IconField } from '../../Robi/RobiUI.js'
+import { Button, IconField } from '../../Robi/RobiUI.js'
 
 // @START-SelectIcon
 export default async function SelectIcon({ parent }) {
-    const btn = BootstrapButton({
+    const btn = Button({
         type: 'robi',
         value: 'Value',
         classes: ['mb-4', 'w-100'],
@@ -27,7 +27,7 @@ export default async function SelectIcon({ parent }) {
 
     iconField.add();
 
-    const resetBtn = BootstrapButton({
+    const resetBtn = Button({
         type: 'robi-light',
         value: 'Reset',
         classes: ['mt-4', 'w-100'],
