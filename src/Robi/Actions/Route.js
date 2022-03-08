@@ -21,7 +21,7 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
     if (App.isDev()) {
         const canRoute = Store.getData('canRoute');
 
-        console.log('Can Route?', canRoute);
+        // console.log('Can Route?', canRoute);
     
         if (canRoute === false) {
             SaveDialog({ 
@@ -119,6 +119,11 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
     if (!route) {
         // TODO: Reset history state?
+        // History({
+        //     url: location.href.split('#')[0],
+        //     title: App.get('title')
+        // });
+
         Route('404');
 
         return;

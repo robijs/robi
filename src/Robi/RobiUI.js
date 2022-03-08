@@ -21,6 +21,7 @@ import { AttachFilesButton } from './Components/AttachFilesButton.js'
 import { AttachFilesField } from './Components/AttachFilesField.js'
 import { Attachments } from './Components/Attachments.js'
 import { Banner } from './Components/Banner.js'
+import { BannerMenu } from './Components/BannerMenu.js'
 import { BootstrapTextarea } from './Components/BootstrapTextarea.js'
 import { BuildInfo } from './Components/BuildInfo.js'
 import { Button } from './Components/Button.js'
@@ -133,6 +134,7 @@ export {
     AttachFilesField,
     Attachments,
     Banner,
+    BannerMenu,
     BootstrapTextarea,
     BuildInfo,
     Button,

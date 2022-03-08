@@ -442,7 +442,7 @@ export async function ActionsCards({ parent, path }) {
 
     const timer = Timer({
         parent,
-        classes: ['mt-4', 'w-100'],
+        classes: ['w-100'],
         start() {
             run = true;
             console.log(`Run: ${run}`);

@@ -1,6 +1,7 @@
 import { Table } from './Table.js'
 import { Title } from './Title.js'
 import { Timer } from './Timer.js'
+import { BannerMenu } from './BannerMenu.js'
 import { Container } from './Container.js'
 import { SectionStepper } from './SectionStepper.js'
 import { DevConsole } from './DevConsole.js'
@@ -72,12 +73,16 @@ export async function Settings({ parent, pathParts, title }) {
                 path: 'Actions'
             },
             {
-                name: 'Build',
-                path: 'Build'
-            },
-            {
                 name: 'App',
                 path: 'App'
+            },
+            {
+                name: 'Banner',
+                path: 'Banner'
+            },
+            {
+                name: 'Build',
+                path: 'Build'
             },
             {
                 name: 'Logs',
@@ -240,6 +245,9 @@ export async function Settings({ parent, pathParts, title }) {
             });
         
             devConsole.add();
+            break;
+        case 'Banner':
+            BannerMenu();
             break;
         case 'Build':
             BuildInfo({

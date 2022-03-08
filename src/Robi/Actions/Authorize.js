@@ -8,7 +8,7 @@ import { Route } from './Route.js'
  * @param {(String|Object)} param most likely a View name as a string
  * @param {string} param.view if param is a object, view is a required property
  * @param {string} param.role if param is a object, role is an optional propety
- * @returns {(undefied|false|true)}
+ * @returns {(undefined|false|true)}
  */
 export function Authorize(param) {
     let role, view;
