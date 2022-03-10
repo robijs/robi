@@ -10,7 +10,6 @@ import { Style } from '../Robi.js';
  */
 export async function BannerMenu() {
     const confirmModal = Modal({
-        // title: false,
         scrollable: true,
         centered: true,
         disableBackdropClose: true,
@@ -82,7 +81,7 @@ export async function BannerMenu() {
                 <!-- Title -->
                 <h3 class='mb-3'>Banner</h3>
                 <!-- Switch -->
-                <div class='d-flex align-items-center mb-3'>
+                <div class='d-flex align-items-center'>
                     <div style='font-size: 14px; font-weight: 500;'>Display a banner on all routes?</div>
                     <div class="custom-control custom-switch grab switch">
                         <input type="checkbox" class="custom-control-input" id='os-switch' data-mode='os'>
@@ -93,7 +92,7 @@ export async function BannerMenu() {
                 <div class='field'>
                     <!-- Instructions -->
                     <div class='form-field-description text-muted mb-3' style='font-size: 14px;'>
-                        Enter your message in the preview banner below. You can change text style and color, set the background, and choose a display position.
+                        Enter your message in the banner below.
                     </div>
                     <!-- Message -->
                     <div style='margin-bottom: 40px;'>
