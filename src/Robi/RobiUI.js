@@ -16,6 +16,7 @@ import { AccountInfo } from './Components/AccountInfo.js'
 import { ActionsCards } from './Components/ActionsCards.js'
 import { ActionsEditor } from './Components/ActionsEditor.js'
 import { Alert } from './Components/Alert.js'
+import { Alerts } from './Components/Alerts.js'
 import { AppContainer } from './Components/AppContainer.js'
 import { AttachFilesButton } from './Components/AttachFilesButton.js'
 import { AttachFilesField } from './Components/AttachFilesField.js'
@@ -128,6 +129,7 @@ export {
     ActionsCards,
     ActionsEditor,
     Alert,
+    Alerts,
     AppContainer,
     AttachFilesButton,
     AttachFilesField,
