@@ -9,7 +9,7 @@ import { NewForm } from './NewForm.js'
 import { TableToolbar } from './TableToolbar.js'
 import { App } from '../Core/App.js'
 import { Lists } from '../Models/Lists.js'
-import { Store } from '../Robi.js'
+import { GenerateUUID, Store } from '../Robi.js'
 
 // @START-File
 /**
@@ -82,13 +82,17 @@ export async function Table(param) {
     // Columns
     const headers = [];
     const columns = [];
-
+    
+    let selectAllId;
+    
     if (checkboxes !== false) {
         // headers.push('');
+        selectAllId = `select-all-${GenerateUUID()}`;
+
         headers.push(/*html*/ `
             <div class='custom-control custom-checkbox' style='min-height: unset; text-align: center; padding-left: 32.5px'>
-                <input type='checkbox' class='custom-control-input' id='select-all'>
-                <label class='custom-control-label' for='select-all'></label>
+                <input type='checkbox' class='custom-control-input' id='${selectAllId}'>
+                <label class='custom-control-label' for='${selectAllId}'></label>
             </div>
         `)
         columns.push({
@@ -453,10 +457,7 @@ export async function Table(param) {
                     const selected = table.selected();
                     const button = tableContainer.find('.delete-item');
                     button.disabled = true;
-                    button.style.minWidth = '45px'; // FIXME: don't hard code
-                    button.innerHTML = /*html*/ `
-                        <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true' style='width: 18px; height: 18px; border-width: 3px'></span>
-                    `;
+                    button.innerHTML = /*html*/ `<span class='spinner-border' role='status' aria-hidden='true' style='width: 18px; height: 18px; border-width: 3px'></span>`;
 
                     // Delete items
                     for (let row in selected) {
@@ -609,7 +610,7 @@ export async function Table(param) {
     }
 
     // Toolbar
-    if (toolbar || advancedSearch || heading) {
+    if (toolbar || advancedSearch) {
         const tableToolbar = TableToolbar({
             heading: heading || ( heading === '' ? '' : list ? (lists.find(item => item.list === list)?.display || list.split(/(?=[A-Z])/).join(' '))  : '' ),
             options: toolbar || [],
@@ -858,7 +859,7 @@ export async function Table(param) {
     table.add();
 
     // Add select all change handler
-    table.find('#select-all')?.addEventListener('change', event => {
+    table.find(`#${selectAllId}`)?.addEventListener('change', event => {
         if (event.target.checked) {
             table.DataTable().rows().select();
         } else {
