@@ -105,7 +105,6 @@ export function Start(param) {
 
         appContainer.add();
 
-
         // Before load
         if (beforeInit) {
             await new Promise((resolve) => {
