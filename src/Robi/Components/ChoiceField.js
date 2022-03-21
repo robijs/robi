@@ -337,7 +337,7 @@ export function ChoiceField(param) {
         }
     }
 
-    component.setDropdownMenu = (list) => {
+    component.setDropdownMenu = (list) => { // Edited by LBunker on 2022-03-21
         component.find('.dropdown-menu').innerHTML = buildDropdown(list);
 
         component.findAll('.dropdown-item').forEach(item => {
