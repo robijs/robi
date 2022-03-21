@@ -32,6 +32,7 @@ export function AppContainer() {
             }
 
             .appcontainer {
+                /* FIXME: show immediately */
                 display: none;
                 background: var(--secondary);
             }

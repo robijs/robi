@@ -11,6 +11,8 @@ import { Store } from '../Core/Store.js'
         name,
         locked,
         html,
+        // TODO: prop for customStyle vs globalStyle
+        // NOTE: or style.shared & style.instance
         style,
         parent,
         position,
