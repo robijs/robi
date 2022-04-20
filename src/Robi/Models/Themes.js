@@ -272,6 +272,27 @@ const Themes = [
             buttonBackgroundColor: '#2d357d',
             borderColor: '#00000080'
         }
+    },
+    { 
+        name: 'Tiffany Blue',
+        light: {
+            primary: '#81D8D0',
+            secondary: '#fff',
+            background: '#F8F8FC',
+            color: '#24292f',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#e9ecef',
+            borderColor: '#d6d8db80'
+        },
+        dark: {
+            primary: '#81D8D0',
+            secondary: '#0e1b34',
+            background: '#051d49',
+            color: '#ffffff',
+            selectedRowOpacity: 10,
+            buttonBackgroundColor: '#2d357d',
+            borderColor: '#00000080'
+        }
     }
 ]
 
