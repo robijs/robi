@@ -4,6 +4,7 @@ import { CreateActionForm } from '../Actions/CreateActionForm.js'
 import { EditLayout } from '../Actions/EditLayout.js'
 import { ModifyFile } from '../Actions/ModifyFile.js'
 import { Store } from '../Core/Store.js'
+import { GenerateUUID } from '../Robi.js'
 
 // @START-File
 /**
@@ -393,12 +394,24 @@ export function ViewTools(param) {
 
             // Enable sidebar
             Store.get('sidebar').get().style.pointerEvents = 'all';
+
+            // TODO: Finish feature
+            parent.find(`.add-row-${id}`).remove();
         }
 
         // Turn on sortable
         $(`#${parent.get().id} .robi-row`).addClass('robi-row-transition');
         $(`#${parent.get().id}`).sortable({ items: '.robi-row' });
         $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'none', 'user-select': 'none'});
+
+        // Add row button
+        // TODO: Finish feature
+        const id = GenerateUUID();
+        parent.append(/*html*/ `
+            <button class='btn btn-robi add-row-${id}'>
+                Add row
+            </button>
+        `)
     }
 
     function editSource() {
