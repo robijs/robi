@@ -1,7 +1,6 @@
 import { App } from '../Core/App.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { LogError } from './LogError.js'
-import { Wait } from './Wait.js'
 
 // @START-File
 /**
@@ -35,7 +34,11 @@ export async function DeleteRoutes({ routes }) {
     const imports = content.match(/\/\/ @START-Imports:Routes([\s\S]*?)\/\/ @END-Imports:Routes/);
     const importObjects = imports[1].split('\n');
     const remainingImports = importObjects.filter(route => {
-        const name = route.split(' ')[1];
+        if (!route) {
+            return;
+        }
+
+        const name = route.split(' ')[1]?.split('Route_')[1];
 
         if (!routes.includes(name)) {
             return route;

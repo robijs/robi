@@ -22,7 +22,6 @@ import Route_LookupField from './Routes/LookupField/LookupField.js'
 import Route_SelectIcon from './Routes/SelectIcon/SelectIcon.js'
 import Route_ChartDemo from './Routes/ChartDemo/ChartDemo.js'
 import Route_ModifyFile from './Routes/ModifyFile/ModifyFile.js'
-import Route_Button from './Routes/Button/Button.js'
 import Route_CustomForm from './Routes/CustomForm/CustomForm.js'
 import Route_NewRoute from './Routes/NewRoute/NewRoute.js'
 // @END-Imports:Routes
@@ -109,15 +108,6 @@ Start({
             go: Route_ModifyFile
         }
         // @END-ModifyFile
-        , // @Route
-        // @START-Button
-        {
-            path: 'Button',
-            title: 'Button',
-            icon: 'bs-stop-fill',
-            go: Route_Button
-        }
-        // @END-Button
         , // @Route
         // @START-NewRoute
         {

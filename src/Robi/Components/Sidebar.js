@@ -931,9 +931,9 @@ export function Sidebar({ parent, path }) {
                 routes
             });
 
-            // Wait an additional 3 seconds
-            console.log('Waiting...')
-            await Wait(3000);
+            if (App.isProd()) {
+                await Wait(3000);
+            }
 
             await blur.off((event) => {
                 console.log(event);
