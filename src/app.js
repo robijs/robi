@@ -22,6 +22,7 @@ import Route_SelectIcon from './Routes/SelectIcon/SelectIcon.js'
 import Route_ChartDemo from './Routes/ChartDemo/ChartDemo.js'
 import Route_ModifyFile from './Routes/ModifyFile/ModifyFile.js'
 import Route_CustomForm from './Routes/CustomForm/CustomForm.js'
+import Route_Robi from './Routes/Robi/Robi.js'
 // @END-Imports:Routes
 
 // @START
@@ -46,6 +47,7 @@ Start({
         // @START-Routes
         // @START-CustomForm
         {
+            hide: true,
             path: 'CustomForm',
             title: 'Custom Form',
             icon: 'bs-checks-grid',
@@ -55,6 +57,7 @@ Start({
         , // @Route
         // @START-SortTables
         {
+            hide: true,
             path: 'SortTables',
             title: 'Sort Tables',
             icon: 'bs-table',
@@ -64,6 +67,7 @@ Start({
         , // @Route
         // @START-Test
         {
+            hide: true,
             path: 'Test',
             title: 'Test',
             icon: 'bs-tools',
@@ -73,6 +77,7 @@ Start({
         , // @Route
         // @START-SelectIcon
         {
+            hide: true,
             path: 'SelectIcon',
             title: 'Select Icon',
             icon: 'bs-app',
@@ -82,6 +87,7 @@ Start({
         , // @Route
         // @START-ChartDemo
         {
+            hide: true,
             path: 'ChartDemo',
             title: 'Chart Demo',
             icon: 'stats-bars',
@@ -91,12 +97,22 @@ Start({
         , // @Route
         // @START-ModifyFile
         {
+            hide: true,
             path: 'ModifyFile',
             title: 'Modify File',
             icon: 'bs-code-slash',
             go: Route_ModifyFile
         }
         // @END-ModifyFile
+        , // @Route
+        // @START-Robi
+        {
+            path: 'Robi',
+            title: 'Robi',
+            icon: 'bs-app',
+            go: Route_Robi
+        }
+        // @END-Robi
         // @END-Routes
     ],
     settings: {

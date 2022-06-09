@@ -934,6 +934,17 @@ export function Sidebar({ parent, path }) {
             await blur.off((event) => {
                 console.log(event);
                 location.reload();
+
+                // FIXME:
+                // If current route changed, route to home
+                // const currentPath = location.href.split('#')[1].split('/')[0];
+
+                // if (routes.includes(currentPath)) {
+                //     location.href = location.href.split('#')[0];
+                //     return;
+                // }
+                
+                // location.reload();
             });
         });
 
