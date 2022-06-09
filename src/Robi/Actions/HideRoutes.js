@@ -1,7 +1,6 @@
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
-import { Wait } from './Wait.js'
 
 // @START-File
 /**
@@ -9,8 +8,6 @@ import { Wait } from './Wait.js'
  * @param {*} param
  */
 export async function HideRoutes({ paths }) {
-    // console.log(paths);
-
     let digest;
     let request;
 
