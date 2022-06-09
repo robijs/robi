@@ -1,11 +1,11 @@
 {
   "name": "robi",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "Client-side SharePoint application framework",
   "keywords": [
     "SharePoint",
     "JavScript",
-    "framework",
+    "Framework",
     "client-side"
   ],
   "author": "Stephen Matheis",
@@ -13,7 +13,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stephenmatheis/robi"
+    "url": "https://github.com/robijs/robi"
   },
   "type": "module",
   "watch": {
