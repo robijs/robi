@@ -3,7 +3,7 @@
 ## Local Development
 ```console
 npm install
-npm run dev
+npm start
 ```
 
 ## Deploy to SharePoint
@@ -11,10 +11,10 @@ npm run dev
 ```console
 npm run build-sp min
 ```
-2. Create a new SharePoint site (if one doesn't already exist). We recommend deploying only one app per site.
+2. Create a new site or subsite. (Note: only deploy one Robi app per site or subsite.)
 3. Create a new document library named App.
-4. Copy single /src directory from /dist to App, including the /src directory.
-5. Launch App/src/Pages/app.aspx
+4. Copy the /src directory from /dist to the App document libary (Note: include the /src directory. Don't just copy it's contents).
+5. Launch App/src/Pages/app.aspx.
 6. Click Install.
 
 ## Troubleshooting
@@ -36,7 +36,7 @@ Stop the server with <kbd>ctrl</kbd> + <kbd>c</kbd> and close your text editor a
 If that doesn't work, check if there's another program using the named directory. Sometimes antivirus and file sync apps (OneDrive, iCloud Drive, Dropbox, etc.) will lock directories to changes. Pause them and try again.
 
 ```console
-npm run dev
+npm start
 ```
 
 ### Trigger: A previous server session didn't close properly or another process is using port 3000
@@ -56,7 +56,7 @@ Some error occurred Error: listen EADDRINUSE: address already in use 127.0.0.1:3
 Stop the server with <kbd>ctrl</kbd> + <kbd>c</kbd> and restart.
 
 ```console
-npm run dev
+npm start
 ```
 
 If that doesn't work, open Task Manager and end all Node.js processes.
