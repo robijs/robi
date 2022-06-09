@@ -18,12 +18,10 @@ import List_MultiChoice from './Lists/MultiChoice/Schema.js'
 // @START-Imports:Routes
 import Route_SortTables from './Routes/SortTables/SortTables.js'
 import Route_Test from './Routes/Test/Test.js'
-import Route_LookupField from './Routes/LookupField/LookupField.js'
 import Route_SelectIcon from './Routes/SelectIcon/SelectIcon.js'
 import Route_ChartDemo from './Routes/ChartDemo/ChartDemo.js'
 import Route_ModifyFile from './Routes/ModifyFile/ModifyFile.js'
 import Route_CustomForm from './Routes/CustomForm/CustomForm.js'
-import Route_NewRoute from './Routes/NewRoute/NewRoute.js'
 // @END-Imports:Routes
 
 // @START
@@ -73,17 +71,9 @@ Start({
         }
         // @END-Test
         , // @Route
-        // @START-LookupField
-        {
-            path: 'LookupField',
-            title: 'Lookup Field',
-            icon: 'bs-file-earmarked-ruled',
-            go: Route_LookupField
-        }
-        // @END-LookupField
-        , // @Route
         // @START-SelectIcon
         {
+            hide: true,
             path: 'SelectIcon',
             title: 'Select Icon',
             icon: 'bs-app',
@@ -102,21 +92,13 @@ Start({
         , // @Route
         // @START-ModifyFile
         {
+            hide: true,
             path: 'ModifyFile',
             title: 'Modify File',
             icon: 'bs-code-slash',
             go: Route_ModifyFile
         }
         // @END-ModifyFile
-        , // @Route
-        // @START-NewRoute
-        {
-            path: 'NewRoute',
-            title: 'New Route',
-            icon: 'bs-bookmark-plus',
-            go: Route_NewRoute
-        }
-        // @END-NewRoute
         // @END-Routes
     ],
     settings: {
