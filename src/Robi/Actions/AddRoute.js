@@ -17,9 +17,6 @@ import { RouteTemplate } from '../Templates/RouteTemplate.js'
  * @param {*} param
  */
 export async function AddRoute(event) {
-    // Show modal
-    console.log('add route');
-
     const addRouteModal = Modal({
         title: false,
         scrollable: true,
@@ -118,8 +115,8 @@ export async function AddRoute(event) {
                     document.querySelector('#app').style.transition = 'filter 150ms';
                     document.querySelector('#app').style.filter = 'blur(5px)';
 
-                    await updateApp();
-                    await createRoute();
+                    updateApp();
+                    createRoute();
 
                     if (App.isProd()) {
                         await Wait(5000);
@@ -145,7 +142,6 @@ export async function AddRoute(event) {
                             });
                         } else {
                             request = await fetch(`http://127.0.0.1:8080/src/app.js`);
-                            await Wait(1000);
                         }
 
                         let content = await request.text();
@@ -209,10 +205,9 @@ export async function AddRoute(event) {
                                 method: 'POST',
                                 body: updatedContent
                             });
-                            await Wait(1000);
                         }
 
-                        console.log('Saved:', setFile);
+                        return setFile;
                     }
 
                     async function createRoute() {
@@ -251,7 +246,6 @@ export async function AddRoute(event) {
                                 method: 'POST',
                                 body: contents
                             });
-                            await Wait(1000);
                         }
                     }
                 },

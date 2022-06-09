@@ -53,6 +53,7 @@
     "rm-sp": "node ./scripts/rm-dist.js"
   },
   "devDependencies": {
+    "chalk": "^5.0.1",
     "chokidar": "^3.5.2",
     "colors": "^1.4.0",
     "concurrently": "^6.2.1",
