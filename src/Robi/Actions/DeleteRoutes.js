@@ -26,15 +26,15 @@ export async function DeleteRoutes({ routes }) {
         });
     } else {
         request = await fetch(`http://127.0.0.1:8080/src/app.js`);
-        await Wait(1000);
     }
+
     let content = await request.text();
     let updated = '';
 
     // Remove Imports
-    const imports = content.match(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/);
+    const imports = content.match(/\/\/ @START-Imports:Routes([\s\S]*?)\/\/ @END-Imports:Routes/);
     const importObjects = imports[1].split('\n');
-    const remainingImports= importObjects.filter(route => {
+    const remainingImports = importObjects.filter(route => {
         const name = route.split(' ')[1];
 
         if (!routes.includes(name)) {
@@ -43,29 +43,29 @@ export async function DeleteRoutes({ routes }) {
 
     }).join('\n');
 
-    updated = content.replace(/\/\/ @START-IMPORTS([\s\S]*?)\/\/ @END-IMPORTS/, `// @START-IMPORTS\n${remainingImports || '\n'}\n// @END-IMPORTS`);
+    updated = content.replace(/\/\/ @START-Imports:Routes([\s\S]*?)\/\/ @END-Imports:Routes/, `// @START-Imports:Routes\n${remainingImports || '\n'}\n// @END-Imports:Routes`);
 
-    const allRoutes = content.match(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/);
-    const routeObjects = allRoutes[1].split(', // @ROUTE');
+    const allRoutes = content.match(/\/\/ @START-Routes([\s\S]*?)\/\/ @END-Routes/);
+    const routeObjects = allRoutes[1].split(', // @Route');
 
     // Remove routes
     const remainingRoutes = routeObjects.filter(route => {
         const [ query, path ] = route.match(/path: '([\s\S]*?)',/);
 
-        console.log(routes, path);
+        // console.log(routes, path);
 
         if (!routes.includes(path)) {
             return route;
         }
 
-    }).join(', // @ROUTE');
+    }).join(', // @Route');
 
-    updated = updated.replace(/\/\/ @START-ROUTES([\s\S]*?)\/\/ @END-ROUTES/, `// @START-ROUTES${remainingRoutes || '\n        '}// @END-ROUTES`);
+    updated = updated.replace(/\/\/ @START-Routes([\s\S]*?)\/\/ @END-Routes/, `// @START-Routes${remainingRoutes || '\n        '}// @END-Routes`);
 
-    console.log('OLD\n----------------------------------------\n', content);
-    console.log('\n****************************************');
-    console.log('NEW\n----------------------------------------\n', updated);
-    console.log('\n****************************************');
+    // console.log('OLD\n----------------------------------------\n', content);
+    // console.log('\n****************************************');
+    // console.log('NEW\n----------------------------------------\n', updated);
+    // console.log('\n****************************************');
 
     let setFile;
 
@@ -83,7 +83,10 @@ export async function DeleteRoutes({ routes }) {
         });
 
         // TODO: Add _ARCHIVED to Route dir name in App/src/Routes
-    } else {
+    }
+    
+    // @START-Dev
+    if (App.isDev()) {
         try {
             setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
                 method: 'POST',
@@ -93,12 +96,14 @@ export async function DeleteRoutes({ routes }) {
             console.log('Archive route');
             
             for (let route of routes) {
-                await fetch(`http://127.0.0.1:2035/?path=src/Routes/${route}`, {
+                // NOTE:
+                // Don't await, kick off all calls at the same time.
+                // Otherwise, the script my get killed if the page is refershed
+                // by live-server's live reload.
+                fetch(`http://127.0.0.1:2035/?path=src/Routes/${route}`, {
                     method: 'DELETE'
                 });
             }
-    
-            await Wait(1000);
         } catch(err) {
             LogError({
                 Message: 'Problem archiving route',
@@ -109,7 +114,6 @@ export async function DeleteRoutes({ routes }) {
             console.log(err);
         }
     }
-
-    console.log('Saved:', setFile);
+    // @START-Dev
 }
 // @END-File
