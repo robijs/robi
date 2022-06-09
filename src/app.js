@@ -73,7 +73,6 @@ Start({
         , // @Route
         // @START-SelectIcon
         {
-            hide: true,
             path: 'SelectIcon',
             title: 'Select Icon',
             icon: 'bs-app',
@@ -92,7 +91,6 @@ Start({
         , // @Route
         // @START-ModifyFile
         {
-            hide: true,
             path: 'ModifyFile',
             title: 'Modify File',
             icon: 'bs-code-slash',

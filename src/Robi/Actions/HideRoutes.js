@@ -26,7 +26,6 @@ export async function HideRoutes({ paths }) {
         });
     } else {
         request = await fetch(`http://127.0.0.1:8080/src/app.js`);
-        await Wait(1000);
     }
 
     const value = await request.text();
@@ -63,12 +62,12 @@ export async function HideRoutes({ paths }) {
     // console.log('NEW\n----------------------------------------\n', updated);
     // console.log('\n****************************************');
 
-    let setFile;
+    let setFileResponse;
 
     if (App.isProd()) {
         // TODO: Make a copy of app.js first
         // TODO: If error occurs on load, copy ${file}-backup.js to ${file}.js
-        setFile = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${App.get('library')}/src')/Files/Add(url='app.js',overwrite=true)`, {
+        setFileResponse = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${App.get('library')}/src')/Files/Add(url='app.js',overwrite=true)`, {
             method: 'POST',
             body: updated, 
             headers: {
@@ -78,13 +77,12 @@ export async function HideRoutes({ paths }) {
             }
         });
     } else {
-        setFile = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
+        setFileResponse = await fetch(`http://127.0.0.1:2035/?path=src&file=app.js`, {
             method: 'POST',
             body: updated
         });
-        await Wait(1000);
     }
 
-    // console.log('Saved:', setFile);
+    return setFileResponse;
 }
 // @END-File
