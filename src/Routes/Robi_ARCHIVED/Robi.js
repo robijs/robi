@@ -6,14 +6,13 @@
 // @START-Imports
 import { } from '../../Robi/Robi.js'
 import { Row } from '../../Robi/RobiUI.js'
-import Test from './Test.js'
 // @END-Imports
 
 // @START-Robi
 export default async function Robi({ parent }) {
     // @START-Rows
     Row((parent) => {
-        Test({parent}).add();
+    
     }, { parent });
     // @END-Rows
 }
