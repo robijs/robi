@@ -31,7 +31,7 @@ export function Sidebar({ parent, path }) {
                     </span>
                     <!-- Developer options --> 
                     ${
-                        Store.user().hasRole('Developer') ?
+                        App.isDev() ?
                         (() => {
                             const id = GenerateUUID();
 
@@ -60,8 +60,8 @@ export function Sidebar({ parent, path }) {
                     ${
                         (() => {
                             const initialWidth = window.innerWidth;
-                            
-                            return initialWidth >= 1305 ? /*html*/ `
+
+                            return initialWidth >= App.get('autoCollapseWidth') ? /*html*/ `
                                 <h3 class='title'>${App.get('title')}</h3>
                             ` : /*html*/ `
                                 <h3 class='placeholder' style='opacity: 0;'>${App.get('title')[0]}</h3>
@@ -75,7 +75,7 @@ export function Sidebar({ parent, path }) {
                 <!-- <div style='padding: 0px 15px; overflow: hidden;'> -->
                 <div style='padding: 0px 15px;'>
                 ${
-                    Store.user().hasRole('Developer') ?
+                    App.isDev() ?
                     /*html*/ `
                         <span class='nav add-route'>
                             <span class='icon-container' style='padding: 0px;'>
@@ -511,7 +511,7 @@ export function Sidebar({ parent, path }) {
             // Window resize event
             const mode = component.get().dataset.mode;
 
-            if (window.innerWidth <= 1305) {
+            if (window.innerWidth <= App.get('autoCollapseWidth')) {
                 closeSidebar(mode);
             } else {
                 openSidebar(mode);
@@ -520,7 +520,7 @@ export function Sidebar({ parent, path }) {
             window.addEventListener('resize', event => {
                 const mode = component.get().dataset.mode;
 
-                if (window.innerWidth <= 1305) {
+                if (window.innerWidth <= App.get('autoCollapseWidth')) {
                     closeSidebar(mode);
                 } else {
                     openSidebar(mode);
@@ -927,24 +927,9 @@ export function Sidebar({ parent, path }) {
                 routes
             });
 
-            if (App.isProd()) {
-                await Wait(3000);
-            }
-
             await blur.off((event) => {
                 console.log(event);
                 location.reload();
-
-                // FIXME:
-                // If current route changed, route to home
-                // const currentPath = location.href.split('#')[1].split('/')[0];
-
-                // if (routes.includes(currentPath)) {
-                //     location.href = location.href.split('#')[0];
-                //     return;
-                // }
-                
-                // location.reload();
             });
         });
 
@@ -1208,7 +1193,7 @@ export function Sidebar({ parent, path }) {
                 `);
             }
 
-            if (Store.user().hasRole('Developer')) {
+            if (App.isDev()) {
                 // Fade out Edit
                 component.find('.dev-buttons-container').style.opacity = '0';
                 component.find('.dev-buttons-container').style.pointerEvents = 'none';
@@ -1243,7 +1228,7 @@ export function Sidebar({ parent, path }) {
                 event.target.classList.remove('fade-in-right');
             });
 
-            if (Store.user().hasRole('Developer')) {
+            if (App.isDev()) {
                 // Fade in Edit
                 component.find('.dev-buttons-container').style.opacity = '1';
                 component.find('.dev-buttons-container').style.pointerEvents = 'auto';

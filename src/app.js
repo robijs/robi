@@ -153,7 +153,8 @@ Start({
         library: '',
         maincontainer: null,
         sidebar: null,
-        usersList: 'Users'
+        usersList: 'Users',
+        autoCollapseWidth: 1260
         // @END-SETTINGS
     }
 });
