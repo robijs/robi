@@ -12,7 +12,7 @@ export function ActionTemplate({ name }) {
         `// Otherwise, changes made with GUI tools will not render properly.`,
         ``,
         `// @START-Imports`,
-        `import {  } from '../../Robi/Robi.js'`,
+        `import {  } from '../../../Robi/Robi.js'`,
         `// @END-Imports`,
         ``,
         `// @START-${name}`,

@@ -12,7 +12,7 @@ export function ComponentTemplate({ name }) {
         `// Otherwise, changes made with GUI tools will not render properly.`,
         ``,
         `// @START-Imports`,
-        `import { Component } from '../../Robi/Robi.js'`,
+        `import { Component } from '../../../Robi/Robi.js'`,
         `// @END-Imports`,
         ``,
         `// @START-${name}`,
