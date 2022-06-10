@@ -40,7 +40,7 @@ export async function AddImportToFile({ module, path, file, dir }) {
             }
         });
     } else {
-        setFile = await fetch(`http://127.0.0.1:2035/?path=${path}}&file=${file}.js`, {
+        setFile = await fetch(`http://127.0.0.1:2035/?path=${path}&file=${file}.js`, {
             method: 'POST',
             body: updatedContent
         });
