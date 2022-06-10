@@ -1,9 +1,10 @@
 import { Component } from '../Actions/Component.js'
-import { CreateFile } from '../Actions/CreateFile.js'
+import { CreateFileForm } from '../Actions/CreateFileForm.js'
 import { EditLayout } from '../Actions/EditLayout.js'
 import { ModifyFile } from '../Actions/ModifyFile.js'
 import { Store } from '../Core/Store.js'
 import { GenerateUUID } from '../Robi.js'
+import { ComponentTemplate } from '../Templates/ComponentTemplate.js'
 
 // @START-File
 /**
@@ -323,7 +324,8 @@ export function ViewTools(param) {
     });
 
     function newComponent() {
-        CreateFile({
+        CreateFileForm({
+            template: ComponentTemplate,
             parent,
             route
         });

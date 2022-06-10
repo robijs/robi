@@ -13,6 +13,7 @@
 // CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 import { AddColumnToView } from './Actions/AddColumnToView.js'
+import { AddImportToFile } from './Actions/AddImportToFile.js'
 import { AddLinks } from './Actions/AddLinks.js'
 import { AddRoute } from './Actions/AddRoute.js'
 import { AttachFiles } from './Actions/AttachFiles.js'
@@ -29,6 +30,7 @@ import { CreateApp } from './Actions/CreateApp.js'
 import { CreateColumn } from './Actions/CreateColumn.js'
 import { CreateDocSet } from './Actions/CreateDocSet.js'
 import { CreateFile } from './Actions/CreateFile.js'
+import { CreateFileForm } from './Actions/CreateFileForm.js'
 import { CreateFolder } from './Actions/CreateFolder.js'
 import { CreateItem } from './Actions/CreateItem.js'
 import { CreateLibrary } from './Actions/CreateLibrary.js'
@@ -119,6 +121,7 @@ import { RouteTemplate } from './Templates/RouteTemplate.js'
 
 export {
     AddColumnToView,
+    AddImportToFile,
     AddLinks,
     AddRoute,
     AttachFiles,
@@ -135,6 +138,7 @@ export {
     CreateColumn,
     CreateDocSet,
     CreateFile,
+    CreateFileForm,
     CreateFolder,
     CreateItem,
     CreateLibrary,
