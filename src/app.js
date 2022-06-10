@@ -23,8 +23,6 @@ import Route_ChartDemo from './Routes/ChartDemo/ChartDemo.js'
 import Route_ModifyFile from './Routes/ModifyFile/ModifyFile.js'
 import Route_CustomForm from './Routes/CustomForm/CustomForm.js'
 import Route_Robi from './Routes/Robi/Robi.js'
-import Route_Test1 from './Routes/Test1/Test1.js'
-import Route_Test2 from './Routes/Test2/Test2.js'
 // @END-Imports:Routes
 
 // @START
@@ -115,24 +113,6 @@ Start({
             go: Route_Robi
         }
         // @END-Robi
-        , // @Route
-        // @START-Test1
-        {
-            path: 'Test1',
-            title: 'Test1',
-            icon: 'bs-arrow-down-circle-fill',
-            go: Route_Test1
-        }
-        // @END-Test1
-        , // @Route
-        // @START-Test2
-        {
-            path: 'Test2',
-            title: 'Test2',
-            icon: 'bs-arrow-left-circle-fill',
-            go: Route_Test2
-        }
-        // @END-Test2
         // @END-Routes
     ],
     settings: {

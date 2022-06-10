@@ -18,4 +18,4 @@ for (let dir of dirs) {
     await rm(`./src/Routes/${dir}`, { recursive: true, force: true });
 }
 
-console.log(chalk.green(`\nAll archived routes deleted\n`));
+console.log(chalk.green(`\nAll archived routes deleted.\n`));
