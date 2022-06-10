@@ -10,12 +10,12 @@ if (dirs.length === 0) {
     process.exit();
 }
 
-console.log(`(${dirs.length}) routes to delete:\n`);
+console.log(`(${dirs.length}) archived routes to delete:\n`);
 
 for (let dir of dirs) {
-    console.log(`\t${chalk.red('⨂')} - removed ${dir}`);
+    console.log(`${chalk.red('⨂')} - removed ${dir}`);
 
     await rm(`./src/Routes/${dir}`, { recursive: true, force: true });
 }
 
-console.log(chalk.green(`\n(${dirs.length}) routes deleted\n`));
+console.log(chalk.green(`\nAll archived routes deleted\n`));
