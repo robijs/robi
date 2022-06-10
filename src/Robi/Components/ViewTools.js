@@ -5,6 +5,7 @@ import { ModifyFile } from '../Actions/ModifyFile.js'
 import { Store } from '../Core/Store.js'
 import { GenerateUUID } from '../Robi.js'
 import { ComponentTemplate } from '../Templates/ComponentTemplate.js'
+import { ActionTemplate } from '../Templates/ActionTemplate.js'
 
 // @START-File
 /**
@@ -293,10 +294,16 @@ export function ViewTools(param) {
                 listener(event) {
                     switch(this.dataset.tool) {
                         case 'component':
-                            newComponent();
+                            newFile({
+                                template: ComponentTemplate,
+                                dir: 'Components'
+                            });
                             break;
                         case 'action':
-                            newAction();
+                            newFile({
+                                template: ActionTemplate,
+                                dir: 'Actions'
+                            });
                             break;
                         case 'table':
                             break;
@@ -323,17 +330,13 @@ export function ViewTools(param) {
         }
     });
 
-    function newComponent() {
+    function newFile({ template, dir}) {
         CreateFileForm({
-            template: ComponentTemplate,
-            parent,
-            route
-        });
-    }
-
-    function newAction() {
-        CreateActionForm({
-
+            template,
+            path: `src/Routes/${route.path}`,
+            dir,
+            addImportTo: route.path,
+            parent
         });
     }
 

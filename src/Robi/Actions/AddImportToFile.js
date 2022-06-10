@@ -1,7 +1,7 @@
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { App } from '../Core/App.js'
 
-export async function AddImportToFile({ module, file }) {
+export async function AddImportToFile({ module, path, file }) {
     let digest;
     let request;
 
@@ -17,7 +17,7 @@ export async function AddImportToFile({ module, file }) {
             }
         });
     } else {
-        request = await fetch(`http://127.0.0.1:8080/src/Routes/${file}/${file}.js`);
+        request = await fetch(`http://127.0.0.1:8080/${path}/${file}.js`);
     }
 
     let content = await request.text();
@@ -40,7 +40,7 @@ export async function AddImportToFile({ module, file }) {
             }
         });
     } else {
-        setFile = await fetch(`http://127.0.0.1:2035/?path=src/Routes/${file}&file=${file}.js`, {
+        setFile = await fetch(`http://127.0.0.1:2035/?path=${path}}&file=${file}.js`, {
             method: 'POST',
             body: updatedContent
         });
