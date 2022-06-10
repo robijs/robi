@@ -25,12 +25,10 @@ import { Confirm } from './Actions/Confirm.js'
 import { CopyFile } from './Actions/CopyFile.js'
 import { CopyRecurse } from './Actions/CopyRecurse.js'
 import { CreateAction } from './Actions/CreateAction.js'
-import { CreateActionForm } from './Actions/CreateActionForm.js'
 import { CreateApp } from './Actions/CreateApp.js'
 import { CreateColumn } from './Actions/CreateColumn.js'
-import { CreateComponent } from './Actions/CreateComponent.js'
-import { CreateComponentForm } from './Actions/CreateComponentForm.js'
 import { CreateDocSet } from './Actions/CreateDocSet.js'
+import { CreateFile } from './Actions/CreateFile.js'
 import { CreateFolder } from './Actions/CreateFolder.js'
 import { CreateItem } from './Actions/CreateItem.js'
 import { CreateLibrary } from './Actions/CreateLibrary.js'
@@ -133,12 +131,10 @@ export {
     CopyFile,
     CopyRecurse,
     CreateAction,
-    CreateActionForm,
     CreateApp,
     CreateColumn,
-    CreateComponent,
-    CreateComponentForm,
     CreateDocSet,
+    CreateFile,
     CreateFolder,
     CreateItem,
     CreateLibrary,

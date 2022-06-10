@@ -3,7 +3,7 @@ import { Button } from '../Components/Button.js'
 import { LoadingSpinner } from '../Components/LoadingSpinner.js'
 import { SingleLineTextField } from '../Components/SingleLineTextField.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
-import { CreateFolder } from '../Actions/CreateFolder.js'
+import { CreateFolder } from './CreateFolder.js'
 import { App } from '../Core/App.js'
 import { ComponentTemplate } from '../Templates/ComponentTemplate.js'
 
@@ -12,7 +12,7 @@ import { ComponentTemplate } from '../Templates/ComponentTemplate.js'
  *
  * @param {*} param
  */
-export async function CreateComponentForm({ parent, route }) {
+export async function CreateFile({ parent, route }) {
     const addRouteModal = Modal({
         title: false,
         scrollable: true,

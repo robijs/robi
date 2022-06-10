@@ -1,6 +1,5 @@
 import { Component } from '../Actions/Component.js'
-import { CreateComponentForm } from '../Actions/CreateComponentForm.js'
-import { CreateActionForm } from '../Actions/CreateActionForm.js'
+import { CreateFile } from '../Actions/CreateFile.js'
 import { EditLayout } from '../Actions/EditLayout.js'
 import { ModifyFile } from '../Actions/ModifyFile.js'
 import { Store } from '../Core/Store.js'
@@ -324,7 +323,7 @@ export function ViewTools(param) {
     });
 
     function newComponent() {
-        CreateComponentForm({
+        CreateFile({
             parent,
             route
         });

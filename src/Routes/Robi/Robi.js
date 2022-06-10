@@ -7,6 +7,7 @@
 import { } from '../../Robi/Robi.js'
 import { Row } from '../../Robi/RobiUI.js'
 import Test from './Test.js'
+import Test2 from './Test2.js'
 // @END-Imports
 
 // @START-Robi
