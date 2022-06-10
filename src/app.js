@@ -7,12 +7,6 @@ import { Start } from './Robi/Robi.js'
 
 // @START-Imports:Lists
 import List_AllTypes from './Lists/AllTypes/Schema.js'
-import List_SLOT from './Lists/SLOT/Schema.js'
-import List_MLOT from './Lists/MLOT/Schema.js'
-import List_Date from './Lists/Date/Schema.js'
-import List_Choice from './Lists/Choice/Schema.js'
-import List_Number from './Lists/Number/Schema.js'
-import List_MultiChoice from './Lists/MultiChoice/Schema.js'
 // @END-Imports:Lists
 
 // @START-Imports:Routes
@@ -34,13 +28,7 @@ Start({
         message: 'View release notes'
     },
     lists: [
-        List_AllTypes,
-        List_SLOT,
-        List_MLOT,
-        List_Choice,
-        List_Date,
-        List_Number,
-        List_MultiChoice
+        List_AllTypes
     ],
     // Routes are directly addressable. Ex: https://site#path.
     routes: [
