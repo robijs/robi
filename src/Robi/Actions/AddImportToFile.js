@@ -1,7 +1,7 @@
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { App } from '../Core/App.js'
 
-export async function AddImportToFile({ module, path, file }) {
+export async function AddImportToFile({ module, path, file, dir }) {
     let digest;
     let request;
 
@@ -24,7 +24,7 @@ export async function AddImportToFile({ module, path, file }) {
 
     // Set import
     const imports = content.match(/\/\/ @START-Imports([\s\S]*?)\/\/ @END-Imports/);
-    const newImports = imports[1] + `import ${module} from './${module}.js'\n`
+    const newImports = imports[1] + `import ${module} from './${dir}/${module}.js'\n`
     const updatedContent = content.replace(/\/\/ @START-Imports([\s\S]*?)\/\/ @END-Imports/, `// @START-Imports${newImports}// @END-Imports`);
 
     let setFile;

@@ -88,6 +88,7 @@ export function CreateFileForm({ parent, path, template, dir, addImportTo }) {
                         AddImportToFile({
                             module: fileName.value(),
                             path,
+                            dir,
                             file: addImportTo
                         });
                     }
