@@ -2,6 +2,7 @@ import { GetRequestDigest } from './GetRequestDigest.js'
 import { CreateFolder } from './CreateFolder.js'
 import { App } from '../Core/App.js'
 
+// @START-File
 export async function CreateFile({ contents, file, path, dir}) {
     // FIXME: Update SharePoint API
     if (App.isProd()) {
@@ -40,3 +41,4 @@ export async function CreateFile({ contents, file, path, dir}) {
 
     return newFile;
 }
+// @END-File

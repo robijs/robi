@@ -1,6 +1,11 @@
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { App } from '../Core/App.js'
 
+// @START-File
+/**
+ * 
+ * @param {Object} param
+ */
 export async function AddImportToFile({ module, path, file, dir }) {
     let digest;
     let request;
@@ -46,3 +51,4 @@ export async function AddImportToFile({ module, path, file, dir }) {
         });
     }
 }
+// @END-File
