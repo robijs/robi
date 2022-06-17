@@ -45,6 +45,13 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
     }
     // NOTE: END
 
+    // Remove Palette
+    const palette = Store.get('palette');
+    
+    if (palette) {
+        palette.remove();
+    }
+
     // Get references to core app components
     const appContainer = Store.get('appcontainer');
     const svgDefs = Store.get('svgdefs');

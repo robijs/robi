@@ -81,6 +81,7 @@ import { NewQuestion } from './Components/NewQuestion.js'
 import { NewReply } from './Components/NewReply.js'
 import { NewUser } from './Components/NewUser.js'
 import { NumberField } from './Components/NumberField.js'
+import { Palette } from './Components/Palette.js'
 import { PercentField } from './Components/PercentField.js'
 import { PhoneField } from './Components/PhoneField.js'
 import { Preferences } from './Components/Preferences.js'
@@ -124,6 +125,7 @@ import { UpgradeAppButton } from './Components/UpgradeAppButton.js'
 import { UploadButton } from './Components/UploadButton.js'
 import { ViewContainer } from './Components/ViewContainer.js'
 import { ViewTools } from './Components/ViewTools.js'
+import { ViewTools_OLD } from './Components/ViewTools_OLD.js'
 
 export {
     AccountInfo,
@@ -195,6 +197,7 @@ export {
     NewReply,
     NewUser,
     NumberField,
+    Palette,
     PercentField,
     PhoneField,
     Preferences,
@@ -237,5 +240,6 @@ export {
     UpgradeAppButton,
     UploadButton,
     ViewContainer,
-    ViewTools
+    ViewTools,
+    ViewTools_OLD
 }

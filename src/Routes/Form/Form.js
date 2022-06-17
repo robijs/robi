@@ -4,21 +4,16 @@
 // Otherwise, changes made from CLI and GUI tools may break this file.
 
 // @START-Imports
-import { GetArticle } from '../../Robi/Robi.js'
+import { } from '../../Robi/Robi.js'
 import { Row } from '../../Robi/RobiUI.js'
 // @END-Imports
 
-// @START-Robi
-export default async function Robi({ parent }) {
+// @START-Form
+export default async function Form({ parent }) {
     // @START-Rows
-    Row(async (parent) => {
-        const md = await GetArticle({
-            path: '../src/Routes/Robi/Articles',
-            name: 'Test'
-        });
-        
-        parent.append(md);
+    Row((parent) => {
+    
     }, { parent });
     // @END-Rows
 }
-// @END-Robi
+// @END-Form

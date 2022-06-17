@@ -4,7 +4,6 @@
 // Otherwise, changes made from the front end may not render properly.
 
 import { App } from '../Core/App.js'
-import { Store } from '../Core/Store.js'
 
 // @START-File
 /**
@@ -14,15 +13,13 @@ import { Store } from '../Core/Store.js'
  */
 export async function GetArticle(param) {
     const {
-        route,
+        path,
         name,
         raw,
-        list,
-        path
     } = param;
 
     if (name) {
-        const resp = await fetch(`Routes/${route}/Articles/${name}.md`);
+        const resp = await fetch(`${path}/${name}.md`);
         const md = await resp.text();
 
         return raw ? md : /*html*/ `

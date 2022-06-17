@@ -6,6 +6,7 @@ import { Store } from '../Core/Store.js'
 import { GenerateUUID } from '../Robi.js'
 import { ComponentTemplate } from '../Templates/ComponentTemplate.js'
 import { ActionTemplate } from '../Templates/ActionTemplate.js'
+import { Palette } from './Palette.js'
 
 // @START-File
 /**
@@ -20,272 +21,78 @@ export function ViewTools(param) {
         position
     } = param;
 
-    let isOpen = false;
+    let palette;
 
     const component = Component({
         html: /*html*/ `
             <div class='viewtools'>
-                <button class='btn tools' type='button'>•••</button>
-                <div class='grow-in-center'>
-                    <!-- New -->
-                    <div class=''>
-                        <div class='tool-title' style='color: seagreen;'>Create a new file</div>
-                        <div class='d-flex'>
-                            <!-- New Component -->
-                            <button class='dropdown-item add-table' type='button' data-tool='component'>
-                                <div class='icon-container'>
-                                    <svg class='icon green' style='font-size: 32px;'>
-                                        <use href='#icon-bs-file-earmark-code'></use>
-                                    </svg>
-                                </div>
-                                <div class='tool-label green'>Component</div>
-                            </button>
-                            <!-- New Component -->
-                            <button class='dropdown-item add-table' type='button' data-tool='action'>
-                                <div class='icon-container'>
-                                    <svg class='icon green' style='font-size: 32px;'>
-                                        <use href='#icon-bs-file-earmark-code'></use>
-                                    </svg>
-                                </div>
-                                <div class='tool-label green'>Action</div>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Divider -->
-                    <div class='dropdown-divider'></div>
-                    <!-- Components -->
-                    <div class=''>
-                        <div class='tool-title primary'>Add a component</div>
-                        <div class='d-flex'>
-                            <!-- Add Table -->
-                            <button class='dropdown-item add-table' type='button' data-tool='table'>
-                                <div class='icon-container'>
-                                    <svg class='icon' style='font-size: 32px;'>
-                                        <use href='#icon-bs-table'></use>
-                                    </svg>
-                                </div>
-                                <div class='tool-label'>Table</div>
-                            </button>
-                            <!-- Add Chart -->
-                            <button class='dropdown-item add-chart' type='button' data-tool='chart'>
-                                <div class='icon-container'>
-                                    <svg class='icon' style='font-size: 32px;'>
-                                        <use href='#icon-bs-bar-chart'></use>
-                                    </svg>
-                                </div>
-                                <div class='tool-label'>Chart</div>
-                            </button>
-                            <!-- Add Text Block -->
-                            <button class='dropdown-item add-text-block' type='button' data-tool='text'>
-                                <div class='icon-container'>
-                                    <span class='d-flex align-items-center justify-content center' style='font-size: 26px; font-weight: 600; color: var(--primary);'>
-                                        <span>Aa</span>
-                                    </span>
-                                </div>
-                                <div class='tool-label'>Text</div>
-                            </button>
-                            <!-- Add Light Button -->
-                            <button class='dropdown-item add-button-light' type='button' data-tool='btn-light'>
-                                <div class='icon-container '>
-                                    <div class='btn btn-robi'>Button</div>
-                                </div>
-                                <div class='tool-label'>Light</div>
-                            </button>
-                            <!-- Add Dark Button -->
-                            <button class='dropdown-item add-button-dark' type='button' data-tool='btn-dark'>
-                                <div class='icon-container'>
-                                    <div class='btn btn-robi-reverse'>Button</div>
-                                </div>
-                                <div class='tool-label'>Dark</div>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Divider -->
-                    <div class='dropdown-divider'></div>
-                    <!-- Layout / Source -->
-                    <div class=''>
-                        <div class='tool-title'>Edit page</div>
-                        <div class='d-flex'>
-                            <!-- Edit Layout -->
-                            <button class='dropdown-item edit-layout' type='button' data-tool='layout'>
-                                <div class='icon-container'>
-                                    <svg class='icon default-color' style='font-size: 32px;'>
-                                        <use href='#icon-bs-grid-1x2'></use>
-                                    </svg>
-                                </div>
-                                <div class='tool-label default-color'>Layout</div>
-                            </button>
-                            <!-- Edit Source -->
-                            <button class='dropdown-item edit-source' type='button' data-tool='source'>
-                                <div class='icon-container'>
-                                    <svg class='icon default-color' style='font-size: 32px;'>
-                                        <use href='#icon-bs-code'></use>
-                                    </svg>
-                                </div>
-                                <div class='tool-label default-color'>Source</div>
-                            </button>
-                        </div>
-                    </div>
+                <div class='open-palette'>
+                    <div class='bar'></div>
+                    <div class='bar vertical'></div>
                 </div>
             </div>
         `,
         style: /*css*/ `
             #id {
-                display: flex;
-                align-items: center;
-                justify-content: center;
                 position: absolute;
-                top: 0px;
                 right: 0px;
+                top: 0px;
                 height: 62px;
-                width: 100%;
-                color: var(--primary);
+                width: 62px;
+                padding: 0px ;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
-            #id .tools {
-                cursor: pointer;
-                color: var(--primary);
-                font-size: 20px;
-                transition: transform 300ms ease, background-color 250ms ease;
-                padding: 6px 11.82px; /* sets button width to an even 50px */
-            }
-
-            #id .scale-up {
-                transform: scale(2);
-            }
-
-            #id .tool-title {
-                font-weight: 700;
-                color: var(--color);
-                font-size: 13px;
-                text-align: center;
-            }
-
-            #id .tool-label {
-                font-weight: 700; 
-            }
-
-            #id .default-color {
-                color: var(--color);
-            }
-
-            #id .green {
-                color: seagreen;
-            }
-
-            #id .primary {
-                color: var(--primary);
-            }
-
-            #id .grow-in-center {
-                z-index: 10000;
-                top: 5px;
-                position: absolute;
-                transform: scale(0);
-                transform-origin: top;
-                opacity: 0;
-                transition: transform 150ms ease, opacity 150ms ease;
-                padding: 10px 20px;
-            }
-
-            #id .grow-in-center.open {
-                transform: scale(1);
-                transform-origin: top;
-                opacity: 1;
-            }
-
-            #id .dropdown-divider {
-                height: unset;
-                margin: .5rem;
-                overflow: hidden;
-                border-left: 1px solid var(--border-color);
-                border-top: none;
-            }
-
-            #id .dropdown-item {
+            /* Button */
+            #id .open-palette {
                 position: relative;
+                background-color: var(--secondary);
                 display: flex;
-                flex-direction: column;
-                color: var(--primary);
-                align-items: center;
-                justify-content: center;
-                padding: 10px;
-                border-radius: 20px;
-                transition: filter 300ms ease, background-color 150ms ease;
+                border-radius: 6px;
+                transition: background-color 200ms ease-in-out;
+                width: 36px;
+                height: 36px;
             }
 
-            #id .dropdown-item .icon {
-                fill: var(--primary);
+            #id .open-palette:hover {
+                background-color: var(--button-background);
             }
 
-            #id .dropdown-item .icon.default-color  {
-                fill: var(--color);
-            }
-
-            #id .dropdown-item .icon.green  {
-                fill: seagreen;
-            }
-
-            /* Border */
-            #id .border {
-                border: solid 2px var(--primary);
-            }
-
-            #id .icon-container {
-                border-radius: 20px;
-                padding: 10px;
-                width: 68px;
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
-
-            #id .icon-container .btn {
-                font-size: 13px;
-            }
-
-            #${parent.get().id} .save-edit-layout,
-            #${parent.get().id} .cancel-edit-layout {
-                z-index: 1000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+            #id .bar {
+                padding: 0;
+                width: 16px;
+                height: 2px;
+                background-color: var(--primary);
+                border-radius: 4px;
+                transition: all 0.4s ease-in-out;
                 position: absolute;
-                top: 0px;
-                height: 62px;
-                padding: 0px 15px;
-                border-radius: 10px;
+                top: calc(50% - 1px);
+                left: calc(50% - 8px);
+                transition: all 300ms ease-in-out;
             }
 
-            #${parent.get().id} .save-edit-layout {
-                left: 0px;
+            #id .bar.vertical {
+                transform: rotate(90deg);
             }
 
-            #${parent.get().id} .cancel-edit-layout {
-                right: 0px;
+            #id .bar.arrow-bottom {
+                transform: rotate(-45deg);
+            }
+
+            #id .bar.arrow-top {
+                transform: rotate(45deg);
             }
         `,
-        parent,
+        parent: Store.get('maincontainer'),
         position,
         events: [
             {
-                selector: '#id .tools',
+                selector: '#id .open-palette',
                 event: 'click',
                 listener(event) {
-                    this.classList.add('scale-up');
-
-                    if (!isOpen) {
-                        isOpen = true;
-
-                        component.find('.grow-in-center').classList.add('open');
-                        setTimeout(() => {
-                            Store.get('appcontainer').on('click', close);
-                        }, 0);
-                    } else {
-                        close();
-                    }
+                    toggle();
                 }
             },
             {
@@ -326,9 +133,45 @@ export function ViewTools(param) {
             }
         ],
         onAdd() {
-
+            // FIXME: Remove before shipping
+            open();
         }
     });
+
+    function toggle() {
+        // TODO: How do I abstract this into something like React's useRef or useState?
+        if (palette) {
+            close();
+        } else {
+            open();
+        }
+    }
+
+    function open() {
+        // Initialize
+        palette = Palette({});
+        palette.add();
+
+        // Set store
+        Store.add({
+            name: 'palette',
+            component: palette
+        });
+
+        // Animate bars
+        component.find('.bar').classList.add('arrow-bottom');
+        component.find('.bar.vertical').classList.add('arrow-top');
+    }
+
+    function close() {
+        // Remove
+        palette.close();
+        palette = undefined;
+
+        // Animate bars
+        component.find('.bar').classList.remove('arrow-bottom');
+        component.find('.bar.vertical').classList.remove('arrow-top');
+    }
 
     function newFile({ template, dir}) {
         CreateFileForm({
@@ -423,15 +266,6 @@ export function ViewTools(param) {
             path: `App/src/Routes/${route.path}`,
             file: `${route.path}.js`
         });
-    }
-
-    function close() {
-        isOpen = false;
-
-        component.find('.grow-in-center').classList.remove('open');
-        component.find('.tools').classList.remove('scale-up');
-
-        Store.get('appcontainer').off('click', close);
     }
 
     return component;

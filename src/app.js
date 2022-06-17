@@ -17,6 +17,7 @@ import Route_ChartDemo from './Routes/ChartDemo/ChartDemo.js'
 import Route_ModifyFile from './Routes/ModifyFile/ModifyFile.js'
 import Route_CustomForm from './Routes/CustomForm/CustomForm.js'
 import Route_Robi from './Routes/Robi/Robi.js'
+import Route_Form from './Routes/Form/Form.js'
 // @END-Imports:Routes
 
 // @START
@@ -101,6 +102,15 @@ Start({
             go: Route_Robi
         }
         // @END-Robi
+        , // @Route
+        // @START-Form
+        {
+            path: 'Form',
+            title: 'Form',
+            icon: 'bs-grid-1x2',
+            go: Route_Form
+        }
+        // @END-Form
         // @END-Routes
     ],
     settings: {
@@ -134,7 +144,7 @@ Start({
         // maincontainer: replace default maincontainer with your component (type function, typically imported from /Components/myComponent.js)
         // sidebar: replace default sidebar with your component (type function, typically imported from /Components/myComponent.js)
         // usersLists: override default name for 'Users' lists
-        allowFeedback: true,
+        allowFeedback: false,
         appcontainer: null,
         dev: {
             user: {
