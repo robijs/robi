@@ -7,6 +7,7 @@ import { GenerateUUID } from '../Robi.js'
 import { ComponentTemplate } from '../Templates/ComponentTemplate.js'
 import { ActionTemplate } from '../Templates/ActionTemplate.js'
 import { Palette } from './Palette.js'
+import { Style } from '../Actions/Style.js'
 
 // @START-File
 /**
@@ -70,7 +71,7 @@ export function ViewTools(param) {
                 position: absolute;
                 top: calc(50% - 1px);
                 left: calc(50% - 8px);
-                transition: all 300ms ease-in-out;
+                transition: all 300ms ease-in-out 200ms;
             }
 
             #id .bar.vertical {
@@ -161,6 +162,28 @@ export function ViewTools(param) {
         // Animate bars
         component.find('.bar').classList.add('arrow-bottom');
         component.find('.bar.vertical').classList.add('arrow-top');
+
+        // DEV:
+        const id = Store.get('maincontainer').get().id;
+        Style({
+            name: 'status-bar',
+            style: /*css*/ `
+                .viewcontainer {
+                    height: calc(100vh - 31px);
+                }
+
+                #${id} .status-bar {
+                    height: 30px;
+                    width: 100%;
+                    background: var(--background);
+                    border-top: solid 1px var(--border-color);
+                } 
+            `
+        })
+
+        Store.get('maincontainer').append(/*html*/ `
+            <div class='status-bar'>Status Bar</div>
+        `);
     }
 
     function close() {
@@ -171,6 +194,10 @@ export function ViewTools(param) {
         // Animate bars
         component.find('.bar').classList.remove('arrow-bottom');
         component.find('.bar.vertical').classList.remove('arrow-top');
+
+        // DEV:
+        Store.get('maincontainer').find('.status-bar').remove();
+        document.querySelector('head style[data-name="status-bar"]').remove();
     }
 
     function newFile({ template, dir}) {

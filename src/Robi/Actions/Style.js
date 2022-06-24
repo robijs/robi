@@ -1,14 +1,18 @@
 // @START-File
 /**
  * 
- * @param {*} param 
+ * @param {Object} param
+ * @param {String} param.name
+ * @param {String} param.style
+ * @param {String} param.locked
+ * @param {Boolean} param.position
  */
 export function Style(param) {
     const {
         name,
+        style,
         locked,
-        position,
-        style
+        position
     } = param;
 
     const node = document.querySelector(`style[data-name='${name}']`);

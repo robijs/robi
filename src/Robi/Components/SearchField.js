@@ -8,17 +8,14 @@ import { App } from '../Core/App.js';
  */
 export function SearchField(param) {
     const {
-        margin, parent, onFilter, onSearch, onClear, onSelect, position
+        parent, onSearch, onClear, onSelect, position
     } = param;
 
     const component = Action_Component({
         html: /*html*/ `
             <div>
-                <!-- <input class='form-control mr-sm-2' type='search' data-toggle='dropdown' placeholder='Search markets and facilites' aria-label='Search'> -->
                 <div class='toggle-search-list' data-toggle='dropdown' aria-haspopup="true" aria-expanded="false">
-                    <input class='form-control mr-sm-2' type='search' placeholder='Search markets & facilities' aria-label='Search'>
-                </div>
-                <div class='dropdown-menu'>
+                    <input class='form-control mr-sm-2' type='search' placeholder='${placeholder || ''}' aria-label='Search'>
                 </div>
             </div>
         `,
@@ -54,67 +51,17 @@ export function SearchField(param) {
                 border: none;
                 box-shadow: none;
             }
-
-            /** Dropdown */
-            #id .dropdown-header {
-                color: var(--primary)
-            }
-
-            #id .dropdown-menu {
-                margin-top: 5px;
-                max-height: 50vh;
-                overflow-y: overlay;
-                /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 2%) 0px 0px 0px 1px; */
-                box-shadow: rgb(0 0 0 / 16%) 0px 10px 36px 0px, rgb(0 0 0 / 2%) 0px 0px 0px 1px;
-                border: none;
-            }
-
-            #id .dropdown-menu::-webkit-scrollbar-track {
-                background: white;
-            }
-            
-            #id .dropdown-item {
-                cursor: pointer;
-                font-size: 13px;
-            }
-
-            #id .dropdown-item:focus,
-            #id .dropdown-item:hover {
-                color: #16181b;
-                text-decoration: none;
-                background-color: rgba(${App.get('primaryColorRGB')}, .1);
-            }
         `,
         parent,
         position,
         events: [
             {
-                selector: `#id .toggle-search-list`,
-                event: 'keydown',
-                listener(event) {
-                    console.log(event.key);
-
-                    if ((event.key === 'ArrowUp' || event.key === 'ArrowDown') && !component.find('.dropdown-menu').classList.contains('show')) {
-                        event.preventDefault();
-                        event.stopPropagation();
-
-                        return false;
-                    }
-                }
-            },
-            {
                 selector: `#id input[type='search']`,
                 event: 'keyup',
                 listener(event) {
-                    if (!event.target.value) {
-                        if (component.find('.dropdown-menu').classList.contains('show')) {
-                            component.find('.toggle-search-list').click();
-                        }
-
-                        return;
+                    if (onSearch) {
+                        onSearch(event.target.value.toLowerCase());
                     }
-
-                    onSearch(event.target.value.toLowerCase());
                 }
             },
             {
@@ -128,44 +75,9 @@ export function SearchField(param) {
                 selector: `#id input[type='search']`,
                 event: 'search',
                 listener: onClear
-            },
-            {
-                selector: `#id .dropdown-menu`,
-                event: 'keydown',
-                listener(event) {
-                    if (event.key === 'Escape' || event.key === 'Backspace') {
-                        component.find('.toggle-search-list').click();
-                        component.find(`input[type='search']`).focus();
-
-                        event.preventDefault();
-
-                        return false;
-                    }
-
-                    if (event.key === 'Enter') {
-                        onSelect(event);
-                    }
-                }
-            },
-            {
-                selector: `#id .dropdown-menu`,
-                event: 'click',
-                listener(event) {
-                    onSelect(event);
-                }
             }
         ]
     });
-
-    function dropdownItemTemplate(item) {
-        const {
-            label, path
-        } = item;
-
-        return /*html*/ `
-            <a href='javascript:void(0)' class='dropdown-item' data-path='${path}'>${label}</a>
-        `;
-    }
 
     return component;
 }

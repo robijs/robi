@@ -20,7 +20,7 @@ export function Palette(param) {
         position
     } = param;
 
-    const width = 250;
+    const width = 275;
     /*
         Layout
         Robi
@@ -43,7 +43,7 @@ export function Palette(param) {
             ]
         },
         {
-            title: 'Robi',
+            title: 'Widgets',
             items: [
                 {
                     name: 'Table',
@@ -53,10 +53,14 @@ export function Palette(param) {
                     name: 'Chart',
                     icon: 'bs-bar-chart'
                 },
-                // {
-                //     name: 'Modal',
-                //     icon: 'bs-stop-btn'
-                // }
+                {
+                    name: 'Form',
+                    icon: 'bs-stop-btn'
+                },
+                {
+                    name: 'Modal',
+                    icon: 'bs-stop-btn'
+                }
             ]
         },
         {
@@ -103,7 +107,7 @@ export function Palette(param) {
                 },
                 {
                     name: 'Multi Line Text',
-                    icon: 'bs-textarea-resize'
+                    icon: 'bs-textarea'
                 },
                 {
                     name: 'Choice',
@@ -118,67 +122,39 @@ export function Palette(param) {
                     icon: 'bs-calendar3-event'
                 },
             ]
-        },
-        {
-            title: 'New',
-            cursor: 'pointer',
-            items: [
-                {
-                    name: 'Component',
-                    icon: 'bs-file-code'
-                },
-                {
-                    name: 'Action',
-                    icon: 'bs-file-code'
-                }
-            ]
         }
     ]
 
+    // TODO: Store filter btn choice in session or local storage?
     const component = Component({
         html: /*html*/ `
             <div class='palette'>
+                <div class='search-container'>
+                    <input class='form-control mr-sm-2' type='search' placeholder='Search' aria-label='Search'>
+                </div>
                 <div class='title'>Component Library</div>
+                <div class='filter-btn-group'>
+                    <div class='filter-btn'>1</div>
+                    <div class='filter-btn'>2</div>
+                    <div class='filter-btn'>3</div>
+                    <div class='filter-btn'>4</div>
+                    <div class='filter-btn'>5</div>
+                </div>
                 ${
-                    componentLibrary.map(({ title, cursor, items }) => {
-                        return /*html*/ `
-                            <div class='group'>
-                                <div class='title'>${title}</div>
-                                <div class='items'>
-                                    ${
-                                        items.map(({ name, icon, html }) => {
-                                            return /*html*/ `
-                                                <div class='item ${cursor || ''}' draggable='true'>
-                                                    ${
-                                                        icon ? 
-                                                        /*html*/ `
-                                                            <svg class='icon'>
-                                                                <use href='#icon-${icon}'></use>
-                                                            </svg>
-                                                        ` : 
-                                                        html
-                                                    }
-                                                    <div class='name'>${name}</div>
-                                                </div>
-                                            `
-                                        }).join('\n')
-                                    }
-                                </div>
-                            </div>
-                        `
-                    }).join('\n')
+                    componentLibrary.map(group).join('\n')
                 }
             </div>
         `,
         style: /*css*/ `
             #id {
+                user-select: none;
                 position: relative;
                 overflow-x: hidden;
                 overflow-y: overlay;
                 height: 100vh;
                 background: var(--background);
-                animation: palette-enter 300ms ease-in-out forwards;
                 border-left: solid 1px var(--border-color);
+                animation: palette-enter 300ms ease-in-out forwards;
             }
 
             @keyframes palette-enter {
@@ -205,9 +181,38 @@ export function Palette(param) {
                 }
             }
 
-            /* Drag */
-            [draggable] {
-                user-select: none;
+            /* Search */
+            #id .form-inline {
+                flex-flow: initial;
+            }
+
+            #id .search-container {
+                width: 100%;
+                padding: 15px 15px 0px 15px;
+            }
+
+            #id input[type='search'] {
+                width: 100%;
+                border-radius: .25rem;
+                font-size: 13px;
+                border: none;
+                background: var(--button-background);
+            }
+
+            #id input[type='search']::-webkit-search-cancel-button {
+                -webkit-appearance: none;
+                cursor: pointer;
+                height: 20px;
+                width: 20px;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill=''><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+            }
+
+            /** Override Bootstrap input element active/focus style */
+            #id input:active,
+            #id input:focus {
+                outline: none;
+                border: none;
+                box-shadow: none;
             }
 
             /* Title */
@@ -222,20 +227,90 @@ export function Palette(param) {
                 white-space: nowrap;
             }
 
+            /* Filter Buttons */
+            #id .filter-btn-group {
+                display: flex;
+                background: var(--secondary);
+                border-radius: 8px;
+                margin: 0px 15px;
+            }
+
+            #id .filter-btn {
+                cursor: pointer;
+                position: relative;
+                text-align: center;
+                flex: 1;
+                padding: 4px 12px;
+                border-radius: 8px;
+                transition: background-color 150ms ease-in-out;
+            }
+
+            #id .filter-btn:hover {
+                background-color: var(--button-background);
+            }
+
+            #id .filter-btn:hover + div::before {
+                background-color: transparent;
+            }
+
+            #id .filter-btn:not(:first-child)::before {
+                content: '';
+                width: 2px;
+                height: 50%;
+                position: absolute;
+                top: 25%;
+                left: -1px;
+                background: var(--button-background);
+                transition: background-color 150ms ease-in-out;
+            }
+
+            #id .filter-btn.selected {
+                background-color: var(--button-background);
+            }
+
             /* Groups */
+            #id .group[data-group='New'] .item {
+                background: var(--background-HSL-3);
+                color: var(--primary);
+                border: solid 1px var(--background-HSL-10);
+            }
+
+            #id .group[data-group='New'] .item .icon {
+                fill: var(--primary);
+            }
+
             #id .group {
                 padding: 15px;
                 white-space: nowrap;
             }
 
             #id .group > .title {
+                display: flex;
+                justify-content: space-between;
                 font-weight: 600;
                 font-size: 16px;
                 margin-bottom: 5px;
+                height: 26px;
+            }
+
+            #id .group > .title .square {
+                display: flex;
+                background: var(--button-background);
+                border-radius: 6px;
+                padding: 2px;
+            }
+
+            #id .group > .title .square .icon {
+                fill: var(--primary);
+            }
+
+            #id .group-btn .name {
+                font-weight: 500;
+                color: var(--primary);
+                font-size: 14px;
             }
 
             #id .item {
-                cursor: grab;
                 display: flex;
                 align-items: center;
                 padding: 8px 12px;
@@ -292,10 +367,24 @@ export function Palette(param) {
                 left: calc(-2.25rem + -4px);
             }
 
+            /* Drag */
+            #id .draggable {
+                cursor: grab;
+            }
         `,
         parent: Store.get('appcontainer'),
         position,
         events: [
+            {
+                selector: '#id .filter-btn',
+                event: 'click',
+                listener(event) {
+                    const btns = component.findAll('.filter-btn');
+                    btns.forEach(btn => btn.classList.remove('selected'));
+
+                    this.classList.add('selected');
+                }
+            },
             {
                 selector: '#id .item',
                 event: 'click',
@@ -334,73 +423,120 @@ export function Palette(param) {
             }
         ],
         onAdd() {
-            var dragSrcEl = null;
-  
-            function handleDragStart(e) {
-                this.style.opacity = '0.4';
-                
-                dragSrcEl = this;
-
-                e.dataTransfer.effectAllowed = 'move';
-                e.dataTransfer.setData('text/html', this.innerHTML);
-            }
-
-            function handleDragOver(e) {
-                if (e.preventDefault) {
-                    e.preventDefault();
-                }
-
-                e.dataTransfer.dropEffect = 'move';
-                
-                return false;
-            }
-
-            function handleDragEnter(e) {
-                this.classList.add('over');
-            }
-
-            function handleDragLeave(e) {
-                this.classList.remove('over');
-            }
-
-            function handleDrop(e) {
-                if (e.stopPropagation) {
-                    e.stopPropagation(); // stops the browser from redirecting.
-                }
-
-                console.log(dragSrcEl, this);
-                
-                if (dragSrcEl != this) {
-                    dragSrcEl.innerHTML = this.innerHTML;
-                    this.innerHTML = e.dataTransfer.getData('text/html');
-                }
-                
-                return false;
-            }
-
-            function handleDragEnd(e) {
-                this.style.opacity = '1';
-                
-                items.forEach(function (item) {
-                    item.classList.remove('over');
-                });
-            }
-            
-            let items = component.findAll('.item');
-            items.forEach(function(item) {
-                item.addEventListener('dragstart', handleDragStart, false);
-                item.addEventListener('dragenter', handleDragEnter, false);
-                item.addEventListener('dragover', handleDragOver, false);
-                item.addEventListener('dragleave', handleDragLeave, false);
-                item.addEventListener('drop', handleDrop, false);
-                item.addEventListener('dragend', handleDragEnd, false);
-            });
-
-            // NOTE: Experimental
-            Store.get('viewcontainer').on('drop', handleDrop);
-            Store.get('viewcontainer').on('dragover', handleDragOver);
+            enableDrag();
+            addCustom();
         }
     });
+
+    async function addCustom() {
+        const req = await fetch('http://127.0.0.1:2035/src/Routes/Robi/Components');
+        const data = await req.json();
+
+        console.log(data);
+
+        component.append(group({
+            title: 'Custom',
+            button: /*html*/ `
+                <div class="icon-container">
+                    <div class="square d-flex">
+                        <svg class="icon" style="font-size: 22px;">
+                            <use href="#icon-bs-plus"></use>
+                        </svg>
+                    </div>
+                </div>
+            `,
+            items: data.map(item => {
+                return {
+                    name: item,
+                    icon: 'bs-code-slash'
+                }
+            })
+        }))
+    }
+
+    function enableDrag() {
+        // TODO: Remove clone if not dragged into a droppable container
+        // TODO: Cancel drop and remove clone if only clicked
+
+
+        // NOTE: equal to grabbed element's margin
+        let offset = 0;
+        let offsetY = 0;
+        let draggedElement;
+
+        function mousedown(event) {
+            // Clone element
+            draggedElement = this.cloneNode(true);
+
+            // Set offsets
+            offsetY = component.get().scrollTop;
+            
+            // Insert cloned element
+            this.insertAdjacentElement('beforebegin', draggedElement);
+
+            // Style dragged element
+            draggedElement.style.maxWidth = `${draggedElement.offsetWidth}px`;
+            draggedElement.style.userSelect = 'none';
+            draggedElement.style.position = 'fixed';
+            draggedElement.style.zIndex = '1000';
+            draggedElement.style.top = `${draggedElement.getBoundingClientRect().top - offset - offsetY}px`;
+            draggedElement.style.left = `${draggedElement.getBoundingClientRect().left - offset}px`;
+
+            // Add event listeners
+            document.addEventListener('mousemove', mousemove);
+            window.addEventListener('mouseup', mouseup);
+        }
+
+        function mousemove(event) {
+            draggedElement.style.top = `${draggedElement.getBoundingClientRect().top + event.movementY - offset}px`;
+            draggedElement.style.left = `${draggedElement.getBoundingClientRect().left + event.movementX - offset}px`;
+        }
+
+        function mouseup(event) {
+            // Remove event listeners
+            document.removeEventListener('mousemove', mousemove);
+            window.addEventListener('mouseup', mouseup);
+        }
+
+        // Get all component library draggable items
+        let items = component.findAll('.draggable');
+        items.forEach(function(item) {
+            // Add event listeners
+            item.addEventListener('mousedown', mousedown,);
+            item.addEventListener('mouseup', mouseup);
+        });
+    }
+
+    function group({ title, button, items, cursor, draggable }) {
+        return /*html*/ `
+            <div class='group' data-group='${title}'>
+                <div class='title'>
+                    ${title}
+                    ${button || ''}
+                </div>
+                <div class='items'>
+                    ${
+                        items.map(({ name, icon, html }) => {
+                            return /*html*/ `
+                                <div class='item${cursor ? ` ${cursor}` : ''}${draggable !== false ? ' draggable' : ''}'>
+                                    ${
+                                        icon ? 
+                                        /*html*/ `
+                                            <svg class='icon'>
+                                                <use href='#icon-${icon}'></use>
+                                            </svg>
+                                        ` : 
+                                        html
+                                    }
+                                    <div class='name'>${name}</div>
+                                </div>
+                            `
+                        }).join('\n')
+                    }
+                </div>
+            </div>
+        `
+    }
 
     function newFile({ template, dir}) {
         CreateFileForm({

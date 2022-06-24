@@ -94,15 +94,6 @@ Start({
         }
         // @END-ModifyFile
         , // @Route
-        // @START-Robi
-        {
-            path: 'Robi',
-            title: 'Robi',
-            icon: 'bs-app',
-            go: Route_Robi
-        }
-        // @END-Robi
-        , // @Route
         // @START-Form
         {
             path: 'Form',
@@ -111,6 +102,15 @@ Start({
             go: Route_Form
         }
         // @END-Form
+        , // @Route
+        // @START-Robi
+        {
+            path: 'Robi',
+            title: 'Robi',
+            icon: 'bs-app',
+            go: Route_Robi
+        }
+        // @END-Robi
         // @END-Routes
     ],
     settings: {

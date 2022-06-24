@@ -1,5 +1,6 @@
 import { createServer } from 'http';
-import { createWriteStream, mkdirSync, renameSync } from 'fs';
+import { createWriteStream, mkdirSync, renameSync, readdirSync } from 'fs';
+import path from 'path'
 
 createServer((req, res) => {
     const headers = {
@@ -137,19 +138,38 @@ createServer((req, res) => {
     }
 
     if (req.method === "GET") {
+        const url = decodeURI(req.url);
+        
+        headers['Content-Type'] = 'application/json';
+
+        let files;
+
+        try {
+            files = readdirSync(`.${url}`).map(file => path.parse(file).name);
+        } catch (error) {
+            files = {
+                error: 'Not a valid path.'
+            }
+        }
+
         res.writeHead(200, headers);
-        res.end(/*html*/ `
-            <h1>Methods allowed:</h1>
-            <ul>
-                <li>POST: http://127.0.0.1:2035/?path=[path/to/file]&file=[filename.ext]</li>
-                <li>DELETE:</li>
-                <ul>
-                    <li>Directory: http://127.0.0.1:2035/?path=[path/to/dir]</li>
-                    <li>File: http://127.0.0.1:2035/?path=[path/to/file]&file=[filename.ext]</li>
-                </ul>
-            </ul>
-        `);
+        res.end(JSON.stringify(files));
+
         return;
+
+        // res.writeHead(200, headers);
+        // res.end(/*html*/ `
+        //     <h1>Methods allowed:</h1>
+        //     <ul>
+        //         <li>POST: http://127.0.0.1:2035/?path=[path/to/file]&file=[filename.ext]</li>
+        //         <li>DELETE:</li>
+        //         <ul>
+        //             <li>Directory: http://127.0.0.1:2035/?path=[path/to/dir]</li>
+        //             <li>File: http://127.0.0.1:2035/?path=[path/to/file]&file=[filename.ext]</li>
+        //         </ul>
+        //     </ul>
+        // `);
+        // return;
     }
 
 }).listen(2035);
