@@ -118,6 +118,7 @@ import { EditFormTemplate } from './Templates/EditFormTemplate.js'
 import { ModelTemplate } from './Templates/ModelTemplate.js'
 import { NewFormTemplate } from './Templates/NewFormTemplate.js'
 import { RouteTemplate } from './Templates/RouteTemplate.js'
+import { classes } from './Utilities/classes.js'
 
 export {
     AddColumnToView,
@@ -225,5 +226,6 @@ export {
     EditFormTemplate,
     ModelTemplate,
     NewFormTemplate,
-    RouteTemplate
+    RouteTemplate,
+    classes
 }

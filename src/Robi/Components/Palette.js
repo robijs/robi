@@ -6,6 +6,10 @@ import { Store } from '../Core/Store.js'
 import { GenerateUUID } from '../Robi.js'
 import { ComponentTemplate } from '../Templates/ComponentTemplate.js'
 import { ActionTemplate } from '../Templates/ActionTemplate.js'
+import { GetLocal } from '../Actions/GetLocal.js'
+import { SetLocal } from '../Actions/SetLocal.js'
+import { HTML } from '../Actions/HTML.js'
+import { classes } from '../Utilities/classes.js'
 
 // @START-File
 /**
@@ -21,13 +25,6 @@ export function Palette(param) {
     } = param;
 
     const width = 275;
-    /*
-        Layout
-        Robi
-        Controls
-        Fields
-        New
-    */
     const componentLibrary = [
         {
             title: 'Layout',
@@ -120,10 +117,26 @@ export function Palette(param) {
                 {
                     name: 'Date',
                     icon: 'bs-calendar3-event'
-                },
+                }
             ]
         }
-    ]
+    ];
+
+    let selectedTool = GetLocal('selectedTool') || 'Layout';
+    const toolCategories = [
+        {
+            name: 'Layout',
+            icon: 'bs-grid-1x2'
+        },
+        {
+            name: 'Widgets',
+            icon: 'bs-layout-sidebar'
+        },
+        {
+            name: 'Controls',
+            icon: 'bs-toggles'
+        }
+    ];
 
     // TODO: Store filter btn choice in session or local storage?
     const component = Component({
@@ -134,15 +147,23 @@ export function Palette(param) {
                 </div>
                 <div class='title'>Component Library</div>
                 <div class='filter-btn-group'>
-                    <div class='filter-btn'>1</div>
-                    <div class='filter-btn'>2</div>
-                    <div class='filter-btn'>3</div>
-                    <div class='filter-btn'>4</div>
-                    <div class='filter-btn'>5</div>
+                    ${
+                        HTML({
+                            items: toolCategories,
+                            each({ name, icon }) {
+                                return /*html*/ `
+                                    <div class='${classes('filter-btn', { selected: selectedTool === name})}' data-name='${name}'>
+                                        <svg class='icon'>
+                                            <use href='#icon-${icon}'></use>
+                                        </svg>   
+                                    </div>
+                                `
+                            }
+                        })
+                    }
+                    <div class='selected-indicator'></div>
                 </div>
-                ${
-                    componentLibrary.map(group).join('\n')
-                }
+                ${componentLibrary.map(group).join('\n')}
             </div>
         `,
         style: /*css*/ `
@@ -230,6 +251,7 @@ export function Palette(param) {
             /* Filter Buttons */
             #id .filter-btn-group {
                 display: flex;
+                position: relative;
                 background: var(--secondary);
                 border-radius: 8px;
                 margin: 0px 15px;
@@ -240,32 +262,23 @@ export function Palette(param) {
                 position: relative;
                 text-align: center;
                 flex: 1;
+                background: transparent;
+                z-index: 1;
                 padding: 4px 12px;
                 border-radius: 8px;
                 transition: background-color 150ms ease-in-out;
             }
 
-            #id .filter-btn:hover {
-                background-color: var(--button-background);
-            }
-
-            #id .filter-btn:hover + div::before {
-                background-color: transparent;
-            }
-
-            #id .filter-btn:not(:first-child)::before {
-                content: '';
-                width: 2px;
-                height: 50%;
+            #id .selected-indicator {
+                opacity: 0;
                 position: absolute;
-                top: 25%;
-                left: -1px;
+                top: 0px;
+                left: 0px;
+                border-radius: 8px;
+                width: calc(${100 / toolCategories.length}%);
+                height: 100%;
                 background: var(--button-background);
-                transition: background-color 150ms ease-in-out;
-            }
-
-            #id .filter-btn.selected {
-                background-color: var(--button-background);
+                transition: left 200ms ease-in-out, opacity 100ms ease-in-out 100ms;
             }
 
             /* Groups */
@@ -379,10 +392,11 @@ export function Palette(param) {
                 selector: '#id .filter-btn',
                 event: 'click',
                 listener(event) {
-                    const btns = component.findAll('.filter-btn');
-                    btns.forEach(btn => btn.classList.remove('selected'));
+                    selectedTool = this.dataset.name;
 
-                    this.classList.add('selected');
+                    SetLocal('selectedTool', selectedTool);
+
+                    component.find('.selected-indicator').style.left = `${this.offsetLeft}px`;
                 }
             },
             {
@@ -423,35 +437,19 @@ export function Palette(param) {
             }
         ],
         onAdd() {
+            setSelectedTool();
             enableDrag();
             addCustom();
         }
     });
 
-    async function addCustom() {
-        const req = await fetch('http://127.0.0.1:2035/src/Routes/Robi/Components');
-        const data = await req.json();
-
-        console.log(data);
-
-        component.append(group({
-            title: 'Custom',
-            button: /*html*/ `
-                <div class="icon-container">
-                    <div class="square d-flex">
-                        <svg class="icon" style="font-size: 22px;">
-                            <use href="#icon-bs-plus"></use>
-                        </svg>
-                    </div>
-                </div>
-            `,
-            items: data.map(item => {
-                return {
-                    name: item,
-                    icon: 'bs-code-slash'
-                }
-            })
-        }))
+    function setSelectedTool() {
+        setTimeout(() => {
+            console.log(component.find(`.filter-btn[data-name="${selectedTool}"]`).offsetLeft);
+            const indicator = component.find('.selected-indicator');
+            indicator.style.left = `${component.find(`.filter-btn[data-name="${selectedTool}"]`).offsetLeft}px`;
+            indicator.style.opacity = '1';
+        }, 300);
     }
 
     function enableDrag() {
@@ -505,6 +503,32 @@ export function Palette(param) {
             item.addEventListener('mousedown', mousedown,);
             item.addEventListener('mouseup', mouseup);
         });
+    }
+
+    async function addCustom() {
+        const req = await fetch('http://127.0.0.1:2035/src/Routes/Robi/Components');
+        const data = await req.json();
+
+        // console.log(data);
+
+        component.append(group({
+            title: 'Custom',
+            button: /*html*/ `
+                <div class="icon-container">
+                    <div class="square d-flex">
+                        <svg class="icon" style="font-size: 22px;">
+                            <use href="#icon-bs-plus"></use>
+                        </svg>
+                    </div>
+                </div>
+            `,
+            items: data.map(item => {
+                return {
+                    name: item,
+                    icon: 'bs-code-slash'
+                }
+            })
+        }))
     }
 
     function group({ title, button, items, cursor, draggable }) {

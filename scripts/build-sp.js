@@ -52,7 +52,8 @@ async function min() {
                 './src/Robi/Actions',
                 './src/Robi/Core',
                 './src/Robi/Models',
-                './src/Robi/Templates'
+                './src/Robi/Templates',
+                './src/Robi/Utilities'
             ],
             imports: [
                 './src/Robi/Components'
