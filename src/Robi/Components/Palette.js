@@ -258,13 +258,15 @@ export function Palette(param) {
             }
 
             #id .filter-btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 cursor: pointer;
                 position: relative;
-                text-align: center;
                 flex: 1;
                 background: transparent;
                 z-index: 1;
-                padding: 4px 12px;
+                padding: 8px 16px;
                 border-radius: 8px;
                 transition: background-color 150ms ease-in-out;
             }
@@ -272,11 +274,11 @@ export function Palette(param) {
             #id .selected-indicator {
                 opacity: 0;
                 position: absolute;
-                top: 0px;
-                left: 0px;
+                top: 3px;
+                left: 3px;
                 border-radius: 8px;
-                width: calc(${100 / toolCategories.length}%);
-                height: 100%;
+                width: calc(${100 / toolCategories.length}% - 6px);
+                height: calc(100% - 6px);
                 background: var(--button-background);
                 transition: left 200ms ease-in-out, opacity 100ms ease-in-out 100ms;
             }
@@ -396,7 +398,7 @@ export function Palette(param) {
 
                     SetLocal('selectedTool', selectedTool);
 
-                    component.find('.selected-indicator').style.left = `${this.offsetLeft}px`;
+                    component.find('.selected-indicator').style.left = `${this.offsetLeft + 3}px`;
                 }
             },
             {
@@ -447,7 +449,7 @@ export function Palette(param) {
         setTimeout(() => {
             console.log(component.find(`.filter-btn[data-name="${selectedTool}"]`).offsetLeft);
             const indicator = component.find('.selected-indicator');
-            indicator.style.left = `${component.find(`.filter-btn[data-name="${selectedTool}"]`).offsetLeft}px`;
+            indicator.style.left = `${component.find(`.filter-btn[data-name="${selectedTool}"]`).offsetLeft + 3}px`;
             indicator.style.opacity = '1';
         }, 300);
     }
