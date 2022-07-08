@@ -149,30 +149,30 @@ const Store = {
     routes() {
         return store.routes;
     },
-    // addRow({ id, component }) {
-    //     store.rows[id] = component;
-    // },
-    // addCell({ rowId, id, component }) {
-    //     store.rows[rowId][id] = component;
-    // },
-    // removeCell({ rowId, id }) {
-    //     delete store.rows[rowId][id];
-    // },
-    // removeRow({ id }) {
-    //     delete store.rows[id];
-    // },
-    // resetRows() {
-    //     store.rows = {};
-    // },
-    // getRow(id) {
-    //     return store.rows[id];
-    // },
-    // getCell({ rowId, id }) {
-    //     return store.rows[rowId][id];
-    // },
-    // getRows() {
-    //     return store.rows
-    // }
+    addRow(component) {
+        store.rows[component.id()] = component;
+    },
+    addCell({ rowId, id, component }) {
+        store.rows[rowId][id] = component;
+    },
+    removeCell({ rowId, id }) {
+        delete store.rows[rowId][id];
+    },
+    removeRow({ id }) {
+        delete store.rows[id];
+    },
+    resetRows() {
+        store.rows = {};
+    },
+    getRow(id) {
+        return store.rows[id];
+    },
+    getCell({ rowId, id }) {
+        return store.rows[rowId][id];
+    },
+    getRows() {
+        return Object.values(store.rows);
+    }
 }
 
 Object.freeze(Store);

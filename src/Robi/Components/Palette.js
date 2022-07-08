@@ -10,6 +10,9 @@ import { GetLocal } from '../Actions/GetLocal.js'
 import { SetLocal } from '../Actions/SetLocal.js'
 import { HTML } from '../Actions/HTML.js'
 import { classes } from '../Utilities/classes.js'
+import { SingleLineTextField } from './SingleLineTextField.js'
+import { Table } from './Table.js'
+import { Button } from './Button.js'
 
 // @START-File
 /**
@@ -271,6 +274,10 @@ export function Palette(param) {
                 transition: background-color 150ms ease-in-out;
             }
 
+            #id .filter-btn .icon {
+                fill: var(--color);
+            }
+
             #id .selected-indicator {
                 opacity: 0;
                 position: absolute;
@@ -351,6 +358,7 @@ export function Palette(param) {
             #id .item > .icon {
                 flex-shrink: 0;
                 font-size: 22px;
+                fill: var(--color);
             }
 
             #id .item .btn {
@@ -458,15 +466,18 @@ export function Palette(param) {
         // TODO: Remove clone if not dragged into a droppable container
         // TODO: Cancel drop and remove clone if only clicked
 
-
         // NOTE: equal to grabbed element's margin
         let offset = 0;
         let offsetY = 0;
         let draggedElement;
+        let componentName;
 
         function mousedown(event) {
             // Clone element
             draggedElement = this.cloneNode(true);
+
+            // Set name
+            componentName = draggedElement.dataset.name;
 
             // Set offsets
             offsetY = component.get().scrollTop;
@@ -475,16 +486,27 @@ export function Palette(param) {
             this.insertAdjacentElement('beforebegin', draggedElement);
 
             // Style dragged element
+            draggedElement.style.pointerEvents = "none";
             draggedElement.style.maxWidth = `${draggedElement.offsetWidth}px`;
             draggedElement.style.userSelect = 'none';
             draggedElement.style.position = 'fixed';
             draggedElement.style.zIndex = '1000';
             draggedElement.style.top = `${draggedElement.getBoundingClientRect().top - offset - offsetY}px`;
             draggedElement.style.left = `${draggedElement.getBoundingClientRect().left - offset}px`;
+            // DEV:
+            draggedElement.style.boxShadow = 'var(--box-shadow)';
 
             // Add event listeners
             document.addEventListener('mousemove', mousemove);
             window.addEventListener('mouseup', mouseup);
+
+            // Enable Drop
+            Store
+                .getRows()
+                .forEach(row => {
+                    row.enableDrop();
+                    row.on('mouseup', rowEnableDrop);
+                });
         }
 
         function mousemove(event) {
@@ -496,6 +518,48 @@ export function Palette(param) {
             // Remove event listeners
             document.removeEventListener('mousemove', mousemove);
             window.addEventListener('mouseup', mouseup);
+
+            // Remove element
+            draggedElement.remove();
+
+            // Remove enable drop
+            Store
+                .getRows()
+                .forEach(row => {
+                    row.disableDrop();
+                    row.off('mouseup', rowEnableDrop);
+                });
+
+            // Add component to DOM
+            
+        }
+
+        function rowEnableDrop(event) {
+            // SingleLineTextField({
+            //     parent: this
+            // }).add();
+
+            // TODO: Keep track of components added to DOM
+            // TODO: Add code generated to file in the right Row and Cell
+            // TODO: Enable editable components
+            //       [ ] Label
+            //       [ ] Callbacks (onChange, onKeyup, action, etc.)
+            //       [ ] Drag and drop to a differnt Row, Cell, or order within
+            switch(componentName) {
+                case 'Table':
+                    Table({
+                        list: 'AllTypes',
+                        parent: this
+                    });
+                    break;
+                case 'Button':
+                    Button({
+                        value: 'Button',
+                        type: 'robi',
+                        parent: this
+                    }).add();
+                    break;
+            }
         }
 
         // Get all component library draggable items
@@ -544,7 +608,7 @@ export function Palette(param) {
                     ${
                         items.map(({ name, icon, html }) => {
                             return /*html*/ `
-                                <div class='item${cursor ? ` ${cursor}` : ''}${draggable !== false ? ' draggable' : ''}'>
+                                <div class='item${cursor ? ` ${cursor}` : ''}${draggable !== false ? ' draggable' : ''}' data-name='${name}'>
                                     ${
                                         icon ? 
                                         /*html*/ `

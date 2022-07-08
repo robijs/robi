@@ -22,14 +22,19 @@ export function Row(render, options = {}) {
             #id.robi-row {
                 width: 100%;
                 display: ${display || 'block'};
+                min-height: ${minHeight || '100px'};
+                transition: box-shadow 200ms ease-in-out;
                 ${height ? `height: ${height};` : ''}
-                ${minHeight ? `min-height: ${minHeight};` : ''}
                 ${flex ? `flex: ${flex};` : ''}
                 ${align ? `align-items: ${align};` : ''}
             }
 
             .robi-row:not(:last-child) {
                 margin-bottom: 30px;
+            }
+
+            .drop-target {
+                box-shadow: 0px 0px 0px 1px var(--primary);
             }
         `,
         // FIXME: Do I like this? Does it assume too much?
@@ -101,8 +106,19 @@ export function Row(render, options = {}) {
                     }
                 });
             }
+
+            // Add to store
+            Store.addRow(component);
         }
     });
+
+    component.enableDrop = () => {
+        component.get().classList.add('drop-target');
+    }
+
+    component.disableDrop = () => {
+        component.get().classList.remove('drop-target');
+    }
 
     component.add();
 }
