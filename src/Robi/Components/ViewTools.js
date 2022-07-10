@@ -135,7 +135,9 @@ export function ViewTools(param) {
         ],
         onAdd() {
             // FIXME: Remove before shipping
-            open();
+           setTimeout(() => {
+                open();
+           }, 500);
         }
     });
 
@@ -163,7 +165,7 @@ export function ViewTools(param) {
         component.find('.bar').classList.add('arrow-bottom');
         component.find('.bar.vertical').classList.add('arrow-top');
 
-        // DEV:
+        // DEV: Status Bar
         const id = Store.get('maincontainer').get().id;
         Style({
             name: 'status-bar',
@@ -190,6 +192,9 @@ export function ViewTools(param) {
                 <div>Status Bar</div>
             </div>
         `);
+
+        // DEV: Add row
+        editLayout();
     }
 
     function close() {
@@ -204,6 +209,9 @@ export function ViewTools(param) {
         // DEV:
         Store.get('maincontainer').find('.status-bar').remove();
         document.querySelector('head style[data-name="status-bar"]').remove();
+
+        // DEV: Add row
+        turnOffSortable();
     }
 
     function newFile({ template, dir}) {
@@ -216,12 +224,11 @@ export function ViewTools(param) {
         });
     }
 
+    const addRowId = GenerateUUID();
+
     function editLayout() {
         // Disable sidebar
         Store.get('sidebar').get().style.pointerEvents = 'none';
-
-        // Hide tools
-        component.find('.tools').classList.add('d-none');
 
         // Add Save and Cancel buttons
         parent.append(/*html*/ `
@@ -250,48 +257,48 @@ export function ViewTools(param) {
         });
 
         // Cancel
-        parent.find('.cancel-edit-layout').on('click', turnOfSortable);
+        parent.find('.cancel-edit-layout').on('click', turnOffSortable);
 
-        // Turn off sortable
-        function turnOfSortable() {
-            $(`#${parent.get().id} .robi-row`).removeClass('robi-row-transition');
+        turnOnSortable();
 
-            // Reset order
-            [...parent.findAll('.robi-row')]
-            .sort((a, b) => parseInt(a.dataset.row.split('row-')[1]) - parseInt(b.dataset.row.split('row-')[1]))
-            .forEach(row => parent.get().append(row));
+        // Add row button
+        parent.append(/*html*/ `
+            <button class='btn btn-robi add-row-${addRowId}'>
+                Add row
+            </button>
+        `);
+    }
 
-            setTimeout(() => {
-                $(`#${parent.get().id}`).sortable('destroy');
-                $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'auto', 'user-select': 'auto'});
-            }, 0);
-
-            // Remove buttons
-            parent.find('.edit-layout-buttons').remove();
-
-            // Show tools
-            component.find('.tools').classList.remove('d-none');
-
-            // Enable sidebar
-            Store.get('sidebar').get().style.pointerEvents = 'all';
-
-            // TODO: Finish feature
-            parent.find(`.add-row-${id}`).remove();
-        }
-
-        // Turn on sortable
+    // Turn on sortable
+    function turnOnSortable() {
         $(`#${parent.get().id} .robi-row`).addClass('robi-row-transition');
         $(`#${parent.get().id}`).sortable({ items: '.robi-row' });
         $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'none', 'user-select': 'none'});
+    }
 
-        // Add row button
-        // TODO: Finish feature
-        const id = GenerateUUID();
-        parent.append(/*html*/ `
-            <button class='btn btn-robi add-row-${id}'>
-                Add row
-            </button>
-        `)
+    // Turn off sortable
+    function turnOffSortable() {
+        $(`#${parent.get().id} .robi-row`).removeClass('robi-row-transition');
+
+        // Reset order
+        [...parent.findAll('.robi-row')]
+        .sort((a, b) => parseInt(a.dataset.row.split('row-')[1]) - parseInt(b.dataset.row.split('row-')[1]))
+        .forEach(row => parent.get().append(row));
+
+        setTimeout(() => {
+            $(`#${parent.get().id}`).sortable('destroy');
+            $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'auto', 'user-select': 'auto'});
+        }, 0);
+
+        // Remove buttons
+        parent.find('.edit-layout-buttons').remove();
+
+        // Enable sidebar
+        Store.get('sidebar').get().style.pointerEvents = 'all';
+
+        // Remove add row button
+        console.log(parent.find(`.add-row-${addRowId}`));
+        parent.find(`.add-row-${addRowId}`).remove();
     }
 
     function editSource() {

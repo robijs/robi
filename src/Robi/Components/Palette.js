@@ -443,6 +443,7 @@ export function Palette(param) {
             setSelectedTool();
             enableDrag();
             addCustom();
+            enableEdit();
         }
     });
 
@@ -645,6 +646,27 @@ export function Palette(param) {
         `
     }
 
+    // NOTE: Show that row is editable, or components, or both?
+    function enableEdit() {
+        // DEV: Rows
+        Store
+            .getRows()
+            .forEach(row => {
+                console.log('here');
+                row.enableEdit();
+            });
+    }
+
+    function disableEdit() {
+        // DEV: Rows
+        Store
+            .getRows()
+            .forEach(row => {
+                console.log('here');
+                row.disableEdit();
+            });
+    }
+
     function newFile({ template, dir}) {
         CreateFileForm({
             template,
@@ -749,6 +771,7 @@ export function Palette(param) {
         });
 
         component.get().classList.add('close-palette');
+        disableEdit();
     }
 
     return component;

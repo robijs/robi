@@ -710,13 +710,13 @@ export function AppContainer() {
             }
 
             /* Row */
-            .robi-row {
+            .  {
                 /* transition: background-color 250ms ease, padding 250ms ease, margin 250ms ease, transform 250ms ease, box-shadow 250ms ease; */
                 /* border-radius: 20px !important; */ /* original */
                 border-radius: 10px !important;
             }
 
-            .robi-row-transition {
+            /* .robi-row-transition {
                 transition: background-color 250ms ease, padding 250ms ease, margin 250ms ease, transform 250ms ease, box-shadow 250ms ease;
             }
 
@@ -725,11 +725,11 @@ export function AppContainer() {
                 padding: 20px !important;
                 background: var(--secondary) !important;
                 box-shadow: 0px 0px 0px 2px var(--primary) !important;
-            }
+            } */
 
-            .robi-row.ui-sortable-helper {
-                box-shadow: var(--sort-shadow) !important;
-                transform: scale(1.05);
+            .robi-row.ui-sortable-helper::before {
+                background: var(--secondary);
+                z-index: -1;
             }
 
             /* Menu */
