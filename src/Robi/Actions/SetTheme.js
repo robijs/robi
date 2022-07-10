@@ -87,7 +87,7 @@ export function SetTheme() {
                 --box-shadow: rgb(0 0 0 / ${App.get('prefersColorScheme') === 'dark' ? 40 : 10}%) 0px 0px 16px -2px;
                 --button-background: ${buttonBackgroundColor};
                 --color: ${color};
-                --inputBackground: ${App.get('prefersColorScheme') === 'dark' ? background : secondary};
+                --input-background: ${App.get('prefersColorScheme') === 'dark' ? background : secondary};
                 --input-border-color: ${App.get('prefersColorScheme') === 'dark' ? 'dimgray' : '#adb5bd'};
                 --primary: ${primary};
                 --primary-hex: ${hex};

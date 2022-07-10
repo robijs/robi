@@ -25,6 +25,10 @@ export function AppContainer() {
                 border: solid 1px var(--input-border-color);
             }
 
+            body.grabbing * {
+                cursor: grabbing !important;
+            }
+
             /* NOTE: END */
 
             html {
@@ -309,7 +313,7 @@ export function AppContainer() {
             .form-field-multi-line-text.editable,
             .btn.dropdown-toggle {
                 font-size: 13px !important;
-                background: var(--inputBackground);
+                background: var(--input-background);
             }
 
             .input-group-text {
@@ -327,7 +331,7 @@ export function AppContainer() {
             .form-field-multi-line-text.editable:focus,
             .btn.dropdown-toggle:focus {
                 border: 1px solid var(--border-color);
-                background: var(--inputBackground);
+                background: var(--input-background);
             }
 
             .form-control,
@@ -362,7 +366,7 @@ export function AppContainer() {
             }
 
             .custom-select {
-                background: var(--inputBackground) !important;
+                background: var(--input-background) !important;
                 border-color: var(--border-color);
             }
 
@@ -666,11 +670,11 @@ export function AppContainer() {
             }
             
             .dropdown-menu {
-                background: var(--inputBackground);
+                background: var(--input-background);
                 margin: .125rem;
                 padding: .125rem;
                 border: solid 1px var(--border-color);
-                background: var(--inputBackground);
+                background: var(--input-background);
             }
             
             .scroll-container {
@@ -731,7 +735,7 @@ export function AppContainer() {
             /* Menu */
             .grow-in-top-left,
             .grow-in-center {
-                background: var(--inputBackground);
+                background: var(--input-background);
                 box-shadow: var(--box-shadow);
             }
 

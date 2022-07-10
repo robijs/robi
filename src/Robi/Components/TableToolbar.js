@@ -187,7 +187,7 @@ export function TableToolbar(param) {
             }
 
             #id .custom-select {
-                background: var(--inputBackground);
+                background: var(--input-background);
             }
 
             /* Load menu */

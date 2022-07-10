@@ -140,6 +140,8 @@ import { Store } from '../Core/Store.js'
                     console.log(`Component '${id}' not added. Can't run onAdd.`)
                 }
             }
+
+            return this;
         },
         addClass(name) {
             this.get().classList.add(name);

@@ -130,7 +130,7 @@ Start({
                 path: 'General'
             }
         ],
-        theme: /* @START-theme */'Purple'/* @END-theme */,
+        theme: /* @START-theme */'Blue'/* @END-theme */,
         title: /* @START-title */'Title'/* @END-title */,
         userDefaultRole: 'User',
         userSettings: /* @START-userSettings */JSON.stringify({ searches: {}, actions: [ { Name: 'Create SLOTs', FileNames: 'CreateSLOTItems.js' }, { Name: 'Update MLOT', FileNames: 'UpdateMLOT.js' } ] })/* @END-userSettings */,

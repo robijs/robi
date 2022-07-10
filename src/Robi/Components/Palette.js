@@ -13,6 +13,7 @@ import { classes } from '../Utilities/classes.js'
 import { SingleLineTextField } from './SingleLineTextField.js'
 import { Table } from './Table.js'
 import { Button } from './Button.js'
+import { ChoiceField } from './ChoiceField.js'
 
 // @START-File
 /**
@@ -28,20 +29,9 @@ export function Palette(param) {
     } = param;
 
     const width = 275;
+
+    // FIXME: Remove layout section. Add rows and cells diretly from the page.
     const componentLibrary = [
-        {
-            title: 'Layout',
-            items: [
-                {
-                    name: 'Cell',
-                    icon: 'bs-square'
-                },
-                {
-                    name: 'Grid',
-                    icon: 'bs-grid'
-                },
-            ]
-        },
         {
             title: 'Widgets',
             items: [
@@ -128,16 +118,20 @@ export function Palette(param) {
     let selectedTool = GetLocal('selectedTool') || 'Layout';
     const toolCategories = [
         {
-            name: 'Layout',
-            icon: 'bs-grid-1x2'
-        },
-        {
             name: 'Widgets',
-            icon: 'bs-layout-sidebar'
+            icon: 'bs-window-sidebar'
         },
         {
             name: 'Controls',
             icon: 'bs-toggles'
+        },
+        {
+            name: 'Fields',
+            icon: 'bs-input-cursor'
+        },
+        {
+            name: 'Custom',
+            icon: 'bs-tools'
         }
     ];
 
@@ -337,8 +331,7 @@ export function Palette(param) {
                 align-items: center;
                 padding: 8px 12px;
                 border-radius: 8px;
-                background: var(--secondary);
-                border: solid 1px var(--border-color);
+                background: var(--background);
                 width: 100%;
             }
 
@@ -485,6 +478,9 @@ export function Palette(param) {
             // Insert cloned element
             this.insertAdjacentElement('beforebegin', draggedElement);
 
+            // Style entire document
+            document.body.classList.add('grabbing');
+
             // Style dragged element
             draggedElement.style.pointerEvents = "none";
             draggedElement.style.maxWidth = `${draggedElement.offsetWidth}px`;
@@ -534,10 +530,8 @@ export function Palette(param) {
             
         }
 
-        function rowEnableDrop(event) {
-            // SingleLineTextField({
-            //     parent: this
-            // }).add();
+        async function rowEnableDrop(event) {
+            let component;
 
             // TODO: Keep track of components added to DOM
             // TODO: Add code generated to file in the right Row and Cell
@@ -546,20 +540,43 @@ export function Palette(param) {
             //       [ ] Callbacks (onChange, onKeyup, action, etc.)
             //       [ ] Drag and drop to a differnt Row, Cell, or order within
             switch(componentName) {
-                case 'Table':
-                    Table({
-                        list: 'AllTypes',
-                        parent: this
-                    });
-                    break;
                 case 'Button':
-                    Button({
+                    component = Button({
                         value: 'Button',
                         type: 'robi',
                         parent: this
                     }).add();
                     break;
+                case 'Choice':
+                    component = ChoiceField({
+                        label: 'Choice',
+                        options: [
+                            {
+                                label: 'Option 1'
+                            },
+                            {
+                                label: 'Option 2'
+                            },
+                            {
+                                label: 'Option 3'
+                            }
+                        ],
+                        parent: this
+                    }).add();
+                    break;
+                case 'Table':
+                    component = await Table({
+                        list: 'AllTypes',
+                        parent: this
+                    });
+                    break;
             }
+
+            // Add editable component event listeners and styles
+            console.log(component);
+
+            // Remove styles
+            document.body.classList.remove('grabbing');
         }
 
         // Get all component library draggable items

@@ -20,6 +20,7 @@ export function Row(render, options = {}) {
         style: /*css*/ `
             /* TODO: Make flex work */
             #id.robi-row {
+                position: relative;
                 width: 100%;
                 display: ${display || 'block'};
                 min-height: ${minHeight || '100px'};
@@ -33,8 +34,24 @@ export function Row(render, options = {}) {
                 margin-bottom: 30px;
             }
 
-            .drop-target {
-                box-shadow: 0px 0px 0px 1px var(--primary);
+            #id.robi-row::before {
+                transition: box-shadow 200ms ease-in-out,
+                            background-color 150ms ease-in-out;
+                content: '';
+                position: absolute;
+                width: calc(100% + 20px);
+                height: calc(100% + 20px);
+                top: -10px;
+                left: -10px;
+                border-radius: 10px;
+            }
+
+            #id.robi-row.drop-target::before {
+                box-shadow: 0px 0px 0px 1px var(--input-border-color);
+            }
+
+            #id.robi-row.drop-target:hover::before {
+                box-shadow: 0px 0px 0px 2px var(--primary);
             }
         `,
         // FIXME: Do I like this? Does it assume too much?

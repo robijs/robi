@@ -5,12 +5,19 @@
 
 // @START-Imports
 import { } from '../../Robi/Robi.js'
-import { Row } from '../../Robi/RobiUI.js'
+import { Row, Table } from '../../Robi/RobiUI.js'
 // @END-Imports
 
 // @START-Form
 export default async function Form({ parent }) {
     // @START-Rows
+    Row((parent) => {
+        Table({
+            list: 'AllTypes',
+            parent
+        });
+    }, { parent });
+    // @Row
     Row((parent) => {
     
     }, { parent });

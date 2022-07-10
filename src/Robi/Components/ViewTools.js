@@ -169,20 +169,26 @@ export function ViewTools(param) {
             name: 'status-bar',
             style: /*css*/ `
                 .viewcontainer {
-                    height: calc(100vh - 31px);
+                    height: calc(100vh - 25px);
                 }
 
                 #${id} .status-bar {
-                    height: 30px;
+                    font-size: 13px;
+                    height: 25px;
                     width: 100%;
-                    background: var(--background);
-                    border-top: solid 1px var(--border-color);
+                    background: var(--primary);
+                    color: var(--secondary);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 } 
             `
         })
 
         Store.get('maincontainer').append(/*html*/ `
-            <div class='status-bar'>Status Bar</div>
+            <div class='status-bar'>
+                <div>Status Bar</div>
+            </div>
         `);
     }
 

@@ -557,7 +557,7 @@ export function DataTable(param) {
 
             /** Dropdown menu */
             #id_wrapper .dropdown-menu {
-                background: var(--inputBackground);
+                background: var(--input-background);
                 box-shadow: var(--box-shadow);
             }
 
