@@ -187,7 +187,7 @@ export function ViewTools(param) {
             html: /*html*/ `
                 <div>
                     <div class='edit-layout-buttons'>
-                        <div class='save-edit-layout'>
+                        <div class='save'>
                             <button type='button' class='btn'>
                                 <span style='color: var(--primary); font-size: 15px; font-weight: 500;'>Save</span>
                             </button>

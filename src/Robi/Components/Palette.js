@@ -449,8 +449,8 @@ export function Palette(param) {
 
     function setSelectedTool() {
         setTimeout(() => {
-            console.log(component.find(`.filter-btn[data-name="${selectedTool}"]`).offsetLeft);
             const indicator = component.find('.selected-indicator');
+
             indicator.style.left = `${component.find(`.filter-btn[data-name="${selectedTool}"]`).offsetLeft + 3}px`;
             indicator.style.opacity = '1';
         }, 300);
@@ -648,17 +648,14 @@ export function Palette(param) {
 
     // NOTE: Show that row is editable, or components, or both?
     function enableEdit() {
-        // DEV: Rows
         Store
             .getRows()
             .forEach(row => {
-                console.log('here');
                 row.enableEdit();
             });
     }
 
     function disableEdit() {
-        // DEV: Rows
         Store
             .getRows()
             .forEach(row => {
