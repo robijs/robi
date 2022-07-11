@@ -326,9 +326,6 @@ export function ViewTools(param) {
             $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'auto', 'user-select': 'auto'});
         }, 0);
 
-        // Remove buttons
-        parent.find('.edit-layout-buttons').remove();
-
         // Enable sidebar
         Store.get('sidebar').get().style.pointerEvents = 'all';
 

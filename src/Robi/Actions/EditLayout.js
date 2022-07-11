@@ -19,7 +19,7 @@ export async function EditLayout({ order, path, file }) {
             modal.find('.modal-content').style.width = 'unset';
 
             const loading = LoadingSpinner({
-                message: `<span style='color: var(--primary);'>Saving layout<span>`,
+                message: `<span style='color: var(--primary);'>Saving<span>`,
                 type: 'robi',
                 classes: ['p-4'],
                 parent: modalBody
@@ -41,28 +41,8 @@ export async function EditLayout({ order, path, file }) {
     await updateApp();
 
     async function updateApp() {
-        let fileValueRequest;
-        let digest;
-
-        if (App.isProd()) {
-            const sourceSiteUrl = `${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path}')/Files('${file}')/$value`;
-
-            digest = await GetRequestDigest();
-
-            fileValueRequest = await fetch(sourceSiteUrl, {
-                method: 'GET',
-                headers: {
-                    'binaryStringRequestBody': 'true',
-                    'Accept': 'application/json;odata=verbose;charset=utf-8',
-                    'X-RequestDigest': digest
-                }
-            });
-
-        } else {
-            const devPath = path.replace('App/', '');
-            fileValueRequest = await fetch(`http://127.0.0.1:8080/${devPath}/${file}`);
-            await Wait(1000);
-        }
+        const devPath = path.replace('App/', '');
+        const fileValueRequest = await fetch(`http://127.0.0.1:8080/${devPath}/${file}`);
 
         let content = await fileValueRequest.text();
         let updatedContent = content;
@@ -71,16 +51,16 @@ export async function EditLayout({ order, path, file }) {
         const currentOrder = sourceRows[1].split('// @Row');
         const newOrder = order.map(index => currentOrder[index]).join('// @Row');
 
-        console.log(sourceRows[1]);
-        console.log(order);
-        console.log(newOrder);
+        // console.log(sourceRows[1]);
+        // console.log(order);
+        // console.log(newOrder);
 
         updatedContent = updatedContent.replace(/\/\/ @START-Rows([\s\S]*?)\/\/ @END-Rows/, `// @START-Rows${newOrder}// @END-Rows`);
 
-        console.log('OLD\n----------------------------------------\n', content);
-        console.log('\n****************************************');
-        console.log('NEW\n----------------------------------------\n', updatedContent);
-        console.log('\n****************************************');
+        // console.log('OLD\n----------------------------------------\n', content);
+        // console.log('\n****************************************');
+        // console.log('NEW\n----------------------------------------\n', updatedContent);
+        // console.log('\n****************************************');
 
         let setFile;
 
@@ -103,7 +83,6 @@ export async function EditLayout({ order, path, file }) {
                 method: 'POST',
                 body: updatedContent
             });
-            await Wait(1000);
         }
     }
 

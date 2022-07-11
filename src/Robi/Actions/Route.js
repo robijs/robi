@@ -162,6 +162,11 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         });
 
         viewTitle.add();
+
+        Store.add({
+            name: 'title',
+            component: title
+        });
     }
 
     // Set browswer history state and window title

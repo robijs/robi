@@ -33,37 +33,6 @@ export function Row(render, options = {}) {
             .robi-row:not(:last-child) {
                 margin-bottom: 30px;
             }
-
-            /* Enable Drop */
-            #id.robi-row::before {
-                transition: box-shadow 200ms ease-in-out,
-                            background-color 150ms ease-in-out;
-                content: '';
-                position: absolute;
-                width: calc(100% + 20px);
-                height: calc(100% + 20px);
-                top: -10px;
-                left: -10px;
-                border-radius: 6px;
-                /* NOTE: Is it safe to assume the background color will always be secondary? */
-            }
-
-            #id.robi-row.drop-target::before {
-                box-shadow: 0px 0px 0px 1px var(--input-border-color);
-            }
-
-            #id.robi-row.drop-target:hover::before {
-                box-shadow: 0px 0px 0px 2px var(--primary);
-            }
-
-            /* Enable Edit */
-            #id.robi-row.editable::before {
-                box-shadow: 0px 0px 0px 1px var(--border-color);
-            }
-
-            #id.robi-row.editable:hover::before {
-                box-shadow: 0px 0px 0px 2px var(--primary);
-            }
         `,
         // FIXME: Do I like this? Does it assume too much?
         parent: parent || Store.get('viewcontainer'),
@@ -139,22 +108,6 @@ export function Row(render, options = {}) {
             Store.addRow(component);
         }
     });
-
-    component.enableDrop = () => {
-        component.get().classList.add('drop-target');
-    }
-
-    component.disableDrop = () => {
-        component.get().classList.remove('drop-target');
-    }
-
-    component.enableEdit = () => {
-        component.get().classList.add('editable');
-    }
-
-    component.disableEdit = () => {
-        component.get().classList.remove('editable');
-    }
 
     component.add();
 }

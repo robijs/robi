@@ -653,6 +653,9 @@ export function Palette(param) {
             .forEach(row => {
                 row.enableEdit();
             });
+
+        // TODO: Should there be a special store for all editable components?
+        // Store.get('title').enableEdit();
     }
 
     function disableEdit() {

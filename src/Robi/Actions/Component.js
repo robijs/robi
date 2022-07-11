@@ -101,6 +101,8 @@ import { Store } from '../Core/Store.js'
             return;
         }
 
+        // FIXME: It's too complicated to name components and have them stored but still refresh/remove styles
+        // TODO: Rethink how named components style is locked
         const css = /*html*/ `
             <style type='text/css' data-name='${name || id}' data-type='component' data-locked='${(name && locked !== false) || locked ? 'yes' : 'no'}' >
                 ${style.replace(/#id/g, `#${id}`)}
@@ -202,8 +204,25 @@ import { Store } from '../Core/Store.js'
         closest(selector) {
             return this.get()?.closest(selector);
         },
+        disableDrop() {
+            this.get().classList.add('drop-target');
+        },
+        disableEdit() {
+            this.get().classList.remove('editable');
+        },
         empty() {
             this.get().innerHTML = '';
+        },
+        enableDrop() {
+            this.get().classList.add('drop-target');
+        },
+        enableEdit() {
+            this.get().classList.add('editable-transition');
+
+            // FIXME: Timeout
+            setTimeout(() => {
+                this.get().classList.add('editable');
+            }, 300);
         },
         find(selector) {
             const node = this.get()?.querySelector(selector);
