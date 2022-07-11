@@ -136,21 +136,6 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
         return;
     }
 
-    // Add tools
-    if (route.type !== 'system' && Store.user().hasRole('Developer')) {
-        const viewTools = ViewTools({
-            route,
-            parent: viewContainer
-        });
-
-        viewTools.add();
-
-        Store.add({
-            name: 'viewtools',
-            component: viewTools
-        });
-    }
-
     // Route title
     let viewTitle;
 
@@ -165,7 +150,23 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
 
         Store.add({
             name: 'title',
-            component: title
+            component: viewTitle
+        });
+    }
+
+    // Add tools
+    if (route.type !== 'system' && App.isDev() && Store.user().hasRole('Developer')) {
+        const viewTools = ViewTools({
+            route,
+            title,
+            parent: viewContainer
+        });
+
+        viewTools.add();
+
+        Store.add({
+            name: 'viewtools',
+            component: viewTools
         });
     }
 

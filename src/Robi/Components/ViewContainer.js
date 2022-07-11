@@ -45,6 +45,11 @@ export function ViewContainer(param) {
                 border-radius: 6px;
             }
 
+            #id .editable {
+                position: relative;
+                cursor: pointer;
+            }
+
             #id .editable::before {
                 box-shadow: 0px 0px 0px 1px var(--border-color);
             }

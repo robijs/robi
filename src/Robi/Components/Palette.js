@@ -14,6 +14,7 @@ import { SingleLineTextField } from './SingleLineTextField.js'
 import { Table } from './Table.js'
 import { Button } from './Button.js'
 import { ChoiceField } from './ChoiceField.js'
+import { Style } from '../Actions/Style.js'
 
 // @START-File
 /**
@@ -655,7 +656,7 @@ export function Palette(param) {
             });
 
         // TODO: Should there be a special store for all editable components?
-        // Store.get('title').enableEdit();
+        Store.get('title').enableEdit();
     }
 
     function disableEdit() {
