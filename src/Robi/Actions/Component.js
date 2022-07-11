@@ -9,6 +9,7 @@ import { Store } from '../Core/Store.js'
  export function Component(param) {
     const {
         name,
+        store,
         locked,
         html,
         // TODO: prop for customStyle vs globalStyle
@@ -36,6 +37,10 @@ import { Store } from '../Core/Store.js'
         const newElement = parsedHTML.body.firstElementChild;
 
         newElement.id = id;
+
+        if (name) {
+            newElement.dataset.name = name;
+        }
 
         try {
             let parentElement;
@@ -97,7 +102,7 @@ import { Store } from '../Core/Store.js'
         }
 
         const css = /*html*/ `
-            <style type='text/css' data-name='${name || id}' data-type='component' data-locked='${name || locked ? 'yes' : 'no'}' >
+            <style type='text/css' data-name='${name || id}' data-type='component' data-locked='${(name && locked !== false) || locked ? 'yes' : 'no'}' >
                 ${style.replace(/#id/g, `#${id}`)}
             </style>
         `;
@@ -133,12 +138,21 @@ import { Store } from '../Core/Store.js'
         add(localParent) {
             const didAdd = addElement(localParent);
 
-            if (onAdd) {
-                if (didAdd) {
+            if (didAdd) {
+                // onAdd
+                if (onAdd) {
                     onAdd();
-                } else {
-                    console.log(`Component '${id}' not added. Can't run onAdd.`)
                 }
+
+                // Set Store
+                if (store && name) {
+                    Store.add({
+                        name,
+                        component: this
+                    });
+                }
+            } else {
+                console.log(`Component '${id}' not added.`);
             }
 
             return this;
@@ -250,7 +264,7 @@ import { Store } from '../Core/Store.js'
             }
 
             function removeStyleAndNode() {
-                const styleNode = document.querySelector(`style[data-name='${id}']`);
+                const styleNode = name ? document.querySelector(`style[data-name='${name}']`) : document.querySelector(`style[data-name='${id}']`);
 
                 if (styleNode) {
                     styleNode.remove();

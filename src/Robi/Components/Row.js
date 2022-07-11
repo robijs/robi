@@ -58,7 +58,7 @@ export function Row(render, options = {}) {
 
             /* Enable Edit */
             #id.robi-row.editable::before {
-                box-shadow: 0px 0px 0px 1px var(--input-border-color);
+                box-shadow: 0px 0px 0px 1px var(--border-color);
             }
 
             #id.robi-row.editable:hover::before {

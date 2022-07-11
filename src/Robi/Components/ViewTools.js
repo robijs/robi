@@ -49,7 +49,7 @@ export function ViewTools(param) {
             /* Button */
             #id .open-palette {
                 position: relative;
-                background-color: var(--secondary);
+                /* background-color: var(--secondary); */
                 display: flex;
                 border-radius: 6px;
                 transition: background-color 200ms ease-in-out;
@@ -165,16 +165,79 @@ export function ViewTools(param) {
         component.find('.bar').classList.add('arrow-bottom');
         component.find('.bar.vertical').classList.add('arrow-top');
 
-        // DEV: Status Bar
-        const id = Store.get('maincontainer').get().id;
         Style({
-            name: 'status-bar',
+            name: `edit-route-viewcontainer`,
             style: /*css*/ `
                 .viewcontainer {
-                    height: calc(100vh - 25px);
+                    height: calc(100vh - 87px);
                 }
+            `
+        });
 
-                #${id} .status-bar {
+        addToolBar();
+        addStatusBar();
+        editLayout();
+    }
+
+    function addToolBar() {
+        Component({
+            store: true,
+            name: 'edit-route-tool-bar',
+            locked: false,
+            html: /*html*/ `
+                <div>
+                    <div class='edit-layout-buttons'>
+                        <div class='save-edit-layout'>
+                            <button type='button' class='btn'>
+                                <span style='color: var(--primary); font-size: 15px; font-weight: 500;'>Save</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `,
+            style: /*css*/ `
+                #id {
+                    font-size: 13px;
+                    height: 62px;
+                    width: 100%;
+                    background: var(--background);
+                    border-bottom: solid 1px var(--border-color);
+                    color: var(--secondary);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                } 
+            `,
+            parent: Store.get('maincontainer'),
+            position: 'afterbegin',
+            events: [
+                {
+                    selector: '#id .save',
+                    event: 'click',
+                    listener(event) {
+                        EditLayout({
+                            order: [...parent.findAll('.robi-row')].map(row => parseInt(row.dataset.row.split('-')[1])),
+                            path: `App/src/Routes/${route.path}`,
+                            file: `${route.path}.js`
+                        });
+                    }
+                }
+            ]
+        }).add();
+    }
+
+    function addStatusBar() {
+        Component({
+            store: true,
+            locked: false,
+            name: 'edit-route-status-bar',
+            html: /*html*/ `
+                <div>
+                    <div>Status Bar</div>
+                </div>
+            `,
+            style: /*css*/ `
+                #id {
                     font-size: 13px;
                     height: 25px;
                     width: 100%;
@@ -184,17 +247,23 @@ export function ViewTools(param) {
                     justify-content: center;
                     align-items: center;
                 } 
+            `,
+            parent: Store.get('maincontainer')
+        }).add();
+    }
+
+    function removeStatusAndToolBars() {
+        Style({
+            name: `edit-route-viewcontainer`,
+            style: /*css*/ `
+                .viewcontainer {
+                    height: calc(100vh - 87px);
+                }
             `
-        })
+        });
 
-        Store.get('maincontainer').append(/*html*/ `
-            <div class='status-bar'>
-                <div>Status Bar</div>
-            </div>
-        `);
-
-        // DEV: Add row
-        editLayout();
+        Store.get('edit-route-tool-bar').remove();
+        Store.get('edit-route-status-bar').remove();
     }
 
     function close() {
@@ -206,11 +275,7 @@ export function ViewTools(param) {
         component.find('.bar').classList.remove('arrow-bottom');
         component.find('.bar.vertical').classList.remove('arrow-top');
 
-        // DEV:
-        Store.get('maincontainer').find('.status-bar').remove();
-        document.querySelector('head style[data-name="status-bar"]').remove();
-
-        // DEV: Add row
+        removeStatusAndToolBars();
         turnOffSortable();
     }
 
@@ -229,35 +294,6 @@ export function ViewTools(param) {
     function editLayout() {
         // Disable sidebar
         Store.get('sidebar').get().style.pointerEvents = 'none';
-
-        // Add Save and Cancel buttons
-        parent.append(/*html*/ `
-            <div class='edit-layout-buttons'>
-                <div class='save-edit-layout'>
-                    <button type='button' class='btn'>
-                        <span style='color: var(--primary); font-size: 15px; font-weight: 500;'>Save</span>
-                    </button>
-                </div>
-                <div class='cancel-edit-layout'>
-                    <button type='button' class='btn'>
-                        <span style='color: var(--primary); font-size: 15px; font-weight: 500;'>Cancel</span>
-                    </button>
-                </div>
-            </div>
-        `);
-
-        // Save
-        parent.find('.save-edit-layout').on('click', () => {
-            // Edit file
-            EditLayout({
-                order: [...parent.findAll('.robi-row')].map(row => parseInt(row.dataset.row.split('-')[1])),
-                path: `App/src/Routes/${route.path}`,
-                file: `${route.path}.js`
-            });
-        });
-
-        // Cancel
-        parent.find('.cancel-edit-layout').on('click', turnOffSortable);
 
         turnOnSortable();
 
