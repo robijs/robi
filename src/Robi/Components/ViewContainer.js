@@ -50,18 +50,22 @@ export function ViewContainer(param) {
                 cursor: pointer;
             }
 
+            #id .editable-selected::before {
+                box-shadow: 0px 0px 0px 2px var(--primary) !important;
+            }
+
             #id .editable::before {
                 box-shadow: 0px 0px 0px 1px var(--border-color);
             }
 
             #id .editable:hover::before {
-                box-shadow: 0px 0px 0px 2px var(--primary);
+                box-shadow: 0px 0px 0px 1px var(--input-border-color);
             }
 
             /* Drop target */
-            #id .drop-target::before {
+            /* #id .drop-target::before {
                 box-shadow: 0px 0px 0px 1px var(--input-border-color);
-            }
+            } */
 
             #id .drop-target:hover::before {
                 box-shadow: 0px 0px 0px 2px var(--primary);

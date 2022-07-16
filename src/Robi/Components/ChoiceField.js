@@ -53,7 +53,7 @@ export function ChoiceField(param) {
                         ${
                             (() => {
                                 const id = GenerateUUID();
-                                // FIXME: this wil probably break if fill in choice is the same as one of the choices
+                                // FIXME: this will break if fill in choice is the same as one of the choices
                                 const otherValue = value && !choices.includes(value) ? value : '';
     
                                 return /*html*/ `
@@ -202,6 +202,14 @@ export function ChoiceField(param) {
                 return checked.dataset.label;
             }
         };
+
+        component.setOptions = (list) => {
+            // component.find('.dropdown-menu').innerHTML = buildDropdown(list);
+    
+            // component.findAll('.dropdown-item').forEach(item => {
+            //     item.addEventListener('click', setValue);
+            // });
+        };
     
         return component;
     }
@@ -324,7 +332,6 @@ export function ChoiceField(param) {
 
     function selectOption(event) {
         if (valueType === 'html') {
-            // component.find('.dropdown-toggle').innerHTML = this.querySelector('[data-target="true"').innerHTML;
             component.find('.dropdown-toggle').innerHTML = this.innerHTML;
         } else {
             component.find('.dropdown-toggle').innerText = event.target.innerText;
@@ -337,7 +344,7 @@ export function ChoiceField(param) {
         }
     }
 
-    component.setDropdownMenu = (list) => { // Edited by LBunker on 2022-03-21
+    component.setDropdownMenu = (list) => {
         component.find('.dropdown-menu').innerHTML = buildDropdown(list);
 
         component.findAll('.dropdown-item').forEach(item => {
@@ -407,6 +414,10 @@ export function ChoiceField(param) {
     component.data = () => {
         return readOnly ? value : options[parseInt(component.find('.btn-choice').dataset.id)];
     };
+
+    component.insertBeforeField = (html) => {
+        component.find('.dropdown').insertAdjacentHTML('beforebegin', html);
+    }
 
     return component;
 }

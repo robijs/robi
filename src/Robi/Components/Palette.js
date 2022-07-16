@@ -666,6 +666,8 @@ export function Palette(param) {
                 console.log('here');
                 row.disableEdit();
             });
+
+        Store.get('title').disableEdit();
     }
 
     function newFile({ template, dir}) {
@@ -761,6 +763,10 @@ export function Palette(param) {
             path: `App/src/Routes/${route.path}`,
             file: `${route.path}.js`
         });
+    }
+
+    component.setTitle = (title) => {
+        component.find('.title').innerText = title;
     }
 
     component.close = () => {

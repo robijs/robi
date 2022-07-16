@@ -209,6 +209,7 @@ import { Store } from '../Core/Store.js'
         },
         disableEdit() {
             this.get().classList.remove('editable');
+            this.get().classList.remove('editable-selected');
         },
         empty() {
             this.get().innerHTML = '';
@@ -219,10 +220,28 @@ import { Store } from '../Core/Store.js'
         enableEdit() {
             this.get().classList.add('editable-transition');
 
-            // FIXME: Timeout
+            // FIXME: Timeout delay hard coded, not tied to palette animtion somehow
             setTimeout(() => {
                 this.get().classList.add('editable');
             }, 300);
+
+            // Click
+            // TODO: Move to method
+            this.on('click', event => {
+                Store.get('editable-selected')?.get()?.classList.remove('editable-selected');
+
+                this.get().classList.add('editable-selected');
+
+                Store.add({
+                    name: 'editable-selected',
+                    component: this
+                });
+
+                // Update palette
+                // TODO: How do we know the name or type of componenet selected?
+                // TODO: Add a type prop to Component constructor?
+                Store.get('palette').setTitle('Test');
+            });
         },
         find(selector) {
             const node = this.get()?.querySelector(selector);
