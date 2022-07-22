@@ -58,11 +58,8 @@ export async function ModifyForm({ list, fields, form, type }) {
         list,
         container: modal,
         parent: modal.getHeader(),
-        container: modal,
     });
 
     tools.add();
-
-    
 }
 // @END-File

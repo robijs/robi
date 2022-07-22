@@ -68,7 +68,9 @@ export async function UpdateItem(param) {
         const updatedItem = getUpdatedItem[0];
 
         return updatedItem;
-    } else {
+    }
+    
+    if (App.isDev()) {
         const body = data;
 
         body.EditorId = body.EditorId || App.get('dev').user.SiteId;
@@ -76,6 +78,14 @@ export async function UpdateItem(param) {
 
         const date = new Date().toUTCString();
         body.Modified = date;
+
+        if (data.FileLeafRef) {
+            console.log(body);
+            body.File = {
+                Name: data.FileLeafRef,
+                Length: 0
+            }
+        }
 
         const options = {
             method: 'PATCH',

@@ -10,6 +10,7 @@ import { Component } from '../Actions/Component.js'
 export function MultiLineTextField(param) {
     const {
         label,
+        lines,
         description,
         optional,
         value,
@@ -27,12 +28,20 @@ export function MultiLineTextField(param) {
         onPaste
     } = param;
 
+    let editorHeight = '141px';
+
+    if (minHeight) {
+        editorHeight = minHeight;
+    } else if (lines) {
+        editorHeight = `${lines * 21.5 + 12}px`;
+    }
+
     const component = Component({
         html: /*html*/ `
             <div class='form-field'>
                 ${label ? /*html*/ `<label class='field-label'>${label}${optional ? /*html*/ `<span class='optional'><i>Optional</i></span>` : ''}</label>` : ''}
                 ${description ? /*html*/ `<div class='form-field-description text-muted'>${description}</div>` : ''}
-                ${readOnly ? /*html*/ `<div class='form-field-multi-line-text readonly'>${value || placeHolder}</div>` : /*html*/ `<div class='form-field-multi-line-text editable' contenteditable='true'>${value || ''}</div>`}
+                ${readOnly ? /*html*/ `<div class='form-field-multi-line-text readonly'>${value || placeHolder}</div>` : /*html*/ `<div class='form-field-multi-line-text content-editable' contenteditable='true'>${value || ''}</div>`}
             </div>
         `,
         style: /*css*/ `
@@ -62,15 +71,16 @@ export function MultiLineTextField(param) {
                 color: var(--color);
             }
 
-            #id .form-field-multi-line-text.editable {
-                min-height: ${minHeight || `200px`};
+            #id .form-field-multi-line-text.content-editable {
+                /* Default '141px', // ( 21.5px per line * 6 lines ) + 6px top padding + 6px bottom padding */
+                min-height: ${editorHeight};
                 width: ${width || 'unset'};
                 border-radius: 4px;
                 border: 1px solid var(--border-color);
             }
 
-            #id .form-field-multi-line-text.editable:active,
-            #id .form-field-multi-line-text.editable:focus {
+            #id .form-field-multi-line-text.content-editable:active,
+            #id .form-field-multi-line-text.content-editable:focus {
                 outline: none;
             }
 
@@ -95,22 +105,22 @@ export function MultiLineTextField(param) {
         position,
         events: [
             {
-                selector: '#id .form-field-multi-line-text.editable',
+                selector: '#id .form-field-multi-line-text.content-editable',
                 event: 'focusout',
                 listener: onFocusout
             },
             {
-                selector: '#id .form-field-multi-line-text.editable',
+                selector: '#id .form-field-multi-line-text.content-editable',
                 event: 'keydown',
                 listener: onKeydown
             },
             {
-                selector: '#id .form-field-multi-line-text.editable',
+                selector: '#id .form-field-multi-line-text.content-editable',
                 event: 'keyup',
                 listener: onKeyup
             },
             {
-                selector: '#id .form-field-multi-line-text.editable',
+                selector: '#id .form-field-multi-line-text.content-editable',
                 event: 'paste',
                 listener: onPaste
             }
@@ -150,6 +160,10 @@ export function MultiLineTextField(param) {
             `);
         }
     };
+
+    component.getField = () => {
+        return component.find('.form-field-multi-line-text');
+    }
 
     component.value = (param, options = {}) => {
         const field = component.find('.form-field-multi-line-text');

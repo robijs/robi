@@ -1,7 +1,6 @@
 import { App } from '../Core/App.js'
 import { GetItemCount } from './GetItemCount.js'
 import { Store } from '../Core/Store.js';
-import { Wait } from './Wait.js';
 
 // @START-File
 /**
@@ -138,10 +137,23 @@ export async function Get(param) {
             }
         }
 
-        // await Wait(500);
         const all = (await Promise.all(fetchAll.map(async response => await response.json()))).flat();
+
         // https://stackoverflow.com/a/58429784
         const unique = [...new Map(all.map(item => [ item.Id, item ])).values()];
+
+        // https://stackoverflow.com/a/47225217'
+        // unique.forEach(item => {
+        //     const keys = Object.keys(item);
+
+        //     keys.forEach(key => {
+        //         if (item[key] === null) {
+        //             item[key] = '';
+        //         }
+        //     });
+
+        //     return item;
+        // });
 
         return unique;
     }

@@ -1,3 +1,8 @@
+// This file can be edited programmatically.
+// If you know the API, feel free to make changes by hand.
+// Just be sure to put @START, @END, and @[Spacer Name] sigils in the right places.
+// Otherwise, changes made from CLI and GUI tools won't work properly.
+
 import { Modal, SingleLineTextField, MultiLineTextField, Button } from '../../Robi/RobiUI.js'
 import { Store, Style, App, CreateItem, UploadFile } from '../../Robi/Robi.js'
 import { RecordScreen } from './RecordScreen.js'
@@ -146,7 +151,7 @@ export async function Feedback() {
                     parent: modalBody,
                     onKeyup() {
                         if (summary.value()) {
-                            newFeedbackData.Description = summary.value();
+                            newFeedbackData.Description = description.value();
                             submitBtn.enable();
                         } else {
                             newFeedbackData.Description = null;
@@ -164,85 +169,87 @@ export async function Feedback() {
     
                 description.add();
 
-                // TODO: Remove recording button
-                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
-                    <div style='font-weight: 500; margin-bottom: .5rem;'>Attach a screen recording</div>
-                    <div class='text-muted' style='font-size: 14px; font-size: 14px; margin-bottom:'>
-                        <p class='mb-1'>Please read all instructions before starting.</p>
-                        <ol>
-                            <li>
-                                Select the <strong>Start recording</strong> button below. In <strong>Choose what to share</strong>, select the image with this browser window.
-                            </li>
-                            <li>
-                                Select the blue <strong>Share</strong>. 
-                                A ${App.get('theme').toLowerCase()} border will surround the application, and a preview is displayed in the lower right corner. 
-                                You can move the preview if it's in the way.
-                            </li>
-                            <li>Recreate the issue as thoroughly as possible.</li>
-                            <li>
-                                When finished, select <strong>Stop recording</strong>. This form will reappear with the video attached here. You can watch the recording, redo, or remove it before submitting.
+                // TODO: Add a flag to app.js so this can be more easily turned on and off
+                // NOTE: RECORDING OFF (WAF issue)
+                // modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                //     <div style='font-weight: 500; margin-bottom: .5rem;'>Attach a screen recording</div>
+                //     <div class='text-muted' style='font-size: 14px; font-size: 14px; margin-bottom:'>
+                //         <p class='mb-1'>Please read all instructions before starting.</p>
+                //         <ol>
+                //             <li>
+                //                 Select the <strong>Start recording</strong> button below. In <strong>Choose what to share</strong>, select the image with this browser window.
+                //             </li>
+                //             <li>
+                //                 Select the blue <strong>Share</strong>. 
+                //                 A ${App.get('theme').toLowerCase()} border will surround the application, and a preview is displayed in the lower right corner. 
+                //                 You can move the preview if it's in the way.
+                //             </li>
+                //             <li>Recreate the issue as thoroughly as possible.</li>
+                //             <li>
+                //                 When finished, select <strong>Stop recording</strong>. This form will reappear with the video attached here. You can watch the recording, redo, or remove it before submitting.
                                 
-                            </li>
-                        </ol>
-                    </div>
-                    <button id='startButton' type='buton' class='btn btn-robi mt-4' style='height: 35px;'>
-                        <span class='d-flex align-items-center justify-content-center'>
-                            <svg class="icon" fill='var(--primary)' style='font-size: 18px;'>
-                                <use href="#icon-bs-record-circle"></use>
-                            </svg>
-                            <span class='ml-2 startButton-label' style='line-height: 0;'>${newFeedbackRecording ? 'Redo recording' : 'Start recording'}</span>
-                        </span>
-                    </button>
-                    <!-- Recording -->
-                    ${
-                        newFeedbackRecording ? /*html*/ `
-                            <div class='d-flex mt-4 new-feedback-recording'>
-                                <div class='' style='max-width: 680px;'>
-                                    <div style='font-weight: 500; margin-bottom: .5rem;'>Recording</div>
-                                    <video src='${newFeedbackRecording.src}' id='recording' width='680px' height='400px' controls></video>
-                                </div>
-                                <div class='bottom d-none'>
-                                    <a id='downloadButton' class='button'>Download</a>
-                                    <pre id='log'></pre>
-                                </div>
-                            </div>
-                            <button id='removeButton' type='buton' class='btn btn-robi mt-4' style='height: 35px;'>Remove recording</button>
-                        ` : ''
-                    }
-                `);
+                //             </li>
+                //         </ol>
+                //     </div>
+                //     <button id='startButton' type='buton' class='btn btn-robi mt-4' style='height: 35px;'>
+                //         <span class='d-flex align-items-center justify-content-center'>
+                //             <svg class="icon" fill='var(--primary)' style='font-size: 18px;'>
+                //                 <use href="#icon-bs-record-circle"></use>
+                //             </svg>
+                //             <span class='ml-2 startButton-label' style='line-height: 0;'>${newFeedbackRecording ? 'Redo recording' : 'Start recording'}</span>
+                //         </span>
+                //     </button>
+                //     <!-- Recording -->
+                //     ${
+                //         newFeedbackRecording ? /*html*/ `
+                //             <div class='d-flex mt-4 new-feedback-recording'>
+                //                 <div class='' style='max-width: 680px;'>
+                //                     <div style='font-weight: 500; margin-bottom: .5rem;'>Recording</div>
+                //                     <video src='${newFeedbackRecording.src}' id='recording' width='680px' height='400px' controls></video>
+                //                 </div>
+                //                 <div class='bottom d-none'>
+                //                     <a id='downloadButton' class='button'>Download</a>
+                //                     <pre id='log'></pre>
+                //                 </div>
+                //             </div>
+                //             <button id='removeButton' type='buton' class='btn btn-robi mt-4' style='height: 35px;'>Remove recording</button>
+                //         ` : ''
+                //     }
+                // `);
 
-                const startButton =  modal.find('#startButton');
+                // const startButton =  modal.find('#startButton');
 
-                startButton.on('click', () => {
-                    RecordScreen({
-                        onShare() {
-                            // Hide feedback button
-                            Store.get('appcontainer').find('.feedback-button-container').classList.add('d-none');
+                // startButton.on('click', () => {
+                //     RecordScreen({
+                //         onShare() {
+                //             // Hide feedback button
+                //             Store.get('appcontainer').find('.feedback-button-container').classList.add('d-none');
 
-                            // Close form
-                            modal.close();
-                        },
-                        onStop() {
-                            // Show feedback button
-                            Store.get('appcontainer').find('.feedback-button-container').classList.remove('d-none');
+                //             // Close form
+                //             modal.close();
+                //         },
+                //         onStop() {
+                //             // Show feedback button
+                //             Store.get('appcontainer').find('.feedback-button-container').classList.remove('d-none');
 
-                            // Open form
-                            showForm();
-                        }
-                    });
-                });
+                //             // Open form
+                //             showForm();
+                //         }
+                //     });
+                // });
 
-                if (newFeedbackRecording) {
-                    const removeButton =  modal.find('#removeButton');
+                // if (newFeedbackRecording) {
+                //     const removeButton =  modal.find('#removeButton');
 
-                    removeButton.on('click', () => {
-                        newFeedbackRecording = undefined;
-                        Store.setData('new feedback recording', undefined);
-                        modal.find('.new-feedback-recording').remove();
-                        startButton.querySelector('.startButton-label').innerText = 'Start recording';
-                        removeButton.remove();
-                    });
-                }
+                //     removeButton.on('click', () => {
+                //         newFeedbackRecording = undefined;
+                //         Store.setData('new feedback recording', undefined);
+                //         modal.find('.new-feedback-recording').remove();
+                //         startButton.querySelector('.startButton-label').innerText = 'Start recording';
+                //         removeButton.remove();
+                //     });
+                // }
+                // NOTE: END
 
                 const submitBtn = Button({
                     async action() {

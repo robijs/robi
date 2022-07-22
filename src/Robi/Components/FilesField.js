@@ -1,6 +1,10 @@
 import { Component } from '../Actions/Component.js'
 import { Alert } from '../Components/Alert.js'
+import { Button } from '../Components/Button.js'
+import { Modal } from '../Components/Modal.js'
 import { App } from '../Core/App.js';
+import { DeleteItem } from '../Robi.js';
+import { Dialog } from './Dialog.js';
 
 // @START-File
 /**
@@ -55,7 +59,8 @@ export function FilesField(param) {
                                     </div>
                                     <!-- <span class='undo-all'>Delete all</span> -->
                                 </div>
-                            ` : ''
+                            ` : 
+                            ''
                         }
                     </div>
                 </div>
@@ -134,7 +139,7 @@ export function FilesField(param) {
                 transition: all 150ms;
                 margin: ${margin || '10px'};
                 padding: ${padding || '40px'};
-                border-radius: 20px;
+                border-radius: 10px;
             }
 
             #id .drop-zone-button-container {
@@ -190,7 +195,8 @@ export function FilesField(param) {
                 display: flex;
                 align-items: center;
                 justify-content: flex-end;
-                min-width: 105px;
+                /* min-width: 105px; */
+                height: 33.75px;
             }
 
             #id .remove-container .remove-icon {
@@ -252,7 +258,7 @@ export function FilesField(param) {
             /* Dark */
             #id .file-preview {
                 display: flex;
-                align-items: center;
+                /* align-items: center; */
                 justify-content: space-between;
                 width: 100%;
                 padding: 9px 12px;
@@ -446,7 +452,45 @@ export function FilesField(param) {
                 event: 'click',
                 listener() {
                     const name = files.find(file => file.name = this.dataset.filename).name;
-                    const link = `${App.get('site')}/${library}/${name}`;
+                    const link = `${App.get('site')}/${path || library}/${name}`;
+
+                    if (App.isDev()) {
+                        const dialog = Modal({
+                            title: false,
+                            close: true,
+                            centered: true,
+                            async addContent(modalBody) {
+                                modalBody.classList.add('install-modal');
+                                dialog.find('.modal-dialog').style.width = '500px';
+                                dialog.find('.modal-content').style.boxShadow = 'var(--box-shadow)';
+                    
+                                modalBody.insertAdjacentHTML('beforeend', /*html*/ `
+                                    <h3 class='mb-3'>Preview clicked</h3>
+                                    <div>
+                                        <strong>${name}</strong> isn't a real file. This modal is proof that the file preview click event is working correctly.
+                                    </div>
+                                `);
+                    
+                                const closeBtn = Button({
+                                    action(event) {
+                                        dialog.close();
+                                    },
+                                    classes: ['w-100 mt-5'],
+                                    width: '100%',
+                                    parent: modalBody,
+                                    type: 'robi',
+                                    value: 'OK'
+                                });
+                    
+                                closeBtn.add();
+                            },
+                            parent
+                        });
+                
+                        dialog.add();
+
+                        return;
+                    }
 
                     console.log('Open file:', link);
 
@@ -464,7 +508,15 @@ export function FilesField(param) {
                     event.target.classList.add('d-none');
                 }
             }
-        ]
+        ],
+        onAdd() {
+            // FIXME: Hack.
+            if (files.length && !itemId) {
+                component.find('.count-container .count').innerText = '0';
+                component.find('.pending-count').classList.remove('hidden');
+                component.find('.pending-count').innerText = `(${files.length} pending)`;
+            }
+        }
     });
 
     // Drag and drop
@@ -503,7 +555,7 @@ export function FilesField(param) {
             canAdd = beforeChange([...event.dataTransfer.files])
         }
 
-        console.log(canAdd);
+        console.log('Can add?', canAdd);
 
         if (canAdd) {
             addFiles(event.dataTransfer.files);
@@ -512,7 +564,8 @@ export function FilesField(param) {
 
     // Files
     function addFiles(fileList) {
-        console.log(multiple, fileList.length);
+        console.log('Allow multiple (default true)?', multiple);
+        console.log('File(s) dropped count:', fileList.length);
         
         if (multiple === false) {
             files = [];
@@ -630,7 +683,11 @@ export function FilesField(param) {
     }
 
     function renderFiles() {
-        return files ? files.map(file => fileTemplate(file)).join('\n') : '';
+        return files ? 
+            files
+                .sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+                .map(file => fileTemplate(file)).join('\n') : 
+            '';
     }
 
     function fileTemplate(file) {
@@ -641,7 +698,7 @@ export function FilesField(param) {
         const ext = name.split('.').pop();
         const icon = selectIcon(ext);
 
-        console.log('allow delete', allowDelete);
+        console.log('Allow file preview delete (default true)?', allowDelete);
 
         // TODO: add event listener for deleting items that have already been uploaded
         return /*html*/ `
@@ -693,6 +750,23 @@ export function FilesField(param) {
                 component.find('.pending-count').innerText = '';
             } else {
                 component.find('.pending-count').innerText = `(${files.length} pending)`;
+
+                // // DEV: Update normal count too
+                // const countContainer = component.find('.count-container');
+
+                // console.log(component.find('.count-container'));
+        
+                // if (countContainer) {
+                //     console.log(files.length);
+
+                //     countContainer.innerHTML = /*html*/ `
+                //         <div class="count-container">
+                //             <span class="count">${files.length}</span>
+                //             <span class='count-label'>${files.length === 1 ? 'file' : 'files'}</span>
+                //             <span class="pending-count hidden"></span>
+                //         </div>
+                //     `;
+                // }
             }
         }
 
@@ -747,7 +821,7 @@ export function FilesField(param) {
             countContainer.innerHTML = /*html*/ `
                 <div class="count-container">
                     <span class="count">${files.length}</span>
-                    <span>${files.length === 1 ? 'file' : 'files'}</span>
+                    <span class='count-label'>${files.length === 1 ? 'file' : 'files'}</span>
                     <span class="pending-count hidden"></span>
                 </div>
             `;
@@ -759,20 +833,33 @@ export function FilesField(param) {
             container.closest('.file-preview').remove();
         }, 150);
 
-        const digest = await GetRequestDigest();
-        const response = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path || library}')/Files('${name}')`, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json;odata=verbose;charset=utf-8',
-                'X-RequestDigest': digest,
-                'If-Match': '*'
-            }
-        });
-
-        console.log(response);
+        if (App.isProd()) {
+            const digest = await GetRequestDigest();
+            const response = await fetch(`${App.get('site')}/_api/web/GetFolderByServerRelativeUrl('${path || library}')/Files('${name}')`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json;odata=verbose;charset=utf-8',
+                    'X-RequestDigest': digest,
+                    'If-Match': '*'
+                }
+            });
+    
+            console.log(response);
+        } 
+        
+        else if(App.isDev()) {
+            await DeleteItem({
+                list: library,
+                itemId: file.id
+            });
+        } 
 
         toggleClearButton();
     };
+
+    component.files = () => {
+        return files;
+    }
 
     component.upload = () => {
         files.forEach(file => {

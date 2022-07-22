@@ -55,7 +55,7 @@ export function AppContainer() {
                 margin: 0px;
                 box-sizing: border-box;
                 overflow: hidden;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+                font-family: var(--font-family);
                 color: var(--color);
             }
             
@@ -310,7 +310,7 @@ export function AppContainer() {
             }
 
             .form-control,
-            .form-field-multi-line-text.editable,
+            .form-field-multi-line-text.content-editable,
             .btn.dropdown-toggle {
                 font-size: 13px !important;
                 background: var(--input-background);
@@ -322,20 +322,20 @@ export function AppContainer() {
             }
 
             .form-control,
-            .form-field-multi-line-text.editable,
+            .form-field-multi-line-text.content-editable,
             .input-group-text {
                 border: 1px solid var(--border-color);
             }
 
             .form-control:focus,
-            .form-field-multi-line-text.editable:focus,
+            .form-field-multi-line-text.content-editable:focus,
             .btn.dropdown-toggle:focus {
                 border: 1px solid var(--border-color);
                 background: var(--input-background);
             }
 
             .form-control,
-            .form-field-multi-line-text.editable,
+            .form-field-multi-line-text.content-editable,
             .btn.dropdown-toggle,
             .dropdown-menu {
                 border-radius: 10px !important;
@@ -352,7 +352,7 @@ export function AppContainer() {
 
             .form-control:not(.dataTables_length .custom-select):focus,
             .custom-select:not(.dataTables_length .custom-select):focus,
-            .form-field-multi-line-text.editable:focus,
+            .form-field-multi-line-text.content-editable:focus,
             .btn.dropdown-toggle:focus {
                 border-color: transparent !important;
                 box-shadow: 0 0 0 3px var(--primary-6b) !important;
@@ -667,6 +667,13 @@ export function AppContainer() {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+            }
+
+            .dropdown-toggle::after {
+                content: '▼';
+                font-size: 11px;
+                color: var(--primary);
+                border: none;
             }
             
             .dropdown-menu {

@@ -78,6 +78,7 @@ export function SetTheme() {
         style: /*css*/ `
             /* Theme Colors */
             :root {
+                --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
                 --background: ${background};
                 --background-HSL: hsl(${background_HSL});
                 --background-HSL-3: hsl(${background_HSL_3});
@@ -99,6 +100,7 @@ export function SetTheme() {
                 --primary-19: ${primary + '19'}; 
                 --primary-20: ${primary + '20'};
                 --primary-30: ${primary + '30'};
+                --primary-50: ${primary + '50'};
                 --scrollbar: ${App.get('prefersColorScheme') === 'dark' ? 'dimgray' : 'lightgray'};
                 --secondary: ${secondary};
                 --selected-row: ${primary + (selectedRowOpacity || '10')};

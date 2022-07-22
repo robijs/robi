@@ -8,6 +8,7 @@ import { MainContainer } from '../Components/MainContainer.js'
 import { FixedToast } from '../Components/FixedToast.js'
 import { Modal } from '../Components/Modal.js'
 import { ReleaseNotesContainer } from '../Components/ReleaseNotesContainer.js'
+import { App } from '../Core/App.js'
 import { Routes } from '../Core/Routes.js'
 import { Store } from '../Core/Store.js'
 import { Feedback } from '../Components/Feedback.js'
@@ -25,6 +26,7 @@ export async function LaunchApp(param) {
     } = param;
 
     const {
+        debug,
         title,
         sessionStorageData,
         sidebar,
@@ -49,15 +51,15 @@ export async function LaunchApp(param) {
         });
     }
 
-    /** Set sessions storage */
+    // Set sessions storage
     SetSessionStorage({
         sessionStorageData
     });
 
-    /** Get current route */
+    // Get current route
     const path = location.href.split('#')[1];
 
-    /** Attach Router to browser back/forward event */
+    // Attach Router to browser back/forward event
     window.addEventListener('popstate', (event) => {
         if (event.state) {
             Route(event.state.url.split('#')[1], {
@@ -66,13 +68,13 @@ export async function LaunchApp(param) {
         }
     });
 
-    /** Store routes */
+    // Store routes
     Store.setRoutes(routes.concat(Routes));
 
     // Get app container
     const appContainer = Store.get('appcontainer');
 
-    /** Sidebar */
+    // Sidebar
     const sidebarParam = {
         parent: appContainer,
         path
@@ -87,7 +89,7 @@ export async function LaunchApp(param) {
 
     sidebarComponent.add();
 
-    /** Main Container */
+    // Main Container
     const mainContainerParam = {
         parent: appContainer
     };
@@ -101,20 +103,20 @@ export async function LaunchApp(param) {
 
     mainContainer.add();
 
-    /** Show App Container */
+    // Show App Container
     appContainer.show('flex');
 
-    /** Generate Session Id */
+    // Generate Session Id
     const sessionId = GenerateUUID();
 
     // TODO: Use GetLocal();
-    /** Format Title for Sessin/Local Storage keys */
+    // Format Title for Sessin/Local Storage keys
     const storageKeyPrefix = settings.title.split(' ').join('-');
 
-    /** Set Session Id */
+    // Set Session Id
     sessionStorage.setItem(`${storageKeyPrefix}-sessionId`, sessionId);
 
-    /** Log in*/
+    // Log in
     try {
         // TODO: Standarize LOG and ERROR format
         Log({
@@ -131,7 +133,12 @@ export async function LaunchApp(param) {
         Feedback();
     }
 
-    /** Run current route on page load */
+    // Debug mode enabled: attach App to window object (global)
+    if (debug || App.isDev()) {
+        window.App = App;
+    }
+
+    // Run current route on page load
     Route(path, {
         log: false
     });
@@ -174,43 +181,5 @@ export async function LaunchApp(param) {
             toast.add();
         }
     }
-
-    // /** Check Local Storage for release notes */
-    // const isReleaseNotesDismissed = localStorage.getItem(`${storageKeyPrefix}-releaseNotesDismissed`);
-
-    // if (!isReleaseNotesDismissed) {
-    //     /** Release Notes */
-    //     const releaseNotes = FixedToast({
-    //         type: 'robi',
-    //         title: `New version ${'0.1.0'}`,
-    //         message: `View release notes`,
-    //         bottom: '20px',
-    //         right: '10px',
-    //         action(event) {
-    //             const modal = Modal({
-    //                 fade: true,
-    //                 background: settings.secondaryColor,
-    //                 centered: true,
-    //                 close: true,
-    //                 addContent(modalBody) {
-    //                     ReleaseNotesContainer({
-    //                         margin: '0px',
-    //                         parent: modalBody,
-    //                     });
-    //                 },
-    //                 parent: appContainer
-    //             });
-
-    //             modal.add();
-    //         },
-    //         onClose(event) {
-    //             /** Set Local Storage */
-    //             localStorage.setItem(`${storageKeyPrefix}-releaseNotesDismissed`, 'true');
-    //         },
-    //         parent: appContainer
-    //     });
-
-    //     releaseNotes.add();
-    // }
 }
 // @END-File

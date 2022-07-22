@@ -8,7 +8,7 @@ import { Wait } from './Wait.js'
  *
  * @param {*} param
  */
-export async function Editor({ path, file, parent }) {
+export async function SourceEditor({ path, file, parent }) {
     parent.append(/*html*/ `
         <div class='rs-box code-box alert w-100 mb-0 p-0' style='background: #1e1e1e; color: #d4d4d4;'>
             <!-- CodeMirror injected here -->

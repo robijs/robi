@@ -29,6 +29,10 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../src/Libraries/lib.css">
+        <!-- Quill and KaTeX are EXPERIMENTAL. Remove is it's causing problems. -->
+        <link rel="stylesheet" href="../src//Libraries/KaTeX/katax.css">
+        <link rel="stylesheet" href="../src/Libraries/quill/quill-snow.css">
+        <!-- <link rel="stylesheet" href="../src/Libraries/quill/quill-bubble.css"> -->
     </head>
     <body>
         <div id="app"></div>
@@ -41,6 +45,21 @@
             }
         </script>
         <script type="module" src="../src/Libraries/lib.js"></script>
+        <!-- Quill and KaTeX are EXPERIMENTAL. Remove is it's causing problems. -->
+        <script src="../src/Libraries/KaTeX/katex.js"></script>
+        <script src="../src/Libraries/quill/quill.js"></script>
         <script type="module" src="../src/app.js"></script>
+        <!-- Web Font Loader is EXPERIMENTAL. Remove if it's causing problems. -->
+        <script>
+            window.WebFontConfig = {
+              custom: {
+                families: ['KaTeX_AMS', 'KaTeX_Caligraphic:n4,n7', 'KaTeX_Fraktur:n4,n7',
+                  'KaTeX_Main:n4,n7,i4,i7', 'KaTeX_Math:i4,i7', 'KaTeX_Script',
+                  'KaTeX_SansSerif:n4,n7,i4', 'KaTeX_Size1', 'KaTeX_Size2', 'KaTeX_Size3',
+                  'KaTeX_Size4', 'KaTeX_Typewriter'],
+              },
+            };
+          </script>
+          <script defer src="../src/Libraries/webfontloader/webfontloader.js"></script>
     </body>
 </html>

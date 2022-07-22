@@ -44,16 +44,6 @@ export function Dialog(param) {
         events: []
     });
 
-    component.value = (param) => {
-        const field = component.find('.form-field-date');
-
-        if (param) {
-            field.value = new Date(param).toISOString().split('T')[0];
-        } else {
-            return field.value;
-        }
-    };
-
     return component;
 }
 // @END-File

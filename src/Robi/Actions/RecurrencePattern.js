@@ -259,561 +259,34 @@ export function RecurrencePattern({ recurrence, month }) {
             return occurrences;
         },
         Monthly({ start, end, value, month}) {
-            // Count
-            // -----
-            // first
-            // second
-            // third
-            // fourth
-            // last
 
-            // Day
-            // -----
-            // day
-            // weekday
-            // weekend day
-            // Monday
-            // Tuesday
-            // Wednesday
-            // Thursday
-            // Friday
-            // Saturday
-            // Sunday
+            /***KNOWN ISSUES***/
+            //1. Component does not pass value.m if you switch between options (day n every m months vs. nth day every m months)// 
+            //2. Component allows for negative and null m//
             
-            const { option } = value;
-            const { first, last } = getDays(month);
             const startDate = new Date(start);
-            const limit = setLimit(end);
+            const endDate = end.d?new Date(end.d):null;
+            const limit = end.n;
 
             let occurrences = [];
-            
-            console.log('Start Date:', startDate);
-            console.log('First:', first);
-            console.log('Last:', last);
-            console.log('Limit:', limit);
-            console.log('Option:', option);
 
-            // Option: Day n of every m month(s)
-            if (option === 'Day n of every m month(s)') {
-                const { n, m } = value;
+            const { i, d, n } = value;
+            const m=Math.abs(value.m)||1                                                                                                                                                    //Accounting for issue#2; Will not register m if option is changed until issue #1 is addressed
 
-                console.log(n, m);
+            const numbers = {
+                first: 0,
+                second: 1,
+                third: 2,
+                fourth: 3,
+                last: -1
+            };
 
-                let nextDate = new Date(startDate.getFullYear(), startDate.getMonth(), n);
-
-                // First, compare day n of start month to start date
-                if (startDate < nextDate ) {
-                    console.log('First Occurence:', nextDate);
-
-                    occurrences.push(new Date(nextDate));
-                } 
-                
-                // If start date is before n, go to next month
-                else {
-                    nextDate = new Date(startDate.getFullYear(), startDate.getMonth() + 1, n);
-                    console.log('First Occurence:', nextDate);
-                }
-
-                // #1 - Check if limit is set first
-                if (limit) {
-                    for (let i = 0; i < limit; i++) {
-                        nextDate.setMonth(nextDate.getMonth() + m);
-
-                        console.log(nextDate);
-
-                        if (nextDate >= first && nextDate <= last) {
-                            occurrences.push(new Date(nextDate));
-                        }
-                    }
-                }
-
-                // #2 - Then use end date
-                else {
-                    const { d } = end;
-                    const endDate = d ? new Date(d) : last;
-
-                    // console.log('End Date:', endDate);
-
-                    while (nextDate <= endDate) {
-                        nextDate.setMonth(nextDate.getMonth() + m);
-
-                        // console.log(nextDate);
-
-                        if (nextDate >= first && nextDate <= last) {
-                            if (nextDate <= endDate) {
-                                occurrences.push(new Date(nextDate));
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Option: The i d of every n month(s)
-            else if (option === 'The i d of every m month(s)') {
-                const { i, d, m } = value;
-                const numbers = {
-                    first: 1,
-                    second: 2,
-                    third: 3,
-                    fourth: 4,
-                    // FIXME: encode last
-                    last: 5
-                };
-                const count = numbers[i];
-
-                let nextDate;
-
-                console.log('Value:', i, `(${count})`, d, m);
-
-                // Rules
-                switch(d) {
-                    // Done
-                    case 'day':
-                        // nextDate = new Date(startDate.getFullYear(), startDate.getMonth(), count);
-                        // occurrences.push(new Date(nextDate));
-
-                        nextDate = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
-                                
-                        // #1 - Check if limit is set first
-                        if (limit) {
-                            let counter = 0;
-
-                            while(counter < limit) {
-                                console.log(nextDate);
-
-                                if (nextDate >= startDate) {
-                                    if (nextDate >= first && nextDate <= last) {
-                                        occurrences.push(new Date(nextDate));
-                                    }
-
-                                    counter++;
-                                }
-
-                                nextDate.setMonth(nextDate.getMonth() + m);
-                            }
-                        }
-
-                        // #2 - Then use end date
-                        else {
-                            const { d } = end;
-                            const endDate = d ? new Date(d) : last;
-
-                            console.log('End Date:', endDate);
-
-                            while (nextDate <= endDate) {
-                                console.log(nextDate);
-
-                                if (nextDate >= startDate) {
-                                    if (nextDate >= first && nextDate <= last) {
-                                        if (nextDate <= endDate) {
-                                            occurrences.push(new Date(nextDate));
-                                        }
-                                    }
-                                }
-
-                                nextDate.setMonth(nextDate.getMonth() + m);
-                            }
-                        }
-                        break;
-                    // Done
-                    case 'weekday':
-                        // Start with start date
-                        nextDate = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
-
-                        // #1 - Check if limit is set first
-                        if (limit) {
-                            for (let i = 0; i < limit; i++) {
-                                // Start with first of the month
-                                console.log('First of month:', nextDate);
+            const nth=numbers[i]                                                                                                                                                            //on the 'nth' day
+            const day=n||d
     
-                                // Get weekday
-                                const day = nextDate.getDay();
-                                console.log('Day:', day);
-    
-                                const offset = getWeekdayOffset(day, count);
-                                console.log('Offset:', offset);
-    
-                                // Add offset
-                                nextDate.setDate(nextDate.getDate() + offset);
-
-                                // If within month, push to array
-                                if (nextDate >= first && nextDate <= last) {
-                                    occurrences.push(new Date(nextDate));
-                                }
-
-                                // Increment month by m, set date to first
-                                nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
-                            }
-                        }
-
-                        // #2 - Then use end date
-                        else {
-                            const { d } = end;
-                            const endDate = d ? new Date(d) : last;
-
-                            console.log('End Date:', endDate);
-
-                            while (nextDate <= endDate) {
-                                // Start with first of the month
-                                console.log('First of month:', nextDate);
-                                        
-                                // Get weekday
-                                const day = nextDate.getDay();
-                                console.log('Day:', day);
-
-                                const offset = getWeekdayOffset(day, count);
-                                console.log('Offset:', offset);
-
-                                // Add offset
-                                nextDate.setDate(nextDate.getDate() + offset);
-
-                                // If within month, push to array
-                                if (nextDate >= first && nextDate <= last) {
-                                    if (nextDate <= endDate) {
-                                        occurrences.push(new Date(nextDate));
-                                    }
-                                }
-
-                                // Increment month by m, set date to first
-                                nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
-                            }
-                        }
-
-                           /**
-                             *  | Weekday | Day | Count | Answer    |
-                             *  |---------|-----|-------|-----------|
-                             *  | Sun     | 0   | 1st   | + 1 > Mon |
-                             *  | Sun     | 0   | 2nd   | + 2 > Tue |
-                             *  | Sun     | 0   | 3rd   | + 3 > Wed |
-                             *  | Sun     | 0   | 4th   | + 4 > Thu |
-                             *  |---------|-----|-------|-----------|
-                             *  | Mon     | 1   | 1st   | + 0 > Mon |
-                             *  | Mon     | 1   | 2nd   | + 1 > Tue |
-                             *  | Mon     | 1   | 3rd   | + 2 > Wed |
-                             *  | Mon     | 1   | 4th   | + 3 > Thu |
-                             *  |---------|-----|-------|---------- |
-                             *  | Tue     | 2   | 1st   | + 0 > Tue |
-                             *  | Tue     | 2   | 2nd   | + 1 > Wed |
-                             *  | Tue     | 2   | 3rd   | + 2 > Thu |
-                             *  | Tue     | 2   | 4th   | + 3 > Fri |
-                             *  |---------|-----|-------|-----------|
-                             *  | Wed     | 3   | 1st   | + 0 > Wed |
-                             *  | Wed     | 3   | 2nd   | + 1 > Thu |
-                             *  | Wed     | 3   | 3rd   | + 2 > Fri |
-                             *  | Wed     | 3   | 4th   | + 5 > Mon |
-                             *  |---------|-----|-------|-----------|
-                             *  | Thu     | 4   | 1st   | + 0 > Thu |
-                             *  | Thu     | 4   | 2nd   | + 1 > Fri |
-                             *  | Thu     | 4   | 3rd   | + 4 > Mon |
-                             *  | Thu     | 4   | 4th   | + 5 > Tue |
-                             *  |---------|-----|-------|-----------|
-                             *  | Fri     | 5   | 1st   | + 0 > Fri |
-                             *  | Fri     | 5   | 2nd   | + 3 > Mon |
-                             *  | Fri     | 5   | 3rd   | + 4 > Tue |
-                             *  | Fri     | 5   | 4th   | + 5 > Wed |
-                             *  |---------|-----|-------|-----------|
-                             *  | Sat     | 6   | 1st   | + 2 > Mon |
-                             *  | Sat     | 6   | 2nd   | + 3 > Tue |
-                             *  | Sat     | 6   | 3rd   | + 4 > Wed |
-                             *  | Sat     | 6   | 4th   | + 5 > Thu |
-                             */
-                        function getWeekdayOffset(day, count) {
-                            switch (`${day} ${count}`) {
-                                case '1 1':
-                                case '2 1':
-                                case '3 1':
-                                case '4 1':
-                                case '5 1':
-                                    return 0;
-                                case '0 1':
-                                case '1 2':
-                                case '2 2':
-                                case '3 2':
-                                case '4 2':
-                                    return 1;
-                                case '0 2':
-                                case '1 3':
-                                case '2 3':
-                                case '3 3':
-                                case '6 1':
-                                    return 2;
-                                case '0 3':
-                                case '1 4':
-                                case '2 4':
-                                case '5 2':
-                                case '6 2':
-                                    return 3;
-                                case '0 4':
-                                case '4 3':
-                                case '5 3':
-                                case '6 3':
-                                    return 4;
-                                case '3 4':
-                                case '4 4':
-                                case '5 4':
-                                case '6 4':
-                                    return 5;
-                            }
-                        }
-                        break;
-                    // Done
-                    case 'weekend day':
-                        // Start with start date
-                        nextDate = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
-
-                        // #1 - Check if limit is set first
-                        if (limit) {
-                            for (let i = 0; i < limit; i++) {
-                                // Start with first of the month
-                                console.log('First of month:', nextDate);
-    
-                                // Get weekday
-                                const day = nextDate.getDay();
-                                console.log('Day:', day);
-    
-                                const offset = getWeekendOffset(day, count);
-                                console.log('Offset:', offset);
-    
-                                // Add offset
-                                nextDate.setDate(nextDate.getDate() + offset);
-
-                                // If within month, push to array
-                                if (nextDate >= first && nextDate <= last) {
-                                    occurrences.push(new Date(nextDate));
-                                }
-
-                                // Increment month by m, set date to first
-                                nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
-                            }
-                        }
-
-                        // #2 - Then use end date
-                        else {
-                            const { d } = end;
-                            const endDate = d ? new Date(d) : last;
-
-                            console.log('End Date:', endDate);
-
-                            while (nextDate <= endDate) {
-                                // Start with first of the month
-                                console.log('First of month:', nextDate);
-                                        
-                                // Get weekday
-                                const day = nextDate.getDay();
-                                console.log('Day:', day);
-
-                                const offset = getWeekendOffset(day, count);
-                                console.log('Offset:', offset);
-
-                                // Add offset
-                                nextDate.setDate(nextDate.getDate() + offset);
-
-                                // If within month, push to array
-                                if (nextDate >= first && nextDate <= last) {
-                                    if (nextDate <= endDate) {
-                                        occurrences.push(new Date(nextDate));
-                                    }
-                                }
-
-                                // Increment month by m, set date to first
-                                nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
-                            }
-                        }
-
-                        /**
-                             *  | Weekday | Day | Count | Answer     |
-                             *  |---------|-----|-------|------------|
-                             *  | Sun     | 0   | 1st   | + 0  > Mon |
-                             *  | Sun     | 0   | 2nd   | + 6  > Tue |
-                             *  | Sun     | 0   | 3rd   | + 7  > Wed |
-                             *  | Sun     | 0   | 4th   | + 13 > Thu |
-                             *  |---------|-----|-------|------------|
-                             *  | Mon     | 1   | 1st   | + 5  > Mon |
-                             *  | Mon     | 1   | 2nd   | + 6  > Tue |
-                             *  | Mon     | 1   | 3rd   | + 12 > Wed |
-                             *  | Mon     | 1   | 4th   | + 13 > Thu |
-                             *  |---------|-----|-------|------------|
-                             *  | Tue     | 2   | 1st   | + 4  > Tue |
-                             *  | Tue     | 2   | 2nd   | + 5  > Wed |
-                             *  | Tue     | 2   | 3rd   | + 11 > Thu |
-                             *  | Tue     | 2   | 4th   | + 12 > Fri |
-                             *  |---------|-----|-------|------------|
-                             *  | Wed     | 3   | 1st   | + 3  > Wed |
-                             *  | Wed     | 3   | 2nd   | + 4  > Thu |
-                             *  | Wed     | 3   | 3rd   | + 10 > Fri |
-                             *  | Wed     | 3   | 4th   | + 11 > Mon |
-                             *  |---------|-----|-------|------------|
-                             *  | Thu     | 4   | 1st   | + 2  > Thu |
-                             *  | Thu     | 4   | 2nd   | + 3  > Fri |
-                             *  | Thu     | 4   | 3rd   | + 9  > Mon |
-                             *  | Thu     | 4   | 4th   | + 10 > Tue |
-                             *  |---------|-----|-------|------------|
-                             *  | Fri     | 5   | 1st   | + 1  > Fri |
-                             *  | Fri     | 5   | 2nd   | + 2  > Mon |
-                             *  | Fri     | 5   | 3rd   | + 8  > Tue |
-                             *  | Fri     | 5   | 4th   | + 9  > Wed |
-                             *  |---------|-----|-------|------------|
-                             *  | Sat     | 6   | 1st   | + 0  > Mon |
-                             *  | Sat     | 6   | 2nd   | + 1  > Tue |
-                             *  | Sat     | 6   | 3rd   | + 7  > Wed |
-                             *  | Sat     | 6   | 4th   | + 8  > Thu |
-                             */
-                        function getWeekendOffset(day, count) {
-                            switch (`${day} ${count}`) {
-                                case '0 1':
-                                case '6 1':
-                                    return 0;
-                                case '5 1':
-                                case '6 2':
-                                    return 1;
-                                case '4 1':
-                                case '5 2':
-                                    return 2;
-                                case '3 1':
-                                case '4 2':
-                                    return 3;
-                                case '2 1':
-                                case '3 2':
-                                    return 4;
-                                case '1 1':
-                                case '2 2':
-                                    return 5;
-                                case '0 2':
-                                case '1 2':
-                                    return 6;
-                                case '0 3':
-                                case '6 3':
-                                    return 7;
-                                case '5 3':
-                                case '6 4':
-                                    return 8;
-                                case '4 3':
-                                case '5 4':
-                                    return 9;
-                                case '3 3':
-                                case '4 4':
-                                    return 10;
-                                case '2 3':
-                                case '3 4':
-                                    return 11;
-                                case '1 3':
-                                case '2 4':
-                                    return 12;
-                                case '0 4':
-                                case '1 4':
-                                    return 13;
-                            }
-                        }
-                        break;
-                    // Done
-                    case 'Monday':
-                        getNextDates(1);
-                        break;
-                    // Done
-                    case 'Tuesday':
-                        getNextDates(2);
-                        break;
-                    // Done
-                    case 'Wednesday':
-                        getNextDates(3);
-                        break;
-                    // Done
-                    case 'Thursday':
-                        getNextDates(4);
-                        break;
-                    // Done
-                    case 'Friday':
-                        getNextDates(5);
-                        break;
-                    // Done
-                    case 'Saturday':
-                        getNextDates(6);
-                        break;
-                    // Done
-                    case 'Sunday':
-                        getNextDates(0);
-                        break;
-                }
-
-                function getNextDates(day) {
-                    // Start with start date
-                    nextDate = new Date(startDate);
-
-                    // #1 - Check if limit is set first
-                    if (limit) {
-                        for (let i = 0; i < limit; i++) {
-                            const nthDay = nthWeekdayOfMonth(day, count, nextDate);
-                            nextDate = new Date(nthDay);
-
-                            console.log(nextDate);
-
-                            // If within month, push to array
-                            if (nextDate >= first && nextDate <= last) {
-                                occurrences.push(new Date(nextDate));
-                            }
-
-                            // Increment month by m, set date to first
-                            nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
-                        }
-                    }
-
-                    // #2 - Then use end date
-                    else {
-                        const { d } = end;
-                        const endDate = d ? new Date(d) : last;
-
-                        console.log('End Date:', endDate);
-
-                        while (nextDate <= endDate) {
-                            const nthDay = nthWeekdayOfMonth(day, count, nextDate);
-                            nextDate = new Date(nthDay);
-
-                            console.log(nextDate);
-
-                            // If within month, push to array
-                            if (nextDate >= first && nextDate <= last) {
-                                if (nextDate <= endDate) {
-                                    occurrences.push(new Date(nextDate));
-                                }
-                            }
-
-                            // Increment month by m, set date to first
-                            nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
-                        }
-                    }
-                }
-
-                // https://stackoverflow.com/a/32193378
-                function nthWeekdayOfMonth(weekday, count, start) {
-                    let date = new Date(start.getFullYear(), start.getMonth(), 1);
-                    let toAdd = (weekday - start.getDay() + 7) % 7 + (count - 1) * 7;
-                    
-                    date.setDate(1 + toAdd);
-
-                    return date;
-                }
-            }
-
-            // Recurse month +1 if no occurrences
-            if (!occurrences.length) {
-                const nextMonth = new Date(month.getFullYear(), month.getMonth() + 1, 1);
-                console.log('NEXT MONTH:', nextMonth);
-
-                if (!limit) {
-                    const { d } = end;
-                    const endMonth = d ? new Date(d) : last;
-                    endMonth.setDate(nextMonth.getDate());
-                    console.log('END MONTH:', new Date(endMonth));
-
-                    if (endMonth >= nextMonth) {
-                        occurrences = formulas.Monthly({ start, end, value, month: nextMonth });
-                    }
-                } else {
-                    occurrences = formulas.Monthly({ start, end, value, month: nextMonth });
-                }
-            }
-
-            console.log(occurrences);
+            let nextDate=getNthDay(nth,day,month)                                                                                                                                           //always generate the date within current month
+            const firstOccurrence=getNthDay(nth,day,startDate)>=startDate?getNthDay(nth,day,startDate):getNthDay(nth,day,new Date(startDate.getFullYear(), startDate.getMonth()+m,1))       //first occurence=nth day month of startDate or nth day month of startDate+m 
+            if(nextDate>=firstOccurrence && everyNmonths(m,firstOccurrence,nextDate) && isBeforeEnd(nextDate,endDate||limit,firstOccurrence,m)) occurrences.push(new Date(nextDate))        //check to see if it meets criteria, push to occurrences if it does
 
             return occurrences;
         },
@@ -1016,6 +489,7 @@ export function RecurrencePattern({ recurrence, month }) {
             console.log('Last:', last);
             console.log('Limit:', limit);
             console.log('Option:', option);
+            console.log('Years:', years);
 
             // Option: On m d
             if (option === 'On m d') {
@@ -1050,6 +524,7 @@ export function RecurrencePattern({ recurrence, month }) {
                 // #2 - Then use end date
                 else {
                     const { d: eD } = end;
+                    // const endDate = eD ? new Date(eD) : last;
                     const endDate = eD ? new Date(eD) : last;
 
                     console.log('End Date:', endDate);
@@ -1060,14 +535,15 @@ export function RecurrencePattern({ recurrence, month }) {
                         const date = new Date(nextDate.getFullYear(), month, d);
                         console.log(date);
 
-                        // If start date is before qtr, add occurrence
                         if (startDate <= date) {
-                            // If occurrs in selected month, add to array
-                            if (date >= first && date <= last) {
-                                if (date <= endDate) {
-                                    occurrences.push(new Date(date));
-                                }
-                            }
+                            occurrences.push(new Date(date));
+
+                            // FIXME: Look into why this failed
+                            // if (date >= first && date <= last) {
+                            //     if (date <= endDate) {
+                            //         occurrences.push(new Date(date));
+                            //     }
+                            // }
                         }
 
                         // Increment years
@@ -1089,224 +565,402 @@ export function RecurrencePattern({ recurrence, month }) {
                 };
                 const count = numbers[i];
 
+
+
+                // let nextDate = count===5?last:new Date(startDate.getFullYear(), months.indexOf(m), count);         
                 let nextDate = new Date(startDate.getFullYear(), months.indexOf(m), count);
 
                 console.log('Value:', i, `(${count})`, d, m);
+                if(count===5){                                                                                                      
 
-                // TODO: Replace m :number > m :string
-                // Rules
-                switch(d) {
-                    // Done
-                    case 'day':
-                        // #1 - Check if limit is set first
-                        if (limit) {
-                            let counter = 0;
 
-                            while (counter < limit) {
-                                console.log(nextDate);
+                }
+                else{
 
-                                // If start date is before nextDate, add occurrence
-                                if (startDate <= nextDate) {
-                                    // If occurrs in selected month, add to array
+                    // TODO: Replace m :number > m :string
+                    // Rules
+                    switch(d) {
+                        // Done
+                        case 'day':
+                                // #1 - Check if limit is set first
+                                if (limit) {
+                                    let counter = 0;
+
+                                    while (counter < limit) {
+                                        console.log(nextDate);
+
+                                        // If start date is before nextDate, add occurrence
+                                        if (startDate <= nextDate) {
+                                            // If occurrs in selected month, add to array
+                                            if (nextDate >= first && nextDate <= last) {
+                                                occurrences.push(new Date(nextDate));
+                                            }
+
+                                            nextDate.setFullYear(nextDate.getFullYear() + 1);
+                                            
+                                            counter++;
+                                        }
+                                    }
+                                }
+
+                                // #2 - Then use end date
+                                else {
+                                    const { d } = end;
+                                    const endDate = d ? new Date(d) : last;
+
+                                    console.log('End Date:', endDate);
+
+                                    while (nextDate <= endDate) {
+                                        console.log(nextDate);
+
+                                        // If start date is before nextDate, add occurrence
+                                        if (startDate <= nextDate) {
+                                            // If occurrs in selected month, add to array
+                                            if (nextDate >= first && nextDate <= last) {
+                                                if (nextDate <= endDate) {
+                                                    occurrences.push(new Date(nextDate));
+                                                } else {
+                                                    // NOTE: Is this right?
+                                                    return occurrences;
+                                                }
+                                            }
+
+                                            nextDate.setFullYear(nextDate.getFullYear() + 1);
+                                        }
+                                    }
+                                }
+                            break;
+                        // Done
+                        case 'weekday':
+                            // Start with start date
+                            nextDate = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+
+                            // #1 - Check if limit is set first
+                            if (limit) {
+                                for (let i = 0; i < limit; i++) {
+                                    // Start with first of the month
+                                    console.log('First of month:', nextDate);
+        
+                                    // Get weekday
+                                    const day = nextDate.getDay();
+                                    console.log('Day:', day);
+        
+                                    const offset = getWeekdayOffset(day, count);
+                                    console.log('Offset:', offset);
+        
+                                    // Add offset
+                                    nextDate.setDate(nextDate.getDate() + offset);
+
+                                    // If within month, push to array
                                     if (nextDate >= first && nextDate <= last) {
                                         occurrences.push(new Date(nextDate));
                                     }
 
-                                    nextDate.setFullYear(nextDate.getFullYear() + 1);
-                                    
-                                    counter++;
+                                    // Increment month by m, set date to first
+                                    nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
                                 }
                             }
-                        }
 
-                        // #2 - Then use end date
-                        else {
-                            const { d } = end;
-                            const endDate = d ? new Date(d) : last;
+                            // #2 - Then use end date
+                            else {
+                                const { d } = end;
+                                const endDate = d ? new Date(d) : last;
 
-                            console.log('End Date:', endDate);
+                                console.log('End Date:', endDate);
 
-                            while (nextDate <= endDate) {
-                                console.log(nextDate);
+                                while (nextDate <= endDate) {
+                                    // Start with first of the month
+                                    console.log('First of month:', nextDate);
+                                            
+                                    // Get weekday
+                                    const day = nextDate.getDay();
+                                    console.log('Day:', day);
 
-                                // If start date is before nextDate, add occurrence
-                                if (startDate <= nextDate) {
-                                    // If occurrs in selected month, add to array
+                                    const offset = getWeekdayOffset(day, count);
+                                    console.log('Offset:', offset);
+
+                                    // Add offset
+                                    nextDate.setDate(nextDate.getDate() + offset);
+
+                                    // If within month, push to array
                                     if (nextDate >= first && nextDate <= last) {
                                         if (nextDate <= endDate) {
                                             occurrences.push(new Date(nextDate));
-                                        } else {
-                                            // NOTE: Is this right?
-                                            return occurrences;
                                         }
                                     }
 
-                                    nextDate.setFullYear(nextDate.getFullYear() + 1);
+                                    // Increment month by m, set date to first
+                                    nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
                                 }
                             }
-                        }
-                        break;
-                    // Done
-                    case 'weekday':
-                        // Start with start date
-                        nextDate = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
 
-                        // #1 - Check if limit is set first
-                        if (limit) {
-                            for (let i = 0; i < limit; i++) {
-                                // Start with first of the month
-                                console.log('First of month:', nextDate);
-    
-                                // Get weekday
-                                const day = nextDate.getDay();
-                                console.log('Day:', day);
-    
-                                const offset = getWeekdayOffset(day, count);
-                                console.log('Offset:', offset);
-    
-                                // Add offset
-                                nextDate.setDate(nextDate.getDate() + offset);
-
-                                // If within month, push to array
-                                if (nextDate >= first && nextDate <= last) {
-                                    occurrences.push(new Date(nextDate));
+                            /**
+                                 *  | Weekday | Day | Count | Answer    |
+                                 *  |---------|-----|-------|-----------|
+                                 *  | Sun     | 0   | 1st   | + 1 > Mon |
+                                 *  | Sun     | 0   | 2nd   | + 2 > Tue |
+                                 *  | Sun     | 0   | 3rd   | + 3 > Wed |
+                                 *  | Sun     | 0   | 4th   | + 4 > Thu |
+                                 *  |---------|-----|-------|-----------|
+                                 *  | Mon     | 1   | 1st   | + 0 > Mon |
+                                 *  | Mon     | 1   | 2nd   | + 1 > Tue |
+                                 *  | Mon     | 1   | 3rd   | + 2 > Wed |
+                                 *  | Mon     | 1   | 4th   | + 3 > Thu |
+                                 *  |---------|-----|-------|---------- |
+                                 *  | Tue     | 2   | 1st   | + 0 > Tue |
+                                 *  | Tue     | 2   | 2nd   | + 1 > Wed |
+                                 *  | Tue     | 2   | 3rd   | + 2 > Thu |
+                                 *  | Tue     | 2   | 4th   | + 3 > Fri |
+                                 *  |---------|-----|-------|-----------|
+                                 *  | Wed     | 3   | 1st   | + 0 > Wed |
+                                 *  | Wed     | 3   | 2nd   | + 1 > Thu |
+                                 *  | Wed     | 3   | 3rd   | + 2 > Fri |
+                                 *  | Wed     | 3   | 4th   | + 5 > Mon |
+                                 *  |---------|-----|-------|-----------|
+                                 *  | Thu     | 4   | 1st   | + 0 > Thu |
+                                 *  | Thu     | 4   | 2nd   | + 1 > Fri |
+                                 *  | Thu     | 4   | 3rd   | + 4 > Mon |
+                                 *  | Thu     | 4   | 4th   | + 5 > Tue |
+                                 *  |---------|-----|-------|-----------|
+                                 *  | Fri     | 5   | 1st   | + 0 > Fri |
+                                 *  | Fri     | 5   | 2nd   | + 3 > Mon |
+                                 *  | Fri     | 5   | 3rd   | + 4 > Tue |
+                                 *  | Fri     | 5   | 4th   | + 5 > Wed |
+                                 *  |---------|-----|-------|-----------|
+                                 *  | Sat     | 6   | 1st   | + 2 > Mon |
+                                 *  | Sat     | 6   | 2nd   | + 3 > Tue |
+                                 *  | Sat     | 6   | 3rd   | + 4 > Wed |
+                                 *  | Sat     | 6   | 4th   | + 5 > Thu |
+                                 */
+                            function getWeekdayOffset(day, count) {
+                                switch (`${day} ${count}`) {
+                                    case '1 1':
+                                    case '2 1':
+                                    case '3 1':
+                                    case '4 1':
+                                    case '5 1':
+                                        return 0;
+                                    case '0 1':
+                                    case '1 2':
+                                    case '2 2':
+                                    case '3 2':
+                                    case '4 2':
+                                        return 1;
+                                    case '0 2':
+                                    case '1 3':
+                                    case '2 3':
+                                    case '3 3':
+                                    case '6 1':
+                                        return 2;
+                                    case '0 3':
+                                    case '1 4':
+                                    case '2 4':
+                                    case '5 2':
+                                    case '6 2':
+                                        return 3;
+                                    case '0 4':
+                                    case '4 3':
+                                    case '5 3':
+                                    case '6 3':
+                                        return 4;
+                                    case '3 4':
+                                    case '4 4':
+                                    case '5 4':
+                                    case '6 4':
+                                        return 5;
                                 }
-
-                                // Increment month by m, set date to first
-                                nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
                             }
-                        }
+                            break;
+                        // Done
+                        case 'weekend day':
+                            // Start with start date
+                            nextDate = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
 
-                        // #2 - Then use end date
-                        else {
-                            const { d } = end;
-                            const endDate = d ? new Date(d) : last;
+                            // #1 - Check if limit is set first
+                            if (limit) {
+                                for (let i = 0; i < limit; i++) {
+                                    // Start with first of the month
+                                    console.log('First of month:', nextDate);
+        
+                                    // Get weekday
+                                    const day = nextDate.getDay();
+                                    console.log('Day:', day);
+        
+                                    const offset = getWeekendOffset(day, count);
+                                    console.log('Offset:', offset);
+        
+                                    // Add offset
+                                    nextDate.setDate(nextDate.getDate() + offset);
 
-                            console.log('End Date:', endDate);
-
-                            while (nextDate <= endDate) {
-                                // Start with first of the month
-                                console.log('First of month:', nextDate);
-                                        
-                                // Get weekday
-                                const day = nextDate.getDay();
-                                console.log('Day:', day);
-
-                                const offset = getWeekdayOffset(day, count);
-                                console.log('Offset:', offset);
-
-                                // Add offset
-                                nextDate.setDate(nextDate.getDate() + offset);
-
-                                // If within month, push to array
-                                if (nextDate >= first && nextDate <= last) {
-                                    if (nextDate <= endDate) {
+                                    // If within month, push to array
+                                    if (nextDate >= first && nextDate <= last) {
                                         occurrences.push(new Date(nextDate));
                                     }
+
+                                    // Increment month by m, set date to first
+                                    nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
                                 }
-
-                                // Increment month by m, set date to first
-                                nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
                             }
-                        }
 
-                        /**
-                             *  | Weekday | Day | Count | Answer    |
-                             *  |---------|-----|-------|-----------|
-                             *  | Sun     | 0   | 1st   | + 1 > Mon |
-                             *  | Sun     | 0   | 2nd   | + 2 > Tue |
-                             *  | Sun     | 0   | 3rd   | + 3 > Wed |
-                             *  | Sun     | 0   | 4th   | + 4 > Thu |
-                             *  |---------|-----|-------|-----------|
-                             *  | Mon     | 1   | 1st   | + 0 > Mon |
-                             *  | Mon     | 1   | 2nd   | + 1 > Tue |
-                             *  | Mon     | 1   | 3rd   | + 2 > Wed |
-                             *  | Mon     | 1   | 4th   | + 3 > Thu |
-                             *  |---------|-----|-------|---------- |
-                             *  | Tue     | 2   | 1st   | + 0 > Tue |
-                             *  | Tue     | 2   | 2nd   | + 1 > Wed |
-                             *  | Tue     | 2   | 3rd   | + 2 > Thu |
-                             *  | Tue     | 2   | 4th   | + 3 > Fri |
-                             *  |---------|-----|-------|-----------|
-                             *  | Wed     | 3   | 1st   | + 0 > Wed |
-                             *  | Wed     | 3   | 2nd   | + 1 > Thu |
-                             *  | Wed     | 3   | 3rd   | + 2 > Fri |
-                             *  | Wed     | 3   | 4th   | + 5 > Mon |
-                             *  |---------|-----|-------|-----------|
-                             *  | Thu     | 4   | 1st   | + 0 > Thu |
-                             *  | Thu     | 4   | 2nd   | + 1 > Fri |
-                             *  | Thu     | 4   | 3rd   | + 4 > Mon |
-                             *  | Thu     | 4   | 4th   | + 5 > Tue |
-                             *  |---------|-----|-------|-----------|
-                             *  | Fri     | 5   | 1st   | + 0 > Fri |
-                             *  | Fri     | 5   | 2nd   | + 3 > Mon |
-                             *  | Fri     | 5   | 3rd   | + 4 > Tue |
-                             *  | Fri     | 5   | 4th   | + 5 > Wed |
-                             *  |---------|-----|-------|-----------|
-                             *  | Sat     | 6   | 1st   | + 2 > Mon |
-                             *  | Sat     | 6   | 2nd   | + 3 > Tue |
-                             *  | Sat     | 6   | 3rd   | + 4 > Wed |
-                             *  | Sat     | 6   | 4th   | + 5 > Thu |
+                            // #2 - Then use end date
+                            else {
+                                const { d } = end;
+                                const endDate = d ? new Date(d) : last;
+
+                                console.log('End Date:', endDate);
+
+                                while (nextDate <= endDate) {
+                                    // Start with first of the month
+                                    console.log('First of month:', nextDate);
+                                            
+                                    // Get weekday
+                                    const day = nextDate.getDay();
+                                    console.log('Day:', day);
+
+                                    const offset = getWeekendOffset(day, count);
+                                    console.log('Offset:', offset);
+
+                                    // Add offset
+                                    nextDate.setDate(nextDate.getDate() + offset);
+
+                                    // If within month, push to array
+                                    if (nextDate >= first && nextDate <= last) {
+                                        if (nextDate <= endDate) {
+                                            occurrences.push(new Date(nextDate));
+                                        }
+                                    }
+
+                                    // Increment month by m, set date to first
+                                    nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
+                                }
+                            }
+
+                            /**
+                             * | Weekday | Day | Count | Answer     |
+                             * |---------|-----|-------|------------|
+                             * | Sun     | 0   | 1st   | + 0  > Mon |
+                             * | Sun     | 0   | 2nd   | + 6  > Tue |
+                             * | Sun     | 0   | 3rd   | + 7  > Wed |
+                             * | Sun     | 0   | 4th   | + 13 > Thu |
+                             * |---------|-----|-------|------------|
+                             * | Mon     | 1   | 1st   | + 5  > Mon |
+                             * | Mon     | 1   | 2nd   | + 6  > Tue |
+                             * | Mon     | 1   | 3rd   | + 12 > Wed |
+                             * | Mon     | 1   | 4th   | + 13 > Thu |
+                             * |---------|-----|-------|------------|
+                             * | Tue     | 2   | 1st   | + 4  > Tue |
+                             * | Tue     | 2   | 2nd   | + 5  > Wed |
+                             * | Tue     | 2   | 3rd   | + 11 > Thu |
+                             * | Tue     | 2   | 4th   | + 12 > Fri |
+                             * |---------|-----|-------|------------|
+                             * | Wed     | 3   | 1st   | + 3  > Wed |
+                             * | Wed     | 3   | 2nd   | + 4  > Thu |
+                             * | Wed     | 3   | 3rd   | + 10 > Fri |
+                             * | Wed     | 3   | 4th   | + 11 > Mon |
+                             * |---------|-----|-------|------------|
+                             * | Thu     | 4   | 1st   | + 2  > Thu |
+                             * | Thu     | 4   | 2nd   | + 3  > Fri |
+                             * | Thu     | 4   | 3rd   | + 9  > Mon |
+                             * | Thu     | 4   | 4th   | + 10 > Tue |
+                             * |---------|-----|-------|------------|
+                             * | Fri     | 5   | 1st   | + 1  > Fri |
+                             * | Fri     | 5   | 2nd   | + 2  > Mon |
+                             * | Fri     | 5   | 3rd   | + 8  > Tue |
+                             * | Fri     | 5   | 4th   | + 9  > Wed |
+                             * |---------|-----|-------|------------|
+                             * | Sat     | 6   | 1st   | + 0  > Mon |
+                             * | Sat     | 6   | 2nd   | + 1  > Tue |
+                             * | Sat     | 6   | 3rd   | + 7  > Wed |
+                             * | Sat     | 6   | 4th   | + 8  > Thu |
                              */
-                        function getWeekdayOffset(day, count) {
-                            switch (`${day} ${count}`) {
-                                case '1 1':
-                                case '2 1':
-                                case '3 1':
-                                case '4 1':
-                                case '5 1':
-                                    return 0;
-                                case '0 1':
-                                case '1 2':
-                                case '2 2':
-                                case '3 2':
-                                case '4 2':
-                                    return 1;
-                                case '0 2':
-                                case '1 3':
-                                case '2 3':
-                                case '3 3':
-                                case '6 1':
-                                    return 2;
-                                case '0 3':
-                                case '1 4':
-                                case '2 4':
-                                case '5 2':
-                                case '6 2':
-                                    return 3;
-                                case '0 4':
-                                case '4 3':
-                                case '5 3':
-                                case '6 3':
-                                    return 4;
-                                case '3 4':
-                                case '4 4':
-                                case '5 4':
-                                case '6 4':
-                                    return 5;
+                            function getWeekendOffset(day, count) {
+                                switch (`${day} ${count}`) {
+                                    case '0 1':
+                                    case '6 1':
+                                        return 0;
+                                    case '5 1':
+                                    case '6 2':
+                                        return 1;
+                                    case '4 1':
+                                    case '5 2':
+                                        return 2;
+                                    case '3 1':
+                                    case '4 2':
+                                        return 3;
+                                    case '2 1':
+                                    case '3 2':
+                                        return 4;
+                                    case '1 1':
+                                    case '2 2':
+                                        return 5;
+                                    case '0 2':
+                                    case '1 2':
+                                        return 6;
+                                    case '0 3':
+                                    case '6 3':
+                                        return 7;
+                                    case '5 3':
+                                    case '6 4':
+                                        return 8;
+                                    case '4 3':
+                                    case '5 4':
+                                        return 9;
+                                    case '3 3':
+                                    case '4 4':
+                                        return 10;
+                                    case '2 3':
+                                    case '3 4':
+                                        return 11;
+                                    case '1 3':
+                                    case '2 4':
+                                        return 12;
+                                    case '0 4':
+                                    case '1 4':
+                                        return 13;
+                                }
                             }
-                        }
-                        break;
-                    // Done
-                    case 'weekend day':
+                            break;
+                        // Done
+                        case 'Monday':
+                            getNextDates(1);
+                            break;
+                        // Done
+                        case 'Tuesday':
+                            getNextDates(2);
+                            break;
+                        // Done
+                        case 'Wednesday':
+                            getNextDates(3);
+                            break;
+                        // Done
+                        case 'Thursday':
+                            getNextDates(4);
+                            break;
+                        // Done
+                        case 'Friday':
+                            getNextDates(5);
+                            break;
+                        // Done
+                        case 'Saturday':
+                            getNextDates(6);
+                            break;
+                        // Done
+                        case 'Sunday':
+                            getNextDates(0);
+                            break;
+                    }
+
+                    function getNextDates(day) {
                         // Start with start date
-                        nextDate = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+                        nextDate = new Date(startDate);
 
                         // #1 - Check if limit is set first
                         if (limit) {
                             for (let i = 0; i < limit; i++) {
-                                // Start with first of the month
-                                console.log('First of month:', nextDate);
-    
-                                // Get weekday
-                                const day = nextDate.getDay();
-                                console.log('Day:', day);
-    
-                                const offset = getWeekendOffset(day, count);
-                                console.log('Offset:', offset);
-    
-                                // Add offset
-                                nextDate.setDate(nextDate.getDate() + offset);
+                                const nthDay = nthWeekdayOfMonth(day, count, nextDate);
+                                nextDate = new Date(nthDay);
+
+                                console.log(nextDate);
 
                                 // If within month, push to array
                                 if (nextDate >= first && nextDate <= last) {
@@ -1326,18 +980,10 @@ export function RecurrencePattern({ recurrence, month }) {
                             console.log('End Date:', endDate);
 
                             while (nextDate <= endDate) {
-                                // Start with first of the month
-                                console.log('First of month:', nextDate);
-                                        
-                                // Get weekday
-                                const day = nextDate.getDay();
-                                console.log('Day:', day);
+                                const nthDay = nthWeekdayOfMonth(day, count, nextDate);
+                                nextDate = new Date(nthDay);
 
-                                const offset = getWeekendOffset(day, count);
-                                console.log('Offset:', offset);
-
-                                // Add offset
-                                nextDate.setDate(nextDate.getDate() + offset);
+                                console.log(nextDate);
 
                                 // If within month, push to array
                                 if (nextDate >= first && nextDate <= last) {
@@ -1350,199 +996,42 @@ export function RecurrencePattern({ recurrence, month }) {
                                 nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
                             }
                         }
-
-                        /**
-                         * | Weekday | Day | Count | Answer     |
-                         * |---------|-----|-------|------------|
-                         * | Sun     | 0   | 1st   | + 0  > Mon |
-                         * | Sun     | 0   | 2nd   | + 6  > Tue |
-                         * | Sun     | 0   | 3rd   | + 7  > Wed |
-                         * | Sun     | 0   | 4th   | + 13 > Thu |
-                         * |---------|-----|-------|------------|
-                         * | Mon     | 1   | 1st   | + 5  > Mon |
-                         * | Mon     | 1   | 2nd   | + 6  > Tue |
-                         * | Mon     | 1   | 3rd   | + 12 > Wed |
-                         * | Mon     | 1   | 4th   | + 13 > Thu |
-                         * |---------|-----|-------|------------|
-                         * | Tue     | 2   | 1st   | + 4  > Tue |
-                         * | Tue     | 2   | 2nd   | + 5  > Wed |
-                         * | Tue     | 2   | 3rd   | + 11 > Thu |
-                         * | Tue     | 2   | 4th   | + 12 > Fri |
-                         * |---------|-----|-------|------------|
-                         * | Wed     | 3   | 1st   | + 3  > Wed |
-                         * | Wed     | 3   | 2nd   | + 4  > Thu |
-                         * | Wed     | 3   | 3rd   | + 10 > Fri |
-                         * | Wed     | 3   | 4th   | + 11 > Mon |
-                         * |---------|-----|-------|------------|
-                         * | Thu     | 4   | 1st   | + 2  > Thu |
-                         * | Thu     | 4   | 2nd   | + 3  > Fri |
-                         * | Thu     | 4   | 3rd   | + 9  > Mon |
-                         * | Thu     | 4   | 4th   | + 10 > Tue |
-                         * |---------|-----|-------|------------|
-                         * | Fri     | 5   | 1st   | + 1  > Fri |
-                         * | Fri     | 5   | 2nd   | + 2  > Mon |
-                         * | Fri     | 5   | 3rd   | + 8  > Tue |
-                         * | Fri     | 5   | 4th   | + 9  > Wed |
-                         * |---------|-----|-------|------------|
-                         * | Sat     | 6   | 1st   | + 0  > Mon |
-                         * | Sat     | 6   | 2nd   | + 1  > Tue |
-                         * | Sat     | 6   | 3rd   | + 7  > Wed |
-                         * | Sat     | 6   | 4th   | + 8  > Thu |
-                         */
-                        function getWeekendOffset(day, count) {
-                            switch (`${day} ${count}`) {
-                                case '0 1':
-                                case '6 1':
-                                    return 0;
-                                case '5 1':
-                                case '6 2':
-                                    return 1;
-                                case '4 1':
-                                case '5 2':
-                                    return 2;
-                                case '3 1':
-                                case '4 2':
-                                    return 3;
-                                case '2 1':
-                                case '3 2':
-                                    return 4;
-                                case '1 1':
-                                case '2 2':
-                                    return 5;
-                                case '0 2':
-                                case '1 2':
-                                    return 6;
-                                case '0 3':
-                                case '6 3':
-                                    return 7;
-                                case '5 3':
-                                case '6 4':
-                                    return 8;
-                                case '4 3':
-                                case '5 4':
-                                    return 9;
-                                case '3 3':
-                                case '4 4':
-                                    return 10;
-                                case '2 3':
-                                case '3 4':
-                                    return 11;
-                                case '1 3':
-                                case '2 4':
-                                    return 12;
-                                case '0 4':
-                                case '1 4':
-                                    return 13;
-                            }
-                        }
-                        break;
-                    // Done
-                    case 'Monday':
-                        getNextDates(1);
-                        break;
-                    // Done
-                    case 'Tuesday':
-                        getNextDates(2);
-                        break;
-                    // Done
-                    case 'Wednesday':
-                        getNextDates(3);
-                        break;
-                    // Done
-                    case 'Thursday':
-                        getNextDates(4);
-                        break;
-                    // Done
-                    case 'Friday':
-                        getNextDates(5);
-                        break;
-                    // Done
-                    case 'Saturday':
-                        getNextDates(6);
-                        break;
-                    // Done
-                    case 'Sunday':
-                        getNextDates(0);
-                        break;
-                }
-
-                function getNextDates(day) {
-                    // Start with start date
-                    nextDate = new Date(startDate);
-
-                    // #1 - Check if limit is set first
-                    if (limit) {
-                        for (let i = 0; i < limit; i++) {
-                            const nthDay = nthWeekdayOfMonth(day, count, nextDate);
-                            nextDate = new Date(nthDay);
-
-                            console.log(nextDate);
-
-                            // If within month, push to array
-                            if (nextDate >= first && nextDate <= last) {
-                                occurrences.push(new Date(nextDate));
-                            }
-
-                            // Increment month by m, set date to first
-                            nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
-                        }
                     }
 
-                    // #2 - Then use end date
-                    else {
-                        const { d } = end;
-                        const endDate = d ? new Date(d) : last;
+                    // https://stackoverflow.com/a/32193378
+                    function nthWeekdayOfMonth(weekday, count, start) {
+                        let date = new Date(start.getFullYear(), start.getMonth(), 1);
+                        let toAdd = (weekday - start.getDay() + 7) % 7 + (count - 1) * 7;
+                        
+                        date.setDate(1 + toAdd);
 
-                        console.log('End Date:', endDate);
-
-                        while (nextDate <= endDate) {
-                            const nthDay = nthWeekdayOfMonth(day, count, nextDate);
-                            nextDate = new Date(nthDay);
-
-                            console.log(nextDate);
-
-                            // If within month, push to array
-                            if (nextDate >= first && nextDate <= last) {
-                                if (nextDate <= endDate) {
-                                    occurrences.push(new Date(nextDate));
-                                }
-                            }
-
-                            // Increment month by m, set date to first
-                            nextDate = new Date(nextDate.getFullYear(), nextDate.getMonth() + m, 1);
-                        }
+                        return date;
                     }
-                }
-
-                // https://stackoverflow.com/a/32193378
-                function nthWeekdayOfMonth(weekday, count, start) {
-                    let date = new Date(start.getFullYear(), start.getMonth(), 1);
-                    let toAdd = (weekday - start.getDay() + 7) % 7 + (count - 1) * 7;
-                    
-                    date.setDate(1 + toAdd);
-
-                    return date;
                 }
             }
 
-            // Recurse month +1 if no occurrences
-            if (!occurrences.length) {
+
+            // Recurse year +1 if no occurrences
+            if (!occurrences.length && value.i!='last') {
                 // Go forward 11 months
                 const nextMonth = new Date(month.getFullYear(), month.getMonth() + 11, 1);
                 console.log('NEXT MONTH:', nextMonth);
 
-                if (!limit) {
-                    const { d } = end;
-                    const endMonth = d ? new Date(d) : last;
-                    endMonth.setDate(nextMonth.getDate());
-                    console.log('END MONTH:', new Date(endMonth));
+                occurrences = formulas.Yearly({ start, end, value, month: nextMonth });
 
-                    if (endMonth >= nextMonth) {
-                        occurrences = formulas.Yearly({ start, end, value, month: nextMonth });
-                    }
-                } else {
-                    occurrences = formulas.Yearly({ start, end, value, month: nextMonth });
-                }
+                // if (!limit) {
+                //     const { d } = end;
+                //     let endMonth = d ? new Date(d) : last;
+                //     // endMonth.setDate(nextMonth.getDate());
+                //     endMonth = new Date(endMonth.getFullYear() + 1, endMonth.getMonth(), endMonth.getDate());
+                //     console.log('END MONTH:', endMonth);
+
+                //     if (endMonth >= nextMonth) {
+                //         occurrences = formulas.Yearly({ start, end, value, month: nextMonth });
+                //     }
+                // } else {
+                //     occurrences = formulas.Yearly({ start, end, value, month: nextMonth });
+                // }
             }
 
             console.log(occurrences);
@@ -1642,6 +1131,66 @@ export function RecurrencePattern({ recurrence, month }) {
         }
     };
 
+    
+//////////////////////////
+    function getNthDay(nth,d,month){
+        
+        const lastDayOfMonth= new Date(month.getFullYear(), month.getMonth()+1, 0)
+        const days= [...Array(lastDayOfMonth.getDate())].map((i,index)=>new Date(month.getFullYear(), month.getMonth(), index+1))           //generate an array of date objects for all days in month
+        
+
+        if(!isNaN(d)){                                                                                                                      //get day d of month
+            return days[d-1]                                                                                                                //returns undefined if exceeeds month; does not break app 
+        }
+
+        if(d==='day'){
+            return(days[getN(days)])
+        }
+        if (d==='weekday') {
+            const weekDays =days.filter(day=>day.getDay()>0 && day.getDay()<6)
+            return(weekDays[getN(weekDays)])
+        }
+        if(d==='weekend day'){
+            const weekEndDays=days.filter(day=>day.getDay()<1 || day.getDay()>5)
+            return(weekEndDays[getN(weekEndDays)])
+        }
+        
+        const dayNames=['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        const xDays=days.filter(day=>day.getDay()===dayNames.indexOf(d))
+        return xDays[getN(xDays)]
+
+        function getN(array){                                                                                                               //didn't want to write "nth<0?[array.length-1]:nth" 5 times
+            if(nth<0) return (array.length-1)
+            else return nth
+        }
+    }
+
+    function isBeforeEnd(date,end,start,m){
+        if(!end) return true
+
+        let lastOccurence
+        if(isNaN(end)) lastOccurence=new Date(end)                                                                                          //if it's a date
+            else {                                                                                                                          //if it's a limit
+            lastOccurence=getNthDay(nth,d,new Date(start.getFullYear(),start.getMonth()+end,1))
+            if(m) lastOccurence=getNthDay(nth,d,new Date(start.getFullYear(),start.getMonth()+(m*(end-1)),1))                               //if it's a limit and every n months
+        }
+
+        return (date <=lastOccurence)
+    }
+
+    function everyNmonths(m,start,next){                                                                                                    //check if this is n months from start
+        if(!m) return true
+
+        let iterateMonth=start.getMonth()
+        while(iterateMonth<next.getMonth()){
+            iterateMonth+=m
+        }
+        return iterateMonth===next.getMonth()
+    }
+
+/////////////////////////////////
+
+
     function getDays(date) {
         date.setDate(1);
 
@@ -1652,7 +1201,7 @@ export function RecurrencePattern({ recurrence, month }) {
 
         return { 
             first: new Date(date.getFullYear(), date.getMonth() - 1, ( prevLastDay - firstDayIndex + 1 ) ),
-            last:new Date(date.getFullYear(), date.getMonth() + 1, nextDays)
+            last: new Date(date.getFullYear(), date.getMonth() + 1, nextDays)
         };
     }
 

@@ -18,6 +18,7 @@ export async function UploadFile(param) {
         file, name, data, library, path
     } = param;
 
+    // PROD
     if (App.isProd()) {
         // Get new request digest
         const requestDigest = await GetRequestDigest();
@@ -68,11 +69,15 @@ export async function UploadFile(param) {
         }
 
         return itemToReturn;
-    } else if (App.isDev()) {
+    }
+    
+    // DEV
+    if (App.isDev()) {
         let fakeFile = {
             File: {
-                Name: file.name,
+                Name: data.FileLeafRef || file.name,
                 Length: 0,
+                Text: await file?.text() || 'Not a plain text file.'
             },
             Name: file.name,
             OData__dlc_DocIdUrl: {
@@ -86,6 +91,7 @@ export async function UploadFile(param) {
         };
 
         const newItem = await CreateItem({
+            type: 'file',
             list: library,
             data: upload
         });

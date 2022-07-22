@@ -24,6 +24,8 @@ export function TableToolbar(param) {
         advancedSearch,
         action,
         heading,
+        headingSize,
+        headingWeight,
         list,
         options,
         parent,
@@ -123,8 +125,8 @@ export function TableToolbar(param) {
             }
 
             #id .text {
-                font-size: 20px;
-                font-weight: 700;
+                font-size: ${headingSize || '20px'};
+                font-weight: ${headingWeight || '700'};
             }
 
             #id .btn {

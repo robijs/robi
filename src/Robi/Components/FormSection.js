@@ -2,6 +2,7 @@ import { Style } from '../Actions/Style.js'
 import { Alert } from './Alert.js'
 import { ChoiceField } from './ChoiceField.js'
 import { Container } from './Container.js'
+import { DateField } from './DateField.js'
 import { LinksField } from './LinksField.js'
 import { MultiChoiceField } from './MultiChoiceField.js'
 import { MultiLineTextField } from './MultiLineTextField.js'
@@ -19,7 +20,9 @@ import { Store } from '../Core/Store.js'
 export function FormSection(param) {
     const { section, listInfo, item, parent: parentConatiner, heading } = param;
     const { name, path, info, rows } = section;
-    const { list, fields } = listInfo;
+    const { list, fields, primaryKey } = listInfo;
+
+    // console.log(item);
 
     const parent = Container({
         display: 'block',
@@ -64,7 +67,7 @@ export function FormSection(param) {
 
     // TODO: Pass form name in, this is supposed to be generic
     const formType = item ? 'Edit' : 'New';
-    const formData = item ? Store.getData(`edit measure ${item.Id}`) : Store.getData('new measure');
+    const formData = item ? Store.getData(`edit measure ${item[primaryKey]}`) : Store.getData('new measure');
 
     // console.log('Form Data:', formData);
 
@@ -112,15 +115,21 @@ export function FormSection(param) {
 
         fieldRow.add();
 
+        /* DEV: Experimental */
         Style({
             name: `form-row-${fieldRow.get().id}`,
             style: /*css*/ `
-                #${fieldRow.get().id} .form-field {
+                #${fieldRow.get().id} .form-field:not(.disregard-row-style)  {
                     flex: 1;
+                    justify-content: space-between;
                 }
 
-                #${fieldRow.get().id} .form-field:not(:last-child) {
+                #${fieldRow.get().id} .form-field:not(:last-child):not(.disregard-row-style) {
                     margin-right: 20px;
+                }
+
+                #${fieldRow.get().id} .input-group:not(.disregard-row-style) {
+                    flex-wrap: unset;
                 }
             `
         });
@@ -129,16 +138,30 @@ export function FormSection(param) {
             const { 
                 name,
                 label,
+                minHeight,
                 style,
                 onKeyup,
                 onKeydown,
                 onPaste,
+                render,
                 component: customComponent,
                 description: customDescription
             } = field;
             const parent = fieldRow;
             let fieldMargin = '0px';
             let component = {};
+
+            if (render) {
+                render({
+                    formType,
+                    item,
+                    parent,
+                    formData,
+                    fields
+                });
+
+                return;
+            }
 
             // Render passed in component
             if (customComponent) {
@@ -162,7 +185,7 @@ export function FormSection(param) {
                     value: formData.Files,
                     list,
                     itemId: item?.Id,
-                    path: item ? `${list}Files/${item.Id}` : undefined,
+                    path: item ? `${list}Files/${item[primaryKey]}` : undefined,
                     parent,
                     fieldMargin,
                     onChange(files) {
@@ -174,7 +197,14 @@ export function FormSection(param) {
             
             // Render field by type
             else {
-                const { display, description: defaultDescription, type, choices, fillIn, action } = fields?.find(item => item.name === name);
+                const {
+                    display,
+                    description: defaultDescription,
+                    type,
+                    choices,
+                    fillIn,
+                    action,
+                } = fields?.find(item => item.name === name);
                 // const description = customDescription || defaultDescription;
                 
                 let description;
@@ -318,6 +348,7 @@ export function FormSection(param) {
                             component = MultiLineTextField({
                                 label: label || display || name,
                                 value: formData[name],
+                                minHeight,
                                 description,
                                 parent,
                                 fieldMargin,
@@ -383,13 +414,30 @@ export function FormSection(param) {
                             }
                         });
                         break;
+                    case 'date':
+                        component = DateField({
+                            label: label || display || name,
+                            description,
+                            choices,
+                            fillIn,
+                            value: formData[name],
+                            parent,
+                            fieldMargin,
+                            onChange(event) {
+                                formData[name] = {
+                                    results: component.value()
+                                };
+                            }
+                        });
+                        break;
                     default:
-                        console.log('missing component for field type: ', type);
+                        console.log('Missing component for field type: ', type);
                         return;
                 }
             }
 
             // Add component to DOM
+            // FIXME: Remove when Table.shouldAdd and Table.onAdd implemented
             component.add();
 
             // Apply passed in styles

@@ -32,10 +32,10 @@ const App = {
 
         // Set site
         if (settings.mode === 'prod') {
-            console.log('Site:', location.href.split(library || '/App/')[0]);
+            console.log('Site:', location.href.split(`/${library}/` || '/App/')[0]);
             console.log('App library:', settings.library);
 
-            settings.site = location.href.split(library || '/App/')[0];
+            settings.site = location.href.split(`/${library}/` || '/App/')[0];
         } else {
             settings.site = 'http://localhost:8080/dev/app.html';
         }

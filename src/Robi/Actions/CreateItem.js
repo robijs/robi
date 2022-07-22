@@ -29,6 +29,7 @@ export async function CreateItem(param) {
         wait
     } = param;
 
+    // PROD
     if (App.isProd()) {
         const requestDigest = await GetRequestDigest();
 
@@ -69,21 +70,28 @@ export async function CreateItem(param) {
         }
 
         return refetechedNewItem[0];
-    } else if (App.isDev()) {
+    }
+    
+    // DEV
+    if (App.isDev()) {
         const body = data;
 
-        // DataTables and other components requied null fields.
+        // DataTables and other components require null fields.
         // SharePoint returns them by default, but lists created with json-server don't
         // have schemas.
         // Append fields from lists.js with value null.
         const lists = App.lists();
-        const { fields } = Lists().concat(lists).find(item => item.list === (schema || list ));
+        const listInfo = Lists().concat(lists).find(item => item.list === (schema || list ));
+        
+        if (listInfo) {
+            const { fields } = listInfo;
 
-        for (let field in fields) {
-            const { name } = fields[field];
-
-            if (name in body === false) {
-                body[name] = null;
+            for (let field in fields) {
+                const { name } = fields[field];
+    
+                if (name in body === false) {
+                    body[name] = null
+                }
             }
         }
 

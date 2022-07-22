@@ -21,6 +21,7 @@ import { AppContainer } from './Components/AppContainer.js'
 import { AttachFilesButton } from './Components/AttachFilesButton.js'
 import { AttachFilesField } from './Components/AttachFilesField.js'
 import { Attachments } from './Components/Attachments.js'
+import { Banner } from './Components/Banner.js'
 import { BannerMenu } from './Components/BannerMenu.js'
 import { BootstrapTextarea } from './Components/BootstrapTextarea.js'
 import { BuildInfo } from './Components/BuildInfo.js'
@@ -41,11 +42,10 @@ import { DateField } from './Components/DateField.js'
 import { DevConsole } from './Components/DevConsole.js'
 import { DeveloperLinks } from './Components/DeveloperLinks.js'
 import { Dialog } from './Components/Dialog.js'
-import { DropDownField } from './Components/DropDownField.js'
-import { DropDownMenu } from './Components/DropDownMenu.js'
 import { DropZone } from './Components/DropZone.js'
 import { EditForm } from './Components/EditForm.js'
 import { EditQuestion } from './Components/EditQuestion.js'
+import { Editor } from './Components/Editor.js'
 import { ErrorForm } from './Components/ErrorForm.js'
 import { Errors } from './Components/Errors.js'
 import { Feedback } from './Components/Feedback.js'
@@ -137,6 +137,7 @@ export {
     AttachFilesButton,
     AttachFilesField,
     Attachments,
+    Banner,
     BannerMenu,
     BootstrapTextarea,
     BuildInfo,
@@ -157,11 +158,10 @@ export {
     DevConsole,
     DeveloperLinks,
     Dialog,
-    DropDownField,
-    DropDownMenu,
     DropZone,
     EditForm,
     EditQuestion,
+    Editor,
     ErrorForm,
     Errors,
     Feedback,

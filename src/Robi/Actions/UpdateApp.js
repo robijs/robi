@@ -277,7 +277,7 @@ export function UpdateApp() {
                         // Add progress count for lists to create
                         // TODO: Refactor to MAP => REDUCE
                         checkedCreate.forEach(item => {
-                            const { fields } = item;
+                            const { fields, options } = item;
 
                             // List + 1 for install
                             progressCount = progressCount + 1;

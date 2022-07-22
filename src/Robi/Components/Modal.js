@@ -1,5 +1,6 @@
 import { Component } from '../Actions/Component.js'
-import { App } from '../Core/App.js';
+import { App } from '../Core/App.js'
+import { Store } from '../Core/Store.js'
 
 // @START-File
 /**
@@ -27,7 +28,9 @@ export function Modal(param) {
         contentPadding,
         parent,
         disableBackdropClose,
+        noBackdrop,
         position,
+        onClose,
         shadow 
     } = param;
     
@@ -35,7 +38,7 @@ export function Modal(param) {
         html: /*html*/ `
             <!-- Modal -->
             <!-- <div class='modal${fade ? ' fade' : ''}' tabindex='-1' role='dialog' aria-hidden='true'> -->
-            <div class='modal fade ${ classes?.length ? classes.join(' ') : ''}' tabindex='-1' role='dialog' aria-hidden='true' ${disableBackdropClose ? 'data-keyboard="false" data-backdrop="static"' : ''}>
+            <div class='modal fade ${ classes?.length ? classes.join(' ') : ''}' tabindex='-1' role='dialog' aria-hidden='true' ${disableBackdropClose ? 'data-keyboard="false" data-backdrop="static"' : ''} ${noBackdrop ? 'data-backdrop="false"' : ''}>
                 <!-- <div class='modal-dialog modal-dialog-zoom ${scrollable !== false ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'> -->
                 <div class='modal-dialog modal-dialog-zoom ${scrollable ? 'modal-dialog-scrollable' : ''} modal-lg${centered === true ? ' modal-dialog-centered' : ''}' role='document'>
                     <div class='modal-content'>
@@ -270,11 +273,11 @@ export function Modal(param) {
                 !title ?
                 /*css*/ `
                     #id .modal-body::-webkit-scrollbar {
-                        width: 22px;
+                        width: 60px;
                     }
 
                     #id .modal-body::-webkit-scrollbar-thumb {
-                        border: 8px solid transparent;
+                        border: 27px solid transparent;
                         border-radius: 60px;
                     }
 
@@ -284,7 +287,7 @@ export function Modal(param) {
                 ` : ''
             }
         `,
-        parent,
+        parent: parent || Store.get('maincontainer'),
         position,
         events: [
             {
@@ -305,14 +308,48 @@ export function Modal(param) {
             if (addContent) {
                 addContent(component.getModalBody());
             }
+            // Draggable
+            // $('.modal-header').on('mousedown', function(event) {
+            //     const draggable = $(this);
+            //     const extra = contentPadding ? parseInt(contentPadding.replace('px', '')) : 0;
+            //     const x = event.pageX - ( draggable.offset().left - extra);
+            //     const y = event.pageY - ( draggable.offset().top - extra);
 
-            // Close listener
+            //     $('body').on('mousemove.draggable', function(event) {
+            //         draggable.closest('.modal-content').offset({
+            //             left: event.pageX - x,
+            //             top: event.pageY - y
+            //         });
+            //     });
+
+            //     $('body').one('mouseup', function() {
+            //         $('body').off('mousemove.draggable');
+            //     });
+
+            //     $('body').one('mouseleave', function() {
+            //         $('body').off('mousemove.draggable');
+            //     });
+
+            //     draggable.closest('.modal').one('bs.modal.hide', function() {
+            //         $('body').off('mousemove.draggable');
+            //     });
+            // });
+
+            /** Close listener */
             $(component.get()).on('hidden.bs.modal', function (e) {
+
+                // Remove from store
+                Store.removeModal(component.id());
+
+                if (onClose) {
+                    onClose(e);
+                }
+
                 component.remove();
             });
 
             if (title) {
-                // Scroll listener
+                /** Scroll listener */
                 component.find('.modal-body').addEventListener('scroll', event => {
                     if (event.target.scrollTop > 0) {
                         event.target.style.borderTop = `solid 1px ${App.get('sidebarBorderColor')}`;
@@ -321,6 +358,9 @@ export function Modal(param) {
                     }
                 });
             }
+
+            // Add to store
+            Store.addModal(component);
         }
     });
 

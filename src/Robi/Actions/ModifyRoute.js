@@ -358,7 +358,8 @@ export async function ModifyRoute({ route }) {
                                 });
                     
                                 const value = await request.text();
-                                const updated = value;
+                                
+                                let updated = value;
 
                                 // Rename function
                                 if (path) {

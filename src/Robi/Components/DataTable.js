@@ -10,8 +10,11 @@ import { App } from '../Core/App.js';
 export function DataTable(param) {
     const {
         buttonColor,
+        buttonTextSize,
+        buttonIconSize,
         headers,
         headerFilter,
+        headersNoWrap,
         columns,
         buttons,
         cursor,
@@ -30,6 +33,7 @@ export function DataTable(param) {
         onSearch,
         onDraw,
         fontSize,
+        mlotMaxWidth,
         nowrap,
         onSelect,
         onDeselect,
@@ -157,7 +161,7 @@ export function DataTable(param) {
 
             /** Buttons */
             #id_wrapper .btn {
-                font-size: 13px;
+                font-size: ${buttonTextSize || '13px'};
                 border-radius: 10px;
                 margin-right: 10px;
             }
@@ -188,7 +192,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .datatable-toolbar .plus-icon .icon {
-                font-size: 19px;
+                font-size: ${buttonIconSize || '19px'};
                 margin-right: 6px;
                 fill: var(--primary);;
             }
@@ -201,7 +205,7 @@ export function DataTable(param) {
 
             /** Delete Item Button */
             #id_wrapper .datatable-toolbar .delete-item {
-                font-size: 19px;
+                font-size: ${buttonIconSize || '19px'};
                 background: ${buttonColor || 'var(--button-background)'} !important;
             }
 
@@ -270,6 +274,7 @@ export function DataTable(param) {
                 flex-direction: column;
                 box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px -2px;
                 border: none;
+                background-color: var(--secondary);
             }
 
             #id_wrapper .buttons-collection {
@@ -284,7 +289,7 @@ export function DataTable(param) {
             }
 
             #id_wrapper .buttons-collection span .icon {
-                font-size: 19px;
+                font-size: ${buttonIconSize || '19px'};
                 fill: var(--primary);
             }
 
@@ -376,9 +381,14 @@ export function DataTable(param) {
             #id_wrapper .table-not-bordered thead td,
             #id_wrapper .table-not-bordered thead th {
                 border-top: none;
+                ${headersNoWrap ? `white-space: nowrap;` : ''};
             }
             
             /** Headers */
+            #id_wrapper thead th {
+                user-select: none;
+            }
+
             #id_wrapper .table-border thead th {
                 border-bottom: solid 1px rgb(${App.get('primaryColorRGB')}, .3);
                 background: rgb(${App.get('primaryColorRGB')}, .2);
@@ -441,12 +451,14 @@ export function DataTable(param) {
             }
 
             /** Select Checkbox */
-            #id_wrapper tbody td.select-checkbox {
+            /* #id_wrapper tbody td.select-checkbox {
                 vertical-align: middle;
-            }
+            } */
 
             #id_wrapper tbody td.select-checkbox:before, 
             #id_wrapper tbody th.select-checkbox:before {
+                transform: translateY(1.5px); /* DEV: */
+                
                 content: ' ';
                 margin: 0 auto;
                 border: solid 2px ${App.get('prefersColorScheme') === 'dark' ? '#444' : 'lightgray' };
@@ -460,6 +472,8 @@ export function DataTable(param) {
 
             #id_wrapper tbody td.select-checkbox:after, 
             #id_wrapper tbody th.select-checkbox:after {
+                transform: translateY(1.5px); /* DEV: */
+
                 margin-top: -18px;
                 top: auto;
                 text-shadow: none;
@@ -526,7 +540,7 @@ export function DataTable(param) {
 
             /* Overflow MLOT field */
             #id_wrapper tbody td .dt-mlot {
-                max-width: 200px;
+                max-width: ${mlotMaxWidth || '200px'};
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
@@ -557,7 +571,7 @@ export function DataTable(param) {
 
             /** Dropdown menu */
             #id_wrapper .dropdown-menu {
-                background: var(--input-background);
+                background: var(--inputBackground);
                 box-shadow: var(--box-shadow);
             }
 

@@ -568,7 +568,8 @@ export function Palette(param) {
                     break;
                 case 'Table':
                     component = await Table({
-                        list: 'AllTypes',
+                        list: 'Measures',
+                        view: 'Measures',
                         parent: this
                     });
                     break;
@@ -594,7 +595,9 @@ export function Palette(param) {
         const req = await fetch('http://127.0.0.1:2035/src/Routes/Robi/Components');
         const data = await req.json();
 
-        // console.log(data);
+        console.log(route);
+
+        return;
 
         component.append(group({
             title: 'Custom',

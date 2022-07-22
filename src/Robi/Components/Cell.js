@@ -43,13 +43,10 @@ export function Cell(render, options = {}) {
             }
 
             /* NOTE: Testing */
-            /* FIXME: Change name to 'background' */
             #id.robi-cell.bordered {
                 padding: 30px;
-                /* border: solid 1px var(--border-color);
-                /* box-shadow: 4px 4px 0px 0px var(--border-color); */
                 background: var(--background);
-                border-radius: 30px;
+                border-radius: 10px;
             }
         `,
         parent: parent || Store.get('viewcontainer'),

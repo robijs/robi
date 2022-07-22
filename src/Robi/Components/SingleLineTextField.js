@@ -13,7 +13,9 @@ export function SingleLineTextField(param) {
         borderRadius,
         classes,
         description,
+        descriptionNoWrap,
         fieldMargin,
+        fieldWidth,
         flex,
         fontSize,
         label,
@@ -61,6 +63,7 @@ export function SingleLineTextField(param) {
                 position: relative;
                 margin: ${fieldMargin || '0px 0px 20px 0px'};
                 max-width: ${maxWidth || 'unset'};
+                ${fieldWidth ? `width: ${fieldWidth};` : ''}
                 ${flex ? `flex: ${flex};` : ''}
                 ${padding ? `padding: ${padding};` : ''}
                 ${borderRadius ? `border-radius: ${borderRadius};` : ''}
@@ -85,6 +88,7 @@ export function SingleLineTextField(param) {
             #id .form-field-description {
                 font-size: 14px;
                 margin-bottom:  0.5rem;
+                ${descriptionNoWrap ? `white-space: nowrap;` : ''}
             }
 
             #id .slot-field {
@@ -95,6 +99,10 @@ export function SingleLineTextField(param) {
                 padding: 5px 10px;
                 border-radius: 4px;
                 transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            }
+
+            #id .form-control {
+                width: ${width || 'unset'};
             }
 
             #id .slot-field.readonly {

@@ -52,7 +52,6 @@ export async function SiteUsageContainer({ parent }) {
     const middleContainer = Container({
         background: 'var(--background)',
         radius: '10px',
-        radius: '10px',
         transition: 'background-color 300ms ease',
         margin: '10px 0px',
         parent: chartCard

@@ -34,7 +34,7 @@ export function Button(param) {
     const component = Component({
         html: /*html*/ `
             <button type="button" class="btn btn-${type} ${classes?.join(' ')}" ${disabled ? 'disabled' : ''} ${style ? `style='${style}'` : ''}>
-                ${value ? value : ''}
+                ${value || ''}
                 ${
                     icon ? /*html*/ `
                         <svg class='icon' style='font-size: ${size}; fill: ${fill || 'var(--color)'};'>

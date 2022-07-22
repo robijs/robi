@@ -4,7 +4,7 @@
  * @param {*} param
  * @returns 
  */
-export function NewFormTemplate({ list, fields }) {
+ export function NewFormTemplate({ list, fields }) {
     if (!list && !fields) {
         return;
     }
@@ -14,7 +14,7 @@ export function NewFormTemplate({ list, fields }) {
     const fieldsToCreate = fields.filter(field => field.name !== 'Id');
 
     let template = [
-        `// This file can be edited programmatically.`,
+        `// This file may be edited programmatically.`,
         `// If you know the API, feel free to make changes by hand.`,
         `// Just be sure to put @START, @END, and @[Spacer Name] sigils in the right places.`,
         `// Otherwise, changes made from CLI and GUI tools won't work properly.`,
@@ -83,10 +83,11 @@ export function NewFormTemplate({ list, fields }) {
         switch (type) {
             case 'slot':
                 component = [
-                    `        const { name, display, validate, value } = ${name}_props;`,
+                    `        const { name, display, description, validate, value } = ${name}_props;`,
                     ``,
                     `        ${name}_field = SingleLineTextField({`,
                     `            label: display || name,`,
+                    `            description,`,
                     `            value,`,
                     `            fieldMargin: '0px',`,
                     `            parent,`,
@@ -112,10 +113,11 @@ export function NewFormTemplate({ list, fields }) {
                 break;
             case 'mlot':
                 component = [
-                    `        const { name, display, validate, value } = ${name}_props;`,
+                    `        const { name, display, description, validate, value } = ${name}_props;`,
                     ``,
                     `        ${name}_field = MultiLineTextField({`,
                     `            label: display || name,`,
+                    `            description,`,
                     `            value,`,
                     `            fieldMargin: '0px',`,
                     `            parent,`,
@@ -141,10 +143,11 @@ export function NewFormTemplate({ list, fields }) {
                 break;
             case 'number':
                 component = [
-                    `        const { name, display, validate, value } = ${name}_props;`,
+                    `        const { name, display, description, validate, value } = ${name}_props;`,
                     ``,
                     `        ${name}_field = NumberField({`,
                     `            label: display || name,`,
+                    `            description,`,
                     `            value,`,
                     `            fieldMargin: '0px',`,
                     `            parent,`,
@@ -170,10 +173,11 @@ export function NewFormTemplate({ list, fields }) {
                 break;
             case 'choice':
                 component = [
-                    `        const { name, display, value, choices, validate } = ${name}_props;`,
+                    `        const { name, display, description, value, choices, validate } = ${name}_props;`,
                     ``,
                     `        ${name}_field = ChoiceField({`,
                     `            label: display || name,`,
+                    `            description,`,
                     `            fieldMargin: '0px',`,
                     `            value,`,
                     `            options: choices.map(choice => {`,
@@ -204,10 +208,11 @@ export function NewFormTemplate({ list, fields }) {
                 break;
             case 'multichoice':
                 component = [
-                    `        const { name, display, choices, fillIn, validate, value } = ${name}_props;`,
+                    `        const { name, display, description, choices, fillIn, validate, value } = ${name}_props;`,
                     ``,
                     `        ${name}_field = MultiChoiceField({`,
                     `            label: display || name,`,
+                    `            description,`,
                     `            value,`,
                     `            fieldMargin: '0px',`,
                     `            choices,`,
@@ -235,10 +240,11 @@ export function NewFormTemplate({ list, fields }) {
                 break;
             case 'date':
                 component = [
-                    `        const { name, display, validate, value } = ${name}_props;`,
+                    `        const { name, display, description, validate, value } = ${name}_props;`,
                     ``,
                     `        ${name}_field = DateField({`,
                     `            label: display || name,`,
+                    `            description,`,
                     `            value,`,
                     `            margin: '0px',`,
                     `            parent,`,
@@ -314,7 +320,7 @@ export function NewFormTemplate({ list, fields }) {
                     `                    isValid = false;`,
                     `                    ${name}_field.isValid(false);`,
                     `                }`,
-                    `            } else if (value) {`,
+                    `            } else if (${name}_field.value()) {`,
                     `                data.${name} = ${name}_field.value();`,
                     `            }`,
                 ].join('\n');
@@ -332,7 +338,7 @@ export function NewFormTemplate({ list, fields }) {
                     `                    isValid = false;`,
                     `                    ${name}_field.isValid(false);`,
                     `                }`,
-                    `            } else if (value) {`,
+                    `            } else if (${name}_field.value()) {`,
                     `                data.${name} = {`,
                     `                    results: ${name}_field.value()`,
                     `                }`,
@@ -350,7 +356,7 @@ export function NewFormTemplate({ list, fields }) {
                     `                    isValid = false;`,
                     `                    ${name}_field.isValid(false);`,
                     `                }`,
-                    `            } else if (value) {`,
+                    `            } else if (${name}_field.value()) {`,
                     `                data.${name} = parseInt(${name}_field.value());`,
                     `            }`,
                 ].join('\n');

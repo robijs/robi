@@ -9,12 +9,14 @@ const store = {
     workers: [],
     components: {},
     rows: {},
+    modals: [],
     models: {},
     lists: {},
     user: {},
     routes: []
 };
 
+// TODO: add Store.modals and getter/setter methods
 const Store = {
     add(param) {
         const {
@@ -83,6 +85,12 @@ const Store = {
             return undefined;
         }
     },
+    getCell({ rowId, id }) {
+        return store.rows[rowId][id];
+    },
+    getModals() {
+        return store.modals;
+    },
     getNextId() {
         return `component-${store.elementIdCounter++}`; 
     },
@@ -92,25 +100,21 @@ const Store = {
     getNextCell() {
         return `cell-${store.cellIdCounter++}`;
     },
+    getRow(id) {
+        return store.rows[id];
+    },
+    getRows() {
+        return Object.values(store.rows);
+    },
     remove(name) {
         store.components[name].component.remove();
         
         delete store.components[name];
     },
-    // register(actionData) {
-    //     store.data.push(actionData);
-    // },
-    // deregister(actionData) {
-    //     const index = store.data.indexOf(actionData);
-
-    //     store.data.splice(index, 1);
-    // },
-    // recall() {
-    //     return store.data;
-    // },
     empty() {
         store.components = {};
         store.rows = {};
+        store.modals = [];
         // TODO: Do we want to persist data when routing?
         // store.data = [];
     },
@@ -155,23 +159,28 @@ const Store = {
     addCell({ rowId, id, component }) {
         store.rows[rowId][id] = component;
     },
+    addModal(component) {
+        store.modals.push(component);
+    },
     removeCell({ rowId, id }) {
         delete store.rows[rowId][id];
+    },
+    // TODO: Remove modal by passing in compononet instead of id string
+    removeModal(param) {
+        if (typeof param === 'string') {
+            const modal = store.modals.find(modal => modal.id() === param);
+            const index = store.modals.indexOf(modal);
+
+            store.modals.splice(index, 1);
+
+            return;
+        }
     },
     removeRow({ id }) {
         delete store.rows[id];
     },
     resetRows() {
         store.rows = {};
-    },
-    getRow(id) {
-        return store.rows[id];
-    },
-    getCell({ rowId, id }) {
-        return store.rows[rowId][id];
-    },
-    getRows() {
-        return Object.values(store.rows);
     }
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "robi",
+  "name": "robijs",
   "version": "0.1.0",
   "description": "Client-side SharePoint application framework",
   "keywords": [
@@ -41,11 +41,13 @@
   "scripts": {
     "start": "concurrently \"npx json-server --watch ./json-server/db.json --id Id\" \"node ./servers/live-server.cjs --cors --watch=./src --open=./dev/app.html --quiet\" \"node ./servers/post.js\" \"npm run build-dev\"",
     "prod": "concurrently \"npx json-server --watch ./json-server/db.json --id Id\" \"node ./servers/live-server.cjs --cors --watch=./src --ignore=./src/Lists,./src/app.js,./src/Robi/Actions,./src/Robi/Components,./src/Robi/Core,./src/Robi/Models --open=./dev/app.html --quiet\" \"node ./servers/post.js\" \"npm run watch-robi\"",
+    "app": "concurrently \"npx json-server --watch ./json-server/db.json --id Id\" \"node ./servers/live-server.cjs --cors --watch=./src --ignore=./src/app.js,./src/Robi/Actions,./src/Robi/Components,./src/Robi/Core,./src/Robi/Models --open=./dev/build.html --quiet\" \"node ./servers/post.js\"",
     "reset": "node ./scripts/reset.js",
     "build": "node ./scripts/build.js",
     "build-dev": "node ./scripts/build-dev.js",
     "build-sp": "node ./scripts/build-sp.js",
     "cleanup": "node ./scripts/cleanup.js",
+    "esbuild": "./node_modules/.bin/esbuild ./src/app.js --bundle --minify --outfile=./bundle/bundle.js",
     "mkc": "node ./scripts/create-component.js",
     "create-route": "node ./scripts/create-route.js",
     "watch-robi": "npm-watch build",
@@ -71,5 +73,11 @@
     "proxy-middleware": "^0.15.0",
     "send": "^0.17.2",
     "serve-index": "^1.9.1"
+  },
+  "dependencies": {
+    "esbuild": "^0.14.49",
+    "install": "^0.13.0",
+    "node-fetch": "^3.2.8",
+    "npm": "^8.14.0"
   }
 }

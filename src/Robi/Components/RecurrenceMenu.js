@@ -467,7 +467,7 @@ export function RecurrenceMenu(param) {
                                 'Friday',
                                 'Saturday'
                             ]
-                            .map(day => dayTemplate(day))
+                            .map((day,num) => dayTemplate(day,num))
                             .join('\n')
                         }
                     </div>
@@ -489,10 +489,10 @@ export function RecurrenceMenu(param) {
             }
 
             // TODO: select if value present
-            function dayTemplate(day) {
+            function dayTemplate(day,num) {
                 return /*html*/ `
                     <div class='custom-control custom-checkbox' style='width: 100px; height: 30px;'>
-                        <input type='checkbox' class='custom-control-input weeks-day' id='${day}' ${setOption(day)}>
+                        <input type='checkbox' class='custom-control-input weeks-day' id='${day}' daynum='${num}' ${setOption(day)}>
                         <label class='custom-control-label' for='${day}'>${day}</label>
                     </div>
                 `;
@@ -518,7 +518,7 @@ export function RecurrenceMenu(param) {
             // Set value.days
             component.findAll('.pattern-menu .weeks-day').forEach(checkbox => {
                 checkbox.addEventListener('change', event => {
-                    value.value.days = [...component.findAll(`.pattern-menu .weeks-day:checked`)].map(node => node.id);
+                    value.value.days = [...component.findAll(`.pattern-menu .weeks-day:checked`)].map(node => parseInt(node.getAttribute('daynum')));
                 });
             });
         },
@@ -559,9 +559,9 @@ export function RecurrenceMenu(param) {
                         <!-- Inputs -->
                         <div class='d-flex align-items-center radio-label' data-for='day'>
                             <div>Day</div>
-                            <input type='number' class='form-control ml-3 mr-3' id='day-value' style='width: 75px;' value=${setDay()}>
+                            <input type='number' class='form-control ml-3 mr-3' id='day-value' style='width: 75px;' min='1' value=${setDay()}>
                             <div>of every</div>
-                            <input type='number' class='form-control ml-3 mr-3' id='month-value' style='width: 75px;' value=${setMonth()}>
+                            <input type='number' class='form-control ml-3 mr-3' id='month-value' style='width: 75px;' min='1' value=${setMonth(value.value.option, 'Day n of every m month(s)')}>
                             <div>month(s)</div>
                         </div>
                     </div>
@@ -576,11 +576,11 @@ export function RecurrenceMenu(param) {
                         <div class='d-flex align-items-center radio-label' data-for='the'>
                             <div>The</div>
                             <select class='form-control ml-3' id='the-interval' style='width: fit-content;'>
-                                <option value='first' ${setI('first')}>first</option>
-                                <option value='second' ${setI('second')}>second</option>
-                                <option value='third' ${setI('third')}>third</option>
-                                <option value='fourth' ${setI('fourth')}>fourth</option>
-                                <option value='last' ${setI('last')}>last</option>
+                                <option value='0' ${setI('first')}>first</option>
+                                <option value='1' ${setI('second')}>second</option>
+                                <option value='2' ${setI('third')}>third</option>
+                                <option value='3' ${setI('fourth')}>fourth</option>
+                                <option value='-1' ${setI('last')}>last</option>
                             </select>
                             <select class='form-control ml-3 mr-3' id='the-day' style='width: fit-content;'>
                                 <option value='day' ${setD('day')}>day</option>
@@ -595,7 +595,7 @@ export function RecurrenceMenu(param) {
                                 <option value='Sunday' ${setD('Sunday')}>Sunday</option>
                             </select>
                             <div>of every</div>
-                            <input type='number' class='form-control ml-3 mr-3' id='the-month' style='width: 75px;' value=${setMonth()}>
+                            <input type='number' class='form-control ml-3 mr-3' id='the-month' style='width: 75px;' value=${setMonth(value.value.option, 'The i d of every m month(s)')}>
                             <div>month(s)</div>
                         </div>
                     </div>
@@ -604,8 +604,12 @@ export function RecurrenceMenu(param) {
 
             // Set default value
             if (isEmpty(value.value)) {
+                const pattern=value.pattern
                 value.value = {
-                    option: 'Day n of every m month(s)'
+                    option: 'Day n of every m month(s)',
+                    pattern,
+                    m: 1,
+                    n: 1
                 }
 
                 console.log(value);
@@ -623,11 +627,11 @@ export function RecurrenceMenu(param) {
             }
 
             function setDay() {
-                return value.value?.n || '';
+                return value.value?.n || 1;
             }
 
-            function setMonth() {
-                return value.value?.m || '';
+            function setMonth(pattern, option) {
+                return pattern === option ? value.value.m : 1;
             }
 
             function setI(option) {
@@ -650,26 +654,41 @@ export function RecurrenceMenu(param) {
                 radio.addEventListener('change', event => {
                     if (event.target.checked) {
                         const id = radio.id;
+                        const pattern=value.pattern
 
-                        // Set value.option to ''Day n of every m month(s)'
+                        // Set value.option to 'Day n of every m month(s)'
                         if (id === 'day') {
                             value.value = {
-                                option: 'Day n of every m month(s)'
+                                option: 'Day n of every m month(s)',
+                                pattern,
+                                n: 1,
+                                m: 1
                             }
 
+                            // Select defaults
+                            component.find('.pattern-menu #day-value').value = 1;
+                            component.find('.pattern-menu #month-value').value = 1;
+
                             // Empty fields
-                            component.find('.pattern-menu #the-interval').value = 'first';
+                            component.find('.pattern-menu #the-interval').value = 0;
                             component.find('.pattern-menu #the-day').value = 'day';
-                            component.find('.pattern-menu #the-month').value = new Date().getDate();
+                            component.find('.pattern-menu #the-month').value = 1;
                         }
 
                         // Set value.option to 'The i d of every m month(s)'
                         else if (id === 'the') {
                             value.value = {
                                 option: 'The i d of every m month(s)',
-                                i: 'first',
-                                d: 'day'
+                                pattern,
+                                i: 0,
+                                d: 'day',
+                                m: 1
                             }
+
+                            // Select defaults
+                            component.find('.pattern-menu #the-interval').value = 0;
+                            component.find('.pattern-menu #the-day').value = 'day';
+                            component.find('.pattern-menu #the-month').value = 1;
 
                             // Empty fields
                             component.find('.pattern-menu #day-value').value = '';
@@ -683,26 +702,35 @@ export function RecurrenceMenu(param) {
 
             // Set value.value.n
             component.find('.pattern-menu #day-value').addEventListener('change', event => {
-                if (event.target.value) {
-                    value.value.n = parseInt(event.target.value);
-                }
-
-                console.log(value);
+                setValue(event, 'n')
             });
 
             // Set value.value.m
             component.find('.pattern-menu #month-value').addEventListener('change', event => {
-                if (event.target.value) {
-                    value.value.m = parseInt(event.target.value);
-                }
-
-                console.log(value);
+                setValue(event, 'm')
             });
+
+            function setValue(event, prop) {
+                const num = parseInt(event.target.value);
+
+                if (num) {
+                    value.value[prop] = num > 0 ? num : 1;
+
+                    if (num < 0) {
+                        event.target.value = 1;
+                    }
+                } else {
+                    value.value[prop] = 1;
+                    event.target.value = 1;
+                }
+                
+                console.log(value);
+            }
 
             // Set value.value.i
             component.find('.pattern-menu #the-interval').addEventListener('change', event => {
                 if (event.target.value) {
-                    value.value.i = event.target.value;
+                    value.value.i = parseInt(event.target.value);
                 }
 
                 console.log(value);
@@ -740,6 +768,8 @@ export function RecurrenceMenu(param) {
          * }
          */
         Quarterly() {
+            
+            const quarters=['First','Second','Third','Fourth']
             /*
                 Calendar Year
                 -------------
@@ -761,7 +791,7 @@ export function RecurrenceMenu(param) {
                     <!-- Row 1 -->
                     <div class='d-flex align-items-center mb-2' style='height: 35px;'>
                         <div>Recur every</div>
-                        <select class='form-control ml-3 mr-3 type' id='' style='width: fit-content;'>
+                        <select class='form-control ml-3 mr-3 type' id='year-value' style='width: fit-content;'>
                             <option value='Calendar Year'>Calendar Year</option>
                             <option value='Fiscal Year'>Fiscal Year</option>
                         </select>
@@ -834,7 +864,7 @@ export function RecurrenceMenu(param) {
 
                 return /*html*/ `
                     <div class='custom-control custom-checkbox' style='height: 30px;'>
-                        <input type='checkbox' class='custom-control-input quarter' id='${quarter}' ${setQtr(quarter)}>
+                        <input type='checkbox' class='custom-control-input quarter' id='${quarter}' ${setQtr(quarter)} qtr='${quarters.indexOf(quarter)}'>
                         <label class='custom-control-label' for='${quarter}' style=''>
                             <span style='display: inline-block; width: 70px;'>${quarter}</span> 
                             <span class='text-muted' style=''>${label}</span>
@@ -842,6 +872,16 @@ export function RecurrenceMenu(param) {
                     </div>
                 `;
             }
+
+            component.find('.pattern-menu #year-value').addEventListener('change', event => {
+                //**Consider making checkmarks persistent when FY/CY is changed; currently, this erases all checks *//
+                value.value.type = event.target.value;
+
+                console.log(event)
+
+                console.log(value);
+            });
+
 
             function setQtr(qtr) {
                 return value.value?.quarters?.includes(qtr) ? 'checked' : '';
@@ -867,7 +907,7 @@ export function RecurrenceMenu(param) {
                 // Add qtr to value.value.quarters
                 component.findAll('.pattern-menu .quarter').forEach(checkbox => {
                     checkbox.addEventListener('change', event => {
-                        value.value.quarters = [...component.findAll(`.pattern-menu .quarter:checked`)].map(node => node.id);
+                        value.value.quarters = [...component.findAll(`.pattern-menu .quarter:checked`)].map(node => parseInt(node.getAttribute('qtr')));
 
                         console.log(value);
                     });
@@ -937,11 +977,11 @@ export function RecurrenceMenu(param) {
                         <div class='d-flex align-items-center radio-label' data-for='yearly-week'>
                             <div>On the:</div>
                             <select class='form-control ml-3' id='yearly-week-interval' style='width: fit-content;'>
-                                <option value='first'>first</option>
-                                <option value='second'>second</option>
-                                <option value='third'>third</option>
-                                <option value='fourth'>fourth</option>
-                                <option value='last'>last</option>
+                                <option value='0' ${setI('first')}>first</option>
+                                <option value='1' ${setI('second')}>second</option>
+                                <option value='2' ${setI('third')}>third</option>
+                                <option value='3' ${setI('fourth')}>fourth</option>
+                                <option value='-1' ${setI('last')}>last</option>
                             </select>
                             <select class='form-control ml-3 mr-3' id='yearly-week-day' style='width: fit-content;'>
                                 <option value='day'>day</option>
@@ -966,13 +1006,17 @@ export function RecurrenceMenu(param) {
 
             if (isEmpty(value.value)) {
                 // Set month and day
-                const month = months[new Date().getMonth()];
-                const day = new Date().getDate();
+                const d = new Date();
+                const month = d.getMonth();
+                const day = d.getDate();
+                const pattern=value.pattern
 
-                value.value = {
+                value.value = {                                                                     //these should use Object.assign to mantain year interval and pattern
                     option: 'On m d',
-                    month,
-                    day
+                    pattern: pattern,
+                    y: 1,
+                    m: month,
+                    d: day
                 }
 
                 component.find('.pattern-menu #yearly-day-month').value = month;
@@ -982,10 +1026,10 @@ export function RecurrenceMenu(param) {
             }
 
             function monthTemplate(month) {
-                let selected = value.value?.m === month || month === months[new Date().getMonth()] ? 'selected' : '';
+                let selected = value.value?.m === month || month === new Date().getMonth() ? 'selected' : '';
 
                 return /*html*/ `
-                    <option value='${month}' ${selected}>${month}</option>
+                    <option value='${months.indexOf(month)}' ${selected}>${month}</option>
                 `;
             }
 
@@ -998,7 +1042,15 @@ export function RecurrenceMenu(param) {
             }
 
             function setYears() {
-                return value.value?.years || 1;
+                return value.value?.y || 1;
+            }
+
+            function setI(option) {                                                                                         //should be placed outside of this closure
+                return value.value?.i === option ? 'selected' : ''
+            }
+
+            function setMonth(option) {                                                                                         //should be placed outside of this closure
+                return value.value?.m === option ? value.value.m : 1
             }
 
             // Set which option is checked
@@ -1024,36 +1076,45 @@ export function RecurrenceMenu(param) {
                 radio.addEventListener('change', event => {
                     if (event.target.checked) {
                         const id = radio.id;
-                        const month = months[new Date().getMonth()];
-                        const day = new Date().getDate();
+                        const m = new Date().getMonth();
+                        const d = new Date().getDate();
+                        const y=value.value.y
+                        const pattern=value.pattern
 
                         // Set value.option to 'On m d'
                         if (id === 'yearly-day') {
+                            
                             value.value = {
                                 option: 'On m d',
-                                month,
-                                day
+                                pattern,
+                                m,
+                                d,
+                                y
                             }
 
                             // Empty fields
-                            component.find('.pattern-menu #yearly-week-interval').value = 'first';
+                            component.find('.pattern-menu #yearly-week-interval').value = 0;
                             component.find('.pattern-menu #yearly-week-day').value = 'day';
-                            component.find('.pattern-menu #yearly-week-month').value = month;
+                            component.find('.pattern-menu #yearly-week-month').value = m;
                         }
 
                         // Set value.option to 'On the i d of m'
                         else if (id === 'yearly-week') {
                             value.value = {
                                 option: 'On the i d of m',
-                                i: 'first',
+                                pattern,
+                                i: 0,
                                 d: 'day',
-                                m: month
+                                m,
+                                y
                             }
 
                             // Empty fields
-                            component.find('.pattern-menu #yearly-day-month').value = month;
-                            component.find('.pattern-menu #yearly-date').value = day;
+                            component.find('.pattern-menu #yearly-day-month').value = m;
+                            component.find('.pattern-menu #yearly-date').value = d;
+                            // component.find('.pattern-menu #yearly-week-interval').value=i;
                         }
+
 
                         console.log(value);
                     }
@@ -1062,21 +1123,23 @@ export function RecurrenceMenu(param) {
 
             // Set value.value.years
             component.find('.pattern-menu #year-value').addEventListener('change', event => {
-                value.value.years = parseInt(event.target.value);
+                value.value.y = parseInt(event.target.value);
+
+                console.log(event)
 
                 console.log(value);
             });
 
             // Set value.value.m #1
             component.find('.pattern-menu #yearly-day-month').addEventListener('change', event => {
-                value.value.m = event.target.value;
+                value.value.m = parseInt(event.target.value);
 
                 console.log(value);
             });
 
             // Set value.value.m #2
             component.find('.pattern-menu #yearly-week-month').addEventListener('change', event => {
-                value.value.m = event.target.value;
+                value.value.m = parseInt(event.target.value);
 
                 console.log(value);
             });
@@ -1156,7 +1219,7 @@ export function RecurrenceMenu(param) {
                 return /*html*/ `
                     <div class='month-container d-flex align-items-center mb-2 justify-content-between mr-3' style='width: 150px;'>
                         <div class='custom-control custom-checkbox' style=''>
-                            <input type='checkbox' class='custom-control-input month' id='${month}' ${m ? 'checked' : ''}>
+                            <input type='checkbox' class='custom-control-input month' month='${months.indexOf(month)}' id='${month}' ${m ? 'checked' : ''}>
                             <label class='custom-control-label' for='${month}'>${month}</label>
                         </div>
                         <select class='day radio-label form-control ml-3' style='width: fit-content;' data-for='${month}'>
@@ -1177,16 +1240,55 @@ export function RecurrenceMenu(param) {
             // Set value.value
             component.findAll('.pattern-menu .month').forEach(checkbox => {
                 checkbox.addEventListener('change', event => {
+                    const pattern=value.pattern
                     value.value =  [...component.findAll(`.pattern-menu .month:checked`)].map(node => {
                         const d = node.closest('.month-container').querySelector('.day ').value;
 
                         return {
-                            m: node.id,
-                            d: parseInt(d)
+                            pattern: pattern,
+                            m: parseInt(node.getAttribute('month')),
+                            d: parseInt(d),
                         }
                     });
 
                     console.log(value);
+                });
+            });
+
+            component.findAll('select.day').forEach(dropdown => {
+                dropdown.addEventListener('change', event => {
+                    console.log(dropdown.value)
+                    console.log(value.value)
+
+                    const pattern=value.pattern
+                    value.value =  [...component.findAll(`.pattern-menu .month:checked`)].map(node => {
+                        const d = node.closest('.month-container').querySelector('.day ').value;
+
+                        return {
+                            pattern: pattern,
+                            m: parseInt(node.getAttribute('month')),
+                            d: parseInt(d),
+                        }
+                    });
+
+                    console.log(value);
+
+
+                    // console.log(document.querySelector(`#${dropdown.getAttribute('data-for')}`).checked)
+                    // console.log(component.findAll(`#${dropdown.getAttribute('data-for')}`).classList.contains('checked'))
+                    // const pattern=value.pattern
+                    // console.log(pattern)
+                    // value.value =  [...component.findAll(`.pattern-menu .month:checked`)].map(node => {
+                    //     const d = node.closest('.month-container').querySelector('.day ').value;
+
+                    //     return {
+                    //         pattern: pattern,
+                    //         m: parseInt(node.getAttribute('month')),
+                    //         d: parseInt(d),
+                    //     }
+                    // });
+
+                    // console.log(value);
                 });
             });
         }

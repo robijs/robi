@@ -13,8 +13,10 @@ export function ChoiceField(param) {
         buttonStyle,
         classes,
         description,
+        descriptionNoWrap,
         fillIn,
         fieldMargin,
+        fieldWidth,
         flex,
         label,
         maxHeight,
@@ -74,6 +76,7 @@ export function ChoiceField(param) {
                     margin: ${fieldMargin || '0px 0px 20px 0px'};
                     width: inherit;
                     ${flex ? `flex: ${flex};` : ''}
+                    ${fieldWidth ? `width: ${fieldWidth};` : ''}
                 }
     
                 #id label {
@@ -239,7 +242,7 @@ export function ChoiceField(param) {
                         ` : 
                         /*html*/ `
                             <button class='btn btn-choice dropdown-toggle' ${buttonStyle ? `style='${buttonStyle}'` : ''} type='button' id='${id}' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-                                ${value || `<span style='opacity: 0;'>Choose</span>`}
+                                ${value || placeholder()}
                             </button>
                             <div class='dropdown-menu' aria-labelledby='${id}'>
                                 <div class='scroll-container'>
@@ -257,6 +260,7 @@ export function ChoiceField(param) {
                 margin: ${fieldMargin || '0px 0px 20px 0px'};
                 padding: ${padding || '0px'};
                 ${flex ? `flex: ${flex};` : ''}
+                ${fieldWidth ? `width: ${fieldWidth};` : ''}
             }
 
             #id label {
@@ -266,6 +270,7 @@ export function ChoiceField(param) {
             #id .form-field-description {
                 font-size: 14px;
                 margin-bottom:  0.5rem;
+                ${descriptionNoWrap ? `white-space: nowrap;` : ''}
             }
 
             #id .dropdown-item {
@@ -297,6 +302,18 @@ export function ChoiceField(param) {
             #id .scroll-container::-webkit-scrollbar-thumb {
                 min-height: 20px;
             }
+
+            #id .empty {
+                font-size: 13px;
+                pointer-events: none;
+                border-radius: 8px;
+                width: 100%;
+                padding: .25rem 1.5rem;
+                font-weight: 400;
+                text-align: center;
+                white-space: nowrap;
+                color: lightgray;
+            }
         `,
         parent,
         position,
@@ -314,7 +331,19 @@ export function ChoiceField(param) {
         ]
     });
 
+    function placeholder() {
+        return /*html*/ `
+            <span style='opacity: 0;'>Choose</span>
+        `;
+    }
+
     function buildDropdown(items) {
+        if (items.length === 0) {
+            return /*html*/ `
+                <div class='empty'>No values</div>
+            `;
+        }
+
         return items
             .map(dropdown => dropdownTemplate(dropdown))
             .join('\n');
@@ -342,6 +371,12 @@ export function ChoiceField(param) {
         if (onChange) {
             onChange(event);
         }
+
+        // DEV: Fix width change issues
+        if (fieldWidth) {
+            const currentFieldWidth = component.find('.dropdown-toggle').offsetWidth;
+            component.get().style.width = `${currentFieldWidth}px`;
+        }
     }
 
     component.setDropdownMenu = (list) => {
@@ -357,24 +392,34 @@ export function ChoiceField(param) {
         
         if (param !== undefined) {
             let label = typeof param === 'object' ? param.label : param;
+
+            if (label === '') {
+                field.innerHTML = placeholder();
+                return;
+            }
+
             if (valueType === 'html') {
                 field.innerHTML = label;
             } else {
                 field.innerText = label;
             }
+
             if (param.id) {
                 field.dataset.id = param.id;
             }
+
             if (param.path) {
                 field.dataset.path = param.path;
             }
-        } else {
-            if (valueType === 'html') {
-                return component.find('.btn-choice');
-            } else {
-                return field.innerText === 'Choose' ? '' : field.innerText;
-            }
+
+            return;
         }
+
+        if (valueType === 'html') {
+            return component.find('.btn-choice');
+        }
+
+        return field.innerText === 'Choose' ? '' : field.innerText;
     };
 
     component.isValid = (state) => {

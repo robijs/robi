@@ -7,9 +7,10 @@ import { Modal } from './Modal.js'
 import { EditForm } from './EditForm.js'
 import { NewForm } from './NewForm.js'
 import { TableToolbar } from './TableToolbar.js'
+import { GenerateUUID } from '../Actions/GenerateUUID.js'
 import { App } from '../Core/App.js'
 import { Lists } from '../Models/Lists.js'
-import { GenerateUUID, Store } from '../Robi.js'
+import { Store } from '../Robi.js'
 
 // @START-File
 /**
@@ -24,6 +25,8 @@ export async function Table(param) {
         advancedSearch,
         border,
         buttonColor,
+        buttonIconSize,
+        buttonTextSize,
         checkboxes,
         createdRow,
         defaultButtons,
@@ -36,9 +39,13 @@ export async function Table(param) {
         formFooter,
         formView,
         headerFilter,
+        headersNoWrap,
         heading,
+        headingSize,
+        headingWeight,
         list,
         margin,
+        mlotMaxWidth,
         newForm,
         newFormTitle,
         nowrap,
@@ -48,6 +55,8 @@ export async function Table(param) {
         order,
         padding,
         parent,
+        parentId,
+        primaryKey,
         path,
         showId,
         titleDisplayName,
@@ -84,9 +93,8 @@ export async function Table(param) {
     const columns = [];
     
     let selectAllId;
-    
+
     if (checkboxes !== false) {
-        // headers.push('');
         selectAllId = `select-all-${GenerateUUID()}`;
 
         headers.push(/*html*/ `
@@ -100,11 +108,12 @@ export async function Table(param) {
         });
     }
 
-    // Item Id
-    const idProperty = 'Id';
+    // Refs
+    let idProperty = primaryKey || 'Id';
     let formFields = [];
     let schema;
 
+    // Get list items and fields 
     if (list) {
         // TODO: Only select fields from view
         items = items || await Get({
@@ -118,7 +127,11 @@ export async function Table(param) {
 
         // Get fields in view
         schema = lists.concat(Lists()).find(item => item.list === list);
-            
+
+        // Primary Key
+        idProperty = schema.primaryKey || idProperty;
+
+        // View    
         if (view) {
             fields = fields || schema?.views
                 .find(item => item.name === view)
@@ -168,84 +181,92 @@ export async function Table(param) {
             return;
         }
 
-        [{ name: 'Id', display: 'Id', type: 'number' }]
-            .concat(fields)
-            .forEach(field => {
-                const {
-                    name, display, type, render
-                } = field;
+        // Build columns
+        if (idProperty === 'Id') {
+            setColumnOptions({ name: 'Id', display: 'Id', type: 'number' });
+        }
 
-                headers.push(display || name);
+        fields.forEach(setColumnOptions);
 
-                const columnOptions = {
-                    data: name === titleDisplayName ? 'Title' : name,
-                    type: name === 'Id' || type === 'number' ? 'num' : 'string',
-                    visible: name === 'Id' && !showId ? false : true
+        function setColumnOptions(field) {
+            const {
+                name, display, type, render
+            } = field;
+
+            headers.push(display || name);
+
+            const columnOptions = {
+                data: name === titleDisplayName ? 'Title' : name,
+                type: name === 'Id' || type === 'number' ? 'num' : 'string',
+                visible: name === 'Id' && !showId ? false : true
+            };
+
+            // Classes
+            if (name === 'Id') {
+                columnOptions.className = 'do-not-export bold';
+                columnOptions.render = (data, type, row) => {
+                    return data;
                 };
+            }
 
-                // Classes
-                if (name === 'Id') {
-                    columnOptions.className = 'do-not-export bold';
-                    columnOptions.render = (data, type, row) => {
-                        return data;
-                    };
-                }
+            // Render
+            if (render) {
+                columnOptions.render = render;
+            }
 
-                // Render
-                if (render) {
-                    columnOptions.render = render;
-                }
+            else if (name.includes('Percent')) {
+                columnOptions.render = (data, type, row) => {
+                    return `${Math.round(parseFloat(data || 0) * 100)}%`;
+                };
+            }
 
-                else if (name.includes('Percent')) {
-                    columnOptions.render = (data, type, row) => {
-                        return `${Math.round(parseFloat(data || 0) * 100)}%`;
-                    };
-                }
+            else if (type === 'mlot') {
+                columnOptions.render = (data, type, row) => {
+                    return /*html*/ `
+                    <div class='dt-mlot'>${data || ''}</data>
+                `;
+                };
+            }
 
-                else if (type === 'mlot') {
-                    columnOptions.render = (data, type, row) => {
-                        return /*html*/ `
-                        <div class='dt-mlot'>${data || ''}</data>
-                    `;
-                    };
-                }
+            // NOTE: What will break on this?
+            else if (type === 'multichoice') {
+                columnOptions.render = (data, type, row) => {
+                    return data ? data.results.join(', ') : '';
+                };
+            }
 
-                // NOTE: What will break on this?
-                else if (type === 'multichoice') {
-                    columnOptions.render = (data, type, row) => {
-                        return data ? data.results.join(', ') : '';
-                    };
-                }
+            else if (type === 'date') {
+                columnOptions.render = (data, type, row) => {
+                    // return data ? new Date(data).toLocaleString() : '';
+                    return data ? new Date(data.split('T')[0].replace(/-/g, '\/')).toLocaleDateString() : '';
+                };
+            }
 
-                else if (type === 'date') {
-                    columnOptions.render = (data, type, row) => {
-                        // return data ? new Date(data).toLocaleString() : '';
-                        return data ? new Date(data.split('T')[0].replace(/-/g, '\/')).toLocaleDateString() : '';
-                    };
-                }
+            else if (name === 'Author') {
+                columnOptions.render = (data, type, row) => {
+                    return data.Title.split(' ').slice(0, 2).join(' ');
+                };
+            }
 
-                else if (name === 'Author') {
-                    columnOptions.render = (data, type, row) => {
-                        return data.Title.split(' ').slice(0, 2).join(' ');
-                    };
-                }
+            else if (name.includes('Created')) {
+                columnOptions.render = (data, type, row) => {
+                    // return data ? new Date(data).toLocaleString() : '';
+                    return data ? new Date(data).toLocaleDateString() : '';
+                };
+            }
 
-                else if (name.includes('Created')) {
-                    columnOptions.render = (data, type, row) => {
-                        // return data ? new Date(data).toLocaleString() : '';
-                        return data ? new Date(data).toLocaleDateString() : '';
-                    };
-                }
+            else if (name !== 'Id') {
+                columnOptions.render = (data, type, row) => {
+                    return typeof data === 'number' ? parseFloat(data).toLocaleString('en-US') : data;
+                };
+            }
 
-                else if (name !== 'Id') {
-                    columnOptions.render = (data, type, row) => {
-                        return typeof data === 'number' ? parseFloat(data).toLocaleString('en-US') : data;
-                    };
-                }
-
-                columns.push(columnOptions);
-            });
-    } else {
+            columns.push(columnOptions);
+        }
+    }
+    
+    // No list
+    else {
         (Array.isArray(fields) ? fields : fields.split(','))
         .forEach(field => {
             const {
@@ -350,9 +371,10 @@ export async function Table(param) {
                                 list,
                                 modal: newModal,
                                 parent: modalBody,
+                                parentId,
                                 table
                             };
-
+                            
                             if (schema?.newForm) {
                                 // NOTE: Must pass in all fields, not just what the selected view provides
                                 formParam.fields = schema?.fields;
@@ -389,22 +411,25 @@ export async function Table(param) {
                                     value: 'Create',
                                     classes: 'btn-robi',
                                     async onClick(event) {
+                                        // Disable button - Prevent user from clicking this item more than once
+                                        event.target.disabled = true;
+                                        event.target.innerHTML = /*html*/ `
+                                            <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Creating
+                                        `;
+
                                         // Call newForm.onCreate() and wait for it to complete
                                         const newItem = await selectedForm?.onCreate(event);
 
                                         // TODO: Don't create item if newItem == false;
-
                                         if (!newItem) {
                                             console.log('Data not valid, alert user');
+                                            event.target.disabled = false;
+                                            event.target.innerHTML = /*html*/ `
+                                                <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> ${selectedForm.label || 'Create'}
+                                            `;
+
                                             return;
                                         }
-
-                                        // Disable button - Prevent user from clicking this item more than once
-                                        console.log($(event.target));
-                                        
-                                        $(event.target)
-                                            .attr('disabled', '')
-                                            .html(`<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Creating`);
 
                                         if (Array.isArray(newItem)) {
                                             items.concat(newItem);
@@ -422,12 +447,7 @@ export async function Table(param) {
                                             });
                                         }
 
-                                        // Enable button
-                                        $(event.target)
-                                            .removeAttr('disabled')
-                                            .text('Created');
-
-                                        // Close modal (DOM node will be removed on hidden.bs.modal event)
+                                        // Close modal
                                         newModal.close();
                                     }
                                 }
@@ -457,7 +477,10 @@ export async function Table(param) {
                     const selected = table.selected();
                     const button = tableContainer.find('.delete-item');
                     button.disabled = true;
-                    button.innerHTML = /*html*/ `<span class='spinner-border' role='status' aria-hidden='true' style='width: 18px; height: 18px; border-width: 3px'></span>`;
+                    button.style.minWidth = '45px'; // FIXME: don't hard code
+                    button.innerHTML = /*html*/ `
+                        <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true' style='width: 18px; height: 18px; border-width: 3px'></span>
+                    `;
 
                     // Delete items
                     for (let row in selected) {
@@ -610,8 +633,10 @@ export async function Table(param) {
     }
 
     // Toolbar
-    if (toolbar || advancedSearch) {
+    if (toolbar || advancedSearch || heading) {
         const tableToolbar = TableToolbar({
+            headingSize,
+            headingWeight,
             heading: heading || ( heading === '' ? '' : list ? (lists.find(item => item.list === list)?.display || list.split(/(?=[A-Z])/).join(' '))  : '' ),
             options: toolbar || [],
             parent: tableContainer,
@@ -698,12 +723,16 @@ export async function Table(param) {
         border: border || false,
         buttonColor,
         buttons,
+        buttonTextSize,
+        buttonIconSize,
         checkboxes: checkboxes !== false ? true : false,
         columns,
         createdRow,
         data: items,
         headerFilter,
+        headersNoWrap,
         headers,
+        mlotMaxWidth,
         nowrap,
         order: order || [[1, 'asc']], /** Sort by 1st column (hidden Id field at [0]) {@link https://datatables.net/reference/api/order()} */
         pageLength: pageLength || 25,
@@ -720,7 +749,7 @@ export async function Table(param) {
 
             // Open edit form full screen
             if (openInModal) {
-                Route(`${list}/${selectedItem.Id}`);
+                Route(`${list}/${selectedItem[idProperty]}`);
             } else {
                 // Open edit form in modal
                 const rowModal = Modal({
@@ -730,6 +759,9 @@ export async function Table(param) {
                         const formParam = { item, table, row, fields: formFields, list, modal: rowModal, parent: modalBody };
 
                         if (schema?.editForm) {
+                            // TODO: Add a flag to let caller decided if edit form should show all or just view fields
+                            // NOTE: Must pass in all fields, not just what the selected view provides
+                            formParam.fields = schema?.fields;
                             selectedForm = await schema?.editForm(formParam);
                         } else if (editForm) {
                             selectedForm = await editForm(formParam);
@@ -737,7 +769,10 @@ export async function Table(param) {
                             selectedForm = await EditForm(formParam);
                         }
 
-                        // TODO: if selectedForm.label, change button value
+                        // Set button value
+                        if (selectedForm?.label) {
+                            rowModal.getButton('Update').innerText = selectedForm.label;
+                        }
 
                         if (formFooter !== false) {
                             rowModal.showFooter();
@@ -759,19 +794,24 @@ export async function Table(param) {
                                 value: 'Update',
                                 classes: 'btn-robi',
                                 async onClick(event) {
+                                    // Disable button - Prevent user from clicking this item more than once
+                                    event.target.disabled = true;
+                                    event.target.innerHTML = /*html*/ `
+                                        <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Updating
+                                    `;
+
                                     // Call newForm.onUpdate() and wait for it to complete
                                     const updatedItem = await selectedForm?.onUpdate(event);
 
                                     if (!updatedItem) {
                                         console.log('Data not valid, alert user');
+                                        event.target.disabled = false;
+                                        event.target.innerHTML = /*html*/ `
+                                            <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> ${selectedForm.label || 'Update'}
+                                        `;
 
                                         return;
                                     }
-
-                                    // Disable button - Prevent user from clicking this item more than once
-                                    $(event.target)
-                                        .attr('disabled', '')
-                                        .html(`<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Updating`);
 
                                     table.updateRow({
                                         row: selectedRow,
@@ -793,19 +833,15 @@ export async function Table(param) {
                                 classes: 'btn-robi-light',
                                 async onClick(event) {
                                     // Disable button - Prevent user from clicking this item more than once
-                                    $(event.target)
-                                        .attr('disabled', '')
-                                        .html(`<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Deleteing`);
+                                    event.target.disabled = true;
+                                    event.target.innerHTML = /*html*/ `
+                                        <span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Deleting
+                                    `;
 
                                     // Call newForm.onDelete() and wait for it to complete
                                     await selectedForm?.onDelete(event);
 
                                     table.removeRow(selectedItem.Id);
-
-                                    // Enable button
-                                    $(event.target)
-                                        .removeAttr('disabled')
-                                        .text('Deleted');
 
                                     // Hide modal
                                     rowModal.getModal().modal('hide');
@@ -925,7 +961,6 @@ export async function Table(param) {
             row.querySelector('td:last-child').classList.remove('btrr-0', 'bbrr-0');
         });
     }
-
     
     // TODO: Generalize
     // TODO: If form is modal, launch modal

@@ -4,6 +4,7 @@ import { FilesField } from './FilesField.js'
 import { Heading } from './Heading.js'
 import { LoadingSpinner } from './LoadingSpinner.js'
 import { Store } from '../Core/Store.js'
+import { App } from '../Robi.js'
 
 // @START-File
 /**
@@ -21,6 +22,7 @@ export function DropZone(param) {
         onChange,
         beforeChange,
         onUpload,
+        uploadData,
         library,
         multiple,
         path,
@@ -66,7 +68,8 @@ export function DropZone(param) {
                 name: item.File.Name,
                 size: item.File.Length,
                 created: item.Created,
-                author: item.Author.Title
+                author: item.Author.Title,
+                id: item.Id
             };
         }) : value,
         itemId,
@@ -80,7 +83,7 @@ export function DropZone(param) {
                 return;
             }
 
-            console.log(file);
+            console.log('on upload', file);
 
             // /** TODO: @todo remove 'remove' event listener -> add 'cancel' event listener   */
             filesContainer.find(`.remove-container[data-filename='${file.name}'] .status`).innerText = 'Queued';
@@ -101,21 +104,35 @@ export function DropZone(param) {
                 library: library || `${list}Files`,
                 path,
                 file,
-                data: {
-                    ParentId: itemId
-                }
+                data: uploadData || { ParentId: itemId }
             });
 
+            // START-Dev
+            if (App.isDev()) {
+                file.id = testUpload.Id
+            }
+            // END-Dev
+
             console.log(testUpload);
-            console.log(`Measure #${itemId} Files`, value);
+            console.log(`${list || library } #${itemId} Files`, value);
             value.push(testUpload);
 
-            onChange(value);
+            if (onChange) {
+                onChange(value);
+            }
+
+            const newCount = parseInt(filesContainer.find(`.count`).innerText) + 1;
 
             filesContainer.find(`.pending-count`).innerText = '';
             filesContainer.find(`.pending-count`).classList.add('hidden');
-            filesContainer.find(`.count`).innerText = `${parseInt(filesContainer.find(`.count`).innerText) + 1}`;
+            filesContainer.find(`.count`).innerText = `${newCount}`;
+            
+            const countLabel = filesContainer.find(`.count-label`);
 
+            if (countLabel) {
+                countLabel.innerText = `file${newCount === 1 ? '' : 's'}`;
+            }
+            
             // filesList.find(`.remove-container[data-filename='${file.name}']`).dataset.itemid = testUpload.Id;
             // filesList.find(`.remove-container[data-filename='${file.name}'] .status`).innerText = 'Uploaded!';
             // filesList.find(`.remove-container[data-filename='${file.name}'] .tip`).innerText = `${'ontouchstart' in window ? 'tap' : 'click'} to undo`;

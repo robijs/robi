@@ -135,9 +135,9 @@ export function ViewTools(param) {
         ],
         onAdd() {
             // FIXME: Remove before shipping
-            //    setTimeout(() => {
-            //         open();
-            //    }, 500);
+        //    setTimeout(() => {
+        //         open();
+        //    }, 500);
         }
     });
 
@@ -152,6 +152,7 @@ export function ViewTools(param) {
 
     function open() {
         // Initialize
+        // TODO: Pass props (parent, position, route, etc.)
         palette = Palette({});
         palette.add();
 
