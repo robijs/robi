@@ -23,7 +23,7 @@ export function Row(render, options = {}) {
                 position: relative;
                 width: 100%;
                 display: ${display || 'block'};
-                min-height: ${minHeight || '100px'};
+                min-height: ${minHeight || 'fit-content'}; /* DEV: Previously 100px */
                 transition: box-shadow 200ms ease-in-out;
                 ${height ? `height: ${height};` : ''}
                 ${flex ? `flex: ${flex};` : ''}

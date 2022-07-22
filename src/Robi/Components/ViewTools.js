@@ -135,9 +135,9 @@ export function ViewTools(param) {
         ],
         onAdd() {
             // FIXME: Remove before shipping
-           setTimeout(() => {
-                open();
-           }, 500);
+            //    setTimeout(() => {
+            //         open();
+            //    }, 500);
         }
     });
 
