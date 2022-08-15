@@ -37,7 +37,11 @@ const App = {
 
             settings.site = location.href.split(`/${library}/` || '/App/')[0];
         } else {
-            settings.site = 'http://localhost:8080/dev/app.html';
+            const path = '/dev/app.html';
+            const domain = location.href.split(path)[0];
+
+            settings.domain = domain;
+            settings.site = `${domain}${path}`;
         }
 
         // Set default route

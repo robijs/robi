@@ -141,7 +141,7 @@ export async function AddRoute(event) {
                                 }
                             });
                         } else {
-                            request = await fetch(`http://127.0.0.1:8080/src/app.js`);
+                            request = await fetch(`${App.get('domain')}/src/app.js`);
                         }
 
                         let content = await request.text();
