@@ -117,6 +117,8 @@ export async function AddRoute(event) {
 
                     updateApp();
                     createRoute();
+                    
+                    location.href = `${App.get('site')}#${routePath.value()}`;
 
                     if (App.isProd()) {
                         await Wait(5000);
