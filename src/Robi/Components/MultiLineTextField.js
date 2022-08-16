@@ -1,5 +1,5 @@
 import { App } from '../Core/App.js'
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 
 // @START-File
 /**

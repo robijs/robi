@@ -26,6 +26,7 @@ export function DropZone(param) {
         library,
         multiple,
         path,
+        prefix
     } = param;
 
     let { value } = param;
@@ -57,14 +58,17 @@ export function DropZone(param) {
         beforeChange,
         onChange,
         path,
+        prefix,
         files: itemId ? value?.map(item => {
             if (item.url) {
                 return item;
             }
 
+            console.log('url', item)
+
             // FIXME: Passed in object should only contain this props
             return {
-                url: item.OData__dlc_DocIdUrl.Url,
+                // url: item.OData__dlc_DocIdUrl.Url,
                 name: item.File.Name,
                 size: item.File.Length,
                 created: item.Created,
@@ -100,6 +104,11 @@ export function DropZone(param) {
             `;
 
             // FIXME: DropZone, FilesField, FormSection, and UploadFile are too tightly coupled
+
+            // DEV: If prefix, rename file
+            const originalName = file.name;
+            file = prefix ? new File([file], `${prefix}${file.name}`, { type: file.type }) : file;
+
             const testUpload = await UploadFile({
                 library: library || `${list}Files`,
                 path,
@@ -141,7 +150,7 @@ export function DropZone(param) {
             // `;
 
             // Attach file remove listener
-            const removeContainer = filesContainer.find(`.remove-container[data-filename='${file.name}']`);
+            const removeContainer = filesContainer.find(`.remove-container[data-filename='${originalName}']`);
 
             removeContainer.insertAdjacentHTML('afterend', /*html*/ `
                 <div class='remove-container delete-on-remove' data-filename='${file.name}'>

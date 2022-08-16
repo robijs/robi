@@ -3,7 +3,7 @@
 // Just be sure to put @START and @END sigils in the right places.
 // Otherwise, changes made from the front end may not render properly.
 
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 import { HTML } from '../Actions/HTML.js'
 
 // @START-File

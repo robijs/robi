@@ -73,7 +73,8 @@ async function min() {
                 './src/Robi/Actions',
                 './src/Robi/Core',
                 './src/Robi/Models',
-                './src/Robi/Templates'
+                './src/Robi/Templates',
+                './src/Robi/Utilities'
             ],
             importFile: 'Robi.js',
             dir: './dist/src/Robi',

@@ -75,6 +75,7 @@ export async function Get(param) {
                 action(data);
             }
 
+            // TODO: Add prop to return single item instead of array of one object
             if (paged || skip) {
                 return data.d;
             } else if (Array.isArray(data)) {
@@ -85,7 +86,10 @@ export async function Get(param) {
         } catch (error) {
             console.log('Fetch request aborted.');
         }
-    } else if (App.isDev() || mode === 'dev') {
+    }
+    
+    // @START-Dev
+    if (App.isDev() || mode === 'dev') {
         const queries = filter ? filter.split(' or ') : [ '' ];
 
         const fetchAll = await Promise.all(queries.map( async query => {
@@ -157,5 +161,6 @@ export async function Get(param) {
 
         return unique;
     }
+    // @END-Dev
 }
 // @END-File

@@ -1,4 +1,4 @@
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 
 // TODO: increment install-console line number
 // @START-File

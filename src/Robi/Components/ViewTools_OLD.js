@@ -1,4 +1,4 @@
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 import { CreateFileForm } from '../Actions/CreateFileForm.js'
 import { EditLayout } from '../Actions/EditLayout.js'
 import { ModifyFile } from '../Actions/ModifyFile.js'

@@ -587,7 +587,7 @@ export function UpdateApp() {
                             reinstallConsole.append(/*html*/ `
                                 <div class='console-line'>
                                     <!-- <code class='line-number'>0</code> -->
-                                    <code>'${App.get('title')} lists deleted - ${checkedDelete.map(item => item.list).join(', ')}.' added to 'releaseNotes'</code>
+                                    <code>'${App.get('title')} lists deleted - ${checkedDelete.map(item => item.Title).join(', ')}.' added to 'releaseNotes'</code>
                                 </div>
                             `);
 

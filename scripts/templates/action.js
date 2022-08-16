@@ -1,4 +1,4 @@
-export function actionTemplate({ name, type}) {
+export function action({ name, type}) {
     return [
         `// This file may be edited programmatically.`,
         `// If you know the API, feel free to make changes by hand.`,
@@ -11,7 +11,7 @@ export function actionTemplate({ name, type}) {
         `// @START-File`,
         `/**`,
         ` * `,
-        ` * @param {Object} param - Interface to this Robi action`,
+        ` * @param {Object} param - Interface`,
         ` * @returns {undefined}`,
         ` */`,
         `export${type  === 'async' ? ' async ' : ' '}function ${name}(param) {`,

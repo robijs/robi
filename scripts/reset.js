@@ -6,6 +6,7 @@ let db = {
     "Searches": [],
     "Comments": [],
     "Errors": [],
+    "Feedback": [],
     "Log": [],
     "Users": [],
     "Questions": [],
@@ -66,7 +67,7 @@ for (let info of listInfo) {
     }
 }
 
-writeFile('./json-server/db.json', JSON.stringify(db), err => {
+writeFile('./database/lists/db.json', JSON.stringify(db), err => {
     if (err) {
         console.error(err)
         return

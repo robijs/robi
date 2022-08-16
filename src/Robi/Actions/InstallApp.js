@@ -418,7 +418,7 @@ export function InstallApp(param) {
                 installConsole.get().scrollTop = installConsole.get().scrollHeight;
 
                 // Create developer account
-                const url = `${App.get('site')}/../_api/web/CurrentUser`;
+                const url = `${App.get('site')}/_api/web/CurrentUser`;
                 const fetchOptions = {
                     headers: {
                         'Content-Type': 'application/json; charset=UTF-8',
@@ -502,6 +502,15 @@ export function InstallApp(param) {
                         data: {
                             Key: 'Build',
                             Value: '1.0.0'
+                        }
+                    });
+
+                    // Create key 'BuildTimestamp'
+                    await CreateItem({
+                        list: 'Settings',
+                        data: {
+                            Key: 'BuildTimestamp',
+                            Value: App.get('BuildTimestamp')
                         }
                     });
                 } else if (isInstalled.Value === 'No') {

@@ -23,6 +23,7 @@ export async function GetCurrentUser(param) {
 
     // PROD
     if (App.isProd()) {
+        // TODO: Fix this for SP online
         const url = `${App.get('site')}/_api/web/CurrentUser`;
         const currentUser = await fetch(url, fetchOptions);
         const response = await currentUser.json();
@@ -91,7 +92,7 @@ export async function GetCurrentUser(param) {
     } 
     
     // DEV
-    else if (App.isDev()) {
+    if (App.isDev()) {
         const currentUser = await fetch(`http://localhost:3000/users?LoginName=${App.get('dev').user.LoginName}`, fetchOptions);
         const response = await currentUser.json();
 
@@ -132,6 +133,24 @@ export async function GetCurrentUser(param) {
                 console.log(`%cFailed to create a user account for ${Title}. Check POST data.`, 'color: firebrick');
             }
         }
+
+        // NOTE: This would break components that set stringified JSON back to Store.user.Settings
+        // TODO: Wrap in method user.getSettings();
+        // TODO: Create new mthod user.setSetting();
+        // Parse Settings
+        // if (userItem.Settings) {
+        //     // https://stackoverflow.com/a/20392392
+        //     try {
+        //         const parsed = JSON.parse(userItem.Settings);
+        
+        //         if (parsed && typeof parsed === "object") {
+        //             userItem.Settings = parsed;
+        //         }
+        //     }
+        //     catch (e) { 
+        //         console.error(e);
+        //     }
+        // }
 
         // Add method
         userItem.hasAnyRole = () => {

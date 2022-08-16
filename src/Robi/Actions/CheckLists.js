@@ -9,7 +9,29 @@ import { App } from '../Core/App.js'
  * @returns 
  */
 export async function CheckLists() {
-    const listsToIgnore = ['App', 'Composed Looks', 'Documents', 'Master Page Gallery', 'MicroFeed', 'Site Assets', 'Site Pages'];
+    const listsToIgnore = [
+        'App',
+        'Composed Looks',
+        'Documents',
+        'Master Page Gallery',
+        'MicroFeed',
+        'Site Assets',
+        'Site Pages',
+        'appdata',
+        'appfiles',
+        'Converted Forms',
+        'Form Templates',
+        'List Template Gallery',
+        'Maintenance Log Library',
+        'Sharing Links',
+        'Solution Gallery',
+        'Style Library',
+        'TaxonomyHiddenList',
+        'Theme Gallery',
+        'User Information List',
+        'Web Part Gallery',
+        'Web Template Extensions'
+    ];
     const coreLists = Lists();
     const appLists = App.lists();
     // NOTE: Ignore 'Utility' App 
@@ -20,7 +42,7 @@ export async function CheckLists() {
     const webLists = await GetWebLists();
     const installedLists = webLists.map(item => item.Title).filter(x => allLists.map(item => item.list).includes(x));
     const diffToCreate = allLists.map(item => item.list).filter(x => !webLists.map(item => item.Title).includes(x));
-    const diffToDelete = webLists.map(item => item.Title).filter(x => !allLists.concat(filesLists).concat(binLists).concat([{list: 'Utility'}]).map(item => item.list).includes(x) && !listsToIgnore.includes(x)); // NOTE: TESTING
+    const diffToDelete = webLists.map(item => item.Title).filter(x => !allLists.concat(filesLists).concat(binLists).concat([{ list: 'Utility' }]).map(item => item.list).includes(x) && !listsToIgnore.includes(x)); // NOTE: TESTING
     // const diffToDelete = webLists.map(item => item.Title).filter(x => !allLists.concat(filesLists).map(item => item.list).includes(x) && !listsToIgnore.includes(x));
     console.log('All Lists:', allLists);
     console.log('Files Lists:', filesLists);
@@ -37,7 +59,89 @@ export async function CheckLists() {
     const toDelete = diffToDelete.map(list => webLists.find(item => item.Title === list));
 
     // Has the schema changed on any lists?
-    const fieldsToIgnore = ['ContentTypeId', 'Title', '_ModerationComments', 'File_x0020_Type', 'ID', 'Id', 'ContentType', 'Modified', 'Created', 'Author', 'Editor', '_HasCopyDestinations', '_CopySource', 'owshiddenversion', 'WorkflowVersion', '_UIVersion', '_UIVersionString', 'Attachments', '_ModerationStatus', 'Edit', 'LinkTitleNoMenu', 'LinkTitle', 'LinkTitle2', 'SelectTitle', 'InstanceID', 'Order', 'GUID', 'WorkflowInstanceID', 'FileRef', 'FileDirRef', 'Last_x0020_Modified', 'Created_x0020_Date', 'FSObjType', 'SortBehavior', 'PermMask', 'FileLeafRef', 'UniqueId', 'SyncClientId', 'ProgId', 'ScopeId', 'HTML_x0020_File_x0020_Type', '_EditMenuTableStart', '_EditMenuTableStart2', '_EditMenuTableEnd', 'LinkFilenameNoMenu', 'LinkFilename', 'LinkFilename2', 'DocIcon', 'ServerUrl', 'EncodedAbsUrl', 'BaseName', 'MetaInfo', '_Level', '_IsCurrentVersion', 'ItemChildCount', 'FolderChildCount', 'AppAuthor', 'AppEditor'];
+    const fieldsToIgnore = [
+        'ContentTypeId',
+        'Title',
+        '_ModerationComments',
+        'File_x0020_Type',
+        'ID',
+        'Id',
+        'ContentType',
+        'Modified',
+        'Created',
+        'Author',
+        'Editor',
+        '_HasCopyDestinations',
+        '_CopySource',
+        'owshiddenversion',
+        'WorkflowVersion',
+        '_UIVersion',
+        '_UIVersionString',
+        'Attachments',
+        '_ModerationStatus',
+        'Edit',
+        'LinkTitleNoMenu',
+        'LinkTitle',
+        'LinkTitle2',
+        'SelectTitle',
+        'InstanceID',
+        'Order',
+        'GUID',
+        'WorkflowInstanceID',
+        'FileRef',
+        'FileDirRef',
+        'Last_x0020_Modified',
+        'Created_x0020_Date',
+        'FSObjType',
+        'SortBehavior',
+        'ParentUniqueId',
+        'PermMask',
+        'FileLeafRef',
+        'UniqueId',
+        'SyncClientId',
+        'ProgId',
+        'ScopeId',
+        'HTML_x0020_File_x0020_Type',
+        '_EditMenuTableStart',
+        '_EditMenuTableStart2',
+        '_EditMenuTableEnd',
+        'LinkFilenameNoMenu',
+        'LinkFilename',
+        'LinkFilename2',
+        'DocIcon',
+        'ServerUrl',
+        'EncodedAbsUrl',
+        'BaseName',
+        'MetaInfo',
+        '_Level',
+        '_IsCurrentVersion',
+        'ItemChildCount',
+        'FolderChildCount',
+        'AppAuthor',
+        'AppEditor',
+        // From SP0
+        'ComplianceAssetId',
+        'PrincipalCount',
+        'Restricted',
+        'OriginatorId',
+        'NoExecute',
+        'ContentVersion',
+        '_ComplianceFlags',
+        '_ComplianceTag',
+        '_ComplianceTagWrittenTime',
+        '_ComplianceTagUserId',
+        '_IsRecord',
+        'AccessPolicy',
+        '_VirusStatus',
+        '_VirusVendorID',
+        '_VirusInfo',
+        'SMTotalSize',
+        'SMLastModifiedDate',
+        'SMTotalFileStreamSize',
+        'SMTotalFileCount',
+        '_CommentFlags',
+        '_CommentCount'
+    ];
     const libraryFieldsToIgnore = [
         'Modified_x0020_By',
         'Created_x0020_By',
@@ -71,7 +175,32 @@ export async function CheckLists() {
         'ParentLeafName',
         'DocConcurrencyNumber',
         'Combine',
-        'RepairDocument'
+        'RepairDocument',
+        // From SPO
+        '_ShortcutUrl',
+        '_ShortcutSiteId',
+        '_ShortcutWebId',
+        '_ShortcutUniqueId',
+        '_ExtendedDescription',
+        'TriggerFlowInfo',
+        'BSN',
+        '_ListSchemaVersion',
+        '_Dirty',
+        '_Parsable',
+        '_StubFile',
+        '_HasEncryptedContent',
+        '_LikeCount',
+        '_RmsTemplateId',
+        '_IpLabelId',
+        '_DisplayName',
+        '_IpLabelAssignmentMethod',
+        'A2ODMountCount',
+        '_ExpirationDate',
+        '_IpLabelHash',
+        '_IpLabelPromotionCtagVersion',
+        'ParentUniqueId',
+        'PolicyDisabledUICapabilities',
+        'StreamHash'
     ];
     const schemaAdd = [];
     const schemaDelete = [];
@@ -124,7 +253,7 @@ export async function CheckLists() {
     console.log('Fields to add:', schemaAdd);
     console.log('Fields to delete:', schemaDelete);
 
-    return { 
+    return {
         coreLists,
         appLists,
         allLists,

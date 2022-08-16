@@ -1,8 +1,8 @@
-import { createServer } from 'http';
-import { createWriteStream, mkdirSync, renameSync, readdirSync } from 'fs';
+import { createServer } from 'http'
+import { createWriteStream, mkdirSync, renameSync, readdirSync } from 'fs'
 import path from 'path'
 
-createServer((req, res) => {
+const server = createServer((req, res) => {
     const headers = {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS, PUT",
@@ -172,4 +172,8 @@ createServer((req, res) => {
         // return;
     }
 
-}).listen(2035);
+});
+
+server.listen(2035, () => {
+    console.log('Robi API at http://localhost:2035');
+});

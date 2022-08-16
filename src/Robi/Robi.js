@@ -18,10 +18,10 @@ import { AddLinks } from './Actions/AddLinks.js'
 import { AddRoute } from './Actions/AddRoute.js'
 import { AttachFiles } from './Actions/AttachFiles.js'
 import { Authorize } from './Actions/Authorize.js'
+import { BackupApp } from './Actions/BackupApp.js'
 import { BlurOnSave } from './Actions/BlurOnSave.js'
 import { CheckLists } from './Actions/CheckLists.js'
 import { Colors } from './Actions/Colors.js'
-import { Component } from './Actions/Component.js'
 import { Confirm } from './Actions/Confirm.js'
 import { CopyFile } from './Actions/CopyFile.js'
 import { CopyRecurse } from './Actions/CopyRecurse.js'
@@ -46,6 +46,7 @@ import { DeleteItem } from './Actions/DeleteItem.js'
 import { DeleteList } from './Actions/DeleteList.js'
 import { DeleteRoutes } from './Actions/DeleteRoutes.js'
 import { EditLayout } from './Actions/EditLayout.js'
+import { FieldMessage } from './Actions/FieldMessage.js'
 import { GenerateUUID } from './Actions/GenerateUUID.js'
 import { Get } from './Actions/Get.js'
 import { GetADUsers } from './Actions/GetADUsers.js'
@@ -54,6 +55,8 @@ import { GetArticle } from './Actions/GetArticle.js'
 import { GetAttachments } from './Actions/GetAttachments.js'
 import { GetByUri } from './Actions/GetByUri.js'
 import { GetCurrentUser } from './Actions/GetCurrentUser.js'
+import { GetFields } from './Actions/GetFields.js'
+import { GetFile } from './Actions/GetFile.js'
 import { GetFolders } from './Actions/GetFolders.js'
 import { GetItemCount } from './Actions/GetItemCount.js'
 import { GetLib } from './Actions/GetLib.js'
@@ -62,6 +65,7 @@ import { GetListGuid } from './Actions/GetListGuid.js'
 import { GetLocal } from './Actions/GetLocal.js'
 import { GetRequestDigest } from './Actions/GetRequestDigest.js'
 import { GetRootRequestDigest } from './Actions/GetRootRequestDigest.js'
+import { GetSession } from './Actions/GetSession.js'
 import { GetSiteUsers } from './Actions/GetSiteUsers.js'
 import { GetWebLists } from './Actions/GetWebLists.js'
 import { HSLDarker } from './Actions/HSLDarker.js'
@@ -91,7 +95,7 @@ import { SaveDialog } from './Actions/SaveDialog.js'
 import { SendEmail } from './Actions/SendEmail.js'
 import { SetHomePage } from './Actions/SetHomePage.js'
 import { SetLocal } from './Actions/SetLocal.js'
-import { SetSessionStorage } from './Actions/SetSessionStorage.js'
+import { SetSession } from './Actions/SetSession.js'
 import { SetTheme } from './Actions/SetTheme.js'
 import { Shimmer } from './Actions/Shimmer.js'
 import { SourceEditor } from './Actions/SourceEditor.js'
@@ -104,6 +108,7 @@ import { UploadFile } from './Actions/UploadFile.js'
 import { UploadFiles } from './Actions/UploadFiles.js'
 import { Wait } from './Actions/Wait.js'
 import { App } from './Core/App.js'
+import { Component } from './Core/Component.js'
 import { Routes } from './Core/Routes.js'
 import { Store } from './Core/Store.js'
 import { Lists } from './Models/Lists.js'
@@ -127,10 +132,10 @@ export {
     AddRoute,
     AttachFiles,
     Authorize,
+    BackupApp,
     BlurOnSave,
     CheckLists,
     Colors,
-    Component,
     Confirm,
     CopyFile,
     CopyRecurse,
@@ -155,6 +160,7 @@ export {
     DeleteList,
     DeleteRoutes,
     EditLayout,
+    FieldMessage,
     GenerateUUID,
     Get,
     GetADUsers,
@@ -163,6 +169,8 @@ export {
     GetAttachments,
     GetByUri,
     GetCurrentUser,
+    GetFields,
+    GetFile,
     GetFolders,
     GetItemCount,
     GetLib,
@@ -171,6 +179,7 @@ export {
     GetLocal,
     GetRequestDigest,
     GetRootRequestDigest,
+    GetSession,
     GetSiteUsers,
     GetWebLists,
     HSLDarker,
@@ -200,7 +209,7 @@ export {
     SendEmail,
     SetHomePage,
     SetLocal,
-    SetSessionStorage,
+    SetSession,
     SetTheme,
     Shimmer,
     SourceEditor,
@@ -213,6 +222,7 @@ export {
     UploadFiles,
     Wait,
     App,
+    Component,
     Routes,
     Store,
     Lists,

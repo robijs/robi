@@ -3,6 +3,7 @@ import { Store } from '../Core/Store.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
 import { CreateItem } from './CreateItem.js'
 import { Post } from './Post.js'
+import { GetSession } from './GetSession.js'
 
 // @START-File
 /**
@@ -34,7 +35,7 @@ export async function Log(param) {
             url: `${App.get('site')}/_api/web/lists/GetByTitle('Log')/items`,
             data: {
                 Title,
-                SessionId: sessionStorage.getItem(`${App.get('name').split(' ').join('_')}-sessionId`),
+                SessionId: GetSession('sessionId'),
                 Message: JSON.stringify({
                     body: Message,
                     location: location.href,
@@ -64,7 +65,7 @@ export async function Log(param) {
             list: 'Log',
             data: {
                 Title,
-                SessionId: sessionStorage.getItem(`${App.get('name').split(' ').join('_')}-sessionId`),
+                SessionId: GetSession('sessionId'),
                 Message: JSON.stringify({
                     body: Message,
                     location: location.href,

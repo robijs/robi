@@ -284,11 +284,6 @@ export function Lists() {
                     ]
                 },
                 {
-                    name: 'RequestedDate',
-                    display: 'Requested Date',
-                    type: 'date'
-                },
-                {
                     name: 'DueDate',
                     display: 'Due Date',
                     type: 'date'
@@ -299,9 +294,14 @@ export function Lists() {
                     type: 'date'
                 },
                 {
-                    name: 'RequestedBy',
-                    display: 'RequestedBy',
-                    type: 'SLOT'
+                    name: 'SubmittedBy',
+                    display: 'Submitted By',
+                    type: 'slot'
+                },
+                {
+                    name: 'SubmittedDate',
+                    display: 'Submitted Date',
+                    type: 'date'
                 },
                 {
                     name: 'URL',
@@ -337,6 +337,18 @@ export function Lists() {
                     name: 'Logs',
                     display: 'Logs',
                     type: 'mlot'
+                }
+            ],
+            views: [
+                {
+                    name: 'Table',
+                    fields: [
+                        'Summary',
+                        'Description',
+                        'Status',
+                        'SubmittedBy',
+                        'SubmittedDate'
+                    ]
                 }
             ]
         }

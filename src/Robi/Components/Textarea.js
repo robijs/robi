@@ -1,4 +1,4 @@
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 
 // TODO: Implement auto-grow - https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/
 

@@ -1,4 +1,4 @@
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 import { UpdateItem } from '../Actions/UpdateItem.js'
 import { CustomNewForm } from '../Actions/CustomNewForm.js'
 import { CustomEditForm } from '../Actions/CustomEditForm.js'
@@ -11,6 +11,7 @@ import { SingleLineTextField } from './SingleLineTextField.js'
 import { App } from '../Core/App.js'
 import { Store } from '../Core/Store.js'
 import { Lists } from '../Models/Lists.js'
+import { classes } from '../Utilities/classes.js'
 
 // @START-File
 // TODO: Compute advanced search container and row heights in onAdd()
@@ -30,7 +31,8 @@ export function TableToolbar(param) {
         options,
         parent,
         position,
-        search
+        search,
+        onReset
     } = param;
 
     const listInfo = Lists().concat(App.lists()).find(item => item.list === list);
@@ -43,7 +45,7 @@ export function TableToolbar(param) {
     const component = Component({
         html: /*html*/ `
             <div class='btn-toolbar w-100' role='toolbar'>
-                <div class='text'>${heading}</div>
+                <div class='${classes('text', { 'flex-grow-1': listInfo?.options?.menu === undefined || App.isProd() })}'>${heading}</div>
                 ${
                     listInfo?.options?.menu !== false && App.isDev() ?
                     (() => {
@@ -72,6 +74,7 @@ export function TableToolbar(param) {
                 ${
                     advancedSearch ? 
                     /*html*/ `
+                        <button type='button' class='btn btn-robi-light mr-2 reset-search d-none'>Reset</button>
                         <button type='button' class='btn btn-robi-light mr-2 advanced-search'>Advanced search</button>
                     `                    
                     : ''   
@@ -161,7 +164,7 @@ export function TableToolbar(param) {
 
             /* Search */
             #id .advanced-search {
-                width: 135px;
+                /* width: 135px; */
                 transition: 300ms opacity ease;
                 text-align: right;
             }
@@ -240,14 +243,25 @@ export function TableToolbar(param) {
                         setTimeout(() => {
                             component.find('.search-container').classList.add('height-0', 'opacity-0', 'pt-0', 'pb-0');
                         }, 0);
+
+                        // DEV: Remove reset button
+                        component.find('.reset-search').classList.add('d-none');
                     } else {
                         open = true;
                         event.target.innerText = 'Close'
                         setTimeout(() => {
                             component.find('.search-container').classList.remove('height-0', 'opacity-0', 'pt-0', 'pb-0');
                         }, 0);
+
+                        // DEV: Add reset button
+                        component.find('.reset-search').classList.remove('d-none');
                     }
                 }
+            },
+            {
+                selector: '#id .reset-search',
+                event: 'click',
+                listener: onReset
             },
             {
                 selector: '#id .add-row',

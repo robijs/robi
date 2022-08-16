@@ -1,4 +1,4 @@
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 import { Shimmer } from '../Actions/Shimmer.js'
 import { Store } from '../Core/Store.js'
 

@@ -1,4 +1,4 @@
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 import { Store } from '../Core/Store.js'
 
 // @START-File
@@ -19,8 +19,6 @@ export function Cell(render, options = {}) {
         radius,
         padding,
         type,
-        narrowPadding,
-        narrowWidth,
         responsive
     } = options;
     

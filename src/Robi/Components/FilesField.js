@@ -1,4 +1,4 @@
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 import { Alert } from '../Components/Alert.js'
 import { Button } from '../Components/Button.js'
 import { Modal } from '../Components/Modal.js'
@@ -28,6 +28,7 @@ export function FilesField(param) {
         padding,
         margin,
         path,
+        prefix,
         parent,
         position
     } = param;
@@ -701,6 +702,7 @@ export function FilesField(param) {
         console.log('Allow file preview delete (default true)?', allowDelete);
 
         // TODO: add event listener for deleting items that have already been uploaded
+        // DEV: Optionally break on prefex
         return /*html*/ `
             <div class='file-preview' data-filename='${name}'>
                 <div class='file-icon-container'>
@@ -708,7 +710,9 @@ export function FilesField(param) {
                         <svg class='icon type ${icon}'><use href='#icon-${icon}'></use></svg>
                     </div>
                     <div class='file-name-container' data-filename='${name}'>
-                        <div class='file-preview-name'>${name}</div>
+                        <div class='file-preview-name'>
+                            ${prefixName(name)}
+                        </div>
                         <div class='file-size'>${returnFileSize(size)}</div>
                     </div>
                 </div>
@@ -728,6 +732,11 @@ export function FilesField(param) {
                 </div>
             </div>
         `;
+    }
+
+    function prefixName(name) {
+        const format = name.split(prefix).slice(1).join(prefix);
+        return format || name;
     }
 
     // Remove file node

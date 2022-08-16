@@ -1,5 +1,6 @@
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 import { CreateApp } from '../Actions/CreateApp.js'
+import { BackupApp } from '../Actions/BackupApp.js'
 import { DeleteApp } from '../Actions/DeleteApp.js'
 import { UpdateApp } from '../Actions/UpdateApp.js'
 import { ResetApp } from '../Actions/ResetApp.js'
@@ -62,10 +63,10 @@ export function DevConsole(param) {
                     <div class='dev-console-row alert-robi-secondary'>
                         <div class='dev-console-text'>
                             <div class='dev-console-label'>Backup</div>
-                            <div class='dev-console-description'>Download a backup of all lists, settings, and source code. You can use backups to reinstall the app or port it to another site.</div>
+                            <div class='dev-console-description'>Download a backup of all lists, settings, and source code. You can use backups to reinstall or port to another site.</div>
                         </div>
                         <div class='d-flex align-items-center ml-5'>
-                            <button class='btn btn-robi dev-console-button delete'>Backup lists, data, and code</button>
+                            <button class='btn btn-robi dev-console-button backup'>Backup lists, data, and code</button>
                         </div>
                     </div>
                     <div class='dev-console-row alert-robi-primary'>
@@ -242,6 +243,15 @@ export function DevConsole(param) {
                     console.log('Button:', event.target.innerText);
 
                     CreateApp();
+                }
+            },
+            {
+                selector: '#id .backup',
+                event: 'click',
+                async listener(event) {
+                    console.log('Button:', event.target.innerText);
+
+                    BackupApp();
                 }
             }
         ],

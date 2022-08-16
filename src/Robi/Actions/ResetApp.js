@@ -426,7 +426,7 @@ export function ResetApp() {
                     reinstallConsole.get().scrollTop = reinstallConsole.get().scrollHeight;
 
                     // Create developer account
-                    const url = `${App.get('site')}/../_api/web/CurrentUser`;
+                    const url = `${App.get('site')}/_api/web/CurrentUser`;
                     const fetchOptions = {
                         headers: {
                             'Content-Type': 'application/json; charset=UTF-8',

@@ -270,7 +270,6 @@ export function Route(path = App.get('defaultRoute'), options = {}) {
                 Title: 'Route',
                 Message: `${Store.user().Email || 'User'} routed to ${route.path}`,
                 StackTrace: new Error().stack,
-                // SessionId: '', // randomly generated UUID
                 Module: import.meta.url
             });
         } catch (error) {

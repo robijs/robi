@@ -58,6 +58,7 @@ export async function Table(param) {
         parentId,
         primaryKey,
         path,
+        search,
         showId,
         titleDisplayName,
         toolbar,
@@ -707,6 +708,16 @@ export async function Table(param) {
                 // Enable button
                 button.disabled = false;
                 button.innerHTML = 'Search';
+            },
+            onReset() {
+                // Clear
+                table.DataTable().clear().draw();
+
+                // Filter
+                table.DataTable().rows.add(items).draw();
+                
+                // Adjust
+                table.DataTable().columns.adjust().draw();
             }
         });
     
@@ -738,6 +749,7 @@ export async function Table(param) {
         pageLength: pageLength || 25,
         rowId: idProperty,
         striped: true,
+        search,
         width: '100%',
         onRowClick: onRowClick || function (param) {
             const {

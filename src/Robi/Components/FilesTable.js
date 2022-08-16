@@ -1,4 +1,4 @@
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 import { DeleteItem } from '../Actions/DeleteItem.js'
 import { App } from '../Core/App.js';
 

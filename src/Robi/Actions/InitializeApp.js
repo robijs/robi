@@ -12,7 +12,11 @@ import { GetAppSetting } from './GetAppSetting.js'
  */
 export async function InitializeApp(param) {
     const { settings, routes } = param;
+    // TODO: Rethink this API (how to pre-load list data before launch
     const { preLoadLists } = settings;
+
+    // Build Timestamp
+    App.set('BuildTimestamp', /* @START-timestamp */null/* @END-timestamp */);
 
     if (App.isProd()) {
         console.log('Mode: prod');

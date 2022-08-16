@@ -1,4 +1,4 @@
-import { Component } from '../Actions/Component.js'
+import { Component } from '../Core/Component.js'
 import { Themes } from '../Models/Themes.js'
 import { App } from '../Core/App.js'
 

@@ -22,6 +22,8 @@ export async function NewForm({ fields, list, parent }) {
 
         let component = {};
 
+        console.log(field);
+
         switch (type) {
             case 'slot':
                 component = SingleLineTextField({

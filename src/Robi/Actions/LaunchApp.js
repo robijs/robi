@@ -1,6 +1,6 @@
 import { GenerateUUID } from './GenerateUUID.js'
 import { GetCurrentUser } from './GetCurrentUser.js'
-import { SetSessionStorage } from './SetSessionStorage.js'
+import { SetSession } from './SetSession.js'
 import { Route } from './Route.js'
 import { Log } from './Log.js'
 import { Sidebar } from '../Components/Sidebar.js'
@@ -12,6 +12,10 @@ import { App } from '../Core/App.js'
 import { Routes } from '../Core/Routes.js'
 import { Store } from '../Core/Store.js'
 import { Feedback } from '../Components/Feedback.js'
+import { GetLocal } from './GetLocal.js'
+import { SetLocal } from './SetLocal.js'
+import { UpdateItem } from './UpdateItem.js'
+import { GetAppSetting } from './GetAppSetting.js'
 
 // @START-File
 /**
@@ -28,14 +32,14 @@ export async function LaunchApp(param) {
     const {
         debug,
         title,
-        sessionStorageData,
+        session,
         sidebar,
         maincontainer,
         allowFeedback,
         beforeLaunch,
         usersList
     } = settings;
-    
+
     // Get/Set User
     Store.user(await GetCurrentUser({
         list: usersList
@@ -51,10 +55,12 @@ export async function LaunchApp(param) {
         });
     }
 
-    // Set sessions storage
-    SetSessionStorage({
-        sessionStorageData
-    });
+    // Set session
+    if (Array.isArray(session)) {
+        session.forEach(({ key, value }) => {
+            SetSession(key, value);
+        });
+    }
 
     // Get current route
     const path = location.href.split('#')[1];
@@ -107,14 +113,7 @@ export async function LaunchApp(param) {
     appContainer.show('flex');
 
     // Generate Session Id
-    const sessionId = GenerateUUID();
-
-    // TODO: Use GetLocal();
-    // Format Title for Sessin/Local Storage keys
-    const storageKeyPrefix = settings.title.split(' ').join('-');
-
-    // Set Session Id
-    sessionStorage.setItem(`${storageKeyPrefix}-sessionId`, sessionId);
+    SetSession('sessionId', GenerateUUID());
 
     // Log in
     try {
@@ -146,7 +145,7 @@ export async function LaunchApp(param) {
     if (releaseNotes) {
         const { show, version, title, message } = releaseNotes;
 
-        const isDismissed = localStorage.getItem(`${storageKeyPrefix}-releaseNotesDismissed-${version}`);
+        const isDismissed = GetLocal(`releaseNotesDismissed-${version}`);
 
         if (show && !isDismissed) {
             const toast = FixedToast({
@@ -173,13 +172,42 @@ export async function LaunchApp(param) {
                     modal.add();
                 },
                 onClose(event) {
-                    localStorage.setItem(`${storageKeyPrefix}-releaseNotesDismissed-${version}`, 'true');
+                    SetLocal(`releaseNotesDismissed-${version}`);
                 },
                 parent: appContainer
             });
     
             toast.add();
         }
+    }
+
+    if (App.isDev()) {
+        console.log(`Latest build loaded.`);
+
+        return;
+    }
+
+    const BuildTimestamp_Installed = await GetAppSetting('BuildTimestamp');
+    const BuildTimestamp_AppSetting = App.get('BuildTimestamp');
+    const BuildTimestamp_Local = GetLocal('BuildTimestamp');
+
+    if (BuildTimestamp_Installed.Value !== BuildTimestamp_AppSetting) {
+        await UpdateItem({
+            list: 'Settings',
+            itemId: BuildTimestamp_Installed.Id,
+            data: {
+                Value: BuildTimestamp_AppSetting
+            }
+        });
+
+        console.log(`Build timestamp '${BuildTimestamp_AppSetting}' is newer than installed '${BuildTimestamp_Installed.Value}'. Updated`);
+    } else {
+        console.log(`Latest build loaded.`);
+    }
+
+    if (BuildTimestamp_AppSetting !== BuildTimestamp_Local) {
+        console.log(`Build timestamp '${BuildTimestamp_AppSetting}' is newer than local storage '${BuildTimestamp_Local}'. Updated.`);
+        SetLocal('BuildTimestamp', BuildTimestamp_AppSetting);
     }
 }
 // @END-File

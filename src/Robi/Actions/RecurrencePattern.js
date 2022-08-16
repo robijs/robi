@@ -1051,6 +1051,9 @@ export function RecurrencePattern({ recurrence, month }) {
             console.log('Last:', last);
             console.log('Limit:', limit);
 
+            // NOTE: Off until bugs fixed
+            return [];
+
             // #1 - Check if limit is set first
             let counter = 0;
 
@@ -1082,6 +1085,8 @@ export function RecurrencePattern({ recurrence, month }) {
 
                 console.log('End Date:', endDate);
 
+                // FIXME: Bug found after deploying to SP site. Generates infinite loop.
+                // NOTE: Turning off until bug fixed;
                 while (nextDate <= endDate) {
                     value.forEach(item => {
                         const { m, d } = item;
@@ -1131,8 +1136,6 @@ export function RecurrencePattern({ recurrence, month }) {
         }
     };
 
-    
-//////////////////////////
     function getNthDay(nth,d,month){
         
         const lastDayOfMonth= new Date(month.getFullYear(), month.getMonth()+1, 0)
@@ -1187,9 +1190,6 @@ export function RecurrencePattern({ recurrence, month }) {
         }
         return iterateMonth===next.getMonth()
     }
-
-/////////////////////////////////
-
 
     function getDays(date) {
         date.setDate(1);

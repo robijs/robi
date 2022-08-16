@@ -49,6 +49,7 @@ import { Editor } from './Components/Editor.js'
 import { ErrorForm } from './Components/ErrorForm.js'
 import { Errors } from './Components/Errors.js'
 import { Feedback } from './Components/Feedback.js'
+import { FeedbackPanel } from './Components/FeedbackPanel.js'
 import { FilesField } from './Components/FilesField.js'
 import { FilesTable } from './Components/FilesTable.js'
 import { FixedToast } from './Components/FixedToast.js'
@@ -165,6 +166,7 @@ export {
     ErrorForm,
     Errors,
     Feedback,
+    FeedbackPanel,
     FilesField,
     FilesTable,
     FixedToast,

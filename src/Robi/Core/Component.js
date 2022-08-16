@@ -1,4 +1,4 @@
-import { Store } from '../Core/Store.js'
+import { Store } from './Store.js'
 
 // @START-File
 /**

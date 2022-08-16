@@ -117,8 +117,6 @@ export async function AddRoute(event) {
 
                     updateApp();
                     createRoute();
-                    
-                    location.href = `${App.get('site')}#${routePath.value()}`;
 
                     if (App.isProd()) {
                         await Wait(5000);
@@ -143,7 +141,7 @@ export async function AddRoute(event) {
                                 }
                             });
                         } else {
-                            request = await fetch(`${App.get('domain')}/src/app.js`);
+                            request = await fetch(`http://127.0.0.1:8080/src/app.js`);
                         }
 
                         let content = await request.text();

@@ -1,6 +1,7 @@
 import { App } from '../Core/App.js'
 import { UpdateItem } from './UpdateItem.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
+import { Get } from './Get.js'
 import { GetByUri } from './GetByUri.js'
 import { CreateItem } from './CreateItem.js';
 
@@ -75,7 +76,7 @@ export async function UploadFile(param) {
     if (App.isDev()) {
         let fakeFile = {
             File: {
-                Name: data.FileLeafRef || file.name,
+                Name: data?.FileLeafRef || file.name,
                 Length: 0,
                 Text: await file?.text() || 'Not a plain text file.'
             },
@@ -89,6 +90,22 @@ export async function UploadFile(param) {
             ...data,
             ...fakeFile
         };
+
+        const getItem = await Get({
+            list: library,
+            filter: `Name eq ${file.name}`
+        });
+
+        if (getItem[0]) {
+            const updatedItem = await UpdateItem({
+                type: 'file',
+                itemId: getItem[0].Id,
+                list: library,
+                data: upload
+            });
+
+            return updatedItem;
+        }
 
         const newItem = await CreateItem({
             type: 'file',

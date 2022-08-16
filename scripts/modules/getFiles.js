@@ -10,6 +10,14 @@ export async function getFiles(path) {
         const text = await readFile(`${path}/${file}`, 'utf8');
         const content = text.match(/\/\/ @START-File([\s\S]*?)\/\/ @END-File/);
 
+        if (file === 'InitializeApp.js') {
+            let updatedContent = content[1].replace(/\/\* @START-timestamp \*\/([\s\S]*?)\/\* @END-timestamp \*\//, `/* @START-timestamp */'${new Date().toISOString()}'/* @END-timestamp */`);
+
+            output += updatedContent;
+            
+            continue;
+        }
+
         output += content[1];
     }
 

@@ -1,5 +1,6 @@
 import { App } from '../Core/App.js'
 import { GetRequestDigest } from './GetRequestDigest.js'
+import { GetSession } from './GetSession.js'
 import { CreateItem } from './CreateItem.js'
 import { Post } from './Post.js'
 
@@ -44,7 +45,7 @@ export async function LogError(param) {
         const postOptions = {
             url: `${App.get('site')}/_api/web/lists/GetByTitle('Errors')/items`,
             data: {
-                SessionId: sessionStorage.getItem(`${App.get('name').split(' ').join('_')}-sessionId`),
+                SessionId: GetSession('sessionId'),
                 Message,
                 Error,
                 Source,
@@ -69,7 +70,7 @@ export async function LogError(param) {
         const newLog = await CreateItem({
             list: 'Errors',
             data: {
-                SessionId: sessionStorage.getItem(`${App.get('name').split(' ').join('_')}-sessionId`),
+                SessionId: GetSession('sessionId'),
                 Message,
                 Error,
                 Source,
