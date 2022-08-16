@@ -96,7 +96,11 @@ export async function NewForm({ fields, list, parent }) {
             })();
         }
 
-        component.add();
+        if (component.add) {
+            component.add();
+        } else {
+            console.error(`Missing field '${name}' with type '${type}'`);
+        }
 
         return {
             component,

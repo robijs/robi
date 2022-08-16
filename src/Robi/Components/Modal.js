@@ -45,7 +45,8 @@ export function Modal(param) {
                         ${
                             !title ?
                             /*html*/ `
-                                <button type='button' class='close ${close ? '' : 'd-none'}' style='position: absolute; right: 0px; ${closeStyle || ''}' data-dismiss='modal' aria-label='Close'>
+                                <!-- Close button on left (macOS) -->
+                                <button type='button' class='close ${close ? '' : 'd-none'}' style='position: absolute; left: 0px; ${closeStyle || ''}' data-dismiss='modal' aria-label='Close'>
                                     <!-- <span class='icon-container' style='right: 20px; top: 20px;'> -->
                                     <span class='icon-container'>
                                         <svg class='icon x-circle-fill'>
@@ -273,11 +274,11 @@ export function Modal(param) {
                 !title ?
                 /*css*/ `
                     #id .modal-body::-webkit-scrollbar {
-                        width: 60px;
+                        width: 20px; /* 60px */
                     }
 
                     #id .modal-body::-webkit-scrollbar-thumb {
-                        border: 27px solid transparent;
+                        border: 7px solid transparent; /* 27px */
                         border-radius: 60px;
                     }
 
