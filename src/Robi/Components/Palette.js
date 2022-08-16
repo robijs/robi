@@ -659,7 +659,8 @@ export function Palette(param) {
             });
 
         // TODO: Should there be a special store for all editable components?
-        Store.get('title').enableEdit();
+        // FIXME: Editable table class ::before adds scrollbar
+        // Store.get('title').enableEdit();
     }
 
     function disableEdit() {

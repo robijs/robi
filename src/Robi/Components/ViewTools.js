@@ -7,6 +7,7 @@ import { GenerateUUID } from '../Robi.js'
 import { ComponentTemplate } from '../Templates/ComponentTemplate.js'
 import { ActionTemplate } from '../Templates/ActionTemplate.js'
 import { Palette } from './Palette.js'
+import { Row } from './Row.js'
 import { Style } from '../Actions/Style.js'
 
 // @START-File
@@ -254,20 +255,16 @@ export function ViewTools(param) {
     }
 
     function removeStatusAndToolBars() {
-        Style({
-            name: `edit-route-viewcontainer`,
-            style: /*css*/ `
-                .viewcontainer {
-                    height: calc(100vh - 87px);
-                }
-            `
-        });
 
         Store.get('edit-route-tool-bar').remove();
         Store.get('edit-route-status-bar').remove();
     }
 
     function close() {
+        document
+            .querySelector(`style[data-name='edit-route-viewcontainer']`)
+            .remove();
+
         // Remove
         palette.close();
         palette = undefined;
@@ -300,14 +297,29 @@ export function ViewTools(param) {
 
         // Add row button
         parent.append(/*html*/ `
-            <button class='btn btn-robi add-row-${addRowId}'>
+            <button type='button' class='btn btn-robi add-row-${addRowId}'>
                 Add row
             </button>
         `);
+
+        const btn = parent.find(`.add-row-${addRowId}`);
+
+        btn.on('click', event => {
+            const row = Row((parent) => {
+    
+            }, { parent: btn, position: 'beforebegin' });
+
+            row.enableEdit();
+                            
+            // FIXME: Does this have been called again,
+            // or can I add the new component to sort
+            turnOnSortable();
+        });
     }
 
     // Turn on sortable
     function turnOnSortable() {
+        // FIXME: Remove jQuery
         $(`#${parent.get().id} .robi-row`).addClass('robi-row-transition');
         $(`#${parent.get().id}`).sortable({ items: '.robi-row' });
         $(`#${parent.get().id} .robi-row > *`).css({'pointer-events': 'none', 'user-select': 'none'});

@@ -39,6 +39,8 @@ export async function EditLayout({ order, path, file }) {
     document.querySelector('#app').style.filter = 'blur(5px)';
 
     await updateApp();
+    
+    return;
 
     async function updateApp() {
         const devPath = path.replace('App/', '');
@@ -49,7 +51,31 @@ export async function EditLayout({ order, path, file }) {
 
         const sourceRows = content.match(/\/\/ @START-Rows([\s\S]*?)\/\/ @END-Rows/);
         const currentOrder = sourceRows[1].split('// @Row');
-        const newOrder = order.map(index => currentOrder[index]).join('// @Row');
+        
+        // console.log(currentOrder[0]);
+
+        // return;
+
+        const newOrder = order
+            .map(index => {
+                let row = currentOrder[index];
+
+                if (!row) {
+                    const spacesToAdd = currentOrder[0].split('\n')[1].search(/\S|$/);
+                    const spaces = new Array(spacesToAdd + 1).join(' ');
+
+                    return [
+                        ``,
+                        `${spaces}Row((parent) => {`,
+                        ``,
+                        `${spaces}}, { parent });`,
+                        `${spaces}`,
+                    ].join('\n');
+                }   
+
+                return row;
+            })
+            .join('// @Row');
 
         // console.log(sourceRows[1]);
         // console.log(order);

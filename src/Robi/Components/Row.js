@@ -9,7 +9,7 @@ import { Store } from '../Core/Store.js'
  * @returns
  */
 export function Row(render, options = {}) {
-    const { parent, display, height, minHeight, flex, align, responsive } = options;
+    const { parent, position, display, height, minHeight, flex, align, responsive } = options;
     
     const id = Store.getNextRow();
 
@@ -23,7 +23,7 @@ export function Row(render, options = {}) {
                 position: relative;
                 width: 100%;
                 display: ${display || 'block'};
-                min-height: ${minHeight || 'fit-content'}; /* DEV: Previously 100px */
+                min-height: ${minHeight || '50px'}; /* DEV: Previously 100px */
                 transition: box-shadow 200ms ease-in-out;
                 ${height ? `height: ${height};` : ''}
                 ${flex ? `flex: ${flex};` : ''}
@@ -36,6 +36,7 @@ export function Row(render, options = {}) {
         `,
         // FIXME: Do I like this? Does it assume too much?
         parent: parent || Store.get('viewcontainer'),
+        position,
         events: [],
         async onAdd() {
             // NOTE: This is awfully imperative. Is there a better way?
@@ -110,5 +111,7 @@ export function Row(render, options = {}) {
     });
 
     component.add();
+
+    return component;
 }
 // @END-File

@@ -240,7 +240,7 @@ import { Store } from './Store.js'
                 // Update palette
                 // TODO: How do we know the name or type of componenet selected?
                 // TODO: Add a type prop to Component constructor?
-                Store.get('palette').setTitle('Test');
+                // Store.get('palette').setTitle('Test');
             });
         },
         find(selector) {

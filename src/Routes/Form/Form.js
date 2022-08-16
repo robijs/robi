@@ -12,6 +12,10 @@ import { Row, Table } from '../../Robi/RobiUI.js'
 export default async function Form({ parent }) {
     // @START-Rows
     Row((parent) => {
+
+    }, { parent });
+    // @Row
+    Row((parent) => {
         Table({
             list: 'AllTypes',
             parent
@@ -20,6 +24,10 @@ export default async function Form({ parent }) {
     // @Row
     Row((parent) => {
     
+    }, { parent });
+    // @Row
+    Row((parent) => {
+
     }, { parent });
     // @END-Rows
 }
